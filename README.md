@@ -107,6 +107,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Task dependency graph and simple critical path derivation
 - Local SvelteKit workspace launched through `spm ui`
 - Workspace views for overview dashboard, task Kanban, Specs, and deterministic Gantt timeline
+- Task Kanban spec filters that narrow the active board without pulling archived work back into the operational flow
 - Multi-spec and lifecycle-window filters for analytical Specs and Gantt slices, including archived work when the goal is slice analysis instead of active-board hygiene
 - Prompt-return backend for agent-safe orchestration
 - Handoff file generation

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-005 is complete. The analytical Specs and Gantt views now support deterministic multi-spec and lifecycle-window filters, and those filtered slices can include archived work without polluting the active board."
-focus = "Choose the next product slice after closing SPEC-005."
+summary = "TASK-017 is complete. The task Kanban now supports spec filters that narrow the active board by one or more specs while still keeping archived work out of the operational flow."
+focus = "Choose the next product slice after adding board spec filters."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Decide whether SPEC-006 detail views or SPEC-007 compact Gantt should be the next active slice.", "Keep the analytical filter contract shared across future detail and timeline views instead of duplicating route-specific logic.", "Capture the next meaningful slice in the configured current state file or create a new task."]
+next_action_hints = ["Decide whether SPEC-006 detail views or SPEC-007 compact Gantt should be the next active slice.", "Keep the shared filter component aligned across operational and analytical views as the workspace grows.", "Capture the next meaningful slice in the configured current state file or create a new task."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T03:19:48.484Z"
+updated_at = "2026-04-03T04:18:17.026Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

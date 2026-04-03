@@ -2,6 +2,7 @@
   import {
     Blocks,
     CircleCheckBig,
+    Filter,
     FolderKanban,
     Hourglass,
     ListChecks,
@@ -9,9 +10,14 @@
     SquareDashedKanban,
   } from "@lucide/svelte";
   import type { DashboardData, DashboardKanbanColumnId } from "../../../../src/services/dashboard.ts";
+  import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
+  import { countKanbanTasks, filterKanbanBySpecs } from "../../lib/task-board.ts";
 
   let { data } = $props();
   const dashboard = $derived(data.dashboard as DashboardData);
+  const filteredKanban = $derived(filterKanbanBySpecs(dashboard.kanban, dashboard.analysis.selectedSpecIds));
+  const filteredTaskCount = $derived(countKanbanTasks(filteredKanban));
+  const hasSpecFilters = $derived(dashboard.analysis.selectedSpecIds.length > 0);
 
   const laneNotes: Record<DashboardKanbanColumnId, string> = {
     blocked: "Work stopped by declared dependencies or explicit blocked state.",
@@ -47,8 +53,34 @@
   </p>
 </section>
 
+<AnalysisFilters
+  {dashboard}
+  eyebrow="Operational focus"
+  title="Board spec filters"
+  detail="Use one or more specs to focus the Kanban on the active work slice you want to execute. This stays operational, so archived tasks remain hidden even while a spec filter is active."
+  showTimeWindow={false}
+  resultCount={filteredTaskCount}
+  resultLabel="tasks visible on the current board slice"
+  hasActiveFilters={hasSpecFilters}
+  activeDetail="Archived tasks stay hidden here so the Kanban remains an active-work surface."
+  inactiveDetail="Without a spec filter, the board shows all non-archived work across the workspace."
+  submitLabel="Focus board"
+/>
+
+{#if hasSpecFilters}
+  <section class="filter-note">
+    <div class="note-pill">
+      <Filter size={14} strokeWidth={1.9} />
+      <span>Filtered by {dashboard.analysis.selectedSpecIds.join(", ")}</span>
+    </div>
+    <p>
+      This board intentionally ignores archived tasks even when a spec filter is active, so the selected slice stays operational instead of becoming historical analysis.
+    </p>
+  </section>
+{/if}
+
 <section class="board">
-  {#each dashboard.kanban as column}
+  {#each filteredKanban as column}
     {@const LaneIcon = laneIcons[column.id]}
     <article class="lane">
       <header class="lane-header">
@@ -160,6 +192,37 @@
     gap: 0.85rem;
     overflow-x: auto;
     padding-bottom: 0.2rem;
+  }
+
+  .filter-note {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.92rem 1rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(15, 141, 96, 0.18);
+    background: linear-gradient(180deg, rgba(239, 248, 243, 0.88), rgba(255, 252, 246, 0.94));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .filter-note p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .note-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    width: fit-content;
+    border-radius: 999px;
+    padding: 0.35rem 0.68rem;
+    border: 1px solid rgba(15, 141, 96, 0.2);
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--muted-soft);
+    font-size: 0.78rem;
+    box-shadow: var(--shadow-soft);
   }
 
   .lane {

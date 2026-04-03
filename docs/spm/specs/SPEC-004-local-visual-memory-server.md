@@ -4,10 +4,10 @@ id = "SPEC-004"
 title = "Add a local visual memory server for specs and tasks"
 summary = "Expose the managed project memory through a local SvelteKit workspace with overview, task, spec, and timeline views that read directly from repo files."
 status = "active"
-task_ids = ["TASK-009", "TASK-010", "TASK-011", "TASK-012", "TASK-013"]
+task_ids = ["TASK-009", "TASK-010", "TASK-011", "TASK-012", "TASK-013", "TASK-017"]
 tags = ["ui", "sveltekit", "local-server", "self-hosting"]
 owner = "human-ai"
-updated_at = "2026-04-03T01:32:10.557Z"
+updated_at = "2026-04-03T04:15:03.923Z"
 +++
 
 # Overview

@@ -3,10 +3,30 @@
   import { Filter, Layers3, RotateCcw, SlidersHorizontal } from "@lucide/svelte";
   import type { DashboardData, DashboardTimeWindow } from "../../../../src/services/dashboard.ts";
 
-  let { dashboard, title = "Analysis filters", detail = "Slice the analytical views by spec set and lifecycle period." } = $props<{
+  let {
+    dashboard,
+    title = "Analysis filters",
+    detail = "Slice the analytical views by spec set and lifecycle period.",
+    eyebrow = "Analytical slice",
+    showTimeWindow = true,
+    resultCount = dashboard.analysis.filteredTaskCount,
+    resultLabel = "tasks in the current analytical slice",
+    hasActiveFilters = dashboard.analysis.hasActiveFilters,
+    inactiveDetail = "Without analytical filters, archived tasks stay hidden from active-flow views.",
+    activeDetail = "Archived tasks are included while filters are active.",
+    submitLabel = "Apply filters",
+  } = $props<{
     dashboard: DashboardData;
     title?: string;
     detail?: string;
+    eyebrow?: string;
+    showTimeWindow?: boolean;
+    resultCount?: number;
+    resultLabel?: string;
+    hasActiveFilters?: boolean;
+    inactiveDetail?: string;
+    activeDetail?: string;
+    submitLabel?: string;
   }>();
 
   const timeWindows: Array<{ value: DashboardTimeWindow; label: string }> = [
@@ -26,7 +46,7 @@
         <Filter size={15} strokeWidth={1.9} />
       </span>
       <div>
-        <p class="eyebrow">Analytical slice</p>
+        <p class="eyebrow">{eyebrow}</p>
         <h4>{title}</h4>
       </div>
     </div>
@@ -51,30 +71,32 @@
         </div>
       </fieldset>
 
-      <label class="field-card field-card-select">
-        <span class="field-label">
-          <SlidersHorizontal size={14} strokeWidth={1.9} />
-          Time window
-        </span>
-        <select name="window">
-          <option value="">All lifecycle history</option>
-          {#each timeWindows as window}
-            <option value={window.value} selected={dashboard.analysis.timeWindow === window.value}>
-              {window.label}
-            </option>
-          {/each}
-        </select>
-      </label>
+      {#if showTimeWindow}
+        <label class="field-card field-card-select">
+          <span class="field-label">
+            <SlidersHorizontal size={14} strokeWidth={1.9} />
+            Time window
+          </span>
+          <select name="window">
+            <option value="">All lifecycle history</option>
+            {#each timeWindows as window}
+              <option value={window.value} selected={dashboard.analysis.timeWindow === window.value}>
+                {window.label}
+              </option>
+            {/each}
+          </select>
+        </label>
+      {/if}
     </div>
 
     <div class="filters-footer">
       <div class="result-copy">
-        <strong>{dashboard.analysis.filteredTaskCount}</strong>
-        <span>tasks in the current analytical slice</span>
-        {#if dashboard.analysis.includesArchived}
-          <small>Archived tasks are included while filters are active.</small>
+        <strong>{resultCount}</strong>
+        <span>{resultLabel}</span>
+        {#if hasActiveFilters}
+          <small>{activeDetail}</small>
         {:else}
-          <small>Without analytical filters, archived tasks stay hidden from active-flow views.</small>
+          <small>{inactiveDetail}</small>
         {/if}
       </div>
 
@@ -83,7 +105,7 @@
           <RotateCcw size={14} strokeWidth={1.9} />
           Clear
         </a>
-        <button type="submit">Apply filters</button>
+        <button type="submit">{submitLabel}</button>
       </div>
     </div>
   </form>
@@ -171,6 +193,10 @@
 
   .field-grid {
     grid-template-columns: minmax(0, 1.85fr) minmax(14rem, 0.9fr);
+  }
+
+  .field-grid:has(> :only-child) {
+    grid-template-columns: 1fr;
   }
 
   .field-card {
