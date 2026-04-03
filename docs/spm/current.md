@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-009 is complete: spec detail pages can now answer open questions in batch, write those answers back into Markdown deterministically, and return continuation guidance for an agent or human reviewer."
-focus = "Choose the next active spec after closing SPEC-009."
+summary = "SPEC-008 is complete: the grouped timeline now supports URL-driven task selection, highlights immediate and transitive dependency neighborhoods, and emphasizes related spec groups for cross-spec diagnosis."
+focus = "Choose the next spec or workflow slice after closing SPEC-008."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Review SPEC-008 and confirm its open interaction decisions.", "Keep using the spec detail answer flow when a spec's open questions are resolved.", "If a saved answer materially changes scope, create or revise linked tasks before starting implementation."]
+next_action_hints = ["Pick the next active spec from the managed roadmap before starting implementation.", "Use timeline selection links during reviews or handoffs when dependency context matters.", "If cross-spec work starts to feel crowded, consider a future detail panel or connector overlay rather than moving graph logic into the route."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T17:11:05.077Z"
+updated_at = "2026-04-03T17:33:43.784Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

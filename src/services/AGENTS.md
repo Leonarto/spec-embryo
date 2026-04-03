@@ -8,3 +8,4 @@ This folder contains reusable deterministic product services.
 - If the local dashboard needs derived data, shape it here so the web app stays a presentation layer over shared deterministic services.
 - Workflow-specific board columns or visual groupings should be modeled here as deterministic projections over the underlying repo statuses, not as a second state system.
 - Section-aware spec helpers such as open-question parsing or resolved-decision extraction belong here, not inside route files or ad hoc Markdown string handling in the UI.
+- Timeline interaction state should also be derived here, so the route only renders URL-driven selection and does not reconstruct dependency neighborhoods on its own.

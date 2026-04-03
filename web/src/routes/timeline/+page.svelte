@@ -9,9 +9,13 @@
     Filter,
     FolderKanban,
     GitBranchPlus,
+    Link2,
     ListFilter,
     Orbit,
+    Radar,
+    Sparkles,
     TimerReset,
+    X,
   } from "@lucide/svelte";
   import type { DashboardData, DashboardTimelineMode } from "../../../../src/services/dashboard.ts";
   import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
@@ -26,6 +30,20 @@
   function timelineModeHref(mode: DashboardTimelineMode): string {
     const params = new URLSearchParams(currentSearch);
     params.set("timeline_mode", mode);
+    const search = params.toString();
+    return search.length > 0 ? `/timeline?${search}` : "/timeline";
+  }
+
+  function timelineSelectionHref(taskId: string): string {
+    const params = new URLSearchParams(currentSearch);
+    params.set("selected_task", taskId);
+    const search = params.toString();
+    return search.length > 0 ? `/timeline?${search}` : "/timeline";
+  }
+
+  function clearTimelineSelectionHref(): string {
+    const params = new URLSearchParams(currentSearch);
+    params.delete("selected_task");
     const search = params.toString();
     return search.length > 0 ? `/timeline?${search}` : "/timeline";
   }
@@ -79,6 +97,78 @@
   </div>
 </section>
 
+{#if dashboard.timeline.selection}
+  <section class="selection-shell">
+    <div class="selection-head">
+      <div class="mode-head">
+        <span class="icon-pill selection-pill">
+          <Radar size={15} strokeWidth={1.9} />
+        </span>
+        <div>
+          <p class="eyebrow">Selected task</p>
+          <h4>{dashboard.timeline.selection.taskId} · {dashboard.timeline.selection.title}</h4>
+        </div>
+      </div>
+
+      <a class="clear-selection" href={clearTimelineSelectionHref()}>
+        <X size={13} strokeWidth={2} />
+        Clear trace
+      </a>
+    </div>
+
+    <p class="selection-copy">
+      The planner is showing immediate and transitive upstream dependencies in one color family, and downstream blocked work in another. Related spec groups stay visible so cross-spec entanglement is easy to scan.
+    </p>
+
+    <div class="selection-metrics">
+      <span class="cell-meta dependency">
+        <Link2 size={12} strokeWidth={1.9} />
+        {dashboard.timeline.selection.directDependencyIds.length} direct deps
+      </span>
+      <span class="cell-meta dependency-soft">
+        <Sparkles size={12} strokeWidth={1.9} />
+        {dashboard.timeline.selection.transitiveDependencyIds.length} transitive deps
+      </span>
+      <span class="cell-meta blocked">
+        <ArrowRight size={12} strokeWidth={1.9} />
+        {dashboard.timeline.selection.directBlockedDependentIds.length} direct blocked
+      </span>
+      <span class="cell-meta blocked-soft">
+        <Sparkles size={12} strokeWidth={1.9} />
+        {dashboard.timeline.selection.transitiveBlockedDependentIds.length} transitive blocked
+      </span>
+    </div>
+
+    <div class="selection-specs">
+      <div class="selection-spec-group">
+        <p class="eyebrow">Directly related specs</p>
+        <div class="chip-row">
+          {#if dashboard.timeline.selection.directRelatedSpecIds.length === 0}
+            <span class="mini-pill neutral">none</span>
+          {:else}
+            {#each dashboard.timeline.selection.directRelatedSpecIds as specId}
+              <a class="mini-pill spec-direct" href={`/specs/${specId}`}>{specId}</a>
+            {/each}
+          {/if}
+        </div>
+      </div>
+
+      <div class="selection-spec-group">
+        <p class="eyebrow">Transitively related specs</p>
+        <div class="chip-row">
+          {#if dashboard.timeline.selection.transitiveRelatedSpecIds.length === 0}
+            <span class="mini-pill neutral">none</span>
+          {:else}
+            {#each dashboard.timeline.selection.transitiveRelatedSpecIds as specId}
+              <a class="mini-pill spec-transitive" href={`/specs/${specId}`}>{specId}</a>
+            {/each}
+          {/if}
+        </div>
+      </div>
+    </div>
+  </section>
+{/if}
+
 <section class="timeline-shell">
   {#if dashboard.timeline.groups.length === 0}
     <div class="timeline-empty">
@@ -100,13 +190,20 @@
     <div class="planner-body">
       {#each dashboard.timeline.groups as group}
         <section class="group-shell">
-              <div class="group-head sticky-pane">
+              <div class={`group-head sticky-pane ${group.selectionState}`}>
                 <div class="group-copy">
               <div class="group-topline">
                 <p class="group-id">{group.specId}</p>
                 <div class="group-meta">
                   <span class="mini-pill neutral">{group.rows.length} rows</span>
                   <span class={`mini-pill status ${group.specStatus}`}>{group.specStatus}</span>
+                  {#if group.selectionState === "related_direct"}
+                    <span class="mini-pill spec-direct">direct</span>
+                  {:else if group.selectionState === "related_transitive"}
+                    <span class="mini-pill spec-transitive">transitive</span>
+                  {:else if group.selectionState === "selected"}
+                    <span class="mini-pill selected-pill">selected</span>
+                  {/if}
                 </div>
               </div>
               <h4><a href={`/specs/${group.specId}`} title={group.specTitle}>{group.specTitle}</a></h4>
@@ -127,8 +224,8 @@
             </div>
           {:else}
             {#each group.rows as row}
-              <div class="planner-row">
-                <div class="row-label sticky-pane">
+              <div class={`planner-row ${row.selectionState}`}>
+                <div class={`row-label sticky-pane ${row.selectionState}`}>
                   <div class="task-copy">
                     <div class="row-topline">
                       <a class="task-id" href={`/tasks/${row.taskId}`}>
@@ -136,6 +233,12 @@
                         {row.taskId}
                       </a>
                       <div class="row-meta-pills">
+                        {#if dashboard.timeline.selection && row.isCrossSpecRelated}
+                          <span class="cell-meta spec-direct">
+                            <Link2 size={12} strokeWidth={1.9} />
+                            cross-spec
+                          </span>
+                        {/if}
                         <span class={`status-pill ${row.effectiveStatus}`}>{row.statusLabel}</span>
                         <span class="cell-meta neutral">
                           <Clock3 size={12} strokeWidth={1.9} />
@@ -147,9 +250,9 @@
                         </span>
                       </div>
                     </div>
-                    <strong class="task-title" data-title={row.title} title={row.title}>
+                    <a class={`task-title ${row.selectionState}`} data-title={row.title} title={row.title} href={timelineSelectionHref(row.taskId)}>
                       <span class="task-title-text">{row.title}</span>
-                    </strong>
+                    </a>
                     <div class="spec-links">
                       {#each row.specIds as specId}
                         <a href={`/specs/${specId}`}>{specId}</a>
@@ -160,14 +263,15 @@
 
                 <div class="row-grid" style={`--total:${totalUnits}`}>
                   <div class="bar-lane">
-                    <div
-                      class={`timeline-bar ${row.effectiveStatus} ${row.archivedAt ? "archived" : ""}`}
+                    <a
+                      class={`timeline-bar ${row.effectiveStatus} ${row.selectionState} ${row.archivedAt ? "archived" : ""}`}
+                      href={timelineSelectionHref(row.taskId)}
                       style={`left:${(row.start / totalUnits) * 100}%; width:${Math.max(((row.end - row.start) / totalUnits) * 100, 2.4)}%`}
                     >
                       <span>{row.start}</span>
                       <span class="bar-fill"></span>
                       <span>{row.end}</span>
-                    </div>
+                    </a>
                   </div>
 
                   <div class="row-notes">
@@ -259,6 +363,7 @@
   }
 
   .mode-shell,
+  .selection-shell,
   .timeline-shell {
     margin-bottom: 1rem;
     padding: 1rem;
@@ -274,6 +379,33 @@
     flex-wrap: wrap;
   }
 
+  .selection-shell,
+  .selection-specs,
+  .selection-spec-group {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .selection-shell {
+    background:
+      radial-gradient(circle at top right, rgba(70, 107, 202, 0.12), transparent 18rem),
+      linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(244, 238, 229, 0.94));
+  }
+
+  .selection-head,
+  .selection-metrics {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .selection-copy {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
   .icon-pill {
     display: inline-flex;
     align-items: center;
@@ -285,6 +417,25 @@
     background: rgba(255, 255, 255, 0.84);
     color: var(--muted-soft);
     flex-shrink: 0;
+  }
+
+  .selection-pill {
+    color: #3456a0;
+    border-color: rgba(70, 107, 202, 0.18);
+    background: rgba(70, 107, 202, 0.1);
+  }
+
+  .clear-selection {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    padding: 0.52rem 0.74rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid rgba(24, 22, 18, 0.12);
+    background: rgba(255, 255, 255, 0.86);
+    color: var(--muted-soft);
+    box-shadow: var(--shadow-soft);
   }
 
   .mode-toggle {
@@ -402,6 +553,21 @@
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5);
   }
 
+  .group-head.selected {
+    background:
+      linear-gradient(180deg, rgba(234, 248, 241, 0.98), rgba(228, 243, 236, 0.96));
+  }
+
+  .group-head.related_direct {
+    background:
+      linear-gradient(180deg, rgba(242, 247, 255, 0.98), rgba(232, 241, 255, 0.96));
+  }
+
+  .group-head.related_transitive {
+    background:
+      linear-gradient(180deg, rgba(247, 249, 255, 0.98), rgba(239, 244, 255, 0.95));
+  }
+
   .group-topline,
   .row-topline,
   .row-label,
@@ -426,7 +592,6 @@
   }
 
   .group-copy a,
-  .task-copy strong,
   .task-id,
   .spec-links a {
     text-decoration: none;
@@ -462,9 +627,58 @@
     --status-glow: 0 10px 20px rgba(24, 22, 18, 0.05);
   }
 
+  .mini-pill.selected-pill {
+    background: rgba(15, 141, 96, 0.12);
+    border-color: rgba(15, 141, 96, 0.22);
+    color: #0d6e4b;
+  }
+
+  .mini-pill.spec-direct,
+  .cell-meta.spec-direct {
+    background: rgba(70, 107, 202, 0.12);
+    border-color: rgba(70, 107, 202, 0.22);
+    color: #3456a0;
+    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(70, 107, 202, 0.14);
+  }
+
+  .mini-pill.spec-transitive {
+    background: rgba(70, 107, 202, 0.08);
+    border-color: rgba(70, 107, 202, 0.16);
+    color: #5570ad;
+  }
+
+  .cell-meta.dependency {
+    background: rgba(70, 107, 202, 0.12);
+    border-color: rgba(70, 107, 202, 0.22);
+    color: #3456a0;
+  }
+
+  .cell-meta.dependency-soft {
+    background: rgba(70, 107, 202, 0.07);
+    border-color: rgba(70, 107, 202, 0.14);
+    color: #5570ad;
+  }
+
+  .cell-meta.blocked {
+    background: rgba(151, 45, 45, 0.12);
+    border-color: rgba(151, 45, 45, 0.22);
+    color: #8d2d2d;
+  }
+
+  .cell-meta.blocked-soft {
+    background: rgba(151, 45, 45, 0.08);
+    border-color: rgba(151, 45, 45, 0.16);
+    color: #9b5b5b;
+  }
+
   .planner-row {
     align-items: stretch;
     border-bottom: 1px solid rgba(24, 22, 18, 0.06);
+    transition: opacity 140ms ease;
+  }
+
+  .planner-row.dimmed {
+    opacity: 0.38;
   }
 
   .empty-group-copy {
@@ -485,6 +699,25 @@
     display: block;
     min-height: 3.35rem;
     padding: 0.72rem 0.95rem 0.72rem 0.85rem;
+    transition:
+      background 140ms ease,
+      box-shadow 140ms ease,
+      opacity 140ms ease;
+  }
+
+  .row-label.selected {
+    background: rgba(15, 141, 96, 0.1);
+    box-shadow: inset -2px 0 0 rgba(15, 141, 96, 0.22);
+  }
+
+  .row-label.dependency,
+  .row-label.dependency_transitive {
+    background: rgba(70, 107, 202, 0.08);
+  }
+
+  .row-label.blocked_dependent,
+  .row-label.blocked_dependent_transitive {
+    background: rgba(151, 45, 45, 0.07);
   }
 
   .task-copy {
@@ -503,7 +736,7 @@
   .task-title {
     display: block;
     position: relative;
-    cursor: default;
+    cursor: pointer;
     min-width: 0;
     max-width: 100%;
     font-family: var(--body-font);
@@ -518,6 +751,20 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .task-title.selected {
+    color: #0d6e4b;
+  }
+
+  .task-title.dependency,
+  .task-title.dependency_transitive {
+    color: #3456a0;
+  }
+
+  .task-title.blocked_dependent,
+  .task-title.blocked_dependent_transitive {
+    color: #8d2d2d;
   }
 
   .task-title::after {
@@ -645,6 +892,32 @@
       linear-gradient(90deg, rgba(24, 22, 18, 0.05) 1px, transparent 1px),
       rgba(255, 255, 255, 0.66);
     background-size: calc(100% / var(--total)) 100%;
+    transition:
+      background 140ms ease,
+      opacity 140ms ease;
+  }
+
+  .planner-row.selected .row-grid {
+    background:
+      linear-gradient(90deg, rgba(15, 141, 96, 0.07) 1px, transparent 1px),
+      rgba(242, 251, 246, 0.8);
+    background-size: calc(100% / var(--total)) 100%;
+  }
+
+  .planner-row.dependency .row-grid,
+  .planner-row.dependency_transitive .row-grid {
+    background:
+      linear-gradient(90deg, rgba(70, 107, 202, 0.06) 1px, transparent 1px),
+      rgba(245, 248, 255, 0.78);
+    background-size: calc(100% / var(--total)) 100%;
+  }
+
+  .planner-row.blocked_dependent .row-grid,
+  .planner-row.blocked_dependent_transitive .row-grid {
+    background:
+      linear-gradient(90deg, rgba(151, 45, 45, 0.05) 1px, transparent 1px),
+      rgba(255, 246, 246, 0.8);
+    background-size: calc(100% / var(--total)) 100%;
   }
 
   .bar-lane {
@@ -667,6 +940,13 @@
     box-shadow: var(--shadow-soft);
     font-size: 0.68rem;
     white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      opacity 140ms ease,
+      transform 140ms ease,
+      box-shadow 140ms ease,
+      border-color 140ms ease;
   }
 
   .timeline-bar .bar-fill {
@@ -696,6 +976,40 @@
 
   .timeline-bar.archived {
     box-shadow: inset 0 0 0 1px rgba(143, 84, 33, 0.15), var(--shadow-soft);
+  }
+
+  .timeline-bar.selected {
+    transform: translateY(-50%) scaleY(1.08);
+    border-color: rgba(15, 141, 96, 0.34);
+    box-shadow: 0 0 0 1px rgba(15, 141, 96, 0.14), 0 18px 28px rgba(15, 141, 96, 0.18);
+  }
+
+  .timeline-bar.dependency {
+    background: rgba(70, 107, 202, 0.2);
+    border-color: rgba(70, 107, 202, 0.28);
+    box-shadow: 0 14px 24px rgba(70, 107, 202, 0.12);
+  }
+
+  .timeline-bar.dependency_transitive {
+    background: rgba(70, 107, 202, 0.12);
+    border-color: rgba(70, 107, 202, 0.18);
+    box-shadow: 0 12px 20px rgba(70, 107, 202, 0.08);
+  }
+
+  .timeline-bar.blocked_dependent {
+    background: rgba(151, 45, 45, 0.18);
+    border-color: rgba(151, 45, 45, 0.28);
+    box-shadow: 0 14px 24px rgba(151, 45, 45, 0.12);
+  }
+
+  .timeline-bar.blocked_dependent_transitive {
+    background: rgba(151, 45, 45, 0.11);
+    border-color: rgba(151, 45, 45, 0.18);
+    box-shadow: 0 12px 20px rgba(151, 45, 45, 0.08);
+  }
+
+  .timeline-bar.dimmed {
+    opacity: 0.38;
   }
 
   .row-notes {

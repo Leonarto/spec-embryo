@@ -3,14 +3,15 @@ doc_kind = "spec"
 id = "SPEC-008"
 title = "Add interactive dependency tracing to the timeline"
 summary = "Add interactive timeline highlighting for cross-spec dependencies, blocked work, and related specs so the Gantt becomes a planning and diagnosis surface instead of only a static view."
-status = "proposed"
-task_ids = []
+status = "done"
+task_ids = ["TASK-027", "TASK-028", "TASK-029"]
 tags = ["ui", "timeline", "dependencies", "interaction"]
 owner = "human-ai"
-updated_at = "2026-04-03T16:16:47.421Z"
+updated_at = "2026-04-03T17:33:38.360Z"
 +++
 
 # Overview
+
 
 The current compact timeline is good for dense scanning, but it is still mostly static. Users can see sequence and effort, yet they cannot easily answer higher-value diagnostic questions directly inside the chart:
 
@@ -23,6 +24,7 @@ This slice turns the timeline into an interactive planning and diagnosis surface
 
 ## Context
 
+
 Spec Embryo already computes deterministic task dependencies, effective task status, spec grouping, and a compact timeline layout. That means the project already has enough structured data to support dependency tracing without introducing LLM behavior or manual graph annotation.
 
 What is missing is interaction: the user cannot select a task and see the surrounding execution graph in a focused way.
@@ -30,6 +32,7 @@ What is missing is interaction: the user cannot select a task and see the surrou
 Cross-spec dependencies are especially important because they often reveal why one spec appears blocked even when its own task list looks healthy. The timeline should make those cross-spec edges legible instead of forcing the user to reconstruct them mentally from `depends_on` fields.
 
 ## Goals
+
 
 - Let a user click a timeline task and immediately see its execution neighborhood.
 - Highlight immediate upstream dependencies differently from blocked downstream work.
@@ -39,6 +42,7 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 ## Non-Goals
 
+
 - Do not add drag-and-drop editing or timeline mutation in this slice.
 - Do not introduce probabilistic reasoning or inferred dependencies beyond explicit `depends_on`.
 - Do not add full graph-visualization chrome or a separate graph page.
@@ -46,12 +50,14 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 ## Constraints
 
+
 - The interaction must use the shared deterministic service layer rather than re-deriving graph relationships in the route.
 - The timeline should remain usable without JavaScript-enhanced interaction; selection behavior may enhance the experience but should not be required for the base timeline to render.
 - Cross-spec highlighting must remain readable within the existing grouped timeline rather than turning into a generic network diagram.
 - Dense layout and scanability remain priorities; the interaction cannot overwhelm the chart with noisy permanent connectors.
 
 ## Proposed Approach
+
 
 - Add a deterministic relation model for each timeline row that includes:
   - immediate upstream dependencies
@@ -70,6 +76,7 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 ## Detailed Specification
 
+
 - Each timeline row should carry deterministic relationship metadata derived from explicit task dependencies only.
 - The relation model should distinguish at least these categories:
   - `selected`
@@ -85,6 +92,7 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 ## Edge Cases
 
+
 - A task may belong to multiple specs; the related-spec highlight should not duplicate the same row or group.
 - A selected task may have both same-spec and cross-spec dependencies; both should remain legible.
 - A selected task may have downstream dependents that are not currently rendered because of filters or active-only mode.
@@ -93,14 +101,23 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 ## Acceptance Criteria
 
+
 - Clicking a timeline task highlights its dependency neighborhood deterministically.
 - Immediate dependencies and blocked downstream tasks use visibly different treatments.
 - Cross-spec dependency participation is visible in the timeline even before a task is selected.
 - Selecting a task makes related spec groups legible without hiding the rest of the timeline.
 - The interaction is powered by shared deterministic service data rather than route-local graph reconstruction.
 
-## Open Questions
+## Resolved Decisions
 
-- Should blocked-task highlighting include only immediate downstream dependents, or the full transitive blocked chain?
-- Should related-spec highlighting include only directly connected specs, or every spec touched by the selected dependency neighborhood?
-- Should cross-spec participation have a subtle always-on marker, or only appear once a task is selected?
+- Question: Should blocked-task highlighting include only immediate downstream dependents, or the full transitive blocked chain?
+  Answer:
+    we could separate the immediates with the full transitive by color, make the immediate a color and the transitivie a lighter color of the same color.
+
+- Question: Should related-spec highlighting include only directly connected specs, or every spec touched by the selected dependency neighborhood?
+  Answer:
+    we could separate the connected with the dependency neighbor by color, make the connected a color and the others a lighter color of the same color.
+
+- Question: Should cross-spec participation have a subtle always-on marker, or only appear once a task is selected?
+  Answer:
+    only appear once a task is selected.

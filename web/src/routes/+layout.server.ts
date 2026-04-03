@@ -37,12 +37,18 @@ function parseTimelineMode(searchParams: URLSearchParams): DashboardTimelineMode
   return value as DashboardTimelineMode;
 }
 
+function parseSelectedTimelineTaskId(searchParams: URLSearchParams): string | undefined {
+  const value = searchParams.get("selected_task");
+  return value?.trim() || undefined;
+}
+
 export const load: LayoutServerLoad = async ({ url }) => {
   const rootDir = resolveProjectRoot();
   const dashboard = await buildDashboardData(rootDir, {
     selectedSpecIds: parseSelectedSpecIds(url.searchParams),
     timeWindow: parseTimeWindow(url.searchParams),
     timelineMode: parseTimelineMode(url.searchParams),
+    selectedTimelineTaskId: parseSelectedTimelineTaskId(url.searchParams),
   });
 
   return {

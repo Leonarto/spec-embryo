@@ -6,11 +6,21 @@ export type EffectiveTaskStatus = "todo" | "in_progress" | "blocked" | "review" 
 export type DashboardKanbanColumnId = "blocked" | "todo" | "in_progress" | "review" | "done";
 export type DashboardTimeWindow = "7d" | "30d" | "90d";
 export type DashboardTimelineMode = "active" | "all";
+export type DashboardTimelineRowSelectionState =
+  | "none"
+  | "selected"
+  | "dependency"
+  | "dependency_transitive"
+  | "blocked_dependent"
+  | "blocked_dependent_transitive"
+  | "dimmed";
+export type DashboardTimelineGroupSelectionState = "none" | "selected" | "related_direct" | "related_transitive";
 
 export interface DashboardFilterOptions {
   selectedSpecIds?: string[];
   timeWindow?: DashboardTimeWindow;
   timelineMode?: DashboardTimelineMode;
+  selectedTimelineTaskId?: string;
 }
 
 export interface DashboardTaskCard {
@@ -71,19 +81,36 @@ export interface DashboardTimelineRow extends DashboardTimelineItem {
   primarySpecId: string;
   dependencyCount: number;
   archivedAt?: string;
+  selectionState: DashboardTimelineRowSelectionState;
+  isCrossSpecRelated: boolean;
 }
 
 export interface DashboardTimelineGroup {
   specId: string;
   specTitle: string;
   specStatus: string;
+  selectionState: DashboardTimelineGroupSelectionState;
   rows: DashboardTimelineRow[];
+}
+
+export interface DashboardTimelineSelection {
+  taskId: string;
+  title: string;
+  primarySpecId: string;
+  specIds: string[];
+  directDependencyIds: string[];
+  transitiveDependencyIds: string[];
+  directBlockedDependentIds: string[];
+  transitiveBlockedDependentIds: string[];
+  directRelatedSpecIds: string[];
+  transitiveRelatedSpecIds: string[];
 }
 
 export interface DashboardAnalysisState {
   selectedSpecIds: string[];
   timeWindow?: DashboardTimeWindow;
   timelineMode: DashboardTimelineMode;
+  selectedTimelineTaskId?: string;
   availableSpecs: Array<{
     id: string;
     title: string;
@@ -142,6 +169,7 @@ export interface DashboardData {
     items: DashboardTimelineItem[];
     groups: DashboardTimelineGroup[];
     mode: DashboardTimelineMode;
+    selection?: DashboardTimelineSelection;
   };
   recentHandoff?: {
     id: string;
@@ -317,8 +345,12 @@ function buildTimeline(taskCards: DashboardTaskCard[]): { totalUnits: number; it
   return { totalUnits, items };
 }
 
+function isClosedStatus(status: EffectiveTaskStatus): boolean {
+  return status === "done" || status === "cancelled";
+}
+
 function isTimelineActiveRow(task: DashboardTaskCard): boolean {
-  return task.effectiveStatus !== "done" && task.effectiveStatus !== "cancelled";
+  return !isClosedStatus(task.effectiveStatus);
 }
 
 function primarySpecForTimeline(task: DashboardTaskCard, selectedSpecIds: string[]): string {
@@ -326,11 +358,165 @@ function primarySpecForTimeline(task: DashboardTaskCard, selectedSpecIds: string
   return selectedMatch ?? task.specIds[0] ?? "UNSCOPED";
 }
 
+function collectReachableIds(startIds: string[], nextIds: (taskId: string) => string[]): string[] {
+  const visited = new Set<string>();
+  const queue = [...startIds];
+
+  while (queue.length > 0) {
+    const taskId = queue.shift()!;
+    if (visited.has(taskId)) {
+      continue;
+    }
+
+    visited.add(taskId);
+    for (const nextId of nextIds(taskId)) {
+      if (!visited.has(nextId)) {
+        queue.push(nextId);
+      }
+    }
+  }
+
+  return Array.from(visited);
+}
+
+function buildTimelineSelection(
+  taskCards: DashboardTaskCard[],
+  selectedTaskId: string | undefined,
+  selectedSpecIds: string[],
+): DashboardTimelineSelection | undefined {
+  if (!selectedTaskId) {
+    return undefined;
+  }
+
+  const taskMap = new Map(taskCards.map((task) => [task.id, task]));
+  const selectedTask = taskMap.get(selectedTaskId);
+  if (!selectedTask) {
+    return undefined;
+  }
+
+  const dependentsMap = new Map<string, string[]>();
+  for (const task of taskCards) {
+    for (const dependencyId of task.dependsOn) {
+      const dependents = dependentsMap.get(dependencyId) ?? [];
+      dependents.push(task.id);
+      dependentsMap.set(dependencyId, dependents);
+    }
+  }
+
+  const directDependencyIds = selectedTask.dependsOn.filter((dependencyId) => taskMap.has(dependencyId));
+  const transitiveDependencyIds = collectReachableIds(directDependencyIds, (taskId) => {
+    const task = taskMap.get(taskId);
+    if (!task) {
+      return [];
+    }
+
+    return task.dependsOn.filter((dependencyId) => taskMap.has(dependencyId));
+  }).filter((taskId) => !directDependencyIds.includes(taskId));
+
+  const directBlockedDependentIds = (dependentsMap.get(selectedTask.id) ?? []).filter((taskId) => {
+    const task = taskMap.get(taskId);
+    return Boolean(task && !isClosedStatus(task.effectiveStatus));
+  });
+  const transitiveBlockedDependentIds = collectReachableIds(directBlockedDependentIds, (taskId) => {
+    const dependentIds = dependentsMap.get(taskId) ?? [];
+    return dependentIds.filter((dependentId) => {
+      const task = taskMap.get(dependentId);
+      return Boolean(task && !isClosedStatus(task.effectiveStatus));
+    });
+  }).filter((taskId) => !directBlockedDependentIds.includes(taskId));
+
+  const primarySpecId = primarySpecForTimeline(selectedTask, selectedSpecIds);
+  const directRelatedSpecIds = Array.from(
+    new Set(
+      [
+        ...selectedTask.specIds,
+        ...directDependencyIds.flatMap((taskId) => taskMap.get(taskId)?.specIds ?? []),
+        ...directBlockedDependentIds.flatMap((taskId) => taskMap.get(taskId)?.specIds ?? []),
+      ].filter((specId) => specId !== primarySpecId),
+    ),
+  );
+  const transitiveRelatedSpecIds = Array.from(
+    new Set(
+      [...transitiveDependencyIds, ...transitiveBlockedDependentIds]
+        .flatMap((taskId) => taskMap.get(taskId)?.specIds ?? [])
+        .filter((specId) => specId !== primarySpecId && !directRelatedSpecIds.includes(specId)),
+    ),
+  );
+
+  return {
+    taskId: selectedTask.id,
+    title: selectedTask.title,
+    primarySpecId,
+    specIds: selectedTask.specIds,
+    directDependencyIds,
+    transitiveDependencyIds,
+    directBlockedDependentIds,
+    transitiveBlockedDependentIds,
+    directRelatedSpecIds,
+    transitiveRelatedSpecIds,
+  };
+}
+
+function selectionStateForRow(
+  row: DashboardTimelineItem,
+  selection: DashboardTimelineSelection | undefined,
+): DashboardTimelineRowSelectionState {
+  if (!selection) {
+    return "none";
+  }
+
+  if (row.taskId === selection.taskId) {
+    return "selected";
+  }
+
+  if (selection.directDependencyIds.includes(row.taskId)) {
+    return "dependency";
+  }
+
+  if (selection.transitiveDependencyIds.includes(row.taskId)) {
+    return "dependency_transitive";
+  }
+
+  if (selection.directBlockedDependentIds.includes(row.taskId)) {
+    return "blocked_dependent";
+  }
+
+  if (selection.transitiveBlockedDependentIds.includes(row.taskId)) {
+    return "blocked_dependent_transitive";
+  }
+
+  return "dimmed";
+}
+
+function groupSelectionState(
+  specId: string,
+  selection: DashboardTimelineSelection | undefined,
+): DashboardTimelineGroupSelectionState {
+  if (!selection) {
+    return "none";
+  }
+
+  if (specId === selection.primarySpecId) {
+    return "selected";
+  }
+
+  if (selection.directRelatedSpecIds.includes(specId)) {
+    return "related_direct";
+  }
+
+  if (selection.transitiveRelatedSpecIds.includes(specId)) {
+    return "related_transitive";
+  }
+
+  return "none";
+}
+
 function buildTimelineGroups(
   taskCards: DashboardTaskCard[],
   timelineItems: DashboardTimelineItem[],
   specs: DashboardData["analysis"]["availableSpecs"],
   selectedSpecIds: string[],
+  selection: DashboardTimelineSelection | undefined,
 ): DashboardTimelineGroup[] {
   const itemMap = new Map(timelineItems.map((item) => [item.taskId, item]));
   const groupMap = new Map<string, DashboardTimelineGroup>();
@@ -349,6 +535,7 @@ function buildTimelineGroups(
         specId,
         specTitle: spec?.title ?? specId,
         specStatus: spec?.status ?? "unknown",
+        selectionState: groupSelectionState(specId, selection),
         rows: [],
       });
       order.push(specId);
@@ -360,6 +547,8 @@ function buildTimelineGroups(
       primarySpecId: specId,
       dependencyCount: task.dependsOn.length,
       archivedAt: task.archivedAt,
+      selectionState: selectionStateForRow(item, selection),
+      isCrossSpecRelated: Boolean(selection && item.specIds.some((rowSpecId) => rowSpecId !== selection.primarySpecId)),
     });
   }
 
@@ -374,6 +563,7 @@ function buildTimelineGroups(
         specId,
         specTitle: spec?.title ?? specId,
         specStatus: spec?.status ?? "unknown",
+        selectionState: groupSelectionState(specId, selection),
         rows: [],
       });
       order.push(specId);
@@ -384,6 +574,7 @@ function buildTimelineGroups(
     .map((specId) => groupMap.get(specId)!)
     .map((group) => ({
       ...group,
+      selectionState: groupSelectionState(group.specId, selection),
       rows: group.rows.sort(
         (left, right) => left.start - right.start || left.priority - right.priority || left.taskId.localeCompare(right.taskId),
       ),
@@ -455,6 +646,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
   const selectedSpecIds = normalizeSelectedSpecIds(filters.selectedSpecIds, availableSpecIds);
   const timeWindow = filters.timeWindow;
   const timelineMode = filters.timelineMode ?? "active";
+  const selectedTimelineTaskId = filters.selectedTimelineTaskId?.trim() || undefined;
   const now = Date.now();
   const hasActiveFilters = selectedSpecIds.length > 0 || Boolean(timeWindow);
   const analyticalSourceCards = hasActiveFilters ? taskCards : activeFlowTaskCards;
@@ -469,6 +661,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
   const analyticalTimelineCards =
     timelineMode === "all" ? analyticalTimelineCardsBase : analyticalTimelineCardsBase.filter((task) => isTimelineActiveRow(task));
   const timeline = buildTimeline(analyticalTimelineCards);
+  const timelineSelection = buildTimelineSelection(analyticalTimelineCards, selectedTimelineTaskId, selectedSpecIds);
   const availableSpecs = context.specs
     .map((spec) => ({
       id: spec.id,
@@ -476,7 +669,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
       status: spec.status,
     }))
     .sort((left, right) => left.id.localeCompare(right.id));
-  const timelineGroups = buildTimelineGroups(analyticalTimelineCards, timeline.items, availableSpecs, selectedSpecIds);
+  const timelineGroups = buildTimelineGroups(analyticalTimelineCards, timeline.items, availableSpecs, selectedSpecIds, timelineSelection);
 
   return {
     project: {
@@ -542,6 +735,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
       items: timeline.items,
       groups: timelineGroups,
       mode: timelineMode,
+      selection: timelineSelection,
     },
     recentHandoff: snapshot.recentHandoff
       ? {
@@ -556,6 +750,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
       selectedSpecIds,
       timeWindow,
       timelineMode,
+      selectedTimelineTaskId: timelineSelection?.taskId,
       availableSpecs,
       hasActiveFilters,
       includesArchived: hasActiveFilters,

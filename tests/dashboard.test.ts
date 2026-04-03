@@ -3,7 +3,7 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { buildDashboardData } from "../src/services/dashboard.ts";
-import { archiveTask, initializeProject, setTaskStatus } from "../src/repository.ts";
+import { archiveTask, createSpec, createTask, initializeProject, setTaskStatus } from "../src/repository.ts";
 
 describe("dashboard service", () => {
   test("builds a serialized dashboard view from the repo files", async () => {
@@ -229,6 +229,69 @@ describe("dashboard service", () => {
       expect(dashboard.timeline.items).toEqual([]);
       expect(dashboard.timeline.groups.map((group) => group.specId)).toEqual(["SPEC-001"]);
       expect(dashboard.timeline.groups[0]?.rows).toEqual([]);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("builds deterministic timeline selection states for dependencies and blocked dependents", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-dashboard-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const dashboard = await buildDashboardData(rootDir, {
+        selectedTimelineTaskId: "TASK-001",
+      });
+
+      const rows = dashboard.timeline.groups.flatMap((group) => group.rows);
+      expect(dashboard.timeline.selection?.taskId).toBe("TASK-001");
+      expect(rows.find((row) => row.taskId === "TASK-001")?.selectionState).toBe("selected");
+      expect(rows.find((row) => row.taskId === "TASK-002")?.selectionState).toBe("blocked_dependent");
+      expect(rows.find((row) => row.taskId === "TASK-003")?.selectionState).toBe("blocked_dependent_transitive");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("marks directly and transitively related spec groups from a selected cross-spec neighborhood", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-dashboard-"));
+
+    try {
+      await initializeProject(rootDir);
+      const followUpSpec = await createSpec(rootDir, {
+        title: "Cross-spec follow-up",
+        summary: "A second spec that depends on the foundation work.",
+      });
+      const transitiveSpec = await createSpec(rootDir, {
+        title: "Transitive dependency surface",
+        summary: "A third spec reached transitively from the selected dependency neighborhood.",
+      });
+
+      const directTask = await createTask(rootDir, {
+        title: "Direct cross-spec task",
+        summary: "Depends directly on TASK-001 from another spec.",
+        specIds: [followUpSpec.id],
+        dependsOn: ["TASK-001"],
+        priority: 2,
+      });
+      await createTask(rootDir, {
+        title: "Transitive cross-spec task",
+        summary: "Depends on the direct cross-spec task from a third spec.",
+        specIds: [transitiveSpec.id],
+        dependsOn: [directTask.id],
+        priority: 2,
+      });
+
+      const dashboard = await buildDashboardData(rootDir, {
+        selectedTimelineTaskId: "TASK-001",
+      });
+
+      expect(dashboard.timeline.selection?.directRelatedSpecIds).toContain(followUpSpec.id);
+      expect(dashboard.timeline.selection?.transitiveRelatedSpecIds).toContain(transitiveSpec.id);
+      expect(dashboard.timeline.groups.find((group) => group.specId === "SPEC-001")?.selectionState).toBe("selected");
+      expect(dashboard.timeline.groups.find((group) => group.specId === followUpSpec.id)?.selectionState).toBe("related_direct");
+      expect(dashboard.timeline.groups.find((group) => group.specId === transitiveSpec.id)?.selectionState).toBe("related_transitive");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
