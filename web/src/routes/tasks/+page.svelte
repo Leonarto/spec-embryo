@@ -103,10 +103,10 @@
           {#each column.tasks as task}
             <article class="task-card">
               <div class="card-top">
-                <span class="task-id">
+                <a class="task-id" href={`/tasks/${task.id}`}>
                   <FolderKanban size={13} strokeWidth={1.9} />
                   {task.id}
-                </span>
+                </a>
                 <span class="meta">p{task.priority}</span>
                 <span class="meta">
                   <Hourglass size={12} strokeWidth={1.9} />
@@ -119,7 +119,7 @@
 
               <div class="chip-row">
                 {#each task.specIds as specId}
-                  <span class="chip">{specId}</span>
+                  <a class="chip" href={`/specs/${specId}`}>{specId}</a>
                 {/each}
               </div>
 
@@ -131,7 +131,7 @@
               {#if task.unmetDependencies.length > 0}
                 <div class="chip-row">
                   {#each task.unmetDependencies as dependencyId}
-                    <span class="chip chip-danger">waits for {dependencyId}</span>
+                    <a class="chip chip-danger" href={`/tasks/${dependencyId}`}>waits for {dependencyId}</a>
                   {/each}
                 </div>
               {/if}
@@ -320,6 +320,7 @@
 
   .task-id {
     font-weight: 700;
+    text-decoration: none;
   }
 
   .chip-danger {

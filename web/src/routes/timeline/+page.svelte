@@ -49,10 +49,10 @@
         <article class="timeline-row">
           <div class="row-meta">
             <div class="meta-head">
-              <span class="task-id">
+              <a class="task-id" href={`/tasks/${item.taskId}`}>
                 <FolderKanban size={13} strokeWidth={1.9} />
                 {item.taskId}
-              </span>
+              </a>
               <span class="effort-pill">
                 <Clock3 size={12} strokeWidth={1.9} />
                 {item.effort}u
@@ -67,7 +67,7 @@
             <h4>{item.title}</h4>
             <div class="chip-row">
               {#each item.specIds as specId}
-                <span class="chip">{specId}</span>
+                <a class="chip" href={`/specs/${specId}`}>{specId}</a>
               {/each}
             </div>
             <div class="span-copy">
@@ -212,6 +212,10 @@
     border: 1px solid var(--line);
     background: rgba(255, 255, 255, 0.88);
     box-shadow: var(--shadow-soft);
+  }
+
+  .task-id {
+    text-decoration: none;
   }
 
   .archived-pill {

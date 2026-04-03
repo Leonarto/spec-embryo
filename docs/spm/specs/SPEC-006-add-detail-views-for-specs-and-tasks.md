@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-006"
 title = "Add detail views for specs and tasks"
 summary = "Define drill-down detail pages that let humans and agents inspect a single spec or task with linked context, state, and history."
-status = "proposed"
-task_ids = []
+status = "done"
+task_ids = ["TASK-018", "TASK-019", "TASK-020"]
 tags = ["ui", "details", "navigation", "self-hosting"]
 owner = "human-ai"
-updated_at = "2026-04-03T02:26:23.263Z"
+updated_at = "2026-04-03T14:52:03.012Z"
 +++
 
 # Overview
@@ -95,7 +95,7 @@ Focused detail pages should make the UI more useful for spec review, implementat
 - Detail pages render the underlying Markdown narrative body in a readable way.
 - Missing IDs return a graceful deterministic fallback.
 
-## Open Questions
+## Resolved Decisions
 
-- Whether the first version should render full Markdown body content inline or collapse long sections behind simple accordions.
-- Whether handoff snippets should appear directly on task detail pages or stay as links until the archival/history slice lands.
+- The first version renders full Markdown body content inline by default so humans and agents can inspect the source narrative without extra clicks.
+- Task detail pages can surface a small deterministic set of related handoff snippets directly when they are easy to resolve from linked specs or active task references.

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-017 is complete. The task Kanban now supports spec filters that narrow the active board by one or more specs while still keeping archived work out of the operational flow."
-focus = "Choose the next product slice after adding board spec filters."
+summary = "SPEC-006 is complete. The workspace now has dedicated spec and task detail pages backed by a shared deterministic detail service, with linked context, inline narrative rendering, and deterministic not-found states."
+focus = "Choose the next product slice after closing SPEC-006."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Decide whether SPEC-006 detail views or SPEC-007 compact Gantt should be the next active slice.", "Keep the shared filter component aligned across operational and analytical views as the workspace grows.", "Capture the next meaningful slice in the configured current state file or create a new task."]
+next_action_hints = ["Decide whether SPEC-007 compact Gantt or a follow-up workflow slice should be next.", "Consider fixing deterministic ID allocation so parallel spec/task creation cannot collide again.", "Keep the shared detail service and shared web components aligned as future detail pages or drill-down views grow."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T04:18:17.026Z"
+updated_at = "2026-04-03T14:52:03.025Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

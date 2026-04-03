@@ -48,7 +48,7 @@
       <div class="card-head">
         <div>
           <p class="spec-id">{spec.id}</p>
-          <h4>{spec.title}</h4>
+          <h4><a class="title-link" href={`/specs/${spec.id}`}>{spec.title}</a></h4>
         </div>
         <span class="status">
           <StatusIcon size={13} strokeWidth={1.9} />
@@ -81,7 +81,7 @@
 
       <div class="chip-row">
         {#each spec.taskIds as taskId}
-          <span class="chip">{taskId}</span>
+          <a class="chip" href={`/tasks/${taskId}`}>{taskId}</a>
         {/each}
       </div>
     </article>
@@ -109,7 +109,7 @@
           <div class="analysis-head">
             <div>
               <p class="task-id">{task.id}</p>
-              <h4>{task.title}</h4>
+              <h4><a class="title-link" href={`/tasks/${task.id}`}>{task.title}</a></h4>
             </div>
             <div class="analysis-meta">
               <span class="status-pill">{task.rawStatus.replaceAll("_", " ")}</span>
@@ -126,7 +126,7 @@
 
           <div class="chip-row">
             {#each task.specIds as specId}
-              <span class="chip">{specId}</span>
+              <a class="chip" href={`/specs/${specId}`}>{specId}</a>
             {/each}
           </div>
 
@@ -310,6 +310,10 @@
     border: 1px solid var(--line);
     background: rgba(255, 255, 255, 0.82);
     box-shadow: var(--shadow-soft);
+  }
+
+  .title-link {
+    text-decoration: none;
   }
 
   .analysis-head,

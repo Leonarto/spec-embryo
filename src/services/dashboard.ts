@@ -134,7 +134,7 @@ export interface DashboardData {
   analysis: DashboardAnalysisState;
 }
 
-function deriveEffectiveStatus(rawStatus: string, unmetDependencies: string[]): EffectiveTaskStatus {
+export function deriveEffectiveStatus(rawStatus: string, unmetDependencies: string[]): EffectiveTaskStatus {
   if (rawStatus === "done" || rawStatus === "cancelled" || rawStatus === "in_progress" || rawStatus === "blocked" || rawStatus === "review") {
     return rawStatus;
   }

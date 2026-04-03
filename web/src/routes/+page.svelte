@@ -113,7 +113,7 @@
         </div>
         <div class="chip-row">
           {#each dashboard.currentState.activeSpecIds as specId}
-            <span class="chip">{specId}</span>
+            <a class="chip" href={`/specs/${specId}`}>{specId}</a>
           {/each}
         </div>
       </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="chip-row">
           {#each dashboard.currentState.activeTaskIds as taskId}
-            <span class="chip">{taskId}</span>
+            <a class="chip" href={`/tasks/${taskId}`}>{taskId}</a>
           {/each}
         </div>
       </div>
@@ -212,7 +212,7 @@
     {:else}
       <ul class="notes-list">
         {#each dashboard.blockedTasks as task}
-          <li>{task.id} · {task.title}</li>
+          <li><a href={`/tasks/${task.id}`}>{task.id} · {task.title}</a></li>
         {/each}
       </ul>
     {/if}
@@ -232,7 +232,7 @@
     </div>
     <ul class="notes-list">
       {#each dashboard.criticalPath as task}
-        <li>{task.id} · {task.title}</li>
+        <li><a href={`/tasks/${task.id}`}>{task.id} · {task.title}</a></li>
       {/each}
     </ul>
   </article>
@@ -286,7 +286,7 @@
         </div>
         <ul class="notes-list">
           {#each dashboard.specs as spec}
-            <li>{spec.id} · {spec.linkedTaskCount} linked tasks</li>
+            <li><a href={`/specs/${spec.id}`}>{spec.id} · {spec.linkedTaskCount} linked tasks</a></li>
           {/each}
         </ul>
       </div>
