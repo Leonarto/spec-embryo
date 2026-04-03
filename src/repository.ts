@@ -220,6 +220,10 @@ export interface UpdateCurrentStateInput {
   clearNextActionHints?: boolean;
 }
 
+export interface ArchiveTaskInput {
+  reason?: string;
+}
+
 export function createDefaultConfig(rootDir: string): ProjectConfig {
   return parseProjectConfig(parseToml(createConfigToml(inferProjectName(rootDir))));
 }
@@ -451,6 +455,109 @@ export async function setTaskStatus(rootDir: string, taskId: string, status: Tas
 
   await writeUtf8(task.filePath, serializeTaskDocument(nextTask, updatedAt));
   return nextTask;
+}
+
+async function updateTaskDocument(
+  rootDir: string,
+  taskId: string,
+  updater: (task: TaskDocument, now: string) => TaskDocument,
+): Promise<TaskDocument> {
+  const config = await readProjectConfig(rootDir);
+  const paths = resolveProjectPaths(rootDir, config);
+  const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
+  const task = tasks.find((entry) => entry.id === taskId);
+
+  if (!task) {
+    throw new Error(`Task not found: ${taskId}`);
+  }
+
+  const now = new Date().toISOString();
+  const nextTask = updater(task, now);
+  await writeUtf8(task.filePath, serializeTaskDocument(nextTask, nextTask.updatedAt ?? now));
+  return nextTask;
+}
+
+function assertArchivableTask(task: TaskDocument): void {
+  if (task.status !== "done" && task.status !== "cancelled") {
+    throw new Error(`Only done or cancelled tasks can be archived: ${task.id}`);
+  }
+}
+
+export async function archiveTask(rootDir: string, taskId: string, input: ArchiveTaskInput = {}): Promise<TaskDocument> {
+  return updateTaskDocument(rootDir, taskId, (task, now) => {
+    assertArchivableTask(task);
+
+    return {
+      ...task,
+      archivedAt: now,
+      archiveReason: input.reason?.trim() || task.archiveReason,
+      updatedAt: now,
+    };
+  });
+}
+
+export async function restoreTask(rootDir: string, taskId: string): Promise<TaskDocument> {
+  return updateTaskDocument(rootDir, taskId, (task, now) => ({
+    ...task,
+    archivedAt: undefined,
+    archiveReason: undefined,
+    updatedAt: now,
+  }));
+}
+
+function parseAgeToMilliseconds(value: string): number {
+  const trimmed = value.trim().toLowerCase();
+  const match = trimmed.match(/^(\d+)([dhw])$/);
+  if (!match) {
+    throw new Error("`--older-than` must look like 7d, 12h, or 2w.");
+  }
+
+  const amount = Number.parseInt(match[1]!, 10);
+  const unit = match[2]!;
+  const multiplier = unit === "h" ? 60 * 60 * 1000 : unit === "d" ? 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
+  return amount * multiplier;
+}
+
+async function archiveClosedTasksByAge(
+  rootDir: string,
+  kind: "done" | "cancelled",
+  olderThan: string,
+  reason?: string,
+): Promise<TaskDocument[]> {
+  const config = await readProjectConfig(rootDir);
+  const paths = resolveProjectPaths(rootDir, config);
+  const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
+  const now = Date.now();
+  const cutoff = now - parseAgeToMilliseconds(olderThan);
+  const timestampField = kind === "done" ? "completedAt" : "cancelledAt";
+  const eligible = tasks.filter((task) => {
+    if (task.status !== kind || task.archivedAt) {
+      return false;
+    }
+
+    const timestamp = task[timestampField];
+    if (!timestamp) {
+      return false;
+    }
+
+    const value = Date.parse(timestamp);
+    return Number.isFinite(value) && value <= cutoff;
+  });
+
+  const archived: TaskDocument[] = [];
+  for (const task of eligible) {
+    archived.push(await archiveTask(rootDir, task.id, { reason }));
+  }
+
+  return archived;
+}
+
+export async function archiveDoneTasks(rootDir: string, olderThan: string, input: ArchiveTaskInput = {}): Promise<TaskDocument[]> {
+  return archiveClosedTasksByAge(rootDir, "done", olderThan, input.reason);
+}
+
+export async function archiveCancelledTasks(rootDir: string, olderThan: string, input: ArchiveTaskInput = {}): Promise<TaskDocument[]> {
+  return archiveClosedTasksByAge(rootDir, "cancelled", olderThan, input.reason);
 }
 
 export async function createSpec(rootDir: string, input: CreateSpecInput): Promise<SpecDocument> {

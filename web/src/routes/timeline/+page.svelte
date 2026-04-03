@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { ArrowRight, ChartNoAxesGantt, Clock3, FolderKanban, Orbit } from "@lucide/svelte";
+  import { Archive, ArrowRight, ChartNoAxesGantt, Clock3, FolderKanban, Orbit, TimerReset } from "@lucide/svelte";
   import type { DashboardData } from "../../../../src/services/dashboard.ts";
+  import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
 
   let { data } = $props();
   const dashboard = $derived(data.dashboard as DashboardData);
@@ -23,56 +24,76 @@
   </p>
 </section>
 
+<AnalysisFilters
+  {dashboard}
+  title="Timeline slice filters"
+  detail="Use spec sets and lifecycle windows to see the relevant slice of work in dependency order. Archived tasks join the slice while filters are active."
+/>
+
 <section class="timeline-shell">
-  <div class="timeline-ruler" style={`--total:${totalUnits}`}>
-    {#each ruler as unit}
-      <span>{unit}</span>
-    {/each}
-  </div>
+  {#if dashboard.timeline.items.length === 0}
+    <div class="timeline-empty">
+      <TimerReset size={16} strokeWidth={1.9} />
+      <span>No timeline items matched the current analytical filters.</span>
+    </div>
+  {:else}
+    <div class="timeline-ruler" style={`--total:${totalUnits}`}>
+      {#each ruler as unit}
+        <span>{unit}</span>
+      {/each}
+    </div>
 
-  <div class="timeline-list">
-    {#each dashboard.timeline.items as item}
-      <article class="timeline-row">
-        <div class="row-meta">
-          <div class="meta-head">
-            <span class="task-id">
-              <FolderKanban size={13} strokeWidth={1.9} />
-              {item.taskId}
-            </span>
-            <span class="effort-pill">
-              <Clock3 size={12} strokeWidth={1.9} />
-              {item.effort}u
-            </span>
+    <div class="timeline-list">
+      {#each dashboard.timeline.items as item}
+        {@const task = dashboard.analysisTasks.find((entry) => entry.id === item.taskId) ?? dashboard.tasks.find((entry) => entry.id === item.taskId)}
+        <article class="timeline-row">
+          <div class="row-meta">
+            <div class="meta-head">
+              <span class="task-id">
+                <FolderKanban size={13} strokeWidth={1.9} />
+                {item.taskId}
+              </span>
+              <span class="effort-pill">
+                <Clock3 size={12} strokeWidth={1.9} />
+                {item.effort}u
+              </span>
+              {#if task?.archivedAt}
+                <span class="effort-pill archived-pill">
+                  <Archive size={12} strokeWidth={1.9} />
+                  archived
+                </span>
+              {/if}
+            </div>
+            <h4>{item.title}</h4>
+            <div class="chip-row">
+              {#each item.specIds as specId}
+                <span class="chip">{specId}</span>
+              {/each}
+            </div>
+            <div class="span-copy">
+              <span>
+                <ArrowRight size={12} strokeWidth={1.9} />
+                {item.start} -> {item.end}
+              </span>
+              <span>
+                <Orbit size={12} strokeWidth={1.9} />
+                {item.effectiveStatus.replaceAll("_", " ")}
+              </span>
+            </div>
           </div>
-          <h4>{item.title}</h4>
-          <div class="chip-row">
-            {#each item.specIds as specId}
-              <span class="chip">{specId}</span>
-            {/each}
-          </div>
-          <div class="span-copy">
-            <span>
-              <ArrowRight size={12} strokeWidth={1.9} />
-              {item.start} -> {item.end}
-            </span>
-            <span>
-              <Orbit size={12} strokeWidth={1.9} />
-              {item.effectiveStatus.replaceAll("_", " ")}
-            </span>
-          </div>
-        </div>
 
-        <div class="bar-track" style={`--total:${totalUnits}`}>
-          <div
-            class="bar {item.effectiveStatus}"
-            style={`left:${(item.start / totalUnits) * 100}%; width:${((item.end - item.start) / totalUnits) * 100}%`}
-          >
-            <span>{item.start} -> {item.end}</span>
+          <div class="bar-track" style={`--total:${totalUnits}`}>
+            <div
+              class="bar {item.effectiveStatus} {task?.archivedAt ? 'bar-archived' : ''}"
+              style={`left:${(item.start / totalUnits) * 100}%; width:${((item.end - item.start) / totalUnits) * 100}%`}
+            >
+              <span>{item.start} -> {item.end}</span>
+            </div>
           </div>
-        </div>
-      </article>
-    {/each}
-  </div>
+        </article>
+      {/each}
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -147,6 +168,17 @@
     gap: 0.85rem;
   }
 
+  .timeline-empty {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--line-strong);
+    background: rgba(255, 255, 255, 0.62);
+  }
+
   .timeline-row {
     display: grid;
     grid-template-columns: 17rem minmax(0, 1fr);
@@ -180,6 +212,11 @@
     border: 1px solid var(--line);
     background: rgba(255, 255, 255, 0.88);
     box-shadow: var(--shadow-soft);
+  }
+
+  .archived-pill {
+    background: rgba(143, 84, 33, 0.12);
+    border-color: rgba(143, 84, 33, 0.2);
   }
 
   .span-copy {
@@ -242,6 +279,10 @@
   .bar.done {
     background: rgba(15, 141, 96, 0.22);
     border-color: rgba(15, 141, 96, 0.2);
+  }
+
+  .bar.bar-archived {
+    box-shadow: inset 0 0 0 1px rgba(143, 84, 33, 0.18), var(--shadow-soft);
   }
 
   @media (max-width: 980px) {

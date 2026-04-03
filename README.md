@@ -77,6 +77,8 @@ web/
 - `task list`: list tasks with dependency and status details.
 - `task create`: create a new task doc with a deterministic ID and update linked specs automatically.
 - `task set-status`: update a task status deterministically in-place, including the explicit `review` stage before `done`.
+- `task archive` / `task archive-done` / `task archive-cancelled`: archive closed tasks without deleting their durable docs.
+- `task restore`: clear archival metadata so a task is visible in active-flow views again.
 
 Task docs now support explicit lifecycle metadata such as `created_at`, `completed_at`, and `cancelled_at`, so archival and time-based analysis can build on meaningful state transitions instead of `updated_at`.
 
@@ -105,6 +107,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Task dependency graph and simple critical path derivation
 - Local SvelteKit workspace launched through `spm ui`
 - Workspace views for overview dashboard, task Kanban, Specs, and deterministic Gantt timeline
+- Multi-spec and lifecycle-window filters for analytical Specs and Gantt slices, including archived work when the goal is slice analysis instead of active-board hygiene
 - Prompt-return backend for agent-safe orchestration
 - Handoff file generation
 - Deterministic spec/task creation with automatic back-linking

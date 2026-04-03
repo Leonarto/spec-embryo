@@ -2,7 +2,7 @@ import type { ParsedArgs } from "../cli.ts";
 import { flagValue } from "../cli.ts";
 import { TASK_STATUSES, isTaskStatus } from "../domain.ts";
 import { buildTaskIndex, summarizeTaskNode } from "../engine.ts";
-import { createTask, loadProjectContext, setTaskStatus } from "../repository.ts";
+import { archiveCancelledTasks, archiveDoneTasks, archiveTask, createTask, loadProjectContext, restoreTask, setTaskStatus } from "../repository.ts";
 
 function parseCommaList(value: string | undefined): string[] {
   return value
@@ -78,8 +78,76 @@ export async function runTaskCommand(rootDir: string, parsed: ParsedArgs): Promi
     return `Updated ${task.id} to [${task.status}] in ${task.filePath}`;
   }
 
+  if (parsed.subcommand === "archive") {
+    const taskId = parsed.positionals[2];
+    if (!taskId) {
+      throw new Error("`task archive` requires <TASK-ID>.");
+    }
+
+    const task = await archiveTask(rootDir, taskId, {
+      reason: flagValue(parsed, "reason"),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(task, null, 2);
+    }
+
+    return `Archived ${task.id} in ${task.filePath}`;
+  }
+
+  if (parsed.subcommand === "archive-done") {
+    const olderThan = flagValue(parsed, "older-than");
+    if (!olderThan) {
+      throw new Error("`task archive-done` requires --older-than <duration>.");
+    }
+
+    const tasks = await archiveDoneTasks(rootDir, olderThan, {
+      reason: flagValue(parsed, "reason"),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(tasks, null, 2);
+    }
+
+    return tasks.length === 0 ? "No done tasks were archived." : `Archived ${tasks.length} done task(s).`;
+  }
+
+  if (parsed.subcommand === "archive-cancelled") {
+    const olderThan = flagValue(parsed, "older-than");
+    if (!olderThan) {
+      throw new Error("`task archive-cancelled` requires --older-than <duration>.");
+    }
+
+    const tasks = await archiveCancelledTasks(rootDir, olderThan, {
+      reason: flagValue(parsed, "reason"),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(tasks, null, 2);
+    }
+
+    return tasks.length === 0 ? "No cancelled tasks were archived." : `Archived ${tasks.length} cancelled task(s).`;
+  }
+
+  if (parsed.subcommand === "restore") {
+    const taskId = parsed.positionals[2];
+    if (!taskId) {
+      throw new Error("`task restore` requires <TASK-ID>.");
+    }
+
+    const task = await restoreTask(rootDir, taskId);
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(task, null, 2);
+    }
+
+    return `Restored ${task.id} in ${task.filePath}`;
+  }
+
   if (parsed.subcommand !== "list") {
-    throw new Error("Supported task commands in v1 are `task list`, `task create`, and `task set-status`.");
+    throw new Error(
+      "Supported task commands are `task list`, `task create`, `task set-status`, `task archive`, `task archive-done`, `task archive-cancelled`, and `task restore`.",
+    );
   }
 
   const context = await loadProjectContext(rootDir);
@@ -112,7 +180,11 @@ export async function runTaskCommand(rootDir: string, parsed: ParsedArgs): Promi
       const summary = summarizeTaskNode(task, taskIndex);
       const deps = task.dependsOn.join(", ") || "none";
       const unmet = summary.unmetDependencies.join(", ") || "none";
-      return `${task.id} [${task.status}] p${task.priority} ${task.title}\n  specs: ${task.specIds.join(", ") || "none"}\n  depends_on: ${deps}\n  unmet_dependencies: ${unmet}\n  ${task.summary}`;
+      const statusLabel = task.archivedAt ? `${task.status}, archived` : task.status;
+      const archivedLine = task.archivedAt
+        ? `\n  archived_at: ${task.archivedAt}${task.archiveReason ? ` (${task.archiveReason})` : ""}`
+        : "";
+      return `${task.id} [${statusLabel}] p${task.priority} ${task.title}\n  specs: ${task.specIds.join(", ") || "none"}\n  depends_on: ${deps}\n  unmet_dependencies: ${unmet}${archivedLine}\n  ${task.summary}`;
     })
     .join("\n\n");
 }

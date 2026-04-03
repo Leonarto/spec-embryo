@@ -179,4 +179,5 @@ The v1 structure is meant to grow cleanly into:
 - repo-local skills registry
 - handoff timelines and audits
 - a lightweight local server that visualizes the same source files
+- analytical views that group work by spec set and lifecycle window without leaving the file-backed model
 - a later optional backend or database without invalidating the file-backed model

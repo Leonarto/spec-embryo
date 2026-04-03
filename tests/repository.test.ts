@@ -2,7 +2,18 @@ import { describe, expect, test } from "bun:test";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { createSpec, createTask, initializeProject, setSpecStatus, setTaskStatus, updateCurrentState } from "../src/repository.ts";
+import {
+  archiveCancelledTasks,
+  archiveDoneTasks,
+  archiveTask,
+  createSpec,
+  createTask,
+  initializeProject,
+  restoreTask,
+  setSpecStatus,
+  setTaskStatus,
+  updateCurrentState,
+} from "../src/repository.ts";
 
 describe("repository status updates", () => {
   test("updates a spec status and preserves the body", async () => {
@@ -177,6 +188,79 @@ describe("repository status updates", () => {
 
       const seedRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-bootstrap-cli.md"), "utf8");
       expect(seedRaw).toContain("created_at = ");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("archives a closed task and preserves its closed status", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      await setTaskStatus(rootDir, "TASK-002", "done");
+
+      const archived = await archiveTask(rootDir, "TASK-002", {
+        reason: "Aged out of the active board.",
+      });
+      const raw = await readFile(archived.filePath, "utf8");
+
+      expect(archived.status).toBe("done");
+      expect(archived.archivedAt).toBeDefined();
+      expect(archived.archiveReason).toBe("Aged out of the active board.");
+      expect(raw).toContain("archived_at = ");
+      expect(raw).toContain('archive_reason = "Aged out of the active board."');
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("restores an archived task by clearing archival metadata", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      await setTaskStatus(rootDir, "TASK-002", "done");
+      await archiveTask(rootDir, "TASK-002", { reason: "Aged out." });
+
+      const restored = await restoreTask(rootDir, "TASK-002");
+      const raw = await readFile(restored.filePath, "utf8");
+
+      expect(restored.archivedAt).toBeUndefined();
+      expect(restored.archiveReason).toBeUndefined();
+      expect(raw).not.toContain("archived_at = ");
+      expect(raw).not.toContain("archive_reason = ");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("archives done and cancelled tasks by explicit lifecycle age", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const doneTask = await createTask(rootDir, {
+        title: "Old done task",
+        summary: "A historical completed task.",
+        specIds: ["SPEC-001"],
+        status: "done",
+      });
+      const cancelledTask = await createTask(rootDir, {
+        title: "Old cancelled task",
+        summary: "A historical cancelled task.",
+        specIds: ["SPEC-001"],
+        status: "cancelled",
+      });
+
+      const doneArchived = await archiveDoneTasks(rootDir, "0d", { reason: "Done archive sweep." });
+      const cancelledArchived = await archiveCancelledTasks(rootDir, "0d", { reason: "Cancelled archive sweep." });
+
+      expect(doneArchived.map((task) => task.id)).toContain(doneTask.id);
+      expect(cancelledArchived.map((task) => task.id)).toContain(cancelledTask.id);
+      expect(doneArchived.every((task) => task.archivedAt)).toBe(true);
+      expect(cancelledArchived.every((task) => task.archivedAt)).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

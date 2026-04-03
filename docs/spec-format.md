@@ -144,3 +144,16 @@ Deterministic creation rules:
 - linked IDs are validated before writing
 - when a task is created, its linked specs are updated with the new `task_ids`
 - when a spec is created with linked tasks, those task docs are updated with the new `spec_ids`
+
+Archival commands:
+
+```bash
+bun run spm task archive TASK-014 --reason "Aged out of the active board"
+bun run spm task archive-done --older-than 7d --reason "Weekly cleanup"
+bun run spm task archive-cancelled --older-than 14d
+bun run spm task restore TASK-014
+```
+
+Archiving does not change `status`; it adds archival metadata so active-flow views can hide old closed work by default without losing durable history.
+
+Analytical views such as Specs and Gantt can then filter deterministically by one or more `spec_ids` and by lifecycle windows like `7d`, `30d`, or `90d`. Those slices use `completed_at` and `cancelled_at` instead of `updated_at`, and they can include archived tasks when the point is to inspect the full work history of a spec set.

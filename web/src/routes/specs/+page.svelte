@@ -1,9 +1,16 @@
 <script lang="ts">
-  import { CircleCheckBig, Gauge, NotebookText, Orbit, Pause, Sparkles } from "@lucide/svelte";
+  import { Archive, CircleCheckBig, Gauge, NotebookText, Orbit, Pause, Sparkles, TimerReset } from "@lucide/svelte";
   import type { DashboardData } from "../../../../src/services/dashboard.ts";
+  import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
 
   let { data } = $props();
   const dashboard = $derived(data.dashboard as DashboardData);
+  const selectedSpecIds = $derived(new Set(dashboard.analysis.selectedSpecIds));
+  const visibleSpecs = $derived(
+    dashboard.analysis.selectedSpecIds.length === 0
+      ? dashboard.specs
+      : dashboard.specs.filter((spec) => selectedSpecIds.has(spec.id)),
+  );
 
   const statusIcons = {
     proposed: Sparkles,
@@ -28,10 +35,16 @@
   </p>
 </section>
 
+<AnalysisFilters
+  {dashboard}
+  title="Spec slice filters"
+  detail="Use one or more specs to inspect the full work slice for that intent area. Analytical slices include archived tasks so completed work does not disappear."
+/>
+
 <section class="spec-grid">
-  {#each dashboard.specs as spec}
+  {#each visibleSpecs as spec}
     {@const StatusIcon = statusIcons[spec.status as keyof typeof statusIcons] ?? NotebookText}
-    <article class="spec-card">
+    <article class:selected={selectedSpecIds.has(spec.id)} class="spec-card">
       <div class="card-head">
         <div>
           <p class="spec-id">{spec.id}</p>
@@ -73,6 +86,63 @@
       </div>
     </article>
   {/each}
+</section>
+
+<section class="analysis-shell">
+  <div class="analysis-copy">
+    <p class="eyebrow">Related work slice</p>
+    <h3>Tasks In Scope</h3>
+    <p class="intro">
+      This list follows the active analytical filters instead of the Kanban hygiene rules, so archived work still shows up when it belongs to the selected spec slice.
+    </p>
+  </div>
+
+  {#if dashboard.analysisTasks.length === 0}
+    <div class="analysis-empty">
+      <TimerReset size={16} strokeWidth={1.9} />
+      <span>No tasks matched the current analytical filters.</span>
+    </div>
+  {:else}
+    <div class="analysis-list">
+      {#each dashboard.analysisTasks as task}
+        <article class="analysis-card">
+          <div class="analysis-head">
+            <div>
+              <p class="task-id">{task.id}</p>
+              <h4>{task.title}</h4>
+            </div>
+            <div class="analysis-meta">
+              <span class="status-pill">{task.rawStatus.replaceAll("_", " ")}</span>
+              {#if task.archivedAt}
+                <span class="status-pill archived">
+                  <Archive size={12} strokeWidth={1.9} />
+                  archived
+                </span>
+              {/if}
+            </div>
+          </div>
+
+          <p>{task.summary}</p>
+
+          <div class="chip-row">
+            {#each task.specIds as specId}
+              <span class="chip">{specId}</span>
+            {/each}
+          </div>
+
+          <div class="progress-grid">
+            <span>priority p{task.priority}</span>
+            <span>effort {task.effort}u</span>
+            {#if task.completedAt}
+              <span>completed {task.completedAt.slice(0, 10)}</span>
+            {:else if task.cancelledAt}
+              <span>cancelled {task.cancelledAt.slice(0, 10)}</span>
+            {/if}
+          </div>
+        </article>
+      {/each}
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -122,6 +192,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.9rem;
+    margin-bottom: 1rem;
   }
 
   .spec-card {
@@ -132,6 +203,11 @@
     border: 1px solid var(--line);
     background: var(--panel);
     box-shadow: var(--shadow);
+  }
+
+  .spec-card.selected {
+    border-color: rgba(15, 141, 96, 0.22);
+    background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(239, 248, 243, 0.9));
   }
 
   .card-head,
@@ -162,7 +238,8 @@
   }
 
   .status,
-  .chip {
+  .chip,
+  .status-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.32rem;
@@ -204,13 +281,78 @@
     gap: 0.5rem;
   }
 
+  .analysis-shell {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+
+  .analysis-copy {
+    display: grid;
+    gap: 0.24rem;
+  }
+
+  .analysis-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .analysis-card {
+    display: grid;
+    gap: 0.72rem;
+    padding: 0.92rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .analysis-head,
+  .analysis-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+    align-items: start;
+    flex-wrap: wrap;
+  }
+
+  .task-id {
+    margin: 0 0 0.28rem;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  .status-pill.archived {
+    background: rgba(143, 84, 33, 0.12);
+    border-color: rgba(143, 84, 33, 0.2);
+  }
+
+  .analysis-empty {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--line-strong);
+    background: rgba(255, 255, 255, 0.6);
+  }
+
   @media (max-width: 900px) {
     .view-header {
       flex-direction: column;
       align-items: start;
     }
 
-    .spec-grid {
+    .spec-grid,
+    .analysis-list {
       grid-template-columns: 1fr;
     }
   }

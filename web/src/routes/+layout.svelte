@@ -24,6 +24,7 @@
   ];
 
   const activePath = $derived(page.url.pathname);
+  const activeSearch = $derived(page.url.search);
 </script>
 
 <svelte:head>
@@ -48,7 +49,7 @@
     <nav class="nav-stack" aria-label="Workspace views">
       {#each navItems as item}
         {@const Icon = item.icon}
-        <a class:active={activePath === item.href} href={item.href}>
+        <a class:active={activePath === item.href} href={`${item.href}${activeSearch}`}>
           <span class="nav-badge">
             <Icon size={17} strokeWidth={1.9} />
           </span>

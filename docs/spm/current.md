@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-014 is complete after review. Seed tasks, direct closed-task creation, and status transitions now all preserve the intended lifecycle timestamp semantics."
-focus = "Start TASK-015 to add archival and restore flows on top of the reviewed lifecycle metadata."
-active_spec_ids = ["SPEC-005"]
-active_task_ids = ["TASK-015"]
+summary = "SPEC-005 is complete. The analytical Specs and Gantt views now support deterministic multi-spec and lifecycle-window filters, and those filtered slices can include archived work without polluting the active board."
+focus = "Choose the next product slice after closing SPEC-005."
+active_spec_ids = []
+active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Implement archive and restore commands on top of created_at, completed_at, cancelled_at, archived_at, and archive_reason.", "Keep archived work durable while removing it from active-flow views by default.", "Leave TASK-016 blocked until the archive visibility rules are implemented in the repository and UI layers."]
+next_action_hints = ["Decide whether SPEC-006 detail views or SPEC-007 compact Gantt should be the next active slice.", "Keep the analytical filter contract shared across future detail and timeline views instead of duplicating route-specific logic.", "Commit this reviewed TASK-016 slice before starting the next implementation block."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T02:46:51.402Z"
+updated_at = "2026-04-03T03:18:13.253Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

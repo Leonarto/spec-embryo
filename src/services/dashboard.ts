@@ -4,6 +4,12 @@ import { buildAgentsHealthReport } from "./agents.ts";
 
 export type EffectiveTaskStatus = "todo" | "in_progress" | "blocked" | "review" | "done" | "cancelled";
 export type DashboardKanbanColumnId = "blocked" | "todo" | "in_progress" | "review" | "done";
+export type DashboardTimeWindow = "7d" | "30d" | "90d";
+
+export interface DashboardFilterOptions {
+  selectedSpecIds?: string[];
+  timeWindow?: DashboardTimeWindow;
+}
 
 export interface DashboardTaskCard {
   id: string;
@@ -17,6 +23,10 @@ export interface DashboardTaskCard {
   unmetDependencies: string[];
   downstreamCount: number;
   effort: number;
+  completedAt?: string;
+  cancelledAt?: string;
+  archivedAt?: string;
+  archiveReason?: string;
 }
 
 export interface DashboardSpecCard {
@@ -52,6 +62,19 @@ export interface DashboardTimelineItem {
   start: number;
   end: number;
   priority: number;
+}
+
+export interface DashboardAnalysisState {
+  selectedSpecIds: string[];
+  timeWindow?: DashboardTimeWindow;
+  availableSpecs: Array<{
+    id: string;
+    title: string;
+    status: string;
+  }>;
+  hasActiveFilters: boolean;
+  includesArchived: boolean;
+  filteredTaskCount: number;
 }
 
 export interface DashboardData {
@@ -90,6 +113,7 @@ export interface DashboardData {
   };
   specs: DashboardSpecCard[];
   tasks: DashboardTaskCard[];
+  analysisTasks: DashboardTaskCard[];
   inProgressTasks: DashboardTaskCard[];
   readyTasks: DashboardTaskCard[];
   blockedTasks: DashboardTaskCard[];
@@ -107,6 +131,7 @@ export interface DashboardData {
     createdAt: string;
   };
   dependencyIssues: Array<{ taskId: string; missingTaskId: string }>;
+  analysis: DashboardAnalysisState;
 }
 
 function deriveEffectiveStatus(rawStatus: string, unmetDependencies: string[]): EffectiveTaskStatus {
@@ -139,6 +164,10 @@ function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: Return
     unmetDependencies: summary.unmetDependencies,
     downstreamCount: summary.downstreamCount,
     effort,
+    completedAt: task.completedAt,
+    cancelledAt: task.cancelledAt,
+    archivedAt: task.archivedAt,
+    archiveReason: task.archiveReason,
   };
 }
 
@@ -265,12 +294,81 @@ function buildTimeline(taskCards: DashboardTaskCard[]): { totalUnits: number; it
   return { totalUnits, items };
 }
 
-export async function buildDashboardData(rootDir: string): Promise<DashboardData> {
+function normalizeSelectedSpecIds(specIds: string[] | undefined, availableSpecIds: string[]): string[] {
+  if (!specIds) {
+    return [];
+  }
+
+  const known = new Set(availableSpecIds);
+  return Array.from(new Set(specIds.map((specId) => specId.trim()).filter((specId) => known.has(specId))));
+}
+
+function matchesSelectedSpecs(task: DashboardTaskCard, selectedSpecIds: string[]): boolean {
+  if (selectedSpecIds.length === 0) {
+    return true;
+  }
+
+  return task.specIds.some((specId) => selectedSpecIds.includes(specId));
+}
+
+function parseTimeWindowMilliseconds(timeWindow: DashboardTimeWindow): number {
+  switch (timeWindow) {
+    case "7d":
+      return 7 * 24 * 60 * 60 * 1000;
+    case "30d":
+      return 30 * 24 * 60 * 60 * 1000;
+    case "90d":
+      return 90 * 24 * 60 * 60 * 1000;
+  }
+}
+
+function readAnalyticalTimestamp(task: DashboardTaskCard): string | undefined {
+  return task.completedAt ?? task.cancelledAt;
+}
+
+function matchesTimeWindow(
+  task: DashboardTaskCard,
+  timeWindow: DashboardTimeWindow | undefined,
+  now: number,
+): boolean {
+  if (!timeWindow) {
+    return true;
+  }
+
+  const timestamp = readAnalyticalTimestamp(task);
+  if (!timestamp) {
+    return false;
+  }
+
+  const value = Date.parse(timestamp);
+  if (!Number.isFinite(value)) {
+    return false;
+  }
+
+  return value >= now - parseTimeWindowMilliseconds(timeWindow);
+}
+
+export async function buildDashboardData(rootDir: string, filters: DashboardFilterOptions = {}): Promise<DashboardData> {
   const [context, agentsReport] = await Promise.all([loadProjectContext(rootDir), buildAgentsHealthReport(rootDir)]);
   const snapshot = deriveStatusSnapshot(context);
   const nextActions = deriveNextActions(context, snapshot);
   const taskIndex = buildTaskIndex(context.tasks);
   const taskCards = context.tasks.map((task) => toTaskCard(task, taskIndex));
+  const activeFlowTaskCards = taskCards.filter((task) => !task.archivedAt);
+  const availableSpecIds = context.specs.map((spec) => spec.id);
+  const selectedSpecIds = normalizeSelectedSpecIds(filters.selectedSpecIds, availableSpecIds);
+  const timeWindow = filters.timeWindow;
+  const now = Date.now();
+  const hasActiveFilters = selectedSpecIds.length > 0 || Boolean(timeWindow);
+  const analyticalSourceCards = hasActiveFilters ? taskCards : activeFlowTaskCards;
+  const analyticalTaskCards = analyticalSourceCards.filter((task) => {
+    if (!matchesSelectedSpecs(task, selectedSpecIds)) {
+      return false;
+    }
+
+    return matchesTimeWindow(task, timeWindow, now);
+  });
+  const analyticalTimelineCards = hasActiveFilters ? analyticalTaskCards : activeFlowTaskCards;
 
   return {
     project: {
@@ -324,13 +422,14 @@ export async function buildDashboardData(rootDir: string): Promise<DashboardData
       })
       .sort((left, right) => left.id.localeCompare(right.id)),
     tasks: taskCards.sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id)),
-    inProgressTasks: snapshot.inProgressTasks.map((task) => toTaskCard(task, taskIndex)),
-    readyTasks: snapshot.readyTasks.map((item) => toTaskCard(item.task, taskIndex)),
-    blockedTasks: snapshot.blockedTasks.map((item) => toTaskCard(item.task, taskIndex)),
-    reviewTasks: snapshot.reviewTasks.map((item) => toTaskCard(item.task, taskIndex)),
-    criticalPath: snapshot.criticalPath.map((task) => toTaskCard(task, taskIndex)),
-    kanban: buildKanban(taskCards),
-    timeline: buildTimeline(taskCards),
+    analysisTasks: analyticalTaskCards.sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id)),
+    inProgressTasks: snapshot.inProgressTasks.map((task) => toTaskCard(task, taskIndex)).filter((task) => !task.archivedAt),
+    readyTasks: snapshot.readyTasks.map((item) => toTaskCard(item.task, taskIndex)).filter((task) => !task.archivedAt),
+    blockedTasks: snapshot.blockedTasks.map((item) => toTaskCard(item.task, taskIndex)).filter((task) => !task.archivedAt),
+    reviewTasks: snapshot.reviewTasks.map((item) => toTaskCard(item.task, taskIndex)).filter((task) => !task.archivedAt),
+    criticalPath: snapshot.criticalPath.map((task) => toTaskCard(task, taskIndex)).filter((task) => !task.archivedAt),
+    kanban: buildKanban(activeFlowTaskCards),
+    timeline: buildTimeline(analyticalTimelineCards),
     recentHandoff: snapshot.recentHandoff
       ? {
           id: snapshot.recentHandoff.id,
@@ -340,5 +439,19 @@ export async function buildDashboardData(rootDir: string): Promise<DashboardData
         }
       : undefined,
     dependencyIssues: snapshot.missingDependencies,
+    analysis: {
+      selectedSpecIds,
+      timeWindow,
+      availableSpecs: context.specs
+        .map((spec) => ({
+          id: spec.id,
+          title: spec.title,
+          status: spec.status,
+        }))
+        .sort((left, right) => left.id.localeCompare(right.id)),
+      hasActiveFilters,
+      includesArchived: hasActiveFilters,
+      filteredTaskCount: analyticalTaskCards.length,
+    },
   };
 }

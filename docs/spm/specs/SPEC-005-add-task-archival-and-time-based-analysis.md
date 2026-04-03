@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-005"
 title = "Add task archival and time-based analysis"
 summary = "Define how closed tasks leave the active kanban without losing history, and how timeline analysis can be filtered by spec and time window."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-014", "TASK-015", "TASK-016"]
 tags = ["workflow", "kanban", "analysis", "history"]
 owner = "human-ai"
-updated_at = "2026-04-03T02:39:56.644Z"
+updated_at = "2026-04-03T03:18:13.252Z"
 +++
 
 # Overview

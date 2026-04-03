@@ -92,6 +92,10 @@ Usage:
   spm task list [--status todo] [--spec SPEC-001]
   spm task create --title "..." --summary "..." --spec-ids SPEC-001[,SPEC-002] [--status todo|in_progress|blocked|review|done|cancelled] [--priority 2] [--depends-on TASK-001] [--blocked-by TASK-002] [--owner-role builder] [--tags cli,self-hosting] [--json]
   spm task set-status <TASK-ID> <todo|in_progress|blocked|review|done|cancelled> [--json]
+  spm task archive <TASK-ID> [--reason "..."] [--json]
+  spm task archive-done --older-than 7d [--reason "..."] [--json]
+  spm task archive-cancelled --older-than 7d [--reason "..."] [--json]
+  spm task restore <TASK-ID> [--json]
 
 Aliases:
   - \`spm\` is the primary short command
