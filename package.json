@@ -1,10 +1,26 @@
 {
-  "name": "spec-embryo",
+  "name": "@leonarto/spec-embryo",
   "version": "0.1.0",
   "description": "Spec Embryo: local-first, spec-first, CLI-first project memory and orchestration for AI-assisted software work.",
   "module": "src/index.ts",
   "type": "module",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leonarto/spec-embryo.git"
+  },
+  "homepage": "https://github.com/Leonarto/spec-embryo#readme",
+  "bugs": {
+    "url": "https://github.com/Leonarto/spec-embryo/issues"
+  },
+  "keywords": [
+    "ai",
+    "cli",
+    "project-memory",
+    "specs",
+    "tasks",
+    "agent"
+  ],
+  "license": "MIT",
   "bin": {
     "spec-embryo": "src/index.ts",
     "spm": "src/index.ts"
@@ -19,6 +35,14 @@
     "web:check": "bun run --cwd web check"
   },
   "dependencies": {
-    "smol-toml": "1.6.1"
+    "@lucide/svelte": "^1.7.0",
+    "@sveltejs/adapter-auto": "7.0.1",
+    "@sveltejs/kit": "2.55.0",
+    "@sveltejs/vite-plugin-svelte": "7.0.0",
+    "@types/node": "25.5.0",
+    "smol-toml": "1.6.1",
+    "svelte": "5.55.1",
+    "typescript": "6.0.2",
+    "vite": "8.0.3"
   }
 }

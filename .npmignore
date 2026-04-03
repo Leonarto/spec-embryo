@@ -1,0 +1,15 @@
+.cursor/
+.specpm/
+docs/
+node_modules/
+skills/
+tests/
+bun.lock
+CLAUDE.md
+AGENTS.md
+scripts/
+web/.svelte-kit/
+web/AGENTS.md
+web/bun.lock
+web/src/AGENTS.md
+web/src/lib/AGENTS.md

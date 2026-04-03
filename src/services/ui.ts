@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue } from "../cli.ts";
 import { pathExists } from "../storage.ts";
@@ -9,11 +9,13 @@ export interface UiLaunchConfig {
   port: number;
 }
 
+const PACKAGED_WEB_DIR = fileURLToPath(new URL("../../web", import.meta.url));
+
 export async function resolveUiLaunchConfig(rootDir: string, parsed: ParsedArgs): Promise<UiLaunchConfig> {
-  const webDir = join(rootDir, "web");
+  const webDir = PACKAGED_WEB_DIR;
 
   if (!(await pathExists(webDir))) {
-    throw new Error("Local web app not found. Expected a SvelteKit app in `web/`.");
+    throw new Error("Packaged web app not found. Reinstall Spec Embryo so the UI assets are available.");
   }
 
   const host = flagValue(parsed, "host") ?? "127.0.0.1";

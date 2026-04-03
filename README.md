@@ -33,6 +33,18 @@ bun run spm handoff --title "Checkpoint before refactor"
 bun run spm reshape --dry-run
 ```
 
+## Install
+
+```bash
+bun add -g @leonarto/spec-embryo
+```
+
+Or install directly from GitHub:
+
+```bash
+bun add -g github:Leonarto/spec-embryo
+```
+
 You can also run the entrypoint directly:
 
 ```bash

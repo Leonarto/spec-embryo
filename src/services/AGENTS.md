@@ -12,3 +12,4 @@ This folder contains reusable deterministic product services.
 - Repo adoption inspection and managed-layout classification should also live here so `init`, future `doctor`, and any local server onboarding surfaces share the same deterministic view of repo state.
 - Doctor-style health validation should capture parse and link failures as structured findings instead of throwing away the whole report on the first bad file.
 - Adoption guidance should also be modeled here as deterministic structured output, so humans and already-running agents receive the same next-step sequence from `init` and `doctor`.
+- UI launch helpers must resolve packaged web assets from the installed CLI, not from the target project root, so `spm ui` keeps working after global/npm installs.
