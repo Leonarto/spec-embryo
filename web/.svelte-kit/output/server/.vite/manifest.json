@@ -1,0 +1,250 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "name": "internal",
+    "src": ".svelte-kit/generated/server/internal.js",
+    "isEntry": true,
+    "imports": [
+      "_environment.js",
+      "_internal.js"
+    ]
+  },
+  "_Icon.js": {
+    "file": "chunks/Icon.js",
+    "name": "Icon",
+    "imports": [
+      "_index-server.js"
+    ]
+  },
+  "_blocks.js": {
+    "file": "chunks/blocks.js",
+    "name": "blocks",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_circle-check-big.js": {
+    "file": "chunks/circle-check-big.js",
+    "name": "circle-check-big",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_clock-3.js": {
+    "file": "chunks/clock-3.js",
+    "name": "clock-3",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_environment.js": {
+    "file": "chunks/environment.js",
+    "name": "environment"
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js",
+    "name": "exports",
+    "imports": [
+      "_index-server.js"
+    ]
+  },
+  "_folder-kanban.js": {
+    "file": "chunks/folder-kanban.js",
+    "name": "folder-kanban",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_index-server.js": {
+    "file": "chunks/index-server.js",
+    "name": "index-server"
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_index-server.js",
+      "_environment.js"
+    ]
+  },
+  "_orbit.js": {
+    "file": "chunks/orbit.js",
+    "name": "orbit",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_shared.js": {
+    "file": "chunks/shared.js",
+    "name": "shared"
+  },
+  "_shield-check.js": {
+    "file": "chunks/shield-check.js",
+    "name": "shield-check",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_sparkles.js": {
+    "file": "chunks/sparkles.js",
+    "name": "sparkles",
+    "imports": [
+      "_index-server.js",
+      "_Icon.js"
+    ]
+  },
+  "_state.js": {
+    "file": "chunks/state.js",
+    "name": "state",
+    "imports": [
+      "_index-server.js",
+      "_environment.js",
+      "_internal.js",
+      "_exports.js",
+      "_shared.js"
+    ]
+  },
+  "_utils.js": {
+    "file": "chunks/utils.js",
+    "name": "utils",
+    "imports": [
+      "_environment.js",
+      "_shared.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/app/server/remote/index.js": {
+    "file": "remote-entry.js",
+    "name": "remote-entry",
+    "src": "node_modules/@sveltejs/kit/src/runtime/app/server/remote/index.js",
+    "isEntry": true,
+    "imports": [
+      "_environment.js",
+      "_utils.js",
+      "_shared.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "name": "entries/fallbacks/error.svelte",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_state.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_environment.js",
+      "_internal.js",
+      "_utils.js",
+      "_exports.js",
+      "_shared.js"
+    ]
+  },
+  "src/routes/+layout.server.ts": {
+    "file": "entries/pages/_layout.server.ts.js",
+    "name": "entries/pages/_layout.server.ts",
+    "src": "src/routes/+layout.server.ts",
+    "isEntry": true
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_Icon.js",
+      "_shield-check.js",
+      "_folder-kanban.js",
+      "_sparkles.js",
+      "_state.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.VsFXdkQE.css"
+    ]
+  },
+  "src/routes/+layout.ts": {
+    "file": "entries/pages/_layout.ts.js",
+    "name": "entries/pages/_layout.ts",
+    "src": "src/routes/+layout.ts",
+    "isEntry": true
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_Icon.js",
+      "_clock-3.js",
+      "_blocks.js",
+      "_shield-check.js",
+      "_folder-kanban.js",
+      "_sparkles.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.D-Smsp2O.css"
+    ]
+  },
+  "src/routes/specs/+page.svelte": {
+    "file": "entries/pages/specs/_page.svelte.js",
+    "name": "entries/pages/specs/_page.svelte",
+    "src": "src/routes/specs/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_Icon.js",
+      "_circle-check-big.js",
+      "_sparkles.js",
+      "_orbit.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.DWNcuzJD.css"
+    ]
+  },
+  "src/routes/tasks/+page.svelte": {
+    "file": "entries/pages/tasks/_page.svelte.js",
+    "name": "entries/pages/tasks/_page.svelte",
+    "src": "src/routes/tasks/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_Icon.js",
+      "_blocks.js",
+      "_circle-check-big.js",
+      "_folder-kanban.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.Bz_VDPcS.css"
+    ]
+  },
+  "src/routes/timeline/+page.svelte": {
+    "file": "entries/pages/timeline/_page.svelte.js",
+    "name": "entries/pages/timeline/_page.svelte",
+    "src": "src/routes/timeline/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-server.js",
+      "_clock-3.js",
+      "_folder-kanban.js",
+      "_orbit.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.BRZztq5G.css"
+    ]
+  }
+}

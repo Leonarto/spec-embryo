@@ -1,0 +1,27 @@
+tool_version = "0.1.0"
+project_name = "spec-embryo"
+memory_dir = "docs/spm"
+state_file = "docs/spm/current.md"
+handoffs_dir = "docs/spm/handoffs"
+specs_dir = "docs/spm/specs"
+tasks_dir = "docs/spm/tasks"
+skills_dir = "docs/spm/skills"
+
+[defaults]
+resume_backend = "deterministic"
+
+[backends.deterministic]
+enabled = true
+
+[backends.prompt]
+enabled = true
+
+[backends.codex]
+enabled = false
+command = "codex"
+args = ["exec", "{prompt_text_file}"]
+
+[backends.claude]
+enabled = false
+command = "claude"
+args = ["-p", "{prompt}"]

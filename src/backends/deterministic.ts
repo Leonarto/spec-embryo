@@ -1,0 +1,105 @@
+import type { ResumeContext } from "../domain.ts";
+import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
+
+function section(title: string, lines: string[]): string {
+  return [title, ...lines.map((line) => `  ${line}`)].join("\n");
+}
+
+export class DeterministicBackend implements ResumeBackend {
+  name = "deterministic" as const;
+
+  async run(context: ResumeContext, options: BackendRunOptions): Promise<BackendRunResult> {
+    const lines: string[] = [];
+
+    lines.push(`Project: ${context.projectName}`);
+    lines.push(`Focus: ${context.focus}`);
+    lines.push(`Summary: ${context.summary}`);
+
+    if (context.git.available) {
+      lines.push(`Git: ${context.git.branch ?? "unknown branch"}${context.git.dirty ? " (dirty)" : " (clean)"}`);
+      if (context.git.lastCommit) {
+        lines.push(`Last commit: ${context.git.lastCommit}`);
+      }
+    }
+
+    const sections = [
+      section(
+        "Active Specs",
+        context.activeSpecs.length > 0
+          ? context.activeSpecs.map((spec) => `${spec.id} [${spec.status}] ${spec.title}`)
+          : ["No active specs recorded."],
+      ),
+      section(
+        "Active Tasks",
+        context.activeTasks.length > 0
+          ? context.activeTasks.map((entry) => {
+              const deps = entry.unmetDependencies.length > 0 ? ` | unmet deps: ${entry.unmetDependencies.join(", ")}` : "";
+              return `${entry.task.id} [${entry.task.status}] p${entry.task.priority} ${entry.task.title}${deps}`;
+            })
+          : ["No active tasks recorded."],
+      ),
+      section(
+        "Blocked",
+        context.blockedTasks.length > 0
+          ? context.blockedTasks.map((entry) => {
+              const reason = entry.unmetDependencies.length > 0 ? entry.unmetDependencies.join(", ") : "manually blocked";
+              return `${entry.task.id} ${entry.task.title} | waiting on ${reason}`;
+            })
+          : ["No blocked tasks."],
+      ),
+      section(
+        "Review",
+        context.reviewTasks.length > 0
+          ? context.reviewTasks.map((entry) => `${entry.task.id} [${entry.task.status}] p${entry.task.priority} ${entry.task.title}`)
+          : ["No tasks currently in review."],
+      ),
+      section(
+        "Ready Next",
+        context.readyTasks.length > 0
+          ? context.readyTasks.slice(0, 5).map((entry) => `${entry.task.id} p${entry.task.priority} ${entry.task.title}`)
+          : ["No ready tasks."],
+      ),
+      section(
+        "Critical Path",
+        context.criticalPath.length > 0
+          ? context.criticalPath.map((task) => `${task.id} [${task.status}] ${task.title}`)
+          : ["No unfinished dependency chain found."],
+      ),
+      section(
+        "Next Actions",
+        context.nextActions.map((action) => action),
+      ),
+    ];
+
+    if (context.recentHandoff) {
+      sections.push(
+        section("Recent Handoff", [
+          `${context.recentHandoff.id} at ${context.recentHandoff.createdAt}`,
+          context.recentHandoff.title,
+          context.recentHandoff.summary,
+        ]),
+      );
+    }
+
+    if (context.git.shortStatus.length > 0) {
+      sections.push(section("Git Changes", context.git.shortStatus.slice(0, 10)));
+    }
+
+    if (context.changedItems.length > 0) {
+      sections.push(
+        section(
+          "Changed Items",
+          context.changedItems.slice(0, 10).map((item) =>
+            item.id ? `[${item.kind}] ${item.id}${item.title ? ` ${item.title}` : ""}` : `[${item.kind}] ${item.path}`,
+          ),
+        ),
+      );
+    }
+
+    const text = `${lines.join("\n")}\n\n${sections.join("\n\n")}`;
+    return {
+      text,
+      json: options.json ? context : undefined,
+    };
+  }
+}

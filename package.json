@@ -1,0 +1,24 @@
+{
+  "name": "spec-embryo",
+  "version": "0.1.0",
+  "description": "Spec Embryo: local-first, spec-first, CLI-first project memory and orchestration for AI-assisted software work.",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "spec-embryo": "src/index.ts",
+    "spm": "src/index.ts"
+  },
+  "scripts": {
+    "spec-embryo": "bun run src/index.ts",
+    "spm": "bun run src/index.ts",
+    "ui": "bun run src/index.ts ui",
+    "start": "bun run src/index.ts",
+    "test": "bun test",
+    "check:agents": "bun run scripts/check-agents.ts",
+    "web:check": "bun run --cwd web check"
+  },
+  "dependencies": {
+    "smol-toml": "1.6.1"
+  }
+}
