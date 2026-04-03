@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-030 is done: init now classifies adoption state and reports deterministic repo-inspection findings before seeding files. TASK-031 is the next slice."
-focus = "Continue SPEC-010 with the read-only doctor flow"
+summary = "TASK-031 is done: spm doctor now reports deterministic health, adoption state, parse errors, and link drift without rewriting files. TASK-032 is the next slice."
+focus = "Continue SPEC-010 with adoption summaries and first-week guidance"
 active_spec_ids = ["SPEC-010"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Implement a read-only spm doctor command over the same layout inspection model.", "Keep migration suggestions explicit and permission-seeking.", "Reuse adoption findings so init and doctor do not diverge."]
+next_action_hints = ["Build deterministic adoption summaries that tell humans and agents what was found and what to do next.", "Keep doctor and init aligned on the same inspection model.", "Make guidance explicit without silently migrating the repo."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T18:51:08.402Z"
+updated_at = "2026-04-03T19:02:14.798Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

@@ -4,6 +4,7 @@ import { cwd, exit } from "node:process";
 import { helpText, parseArgs } from "./cli.ts";
 import { runAgentsCommand } from "./commands/agents.ts";
 import { runCurrentCommand } from "./commands/current.ts";
+import { runDoctorCommand } from "./commands/doctor.ts";
 import { runHandoffCommand } from "./commands/handoff.ts";
 import { runInitCommand } from "./commands/init.ts";
 import { runReshapeCommand } from "./commands/reshape.ts";
@@ -30,6 +31,9 @@ async function main(): Promise<void> {
       break;
     case "status":
       output = await runStatusCommand(rootDir, parsed);
+      break;
+    case "doctor":
+      output = await runDoctorCommand(rootDir, parsed);
       break;
     case "ui":
       output = await runUiCommand(rootDir, parsed);

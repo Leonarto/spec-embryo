@@ -65,6 +65,7 @@ web/
 
 - `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, and creating or completing the managed memory home.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
+- `doctor`: inspect repo-memory health, adoption state, drift, and broken links without rewriting files.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.
