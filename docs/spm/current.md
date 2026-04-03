@@ -7,9 +7,9 @@ focus = "Choose the next product slice after closing SPEC-005."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Decide whether SPEC-006 detail views or SPEC-007 compact Gantt should be the next active slice.", "Keep the analytical filter contract shared across future detail and timeline views instead of duplicating route-specific logic.", "Commit this reviewed TASK-016 slice before starting the next implementation block."]
+next_action_hints = ["Decide whether SPEC-006 detail views or SPEC-007 compact Gantt should be the next active slice.", "Keep the analytical filter contract shared across future detail and timeline views instead of duplicating route-specific logic.", "Capture the next meaningful slice in the configured current state file or create a new task."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T03:18:13.253Z"
+updated_at = "2026-04-03T03:19:48.484Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 
