@@ -7,7 +7,7 @@ status = "done"
 task_ids = ["TASK-027", "TASK-028", "TASK-029"]
 tags = ["ui", "timeline", "dependencies", "interaction"]
 owner = "human-ai"
-updated_at = "2026-04-03T17:33:38.360Z"
+updated_at = "2026-04-03T18:01:00.000Z"
 +++
 
 # Overview
@@ -35,7 +35,7 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 
 - Let a user click a timeline task and immediately see its execution neighborhood.
-- Highlight immediate upstream dependencies differently from blocked downstream work.
+- Highlight immediate upstream dependencies differently from downstream dependents, and distinguish currently blocked downstream work as a stronger subset of that downstream path.
 - Make cross-spec dependencies visibly reflected in the grouped timeline instead of disappearing inside the grouping model.
 - Highlight related specs when the selected task touches or depends on work outside its primary spec group.
 - Keep the interaction deterministic, fast, and derived only from repo-backed task relationships.
@@ -62,17 +62,18 @@ Cross-spec dependencies are especially important because they often reveal why o
 - Add a deterministic relation model for each timeline row that includes:
   - immediate upstream dependencies
   - immediate downstream dependents
-  - blocked downstream tasks
+  - currently blocked downstream tasks
   - related spec IDs touched by those edges
   - whether a row participates in a cross-spec dependency
 - Add interactive task selection in the timeline route.
 - When a task is selected:
   - emphasize the selected row and bar
   - highlight immediate upstream dependencies in one color
-  - highlight blocked downstream tasks in a different color
+  - highlight downstream dependents in a different color family from upstream dependencies
+  - highlight currently blocked downstream tasks as a stronger subset of the downstream dependent treatment
   - highlight related spec groups that participate in the selected dependency neighborhood
   - visually mute unrelated rows without hiding them
-- Add a passive cross-spec signal even before selection so users can spot rows that bridge specs.
+- Only show cross-spec relationship emphasis once a task is selected.
 
 ## Detailed Specification
 
@@ -81,10 +82,12 @@ Cross-spec dependencies are especially important because they often reveal why o
 - The relation model should distinguish at least these categories:
   - `selected`
   - `dependency`
+  - `dependent`
   - `blocked-dependent`
   - `related-spec`
-  - `cross-spec-bridge`
+  - `cross-spec-related`
 - Immediate upstream dependencies should use a distinct highlight color from blocked downstream tasks.
+- Downstream dependents should remain visible even when they are not currently blocked, so the timeline can show both historical unblocking relationships and still-blocked work.
 - When a selected task has dependencies or dependents in another spec, the corresponding spec group header should receive a related-state treatment.
 - A task with no dependency neighborhood should still be selectable, with a clear isolated-state treatment rather than appearing broken.
 - Selection should be easy to clear so the timeline can return to default scan mode.
@@ -103,8 +106,8 @@ Cross-spec dependencies are especially important because they often reveal why o
 
 
 - Clicking a timeline task highlights its dependency neighborhood deterministically.
-- Immediate dependencies and blocked downstream tasks use visibly different treatments.
-- Cross-spec dependency participation is visible in the timeline even before a task is selected.
+- Immediate dependencies, downstream dependents, and currently blocked downstream tasks use visibly different treatments.
+- Cross-spec relationship emphasis appears when a task is selected and makes the related spec groups legible.
 - Selecting a task makes related spec groups legible without hiding the rest of the timeline.
 - The interaction is powered by shared deterministic service data rather than route-local graph reconstruction.
 

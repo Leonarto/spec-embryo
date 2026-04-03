@@ -28,7 +28,7 @@ The repo is the source of truth. V1 uses:
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
-When existing projects already have a legacy docs/specs folder, `spec import-prompt` provides a deterministic scan plus an agent-ready migration bundle so that formatting work can happen without guessing the target schema.
+When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front and `spec import-prompt` provides a deterministic scan plus an agent-ready migration bundle so that formatting work can happen without guessing the target schema.
 
 ## Domain model
 

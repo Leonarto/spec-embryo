@@ -63,7 +63,7 @@ web/
 
 ## Command summary
 
-- `init`: discover a docs/specs surface when appropriate and create the managed memory home.
+- `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, and creating or completing the managed memory home.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
@@ -117,6 +117,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Handoff file generation
 - Deterministic spec/task creation with automatic back-linking
 - Initial spec/task/current-state templates and seed files
+- Adoption-aware `init` output that classifies fresh, legacy-docs, partial, and already-adopted repos before seeding files
 
 ## Architecture
 

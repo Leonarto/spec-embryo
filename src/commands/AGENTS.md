@@ -9,5 +9,6 @@ This folder is the thin CLI command layer.
 - Creation commands should also delegate to repository helpers so ID generation, link validation, and back-link updates stay deterministic and centralized.
 - Current-state mutation commands should preserve the current-state body and validate referenced spec/task IDs through repository helpers.
 - Agent-facing migration commands should return structured bundles from deterministic scans rather than embedding ad hoc prompt logic in the handler.
+- `init` should stay a thin guided entrypoint: repo-state classification and adoption inspection belong in reusable services, while the command is responsible for prompting only when multiple homes need a human choice.
 - Keep flags and user-facing behavior consistent with `src/cli.ts`.
 - If a command starts needing multiple helpers or subflows, split it instead of growing one large file.

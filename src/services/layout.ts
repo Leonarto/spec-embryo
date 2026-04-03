@@ -16,6 +16,26 @@ export interface LayoutChoice {
   requiresChoice: boolean;
 }
 
+export type AdoptionState = "fresh" | "legacy-docs" | "partially-adopted" | "adopted";
+
+export interface ManagedHomeInspection {
+  memoryDir: string;
+  hasCurrentState: boolean;
+  hasHandoffsDir: boolean;
+  hasSpecsDir: boolean;
+  hasTasksDir: boolean;
+  hasSkillsDir: boolean;
+}
+
+export interface AdoptionInspection {
+  state: AdoptionState;
+  layoutChoice: LayoutChoice;
+  hasConfig: boolean;
+  hasHiddenSpecpmDir: boolean;
+  managedHomes: ManagedHomeInspection[];
+  findings: string[];
+}
+
 export interface ReshapeAction {
   type: "move" | "mkdir" | "write-config" | "warn";
   source?: string;
@@ -64,6 +84,44 @@ export function initSequenceDescription(memoryDir: string): string[] {
     `Create \`${managed.specsDir}\`, \`${managed.tasksDir}\`, and \`${managed.skillsDir}\` for spec-first execution memory.`,
     "Seed templates and starter docs so the CLI is immediately useful.",
   ];
+}
+
+async function inspectManagedHome(rootDir: string, memoryDir: string): Promise<ManagedHomeInspection> {
+  const managed = buildManagedPaths(memoryDir);
+  return {
+    memoryDir,
+    hasCurrentState: await pathExists(join(rootDir, managed.stateFile)),
+    hasHandoffsDir: await pathExists(join(rootDir, managed.handoffsDir)),
+    hasSpecsDir: await pathExists(join(rootDir, managed.specsDir)),
+    hasTasksDir: await pathExists(join(rootDir, managed.tasksDir)),
+    hasSkillsDir: await pathExists(join(rootDir, managed.skillsDir)),
+  };
+}
+
+function hasAnyManagedSignals(inspection: ManagedHomeInspection): boolean {
+  return (
+    inspection.hasCurrentState ||
+    inspection.hasHandoffsDir ||
+    inspection.hasSpecsDir ||
+    inspection.hasTasksDir ||
+    inspection.hasSkillsDir
+  );
+}
+
+function isFullyManagedHome(inspection: ManagedHomeInspection): boolean {
+  return inspection.hasCurrentState && inspection.hasHandoffsDir && inspection.hasSpecsDir && inspection.hasTasksDir && inspection.hasSkillsDir;
+}
+
+function describeManagedHome(inspection: ManagedHomeInspection): string {
+  const present = [
+    inspection.hasCurrentState ? "current" : undefined,
+    inspection.hasHandoffsDir ? "handoffs" : undefined,
+    inspection.hasSpecsDir ? "specs" : undefined,
+    inspection.hasTasksDir ? "tasks" : undefined,
+    inspection.hasSkillsDir ? "skills" : undefined,
+  ].filter((value): value is string => Boolean(value));
+
+  return `${inspection.memoryDir} (${present.length > 0 ? present.join(", ") : "no managed files yet"})`;
 }
 
 export async function findDocumentationHomeCandidates(rootDir: string): Promise<DocumentationHomeCandidate[]> {
@@ -150,6 +208,103 @@ export async function resolveLayoutChoice(
     source: "default",
     candidates,
     requiresChoice: false,
+  };
+}
+
+export async function inspectAdoptionState(
+  rootDir: string,
+  options?: {
+    explicitHome?: string;
+    standalone?: boolean;
+    config?: ProjectConfig;
+  },
+): Promise<AdoptionInspection> {
+  const layoutChoice = await resolveLayoutChoice(rootDir, options);
+  const hasHiddenSpecpmDir = await pathExists(join(rootDir, ".specpm"));
+  const candidateMemoryDirs = new Set<string>();
+
+  if (layoutChoice.memoryDir.length > 0) {
+    candidateMemoryDirs.add(layoutChoice.memoryDir);
+  }
+
+  if (options?.config) {
+    candidateMemoryDirs.add(options.config.memoryDir);
+  }
+
+  for (const candidate of layoutChoice.candidates) {
+    candidateMemoryDirs.add(`${candidate.relativePath}/spm`);
+  }
+
+  candidateMemoryDirs.add("spm");
+  candidateMemoryDirs.add("docs/spm");
+
+  const managedHomes = (
+    await Promise.all(Array.from(candidateMemoryDirs).sort((left, right) => left.localeCompare(right)).map((memoryDir) => inspectManagedHome(rootDir, memoryDir)))
+  ).filter((inspection) => hasAnyManagedSignals(inspection));
+
+  const findings: string[] = [];
+
+  if (options?.config) {
+    findings.push(`Existing config points to \`${options.config.memoryDir}\`.`);
+  } else {
+    findings.push("No existing Spec Embryo config found.");
+  }
+
+  if (layoutChoice.candidates.length > 0) {
+    findings.push(
+      `Detected documentation/spec surfaces: ${layoutChoice.candidates
+        .map((candidate) => `\`${candidate.relativePath}\` (${candidate.reason})`)
+        .join(", ")}.`,
+    );
+  } else {
+    findings.push("No documentation/spec surfaces were detected automatically.");
+  }
+
+  if (managedHomes.length > 0) {
+    findings.push(`Detected managed-memory signals at: ${managedHomes.map((inspection) => `\`${describeManagedHome(inspection)}\``).join(", ")}.`);
+  } else {
+    findings.push("No managed-memory files were detected yet.");
+  }
+
+  if (hasHiddenSpecpmDir && !options?.config) {
+    findings.push("A `.specpm/` directory exists without a readable managed-memory config.");
+  }
+
+  let state: AdoptionState;
+  if (options?.config) {
+    const configuredHome = managedHomes.find((inspection) => inspection.memoryDir === options.config!.memoryDir);
+    state = configuredHome && isFullyManagedHome(configuredHome) ? "adopted" : "partially-adopted";
+  } else if (hasHiddenSpecpmDir || managedHomes.length > 0) {
+    state = "partially-adopted";
+  } else if (layoutChoice.candidates.length > 0) {
+    state = "legacy-docs";
+  } else {
+    state = "fresh";
+  }
+
+  if (state === "partially-adopted") {
+    findings.push("This repo already shows partial Spec Embryo signals, so init should preserve and complete the managed layout instead of treating it as fresh.");
+  }
+
+  if (state === "legacy-docs") {
+    findings.push("This repo looks importable: guided init should attach Spec Embryo to a suitable docs home and then suggest import or migration steps.");
+  }
+
+  if (state === "fresh") {
+    findings.push("This repo looks new to Spec Embryo, so init can seed the canonical layout directly.");
+  }
+
+  if (state === "adopted") {
+    findings.push("This repo already has the canonical managed layout configured; init should preserve it and only seed missing optional artifacts.");
+  }
+
+  return {
+    state,
+    layoutChoice,
+    hasConfig: Boolean(options?.config),
+    hasHiddenSpecpmDir,
+    managedHomes,
+    findings,
   };
 }
 

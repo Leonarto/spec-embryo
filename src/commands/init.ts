@@ -1,9 +1,11 @@
+import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue, formatPath, hasFlag } from "../cli.ts";
-import { initializeProject } from "../repository.ts";
-import { normalizeManagedHomeInput, resolveLayoutChoice } from "../services/layout.ts";
+import { initializeProject, readProjectConfig } from "../repository.ts";
+import { pathExists } from "../storage.ts";
+import { inspectAdoptionState, normalizeManagedHomeInput } from "../services/layout.ts";
 
 async function promptForLayoutChoice(candidates: Array<{ relativePath: string; reason: string }>): Promise<string> {
   if (!stdin.isTTY || !stdout.isTTY) {
@@ -37,19 +39,18 @@ async function promptForLayoutChoice(candidates: Array<{ relativePath: string; r
 }
 
 export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
-  let memoryDir = flagValue(parsed, "home");
-  if (memoryDir) {
-    memoryDir = normalizeManagedHomeInput(memoryDir);
-  } else {
-    const choice = await resolveLayoutChoice(rootDir, {
-      standalone: hasFlag(parsed, "standalone"),
-    });
+  const explicitHome = flagValue(parsed, "home");
+  const configFile = join(rootDir, ".specpm", "config.toml");
+  const existingConfig = (await pathExists(configFile)) ? await readProjectConfig(rootDir) : undefined;
+  const inspection = await inspectAdoptionState(rootDir, {
+    explicitHome,
+    standalone: hasFlag(parsed, "standalone"),
+    config: existingConfig,
+  });
 
-    if (choice.requiresChoice) {
-      memoryDir = await promptForLayoutChoice(choice.candidates);
-    } else {
-      memoryDir = choice.memoryDir;
-    }
+  let memoryDir = explicitHome ? normalizeManagedHomeInput(explicitHome) : inspection.layoutChoice.memoryDir;
+  if (inspection.layoutChoice.requiresChoice) {
+    memoryDir = await promptForLayoutChoice(inspection.layoutChoice.candidates);
   }
 
   const result = await initializeProject(rootDir, {
@@ -61,7 +62,11 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
 
   return [
     "Initialized Spec Embryo project memory.",
+    `Adoption state: ${inspection.state}`,
     `Memory home: ${result.memoryDir}`,
+    "",
+    "Repo inspection:",
+    ...inspection.findings.map((finding) => `- ${finding}`),
     "",
     "Init sequence:",
     ...result.sequence.map((step, index) => `${index + 1}. ${step}`),

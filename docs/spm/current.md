@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-008 is complete: the grouped timeline now supports URL-driven task selection, highlights immediate and transitive dependency neighborhoods, and emphasizes related spec groups for cross-spec diagnosis."
-focus = "Choose the next spec or workflow slice after closing SPEC-008."
-active_spec_ids = []
+summary = "TASK-030 is done: init now classifies adoption state and reports deterministic repo-inspection findings before seeding files. TASK-031 is the next slice."
+focus = "Continue SPEC-010 with the read-only doctor flow"
+active_spec_ids = ["SPEC-010"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pick the next active spec from the managed roadmap before starting implementation.", "Use timeline selection links during reviews or handoffs when dependency context matters.", "If cross-spec work starts to feel crowded, consider a future detail panel or connector overlay rather than moving graph logic into the route."]
+next_action_hints = ["Implement a read-only spm doctor command over the same layout inspection model.", "Keep migration suggestions explicit and permission-seeking.", "Reuse adoption findings so init and doctor do not diverge."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T17:33:43.784Z"
+updated_at = "2026-04-03T18:51:08.402Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

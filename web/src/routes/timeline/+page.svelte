@@ -36,7 +36,11 @@
 
   function timelineSelectionHref(taskId: string): string {
     const params = new URLSearchParams(currentSearch);
-    params.set("selected_task", taskId);
+    if (dashboard.timeline.selection?.taskId === taskId) {
+      params.delete("selected_task");
+    } else {
+      params.set("selected_task", taskId);
+    }
     const search = params.toString();
     return search.length > 0 ? `/timeline?${search}` : "/timeline";
   }
