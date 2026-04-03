@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-003"
 title = "Establish an agent-grade spec writing and review workflow"
 summary = "Create durable skills and repo policy for writing specs that are optimized for LLM implementation, iterated with the human user, reviewed, and fixed before coding."
-status = "active"
+status = "done"
 task_ids = ["TASK-007", "TASK-008", "TASK-013"]
 tags = ["specs", "workflow", "agents"]
 owner = "human-ai"
-updated_at = "2026-04-03T01:32:10.557Z"
+updated_at = "2026-04-03T16:20:43.855Z"
 +++
 
 # Problem

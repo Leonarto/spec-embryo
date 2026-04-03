@@ -3,8 +3,32 @@
   import DocumentBody from "../../../lib/components/DocumentBody.svelte";
   import type { SpecDetailResult } from "../../../../../src/services/details.ts";
 
-  let { data } = $props();
+  let { data, form } = $props();
   const detail = $derived(data.detail as SpecDetailResult);
+  const actionResult = $derived(
+    form as
+      | {
+          action?: string;
+          error?: string;
+          success?: boolean;
+          savedCount?: number;
+          answeredQuestions?: string[];
+          evaluation?: {
+            status: "needs-more-input" | "ready-for-follow-up";
+            summary: string;
+            nextActions: string[];
+            bundle: {
+              recommended_prompt: string;
+              expected_output_format: {
+                sections: string[];
+                propose_new_questions: boolean;
+                propose_follow_up_tasks: boolean;
+              };
+            };
+          };
+        }
+      | undefined,
+  );
 
   const statusIcons = {
     proposed: Sparkles,
@@ -185,6 +209,119 @@
       </article>
     </section>
 
+    <section class="detail-grid detail-grid-secondary">
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <Sparkles size={15} strokeWidth={1.9} />
+            <h3>Answer open questions</h3>
+          </div>
+        </div>
+
+        {#if detail.openQuestions.length === 0}
+          <p class="empty">This spec does not have open questions right now.</p>
+        {:else}
+          <form class="question-form" method="POST" action="?/answerOpenQuestions">
+            <div class="question-list">
+              {#each detail.openQuestions as question}
+                <label class="question-card">
+                  <input type="hidden" name="question" value={question.question} />
+                  <div class="question-head">
+                    <p class="linked-id">{question.id}</p>
+                    <span class="mini-pill">open</span>
+                  </div>
+                  <strong>{question.question}</strong>
+                  <textarea
+                    name="answer"
+                    rows="4"
+                    placeholder="Add the durable answer that should be written back into the spec."
+                  ></textarea>
+                </label>
+              {/each}
+            </div>
+
+            <div class="question-actions">
+              <p class="helper-copy">You can answer one or many questions here. Empty answers are ignored on save.</p>
+              <button class="primary-button" type="submit">Save answered questions</button>
+            </div>
+          </form>
+        {/if}
+
+        {#if actionResult?.action === "answerOpenQuestions" && actionResult.error}
+          <div class="feedback-card feedback-error">
+            <p class="linked-id">save error</p>
+            <strong>{actionResult.error}</strong>
+          </div>
+        {/if}
+
+        {#if actionResult?.action === "answerOpenQuestions" && actionResult.success}
+          <div class="feedback-stack">
+            <div class="feedback-card feedback-success">
+              <p class="linked-id">saved</p>
+              <strong>{actionResult.savedCount} answer{actionResult.savedCount === 1 ? "" : "s"} recorded</strong>
+              {#if actionResult.answeredQuestions && actionResult.answeredQuestions.length > 0}
+                <div class="chip-row">
+                  {#each actionResult.answeredQuestions as question}
+                    <span class="chip">{question}</span>
+                  {/each}
+                </div>
+              {/if}
+            </div>
+
+            {#if actionResult.evaluation}
+              <div class="feedback-card">
+                <div class="panel-head">
+                  <div class="panel-title">
+                    <Target size={15} strokeWidth={1.9} />
+                    <h3>Continuation guidance</h3>
+                  </div>
+                  <span class={`mini-pill ${actionResult.evaluation.status === "ready-for-follow-up" ? "mini-pill-success" : "mini-pill-warm"}`}>
+                    {actionResult.evaluation.status === "ready-for-follow-up" ? "ready" : "needs more input"}
+                  </span>
+                </div>
+                <p>{actionResult.evaluation.summary}</p>
+                <ul class="plain-list">
+                  {#each actionResult.evaluation.nextActions as action}
+                    <li>{action}</li>
+                  {/each}
+                </ul>
+                <div class="prompt-block">
+                  <p class="linked-id">agent evaluation prompt</p>
+                  <pre>{actionResult.evaluation.bundle.recommended_prompt}</pre>
+                </div>
+              </div>
+            {/if}
+          </div>
+        {/if}
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <NotebookText size={15} strokeWidth={1.9} />
+            <h3>Resolved decisions</h3>
+          </div>
+          <span class="mini-pill">{detail.resolvedDecisions.length}</span>
+        </div>
+
+        {#if detail.resolvedDecisions.length === 0}
+          <p class="empty">This spec does not have resolved decisions recorded yet.</p>
+        {:else}
+          <div class="decision-list">
+            {#each detail.resolvedDecisions as decision}
+              <div class="decision-card">
+                <p class="linked-id">{decision.id}</p>
+                {#if decision.question}
+                  <strong>{decision.question}</strong>
+                {/if}
+                <p>{decision.answer}</p>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </article>
+    </section>
+
     <article class="panel panel-body">
       <div class="panel-head">
         <div class="panel-title">
@@ -350,6 +487,10 @@
     margin-bottom: 1rem;
   }
 
+  .detail-grid-secondary {
+    margin-bottom: 1rem;
+  }
+
   .panel {
     gap: 0.9rem;
   }
@@ -387,6 +528,26 @@
     box-shadow: var(--shadow-soft);
   }
 
+  .question-form,
+  .question-list,
+  .feedback-stack,
+  .decision-list {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .question-card,
+  .decision-card,
+  .feedback-card {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.9rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(119, 103, 77, 0.16);
+    background: rgba(255, 251, 244, 0.82);
+    box-shadow: var(--shadow-soft);
+  }
+
   .task-group {
     display: grid;
     gap: 0.72rem;
@@ -411,6 +572,98 @@
 
   .state-card strong {
     line-height: 1.35;
+  }
+
+  .question-head,
+  .question-actions {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .helper-copy {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 7rem;
+    resize: vertical;
+    box-sizing: border-box;
+    padding: 0.85rem 0.95rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(119, 103, 77, 0.22);
+    background: rgba(255, 255, 255, 0.82);
+    color: inherit;
+    font: inherit;
+  }
+
+  textarea:focus {
+    outline: 2px solid rgba(15, 141, 96, 0.2);
+    border-color: rgba(15, 141, 96, 0.4);
+  }
+
+  .primary-button {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.72rem 1rem;
+    background: linear-gradient(135deg, rgba(18, 114, 88, 0.96), rgba(31, 153, 119, 0.96));
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(15, 141, 96, 0.18);
+  }
+
+  .feedback-error {
+    border-color: rgba(161, 78, 56, 0.2);
+    background: rgba(255, 241, 236, 0.9);
+  }
+
+  .feedback-success {
+    border-color: rgba(15, 141, 96, 0.2);
+    background: rgba(241, 250, 244, 0.92);
+  }
+
+  .plain-list {
+    margin: 0;
+    padding-left: 1rem;
+    color: var(--muted);
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .prompt-block {
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(119, 103, 77, 0.14);
+  }
+
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .mini-pill-success {
+    color: rgba(15, 102, 69, 1);
+    border-color: rgba(15, 141, 96, 0.24);
+    background: rgba(15, 141, 96, 0.08);
+  }
+
+  .mini-pill-warm {
+    color: rgba(143, 84, 33, 1);
+    border-color: rgba(143, 84, 33, 0.24);
+    background: rgba(143, 84, 33, 0.08);
   }
 
   @media (max-width: 980px) {

@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { archiveTask, initializeProject, setTaskStatus } from "../src/repository.ts";
+import { archiveTask, createSpec, initializeProject, setTaskStatus } from "../src/repository.ts";
 import { buildSpecDetailData, buildTaskDetailData } from "../src/services/details.ts";
 
 describe("detail service", () => {
@@ -68,6 +68,42 @@ describe("detail service", () => {
       expect(missingSpec.availableIds).toContain("SPEC-001");
       expect(missingTask.found).toBe(false);
       expect(missingTask.availableIds).toContain("TASK-001");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("extracts open questions and resolved decisions from spec detail data", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-details-"));
+
+    try {
+      await initializeProject(rootDir);
+      const spec = await createSpec(rootDir, {
+        title: "Question extraction",
+        summary: "Parse structured question sections from spec details.",
+      });
+      const raw = await readFile(spec.filePath, "utf8");
+
+      await writeFile(
+        spec.filePath,
+        `${raw.trim()}\n\n## Resolved Decisions\n\n- Question: Should this be preserved?\n  Answer:\n    Yes, as durable spec memory.\n\n## Open Questions\n\n- What should happen next?\n- How should the UI expose the saved answers?\n`,
+      );
+
+      const detail = await buildSpecDetailData(rootDir, spec.id);
+
+      expect(detail.found).toBe(true);
+      if (!detail.found) {
+        return;
+      }
+
+      expect(detail.resolvedDecisions[0]?.question).toBe("Should this be preserved?");
+      expect(detail.resolvedDecisions[0]?.answer).toContain("Yes, as durable spec memory.");
+      expect(detail.openQuestions.map((entry) => entry.question)).toEqual([
+        "What should happen next?",
+        "How should the UI expose the saved answers?",
+      ]);
+      expect(detail.bodySections.some((section) => section.heading === "Open Questions")).toBe(false);
+      expect(detail.bodySections.some((section) => section.heading === "Resolved Decisions")).toBe(false);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

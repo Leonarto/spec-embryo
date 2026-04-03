@@ -110,6 +110,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Task Kanban spec filters that narrow the active board without pulling archived work back into the operational flow
 - Multi-spec and lifecycle-window filters for analytical Specs and Gantt slices, including archived work when the goal is slice analysis instead of active-board hygiene
 - Dedicated spec and task detail routes with deterministic not-found states, linked context, and inline source narrative rendering
+- Spec detail pages that can parse `Open Questions`, answer them in batch from the UI, write those answers back into Markdown deterministically, and surface continuation guidance plus an agent evaluation prompt bundle
 - A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
 - Prompt-return backend for agent-safe orchestration
 - Handoff file generation

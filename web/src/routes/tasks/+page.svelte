@@ -64,7 +64,6 @@
   hasActiveFilters={hasSpecFilters}
   activeDetail="Archived tasks stay hidden here so the Kanban remains an active-work surface."
   inactiveDetail="Without a spec filter, the board shows all non-archived work across the workspace."
-  submitLabel="Focus board"
 />
 
 {#if hasSpecFilters}

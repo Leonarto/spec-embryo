@@ -1,7 +1,11 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { Filter, Layers3, RotateCcw, SlidersHorizontal } from "@lucide/svelte";
+  import type { Snippet } from "svelte";
   import type { DashboardData, DashboardTimeWindow } from "../../../../src/services/dashboard.ts";
+  import MultiSelectDropdown from "./MultiSelectDropdown.svelte";
+  import SelectDropdown from "./SelectDropdown.svelte";
 
   let {
     dashboard,
@@ -14,7 +18,8 @@
     hasActiveFilters = dashboard.analysis.hasActiveFilters,
     inactiveDetail = "Without analytical filters, archived tasks stay hidden from active-flow views.",
     activeDetail = "Archived tasks are included while filters are active.",
-    submitLabel = "Apply filters",
+    clearHref = "",
+    extraField,
   } = $props<{
     dashboard: DashboardData;
     title?: string;
@@ -26,17 +31,46 @@
     hasActiveFilters?: boolean;
     inactiveDetail?: string;
     activeDetail?: string;
-    submitLabel?: string;
+    clearHref?: string;
+    extraField?: Snippet;
   }>();
 
-  const timeWindows: Array<{ value: DashboardTimeWindow; label: string }> = [
-    { value: "7d", label: "Last 7 days" },
-    { value: "30d", label: "Last 30 days" },
-    { value: "90d", label: "Last 90 days" },
+  const timeWindows: Array<{ value: DashboardTimeWindow; label: string; description: string }> = [
+    { value: "7d", label: "Last 7 days", description: "Only recently completed or cancelled work." },
+    { value: "30d", label: "Last 30 days", description: "A broader recent delivery slice." },
+    { value: "90d", label: "Last 90 days", description: "A quarterly view of lifecycle history." },
   ];
 
+  const specOptions = $derived(
+    dashboard.analysis.availableSpecs.map((spec: DashboardData["analysis"]["availableSpecs"][number]) => ({
+      value: spec.id,
+      label: spec.id,
+      description: spec.title,
+    })),
+  );
+
   const currentPath = $derived(page.url.pathname);
-  const selectedSpecIds = $derived(new Set(dashboard.analysis.selectedSpecIds));
+
+  async function applyFilters(event: Event): Promise<void> {
+    const form = event.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const searchParams = new URLSearchParams();
+
+    for (const [key, value] of formData.entries()) {
+      if (typeof value !== "string" || value.length === 0) {
+        continue;
+      }
+
+      searchParams.append(key, value);
+    }
+
+    const search = searchParams.toString();
+    await goto(search.length > 0 ? `${currentPath}?${search}` : currentPath, {
+      keepFocus: true,
+      noScroll: true,
+      replaceState: true,
+    });
+  }
 </script>
 
 <section class="filters-shell">
@@ -53,40 +87,39 @@
     <p>{detail}</p>
   </div>
 
-  <form class="filters-form" method="GET" action={currentPath}>
+  <form class="filters-form" method="GET" action={currentPath} onchange={applyFilters}>
     <div class="field-grid">
       <fieldset class="field-card">
         <legend>
           <Layers3 size={14} strokeWidth={1.9} />
           Specs
         </legend>
-        <div class="spec-options">
-          {#each dashboard.analysis.availableSpecs as spec}
-            <label class:selected={selectedSpecIds.has(spec.id)}>
-              <input type="checkbox" name="spec" value={spec.id} checked={selectedSpecIds.has(spec.id)} />
-              <span>{spec.id}</span>
-              <small>{spec.title}</small>
-            </label>
-          {/each}
-        </div>
+        <MultiSelectDropdown
+          name="spec"
+          options={specOptions}
+          selectedValues={dashboard.analysis.selectedSpecIds}
+          buttonLabel="Choose specs"
+          emptyLabel="All specs"
+        />
       </fieldset>
 
       {#if showTimeWindow}
-        <label class="field-card field-card-select">
-          <span class="field-label">
+        <fieldset class="field-card field-card-select">
+          <legend>
             <SlidersHorizontal size={14} strokeWidth={1.9} />
             Time window
-          </span>
-          <select name="window">
-            <option value="">All lifecycle history</option>
-            {#each timeWindows as window}
-              <option value={window.value} selected={dashboard.analysis.timeWindow === window.value}>
-                {window.label}
-              </option>
-            {/each}
-          </select>
-        </label>
+          </legend>
+          <SelectDropdown
+            name="window"
+            options={timeWindows}
+            selectedValue={dashboard.analysis.timeWindow ?? ""}
+            buttonLabel="Choose window"
+            emptyLabel="All lifecycle history"
+          />
+        </fieldset>
       {/if}
+
+      {@render extraField?.()}
     </div>
 
     <div class="filters-footer">
@@ -101,11 +134,10 @@
       </div>
 
       <div class="button-row">
-        <a class="ghost-button" href={currentPath}>
+        <a class="ghost-button" href={clearHref || currentPath}>
           <RotateCcw size={14} strokeWidth={1.9} />
           Clear
         </a>
-        <button type="submit">{submitLabel}</button>
       </div>
     </div>
   </form>
@@ -114,9 +146,9 @@
 <style>
   .filters-shell {
     display: grid;
-    gap: 1rem;
+    gap: 0.85rem;
     margin-bottom: 1rem;
-    padding: 1rem;
+    padding: 0.9rem;
     border-radius: var(--radius-xl);
     border: 1px solid var(--line);
     background: linear-gradient(180deg, rgba(255, 252, 246, 0.94), rgba(247, 241, 232, 0.88));
@@ -125,14 +157,12 @@
 
   .filters-copy,
   .filters-form,
-  .field-grid,
-  .spec-options {
+  .field-grid {
     display: grid;
-    gap: 0.8rem;
+    gap: 0.7rem;
   }
 
   .copy-head,
-  .field-label,
   .filters-footer,
   .button-row,
   legend {
@@ -143,7 +173,7 @@
 
   .filters-footer {
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.85rem;
     flex-wrap: wrap;
   }
 
@@ -192,7 +222,7 @@
   }
 
   .field-grid {
-    grid-template-columns: minmax(0, 1.85fr) minmax(14rem, 0.9fr);
+    grid-template-columns: minmax(0, 1.65fr) repeat(2, minmax(13rem, 0.9fr));
   }
 
   .field-grid:has(> :only-child) {
@@ -201,9 +231,9 @@
 
   .field-card {
     display: grid;
-    gap: 0.75rem;
+    gap: 0.55rem;
     min-width: 0;
-    padding: 0.85rem;
+    padding: 0.72rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
     background: rgba(255, 255, 255, 0.72);
@@ -215,73 +245,19 @@
   }
 
   legend,
-  .field-label {
+  legend {
     padding: 0;
     color: var(--muted-soft);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
   }
 
-  .spec-options {
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  }
-
-  .spec-options label {
-    display: grid;
-    gap: 0.14rem;
-    padding: 0.72rem 0.78rem;
-    border-radius: 1rem;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
-    cursor: pointer;
-    transition:
-      border-color 120ms ease,
-      transform 120ms ease,
-      box-shadow 120ms ease,
-      background 120ms ease;
-  }
-
-  .spec-options label.selected {
-    border-color: rgba(15, 141, 96, 0.28);
-    background: rgba(15, 141, 96, 0.08);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .spec-options label:hover {
-    transform: translateY(-1px);
-    border-color: rgba(24, 22, 18, 0.16);
-  }
-
-  .spec-options input {
-    accent-color: var(--accent);
-    margin: 0 0 0.18rem;
-  }
-
-  .spec-options span {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-
-  .spec-options small {
-    color: var(--muted);
-    line-height: 1.35;
-  }
-
-  select,
-  button,
   .ghost-button {
     border-radius: 999px;
     border: 1px solid var(--line-strong);
     background: rgba(255, 255, 255, 0.9);
     color: var(--ink);
     box-shadow: var(--shadow-soft);
-  }
-
-  select {
-    min-width: 0;
-    width: 100%;
-    padding: 0.75rem 0.9rem;
   }
 
   .result-copy {
@@ -300,18 +276,13 @@
     justify-content: end;
   }
 
-  button,
   .ghost-button {
     display: inline-flex;
     align-items: center;
     gap: 0.42rem;
-    padding: 0.72rem 1rem;
+    padding: 0.62rem 0.88rem;
     text-decoration: none;
     cursor: pointer;
-  }
-
-  button {
-    background: linear-gradient(180deg, rgba(15, 141, 96, 0.16), rgba(255, 255, 255, 0.94));
   }
 
   @media (max-width: 980px) {

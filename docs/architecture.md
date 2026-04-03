@@ -122,6 +122,7 @@ Deterministic by default:
 - derive next actions when rules are explicit
 - compute a simple critical path from dependencies
 - write handoff and current-state files
+- parse and rewrite spec open-question and resolved-decision sections
 
 Non-deterministic only when genuinely needed:
 
@@ -138,7 +139,8 @@ The first local visual server lives under `web/` and is launched through `spm ui
 
 - SvelteKit handles the presentation layer and local server lifecycle.
 - The dashboard loads its data from shared deterministic services in `src/services/`.
-- The UI is read-only in v1.
+- The UI is mostly read-only in v1, with a narrow deterministic mutation path for answering spec open questions.
+- The first mutation flow lives on spec detail pages: users can answer open questions in batch, write those answers back into the spec deterministically, and receive continuation guidance without turning the web app into a second source of truth.
 - The web layer should remain a view over repo memory, not a replacement source of truth.
 
 ## Execution modes

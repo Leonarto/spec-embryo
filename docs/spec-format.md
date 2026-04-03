@@ -36,6 +36,22 @@ updated_at = "2026-04-02T00:00:00Z"
 ...
 ```
 
+Section conventions that now have first-class product support:
+
+- `## Open Questions` can hold bullet or paragraph questions that still need answers.
+- `## Resolved Decisions` can hold durable answers after those questions are resolved.
+- The UI answer flow rewrites those two sections deterministically instead of rewriting the whole spec with an LLM.
+
+Resolved decision format used by the UI:
+
+```md
+## Resolved Decisions
+
+- Question: Should follow-up tasks be created immediately?
+  Answer:
+    Not automatically. The system should suggest them first.
+```
+
 ## Task files
 
 Location:
@@ -157,3 +173,14 @@ bun run spm task restore TASK-014
 Archiving does not change `status`; it adds archival metadata so active-flow views can hide old closed work by default without losing durable history.
 
 Analytical views such as Specs and Gantt can then filter deterministically by one or more `spec_ids` and by lifecycle windows like `7d`, `30d`, or `90d`. Those slices use `completed_at` and `cancelled_at` instead of `updated_at`, and they can include archived tasks when the point is to inspect the full work history of a spec set.
+
+## Spec question answers from the UI
+
+Spec detail pages can answer open questions in batch and save them back into the source file. The save flow:
+
+- removes answered entries from `## Open Questions`
+- appends them into `## Resolved Decisions`
+- preserves the rest of the spec body deterministically
+- returns continuation guidance plus an agent-facing evaluation prompt bundle
+
+This keeps the file-backed source of truth durable for future humans and agents instead of leaving important decisions stranded in chat history.

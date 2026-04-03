@@ -23,6 +23,7 @@ import { parseTomlFrontmatter, serializeTomlFrontmatter } from "./frontmatter.ts
 import { resolveProjectPaths } from "./paths.ts";
 import { ensureDir, listMarkdownFiles, pathExists, readUtf8, writeUtf8 } from "./storage.ts";
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
+import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
 import {
   createConfigToml,
   createCurrentStateTemplate,
@@ -222,6 +223,12 @@ export interface UpdateCurrentStateInput {
 
 export interface ArchiveTaskInput {
   reason?: string;
+}
+
+export interface AnswerSpecQuestionsResult {
+  spec: SpecDocument;
+  answeredQuestions: string[];
+  remainingQuestions: string[];
 }
 
 export function createDefaultConfig(rootDir: string): ProjectConfig {
@@ -432,6 +439,37 @@ export async function setSpecStatus(rootDir: string, specId: string, status: Spe
 
   await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, updatedAt));
   return nextSpec;
+}
+
+export async function answerSpecOpenQuestions(
+  rootDir: string,
+  specId: string,
+  answers: SpecAnswerInput[],
+): Promise<AnswerSpecQuestionsResult> {
+  const config = await readProjectConfig(rootDir);
+  const paths = resolveProjectPaths(rootDir, config);
+  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+  const spec = specs.find((entry) => entry.id === specId);
+
+  if (!spec) {
+    throw new Error(`Spec not found: ${specId}`);
+  }
+
+  const applied = applySpecAnswers(spec.body, answers);
+  const updatedAt = new Date().toISOString();
+  const nextSpec: SpecDocument = {
+    ...spec,
+    body: applied.body,
+    updatedAt,
+  };
+
+  await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, updatedAt));
+
+  return {
+    spec: nextSpec,
+    answeredQuestions: applied.answeredQuestions,
+    remainingQuestions: applied.remainingQuestions.map((entry) => entry.question),
+  };
 }
 
 export async function setTaskStatus(rootDir: string, taskId: string, status: TaskStatus): Promise<TaskDocument> {

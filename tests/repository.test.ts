@@ -1,11 +1,12 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import {
   archiveCancelledTasks,
   archiveDoneTasks,
   archiveTask,
+  answerSpecOpenQuestions,
   createSpec,
   createTask,
   initializeProject,
@@ -287,6 +288,42 @@ describe("repository status updates", () => {
       expect(raw).toContain('blocked_task_ids = ["TASK-003"]');
       expect(raw).toContain('next_action_hints = ["Use the CLI to keep project state explicit."]');
       expect(raw).toContain("# Current State");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("answers open questions and rewrites the spec deterministically", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      const spec = await createSpec(rootDir, {
+        title: "Answer questions in specs",
+        summary: "Support deterministic spec rewrites after UI answers.",
+      });
+      const raw = await readFile(spec.filePath, "utf8");
+
+      await writeFile(
+        spec.filePath,
+        `${raw.trim()}\n\n## Open Questions\n\n- Should answered questions move into resolved decisions?\n- Should unanswered questions remain visible?\n`,
+      );
+
+      const result = await answerSpecOpenQuestions(rootDir, spec.id, [
+        {
+          question: "Should answered questions move into resolved decisions?",
+          answer: "Yes. Preserve the original question and store the answer underneath it.",
+        },
+      ]);
+      const nextRaw = await readFile(spec.filePath, "utf8");
+
+      expect(result.answeredQuestions).toEqual(["Should answered questions move into resolved decisions?"]);
+      expect(result.remainingQuestions).toEqual(["Should unanswered questions remain visible?"]);
+      expect(nextRaw).toContain("## Resolved Decisions");
+      expect(nextRaw).toContain("- Question: Should answered questions move into resolved decisions?");
+      expect(nextRaw).toContain("Answer:");
+      expect(nextRaw).not.toContain("- Should answered questions move into resolved decisions?");
+      expect(nextRaw).toContain("- Should unanswered questions remain visible?");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

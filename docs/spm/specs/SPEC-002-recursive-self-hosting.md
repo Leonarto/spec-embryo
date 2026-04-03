@@ -2,12 +2,12 @@
 doc_kind = "spec"
 id = "SPEC-002"
 title = "Make Spec Embryo recursive and self-hosting"
-status = "active"
 summary = "Use Spec Embryo on itself so the tool's own repo is managed through its CLI, managed memory, and agent guidance."
+status = "done"
 task_ids = ["TASK-004", "TASK-005", "TASK-006"]
 tags = ["self-hosting", "workflow", "agents"]
 owner = "human-ai"
-updated_at = "2026-04-02T21:10:00Z"
+updated_at = "2026-04-03T16:20:43.739Z"
 +++
 
 # Problem

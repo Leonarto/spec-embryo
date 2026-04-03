@@ -2,12 +2,12 @@
 doc_kind = "spec"
 id = "SPEC-001"
 title = "Establish the deterministic local-first core"
-status = "active"
 summary = "Define the file-backed, spec-first architecture and ship the first usable CLI workflow."
+status = "done"
 task_ids = ["TASK-001", "TASK-002", "TASK-003", "TASK-004", "TASK-005", "TASK-006"]
 tags = ["v1", "foundation", "cli"]
 owner = "human-ai"
-updated_at = "2026-04-02T20:35:21.112Z"
+updated_at = "2026-04-03T16:20:43.740Z"
 +++
 
 # Problem

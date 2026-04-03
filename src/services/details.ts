@@ -8,6 +8,7 @@ import type {
 } from "../domain.ts";
 import { loadProjectContext } from "../repository.ts";
 import { deriveEffectiveStatus, type DashboardTaskCard } from "./dashboard.ts";
+import { parseSpecQuestionSections } from "./spec-questions.ts";
 
 export interface DocumentBodyBlock {
   kind: "paragraph" | "list";
@@ -44,6 +45,17 @@ export interface DetailRelatedHandoff {
   createdAt: string;
 }
 
+export interface SpecOpenQuestionDetail {
+  id: string;
+  question: string;
+}
+
+export interface ResolvedDecisionDetail {
+  id: string;
+  question?: string;
+  answer: string;
+}
+
 export interface SpecDetailData {
   kind: "spec";
   found: true;
@@ -73,6 +85,8 @@ export interface SpecDetailData {
   }>;
   currentState: DetailCurrentStateRelevance;
   relatedHandoffs: DetailRelatedHandoff[];
+  openQuestions: SpecOpenQuestionDetail[];
+  resolvedDecisions: ResolvedDecisionDetail[];
   bodySections: DocumentBodySection[];
 }
 
@@ -356,6 +370,11 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
     .filter((task): task is TaskDocument => Boolean(task))
     .map((task) => toDetailTaskCard(task, taskIndex))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
+  const parsedQuestionSections = parseSpecQuestionSections(spec.body);
+  const bodySections = parseDocumentBody(spec.body).filter((section) => {
+    const heading = section.heading.trim().toLowerCase();
+    return heading !== "open questions" && heading !== "resolved decisions";
+  });
 
   return {
     found: true,
@@ -374,7 +393,9 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
     linkedTaskGroups: buildLinkedTaskGroups(linkedTasks),
     currentState: buildCurrentStateRelevance(context.currentState, { specId: spec.id }),
     relatedHandoffs: buildRelatedHandoffsForSpec(context, spec),
-    bodySections: parseDocumentBody(spec.body),
+    openQuestions: parsedQuestionSections.openQuestions,
+    resolvedDecisions: parsedQuestionSections.resolvedDecisions,
+    bodySections,
   };
 }
 
