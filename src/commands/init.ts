@@ -5,6 +5,7 @@ import type { ParsedArgs } from "../cli.ts";
 import { flagValue, formatPath, hasFlag } from "../cli.ts";
 import { initializeProject, readProjectConfig } from "../repository.ts";
 import { pathExists } from "../storage.ts";
+import { buildAdoptionGuidance, renderAdoptionGuidance } from "../services/adoption.ts";
 import { inspectAdoptionState, normalizeManagedHomeInput } from "../services/layout.ts";
 
 async function promptForLayoutChoice(candidates: Array<{ relativePath: string; reason: string }>): Promise<string> {
@@ -59,17 +60,40 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
   });
   const createdLines = result.created.map((filePath) => `created ${formatPath(rootDir, filePath)}`);
   const skippedLines = result.skipped.map((filePath) => `kept ${formatPath(rootDir, filePath)}`);
+  const guidance = buildAdoptionGuidance({
+    adoption: inspection,
+    memoryDir: result.memoryDir,
+    created: result.created.map((filePath) => formatPath(rootDir, filePath)),
+    skipped: result.skipped.map((filePath) => formatPath(rootDir, filePath)),
+    commandContext: "init",
+  });
+
+  if (parsed.flags.has("json")) {
+    return JSON.stringify(
+      {
+        memory_dir: result.memoryDir,
+        adopted_home: inspection.layoutChoice.adoptedHome,
+        adoption_state: inspection.state,
+        inspection,
+        sequence: result.sequence,
+        created: result.created.map((filePath) => formatPath(rootDir, filePath)),
+        skipped: result.skipped.map((filePath) => formatPath(rootDir, filePath)),
+        guidance,
+      },
+      null,
+      2,
+    );
+  }
 
   return [
     "Initialized Spec Embryo project memory.",
     `Adoption state: ${inspection.state}`,
     `Memory home: ${result.memoryDir}`,
     "",
-    "Repo inspection:",
-    ...inspection.findings.map((finding) => `- ${finding}`),
-    "",
     "Init sequence:",
     ...result.sequence.map((step, index) => `${index + 1}. ${step}`),
+    "",
+    ...renderAdoptionGuidance(guidance),
     "",
     ...createdLines,
     ...(skippedLines.length > 0 ? ["", ...skippedLines] : []),

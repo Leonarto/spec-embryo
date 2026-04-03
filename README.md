@@ -64,8 +64,10 @@ web/
 ## Command summary
 
 - `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, and creating or completing the managed memory home.
+- `init --json`: return the same adoption classification plus a structured next-step guide for an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
 - `doctor`: inspect repo-memory health, adoption state, drift, and broken links without rewriting files.
+- `doctor --json`: return structured findings plus deterministic migration and first-week guidance for agent continuation.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.

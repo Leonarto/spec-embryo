@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-010"
 title = "External repo adoption and doctor workflow"
 summary = "Define how Spec Embryo should help existing repositories adopt the managed memory model, detect drift, and surface the next deterministic cleanup actions."
-status = "active"
+status = "done"
 task_ids = ["TASK-030", "TASK-031", "TASK-032"]
 tags = ["adoption", "doctor", "workflow"]
-updated_at = "2026-04-03T18:46:34.201Z"
+updated_at = "2026-04-03T19:10:35.259Z"
 +++
 
 # Problem

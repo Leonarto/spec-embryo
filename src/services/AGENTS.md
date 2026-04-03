@@ -11,3 +11,4 @@ This folder contains reusable deterministic product services.
 - Timeline interaction state should also be derived here, so the route only renders URL-driven selection and does not reconstruct dependency neighborhoods on its own.
 - Repo adoption inspection and managed-layout classification should also live here so `init`, future `doctor`, and any local server onboarding surfaces share the same deterministic view of repo state.
 - Doctor-style health validation should capture parse and link failures as structured findings instead of throwing away the whole report on the first bad file.
+- Adoption guidance should also be modeled here as deterministic structured output, so humans and already-running agents receive the same next-step sequence from `init` and `doctor`.

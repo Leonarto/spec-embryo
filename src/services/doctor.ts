@@ -16,6 +16,7 @@ import {
 import { parseTomlFrontmatter } from "../frontmatter.ts";
 import { createDefaultConfig, readProjectConfig } from "../repository.ts";
 import { resolveProjectPaths } from "../paths.ts";
+import { buildAdoptionGuidance } from "./adoption.ts";
 import { inspectAdoptionState, type AdoptionInspection } from "./layout.ts";
 import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
 
@@ -51,6 +52,7 @@ export interface DoctorReport {
     handoffs: number;
   };
   findings: DoctorFinding[];
+  guidance: ReturnType<typeof buildAdoptionGuidance>;
 }
 
 interface SafeParseResult<T> {
@@ -373,6 +375,13 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     );
   }
 
+  const guidance = buildAdoptionGuidance({
+    adoption,
+    memoryDir: config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm",
+    doctorFindings: findings,
+    commandContext: "doctor",
+  });
+
   return {
     summary: buildSummary(findings),
     adoption,
@@ -387,6 +396,7 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
       handoffs: handoffsResult.documents.length,
     },
     findings,
+    guidance,
   };
 }
 
@@ -416,6 +426,27 @@ export function renderDoctorReport(report: DoctorReport): string {
       }
     }
   }
+
+  lines.push(
+    "",
+    "Adoption summary:",
+    `- ${report.guidance.overview}`,
+    "",
+    "What was found:",
+    ...report.guidance.whatFound.map((item) => `- ${item}`),
+    "",
+    "What changed:",
+    ...report.guidance.whatChanged.map((item) => `- ${item}`),
+    "",
+    "What still needs migration or follow-up:",
+    ...report.guidance.remainingWork.map((item) => `- ${item}`),
+    "",
+    "Recommended next commands:",
+    ...report.guidance.recommendedCommands.map((item) => `- ${item.command} — ${item.reason}`),
+    "",
+    "First-week sequence:",
+    ...report.guidance.firstWeekSequence.map((item, index) => `${index + 1}. ${item}`),
+  );
 
   return lines.join("\n");
 }

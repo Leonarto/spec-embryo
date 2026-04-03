@@ -75,8 +75,8 @@ export function helpText(): string {
   return `spec-embryo
 
 Usage:
-  spec-embryo init [--force] [--home docs] [--standalone]
-  spm init [--force] [--home docs] [--standalone]
+  spec-embryo init [--force] [--home docs] [--standalone] [--json]
+  spm init [--force] [--home docs] [--standalone] [--json]
   spm reshape [--home docs] [--dry-run]
   spm doctor [--json]
   spm status [--json]
