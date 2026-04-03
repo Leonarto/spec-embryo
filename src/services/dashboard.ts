@@ -11,6 +11,8 @@ export type DashboardTimelineRowSelectionState =
   | "selected"
   | "dependency"
   | "dependency_transitive"
+  | "dependent"
+  | "dependent_transitive"
   | "blocked_dependent"
   | "blocked_dependent_transitive"
   | "dimmed";
@@ -100,6 +102,8 @@ export interface DashboardTimelineSelection {
   specIds: string[];
   directDependencyIds: string[];
   transitiveDependencyIds: string[];
+  directDependentIds: string[];
+  transitiveDependentIds: string[];
   directBlockedDependentIds: string[];
   transitiveBlockedDependentIds: string[];
   directRelatedSpecIds: string[];
@@ -413,17 +417,18 @@ function buildTimelineSelection(
     return task.dependsOn.filter((dependencyId) => taskMap.has(dependencyId));
   }).filter((taskId) => !directDependencyIds.includes(taskId));
 
-  const directBlockedDependentIds = (dependentsMap.get(selectedTask.id) ?? []).filter((taskId) => {
+  const directDependentIds = (dependentsMap.get(selectedTask.id) ?? []).filter((taskId) => taskMap.has(taskId));
+  const transitiveDependentIds = collectReachableIds(directDependentIds, (taskId) =>
+    (dependentsMap.get(taskId) ?? []).filter((dependentId) => taskMap.has(dependentId)),
+  ).filter((taskId) => !directDependentIds.includes(taskId));
+  const directBlockedDependentIds = directDependentIds.filter((taskId) => {
     const task = taskMap.get(taskId);
-    return Boolean(task && !isClosedStatus(task.effectiveStatus));
+    return Boolean(task && task.effectiveStatus === "blocked");
   });
-  const transitiveBlockedDependentIds = collectReachableIds(directBlockedDependentIds, (taskId) => {
-    const dependentIds = dependentsMap.get(taskId) ?? [];
-    return dependentIds.filter((dependentId) => {
-      const task = taskMap.get(dependentId);
-      return Boolean(task && !isClosedStatus(task.effectiveStatus));
-    });
-  }).filter((taskId) => !directBlockedDependentIds.includes(taskId));
+  const transitiveBlockedDependentIds = transitiveDependentIds.filter((taskId) => {
+    const task = taskMap.get(taskId);
+    return Boolean(task && task.effectiveStatus === "blocked");
+  });
 
   const primarySpecId = primarySpecForTimeline(selectedTask, selectedSpecIds);
   const directRelatedSpecIds = Array.from(
@@ -431,13 +436,14 @@ function buildTimelineSelection(
       [
         ...selectedTask.specIds,
         ...directDependencyIds.flatMap((taskId) => taskMap.get(taskId)?.specIds ?? []),
+        ...directDependentIds.flatMap((taskId) => taskMap.get(taskId)?.specIds ?? []),
         ...directBlockedDependentIds.flatMap((taskId) => taskMap.get(taskId)?.specIds ?? []),
       ].filter((specId) => specId !== primarySpecId),
     ),
   );
   const transitiveRelatedSpecIds = Array.from(
     new Set(
-      [...transitiveDependencyIds, ...transitiveBlockedDependentIds]
+      [...transitiveDependencyIds, ...transitiveDependentIds, ...transitiveBlockedDependentIds]
         .flatMap((taskId) => taskMap.get(taskId)?.specIds ?? [])
         .filter((specId) => specId !== primarySpecId && !directRelatedSpecIds.includes(specId)),
     ),
@@ -450,6 +456,8 @@ function buildTimelineSelection(
     specIds: selectedTask.specIds,
     directDependencyIds,
     transitiveDependencyIds,
+    directDependentIds,
+    transitiveDependentIds,
     directBlockedDependentIds,
     transitiveBlockedDependentIds,
     directRelatedSpecIds,
@@ -483,6 +491,14 @@ function selectionStateForRow(
 
   if (selection.transitiveBlockedDependentIds.includes(row.taskId)) {
     return "blocked_dependent_transitive";
+  }
+
+  if (selection.directDependentIds.includes(row.taskId)) {
+    return "dependent";
+  }
+
+  if (selection.transitiveDependentIds.includes(row.taskId)) {
+    return "dependent_transitive";
   }
 
   return "dimmed";

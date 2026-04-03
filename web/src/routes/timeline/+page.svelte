@@ -117,7 +117,7 @@
     </div>
 
     <p class="selection-copy">
-      The planner is showing immediate and transitive upstream dependencies in one color family, and downstream blocked work in another. Related spec groups stay visible so cross-spec entanglement is easy to scan.
+      The planner is showing upstream dependencies, downstream dependents, and the subset of downstream work that is currently blocked. Related spec groups stay visible so cross-spec entanglement is easy to scan.
     </p>
 
     <div class="selection-metrics">
@@ -128,6 +128,14 @@
       <span class="cell-meta dependency-soft">
         <Sparkles size={12} strokeWidth={1.9} />
         {dashboard.timeline.selection.transitiveDependencyIds.length} transitive deps
+      </span>
+      <span class="cell-meta dependent">
+        <ArrowRight size={12} strokeWidth={1.9} />
+        {dashboard.timeline.selection.directDependentIds.length} direct dependents
+      </span>
+      <span class="cell-meta dependent-soft">
+        <Sparkles size={12} strokeWidth={1.9} />
+        {dashboard.timeline.selection.transitiveDependentIds.length} transitive dependents
       </span>
       <span class="cell-meta blocked">
         <ArrowRight size={12} strokeWidth={1.9} />
@@ -659,6 +667,18 @@
     color: #5570ad;
   }
 
+  .cell-meta.dependent {
+    background: rgba(143, 84, 33, 0.12);
+    border-color: rgba(143, 84, 33, 0.22);
+    color: #8f5421;
+  }
+
+  .cell-meta.dependent-soft {
+    background: rgba(143, 84, 33, 0.07);
+    border-color: rgba(143, 84, 33, 0.14);
+    color: #9b7147;
+  }
+
   .cell-meta.blocked {
     background: rgba(151, 45, 45, 0.12);
     border-color: rgba(151, 45, 45, 0.22);
@@ -715,6 +735,11 @@
     background: rgba(70, 107, 202, 0.08);
   }
 
+  .row-label.dependent,
+  .row-label.dependent_transitive {
+    background: rgba(143, 84, 33, 0.07);
+  }
+
   .row-label.blocked_dependent,
   .row-label.blocked_dependent_transitive {
     background: rgba(151, 45, 45, 0.07);
@@ -760,6 +785,11 @@
   .task-title.dependency,
   .task-title.dependency_transitive {
     color: #3456a0;
+  }
+
+  .task-title.dependent,
+  .task-title.dependent_transitive {
+    color: #8f5421;
   }
 
   .task-title.blocked_dependent,
@@ -912,6 +942,14 @@
     background-size: calc(100% / var(--total)) 100%;
   }
 
+  .planner-row.dependent .row-grid,
+  .planner-row.dependent_transitive .row-grid {
+    background:
+      linear-gradient(90deg, rgba(143, 84, 33, 0.05) 1px, transparent 1px),
+      rgba(255, 248, 241, 0.8);
+    background-size: calc(100% / var(--total)) 100%;
+  }
+
   .planner-row.blocked_dependent .row-grid,
   .planner-row.blocked_dependent_transitive .row-grid {
     background:
@@ -994,6 +1032,18 @@
     background: rgba(70, 107, 202, 0.12);
     border-color: rgba(70, 107, 202, 0.18);
     box-shadow: 0 12px 20px rgba(70, 107, 202, 0.08);
+  }
+
+  .timeline-bar.dependent {
+    background: rgba(143, 84, 33, 0.18);
+    border-color: rgba(143, 84, 33, 0.26);
+    box-shadow: 0 14px 24px rgba(143, 84, 33, 0.12);
+  }
+
+  .timeline-bar.dependent_transitive {
+    background: rgba(143, 84, 33, 0.11);
+    border-color: rgba(143, 84, 33, 0.18);
+    box-shadow: 0 12px 20px rgba(143, 84, 33, 0.08);
   }
 
   .timeline-bar.blocked_dependent {

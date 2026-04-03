@@ -249,6 +249,29 @@ describe("dashboard service", () => {
       expect(rows.find((row) => row.taskId === "TASK-001")?.selectionState).toBe("selected");
       expect(rows.find((row) => row.taskId === "TASK-002")?.selectionState).toBe("blocked_dependent");
       expect(rows.find((row) => row.taskId === "TASK-003")?.selectionState).toBe("blocked_dependent_transitive");
+      expect(dashboard.timeline.selection?.directDependentIds).toEqual(["TASK-002"]);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("distinguishes downstream dependents from currently blocked downstream work", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-dashboard-"));
+
+    try {
+      await initializeProject(rootDir);
+      await setTaskStatus(rootDir, "TASK-001", "done");
+
+      const dashboard = await buildDashboardData(rootDir, {
+        selectedTimelineTaskId: "TASK-001",
+        timelineMode: "all",
+      });
+
+      const rows = dashboard.timeline.groups.flatMap((group) => group.rows);
+      expect(rows.find((row) => row.taskId === "TASK-002")?.selectionState).toBe("dependent");
+      expect(rows.find((row) => row.taskId === "TASK-003")?.selectionState).toBe("blocked_dependent_transitive");
+      expect(dashboard.timeline.selection?.directBlockedDependentIds).toEqual([]);
+      expect(dashboard.timeline.selection?.directDependentIds).toEqual(["TASK-002"]);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
