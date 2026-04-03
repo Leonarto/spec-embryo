@@ -1,8 +1,9 @@
 import type { LayoutServerLoad } from "./$types";
-import { buildDashboardData, type DashboardTimeWindow } from "../../../src/services/dashboard.ts";
+import { buildDashboardData, type DashboardTimeWindow, type DashboardTimelineMode } from "../../../src/services/dashboard.ts";
 import { resolveProjectRoot } from "../lib/server/project-root.ts";
 
 const timeWindows = new Set<DashboardTimeWindow>(["7d", "30d", "90d"]);
+const timelineModes = new Set<DashboardTimelineMode>(["active", "all"]);
 
 function parseSelectedSpecIds(searchParams: URLSearchParams): string[] {
   const fromRepeated = searchParams.getAll("spec");
@@ -27,11 +28,21 @@ function parseTimeWindow(searchParams: URLSearchParams): DashboardTimeWindow | u
   return value as DashboardTimeWindow;
 }
 
+function parseTimelineMode(searchParams: URLSearchParams): DashboardTimelineMode | undefined {
+  const value = searchParams.get("timeline_mode");
+  if (!value || !timelineModes.has(value as DashboardTimelineMode)) {
+    return undefined;
+  }
+
+  return value as DashboardTimelineMode;
+}
+
 export const load: LayoutServerLoad = async ({ url }) => {
   const rootDir = resolveProjectRoot();
   const dashboard = await buildDashboardData(rootDir, {
     selectedSpecIds: parseSelectedSpecIds(url.searchParams),
     timeWindow: parseTimeWindow(url.searchParams),
+    timelineMode: parseTimelineMode(url.searchParams),
   });
 
   return {

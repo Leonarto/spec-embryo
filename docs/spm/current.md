@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-006 is complete. The workspace now has dedicated spec and task detail pages backed by a shared deterministic detail service, with linked context, inline narrative rendering, and deterministic not-found states."
-focus = "Choose the next product slice after closing SPEC-006."
+summary = "SPEC-007 is complete. The timeline is now a denser grouped planning surface with spec-based bands, compact metadata columns, and active-vs-completed display modes while staying deterministic and repo-native."
+focus = "Choose the next product slice after closing SPEC-007."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Decide whether SPEC-007 compact Gantt or a follow-up workflow slice should be next.", "Consider fixing deterministic ID allocation so parallel spec/task creation cannot collide again.", "Keep the shared detail service and shared web components aligned as future detail pages or drill-down views grow."]
+next_action_hints = ["Decide whether the next slice should address deterministic ID allocation collisions or another workflow/UI improvement.", "Keep the grouped timeline data model in the shared service layer instead of rebuilding it in the route.", "Revisit dependency connector lines later only if they can be added without harming scanability."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T14:52:03.025Z"
+updated_at = "2026-04-03T15:36:32.662Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

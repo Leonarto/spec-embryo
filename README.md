@@ -106,10 +106,11 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Git-aware status and resume summaries, including deterministic changed-item derivation
 - Task dependency graph and simple critical path derivation
 - Local SvelteKit workspace launched through `spm ui`
-- Workspace views for overview dashboard, task Kanban, Specs, and deterministic Gantt timeline
+- Workspace views for overview dashboard, task Kanban, Specs, and a compact grouped Gantt timeline
 - Task Kanban spec filters that narrow the active board without pulling archived work back into the operational flow
 - Multi-spec and lifecycle-window filters for analytical Specs and Gantt slices, including archived work when the goal is slice analysis instead of active-board hygiene
 - Dedicated spec and task detail routes with deterministic not-found states, linked context, and inline source narrative rendering
+- A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
 - Prompt-return backend for agent-safe orchestration
 - Handoff file generation
 - Deterministic spec/task creation with automatic back-linking

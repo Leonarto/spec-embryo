@@ -22,6 +22,8 @@ describe("dashboard service", () => {
       expect(dashboard.kanban.map((column) => column.id)).toEqual(["blocked", "todo", "in_progress", "review", "done"]);
       expect(dashboard.kanban.find((column) => column.id === "review")?.tasks).toEqual([]);
       expect(dashboard.timeline.items.some((item) => item.taskId === "TASK-001")).toBe(true);
+      expect(dashboard.timeline.mode).toBe("active");
+      expect(dashboard.timeline.groups[0]?.specId).toBe("SPEC-001");
       expect(dashboard.tasks.find((task) => task.id === "TASK-002")?.effectiveStatus).toBe("blocked");
       expect((dashboard.project as Record<string, unknown>).rootDir).toBeUndefined();
       expect((dashboard.git as Record<string, unknown>).shortStatus).toBeUndefined();
@@ -43,6 +45,27 @@ describe("dashboard service", () => {
 
       expect(dashboard.counts.reviewTasks).toBe(1);
       expect(reviewColumn?.tasks.map((task) => task.id)).toEqual(["TASK-002"]);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("uses effective status labels in grouped timeline rows", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-dashboard-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const dashboard = await buildDashboardData(rootDir, {
+        timelineMode: "active",
+      });
+
+      const blockedRow = dashboard.timeline.groups
+        .flatMap((group) => group.rows)
+        .find((row) => row.taskId === "TASK-002");
+
+      expect(blockedRow?.effectiveStatus).toBe("blocked");
+      expect(blockedRow?.statusLabel).toBe("blocked");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -104,7 +127,8 @@ describe("dashboard service", () => {
       expect(dashboard.analysis.includesArchived).toBe(true);
       expect(dashboard.analysis.selectedSpecIds).toEqual(["SPEC-001"]);
       expect(dashboard.analysisTasks.some((task) => task.id === "TASK-002" && task.archivedAt)).toBe(true);
-      expect(dashboard.timeline.items.some((item) => item.taskId === "TASK-002")).toBe(true);
+      expect(dashboard.timeline.mode).toBe("active");
+      expect(dashboard.timeline.items.some((item) => item.taskId === "TASK-002")).toBe(false);
       expect(dashboard.kanban.some((column) => column.tasks.some((task) => task.id === "TASK-002"))).toBe(false);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
@@ -160,6 +184,51 @@ describe("dashboard service", () => {
       expect(dashboard.analysis.hasActiveFilters).toBe(true);
       expect(dashboard.analysisTasks.map((task) => task.id)).toContain("TASK-002");
       expect(dashboard.analysisTasks.map((task) => task.id)).not.toContain("TASK-001");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("supports active-only and include-completed timeline modes", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-dashboard-"));
+
+    try {
+      await initializeProject(rootDir);
+      await setTaskStatus(rootDir, "TASK-002", "done");
+
+      const activeDashboard = await buildDashboardData(rootDir, {
+        timelineMode: "active",
+      });
+      const allDashboard = await buildDashboardData(rootDir, {
+        timelineMode: "all",
+      });
+
+      expect(activeDashboard.timeline.items.map((item) => item.taskId)).not.toContain("TASK-002");
+      expect(allDashboard.timeline.items.map((item) => item.taskId)).toContain("TASK-002");
+      expect(allDashboard.analysis.timelineMode).toBe("all");
+      expect(allDashboard.timeline.groups.some((group) => group.rows.some((row) => row.taskId === "TASK-002"))).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("keeps selected spec groups visible even when active mode has no matching rows", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-dashboard-"));
+
+    try {
+      await initializeProject(rootDir);
+      await setTaskStatus(rootDir, "TASK-001", "done");
+      await setTaskStatus(rootDir, "TASK-002", "done");
+      await setTaskStatus(rootDir, "TASK-003", "done");
+
+      const dashboard = await buildDashboardData(rootDir, {
+        selectedSpecIds: ["SPEC-001"],
+        timelineMode: "active",
+      });
+
+      expect(dashboard.timeline.items).toEqual([]);
+      expect(dashboard.timeline.groups.map((group) => group.specId)).toEqual(["SPEC-001"]);
+      expect(dashboard.timeline.groups[0]?.rows).toEqual([]);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

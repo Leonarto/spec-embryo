@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-007"
 title = "Upgrade the Gantt view into a compact professional timeline"
 summary = "Define a denser, Microsoft Project-inspired timeline view that stays deterministic, readable, and useful without date estimates."
-status = "proposed"
-task_ids = []
+status = "done"
+task_ids = ["TASK-021", "TASK-022", "TASK-023"]
 tags = ["ui", "gantt", "timeline", "design"]
 owner = "human-ai"
-updated_at = "2026-04-03T02:26:23.139Z"
+updated_at = "2026-04-03T15:36:32.664Z"
 +++
 
 # Overview
@@ -97,7 +97,7 @@ The goal is not to copy Microsoft Project literally, but to borrow the qualities
 - Relative effort and dependency order remain deterministic and visible without explicit dates.
 - Status and review state can be read at a glance from the chart.
 
-## Open Questions
+## Resolved Decisions
 
-- Whether the left metadata pane should show only task labels by default or include a few extra columns such as owner role and dependency count.
-- Whether the first dense version should include dependency connector lines immediately or defer them if they create too much noise.
+- The left metadata pane should include a small number of extra scanning columns in the first dense version: status, effort, and dependency count.
+- The first dense version should defer dependency connector lines if they create too much noise; priority goes to grouping, density, and legibility first.
