@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-012"
 title = "Add dark mode and color mode selection to the local UI"
 summary = "Define theme support for the local workspace, including a color-mode selector and a default dark presentation."
-status = "active"
+status = "done"
 task_ids = ["TASK-035", "TASK-036", "TASK-037"]
 tags = ["ui", "theme", "dark-mode"]
-updated_at = "2026-04-04T02:38:25.985Z"
+updated_at = "2026-04-04T03:06:21.629Z"
 +++
 
 # Problem

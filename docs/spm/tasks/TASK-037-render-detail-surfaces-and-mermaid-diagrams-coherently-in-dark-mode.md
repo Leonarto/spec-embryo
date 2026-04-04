@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-037"
 title = "Render detail surfaces and Mermaid diagrams coherently in dark mode"
 summary = "Adapt detail views, code blocks, and Mermaid theme variables so dark mode feels native instead of bolted on."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-012"]
 depends_on = ["TASK-036"]
 blocked_by = []
 priority = 1
 created_at = "2026-04-04T02:29:55.259Z"
+completed_at = "2026-04-04T03:06:21.515Z"
 tags = []
-updated_at = "2026-04-04T02:29:55.259Z"
+updated_at = "2026-04-04T03:06:21.515Z"
 +++
 
 # Scope

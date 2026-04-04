@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { buildMermaidThemeVariables } from "../mermaid-theme.ts";
 
   const MIN_ZOOM = 0.3;
   const MAX_ZOOM = 2.2;
@@ -39,24 +40,10 @@
 
     try {
       const mermaid = (await import("mermaid")).default;
-      const styles = getComputedStyle(document.documentElement);
-      const readVar = (name: string, fallback: string) => styles.getPropertyValue(name).trim() || fallback;
       mermaid.initialize({
         startOnLoad: false,
         theme: "base",
-        themeVariables: {
-          primaryColor: readVar("--mermaid-node-fill", "#f5f0e6"),
-          primaryBorderColor: readVar("--mermaid-node-border", "#2e6a52"),
-          primaryTextColor: readVar("--mermaid-node-text", "#1d271f"),
-          lineColor: readVar("--mermaid-line", "#2e6a52"),
-          tertiaryColor: readVar("--mermaid-surface", "#fffdf8"),
-          background: readVar("--mermaid-surface", "#fffdf8"),
-          mainBkg: readVar("--mermaid-main-bg", "#f8f2e8"),
-          nodeBorder: readVar("--mermaid-node-border", "#2e6a52"),
-          clusterBkg: readVar("--mermaid-cluster-bg", "#f7f4ed"),
-          clusterBorder: readVar("--mermaid-cluster-border", "#c9bcaa"),
-          fontFamily: "var(--body-font)",
-        },
+        themeVariables: buildMermaidThemeVariables(getComputedStyle(document.documentElement)),
         flowchart: {
           curve: "basis",
           useMaxWidth: true,
