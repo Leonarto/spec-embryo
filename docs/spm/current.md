@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "AGENTS budgets now derive from project-standard context ratios in .specpm/config.toml, defaulting to a 400000-token GPT-5/Codex context assumption."
-focus = "Choose the next post-budgeting product slice"
-active_spec_ids = []
+summary = "SPEC-012 remains active: TASK-035 is complete, and the next UI slice is to carry the new theme model through shared tokens and workspace surfaces before Mermaid-specific dark-mode polish."
+focus = "Refactor shared theme tokens and common surfaces for TASK-036"
+active_spec_ids = ["SPEC-012"]
 active_task_ids = []
-blocked_task_ids = []
-next_action_hints = ["Verify external repos behave well with the new AGENTS budget config.", "Decide whether AGENTS budget editing should get dedicated CLI flows.", "Consider adding model/profile presets beyond the default GPT-5/Codex-sized context assumption."]
+blocked_task_ids = ["TASK-037"]
+next_action_hints = ["Start TASK-036 by replacing remaining light-only surface decisions with shared theme tokens.", "Keep the shell, dashboard, task, spec, and timeline surfaces visually intentional in both modes.", "Leave Mermaid-specific dark-mode rendering for TASK-037 after shared surfaces are stable."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-04T00:21:03.020Z"
+updated_at = "2026-04-04T02:38:26.151Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

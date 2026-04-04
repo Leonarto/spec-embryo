@@ -1,6 +1,8 @@
 <script lang="ts">
   import "../app.css";
+  import { browser } from "$app/environment";
   import { page } from "$app/state";
+  import { onMount } from "svelte";
   import {
     ChartNoAxesGantt,
     FolderKanban,
@@ -11,6 +13,8 @@
     Sparkles,
   } from "@lucide/svelte";
   import type { DashboardData } from "../../../src/services/dashboard.ts";
+  import ColorModeControl from "../lib/components/ColorModeControl.svelte";
+  import { THEME_STORAGE_KEY, normalizeColorMode, resolveTheme, type ColorMode, type ResolvedTheme } from "../lib/theme.ts";
 
   let { data, children } = $props();
 
@@ -25,6 +29,52 @@
 
   const activePath = $derived(page.url.pathname);
   const activeSearch = $derived(page.url.search);
+  let colorMode = $state<ColorMode>("system");
+  let resolvedTheme = $state<ResolvedTheme>("dark");
+
+  function systemPrefersDark(): boolean | null {
+    if (!browser || typeof window.matchMedia !== "function") {
+      return null;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  function applyTheme(mode: ColorMode) {
+    colorMode = mode;
+    resolvedTheme = resolveTheme(mode, systemPrefersDark());
+
+    if (!browser) {
+      return;
+    }
+
+    const root = document.documentElement;
+    root.dataset.colorMode = mode;
+    root.dataset.theme = resolvedTheme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, mode);
+  }
+
+  onMount(() => {
+    const stored = normalizeColorMode(window.localStorage.getItem(THEME_STORAGE_KEY));
+    applyTheme(stored);
+
+    const media = typeof window.matchMedia === "function"
+      ? window.matchMedia("(prefers-color-scheme: dark)")
+      : null;
+
+    if (!media) {
+      return;
+    }
+
+    const updateSystemTheme = () => {
+      if (colorMode === "system") {
+        applyTheme("system");
+      }
+    };
+
+    media.addEventListener("change", updateSystemTheme);
+    return () => media.removeEventListener("change", updateSystemTheme);
+  });
 </script>
 
 <svelte:head>
@@ -61,13 +111,18 @@
       {/each}
     </nav>
 
-    <div class="sidebar-note">
-      <div class="sidebar-note-head">
-        <p class="eyebrow">Memory home</p>
-        <strong>{dashboard.project.memoryDir}</strong>
+    <div class="sidebar-bottom">
+      <ColorModeControl mode={colorMode} resolvedTheme={resolvedTheme} onSelect={applyTheme} />
+
+      <div class="sidebar-note">
+        <div class="sidebar-note-head">
+          <p class="eyebrow">Memory home</p>
+          <strong>{dashboard.project.memoryDir}</strong>
+        </div>
+        <p>{dashboard.currentState.summary}</p>
       </div>
-      <p>{dashboard.currentState.summary}</p>
     </div>
+
   </aside>
 
   <div class="main-column">
@@ -128,9 +183,13 @@
     padding: 0.95rem 0.8rem;
     border-right: 1px solid var(--line);
     background:
-      linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(247, 241, 232, 0.88));
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--panel-strong) 92%, transparent),
+        color-mix(in srgb, var(--panel-muted) 96%, transparent)
+      );
     backdrop-filter: blur(18px);
-    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.45);
+    box-shadow: inset -1px 0 0 color-mix(in srgb, var(--line-strong) 80%, transparent);
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -150,8 +209,12 @@
     width: fit-content;
     padding: 0.45rem 0.7rem;
     border-radius: 999px;
-    border: 1px solid rgba(24, 22, 18, 0.14);
-    background: linear-gradient(135deg, rgba(15, 141, 96, 0.16), rgba(255, 255, 255, 0.76));
+    border: 1px solid var(--line);
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      color-mix(in srgb, var(--panel-strong) 90%, transparent)
+    );
     box-shadow: var(--shadow-soft);
     font-family: var(--display-font);
     font-size: 1.05rem;
@@ -218,14 +281,18 @@
   .nav-stack a:hover,
   .nav-stack a.active {
     transform: translateX(1px);
-    border-color: rgba(24, 22, 18, 0.12);
-    background: rgba(255, 255, 255, 0.76);
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--panel-strong) 94%, transparent);
     box-shadow: var(--shadow-soft);
   }
 
   .nav-stack a.active {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(248, 244, 237, 0.92));
-    border-color: rgba(24, 22, 18, 0.18);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent-soft) 58%, var(--panel-strong)),
+      color-mix(in srgb, var(--panel) 94%, transparent)
+    );
+    border-color: var(--line-strong);
   }
 
   .nav-badge {
@@ -236,7 +303,7 @@
     height: 2.1rem;
     border-radius: 0.85rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.86);
+    background: color-mix(in srgb, var(--panel-strong) 94%, transparent);
     color: var(--muted-soft);
     flex-shrink: 0;
   }
@@ -258,13 +325,16 @@
   }
 
   .sidebar-note {
-    margin-top: auto;
     display: grid;
     gap: 0.45rem;
     padding: 0.82rem;
     border-radius: 1.15rem;
     border: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(250, 245, 237, 0.78));
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--panel-strong) 92%, transparent),
+      color-mix(in srgb, var(--panel) 96%, transparent)
+    );
     box-shadow: var(--shadow-soft);
   }
 
@@ -276,6 +346,12 @@
   .sidebar-note strong {
     font-size: 0.86rem;
     line-height: 1.35;
+  }
+
+  .sidebar-bottom {
+    margin-top: auto;
+    display: grid;
+    gap: 0.75rem;
   }
 
   .main-column {
@@ -300,7 +376,12 @@
     margin: -0.95rem -1.15rem 0;
     padding: 0.95rem 1.15rem 1.1rem;
     background:
-      linear-gradient(180deg, rgba(241, 235, 223, 0.94), rgba(241, 235, 223, 0.82) 70%, rgba(241, 235, 223, 0));
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 88%, transparent),
+        color-mix(in srgb, var(--bg) 74%, transparent) 70%,
+        transparent
+      );
     backdrop-filter: blur(10px);
   }
 
@@ -325,7 +406,7 @@
     padding: 0.8rem 0.9rem;
     border-radius: 1.05rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.76);
+    background: color-mix(in srgb, var(--panel-strong) 94%, transparent);
     min-width: 0;
     box-shadow: var(--shadow-soft);
   }
@@ -397,6 +478,10 @@
       border-right: 0;
       border-bottom: 1px solid var(--line);
       overflow: visible;
+    }
+
+    .sidebar-bottom {
+      margin-top: 0;
     }
 
     .main-column {
