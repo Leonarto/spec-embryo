@@ -400,8 +400,8 @@
 
   .selection-shell {
     background:
-      radial-gradient(circle at top right, rgba(70, 107, 202, 0.12), transparent 18rem),
-      linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(244, 238, 229, 0.94));
+      radial-gradient(circle at top right, color-mix(in srgb, var(--info) 16%, transparent), transparent 18rem),
+      linear-gradient(180deg, var(--surface-overlay), var(--surface-hero));
   }
 
   .selection-head,
@@ -426,15 +426,15 @@
     height: 2rem;
     border-radius: 0.85rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
+    background: var(--surface-interactive);
     color: var(--muted-soft);
     flex-shrink: 0;
   }
 
   .selection-pill {
-    color: #3456a0;
-    border-color: rgba(70, 107, 202, 0.18);
-    background: rgba(70, 107, 202, 0.1);
+    color: var(--info-ink);
+    border-color: var(--info-strong-soft);
+    background: var(--info-soft);
   }
 
   .clear-selection {
@@ -444,8 +444,8 @@
     padding: 0.52rem 0.74rem;
     border-radius: 999px;
     text-decoration: none;
-    border: 1px solid rgba(24, 22, 18, 0.12);
-    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid var(--line);
+    background: var(--surface-interactive);
     color: var(--muted-soft);
     box-shadow: var(--shadow-soft);
   }
@@ -462,13 +462,13 @@
     border-radius: 999px;
     text-decoration: none;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
+    background: var(--surface-interactive);
     box-shadow: var(--shadow-soft);
   }
 
   .mode-toggle a.active {
-    border-color: rgba(15, 141, 96, 0.22);
-    background: rgba(15, 141, 96, 0.1);
+    border-color: var(--accent-border);
+    background: var(--accent-soft);
   }
 
   .timeline-empty {
@@ -478,7 +478,7 @@
     padding: 0.9rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px dashed var(--line-strong);
-    background: rgba(255, 255, 255, 0.62);
+    background: var(--surface-card-subtle);
   }
 
   .planner-head,
@@ -489,14 +489,14 @@
   .empty-group {
     display: flex;
     min-width: 68rem;
-    border-bottom: 1px solid rgba(24, 22, 18, 0.06);
+    border-bottom: 1px solid var(--line);
   }
 
   .planner-head {
     position: sticky;
     top: 0;
     z-index: 2;
-    background: rgba(247, 241, 232, 0.92);
+    background: color-mix(in srgb, var(--surface-overlay) 94%, transparent);
     border-bottom: 1px solid var(--line);
     backdrop-filter: blur(12px);
   }
@@ -505,7 +505,7 @@
     width: 24rem;
     min-width: 24rem;
     flex-shrink: 0;
-    background: rgba(250, 245, 238, 0.96);
+    background: var(--surface-overlay);
   }
 
   .pane-head,
@@ -554,30 +554,30 @@
 
   .group-shell {
     gap: 0;
-    border-bottom: 1px solid rgba(24, 22, 18, 0.08);
+    border-bottom: 1px solid var(--line);
   }
 
   .group-head {
     padding-top: 1rem;
     padding-bottom: 0.9rem;
-    border-bottom: 1px solid rgba(24, 22, 18, 0.08);
-    background: linear-gradient(180deg, rgba(255, 254, 250, 0.98), rgba(245, 238, 227, 0.94));
-    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--surface-overlay-strong), var(--surface-hero));
+    box-shadow: inset 0 -1px 0 var(--inset-highlight);
   }
 
   .group-head.selected {
     background:
-      linear-gradient(180deg, rgba(234, 248, 241, 0.98), rgba(228, 243, 236, 0.96));
+      linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 92%, var(--surface-overlay)), color-mix(in srgb, var(--accent-soft) 70%, var(--surface-hero)));
   }
 
   .group-head.related_direct {
     background:
-      linear-gradient(180deg, rgba(242, 247, 255, 0.98), rgba(232, 241, 255, 0.96));
+      linear-gradient(180deg, color-mix(in srgb, var(--info-soft) 92%, var(--surface-overlay)), color-mix(in srgb, var(--info-soft) 70%, var(--surface-hero)));
   }
 
   .group-head.related_transitive {
     background:
-      linear-gradient(180deg, rgba(247, 249, 255, 0.98), rgba(239, 244, 255, 0.95));
+      linear-gradient(180deg, color-mix(in srgb, var(--info-soft) 70%, var(--surface-overlay)), color-mix(in srgb, var(--info-soft) 44%, var(--surface-hero)));
   }
 
   .group-topline,
@@ -624,9 +624,9 @@
     border-radius: 999px;
     padding: 0.18rem 0.48rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.86);
+    background: var(--surface-interactive);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       var(--status-glow, var(--shadow-soft));
     font-size: 0.71rem;
     line-height: 1.1;
@@ -634,70 +634,70 @@
 
   .mini-pill.neutral,
   .cell-meta.neutral {
-    border-color: rgba(24, 22, 18, 0.1);
-    background: rgba(255, 255, 255, 0.8);
+    border-color: var(--neutral-strong-soft);
+    background: var(--surface-card-soft);
     --status-glow: 0 10px 20px rgba(24, 22, 18, 0.05);
   }
 
   .mini-pill.selected-pill {
-    background: rgba(15, 141, 96, 0.12);
-    border-color: rgba(15, 141, 96, 0.22);
-    color: #0d6e4b;
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent-ink);
   }
 
   .mini-pill.spec-direct,
   .cell-meta.spec-direct {
-    background: rgba(70, 107, 202, 0.12);
-    border-color: rgba(70, 107, 202, 0.22);
-    color: #3456a0;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(70, 107, 202, 0.14);
+    background: var(--info-soft);
+    border-color: var(--info-strong-soft);
+    color: var(--info-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 18px rgba(70, 107, 202, 0.14);
   }
 
   .mini-pill.spec-transitive {
-    background: rgba(70, 107, 202, 0.08);
-    border-color: rgba(70, 107, 202, 0.16);
-    color: #5570ad;
+    background: color-mix(in srgb, var(--info-soft) 72%, transparent);
+    border-color: color-mix(in srgb, var(--info) 22%, transparent);
+    color: var(--info-ink);
   }
 
   .cell-meta.dependency {
-    background: rgba(70, 107, 202, 0.12);
-    border-color: rgba(70, 107, 202, 0.22);
-    color: #3456a0;
+    background: var(--info-soft);
+    border-color: var(--info-strong-soft);
+    color: var(--info-ink);
   }
 
   .cell-meta.dependency-soft {
-    background: rgba(70, 107, 202, 0.07);
-    border-color: rgba(70, 107, 202, 0.14);
-    color: #5570ad;
+    background: color-mix(in srgb, var(--info-soft) 72%, transparent);
+    border-color: color-mix(in srgb, var(--info) 22%, transparent);
+    color: var(--info-ink);
   }
 
   .cell-meta.dependent {
-    background: rgba(143, 84, 33, 0.12);
-    border-color: rgba(143, 84, 33, 0.22);
-    color: #8f5421;
+    background: var(--warning-soft);
+    border-color: var(--warning-border);
+    color: var(--warning-ink);
   }
 
   .cell-meta.dependent-soft {
-    background: rgba(143, 84, 33, 0.07);
-    border-color: rgba(143, 84, 33, 0.14);
-    color: #9b7147;
+    background: color-mix(in srgb, var(--warning-soft) 72%, transparent);
+    border-color: color-mix(in srgb, var(--warning) 22%, transparent);
+    color: var(--warning-ink);
   }
 
   .cell-meta.blocked {
-    background: rgba(151, 45, 45, 0.12);
-    border-color: rgba(151, 45, 45, 0.22);
-    color: #8d2d2d;
+    background: var(--danger-soft);
+    border-color: var(--danger-border);
+    color: var(--danger-ink);
   }
 
   .cell-meta.blocked-soft {
-    background: rgba(151, 45, 45, 0.08);
-    border-color: rgba(151, 45, 45, 0.16);
-    color: #9b5b5b;
+    background: color-mix(in srgb, var(--danger-soft) 72%, transparent);
+    border-color: color-mix(in srgb, var(--danger) 22%, transparent);
+    color: var(--danger-ink);
   }
 
   .planner-row {
     align-items: stretch;
-    border-bottom: 1px solid rgba(24, 22, 18, 0.06);
+    border-bottom: 1px solid var(--line);
     transition: opacity 140ms ease;
   }
 
@@ -730,23 +730,23 @@
   }
 
   .row-label.selected {
-    background: rgba(15, 141, 96, 0.1);
-    box-shadow: inset -2px 0 0 rgba(15, 141, 96, 0.22);
+    background: var(--accent-soft);
+    box-shadow: inset -2px 0 0 var(--accent-border);
   }
 
   .row-label.dependency,
   .row-label.dependency_transitive {
-    background: rgba(70, 107, 202, 0.08);
+    background: color-mix(in srgb, var(--info-soft) 68%, transparent);
   }
 
   .row-label.dependent,
   .row-label.dependent_transitive {
-    background: rgba(143, 84, 33, 0.07);
+    background: color-mix(in srgb, var(--warning-soft) 68%, transparent);
   }
 
   .row-label.blocked_dependent,
   .row-label.blocked_dependent_transitive {
-    background: rgba(151, 45, 45, 0.07);
+    background: color-mix(in srgb, var(--danger-soft) 68%, transparent);
   }
 
   .task-copy {
@@ -783,22 +783,22 @@
   }
 
   .task-title.selected {
-    color: #0d6e4b;
+    color: var(--accent-ink);
   }
 
   .task-title.dependency,
   .task-title.dependency_transitive {
-    color: #3456a0;
+    color: var(--info-ink);
   }
 
   .task-title.dependent,
   .task-title.dependent_transitive {
-    color: #8f5421;
+    color: var(--warning-ink);
   }
 
   .task-title.blocked_dependent,
   .task-title.blocked_dependent_transitive {
-    color: #8d2d2d;
+    color: var(--danger-ink);
   }
 
   .task-title::after {
@@ -811,10 +811,10 @@
     max-width: min(28rem, 72vw);
     padding: 0.55rem 0.7rem;
     border-radius: 0.85rem;
-    border: 1px solid rgba(24, 22, 18, 0.14);
-    background: rgba(255, 252, 247, 0.98);
+    border: 1px solid var(--line-strong);
+    background: var(--surface-tooltip);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       0 18px 40px rgba(24, 22, 18, 0.14);
     color: var(--ink);
     font-size: 0.82rem;
@@ -845,67 +845,67 @@
 
   .status-pill {
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       var(--status-glow, 0 10px 22px rgba(24, 22, 18, 0.05));
   }
 
   .mini-pill.status.active,
   .status-pill.in_progress {
-    background: rgba(15, 141, 96, 0.14);
-    border-color: rgba(15, 141, 96, 0.22);
-    color: #0d6e4b;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(15, 141, 96, 0.16);
+    background: var(--accent-strong-soft);
+    border-color: var(--accent-border);
+    color: var(--accent-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 18px rgba(15, 141, 96, 0.16);
   }
 
   .mini-pill.status.proposed {
-    background: rgba(70, 107, 202, 0.12);
-    border-color: rgba(70, 107, 202, 0.2);
-    color: #3456a0;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(70, 107, 202, 0.14);
+    background: var(--info-soft);
+    border-color: var(--info-strong-soft);
+    color: var(--info-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 18px rgba(70, 107, 202, 0.14);
   }
 
   .mini-pill.status.paused {
-    background: rgba(125, 96, 58, 0.14);
-    border-color: rgba(125, 96, 58, 0.22);
-    color: #755733;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(125, 96, 58, 0.14);
+    background: var(--warning-soft);
+    border-color: var(--warning-border);
+    color: var(--warning-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 18px rgba(125, 96, 58, 0.14);
   }
 
   .mini-pill.status.done,
   .status-pill.done {
-    background: rgba(17, 122, 84, 0.12);
-    border-color: rgba(17, 122, 84, 0.18);
-    color: #0c6d4a;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 16px rgba(17, 122, 84, 0.12);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 16px rgba(17, 122, 84, 0.12);
   }
 
   .mini-pill.status.archived,
   .status-pill.cancelled {
-    background: rgba(117, 92, 58, 0.14);
-    border-color: rgba(117, 92, 58, 0.18);
-    color: #6e5434;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 16px rgba(117, 92, 58, 0.12);
+    background: var(--neutral-soft);
+    border-color: var(--neutral-strong-soft);
+    color: var(--neutral-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 16px rgba(117, 92, 58, 0.12);
   }
 
   .status-pill.review {
-    background: rgba(143, 84, 33, 0.14);
-    border-color: rgba(143, 84, 33, 0.22);
-    color: #8f5421;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(143, 84, 33, 0.16);
+    background: var(--warning-soft);
+    border-color: var(--warning-border);
+    color: var(--warning-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 18px rgba(143, 84, 33, 0.16);
   }
 
   .status-pill.blocked {
-    background: rgba(151, 45, 45, 0.12);
-    border-color: rgba(151, 45, 45, 0.22);
-    color: #8d2d2d;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 18px rgba(151, 45, 45, 0.16);
+    background: var(--danger-soft);
+    border-color: var(--danger-border);
+    color: var(--danger-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 18px rgba(151, 45, 45, 0.16);
   }
 
   .status-pill.todo {
-    background: rgba(84, 78, 67, 0.1);
-    border-color: rgba(84, 78, 67, 0.14);
-    color: #5d5549;
-    --status-glow: 0 0 0 1px rgba(255, 255, 255, 0.34) inset, 0 0 14px rgba(84, 78, 67, 0.08);
+    background: var(--neutral-soft);
+    border-color: var(--neutral-strong-soft);
+    color: var(--neutral-ink);
+    --status-glow: 0 0 0 1px var(--inset-highlight) inset, 0 0 14px rgba(84, 78, 67, 0.08);
   }
 
   .status-pill.done,
@@ -923,8 +923,8 @@
     padding-right: 0.8rem;
     flex: 1;
     background:
-      linear-gradient(90deg, rgba(24, 22, 18, 0.05) 1px, transparent 1px),
-      rgba(255, 255, 255, 0.66);
+      linear-gradient(90deg, color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px),
+      var(--surface-grid);
     background-size: calc(100% / var(--total)) 100%;
     transition:
       background 140ms ease,
@@ -933,32 +933,32 @@
 
   .planner-row.selected .row-grid {
     background:
-      linear-gradient(90deg, rgba(15, 141, 96, 0.07) 1px, transparent 1px),
-      rgba(242, 251, 246, 0.8);
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px),
+      var(--surface-grid-selected);
     background-size: calc(100% / var(--total)) 100%;
   }
 
   .planner-row.dependency .row-grid,
   .planner-row.dependency_transitive .row-grid {
     background:
-      linear-gradient(90deg, rgba(70, 107, 202, 0.06) 1px, transparent 1px),
-      rgba(245, 248, 255, 0.78);
+      linear-gradient(90deg, color-mix(in srgb, var(--info) 9%, transparent) 1px, transparent 1px),
+      var(--surface-grid-info);
     background-size: calc(100% / var(--total)) 100%;
   }
 
   .planner-row.dependent .row-grid,
   .planner-row.dependent_transitive .row-grid {
     background:
-      linear-gradient(90deg, rgba(143, 84, 33, 0.05) 1px, transparent 1px),
-      rgba(255, 248, 241, 0.8);
+      linear-gradient(90deg, color-mix(in srgb, var(--warning) 9%, transparent) 1px, transparent 1px),
+      var(--surface-grid-warning);
     background-size: calc(100% / var(--total)) 100%;
   }
 
   .planner-row.blocked_dependent .row-grid,
   .planner-row.blocked_dependent_transitive .row-grid {
     background:
-      linear-gradient(90deg, rgba(151, 45, 45, 0.05) 1px, transparent 1px),
-      rgba(255, 246, 246, 0.8);
+      linear-gradient(90deg, color-mix(in srgb, var(--danger) 9%, transparent) 1px, transparent 1px),
+      var(--surface-grid-danger);
     background-size: calc(100% / var(--total)) 100%;
   }
 

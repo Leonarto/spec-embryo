@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-012 remains active: TASK-035 is complete, and the next UI slice is to carry the new theme model through shared tokens and workspace surfaces before Mermaid-specific dark-mode polish."
-focus = "Refactor shared theme tokens and common surfaces for TASK-036"
+summary = "SPEC-012 remains active: shared workspace routes now rely on theme tokens instead of embedded light-only colors, and the next slice is to finish detail-view and Mermaid-specific dark-mode coherence."
+focus = "Carry theme-aware styling into detail surfaces and Mermaid for TASK-037"
 active_spec_ids = ["SPEC-012"]
 active_task_ids = []
-blocked_task_ids = ["TASK-037"]
-next_action_hints = ["Start TASK-036 by replacing remaining light-only surface decisions with shared theme tokens.", "Keep the shell, dashboard, task, spec, and timeline surfaces visually intentional in both modes.", "Leave Mermaid-specific dark-mode rendering for TASK-037 after shared surfaces are stable."]
+blocked_task_ids = []
+next_action_hints = ["Start TASK-037 by aligning Mermaid and detail surfaces with the new semantic theme tokens.", "Keep dark-mode diagrams coherent with the rest of the workspace rather than treating them as isolated light islands.", "Preserve the current route-level rule: prefer shared tokens over new raw theme colors in Svelte files."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-04T02:38:26.151Z"
+updated_at = "2026-04-04T02:57:33.642Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-036"
 title = "Refactor workspace tokens and shared surfaces for dark and light modes"
 summary = "Replace light-only tokens with theme-aware variables and audit the shell, dashboard, board, specs, and timeline for intentional dual-mode styling."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-012"]
 depends_on = ["TASK-035"]
 blocked_by = []
 priority = 1
 created_at = "2026-04-04T02:29:55.130Z"
+completed_at = "2026-04-04T02:57:33.611Z"
 tags = []
-updated_at = "2026-04-04T02:29:55.130Z"
+updated_at = "2026-04-04T02:57:33.611Z"
 +++
 
 # Scope

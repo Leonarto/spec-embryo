@@ -377,19 +377,19 @@
     border-radius: 999px;
     padding: 0.34rem 0.7rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--surface-interactive);
     box-shadow: var(--shadow-soft);
     font-size: 0.77rem;
   }
 
   .chip-accent {
-    background: rgba(15, 141, 96, 0.12);
-    border-color: rgba(15, 141, 96, 0.22);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
   }
 
   .chip-warning {
-    background: rgba(143, 84, 33, 0.12);
-    border-color: rgba(143, 84, 33, 0.22);
+    background: var(--warning-soft);
+    border-color: var(--warning-border);
   }
 
   .detail-grid {
@@ -409,12 +409,12 @@
     padding: 0.9rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.82);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 
   .linked-card:hover {
-    border-color: rgba(15, 141, 96, 0.18);
+    border-color: var(--accent-border);
     transform: translateY(-1px);
   }
 

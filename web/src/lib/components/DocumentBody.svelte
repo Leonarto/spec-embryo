@@ -72,7 +72,7 @@
     padding: 1rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.76);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 
@@ -86,7 +86,7 @@
     width: 1.65rem;
     height: 0.18rem;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(15, 141, 96, 0.9), rgba(15, 141, 96, 0.2));
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 92%, white 8%), var(--accent-soft));
   }
 
   h3,
@@ -119,11 +119,9 @@
     gap: 0.7rem;
     padding: 0.85rem;
     border-radius: 0.95rem;
-    border: 1px solid rgba(41, 38, 30, 0.1);
-    background:
-      linear-gradient(180deg, rgba(43, 39, 31, 0.98), rgba(28, 25, 20, 0.98)),
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 45%);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--code-border);
+    background: var(--code-bg), var(--code-glow);
+    box-shadow: inset 0 1px 0 var(--inset-highlight);
   }
 
   .code-head {
@@ -141,15 +139,15 @@
   }
 
   .code-label {
-    color: rgba(229, 221, 205, 0.6);
+    color: var(--code-label);
   }
 
   .code-language {
     padding: 0.26rem 0.5rem;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 248, 238, 0.88);
-    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--code-pill-border);
+    color: var(--code-pill-ink);
+    background: var(--code-pill-bg);
   }
 
   pre {
@@ -158,7 +156,7 @@
 
   code {
     font-family: "IBM Plex Mono", "SFMono-Regular", ui-monospace, monospace;
-    color: rgba(247, 241, 231, 0.9);
+    color: var(--code-ink);
     font-size: 0.88rem;
     line-height: 1.6;
     white-space: pre;

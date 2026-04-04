@@ -151,7 +151,11 @@
     padding: 0.9rem;
     border-radius: var(--radius-xl);
     border: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(255, 252, 246, 0.94), rgba(247, 241, 232, 0.88));
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-hero) 96%, transparent),
+      color-mix(in srgb, var(--surface-card-soft) 94%, transparent)
+    );
     box-shadow: var(--shadow);
   }
 
@@ -189,7 +193,7 @@
     height: 2.05rem;
     border-radius: 0.85rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
+    background: var(--surface-interactive);
     color: var(--muted-soft);
     flex-shrink: 0;
   }
@@ -236,7 +240,7 @@
     padding: 0.72rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 
@@ -255,7 +259,7 @@
   .ghost-button {
     border-radius: 999px;
     border: 1px solid var(--line-strong);
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--surface-interactive);
     color: var(--ink);
     box-shadow: var(--shadow-soft);
   }

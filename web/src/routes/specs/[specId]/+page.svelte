@@ -467,19 +467,19 @@
     border-radius: 999px;
     padding: 0.34rem 0.7rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--surface-interactive);
     box-shadow: var(--shadow-soft);
     font-size: 0.77rem;
   }
 
   .chip-accent {
-    background: rgba(15, 141, 96, 0.12);
-    border-color: rgba(15, 141, 96, 0.22);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
   }
 
   .chip-warning {
-    background: rgba(143, 84, 33, 0.12);
-    border-color: rgba(143, 84, 33, 0.22);
+    background: var(--warning-soft);
+    border-color: var(--warning-border);
   }
 
   .detail-grid {
@@ -500,13 +500,13 @@
     height: 0.6rem;
     border-radius: 999px;
     overflow: hidden;
-    background: rgba(24, 22, 18, 0.08);
+    background: var(--neutral-soft);
   }
 
   .progress-bar {
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(15, 141, 96, 0.82), rgba(15, 141, 96, 0.34));
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 88%, white 12%), var(--accent-soft));
   }
 
   .progress-grid {
@@ -524,7 +524,7 @@
     padding: 0.9rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.82);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 
@@ -543,8 +543,8 @@
     gap: 0.55rem;
     padding: 0.9rem;
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(119, 103, 77, 0.16);
-    background: rgba(255, 251, 244, 0.82);
+    border: 1px solid var(--line);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 
@@ -561,7 +561,7 @@
   }
 
   .linked-card:hover {
-    border-color: rgba(15, 141, 96, 0.18);
+    border-color: var(--accent-border);
     transform: translateY(-1px);
   }
 
@@ -595,23 +595,23 @@
     box-sizing: border-box;
     padding: 0.85rem 0.95rem;
     border-radius: 1rem;
-    border: 1px solid rgba(119, 103, 77, 0.22);
-    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid var(--line-strong);
+    background: var(--surface-overlay-soft);
     color: inherit;
     font: inherit;
   }
 
   textarea:focus {
-    outline: 2px solid rgba(15, 141, 96, 0.2);
-    border-color: rgba(15, 141, 96, 0.4);
+    outline: 2px solid color-mix(in srgb, var(--accent) 24%, transparent);
+    border-color: var(--accent-border);
   }
 
   .primary-button {
     border: 0;
     border-radius: 999px;
     padding: 0.72rem 1rem;
-    background: linear-gradient(135deg, rgba(18, 114, 88, 0.96), rgba(31, 153, 119, 0.96));
-    color: white;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 86%, black 14%), color-mix(in srgb, var(--accent) 72%, white 18%));
+    color: color-mix(in srgb, var(--panel-strong) 14%, white 86%);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
@@ -619,13 +619,13 @@
   }
 
   .feedback-error {
-    border-color: rgba(161, 78, 56, 0.2);
-    background: rgba(255, 241, 236, 0.9);
+    border-color: var(--danger-border);
+    background: color-mix(in srgb, var(--danger-soft) 72%, var(--surface-card));
   }
 
   .feedback-success {
-    border-color: rgba(15, 141, 96, 0.2);
-    background: rgba(241, 250, 244, 0.92);
+    border-color: var(--accent-border);
+    background: color-mix(in srgb, var(--accent-soft) 72%, var(--surface-card));
   }
 
   .plain-list {
@@ -641,8 +641,8 @@
     gap: 0.45rem;
     padding: 0.8rem;
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(119, 103, 77, 0.14);
+    background: var(--surface-card-soft);
+    border: 1px solid var(--line);
   }
 
   pre {
@@ -655,15 +655,15 @@
   }
 
   .mini-pill-success {
-    color: rgba(15, 102, 69, 1);
-    border-color: rgba(15, 141, 96, 0.24);
-    background: rgba(15, 141, 96, 0.08);
+    color: var(--accent-ink);
+    border-color: var(--accent-border);
+    background: var(--accent-soft);
   }
 
   .mini-pill-warm {
-    color: rgba(143, 84, 33, 1);
-    border-color: rgba(143, 84, 33, 0.24);
-    background: rgba(143, 84, 33, 0.08);
+    color: var(--warning-ink);
+    border-color: var(--warning-border);
+    background: var(--warning-soft);
   }
 
   @media (max-width: 980px) {

@@ -199,8 +199,8 @@
     margin-bottom: 1rem;
     padding: 0.92rem 1rem;
     border-radius: var(--radius-xl);
-    border: 1px solid rgba(15, 141, 96, 0.18);
-    background: linear-gradient(180deg, rgba(239, 248, 243, 0.88), rgba(255, 252, 246, 0.94));
+    border: 1px solid var(--accent-border);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 88%, var(--surface-hero)), var(--surface-overlay));
     box-shadow: var(--shadow-soft);
   }
 
@@ -217,8 +217,8 @@
     width: fit-content;
     border-radius: 999px;
     padding: 0.35rem 0.68rem;
-    border: 1px solid rgba(15, 141, 96, 0.2);
-    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--accent-border);
+    background: var(--surface-interactive);
     color: var(--muted-soft);
     font-size: 0.78rem;
     box-shadow: var(--shadow-soft);
@@ -255,7 +255,7 @@
     height: 2.05rem;
     border-radius: 0.9rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
+    background: var(--surface-interactive);
     color: var(--muted-soft);
   }
 
@@ -291,7 +291,7 @@
     padding: 0.88rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
+    background: var(--surface-card);
     box-shadow: var(--shadow-soft);
   }
 
@@ -314,7 +314,7 @@
     padding: 0.31rem 0.6rem;
     font-size: 0.75rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--surface-interactive);
   }
 
   .task-id {
@@ -324,7 +324,7 @@
 
   .chip-danger {
     background: var(--danger-soft);
-    border-color: rgba(151, 45, 45, 0.22);
+    border-color: var(--danger-border);
   }
 
   .detail-grid {

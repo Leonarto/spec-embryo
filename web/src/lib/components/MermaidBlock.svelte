@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   const MIN_ZOOM = 0.3;
   const MAX_ZOOM = 2.2;
   const ZOOM_STEP = 0.2;
@@ -9,6 +11,7 @@
   let error = $state<string | null>(null);
   let isRendering = $state(true);
   let zoom = $state(1);
+  let activeTheme = $state("dark");
 
   function clampZoom(next: number): number {
     return Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Number.parseFloat(next.toFixed(2))));
@@ -36,20 +39,22 @@
 
     try {
       const mermaid = (await import("mermaid")).default;
+      const styles = getComputedStyle(document.documentElement);
+      const readVar = (name: string, fallback: string) => styles.getPropertyValue(name).trim() || fallback;
       mermaid.initialize({
         startOnLoad: false,
         theme: "base",
         themeVariables: {
-          primaryColor: "#f5f0e6",
-          primaryBorderColor: "#2e6a52",
-          primaryTextColor: "#1d271f",
-          lineColor: "#2e6a52",
-          tertiaryColor: "#fffdf8",
-          background: "#fffdf8",
-          mainBkg: "#f8f2e8",
-          nodeBorder: "#2e6a52",
-          clusterBkg: "#f7f4ed",
-          clusterBorder: "#c9bcaa",
+          primaryColor: readVar("--mermaid-node-fill", "#f5f0e6"),
+          primaryBorderColor: readVar("--mermaid-node-border", "#2e6a52"),
+          primaryTextColor: readVar("--mermaid-node-text", "#1d271f"),
+          lineColor: readVar("--mermaid-line", "#2e6a52"),
+          tertiaryColor: readVar("--mermaid-surface", "#fffdf8"),
+          background: readVar("--mermaid-surface", "#fffdf8"),
+          mainBkg: readVar("--mermaid-main-bg", "#f8f2e8"),
+          nodeBorder: readVar("--mermaid-node-border", "#2e6a52"),
+          clusterBkg: readVar("--mermaid-cluster-bg", "#f7f4ed"),
+          clusterBorder: readVar("--mermaid-cluster-border", "#c9bcaa"),
           fontFamily: "var(--body-font)",
         },
         flowchart: {
@@ -71,7 +76,23 @@
     }
   }
 
+  onMount(() => {
+    activeTheme = document.documentElement.dataset.theme || "dark";
+
+    const observer = new MutationObserver(() => {
+      activeTheme = document.documentElement.dataset.theme || "dark";
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  });
+
   $effect(() => {
+    activeTheme;
     void renderDiagram(source);
   });
 </script>
@@ -118,12 +139,12 @@
     gap: 0.85rem;
     padding: 0.9rem;
     border-radius: calc(var(--radius-lg) - 0.15rem);
-    border: 1px solid rgba(46, 106, 82, 0.18);
+    border: 1px solid var(--accent-border);
     background:
-      linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(247, 242, 233, 0.95)),
-      radial-gradient(circle at top left, rgba(46, 106, 82, 0.07), transparent 48%);
+      linear-gradient(180deg, var(--surface-overlay), var(--surface-card-soft)),
+      radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 10%, transparent), transparent 48%);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 1px 0 var(--inset-highlight),
       0 18px 40px rgba(34, 28, 20, 0.08);
   }
 
@@ -156,9 +177,9 @@
   .diagram-kind {
     padding: 0.28rem 0.55rem;
     border-radius: 999px;
-    border: 1px solid rgba(46, 106, 82, 0.24);
-    color: #20674c;
-    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-ink);
+    background: var(--surface-interactive);
     box-shadow: 0 0 16px rgba(46, 106, 82, 0.12);
   }
 
@@ -168,11 +189,11 @@
 
   .control-button,
   .control-readout {
-    border: 1px solid rgba(46, 106, 82, 0.2);
-    background: rgba(255, 255, 255, 0.74);
-    color: #1d271f;
+    border: 1px solid var(--accent-border);
+    background: var(--surface-interactive);
+    color: var(--ink);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      inset 0 1px 0 var(--inset-highlight),
       0 0 18px rgba(46, 106, 82, 0.08);
   }
 
@@ -217,7 +238,7 @@
     max-height: 38rem;
     padding: 0.2rem 0.1rem 0.1rem;
     border-radius: 0.9rem;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(250, 245, 236, 0.62));
+    background: linear-gradient(180deg, var(--surface-card-subtle), var(--surface-card-soft));
   }
 
   .diagram-canvas {
@@ -248,8 +269,8 @@
     overflow-x: auto;
     padding: 0.9rem;
     border-radius: 0.9rem;
-    background: rgba(36, 33, 28, 0.96);
-    color: rgba(245, 238, 225, 0.92);
+    background: color-mix(in srgb, var(--panel-strong) 96%, black 4%);
+    color: var(--code-ink);
     font-size: 0.85rem;
     line-height: 1.55;
   }

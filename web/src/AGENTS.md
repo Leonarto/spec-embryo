@@ -13,3 +13,4 @@ This source tree is for the SvelteKit UI layer only.
 - Keep the navigation rail compact in spacing but wide enough for labels and icons to avoid truncation or overflow.
 - Keep the visual language consistent across routes.
 - Preserve independent left-rail and main-pane scrolling on desktop.
+- Route- and component-level theme styling should consume shared tokens from `app.css`; avoid reintroducing raw light-only colors into route styles once a token exists.

@@ -130,7 +130,7 @@
     padding: 0.48rem 0.54rem;
     border-radius: 0.98rem;
     border: 1px solid transparent;
-    background: rgba(255, 255, 255, 0.04);
+    background: color-mix(in srgb, var(--surface-card-soft) 34%, transparent);
     color: inherit;
     text-align: left;
     cursor: pointer;

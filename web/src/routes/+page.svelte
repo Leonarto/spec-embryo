@@ -375,7 +375,7 @@
     height: 2.2rem;
     border-radius: 0.95rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
+    background: var(--surface-interactive);
     color: var(--muted-soft);
     flex-shrink: 0;
   }
@@ -383,7 +383,7 @@
   .icon-soft {
     width: 2rem;
     height: 2rem;
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--surface-card-soft);
   }
 
   .hero-copy,
@@ -410,7 +410,7 @@
     border-radius: 999px;
     padding: 0.34rem 0.65rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--surface-interactive);
     font-size: 0.75rem;
     box-shadow: var(--shadow-soft);
   }
@@ -420,7 +420,7 @@
   }
 
   .stats-card {
-    background: linear-gradient(180deg, var(--panel-strong), rgba(248, 242, 233, 0.92));
+    background: linear-gradient(180deg, var(--surface-hero), var(--surface-card-soft));
   }
 
   .stats-grid {
@@ -431,7 +431,7 @@
     padding: 0.8rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.78);
+    background: var(--surface-card-soft);
   }
 
   .stats-grid strong {
@@ -458,7 +458,7 @@
     display: grid;
     gap: 0.75rem;
     padding: 0.9rem;
-    background: rgba(255, 255, 255, 0.58);
+    background: var(--surface-card-subtle);
     box-shadow: var(--shadow-soft);
   }
 
@@ -483,7 +483,7 @@
     padding: 0.75rem 0.8rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.62);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 
@@ -495,15 +495,15 @@
   .notes-list li {
     padding: 0.7rem 0.78rem;
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(24, 22, 18, 0.08);
-    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid var(--line);
+    background: var(--surface-card-subtle);
   }
 
   .health-card {
     padding: 0.9rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.76);
+    background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
   }
 

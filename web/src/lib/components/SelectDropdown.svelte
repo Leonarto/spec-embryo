@@ -89,7 +89,7 @@
     padding: 0.72rem 0.84rem;
     border-radius: 1rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.86);
+    background: var(--surface-interactive);
     box-shadow: var(--shadow-soft);
     cursor: pointer;
     transition:
@@ -105,10 +105,10 @@
 
   .dropdown-shell[open] .dropdown-trigger,
   .dropdown-trigger:hover {
-    border-color: rgba(15, 141, 96, 0.2);
-    background: rgba(255, 255, 255, 0.94);
+    border-color: var(--accent-border);
+    background: var(--surface-interactive-hover);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       0 12px 30px rgba(24, 22, 18, 0.08);
   }
 
@@ -169,10 +169,10 @@
     z-index: 15;
     padding: 0.5rem;
     border-radius: 1.05rem;
-    border: 1px solid rgba(24, 22, 18, 0.12);
-    background: rgba(255, 252, 246, 0.98);
+    border: 1px solid var(--line);
+    background: var(--surface-overlay);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       0 22px 50px rgba(24, 22, 18, 0.12);
     backdrop-filter: blur(14px);
   }
@@ -193,7 +193,7 @@
     padding: 0.68rem 0.72rem;
     border-radius: 0.95rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.82);
+    background: var(--surface-card-soft);
     cursor: pointer;
     transition:
       border-color 120ms ease,
@@ -204,14 +204,14 @@
 
   .option-list label:hover {
     transform: translateY(-1px);
-    border-color: rgba(24, 22, 18, 0.16);
+    border-color: var(--line-strong);
   }
 
   .option-list label.selected {
-    border-color: rgba(15, 141, 96, 0.26);
-    background: rgba(15, 141, 96, 0.08);
+    border-color: var(--accent-border);
+    background: var(--accent-soft);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       0 10px 24px rgba(15, 141, 96, 0.08);
   }
 
@@ -230,7 +230,7 @@
     margin-top: 0.12rem;
     border-radius: 999px;
     border: 1px solid var(--line-strong);
-    background: rgba(255, 255, 255, 0.94);
+    background: var(--surface-overlay-soft);
     color: transparent;
     transition:
       background 120ms ease,
@@ -240,9 +240,9 @@
   }
 
   .option-list label.selected .checkbox-mark {
-    border-color: rgba(15, 141, 96, 0.22);
-    background: rgba(15, 141, 96, 0.14);
-    color: #0d6e4b;
+    border-color: var(--accent-border);
+    background: var(--accent-strong-soft);
+    color: var(--accent-ink);
     box-shadow: 0 0 14px rgba(15, 141, 96, 0.12);
   }
 

@@ -226,8 +226,8 @@
   }
 
   .spec-card.selected {
-    border-color: rgba(15, 141, 96, 0.22);
-    background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(239, 248, 243, 0.9));
+    border-color: var(--accent-border);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 88%, var(--surface-overlay)), var(--surface-card));
   }
 
   .card-head,
@@ -287,9 +287,9 @@
     border-radius: 999px;
     padding: 0.18rem 0.48rem;
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--surface-interactive);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+      0 0 0 1px var(--inset-highlight) inset,
       var(--pill-glow, var(--shadow-soft));
     font-size: 0.71rem;
     line-height: 1.1;
@@ -310,13 +310,13 @@
     height: 0.72rem;
     border-radius: 999px;
     overflow: hidden;
-    background: rgba(24, 22, 18, 0.08);
+    background: var(--neutral-soft);
   }
 
   .progress-bar {
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(15, 141, 96, 0.78), rgba(15, 141, 96, 0.36));
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 88%, white 12%), var(--accent-soft));
   }
 
   .progress-grid,
@@ -331,64 +331,64 @@
   }
 
   .mini-pill.neutral {
-    border-color: rgba(24, 22, 18, 0.1);
-    background: rgba(255, 255, 255, 0.82);
+    border-color: var(--neutral-strong-soft);
+    background: var(--surface-card-soft);
     --pill-glow: 0 10px 20px rgba(24, 22, 18, 0.05);
   }
 
   .status.active {
-    color: #0d6e4b;
-    border-color: rgba(15, 141, 96, 0.2);
-    background: rgba(15, 141, 96, 0.14);
+    color: var(--accent-ink);
+    border-color: var(--accent-border);
+    background: var(--accent-strong-soft);
     --pill-glow: 0 0 16px rgba(15, 141, 96, 0.14);
   }
 
   .status.proposed {
-    color: #3456a0;
-    border-color: rgba(70, 107, 202, 0.2);
-    background: rgba(70, 107, 202, 0.12);
+    color: var(--info-ink);
+    border-color: var(--info-strong-soft);
+    background: var(--info-soft);
     --pill-glow: 0 0 16px rgba(70, 107, 202, 0.12);
   }
 
   .status.paused {
-    color: #755733;
-    border-color: rgba(125, 96, 58, 0.22);
-    background: rgba(125, 96, 58, 0.14);
+    color: var(--warning-ink);
+    border-color: var(--warning-border);
+    background: var(--warning-soft);
     --pill-glow: 0 0 16px rgba(125, 96, 58, 0.12);
   }
 
   .status.done {
-    color: #0c6d4a;
-    border-color: rgba(17, 122, 84, 0.18);
-    background: rgba(17, 122, 84, 0.12);
+    color: var(--accent-ink);
+    border-color: var(--accent-border);
+    background: var(--accent-soft);
     --pill-glow: 0 0 16px rgba(17, 122, 84, 0.1);
   }
 
   .status.archived {
-    color: #6e5434;
-    border-color: rgba(117, 92, 58, 0.18);
-    background: rgba(117, 92, 58, 0.14);
+    color: var(--neutral-ink);
+    border-color: var(--neutral-strong-soft);
+    background: var(--neutral-soft);
     --pill-glow: 0 0 16px rgba(117, 92, 58, 0.1);
   }
 
   .status-pill.review {
-    color: #8f5421;
-    border-color: rgba(143, 84, 33, 0.22);
-    background: rgba(143, 84, 33, 0.14);
+    color: var(--warning-ink);
+    border-color: var(--warning-border);
+    background: var(--warning-soft);
     --pill-glow: 0 0 16px rgba(143, 84, 33, 0.14);
   }
 
   .status-pill.blocked {
-    color: #8d2d2d;
-    border-color: rgba(151, 45, 45, 0.22);
-    background: rgba(151, 45, 45, 0.12);
+    color: var(--danger-ink);
+    border-color: var(--danger-border);
+    background: var(--danger-soft);
     --pill-glow: 0 0 16px rgba(151, 45, 45, 0.14);
   }
 
   .status-pill.todo {
-    color: #5d5549;
-    border-color: rgba(84, 78, 67, 0.14);
-    background: rgba(84, 78, 67, 0.1);
+    color: var(--neutral-ink);
+    border-color: var(--neutral-strong-soft);
+    background: var(--neutral-soft);
     --pill-glow: 0 0 14px rgba(84, 78, 67, 0.08);
   }
 
@@ -400,7 +400,7 @@
     padding: 0.9rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px dashed var(--line-strong);
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--surface-card-subtle);
   }
 
   @media (max-width: 900px) {
