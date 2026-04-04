@@ -114,7 +114,7 @@ describe("detail service", () => {
 
     try {
       await initializeProject(rootDir);
-      const taskFile = join(rootDir, "docs/spm/tasks/TASK-001-bootstrap-cli.md");
+      const taskFile = join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md");
       const raw = await readFile(taskFile, "utf8");
 
       await writeFile(

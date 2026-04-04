@@ -43,6 +43,30 @@ describe("adoption guidance", () => {
     expect(guidance.remainingWork.some((item) => item.includes("Legacy docs"))).toBe(true);
   });
 
+  test("strongly orients agents away from treating scaffold as literal product work", () => {
+    const guidance = buildAdoptionGuidance({
+      adoption: createInspection({
+        state: "adopted",
+        findings: ["The managed memory home is already present."],
+      }),
+      memoryDir: "docs/spm",
+      doctorFindings: [
+        {
+          severity: "warning",
+          code: "seed-scaffold-present",
+          message: "The repo still contains onboarding scaffold docs.",
+        },
+      ],
+      seedScaffoldDetected: true,
+      commandContext: "doctor",
+    });
+
+    expect(guidance.overview).toContain("onboarding scaffold");
+    expect(guidance.agentOrientation.some((item) => item.includes("It is not the adopted repo's product direction"))).toBe(true);
+    expect(guidance.remainingWork[0]).toContain("temporary orientation");
+    expect(guidance.recommendedCommands.some((item) => item.command.includes("spm spec import-prompt"))).toBe(true);
+  });
+
   test("includes doctor-driven cleanup guidance for partially adopted repos", () => {
     const doctorFindings: DoctorFinding[] = [
       {

@@ -13,11 +13,13 @@ describe("doctor service", () => {
       await initializeProject(rootDir);
       const report = await buildDoctorReport(rootDir);
 
-      expect(report.summary.overall).toBe("healthy");
+      expect(report.summary.overall).toBe("needs-attention");
       expect(report.adoption.state).toBe("adopted");
       expect(report.config.valid).toBe(true);
       expect(report.summary.blockingCount).toBe(0);
-      expect(report.summary.warningCount).toBe(0);
+      expect(report.summary.warningCount).toBe(1);
+      expect(report.findings.some((finding) => finding.code === "seed-scaffold-present")).toBe(true);
+      expect(report.guidance.agentOrientation.some((item) => item.includes("not the adopted repo's product direction"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -28,7 +30,7 @@ describe("doctor service", () => {
 
     try {
       await initializeProject(rootDir);
-      const taskFile = join(rootDir, "docs", "spm", "tasks", "TASK-001-bootstrap-cli.md");
+      const taskFile = join(rootDir, "docs", "spm", "tasks", "TASK-001-inventory-the-real-project-direction-and-existing-docs.md");
       const taskRaw = await Bun.file(taskFile).text();
       await writeFile(taskFile, taskRaw.replace('spec_ids = ["SPEC-001"]', 'spec_ids = ["SPEC-999"]'), "utf8");
 

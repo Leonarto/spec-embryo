@@ -227,6 +227,16 @@ function validateCurrentStateLinks(currentState: CurrentStateDocument | undefine
   return findings;
 }
 
+function detectSeedScaffold(currentState: CurrentStateDocument | undefined, specs: SpecDocument[], tasks: TaskDocument[]): boolean {
+  const hasSeedTag = (tags: string[]) => tags.includes("seed");
+
+  return Boolean(
+    (currentState && hasSeedTag(currentState.tags)) ||
+      specs.some((spec) => hasSeedTag(spec.tags)) ||
+      tasks.some((task) => hasSeedTag(task.tags)),
+  );
+}
+
 export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> {
   const configFile = join(rootDir, ".specpm", "config.toml");
   const configExists = await pathExists(configFile);
@@ -352,6 +362,18 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
 
   findings.push(...validateSpecTaskLinks(specsResult.documents, tasksResult.documents));
   findings.push(...validateCurrentStateLinks(currentState, specsResult.documents, tasksResult.documents));
+  const seedScaffoldDetected = detectSeedScaffold(currentState, specsResult.documents, tasksResult.documents);
+
+  if (seedScaffoldDetected) {
+    pushFinding(
+      findings,
+      "warning",
+      "seed-scaffold-present",
+      "The managed memory still contains onboarding scaffold docs meant to orient adoption, not the adopted repo's literal product roadmap.",
+      config ? paths.specsDir : undefined,
+      "Replace or archive the scaffold once the repo's real specs, tasks, and current state are explicit.",
+    );
+  }
 
   if (config && specsResult.documents.length === 0) {
     pushFinding(
@@ -380,6 +402,7 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     memoryDir: config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm",
     doctorFindings: findings,
     commandContext: "doctor",
+    seedScaffoldDetected,
   });
 
   return {
@@ -431,6 +454,9 @@ export function renderDoctorReport(report: DoctorReport): string {
     "",
     "Adoption summary:",
     `- ${report.guidance.overview}`,
+    "",
+    "Agent orientation:",
+    ...report.guidance.agentOrientation.map((item) => `- ${item}`),
     "",
     "What was found:",
     ...report.guidance.whatFound.map((item) => `- ${item}`),

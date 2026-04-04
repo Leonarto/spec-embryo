@@ -27,6 +27,7 @@ import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-question
 import {
   createConfigToml,
   createCurrentStateTemplate,
+  createSeedCurrentStateTemplate,
   createSeedSpecTemplate,
   createSeedTaskTemplates,
   createSkillsReadme,
@@ -349,20 +350,36 @@ export async function initializeProject(
     ensureDir(paths.skillsDir),
   ]);
 
+  const existingSpecFiles = await listMarkdownFiles(paths.specsDir);
+  const existingTaskFiles = await listMarkdownFiles(paths.tasksDir);
+  const shouldSeedAdoptionScaffold = existingSpecFiles.length === 0 && existingTaskFiles.length === 0;
+
   const files: Array<{ path: string; content: string }> = [
     { path: paths.configFile, content: createConfigToml(projectName, memoryDir) },
-    { path: paths.stateFile, content: createCurrentStateTemplate(timestamp) },
-    { path: join(paths.specsDir, "SPEC-001-deterministic-local-first-core.md"), content: createSeedSpecTemplate(timestamp) },
-    ...createSeedTaskTemplates(timestamp).map((item) => ({
-      path: join(paths.tasksDir, item.name),
-      content: item.content,
-    })),
+    {
+      path: paths.stateFile,
+      content: shouldSeedAdoptionScaffold
+        ? createSeedCurrentStateTemplate(projectName, timestamp)
+        : createCurrentStateTemplate(timestamp),
+    },
     { path: join(paths.skillsDir, "README.md"), content: createSkillsReadme() },
     ...createTemplateFiles().map((item) => ({
       path: join(paths.templatesDir, item.name),
       content: item.content,
     })),
   ];
+
+  if (shouldSeedAdoptionScaffold) {
+    files.splice(
+      2,
+      0,
+      { path: join(paths.specsDir, "SPEC-001-adopt-spec-embryo-memory-for-this-repository.md"), content: createSeedSpecTemplate(projectName, timestamp) },
+      ...createSeedTaskTemplates(projectName, timestamp).map((item) => ({
+        path: join(paths.tasksDir, item.name),
+        content: item.content,
+      })),
+    );
+  }
 
   for (const file of files) {
     if (options?.force || !(await pathExists(file.path))) {

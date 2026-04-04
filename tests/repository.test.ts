@@ -29,7 +29,7 @@ describe("repository status updates", () => {
       expect(spec.status).toBe("done");
       expect(spec.updatedAt).toBeDefined();
       expect(raw).toContain('status = "done"');
-      expect(raw).toContain("# Problem");
+      expect(raw).toContain("# Purpose");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -108,7 +108,7 @@ describe("repository status updates", () => {
       });
 
       const specRaw = await readFile(spec.filePath, "utf8");
-      const taskRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-002-deterministic-resume.md"), "utf8");
+      const taskRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-002-create-or-import-the-first-real-project-spec.md"), "utf8");
 
       expect(spec.id).toBe("SPEC-002");
       expect(spec.filePath.endsWith("SPEC-002-add-structured-current-state-updates.md")).toBe(true);
@@ -137,7 +137,7 @@ describe("repository status updates", () => {
       });
 
       const taskRaw = await readFile(task.filePath, "utf8");
-      const specRaw = await readFile(join(rootDir, "docs/spm/specs/SPEC-001-deterministic-local-first-core.md"), "utf8");
+      const specRaw = await readFile(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md"), "utf8");
 
       expect(task.id).toBe("TASK-004");
       expect(task.filePath.endsWith("TASK-004-create-spec-docs-from-the-cli.md")).toBe(true);
@@ -187,8 +187,28 @@ describe("repository status updates", () => {
     try {
       await initializeProject(rootDir);
 
-      const seedRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-bootstrap-cli.md"), "utf8");
+      const seedRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md"), "utf8");
       expect(seedRaw).toContain("created_at = ");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("does not reseed onboarding specs and tasks into an already adopted repo", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      await createSpec(rootDir, {
+        title: "Real project spec",
+        summary: "A project-specific spec should prevent reseeding scaffold.",
+      });
+
+      await initializeProject(rootDir);
+
+      expect(await Bun.file(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md")).exists()).toBe(true);
+      expect(await Bun.file(join(rootDir, "docs/spm/specs/SPEC-003-adopt-spec-embryo-memory-for-this-repository.md")).exists()).toBe(false);
+      expect(await Bun.file(join(rootDir, "docs/spm/tasks/TASK-005-inventory-the-real-project-direction-and-existing-docs.md")).exists()).toBe(false);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
