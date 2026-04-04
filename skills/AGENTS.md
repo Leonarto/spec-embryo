@@ -8,3 +8,4 @@ This folder holds repo-local skills and agent-facing guidance.
 - When the workflow changes, update the skill in the same change.
 - `spm-self-hosting/` is the skill for using Spec Embryo recursively on this repo itself.
 - `spec-writer/` and `spec-reviewer/` govern the required spec authoring loop for substantive specs in this repo.
+- `publish/` governs deterministic npm release preparation and should stop before the final `bun publish` handoff to the user.

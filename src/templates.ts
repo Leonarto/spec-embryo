@@ -14,6 +14,15 @@ specs_dir = ${JSON.stringify(managed.specsDir)}
 tasks_dir = ${JSON.stringify(managed.tasksDir)}
 skills_dir = ${JSON.stringify(managed.skillsDir)}
 
+[agents]
+context_window_tokens = 400000
+root_target_ratio = 0.00225
+root_hard_cap_ratio = 0.003
+chain_target_ratio = 0.0045
+chain_hard_cap_ratio = 0.0055
+absolute_root_hard_cap = 4000
+absolute_chain_hard_cap = 8000
+
 [defaults]
 resume_backend = "deterministic"
 

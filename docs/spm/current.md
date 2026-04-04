@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-010 is complete: init now classifies adoption state, doctor validates repo-memory health read-only, and both expose deterministic migration and first-week guidance for humans and agents."
-focus = "Choose the next post-adoption product slice"
+summary = "AGENTS budgets now derive from project-standard context ratios in .specpm/config.toml, defaulting to a 400000-token GPT-5/Codex context assumption."
+focus = "Choose the next post-budgeting product slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Use the new adoption workflow against an external repo to pressure-test it.", "Pick the next spec based on external adoption friction, not internal polish alone.", "Keep future adoption flexibility config-driven so canonical defaults stay reliable."]
+next_action_hints = ["Verify external repos behave well with the new AGENTS budget config.", "Decide whether AGENTS budget editing should get dedicated CLI flows.", "Consider adding model/profile presets beyond the default GPT-5/Codex-sized context assumption."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-03T19:10:40.022Z"
+updated_at = "2026-04-04T00:21:03.020Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

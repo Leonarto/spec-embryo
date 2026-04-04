@@ -108,4 +108,34 @@ describe("detail service", () => {
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("preserves fenced mermaid blocks in detail body sections", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-details-"));
+
+    try {
+      await initializeProject(rootDir);
+      const taskFile = join(rootDir, "docs/spm/tasks/TASK-001-bootstrap-cli.md");
+      const raw = await readFile(taskFile, "utf8");
+
+      await writeFile(
+        taskFile,
+        `${raw.trim()}\n\n## Flow\n\n\`\`\`mermaid\nflowchart TD\n  A[Start] --> B[Resume]\n\`\`\`\n`,
+      );
+
+      const detail = await buildTaskDetailData(rootDir, "TASK-001");
+
+      expect(detail.found).toBe(true);
+      if (!detail.found) {
+        return;
+      }
+
+      const flowSection = detail.bodySections.find((section) => section.heading === "Flow");
+      expect(flowSection).toBeDefined();
+      expect(flowSection?.blocks[0]?.kind).toBe("code");
+      expect(flowSection?.blocks[0]?.language).toBe("mermaid");
+      expect(flowSection?.blocks[0]?.lines.join("\n")).toContain("flowchart TD");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });

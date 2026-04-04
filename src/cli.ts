@@ -75,8 +75,11 @@ export function helpText(): string {
   return `spec-embryo
 
 Usage:
+  spec-embryo --version
+  spm --version
   spec-embryo init [--force] [--home docs] [--standalone] [--json]
   spm init [--force] [--home docs] [--standalone] [--json]
+  spm version
   spm reshape [--home docs] [--dry-run]
   spm doctor [--json]
   spm status [--json]

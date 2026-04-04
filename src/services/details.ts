@@ -11,8 +11,9 @@ import { deriveEffectiveStatus, type DashboardTaskCard } from "./dashboard.ts";
 import { parseSpecQuestionSections } from "./spec-questions.ts";
 
 export interface DocumentBodyBlock {
-  kind: "paragraph" | "list";
+  kind: "paragraph" | "list" | "code";
   lines: string[];
+  language?: string;
 }
 
 export interface DocumentBodySection {
@@ -225,6 +226,8 @@ function parseDocumentBody(body: string): DocumentBodySection[] {
   let currentSection: DocumentBodySection | undefined;
   let paragraph: string[] = [];
   let list: string[] = [];
+  let codeFenceLanguage: string | undefined;
+  let codeLines: string[] = [];
 
   function ensureSection(): DocumentBodySection {
     if (!currentSection) {
@@ -263,13 +266,49 @@ function parseDocumentBody(body: string): DocumentBodySection[] {
     list = [];
   }
 
+  function flushCode() {
+    if (codeLines.length === 0) {
+      codeFenceLanguage = undefined;
+      return;
+    }
+
+    ensureSection().blocks.push({
+      kind: "code",
+      lines: [...codeLines],
+      language: codeFenceLanguage,
+    });
+    codeLines = [];
+    codeFenceLanguage = undefined;
+  }
+
   for (const line of normalized.split("\n")) {
     const trimmed = line.trim();
+
+    if (codeFenceLanguage !== undefined) {
+      if (trimmed.startsWith("```")) {
+        flushCode();
+        continue;
+      }
+
+      codeLines.push(line);
+      continue;
+    }
+
+    const fenceMatch = trimmed.match(/^```([\w-]+)?\s*$/);
+    if (fenceMatch) {
+      flushParagraph();
+      flushList();
+      codeFenceLanguage = fenceMatch[1]?.trim().toLowerCase() || "";
+      codeLines = [];
+      continue;
+    }
+
     const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
 
     if (headingMatch) {
       flushParagraph();
       flushList();
+      flushCode();
       currentSection = {
         heading: headingMatch[2]!.trim(),
         depth: headingMatch[1]!.length,
@@ -297,6 +336,7 @@ function parseDocumentBody(body: string): DocumentBodySection[] {
 
   flushParagraph();
   flushList();
+  flushCode();
   return sections;
 }
 

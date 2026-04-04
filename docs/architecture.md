@@ -19,6 +19,7 @@ This keeps the repo-native memory system stable even as future interfaces evolve
 The repo is the source of truth. V1 uses:
 
 - `.specpm/config.toml` for tool configuration and backend settings
+- `.specpm/config.toml` also holds the project-standard AGENTS context-budget policy
 - `docs/spm/` or `spm/` as the managed memory home
 - `<memory-home>/current.md` for explicit current state
 - `<memory-home>/handoffs/*.md` for durable handoff checkpoints
@@ -142,6 +143,17 @@ The first local visual server lives under `web/` and is launched through `spm ui
 - The UI is mostly read-only in v1, with a narrow deterministic mutation path for answering spec open questions.
 - The first mutation flow lives on spec detail pages: users can answer open questions in batch, write those answers back into the spec deterministically, and receive continuation guidance without turning the web app into a second source of truth.
 - The web layer should remain a view over repo memory, not a replacement source of truth.
+
+## AGENTS budget policy
+
+AGENTS sizing is now project-configured instead of being only hardcoded in the checker.
+
+- `.specpm/config.toml` defines the standard `context_window_tokens` for the project.
+- Root and chain AGENTS budgets are derived from context-ratio settings.
+- Folder-local AGENTS budgets are scaled from the root budget by deterministic multipliers in the AGENTS service.
+- Absolute hard caps still exist so a large configured context window does not automatically justify bloated always-on instructions.
+
+This keeps AGENTS policy stable for everyone in the repo without forcing user-specific edits whenever an individual changes models.
 
 ## Execution modes
 

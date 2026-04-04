@@ -7,3 +7,4 @@ Shared web-ui helpers and components live here.
 - Shared analytical controls should stay consistent across Specs, Gantt, and future detail views.
 - Keep shared detail-page presentation helpers here once both spec and task routes need them.
 - Shared dropdown controls should behave like overlays anchored to the trigger, not expand inline and reflow surrounding layout.
+- Diagram renderers belong here too: treat Mermaid as a view-layer enhancement over fenced blocks parsed in root services, and keep non-Mermaid fenced blocks readable as code.

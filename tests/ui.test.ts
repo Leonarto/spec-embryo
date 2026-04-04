@@ -13,11 +13,23 @@ function parsedWithFlags(flags: Map<string, string | boolean>): ParsedArgs {
 
 describe("ui service", () => {
   test("resolves the default launch config", async () => {
-    const config = await resolveUiLaunchConfig(process.cwd(), parsedWithFlags(new Map()));
+    const config = await resolveUiLaunchConfig(process.cwd(), parsedWithFlags(new Map()), {
+      portProbe: async () => true,
+    });
 
     expect(config.host).toBe("127.0.0.1");
     expect(config.port).toBe(4173);
+    expect(config.requestedPort).toBe(4173);
     expect(config.webDir.endsWith("/web")).toBe(true);
+  });
+
+  test("falls forward to the next available port when the requested port is busy", async () => {
+    const config = await resolveUiLaunchConfig(process.cwd(), parsedWithFlags(new Map()), {
+      portProbe: async (_host, port) => port !== 4173,
+    });
+
+    expect(config.requestedPort).toBe(4173);
+    expect(config.port).toBe(4174);
   });
 
   test("rejects invalid ports", async () => {

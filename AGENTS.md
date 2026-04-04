@@ -31,19 +31,18 @@ Core layers:
 - When working on the Spec Embryo repo itself, use the repo-local skill at `skills/spm-self-hosting/SKILL.md`.
 - When `spm` already provides the needed project-memory view, use the CLI before falling back to raw file inspection.
 - When touching the local dashboard, keep `web/` as a read-only view over shared deterministic services rather than inventing web-only parsing or state.
-- When authoring or materially revising a spec, use `skills/spec-writer/SKILL.md`, iterate the core decisions with the human user, then use `skills/spec-reviewer/SKILL.md` and fix the spec before finalizing it.
+- When authoring or materially revising a spec, use `skills/spec-writer/SKILL.md`, iterate key decisions with the user, then use `skills/spec-reviewer/SKILL.md` and fix the spec before finalizing it.
+- For npm releases of `@leonarto/spec-embryo`, use `skills/publish/SKILL.md` and stop before final `bun publish`; hand the exact command to the user for 2FA.
 - Treat `review` as a real gate for tasks. If review finds issues, keep the task in `review` or move it back to active work; use `done` only after the findings are fixed.
 - After review fixes are in, commit before the next slice so later diffs and reviews stay clean.
 - Keep folder-local `AGENTS.md` files additive. Root policy lives here; nested files should only add local context.
-- If you create a subsystem or folder likely to grow, add a local `AGENTS.md` there early.
+- If you create a growing subsystem or folder, add a local `AGENTS.md` there early.
 - Always aim for at least 80% test coverage overall.
 - Whenever you add or materially change code, add or update tests in the same change unless the code is genuinely untestable and the reason is explicit.
 
 ## Required AGENTS maintenance
 
-After any big chunk of work, update the relevant `AGENTS.md` files before finishing.
-
-Treat work as a big chunk when any of these are true:
+After any big chunk of work, update the relevant `AGENTS.md` files before finishing. Treat work as a big chunk when any of these are true:
 
 - folder purpose changed
 - new commands, schemas, workflows, or invariants were added
@@ -51,22 +50,20 @@ Treat work as a big chunk when any of these are true:
 - more than a few files in one area changed
 - a future agent would likely misunderstand the new shape without fresh local guidance
 
-When updating any `AGENTS.md`, use the repo-local skill at `skills/agents-md-maintainer/SKILL.md`.
-
-If the AGENTS-maintenance workflow, token budgets, or checker behavior changes, update that skill in the same change. Do not let the skill drift from actual practice.
+When updating any `AGENTS.md`, use `skills/agents-md-maintainer/SKILL.md`. If AGENTS maintenance workflow, token budgets, or checker behavior changes, update that skill too.
 
 ## Size and performance policy
 
-There is no single official vendor-prescribed sweet spot for repo instruction files. The practical policy here is inferred from official guidance that longer prompts increase cost and latency, long-context works best when tightly structured, and static instructions should stay concise.
+There is no single vendor-prescribed sweet spot for repo instruction files. Budgets here are approximate and enforced by `bun run check:agents` plus the project policy in `.specpm/config.toml`.
 
-Token budgets here are approximate and enforced by `bun run check:agents` using a simple estimator.
+The current default assumes a `400000` token GPT-5/Codex-sized context window and derives root + chain budgets from context ratios. Folder-local budgets scale from that root policy.
 
-Targets:
+Rules of thumb:
 
-- root `AGENTS.md`: target 600-900 tokens, hard cap 1200
-- scoped folder `AGENTS.md`: target 150-350 tokens, hard cap 500
-- deep leaf `AGENTS.md`: prefer 80-250 tokens
-- cumulative active chain of root + nested `AGENTS.md` for a working path: target under 1800 tokens, hard cap 2200
+- root `AGENTS.md`: keep it concise even if config allows more
+- scoped folder `AGENTS.md`: usually much smaller than root
+- deep leaf `AGENTS.md`: prefer the smallest file that still prevents future confusion
+- do not expand AGENTS files just because the configured context window is larger
 
 Rules:
 
@@ -87,9 +84,7 @@ Before wrapping a change that touched repo structure or instructions:
 - product overview: `README.md`
 - architecture: `docs/architecture.md`
 - current state: `docs/spm/current.md`
-- local visual server: `web/`
 - local AGENTS maintenance skill: `skills/agents-md-maintainer/SKILL.md`
 - local self-hosting skill: `skills/spm-self-hosting/SKILL.md`
 - local spec authoring skills: `skills/spec-writer/SKILL.md`, `skills/spec-reviewer/SKILL.md`
 - AGENTS size checker: `scripts/check-agents.ts`
-- product AGENTS service: `src/services/agents.ts`

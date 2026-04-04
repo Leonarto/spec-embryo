@@ -13,10 +13,16 @@ import { runSpecCommand } from "./commands/spec.ts";
 import { runStatusCommand } from "./commands/status.ts";
 import { runTaskCommand } from "./commands/task.ts";
 import { runUiCommand } from "./commands/ui.ts";
+import { readCliVersion } from "./services/version.ts";
 
 async function main(): Promise<void> {
   const parsed = parseArgs(process.argv.slice(2));
   const rootDir = cwd();
+
+  if (parsed.flags.has("version")) {
+    console.log(await readCliVersion());
+    return;
+  }
 
   if (!parsed.command || parsed.command === "--help" || parsed.command === "help") {
     console.log(helpText());
@@ -58,6 +64,9 @@ async function main(): Promise<void> {
       break;
     case "task":
       output = await runTaskCommand(rootDir, parsed);
+      break;
+    case "version":
+      output = await readCliVersion();
       break;
     default:
       throw new Error(`Unknown command: ${parsed.command}`);

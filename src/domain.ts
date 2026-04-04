@@ -74,6 +74,16 @@ export interface ExecutionBackendConfig {
   args?: string[];
 }
 
+export interface AgentsConfig {
+  contextWindowTokens: number;
+  rootTargetRatio: number;
+  rootHardCapRatio: number;
+  chainTargetRatio: number;
+  chainHardCapRatio: number;
+  absoluteRootHardCap: number;
+  absoluteChainHardCap: number;
+}
+
 export interface ProjectConfig {
   toolVersion: string;
   projectName: string;
@@ -83,6 +93,7 @@ export interface ProjectConfig {
   specsDir: string;
   tasksDir: string;
   skillsDir: string;
+  agents: AgentsConfig;
   defaults: {
     resumeBackend: BackendName;
   };
@@ -200,6 +211,15 @@ function asNumber(value: unknown, field: string, filePath: string, fallback: num
   return fallback;
 }
 
+function asPositiveNumber(value: unknown, field: string, filePath: string, fallback: number): number {
+  const parsed = asNumber(value, field, filePath, fallback);
+  if (parsed > 0) {
+    return parsed;
+  }
+
+  fail(`Expected "${field}" to be a positive number in ${filePath}`);
+}
+
 function asEnum<T extends readonly string[]>(
   value: unknown,
   allowed: T,
@@ -224,6 +244,7 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
   }
 
   const defaults = isRecord(data.defaults) ? data.defaults : {};
+  const agents = isRecord(data.agents) ? data.agents : {};
   const backends = isRecord(data.backends) ? data.backends : {};
   const deterministicBackend = isRecord(backends.deterministic) ? backends.deterministic : {};
   const promptBackend = isRecord(backends.prompt) ? backends.prompt : {};
@@ -239,6 +260,50 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
     specsDir: asString(data.specs_dir, "specs_dir", ".specpm/config.toml", "docs/spm/specs"),
     tasksDir: asString(data.tasks_dir, "tasks_dir", ".specpm/config.toml", "docs/spm/tasks"),
     skillsDir: asString(data.skills_dir, "skills_dir", ".specpm/config.toml", "docs/spm/skills"),
+    agents: {
+      contextWindowTokens: asPositiveNumber(
+        agents.context_window_tokens,
+        "agents.context_window_tokens",
+        ".specpm/config.toml",
+        400_000,
+      ),
+      rootTargetRatio: asPositiveNumber(
+        agents.root_target_ratio,
+        "agents.root_target_ratio",
+        ".specpm/config.toml",
+        0.00225,
+      ),
+      rootHardCapRatio: asPositiveNumber(
+        agents.root_hard_cap_ratio,
+        "agents.root_hard_cap_ratio",
+        ".specpm/config.toml",
+        0.003,
+      ),
+      chainTargetRatio: asPositiveNumber(
+        agents.chain_target_ratio,
+        "agents.chain_target_ratio",
+        ".specpm/config.toml",
+        0.0045,
+      ),
+      chainHardCapRatio: asPositiveNumber(
+        agents.chain_hard_cap_ratio,
+        "agents.chain_hard_cap_ratio",
+        ".specpm/config.toml",
+        0.0055,
+      ),
+      absoluteRootHardCap: asPositiveNumber(
+        agents.absolute_root_hard_cap,
+        "agents.absolute_root_hard_cap",
+        ".specpm/config.toml",
+        4_000,
+      ),
+      absoluteChainHardCap: asPositiveNumber(
+        agents.absolute_chain_hard_cap,
+        "agents.absolute_chain_hard_cap",
+        ".specpm/config.toml",
+        8_000,
+      ),
+    },
     defaults: {
       resumeBackend: asEnum(defaults.resume_backend, BACKEND_NAMES, "defaults.resume_backend", ".specpm/config.toml", "deterministic"),
     },

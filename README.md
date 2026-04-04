@@ -80,6 +80,7 @@ web/
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
 - `doctor`: inspect repo-memory health, adoption state, drift, and broken links without rewriting files.
 - `doctor --json`: return structured findings plus deterministic migration and first-week guidance for agent continuation.
+- `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.
@@ -144,10 +145,16 @@ Spec format details live in [docs/spec-format.md](docs/spec-format.md).
 
 - Root repo guidance lives in [AGENTS.md](AGENTS.md).
 - Growing areas also have local `AGENTS.md` files with folder-specific context.
-- Use `bun run check:agents` after updating those files to keep them concise and fast.
+- Use `bun run check:agents` after updating those files to keep them concise and aligned with the project's configured context window policy.
 - The same logic is available in-product through `bun run spm agents check`.
 - `bun run spm status` includes an AGENTS health summary so instruction drift shows up in normal PM flow.
 - The repo-local AGENTS maintenance skill lives in `skills/agents-md-maintainer/`.
+
+The AGENTS checker now reads `.specpm/config.toml` for project-standard budgets, including:
+
+- `agents.context_window_tokens`
+- root and chain context-ratio targets
+- absolute hard caps that keep the project from drifting into oversized always-on instructions
 
 ## Testing
 
