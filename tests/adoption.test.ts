@@ -39,6 +39,8 @@ describe("adoption guidance", () => {
     });
 
     expect(guidance.overview).toContain("importable");
+    expect(guidance.spmOrientation.whatSpmIs).toContain("local-first CLI");
+    expect(guidance.spmOrientation.whenToUse.length).toBeGreaterThan(0);
     expect(guidance.recommendedCommands.some((item) => item.command.includes("spec import-prompt --source docs"))).toBe(true);
     expect(guidance.remainingWork.some((item) => item.includes("Legacy docs"))).toBe(true);
   });
@@ -62,6 +64,7 @@ describe("adoption guidance", () => {
     });
 
     expect(guidance.overview).toContain("onboarding scaffold");
+    expect(guidance.spmOrientation.deterministicResponsibilities.some((item) => item.includes("doctor findings"))).toBe(true);
     expect(guidance.agentOrientation.some((item) => item.includes("It is not the adopted repo's product direction"))).toBe(true);
     expect(guidance.remainingWork[0]).toContain("temporary orientation");
     expect(guidance.recommendedCommands.some((item) => item.command.includes("spm spec import-prompt"))).toBe(true);

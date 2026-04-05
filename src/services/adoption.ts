@@ -6,8 +6,16 @@ export interface AdoptionCommandSuggestion {
   reason: string;
 }
 
+export interface SpmOrientation {
+  whatSpmIs: string;
+  whyUseIt: string;
+  whenToUse: string[];
+  deterministicResponsibilities: string[];
+}
+
 export interface AdoptionGuidance {
   overview: string;
+  spmOrientation: SpmOrientation;
   agentOrientation: string[];
   whatFound: string[];
   whatChanged: string[];
@@ -52,6 +60,24 @@ export function buildAdoptionGuidance(input: {
   const whatFound = [...input.adoption.findings];
   const whatChanged: string[] = [];
   const remainingWork: string[] = [];
+  const spmOrientation: SpmOrientation = {
+    whatSpmIs:
+      "spm is Spec Embryo's local-first CLI for project memory. It reads and writes the repo's managed specs, tasks, handoffs, and current state so humans and agents share the same file-backed source of truth.",
+    whyUseIt:
+      "Use spm to keep planning state deterministic, repo-native, and visible to both the human and the next agent instead of reconstructing that state from scattered docs or chat history.",
+    whenToUse: [
+      "Use spm when you need to inspect the current managed state of the repo, especially before inventing new workflow assumptions.",
+      "Use spm when you need to create, update, or validate specs, tasks, current state, handoffs, or adoption structure through deterministic rules.",
+      "Use spm when another command already answers the question more reliably than ad hoc file inspection or free-form LLM summarization.",
+    ],
+    deterministicResponsibilities: [
+      "Repo adoption inspection, layout classification, and doctor findings.",
+      "Reading and writing managed current state, specs, tasks, and handoffs.",
+      "Validating frontmatter, links, statuses, and configured managed-memory paths.",
+      "Computing deterministic status, blockers, dependency-derived next actions, and timeline/kanban projections.",
+      "Rendering the built-in UI and surfacing the repo memory that UI reads from local files.",
+    ],
+  };
   const agentOrientation: string[] = [
     "Spec Embryo is local project memory and workflow support for this repository. It is not the adopted repo's product direction.",
     "If init created seed specs or tasks, treat them as temporary onboarding scaffolding and replace them with project-specific memory as soon as you understand the real project.",
@@ -166,6 +192,7 @@ export function buildAdoptionGuidance(input: {
           : input.adoption.state === "partially-adopted"
             ? "This repo shows partial Spec Embryo signals and needs cleanup before the workflow becomes fully trustworthy."
             : "This repo is fresh to Spec Embryo and now needs its first real spec/task/current-state content.",
+    spmOrientation,
     agentOrientation,
     whatFound,
     whatChanged,
@@ -179,6 +206,16 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
   return [
     "Adoption summary:",
     `- ${guidance.overview}`,
+    "",
+    "What spm is:",
+    `- ${guidance.spmOrientation.whatSpmIs}`,
+    `- ${guidance.spmOrientation.whyUseIt}`,
+    "",
+    "When to use spm:",
+    ...guidance.spmOrientation.whenToUse.map((item) => `- ${item}`),
+    "",
+    "Let spm handle these deterministic responsibilities:",
+    ...guidance.spmOrientation.deterministicResponsibilities.map((item) => `- ${item}`),
     "",
     "Agent orientation:",
     ...guidance.agentOrientation.map((item) => `- ${item}`),

@@ -4,9 +4,9 @@ id = "SPEC-010"
 title = "External repo adoption and doctor workflow"
 summary = "Define how Spec Embryo should help existing repositories adopt the managed memory model, detect drift, and surface the next deterministic cleanup actions."
 status = "done"
-task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038"]
+task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038", "TASK-039"]
 tags = ["adoption", "doctor", "workflow"]
-updated_at = "2026-04-04T16:24:27.648Z"
+updated_at = "2026-04-05T00:32:37.959Z"
 +++
 
 # Problem
@@ -157,6 +157,7 @@ This matters because external adoption is the actual product growth path. If ano
   - current-state updates
 - The structured doctor output should also make it easy for an active agent to ask the human whether to proceed with migration instead of assuming permission.
 - Human-readable and JSON adoption/doctor output should include explicit agent orientation that says Spec Embryo is workflow support for the adopted repo, not the adopted repo's product direction.
+- Adoption guidance should explicitly explain what `spm` is, when another LLM should use it, and which deterministic responsibilities it can offload to `spm` instead of improvising them in chat.
 - `doctor` should warn when the managed memory still contains onboarding scaffold so another agent does not treat those docs as literal implementation backlog.
 - Adoption output should include a deterministic “first week” sequence tailored to repo state, such as:
   - import legacy specs

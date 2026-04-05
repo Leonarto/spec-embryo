@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-010 is complete again: init now seeds adoption scaffold only for repos with no managed specs/tasks, doctor/init outputs orient agents toward the adopted repo's real product work, and doctor warns when onboarding scaffold is still present."
-focus = "Choose the next product slice after tightening external adoption guidance."
+summary = "SPEC-010 is complete again: init and doctor now explain what spm is, when another LLM should use it, and which deterministic responsibilities the CLI already handles during adoption and ongoing project-memory work."
+focus = "Choose the next product slice after clarifying spm orientation for external-repo agents."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pressure-test the improved init/doctor flow in another external repo with legacy docs.", "Decide the next product slice after this adoption-guidance checkpoint.", "Keep onboarding scaffold explicitly temporary whenever future adoption flows seed repo memory."]
+next_action_hints = ["Pressure-test the improved init/doctor flow in another external repo with legacy docs.", "Decide the next product slice after this adoption-guidance checkpoint.", "Keep telling external agents what spm is and what it deterministically handles whenever adoption surfaces change."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-04T16:24:35.435Z"
+updated_at = "2026-04-05T00:32:47.611Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

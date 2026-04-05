@@ -7,6 +7,7 @@ This folder contains reusable deterministic product services.
 - Dashboard- and timeline-specific shaping should be projections over canonical repo state, never a second state system.
 - Spec section parsing, adoption inspection, doctor findings, and adoption guidance belong here so `init`, `doctor`, and UI flows stay aligned.
 - Adoption guidance must clearly distinguish temporary onboarding scaffold from the adopted repo's real product memory so another agent does not treat seed docs as literal backlog.
+- Adoption guidance should also explain what `spm` is, when it should be used, and which deterministic responsibilities it already handles for the next agent.
 - Doctor-style validation should return structured findings even when some files fail to parse.
 - UI launch helpers must use packaged web assets and choose the first available local port deterministically so multiple repos can run `spm ui` side by side.
 - AGENTS budget logic belongs here too; it should read project-standard context policy from `.specpm/config.toml` rather than baking model assumptions into `AGENTS.md`.
