@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { buildDoctorReport } from "../src/services/doctor.ts";
 import { initializeProject } from "../src/repository.ts";
+import { CLI_VERSION } from "../src/services/version.ts";
 
 describe("doctor service", () => {
   test("reports a healthy adopted repo", async () => {
@@ -20,6 +21,9 @@ describe("doctor service", () => {
       expect(report.summary.warningCount).toBe(1);
       expect(report.findings.some((finding) => finding.code === "seed-scaffold-present")).toBe(true);
       expect(report.guidance.agentOrientation.some((item) => item.includes("not the adopted repo's product direction"))).toBe(true);
+      expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
+      expect(report.directAgentBriefFile).toBe("docs/spm/adoption/direct-agent-brief.md");
+      expect(report.directAgentBrief).toContain("You are helping adopt Spec Embryo into this repository.");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -55,6 +59,26 @@ describe("doctor service", () => {
       expect(report.summary.overall).toBe("blocked");
       expect(report.findings.some((finding) => finding.code === "invalid-config")).toBe(true);
       expect(report.config.valid).toBe(false);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("surfaces when the running CLI is newer than the repo tool version", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-doctor-"));
+
+    try {
+      await initializeProject(rootDir);
+      const configFile = join(rootDir, ".specpm", "config.toml");
+      const configRaw = await Bun.file(configFile).text();
+      await writeFile(configFile, configRaw.replace(`tool_version = "${CLI_VERSION}"`, 'tool_version = "0.1.0"'), "utf8");
+
+      const report = await buildDoctorReport(rootDir);
+
+      expect(report.versions.cliVersion).toBe(CLI_VERSION);
+      expect(report.versions.projectToolVersion).toBe("0.1.0");
+      expect(report.versions.updateAvailable).toBe(true);
+      expect(report.findings.some((finding) => finding.code === "tool-upgrade-available")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

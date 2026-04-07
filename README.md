@@ -75,11 +75,11 @@ web/
 
 ## Command summary
 
-- `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, and creating or completing the managed memory home.
-- `init --json`: return the same adoption classification plus a structured next-step guide for an already-running agent.
+- `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, creating or completing the managed memory home, and writing a repo-local migration guide plus direct-agent-brief file.
+- `init --json`: return the same adoption classification plus a structured next-step guide and direct agent brief that the user can hand to an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
-- `doctor`: inspect repo-memory health, adoption state, drift, and broken links without rewriting files.
-- `doctor --json`: return structured findings plus deterministic migration and first-week guidance for agent continuation.
+- `doctor`: inspect repo-memory health, adoption state, drift, broken links, and recorded tool-version lag without rewriting files, while also emitting a copy-pasteable direct agent brief.
+- `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
@@ -134,6 +134,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Deterministic spec/task creation with automatic back-linking
 - Initial spec/task/current-state templates and seed files
 - Adoption-aware `init` output that classifies fresh, legacy-docs, partial, and already-adopted repos before seeding files
+- Repo-local migration guide and direct-agent-brief artifacts for human-reviewed external adoption
 
 ## Architecture
 

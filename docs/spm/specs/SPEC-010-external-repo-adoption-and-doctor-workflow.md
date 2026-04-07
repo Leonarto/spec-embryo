@@ -4,9 +4,9 @@ id = "SPEC-010"
 title = "External repo adoption and doctor workflow"
 summary = "Define how Spec Embryo should help existing repositories adopt the managed memory model, detect drift, and surface the next deterministic cleanup actions."
 status = "done"
-task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038", "TASK-039"]
+task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038", "TASK-039", "TASK-040", "TASK-041"]
 tags = ["adoption", "doctor", "workflow"]
-updated_at = "2026-04-05T00:32:37.959Z"
+updated_at = "2026-04-07T19:34:21.435Z"
 +++
 
 # Problem
@@ -158,6 +158,24 @@ This matters because external adoption is the actual product growth path. If ano
 - The structured doctor output should also make it easy for an active agent to ask the human whether to proceed with migration instead of assuming permission.
 - Human-readable and JSON adoption/doctor output should include explicit agent orientation that says Spec Embryo is workflow support for the adopted repo, not the adopted repo's product direction.
 - Adoption guidance should explicitly explain what `spm` is, when another LLM should use it, and which deterministic responsibilities it can offload to `spm` instead of improvising them in chat.
+- Adoption should provide a repo-local migration guide plus a direct agent brief that the human can review and then paste to the active coding agent.
+- The direct agent brief should be designed for a user-mediated loop:
+  - the user runs an `spm` command
+  - `spm` emits a migration guide and intelligent agent brief
+  - the user reviews that brief
+  - the user pastes it to the active coding agent
+- The migration guide and brief should explain:
+  - what the scaffold tasks are for
+  - where the real source specs/docs live
+  - why `spm` is present in the repo
+  - which deterministic chores `spm` handles
+  - how AGENTS files and skills should be updated as adoption progresses
+- The migration guide and brief should explicitly cover partially adopted repos, including how to identify missing adoption work in:
+  - managed spec/task conversion
+  - statuses and dependencies
+  - AGENTS sizing and `spm` usage guidance
+  - repo-local skills
+  - `spm ui` visibility/readiness
 - `doctor` should warn when the managed memory still contains onboarding scaffold so another agent does not treat those docs as literal implementation backlog.
 - Adoption output should include a deterministic “first week” sequence tailored to repo state, such as:
   - import legacy specs

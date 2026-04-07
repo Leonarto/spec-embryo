@@ -24,6 +24,7 @@ import { resolveProjectPaths } from "./paths.ts";
 import { ensureDir, listMarkdownFiles, pathExists, readUtf8, writeUtf8 } from "./storage.ts";
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
 import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
+import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
 import {
   createConfigToml,
   createCurrentStateTemplate,
@@ -325,6 +326,14 @@ export interface InitResult {
   skipped: string[];
 }
 
+export interface AdoptionArtifactsWriteResult {
+  adoptionDir: string;
+  migrationGuideFile: string;
+  agentBriefFile: string;
+  created: string[];
+  skipped: string[];
+}
+
 export async function initializeProject(
   rootDir: string,
   options?: {
@@ -393,6 +402,49 @@ export async function initializeProject(
   return {
     memoryDir,
     sequence: initSequenceDescription(memoryDir),
+    created,
+    skipped,
+  };
+}
+
+export async function writeAdoptionArtifacts(
+  rootDir: string,
+  memoryDir: string,
+  content: {
+    migrationGuide: string;
+    agentBrief: string;
+  },
+  options?: {
+    force?: boolean;
+  },
+): Promise<AdoptionArtifactsWriteResult> {
+  const artifactPaths = buildAdoptionArtifactPaths(memoryDir);
+  const adoptionDir = join(rootDir, artifactPaths.adoptionDir);
+  const migrationGuideFile = join(rootDir, artifactPaths.migrationGuideFile);
+  const agentBriefFile = join(rootDir, artifactPaths.agentBriefFile);
+  const created: string[] = [];
+  const skipped: string[] = [];
+
+  await ensureDir(adoptionDir);
+
+  const files = [
+    { path: migrationGuideFile, content: content.migrationGuide },
+    { path: agentBriefFile, content: content.agentBrief },
+  ];
+
+  for (const file of files) {
+    if (options?.force || !(await pathExists(file.path))) {
+      await writeUtf8(file.path, file.content);
+      created.push(file.path);
+    } else {
+      skipped.push(file.path);
+    }
+  }
+
+  return {
+    adoptionDir,
+    migrationGuideFile,
+    agentBriefFile,
     created,
     skipped,
   };

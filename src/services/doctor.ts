@@ -16,9 +16,10 @@ import {
 import { parseTomlFrontmatter } from "../frontmatter.ts";
 import { createDefaultConfig, readProjectConfig } from "../repository.ts";
 import { resolveProjectPaths } from "../paths.ts";
-import { buildAdoptionGuidance } from "./adoption.ts";
+import { buildAdoptionArtifactPaths, buildAdoptionGuidance, renderDirectAgentBrief } from "./adoption.ts";
 import { inspectAdoptionState, type AdoptionInspection } from "./layout.ts";
 import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
+import { CLI_VERSION, compareCliVersions } from "./version.ts";
 
 export type DoctorSeverity = "blocking" | "warning" | "info";
 export type DoctorOverallStatus = "healthy" | "needs-attention" | "blocked";
@@ -41,6 +42,11 @@ export interface DoctorSummary {
 export interface DoctorReport {
   summary: DoctorSummary;
   adoption: AdoptionInspection;
+  versions: {
+    cliVersion: string;
+    projectToolVersion?: string;
+    updateAvailable: boolean;
+  };
   config: {
     exists: boolean;
     valid: boolean;
@@ -53,6 +59,9 @@ export interface DoctorReport {
   };
   findings: DoctorFinding[];
   guidance: ReturnType<typeof buildAdoptionGuidance>;
+  migrationGuideFile: string;
+  directAgentBriefFile: string;
+  directAgentBrief: string;
 }
 
 interface SafeParseResult<T> {
@@ -268,6 +277,17 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     );
   }
 
+  if (config && compareCliVersions(CLI_VERSION, config.toolVersion) > 0) {
+    pushFinding(
+      findings,
+      "info",
+      "tool-upgrade-available",
+      `This repo was last initialized or reshaped with Spec Embryo ${config.toolVersion}, but the running CLI is ${CLI_VERSION}.`,
+      configFile,
+      "Re-run `spm doctor` or `spm init` after reviewing the release changes if you want this repo to adopt the newer guidance and defaults.",
+    );
+  }
+
   const adoption = await inspectAdoptionState(rootDir, { config });
   for (const finding of adoption.findings) {
     pushFinding(findings, "info", "adoption-inspection", finding);
@@ -404,10 +424,23 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     commandContext: "doctor",
     seedScaffoldDetected,
   });
+  const memoryDir = config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm";
+  const artifactPaths = buildAdoptionArtifactPaths(memoryDir);
+  const directAgentBrief = renderDirectAgentBrief({
+    projectName: effectiveConfig.projectName,
+    memoryDir,
+    adoption,
+    guidance,
+  });
 
   return {
     summary: buildSummary(findings),
     adoption,
+    versions: {
+      cliVersion: CLI_VERSION,
+      projectToolVersion: config?.toolVersion,
+      updateAvailable: Boolean(config && compareCliVersions(CLI_VERSION, config.toolVersion) > 0),
+    },
     config: {
       exists: configExists,
       valid: Boolean(config),
@@ -420,6 +453,9 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     },
     findings,
     guidance,
+    migrationGuideFile: artifactPaths.migrationGuideFile,
+    directAgentBriefFile: artifactPaths.agentBriefFile,
+    directAgentBrief,
   };
 }
 
@@ -428,6 +464,7 @@ export function renderDoctorReport(report: DoctorReport): string {
     "Spec Embryo doctor",
     `Status: ${report.summary.overall}`,
     `Adoption state: ${report.adoption.state}`,
+    `Versions: cli ${report.versions.cliVersion}${report.versions.projectToolVersion ? ` | project ${report.versions.projectToolVersion}` : ""}${report.versions.updateAvailable ? " | update available" : ""}`,
     `Config: ${report.config.valid ? `valid (${report.config.memoryDir})` : report.config.exists ? "invalid" : "missing"}`,
     `Counts: specs ${report.counts.specs} | tasks ${report.counts.tasks} | handoffs ${report.counts.handoffs}`,
     "",
@@ -482,6 +519,15 @@ export function renderDoctorReport(report: DoctorReport): string {
     "",
     "First-week sequence:",
     ...report.guidance.firstWeekSequence.map((item, index) => `${index + 1}. ${item}`),
+    "",
+    "Migration guide file:",
+    `- ${report.migrationGuideFile}`,
+    "",
+    "Direct agent brief file:",
+    `- ${report.directAgentBriefFile}`,
+    "",
+    "Direct agent brief (copy this to the current coding agent):",
+    ...report.directAgentBrief.trimEnd().split("\n"),
   );
 
   return lines.join("\n");

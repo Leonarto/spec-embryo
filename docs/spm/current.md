@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-010 is complete again: init and doctor now explain what spm is, when another LLM should use it, and which deterministic responsibilities the CLI already handles during adoption and ongoing project-memory work."
-focus = "Choose the next product slice after clarifying spm orientation for external-repo agents."
+summary = "TASK-041 is complete: init now records the actual installed Spec Embryo version in project config, and doctor surfaces when the running CLI is newer than the repo's recorded tool version."
+focus = "Choose the next product slice after closing the external-adoption versioning work."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pressure-test the improved init/doctor flow in another external repo with legacy docs.", "Decide the next product slice after this adoption-guidance checkpoint.", "Keep telling external agents what spm is and what it deterministically handles whenever adoption surfaces change."]
+next_action_hints = ["Commit this adoption/versioning slice before moving on.", "Decide whether the packaged spm ui runtime fix should become its own task/spec.", "Pressure-test version-aware doctor output in another real repo after a future release."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-05T00:32:47.611Z"
+updated_at = "2026-04-07T19:34:21.571Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

@@ -15,6 +15,7 @@ import {
   setTaskStatus,
   updateCurrentState,
 } from "../src/repository.ts";
+import { CLI_VERSION } from "../src/services/version.ts";
 
 describe("repository status updates", () => {
   test("updates a spec status and preserves the body", async () => {
@@ -189,6 +190,19 @@ describe("repository status updates", () => {
 
       const seedRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md"), "utf8");
       expect(seedRaw).toContain("created_at = ");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("writes the current CLI version into the project config during init", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const configRaw = await readFile(join(rootDir, ".specpm/config.toml"), "utf8");
+      expect(configRaw).toContain(`tool_version = "${CLI_VERSION}"`);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

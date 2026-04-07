@@ -3,9 +3,14 @@ import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue, formatPath, hasFlag } from "../cli.ts";
-import { initializeProject, readProjectConfig } from "../repository.ts";
+import { initializeProject, readProjectConfig, writeAdoptionArtifacts } from "../repository.ts";
 import { pathExists } from "../storage.ts";
-import { buildAdoptionGuidance, renderAdoptionGuidance } from "../services/adoption.ts";
+import {
+  buildAdoptionGuidance,
+  renderAdoptionGuidance,
+  renderDirectAgentBrief,
+  renderMigrationGuideMarkdown,
+} from "../services/adoption.ts";
 import { inspectAdoptionState, normalizeManagedHomeInput } from "../services/layout.ts";
 
 async function promptForLayoutChoice(candidates: Array<{ relativePath: string; reason: string }>): Promise<string> {
@@ -58,8 +63,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     force: hasFlag(parsed, "force"),
     memoryDir,
   });
-  const createdLines = result.created.map((filePath) => `created ${formatPath(rootDir, filePath)}`);
-  const skippedLines = result.skipped.map((filePath) => `kept ${formatPath(rootDir, filePath)}`);
+  const projectConfig = await readProjectConfig(rootDir);
   const guidance = buildAdoptionGuidance({
     adoption: inspection,
     memoryDir: result.memoryDir,
@@ -67,6 +71,30 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     skipped: result.skipped.map((filePath) => formatPath(rootDir, filePath)),
     commandContext: "init",
   });
+  const directAgentBrief = renderDirectAgentBrief({
+    projectName: projectConfig.projectName,
+    memoryDir: result.memoryDir,
+    adoption: inspection,
+    guidance,
+  });
+  const adoptionArtifacts = await writeAdoptionArtifacts(
+    rootDir,
+    result.memoryDir,
+    {
+      migrationGuide: renderMigrationGuideMarkdown({
+        projectName: projectConfig.projectName,
+        memoryDir: result.memoryDir,
+        adoption: inspection,
+        guidance,
+      }),
+      agentBrief: directAgentBrief,
+    },
+    {
+      force: hasFlag(parsed, "force"),
+    },
+  );
+  const createdLines = [...result.created, ...adoptionArtifacts.created].map((filePath) => `created ${formatPath(rootDir, filePath)}`);
+  const skippedLines = [...result.skipped, ...adoptionArtifacts.skipped].map((filePath) => `kept ${formatPath(rootDir, filePath)}`);
 
   if (parsed.flags.has("json")) {
     return JSON.stringify(
@@ -76,8 +104,11 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
         adoption_state: inspection.state,
         inspection,
         sequence: result.sequence,
-        created: result.created.map((filePath) => formatPath(rootDir, filePath)),
-        skipped: result.skipped.map((filePath) => formatPath(rootDir, filePath)),
+        created: [...result.created, ...adoptionArtifacts.created].map((filePath) => formatPath(rootDir, filePath)),
+        skipped: [...result.skipped, ...adoptionArtifacts.skipped].map((filePath) => formatPath(rootDir, filePath)),
+        migration_guide_file: formatPath(rootDir, adoptionArtifacts.migrationGuideFile),
+        direct_agent_brief_file: formatPath(rootDir, adoptionArtifacts.agentBriefFile),
+        direct_agent_brief: directAgentBrief,
         guidance,
       },
       null,
@@ -94,6 +125,15 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     ...result.sequence.map((step, index) => `${index + 1}. ${step}`),
     "",
     ...renderAdoptionGuidance(guidance),
+    "",
+    "Migration guide file:",
+    `- ${formatPath(rootDir, adoptionArtifacts.migrationGuideFile)}`,
+    "",
+    "Direct agent brief file:",
+    `- ${formatPath(rootDir, adoptionArtifacts.agentBriefFile)}`,
+    "",
+    "Direct agent brief (copy this to the current coding agent):",
+    ...directAgentBrief.trimEnd().split("\n"),
     "",
     ...createdLines,
     ...(skippedLines.length > 0 ? ["", ...skippedLines] : []),

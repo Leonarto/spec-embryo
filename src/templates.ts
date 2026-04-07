@@ -1,11 +1,12 @@
 import { basename } from "node:path";
 import { serializeTomlFrontmatter } from "./frontmatter.ts";
 import { buildManagedPaths } from "./services/layout.ts";
+import { CLI_VERSION } from "./services/version.ts";
 
 export function createConfigToml(projectName: string, memoryDir = "docs/spm"): string {
   const managed = buildManagedPaths(memoryDir);
   return `
-tool_version = "0.1.0"
+tool_version = ${JSON.stringify(CLI_VERSION)}
 project_name = ${JSON.stringify(projectName)}
 memory_dir = ${JSON.stringify(managed.memoryDir)}
 state_file = ${JSON.stringify(managed.stateFile)}

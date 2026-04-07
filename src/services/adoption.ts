@@ -24,6 +24,27 @@ export interface AdoptionGuidance {
   firstWeekSequence: string[];
 }
 
+export interface AdoptionArtifactPaths {
+  adoptionDir: string;
+  migrationGuideFile: string;
+  agentBriefFile: string;
+}
+
+function buildRelativePath(baseDir: string, leaf: string): string {
+  const normalizedBase = baseDir.replace(/\/+$/u, "");
+  return normalizedBase.length === 0 ? leaf : `${normalizedBase}/${leaf}`;
+}
+
+export function buildAdoptionArtifactPaths(memoryDir: string): AdoptionArtifactPaths {
+  const adoptionDir = buildRelativePath(memoryDir, "adoption");
+
+  return {
+    adoptionDir,
+    migrationGuideFile: buildRelativePath(adoptionDir, "migration-guide.md"),
+    agentBriefFile: buildRelativePath(adoptionDir, "direct-agent-brief.md"),
+  };
+}
+
 function uniqueCommands(suggestions: AdoptionCommandSuggestion[]): AdoptionCommandSuggestion[] {
   const seen = new Set<string>();
   const deduped: AdoptionCommandSuggestion[] = [];
@@ -55,6 +76,7 @@ export function buildAdoptionGuidance(input: {
   const warningOrBlockingFindings = doctorFindings.filter(
     (finding) => finding.severity === "warning" || finding.severity === "blocking",
   );
+  const toolUpgradeAvailable = doctorFindings.some((finding) => finding.code === "tool-upgrade-available");
   const seedScaffoldDetected = input.seedScaffoldDetected ?? false;
 
   const whatFound = [...input.adoption.findings];
@@ -152,6 +174,20 @@ export function buildAdoptionGuidance(input: {
     remainingWork.push(`Doctor reported ${warningOrBlockingFindings.length} issue${warningOrBlockingFindings.length === 1 ? "" : "s"} that still need migration or cleanup decisions.`);
   }
 
+  if (toolUpgradeAvailable) {
+    remainingWork.push("The running Spec Embryo CLI is newer than the repo's recorded tool version, so this repo may benefit from refreshed adoption guidance or defaults.");
+    recommendedCommands.push(
+      {
+        command: "spm init",
+        reason: "Refresh adoption artifacts and any missing deterministic defaults with the newer installed CLI version.",
+      },
+      {
+        command: "spm doctor",
+        reason: "Verify the repo again after the refresh and confirm whether any migration follow-up changed under the newer guidance.",
+      },
+    );
+  }
+
   if (warningOrBlockingFindings.length > 0 && input.commandContext !== "doctor") {
     recommendedCommands.push({
       command: "spm doctor --json",
@@ -235,4 +271,172 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "First-week sequence:",
     ...guidance.firstWeekSequence.map((item, index) => `${index + 1}. ${item}`),
   ];
+}
+
+function sourceMaterialLines(adoption: AdoptionInspection): string[] {
+  const paths = new Set<string>();
+
+  if (adoption.layoutChoice.adoptedHome) {
+    paths.add(adoption.layoutChoice.adoptedHome);
+  }
+
+  for (const candidate of adoption.layoutChoice.candidates) {
+    paths.add(candidate.relativePath);
+  }
+
+  if (paths.size === 0) {
+    return ["No obvious legacy docs/spec folders were detected yet; inspect the repo manually before inventing new product memory."];
+  }
+
+  return Array.from(paths).map((path) => `Inspect \`${path}\` as likely source material for the real project direction and migration work.`);
+}
+
+function partialAdoptionChecklines(adoption: AdoptionInspection): string[] {
+  const lines = [
+    "Check whether existing specs and tasks still need conversion into the managed SpM shape.",
+    "Check whether task statuses and dependencies describe the real work accurately enough for the UI and resume flows.",
+    "Check whether AGENTS guidance explains SpM usage, budgets, and local workflow expectations without bloating the repo instructions.",
+    "Check whether the repo needs local skills or skill updates so future agents know how to work with SpM here.",
+    "Check whether the managed memory is complete enough that `spm ui` renders meaningful progress, focus, and dependency views.",
+  ];
+
+  return adoption.state === "partially-adopted" ? lines : [];
+}
+
+function upgradeFlowLines(): string[] {
+  return [
+    "If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.",
+    "Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.",
+    "Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.",
+    "If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.",
+  ];
+}
+
+export function renderMigrationGuideMarkdown(input: {
+  projectName: string;
+  memoryDir: string;
+  adoption: AdoptionInspection;
+  guidance: AdoptionGuidance;
+}): string {
+  const artifactPaths = buildAdoptionArtifactPaths(input.memoryDir);
+  const sourceLines = sourceMaterialLines(input.adoption);
+  const partialChecks = partialAdoptionChecklines(input.adoption);
+  const lines = [
+    "# Spec Embryo Migration Guide",
+    "",
+    `This guide explains how to adopt Spec Embryo into **${input.projectName}** without confusing the adoption scaffold for the repository's real product roadmap.`,
+    "",
+    "## What SpM Is",
+    "",
+    `- ${input.guidance.spmOrientation.whatSpmIs}`,
+    `- ${input.guidance.spmOrientation.whyUseIt}`,
+    "",
+    "## Current Adoption State",
+    "",
+    `- Adoption state: \`${input.adoption.state}\``,
+    `- Managed memory home: \`${input.memoryDir}\``,
+    `- Direct agent brief file: \`${artifactPaths.agentBriefFile}\``,
+    "",
+    "## Scaffold Versus Real Project Work",
+    "",
+    "- Any seed spec/task scaffold is temporary migration backlog, not the repository's literal product roadmap.",
+    "- The real product direction still lives in this repository's own specs, docs, architecture notes, and active codebase.",
+    "- Use the scaffold to migrate or rewrite real project memory into the managed SpM layout instead of replacing the scaffold too early or implementing Spec Embryo itself inside the adopted repo.",
+    "",
+    "## Source Material To Inspect First",
+    "",
+    ...sourceLines.map((line) => `- ${line}`),
+    "",
+    "## What SpM Already Handles Deterministically",
+    "",
+    ...input.guidance.spmOrientation.deterministicResponsibilities.map((item) => `- ${item}`),
+  ];
+
+  if (partialChecks.length > 0) {
+    lines.push(
+      "",
+      "## Partial Adoption Checks",
+      "",
+      ...partialChecks.map((line) => `- ${line}`),
+    );
+  }
+
+  lines.push(
+    "",
+    "## User-Mediated Agent Handoff",
+    "",
+    "1. Run the relevant `spm` command such as `spm init`, `spm doctor`, or `spm spec import-prompt`.",
+    "2. Review this migration guide so the adoption choices are explicit.",
+    "3. Copy the direct agent brief from the command output or from the generated brief file.",
+    "4. Paste that brief directly to the active coding agent so it works from the reviewed adoption contract instead of guessing from scaffold docs alone.",
+    "5. Ask the agent to update managed specs, tasks, current state, AGENTS files, and skills as adoption progresses.",
+    "",
+    "## Recommended Next Commands",
+    "",
+    ...input.guidance.recommendedCommands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    "",
+    "## Adopting Newer SpM Guidance",
+    "",
+    ...upgradeFlowLines().map((line, index) => `${index + 1}. ${line}`),
+    "",
+    "## First-Week Sequence",
+    "",
+    ...input.guidance.firstWeekSequence.map((item, index) => `${index + 1}. ${item}`),
+  );
+
+  return `${lines.join("\n")}\n`;
+}
+
+export function renderDirectAgentBrief(input: {
+  projectName: string;
+  memoryDir: string;
+  adoption: AdoptionInspection;
+  guidance: AdoptionGuidance;
+}): string {
+  const sourceLines = sourceMaterialLines(input.adoption);
+  const partialChecks = partialAdoptionChecklines(input.adoption);
+  const lines = [
+    "You are helping adopt Spec Embryo into this repository.",
+    "",
+    "Important context:",
+    `- ${input.guidance.spmOrientation.whatSpmIs}`,
+    `- ${input.guidance.spmOrientation.whyUseIt}`,
+    "- This repository's product direction is not Spec Embryo unless the repo actually is Spec Embryo itself.",
+    "- Treat any SpM seed scaffold as migration backlog for organizing the repo, not as literal product implementation work.",
+    `- The managed memory home for this repo is \`${input.memoryDir}\`.`,
+    "",
+    "What to inspect first:",
+    ...sourceLines.map((line) => `- ${line}`),
+    "",
+    "How to work:",
+    "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",
+    "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
+    "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
+    "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",
+  ];
+
+  if (partialChecks.length > 0) {
+    lines.push("", "Before declaring adoption complete, check:", ...partialChecks.map((line) => `- ${line}`));
+  }
+
+  lines.push(
+    "",
+    "Deterministic commands to prefer:",
+    ...input.guidance.recommendedCommands.map((item) => `- ${item.command}`),
+    "",
+    "If doctor reports that the running CLI is newer than the repo's recorded tool version:",
+    ...upgradeFlowLines().map((line) => `- ${line}`),
+    "",
+    "Do not assume:",
+    "- Do not replace or delete legacy project docs before preserving their intent in managed memory.",
+    "- Do not treat the seed scaffold as the repo's long-term roadmap once real project memory exists.",
+    "- Do not assume adoption is complete just because `.specpm/` or `docs/spm/` already exists.",
+    "",
+    "Ask the human when:",
+    "- more than one source docs/spec area could be the real migration source",
+    "- migration would rewrite or discard meaningful existing project planning",
+    "- the repo needs a structural choice that could affect how the team works going forward",
+  );
+
+  return `${lines.join("\n")}\n`;
 }

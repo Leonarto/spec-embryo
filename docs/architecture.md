@@ -20,6 +20,7 @@ The repo is the source of truth. V1 uses:
 
 - `.specpm/config.toml` for tool configuration and backend settings
 - `.specpm/config.toml` also holds the project-standard AGENTS context-budget policy
+- `.specpm/config.toml` also records the adopted repo's last written `tool_version` so doctor can surface newer CLI guidance
 - `docs/spm/` or `spm/` as the managed memory home
 - `<memory-home>/current.md` for explicit current state
 - `<memory-home>/handoffs/*.md` for durable handoff checkpoints
@@ -29,7 +30,7 @@ The repo is the source of truth. V1 uses:
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
-When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema.
+When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema.
 
 ## Domain model
 
@@ -124,6 +125,7 @@ Deterministic by default:
 - compute a simple critical path from dependencies
 - write handoff and current-state files
 - parse and rewrite spec open-question and resolved-decision sections
+- render adoption-oriented migration guide and direct agent brief artifacts from deterministic repo inspection
 
 Non-deterministic only when genuinely needed:
 
@@ -132,7 +134,7 @@ Non-deterministic only when genuinely needed:
 - subjective synthesis across unstructured input
 - higher-level planning suggestions beyond explicit rules
 
-That is why prompt-return mode exists: if an AI is already calling Spec Embryo, the tool should return high-signal structured context and a recommended prompt instead of nesting another model call.
+That is why prompt-return mode exists: if an AI is already calling Spec Embryo, the tool should return high-signal structured context and a recommended brief instead of nesting another model call.
 
 ## Local visual server
 
