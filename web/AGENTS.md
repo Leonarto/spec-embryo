@@ -10,4 +10,5 @@ This folder contains the local SvelteKit workspace for Spec Embryo.
 - Keep the overview dashboard as the home for general signals, stats, AGENTS health, and cross-cutting context that does not belong inside Tasks, Specs, or Timeline.
 - The timeline view now aims for a dense split-pane planning surface rather than large card rows; preserve grouping and scanability when iterating on it.
 - Use iconography deliberately and consistently. The current icon layer is `@lucide/svelte`, chosen to align with shadcn-svelte's recommended icon path without forcing a Tailwind rewrite.
+- `spm ui` must work both in local repo dev and from the globally installed npm package, so Vite filesystem allow rules should stay compatible with packaged dependency roots under Bun/npm global `node_modules`.
 - If the web app gains multiple pages or richer local state, add nested `AGENTS.md` files before the folder sprawls.
