@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-042 is complete: managed docs now reject non-canonical spec/task statuses, and adoption/import guidance explicitly teaches the exact allowed enums."
-focus = "Choose the next slice after closing canonical-status enforcement for external adoption."
+summary = "TASK-043 is complete: spm doctor now defaults to a short status/findings summary, while --verbose preserves the full adoption guide and direct agent brief."
+focus = "Choose the next slice after making doctor output concise by default."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Commit the status-enforcement slice before starting the next feature.", "Pressure-test the stricter parser against another real adopted repo.", "Consider whether doctor should offer synonym-normalization suggestions for legacy migration input."]
+next_action_hints = ["Commit the doctor output refinement before starting the next feature.", "Pressure-test the concise doctor output in another adopted repo and confirm agents only expand to verbose when needed.", "Consider whether init should also gain a lightweight default vs verbose split later."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-07T21:40:40.366Z"
+updated_at = "2026-04-07T22:38:36.288Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

@@ -8,5 +8,5 @@ export async function runDoctorCommand(rootDir: string, parsed: ParsedArgs): Pro
     return JSON.stringify(report, null, 2);
   }
 
-  return renderDoctorReport(report);
+  return renderDoctorReport(report, { verbose: parsed.flags.has("verbose") });
 }

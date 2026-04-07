@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { buildDoctorReport } from "../src/services/doctor.ts";
+import { buildDoctorReport, renderDoctorReport } from "../src/services/doctor.ts";
 import { initializeProject } from "../src/repository.ts";
 import { CLI_VERSION } from "../src/services/version.ts";
 import { loadProjectContext } from "../src/repository.ts";
@@ -99,6 +99,29 @@ describe("doctor service", () => {
       expect(report.summary.overall).toBe("blocked");
       expect(report.findings.some((finding) => finding.code === "parse-error")).toBe(true);
       await expect(loadProjectContext(rootDir)).rejects.toThrow("Expected \"status\"");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("renders a concise default doctor report and a verbose expanded variant", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-doctor-"));
+
+    try {
+      await initializeProject(rootDir);
+      const report = await buildDoctorReport(rootDir);
+
+      const concise = renderDoctorReport(report);
+      const verbose = renderDoctorReport(report, { verbose: true });
+
+      expect(concise).toContain("Spec Embryo doctor");
+      expect(concise).toContain("Findings:");
+      expect(concise).toContain("Run `spm doctor --verbose`");
+      expect(concise).not.toContain("Adoption summary:");
+      expect(concise).not.toContain("Direct agent brief (copy this to the current coding agent):");
+
+      expect(verbose).toContain("Adoption summary:");
+      expect(verbose).toContain("Direct agent brief (copy this to the current coding agent):");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

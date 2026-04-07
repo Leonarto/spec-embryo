@@ -81,7 +81,7 @@ Usage:
   spm init [--force] [--home docs] [--standalone] [--json]
   spm version
   spm reshape [--home docs] [--dry-run]
-  spm doctor [--json]
+  spm doctor [--verbose] [--json]
   spm status [--json]
   spm current show [--json]
   spm current set [--focus "..."] [--summary "..."] [--active-spec-ids SPEC-001,SPEC-002] [--active-task-ids TASK-006,TASK-013] [--blocked-task-ids TASK-003] [--next-action-hints "hint one || hint two"] [--clear-active-spec-ids] [--clear-active-task-ids] [--clear-blocked-task-ids] [--clear-next-action-hints] [--json]

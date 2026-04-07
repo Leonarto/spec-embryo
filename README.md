@@ -78,7 +78,8 @@ web/
 - `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, creating or completing the managed memory home, and writing a repo-local migration guide plus direct-agent-brief file.
 - `init --json`: return the same adoption classification plus a structured next-step guide and direct agent brief that the user can hand to an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
-- `doctor`: inspect repo-memory health, adoption state, drift, broken links, and recorded tool-version lag without rewriting files, while also emitting a copy-pasteable direct agent brief.
+- `doctor`: inspect repo-memory health, adoption state, drift, broken links, and recorded tool-version lag with a concise default summary that keeps recurring agent reads cheap.
+- `doctor --verbose`: include the full adoption guide, next-command sequence, and copy-pasteable direct agent brief.
 - `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.

@@ -64,6 +64,10 @@ export interface DoctorReport {
   directAgentBrief: string;
 }
 
+export interface DoctorRenderOptions {
+  verbose?: boolean;
+}
+
 interface SafeParseResult<T> {
   documents: T[];
   findings: DoctorFinding[];
@@ -459,7 +463,8 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
   };
 }
 
-export function renderDoctorReport(report: DoctorReport): string {
+export function renderDoctorReport(report: DoctorReport, options: DoctorRenderOptions = {}): string {
+  const verbose = options.verbose ?? false;
   const lines = [
     "Spec Embryo doctor",
     `Status: ${report.summary.overall}`,
@@ -485,6 +490,15 @@ export function renderDoctorReport(report: DoctorReport): string {
         lines.push(`  hint: ${finding.hint}`);
       }
     }
+  }
+
+  if (!verbose) {
+    lines.push(
+      "",
+      "Run `spm doctor --verbose` for the full adoption guide and direct agent brief.",
+      "Use `spm doctor --json` when an agent only needs structured findings and metadata.",
+    );
+    return lines.join("\n");
   }
 
   lines.push(
