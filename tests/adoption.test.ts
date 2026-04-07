@@ -149,10 +149,15 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Partial Adoption Checks");
     expect(guide).toContain("Adopting Newer SpM Guidance");
     expect(guide).toContain("Re-run `spm init`");
+    expect(guide).toContain("Canonical Statuses");
+    expect(guide).toContain("planned");
+    expect(guide).toContain("completed");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("spm ui");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
+    expect(brief).toContain("Use only canonical spec statuses");
+    expect(brief).toContain("Use only canonical task statuses");
   });
 
   test("adds upgrade commands when doctor reports a newer CLI version", () => {

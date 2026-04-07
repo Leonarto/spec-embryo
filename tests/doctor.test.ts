@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { buildDoctorReport } from "../src/services/doctor.ts";
 import { initializeProject } from "../src/repository.ts";
 import { CLI_VERSION } from "../src/services/version.ts";
+import { loadProjectContext } from "../src/repository.ts";
 
 describe("doctor service", () => {
   test("reports a healthy adopted repo", async () => {
@@ -79,6 +80,25 @@ describe("doctor service", () => {
       expect(report.versions.projectToolVersion).toBe("0.1.0");
       expect(report.versions.updateAvailable).toBe(true);
       expect(report.findings.some((finding) => finding.code === "tool-upgrade-available")).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("treats non-canonical managed statuses as blocking parse errors", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-doctor-"));
+
+    try {
+      await initializeProject(rootDir);
+      const specFile = join(rootDir, "docs", "spm", "specs", "SPEC-001-adopt-spec-embryo-memory-for-this-repository.md");
+      const specRaw = await Bun.file(specFile).text();
+      await writeFile(specFile, specRaw.replace('status = "active"', 'status = "planned"'), "utf8");
+
+      const report = await buildDoctorReport(rootDir);
+
+      expect(report.summary.overall).toBe("blocked");
+      expect(report.findings.some((finding) => finding.code === "parse-error")).toBe(true);
+      await expect(loadProjectContext(rootDir)).rejects.toThrow("Expected \"status\"");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

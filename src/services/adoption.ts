@@ -1,5 +1,6 @@
 import type { DoctorFinding } from "./doctor.ts";
 import type { AdoptionInspection } from "./layout.ts";
+import { SPEC_STATUSES, TASK_STATUSES } from "../domain.ts";
 
 export interface AdoptionCommandSuggestion {
   command: string;
@@ -350,6 +351,12 @@ export function renderMigrationGuideMarkdown(input: {
     "## What SpM Already Handles Deterministically",
     "",
     ...input.guidance.spmOrientation.deterministicResponsibilities.map((item) => `- ${item}`),
+    "",
+    "## Canonical Statuses",
+    "",
+    `- Spec statuses: \`${SPEC_STATUSES.join("`, `")}\``,
+    `- Task statuses: \`${TASK_STATUSES.join("`, `")}\``,
+    "- Do not replace these with synonyms like `planned` or `completed` inside managed SpM docs.",
   ];
 
   if (partialChecks.length > 0) {
@@ -413,6 +420,8 @@ export function renderDirectAgentBrief(input: {
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",
+    `- Use only canonical spec statuses: ${SPEC_STATUSES.join(", ")}.`,
+    `- Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
   ];
 
   if (partialChecks.length > 0) {

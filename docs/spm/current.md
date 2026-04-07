@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-041 is complete: init now records the actual installed Spec Embryo version in project config, and doctor surfaces when the running CLI is newer than the repo's recorded tool version."
-focus = "Choose the next product slice after closing the external-adoption versioning work."
+summary = "TASK-042 is complete: managed docs now reject non-canonical spec/task statuses, and adoption/import guidance explicitly teaches the exact allowed enums."
+focus = "Choose the next slice after closing canonical-status enforcement for external adoption."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Commit this adoption/versioning slice before moving on.", "Decide whether the packaged spm ui runtime fix should become its own task/spec.", "Pressure-test version-aware doctor output in another real repo after a future release."]
+next_action_hints = ["Commit the status-enforcement slice before starting the next feature.", "Pressure-test the stricter parser against another real adopted repo.", "Consider whether doctor should offer synonym-normalization suggestions for legacy migration input."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-07T19:34:21.571Z"
+updated_at = "2026-04-07T21:40:40.366Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

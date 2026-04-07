@@ -238,6 +238,20 @@ function asEnum<T extends readonly string[]>(
   fail(`Expected "${field}" in ${filePath} to be one of: ${allowed.join(", ")}`);
 }
 
+function asEnumWithUndefinedFallback<T extends readonly string[]>(
+  value: unknown,
+  allowed: T,
+  field: string,
+  filePath: string,
+  fallback: T[number],
+): T[number] {
+  if (value === undefined) {
+    return fallback;
+  }
+
+  return asEnum(value, allowed, field, filePath);
+}
+
 export function parseProjectConfig(data: unknown): ProjectConfig {
   if (!isRecord(data)) {
     fail("Project config must be a TOML object.");
@@ -338,7 +352,7 @@ export function parseSpecDocument(filePath: string, attributes: unknown, body: s
     id: asString(attributes.id, "id", filePath),
     title: asString(attributes.title, "title", filePath),
     summary: asString(attributes.summary, "summary", filePath, "No summary provided."),
-    status: asEnum(attributes.status, SPEC_STATUSES, "status", filePath, "proposed"),
+    status: asEnumWithUndefinedFallback(attributes.status, SPEC_STATUSES, "status", filePath, "proposed"),
     taskIds: asStringArray(attributes.task_ids, "task_ids", filePath),
     tags: asStringArray(attributes.tags, "tags", filePath),
     owner: asOptionalString(attributes.owner),
@@ -358,7 +372,7 @@ export function parseTaskDocument(filePath: string, attributes: unknown, body: s
     id: asString(attributes.id, "id", filePath),
     title: asString(attributes.title, "title", filePath),
     summary: asString(attributes.summary, "summary", filePath, "No summary provided."),
-    status: asEnum(attributes.status, TASK_STATUSES, "status", filePath, "todo"),
+    status: asEnumWithUndefinedFallback(attributes.status, TASK_STATUSES, "status", filePath, "todo"),
     specIds: asStringArray(attributes.spec_ids, "spec_ids", filePath),
     dependsOn: asStringArray(attributes.depends_on, "depends_on", filePath),
     blockedBy: asStringArray(attributes.blocked_by, "blocked_by", filePath),

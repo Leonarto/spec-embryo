@@ -27,6 +27,9 @@ describe("spec import service", () => {
       expect(bundle.files[0]?.relativePath).toContain("legacy-specs");
       expect(bundle.recommendedPrompt).toContain("Prefer one foundation spec and linked tasks.");
       expect(bundle.migrationRules).toContain("Use `doc_kind = \"spec\"` for specs and `doc_kind = \"task\"` for tasks.");
+      expect(bundle.migrationRules.some((rule) => rule.includes("canonical spec statuses"))).toBe(true);
+      expect(bundle.migrationRules.some((rule) => rule.includes("planned"))).toBe(true);
+      expect(bundle.recommendedPrompt).toContain("Use exact canonical spec statuses");
       expect(renderSpecImportBundle(bundle)).toContain("Spec import prompt bundle");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
