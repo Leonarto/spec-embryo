@@ -6,6 +6,7 @@ This folder contains reusable deterministic product services.
 - Put cross-command workflow logic here, not in handlers or route files.
 - Dashboard- and timeline-specific shaping should be projections over canonical repo state, never a second state system.
 - Spec section parsing, adoption inspection, doctor findings, and adoption guidance belong here so `init`, `doctor`, and UI flows stay aligned.
+- Memory retrieval services should index and traverse managed docs from canonical `ProjectContext` data, not a second parser.
 - Adoption guidance must distinguish temporary onboarding scaffold from the adopted repo's real product memory.
 - Adoption guidance should explain what `spm` is, when to use it, and which deterministic responsibilities it already handles for the next agent.
 - Adoption guidance should produce a repo-local migration guide plus a direct agent brief for the human to paste, and it should cover partially adopted repos, including AGENTS, skills, status/dependency cleanup, and `spm ui` readiness checks.

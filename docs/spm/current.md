@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-045 is complete locally: packaged spm ui now disables Svelte dev prebundling when running from node_modules so global installs can load virtual CSS modules correctly."
-focus = "Choose the next slice after fixing packaged spm ui virtual CSS loading."
-active_spec_ids = []
+summary = "TASK-046 is done: the repo now has deterministic memory indexing and typed link-graph foundations for specs, tasks, current state, and handoffs."
+focus = "Start TASK-047 by turning the deterministic memory index into a typed query command for managed memory."
+active_spec_ids = ["SPEC-013"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Commit the packaged ui CSS-loading fix before starting the next feature.", "Publish a patch release so external projects can pick up the packaged-runtime fix.", "Re-test spm ui in a globally installed external repo after upgrading to confirm the virtual CSS warnings are gone."]
+next_action_hints = ["Reuse the new memory-index service for typed filters and normalized text matching.", "Keep default human output compact and agent-readable before adding verbose expansions.", "Add focused coverage for doc kind, status, tag, id, linked-to, and neighbor-of filtering."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T12:35:28.840Z"
+updated_at = "2026-04-08T15:17:29.715Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 
