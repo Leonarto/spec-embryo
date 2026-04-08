@@ -4,9 +4,9 @@ id = "SPEC-010"
 title = "External repo adoption and doctor workflow"
 summary = "Define how Spec Embryo should help existing repositories adopt the managed memory model, detect drift, and surface the next deterministic cleanup actions."
 status = "done"
-task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038", "TASK-039", "TASK-040", "TASK-041", "TASK-042", "TASK-043"]
+task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038", "TASK-039", "TASK-040", "TASK-041", "TASK-042", "TASK-043", "TASK-044"]
 tags = ["adoption", "doctor", "workflow"]
-updated_at = "2026-04-07T22:38:42.800Z"
+updated_at = "2026-04-08T02:56:39.423Z"
 +++
 
 # Problem

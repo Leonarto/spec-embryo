@@ -313,6 +313,14 @@ function upgradeFlowLines(): string[] {
   ];
 }
 
+function doctorModeLines(): string[] {
+  return [
+    "Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.",
+    "Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.",
+    "Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.",
+  ];
+}
+
 export function renderMigrationGuideMarkdown(input: {
   projectName: string;
   memoryDir: string;
@@ -351,6 +359,10 @@ export function renderMigrationGuideMarkdown(input: {
     "## What SpM Already Handles Deterministically",
     "",
     ...input.guidance.spmOrientation.deterministicResponsibilities.map((item) => `- ${item}`),
+    "",
+    "## Reading Doctor Efficiently",
+    "",
+    ...doctorModeLines().map((line) => `- ${line}`),
     "",
     "## Canonical Statuses",
     "",
@@ -417,6 +429,7 @@ export function renderDirectAgentBrief(input: {
     "",
     "How to work:",
     "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",
+    ...doctorModeLines().map((line) => `- ${line}`),
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",

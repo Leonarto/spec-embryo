@@ -149,12 +149,19 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Partial Adoption Checks");
     expect(guide).toContain("Adopting Newer SpM Guidance");
     expect(guide).toContain("Re-run `spm init`");
+    expect(guide).toContain("Reading Doctor Efficiently");
+    expect(guide).toContain("Use `spm doctor` first for a cheap status");
+    expect(guide).toContain("Use `spm doctor --verbose` only when");
+    expect(guide).toContain("Use `spm doctor --json` when an agent needs structured findings");
     expect(guide).toContain("Canonical Statuses");
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("spm ui");
+    expect(brief).toContain("Use `spm doctor` first for a cheap status");
+    expect(brief).toContain("Use `spm doctor --verbose` only when");
+    expect(brief).toContain("Use `spm doctor --json` when an agent needs structured findings");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
@@ -204,6 +211,8 @@ describe("init adoption artifacts", () => {
       expect(guide).toContain("User-Mediated Agent Handoff");
       expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
       expect(brief).toContain("Treat any SpM seed scaffold as migration backlog");
+      expect(guide).toContain("Reading Doctor Efficiently");
+      expect(brief).toContain("Use `spm doctor` first for a cheap status");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

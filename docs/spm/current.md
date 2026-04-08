@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-043 is complete: spm doctor now defaults to a short status/findings summary, while --verbose preserves the full adoption guide and direct agent brief."
-focus = "Choose the next slice after making doctor output concise by default."
+summary = "TASK-044 is complete: init-generated migration guides and direct agent briefs now explicitly teach when to use spm doctor, spm doctor --verbose, and spm doctor --json."
+focus = "Choose the next slice after clarifying doctor mode guidance in adoption artifacts."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Commit the doctor output refinement before starting the next feature.", "Pressure-test the concise doctor output in another adopted repo and confirm agents only expand to verbose when needed.", "Consider whether init should also gain a lightweight default vs verbose split later."]
+next_action_hints = ["Commit the doctor-mode guidance refinement before starting the next feature.", "Pressure-test the updated migration guide in another adopted repo and confirm the agent follows the cheap-by-default doctor flow.", "Consider whether other long human-facing commands should adopt the same explicit default-versus-verbose teaching."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-07T22:38:36.288Z"
+updated_at = "2026-04-08T02:56:39.298Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 
