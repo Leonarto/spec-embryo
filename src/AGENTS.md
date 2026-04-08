@@ -17,4 +17,5 @@ Rules:
 - Put deterministic business logic in `engine.ts` or nearby helpers, not in command handlers.
 - Extend `domain.ts` first when new document types or config shapes appear.
 - Task lifecycle semantics live in the shared task document model; if completion, cancellation, or archival behavior changes, update task parsing and serialization together.
+- Spec/task creation that allocates new IDs or rewrites linked docs must stay serialized through the shared repository lock in `storage.ts`; do not add parallel create paths that bypass it.
 - Add or update nested `AGENTS.md` files if a subarea becomes meaningfully more complex.

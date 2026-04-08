@@ -21,7 +21,7 @@ import {
 } from "./domain.ts";
 import { parseTomlFrontmatter, serializeTomlFrontmatter } from "./frontmatter.ts";
 import { resolveProjectPaths } from "./paths.ts";
-import { ensureDir, listMarkdownFiles, pathExists, readUtf8, writeUtf8 } from "./storage.ts";
+import { ensureDir, listMarkdownFiles, pathExists, readUtf8, withLock, writeUtf8 } from "./storage.ts";
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
 import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
 import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
@@ -59,6 +59,11 @@ function nextNumericId(existingIds: string[], prefix: "SPEC" | "TASK"): string {
   }, 0);
 
   return `${prefix}-${String(max + 1).padStart(3, "0")}`;
+}
+
+async function withDocumentCreateLock<T>(rootDir: string, work: () => Promise<T>): Promise<T> {
+  const paths = resolveProjectPaths(rootDir);
+  return withLock(join(paths.specpmDir, "locks", "document-create.lock"), work);
 }
 
 function assertKnownIds(kind: "Spec" | "Task", provided: string[], existing: string[]): void {
@@ -668,102 +673,106 @@ export async function archiveCancelledTasks(rootDir: string, olderThan: string, 
 }
 
 export async function createSpec(rootDir: string, input: CreateSpecInput): Promise<SpecDocument> {
-  const config = await readProjectConfig(rootDir);
-  const paths = resolveProjectPaths(rootDir, config);
-  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
-  const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
-  const taskIds = uniqueStrings(input.taskIds ?? []);
-  assertKnownIds("Task", taskIds, tasks.map((task) => task.id));
+  return withDocumentCreateLock(rootDir, async () => {
+    const config = await readProjectConfig(rootDir);
+    const paths = resolveProjectPaths(rootDir, config);
+    const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+    const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
+    const taskIds = uniqueStrings(input.taskIds ?? []);
+    assertKnownIds("Task", taskIds, tasks.map((task) => task.id));
 
-  const now = new Date().toISOString();
-  const id = nextNumericId(specs.map((spec) => spec.id), "SPEC");
-  const fileName = `${id}-${slugify(input.title) || "spec"}.md`;
-  const filePath = join(paths.specsDir, fileName);
+    const now = new Date().toISOString();
+    const id = nextNumericId(specs.map((spec) => spec.id), "SPEC");
+    const fileName = `${id}-${slugify(input.title) || "spec"}.md`;
+    const filePath = join(paths.specsDir, fileName);
 
-  const spec: SpecDocument = {
-    docKind: "spec",
-    id,
-    title: input.title.trim(),
-    summary: input.summary.trim(),
-    status: input.status ?? "proposed",
-    taskIds,
-    tags: uniqueStrings(input.tags ?? []),
-    owner: input.owner?.trim() || undefined,
-    updatedAt: now,
-    body: buildCreatedSpecBody({ title: input.title.trim() }),
-    filePath,
-  };
-
-  await writeUtf8(filePath, serializeSpecDocument(spec, now));
-
-  const linkedTasks = tasks.filter((task) => taskIds.includes(task.id));
-  for (const task of linkedTasks) {
-    const nextTask: TaskDocument = {
-      ...task,
-      specIds: uniqueStrings([...task.specIds, spec.id]),
+    const spec: SpecDocument = {
+      docKind: "spec",
+      id,
+      title: input.title.trim(),
+      summary: input.summary.trim(),
+      status: input.status ?? "proposed",
+      taskIds,
+      tags: uniqueStrings(input.tags ?? []),
+      owner: input.owner?.trim() || undefined,
       updatedAt: now,
+      body: buildCreatedSpecBody({ title: input.title.trim() }),
+      filePath,
     };
-    await writeUtf8(task.filePath, serializeTaskDocument(nextTask, now));
-  }
 
-  return spec;
+    await writeUtf8(filePath, serializeSpecDocument(spec, now));
+
+    const linkedTasks = tasks.filter((task) => taskIds.includes(task.id));
+    for (const task of linkedTasks) {
+      const nextTask: TaskDocument = {
+        ...task,
+        specIds: uniqueStrings([...task.specIds, spec.id]),
+        updatedAt: now,
+      };
+      await writeUtf8(task.filePath, serializeTaskDocument(nextTask, now));
+    }
+
+    return spec;
+  });
 }
 
 export async function createTask(rootDir: string, input: CreateTaskInput): Promise<TaskDocument> {
-  const config = await readProjectConfig(rootDir);
-  const paths = resolveProjectPaths(rootDir, config);
-  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
-  const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
-  const specIds = uniqueStrings(input.specIds);
-  const dependsOn = uniqueStrings(input.dependsOn ?? []);
-  const blockedBy = uniqueStrings(input.blockedBy ?? []);
+  return withDocumentCreateLock(rootDir, async () => {
+    const config = await readProjectConfig(rootDir);
+    const paths = resolveProjectPaths(rootDir, config);
+    const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+    const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
+    const specIds = uniqueStrings(input.specIds);
+    const dependsOn = uniqueStrings(input.dependsOn ?? []);
+    const blockedBy = uniqueStrings(input.blockedBy ?? []);
 
-  if (specIds.length === 0) {
-    throw new Error("Task creation requires at least one linked spec.");
-  }
+    if (specIds.length === 0) {
+      throw new Error("Task creation requires at least one linked spec.");
+    }
 
-  assertKnownIds("Spec", specIds, specs.map((spec) => spec.id));
-  assertKnownIds("Task", dependsOn, tasks.map((task) => task.id));
-  assertKnownIds("Task", blockedBy, tasks.map((task) => task.id));
+    assertKnownIds("Spec", specIds, specs.map((spec) => spec.id));
+    assertKnownIds("Task", dependsOn, tasks.map((task) => task.id));
+    assertKnownIds("Task", blockedBy, tasks.map((task) => task.id));
 
-  const now = new Date().toISOString();
-  const id = nextNumericId(tasks.map((task) => task.id), "TASK");
-  const fileName = `${id}-${slugify(input.title) || "task"}.md`;
-  const filePath = join(paths.tasksDir, fileName);
+    const now = new Date().toISOString();
+    const id = nextNumericId(tasks.map((task) => task.id), "TASK");
+    const fileName = `${id}-${slugify(input.title) || "task"}.md`;
+    const filePath = join(paths.tasksDir, fileName);
 
-  const task: TaskDocument = {
-    status: input.status ?? "todo",
-    docKind: "task",
-    id,
-    title: input.title.trim(),
-    summary: input.summary.trim(),
-    specIds,
-    dependsOn,
-    blockedBy,
-    priority: input.priority ?? 3,
-    ownerRole: input.ownerRole?.trim() || undefined,
-    createdAt: now,
-    completedAt: (input.status ?? "todo") === "done" ? now : undefined,
-    cancelledAt: (input.status ?? "todo") === "cancelled" ? now : undefined,
-    tags: uniqueStrings(input.tags ?? []),
-    updatedAt: now,
-    body: buildCreatedTaskBody({ title: input.title.trim() }),
-    filePath,
-  };
-
-  await writeUtf8(filePath, serializeTaskDocument(task, now));
-
-  const linkedSpecs = specs.filter((spec) => specIds.includes(spec.id));
-  for (const spec of linkedSpecs) {
-    const nextSpec: SpecDocument = {
-      ...spec,
-      taskIds: uniqueStrings([...spec.taskIds, task.id]),
+    const task: TaskDocument = {
+      status: input.status ?? "todo",
+      docKind: "task",
+      id,
+      title: input.title.trim(),
+      summary: input.summary.trim(),
+      specIds,
+      dependsOn,
+      blockedBy,
+      priority: input.priority ?? 3,
+      ownerRole: input.ownerRole?.trim() || undefined,
+      createdAt: now,
+      completedAt: (input.status ?? "todo") === "done" ? now : undefined,
+      cancelledAt: (input.status ?? "todo") === "cancelled" ? now : undefined,
+      tags: uniqueStrings(input.tags ?? []),
       updatedAt: now,
+      body: buildCreatedTaskBody({ title: input.title.trim() }),
+      filePath,
     };
-    await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, now));
-  }
 
-  return task;
+    await writeUtf8(filePath, serializeTaskDocument(task, now));
+
+    const linkedSpecs = specs.filter((spec) => specIds.includes(spec.id));
+    for (const spec of linkedSpecs) {
+      const nextSpec: SpecDocument = {
+        ...spec,
+        taskIds: uniqueStrings([...spec.taskIds, task.id]),
+        updatedAt: now,
+      };
+      await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, now));
+    }
+
+    return task;
+  });
 }
 
 export async function updateCurrentState(rootDir: string, input: UpdateCurrentStateInput): Promise<CurrentStateDocument> {

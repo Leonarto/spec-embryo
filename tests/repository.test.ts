@@ -152,6 +152,80 @@ describe("repository status updates", () => {
     }
   });
 
+  test("serializes concurrent task creation so ids stay unique", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const created = await Promise.all([
+        createTask(rootDir, {
+          title: "Parallel task one",
+          summary: "First concurrent task.",
+          specIds: ["SPEC-001"],
+        }),
+        createTask(rootDir, {
+          title: "Parallel task two",
+          summary: "Second concurrent task.",
+          specIds: ["SPEC-001"],
+        }),
+        createTask(rootDir, {
+          title: "Parallel task three",
+          summary: "Third concurrent task.",
+          specIds: ["SPEC-001"],
+        }),
+      ]);
+
+      const ids = created.map((task) => task.id).sort();
+      const specRaw = await readFile(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md"), "utf8");
+
+      expect(ids).toEqual(["TASK-004", "TASK-005", "TASK-006"]);
+      expect(new Set(ids).size).toBe(3);
+      expect(specRaw).toContain('"TASK-004"');
+      expect(specRaw).toContain('"TASK-005"');
+      expect(specRaw).toContain('"TASK-006"');
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("serializes concurrent spec creation so ids stay unique", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const created = await Promise.all([
+        createSpec(rootDir, {
+          title: "Parallel spec one",
+          summary: "First concurrent spec.",
+          taskIds: ["TASK-001"],
+        }),
+        createSpec(rootDir, {
+          title: "Parallel spec two",
+          summary: "Second concurrent spec.",
+          taskIds: ["TASK-001"],
+        }),
+        createSpec(rootDir, {
+          title: "Parallel spec three",
+          summary: "Third concurrent spec.",
+          taskIds: ["TASK-001"],
+        }),
+      ]);
+
+      const ids = created.map((spec) => spec.id).sort();
+      const taskRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md"), "utf8");
+
+      expect(ids).toEqual(["SPEC-002", "SPEC-003", "SPEC-004"]);
+      expect(new Set(ids).size).toBe(3);
+      expect(taskRaw).toContain('"SPEC-002"');
+      expect(taskRaw).toContain('"SPEC-003"');
+      expect(taskRaw).toContain('"SPEC-004"');
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
   test("creates lifecycle timestamps when a task is created directly in a closed state", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
 
