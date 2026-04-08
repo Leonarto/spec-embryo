@@ -68,6 +68,19 @@ function normalizePhrase(value: string): string {
   return value.trim().toLowerCase().replace(/\s+/gu, " ");
 }
 
+function normalizeRequestedText(text: string | undefined): string | undefined {
+  if (text === undefined) {
+    return undefined;
+  }
+
+  const normalized = normalizePhrase(text);
+  if (normalized.length === 0) {
+    throw new Error("`--text` must contain at least one non-whitespace character.");
+  }
+
+  return normalized;
+}
+
 function assertDocIdExists(id: string, knownIds: Set<string>, filterName: "--linked-to" | "--neighbor-of"): void {
   if (!knownIds.has(id)) {
     throw new Error(`Unknown document ID for ${filterName}: ${id}`);
@@ -195,6 +208,7 @@ function buildFilterReasons(entry: MemoryIndexEntry, filters: MemoryQueryFilters
 
 export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQueryFilters): MemoryQueryBundle {
   const limit = filters.limit && filters.limit > 0 ? filters.limit : 20;
+  const requestedText = normalizeRequestedText(filters.text);
   const requestedTags = (filters.tags ?? []).map((tag) => tag.trim()).filter(Boolean);
   const graph = buildMemoryLinkGraph(context);
   const knownIds = new Set(graph.index.byId.keys());
@@ -255,8 +269,8 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
         return [];
       }
 
-      const textScore = scoreTextMatch(entry, filters.text);
-      if (filters.text && textScore === undefined) {
+      const textScore = scoreTextMatch(entry, requestedText);
+      if (requestedText && textScore === undefined) {
         return [];
       }
 
@@ -299,7 +313,7 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
 
   return {
     filters: {
-      text: filters.text?.trim() || undefined,
+      text: requestedText,
       docKind: filters.docKind,
       status: filters.status,
       tags: requestedTags,

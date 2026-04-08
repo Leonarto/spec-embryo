@@ -31,6 +31,24 @@ describe("memory query service", () => {
     }
   });
 
+  test("retrieves matches from managed document bodies, not only summaries", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-query-"));
+
+    try {
+      await initializeProject(rootDir);
+      const context = await loadProjectContext(rootDir);
+      const bundle = buildMemoryQueryBundle(context, {
+        text: "real product direction",
+        docKind: "spec",
+      });
+
+      expect(bundle.totalMatches).toBeGreaterThan(0);
+      expect(bundle.results[0]?.id).toBe("SPEC-001");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
   test("supports linked-to and neighborhood-aware retrieval", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-query-"));
 
@@ -93,6 +111,9 @@ describe("memory query command", () => {
       await expect(runMemoryCommand(rootDir, parseArgs(["memory", "query", "--doc-kind", "note"]))).rejects.toThrow(
         "Invalid memory doc kind",
       );
+      await expect(
+        runMemoryCommand(rootDir, parseArgs(["memory", "query", "--text", "   "])),
+      ).rejects.toThrow("`--text` must contain at least one non-whitespace character.");
       await expect(
         runMemoryCommand(rootDir, parseArgs(["memory", "query", "--linked-to", "DOC-999"])),
       ).rejects.toThrow("Unknown document ID");

@@ -81,6 +81,29 @@ function parseBriefProfile(value: string | undefined): MemoryBriefProfile | unde
   );
 }
 
+function parseOptionalBooleanFlag(
+  parsed: ParsedArgs,
+  positiveFlag: string,
+  negativeFlag: string,
+): boolean | undefined {
+  const include = parsed.flags.has(positiveFlag);
+  const exclude = parsed.flags.has(negativeFlag);
+
+  if (include && exclude) {
+    throw new Error(`Use either \`--${positiveFlag}\` or \`--${negativeFlag}\`, not both.`);
+  }
+
+  if (include) {
+    return true;
+  }
+
+  if (exclude) {
+    return false;
+  }
+
+  return undefined;
+}
+
 export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
   if (parsed.subcommand === "query") {
     const context = await loadProjectContext(rootDir);
@@ -128,9 +151,9 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       specId: flagValue(parsed, "spec"),
       taskId: flagValue(parsed, "task"),
       text: flagValue(parsed, "text"),
-      includeNeighbors: parsed.flags.has("include-neighbors") ? true : undefined,
-      includeCurrent: parsed.flags.has("include-current") ? true : undefined,
-      includeHandoffs: parsed.flags.has("include-handoffs") ? true : undefined,
+      includeNeighbors: parseOptionalBooleanFlag(parsed, "include-neighbors", "no-neighbors"),
+      includeCurrent: parseOptionalBooleanFlag(parsed, "include-current", "no-current"),
+      includeHandoffs: parseOptionalBooleanFlag(parsed, "include-handoffs", "no-handoffs"),
       profile: parseBriefProfile(flagValue(parsed, "profile")),
     });
 

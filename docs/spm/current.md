@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-014 is done. Deterministic memory retrieval now prefers stronger spec anchors for topic queries, exposes explicit match reasons, and includes agent-style regression evals."
+summary = "SPEC-014 is done. Memory retrieval now indexes managed body text, rejects blank text queries, and honors explicit memory brief section flags."
 focus = "Choose the next memory or adoption slice."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Decide whether to keep investing in memory services, adoption ergonomics, or UI visualization next."]
+next_action_hints = ["Decide whether the next slice should deepen retrieval ranking, adoption ergonomics, or UI visualization."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T18:03:07.524Z"
+updated_at = "2026-04-08T18:55:57.827Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

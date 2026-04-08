@@ -33,6 +33,22 @@ export interface MemoryIndex {
   byKind: Map<MemoryDocKind, MemoryIndexEntry[]>;
 }
 
+function extractBodySearchValues(body: string): string[] {
+  return body
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) =>
+      line
+        .trim()
+        .replace(/^#{1,6}\s+/u, "")
+        .replace(/^[-*+]\s+/u, "")
+        .replace(/^\d+\.\s+/u, "")
+        .replace(/^>\s+/u, "")
+        .replace(/`/gu, ""),
+    )
+    .filter((line) => line.length > 0 && !line.startsWith("```"));
+}
+
 function tokenize(value: string): string[] {
   return value
     .toLowerCase()
@@ -73,6 +89,7 @@ function toIndexEntry(document: MemoryDocument): MemoryIndexEntry {
     document.title,
     document.summary,
     ...document.tags,
+    ...extractBodySearchValues(document.body),
   ]);
 
   return {

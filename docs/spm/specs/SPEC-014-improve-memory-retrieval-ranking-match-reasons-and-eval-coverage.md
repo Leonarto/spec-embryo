@@ -4,10 +4,10 @@ id = "SPEC-014"
 title = "Improve memory retrieval ranking, match reasons, and eval coverage"
 summary = "Strengthen deterministic retrieval by surfacing why matches were found, improving conceptual ranking, and adding agent-style regression scenarios."
 status = "done"
-task_ids = ["TASK-051", "TASK-052", "TASK-053"]
+task_ids = ["TASK-051", "TASK-052", "TASK-053", "TASK-054", "TASK-055", "TASK-056"]
 tags = ["memory", "retrieval", "evals", "ranking"]
 owner = "human-ai"
-updated_at = "2026-04-08T18:03:01.964Z"
+updated_at = "2026-04-08T18:55:49.194Z"
 +++
 
 # Problem

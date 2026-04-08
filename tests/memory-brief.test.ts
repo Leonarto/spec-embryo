@@ -39,8 +39,41 @@ describe("memory brief service", () => {
 
       expect(bundle.matches?.some((item) => item.id === "TASK-001")).toBe(true);
       expect(bundle.matches?.some((item) => item.matchReasons.length > 0)).toBe(true);
+      expect(bundle.neighbors.length).toBeGreaterThan(0);
       expect(bundle.current?.activeSpecIds).toContain("SPEC-001");
       expect(bundle.nextInspectIds.length).toBeGreaterThan(0);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("honors include flags for neighbors, current state, and handoffs", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-brief-"));
+
+    try {
+      await initializeProject(rootDir);
+      const context = await loadProjectContext(rootDir);
+
+      const explicit = buildMemoryBriefBundle(context, {
+        taskId: "TASK-001",
+        includeNeighbors: false,
+        includeCurrent: false,
+        includeHandoffs: false,
+      });
+      expect(explicit.neighbors).toEqual([]);
+      expect(explicit.current).toBeUndefined();
+      expect(explicit.handoffs).toEqual([]);
+
+      const textBundle = buildMemoryBriefBundle(context, {
+        text: "real project direction",
+        profile: "migration",
+        includeNeighbors: false,
+        includeCurrent: false,
+        includeHandoffs: false,
+      });
+      expect(textBundle.neighbors).toEqual([]);
+      expect(textBundle.current).toBeUndefined();
+      expect(textBundle.handoffs).toEqual([]);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -73,6 +106,14 @@ describe("memory brief command", () => {
       expect(bundle.request.profile).toBe("migration");
       expect(bundle.matches.some((item) => item.id === "TASK-001")).toBe(true);
       expect(bundle.matches.some((item) => item.matchReasons.length > 0)).toBe(true);
+
+      const trimmed = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "brief", "--task", "TASK-001", "--no-neighbors", "--no-current", "--no-handoffs"]),
+      );
+      expect(trimmed).not.toContain("Current:");
+      expect(trimmed).toContain("Neighbors:\n- none");
+      expect(trimmed).toContain("Handoffs:\n- none");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -87,6 +128,12 @@ describe("memory brief command", () => {
       await expect(runMemoryCommand(rootDir, parseArgs(["memory", "brief", "--task", "TASK-001", "--text", "cli"]))).rejects.toThrow(
         "requires exactly one",
       );
+      await expect(
+        runMemoryCommand(
+          rootDir,
+          parseArgs(["memory", "brief", "--task", "TASK-001", "--include-neighbors", "--no-neighbors"]),
+        ),
+      ).rejects.toThrow("Use either `--include-neighbors` or `--no-neighbors`, not both.");
       await expect(runMemoryCommand(rootDir, parseArgs(["memory", "brief", "--profile", "deep"]))).rejects.toThrow(
         "Invalid memory brief profile",
       );

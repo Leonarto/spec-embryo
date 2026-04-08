@@ -1,6 +1,6 @@
 import type { HandoffDocument, ProjectContext } from "../domain.ts";
 import { buildMemoryIndex, type MemoryIndexEntry } from "./memory-index.ts";
-import { buildMemoryLinksBundle, buildMemoryLinkGraph } from "./memory-links.ts";
+import { buildMemoryNeighborhood, buildMemoryLinkGraph } from "./memory-links.ts";
 import { buildMemoryQueryBundle } from "./memory-query.ts";
 
 export const MEMORY_BRIEF_PROFILES = ["implementation", "review", "migration"] as const;
@@ -145,6 +145,39 @@ function uniqueIds(values: string[]): string[] {
   return Array.from(new Set(values)).filter(Boolean);
 }
 
+function buildNeighborItems(
+  graph: ReturnType<typeof buildMemoryLinkGraph>,
+  centerIds: string[],
+): Array<{ id: string; docKind?: string; title?: string }> {
+  const centerIdSet = new Set(centerIds);
+  const neighborIds = new Set<string>();
+
+  for (const centerId of centerIds) {
+    const neighborhood = buildMemoryNeighborhood(graph, centerId, { depth: 1 });
+    for (const id of neighborhood.documentIds) {
+      if (!centerIdSet.has(id)) {
+        neighborIds.add(id);
+      }
+    }
+  }
+
+  return Array.from(neighborIds)
+    .map((id) => {
+      const entry = graph.index.byId.get(id);
+      return {
+        id,
+        docKind: entry?.docKind,
+        title: entry?.title,
+      };
+    })
+    .sort(
+      (left, right) =>
+        left.id.localeCompare(right.id) ||
+        (left.docKind ?? "").localeCompare(right.docKind ?? "") ||
+        (left.title ?? "").localeCompare(right.title ?? ""),
+    );
+}
+
 export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryBriefRequest): MemoryBriefBundle {
   const { mode, value } = resolveRequestMode(request);
   const profile = resolveProfile(request.profile);
@@ -168,6 +201,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
       status: result.status,
       matchReasons: result.matchReasons,
     }));
+    const neighbors = includeNeighbors ? buildNeighborItems(graph, matches.slice(0, 2).map((item) => item.id)) : [];
 
     return {
       request: { mode, value, profile, includeNeighbors, includeCurrent, includeHandoffs },
@@ -181,7 +215,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
             blockedTaskIds: context.currentState.blockedTaskIds,
           }
         : undefined,
-      neighbors: [],
+      neighbors,
       handoffs: includeHandoffs
         ? context.handoffs.slice(0, profile === "review" ? 3 : 2).map((handoff) => ({
             id: handoff.id,
@@ -192,6 +226,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
         : [],
       nextInspectIds: uniqueIds([
         ...matches.slice(0, 3).map((item) => item.id),
+        ...(includeNeighbors ? neighbors.slice(0, 2).map((item) => item.id) : []),
         ...(includeCurrent ? context.currentState.activeSpecIds.slice(0, 2) : []),
         ...(includeCurrent ? context.currentState.activeTaskIds.slice(0, 2) : []),
         ...(includeHandoffs ? context.handoffs.slice(0, 2).map((handoff) => handoff.id) : []),
@@ -200,8 +235,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
   }
 
   const entry = assertKnownEntry(index.byId.get(value), mode, value);
-  const links = buildMemoryLinksBundle(graph, entry.id, { depth: includeNeighbors ? 1 : 1 });
-  const neighbors = includeNeighbors ? links.neighborhood : [];
+  const neighbors = includeNeighbors ? buildNeighborItems(graph, [entry.id]) : [];
   const handoffs = includeHandoffs
     ? pickRelatedHandoffs(context, entry.id, profile).map((handoff) => ({
         id: handoff.id,
