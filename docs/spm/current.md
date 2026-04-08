@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-046 is done: the repo now has deterministic memory indexing and typed link-graph foundations for specs, tasks, current state, and handoffs."
-focus = "Start TASK-047 by turning the deterministic memory index into a typed query command for managed memory."
+summary = "TASK-047 is done: spm memory query now retrieves managed docs by text, typed filters, tags, links, and one-hop neighborhoods with compact output and stable JSON."
+focus = "Start TASK-048 by exposing backlinks and neighborhood traversal through spm memory links."
 active_spec_ids = ["SPEC-013"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Reuse the new memory-index service for typed filters and normalized text matching.", "Keep default human output compact and agent-readable before adding verbose expansions.", "Add focused coverage for doc kind, status, tag, id, linked-to, and neighbor-of filtering."]
+next_action_hints = ["Reuse the existing memory-link graph instead of rebuilding neighborhood logic in the command layer.", "Keep the human output grouped into outgoing, incoming, and neighborhood sections.", "Add focused coverage for backlinks, outgoing links, and deterministic depth handling."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T15:17:29.715Z"
+updated_at = "2026-04-08T15:51:47.686Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

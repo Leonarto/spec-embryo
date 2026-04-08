@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-047"
 title = "Add the memory query command with typed filters and tag search"
 summary = "Expose spm memory query so humans and agents can retrieve managed docs by text, kind, status, tags, links, and neighborhood-aware filters using compact default output and stable JSON."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-013"]
 depends_on = ["TASK-046"]
 blocked_by = []
 priority = 1
 owner_role = "builder"
 created_at = "2026-04-08T14:41:03.883Z"
+completed_at = "2026-04-08T15:51:47.686Z"
 tags = ["memory", "query", "cli"]
-updated_at = "2026-04-08T14:41:03.883Z"
+updated_at = "2026-04-08T15:51:47.686Z"
 +++
 
 # Scope

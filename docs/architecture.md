@@ -7,8 +7,8 @@ Spec Embryo is intentionally split into seven layers:
 1. Storage and file layer: filesystem access, TOML frontmatter parsing, config loading, and durable writes.
 2. Domain model: typed documents for specs, tasks, handoffs, current state, and backend config.
 3. Deterministic engine: linking, validation, git inspection, blockers, ready work, critical path, and next-action derivation.
-4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
-5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, layout normalization, and other reusable logic above the repository layer.
+4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory query`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
+5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, memory indexing/querying, layout normalization, and other reusable logic above the repository layer.
 6. Local visual server: a SvelteKit app that renders managed memory through shared deterministic services rather than a second parser.
 7. Execution backends: deterministic text output, prompt-return output, and optional subprocess adapters.
 
@@ -126,6 +126,7 @@ Deterministic by default:
 - write handoff and current-state files
 - parse and rewrite spec open-question and resolved-decision sections
 - render adoption-oriented migration guide and direct agent brief artifacts from deterministic repo inspection
+- index managed docs into deterministic retrieval entries and query them by typed filters, backlinks, and one-hop neighborhoods
 
 Non-deterministic only when genuinely needed:
 

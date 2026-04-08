@@ -7,6 +7,7 @@ import { runCurrentCommand } from "./commands/current.ts";
 import { runDoctorCommand } from "./commands/doctor.ts";
 import { runHandoffCommand } from "./commands/handoff.ts";
 import { runInitCommand } from "./commands/init.ts";
+import { runMemoryCommand } from "./commands/memory.ts";
 import { runReshapeCommand } from "./commands/reshape.ts";
 import { runResumeCommand } from "./commands/resume.ts";
 import { runSpecCommand } from "./commands/spec.ts";
@@ -58,6 +59,9 @@ async function main(): Promise<void> {
       break;
     case "agents":
       output = await runAgentsCommand(rootDir, parsed);
+      break;
+    case "memory":
+      output = await runMemoryCommand(rootDir, parsed);
       break;
     case "spec":
       output = await runSpecCommand(rootDir, parsed);
