@@ -1,6 +1,7 @@
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue } from "../cli.ts";
 import { loadProjectContext } from "../repository.ts";
+import { buildMemoryLinkGraph, buildMemoryLinksBundle, renderMemoryLinksBundle } from "../services/memory-links.ts";
 import {
   buildMemoryQueryBundle,
   MEMORY_QUERY_DOC_KINDS,
@@ -61,25 +62,44 @@ function parseStatus(value: string | undefined): MemoryQueryStatus | undefined {
 }
 
 export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
-  if (parsed.subcommand !== "query") {
-    throw new Error("Supported memory commands in this slice are `memory query`.");
+  if (parsed.subcommand === "query") {
+    const context = await loadProjectContext(rootDir);
+    const bundle = buildMemoryQueryBundle(context, {
+      text: flagValue(parsed, "text"),
+      docKind: parseDocKind(flagValue(parsed, "doc-kind")),
+      status: parseStatus(flagValue(parsed, "status")),
+      tags: parseCommaList(flagValue(parsed, "tag")),
+      id: flagValue(parsed, "id"),
+      linkedTo: flagValue(parsed, "linked-to"),
+      neighborOf: flagValue(parsed, "neighbor-of"),
+      limit: parsePositiveInteger(flagValue(parsed, "limit"), "--limit"),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderMemoryQueryBundle(bundle);
   }
 
-  const context = await loadProjectContext(rootDir);
-  const bundle = buildMemoryQueryBundle(context, {
-    text: flagValue(parsed, "text"),
-    docKind: parseDocKind(flagValue(parsed, "doc-kind")),
-    status: parseStatus(flagValue(parsed, "status")),
-    tags: parseCommaList(flagValue(parsed, "tag")),
-    id: flagValue(parsed, "id"),
-    linkedTo: flagValue(parsed, "linked-to"),
-    neighborOf: flagValue(parsed, "neighbor-of"),
-    limit: parsePositiveInteger(flagValue(parsed, "limit"), "--limit"),
-  });
+  if (parsed.subcommand === "links") {
+    const docId = parsed.positionals[2];
+    if (!docId) {
+      throw new Error("`memory links` requires <DOC-ID>.");
+    }
 
-  if (parsed.flags.has("json")) {
-    return JSON.stringify(bundle, null, 2);
+    const context = await loadProjectContext(rootDir);
+    const graph = buildMemoryLinkGraph(context);
+    const bundle = buildMemoryLinksBundle(graph, docId, {
+      depth: parsePositiveInteger(flagValue(parsed, "depth"), "--depth"),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderMemoryLinksBundle(bundle);
   }
 
-  return renderMemoryQueryBundle(bundle);
+  throw new Error("Supported memory commands in this slice are `memory query` and `memory links`.");
 }

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-047 is done: spm memory query now retrieves managed docs by text, typed filters, tags, links, and one-hop neighborhoods with compact output and stable JSON."
-focus = "Start TASK-048 by exposing backlinks and neighborhood traversal through spm memory links."
+summary = "TASK-048 is done: spm memory links now exposes grouped outgoing relations, backlinks, and deterministic neighborhoods with compact human output and stable JSON."
+focus = "Start TASK-049 by turning indexed memory and link neighborhoods into compact working briefs."
 active_spec_ids = ["SPEC-013"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Reuse the existing memory-link graph instead of rebuilding neighborhood logic in the command layer.", "Keep the human output grouped into outgoing, incoming, and neighborhood sections.", "Add focused coverage for backlinks, outgoing links, and deterministic depth handling."]
+next_action_hints = ["Reuse both memory-query and memory-links bundles when composing briefs instead of recomputing retrieval state.", "Keep brief output compact by default and profile-driven only where it changes emphasis.", "Add focused coverage for spec, task, and topic-oriented brief entry modes."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T15:51:47.686Z"
+updated_at = "2026-04-08T16:17:53.838Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

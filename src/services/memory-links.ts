@@ -36,11 +36,50 @@ export interface MemoryNeighborhood {
   relations: MemoryRelation[];
 }
 
+export interface MemoryLinksGroup {
+  relation: MemoryRelationType;
+  items: Array<{
+    id: string;
+    docKind?: MemoryDocKind;
+    title?: string;
+    sourceField: string;
+  }>;
+}
+
+export interface MemoryLinksBundle {
+  center: {
+    id: string;
+    docKind: MemoryDocKind;
+    title: string;
+    summary: string;
+  };
+  depth: number;
+  outgoing: MemoryLinksGroup[];
+  incoming: MemoryLinksGroup[];
+  neighborhood: Array<{
+    id: string;
+    docKind?: MemoryDocKind;
+    title?: string;
+  }>;
+}
+
 function compareRelations(left: MemoryRelation, right: MemoryRelation): number {
   return (
     left.fromId.localeCompare(right.fromId) ||
     left.toId.localeCompare(right.toId) ||
     left.relation.localeCompare(right.relation) ||
+    left.sourceField.localeCompare(right.sourceField)
+  );
+}
+
+function compareLinkItems(
+  left: { id: string; docKind?: MemoryDocKind; title?: string; sourceField: string },
+  right: { id: string; docKind?: MemoryDocKind; title?: string; sourceField: string },
+): number {
+  return (
+    left.id.localeCompare(right.id) ||
+    (left.docKind ?? "").localeCompare(right.docKind ?? "") ||
+    (left.title ?? "").localeCompare(right.title ?? "") ||
     left.sourceField.localeCompare(right.sourceField)
   );
 }
@@ -260,4 +299,118 @@ export function buildMemoryNeighborhood(
     documentIds: Array.from(discovered).sort((left, right) => left.localeCompare(right)),
     relations: Array.from(relations.values()).sort(compareRelations),
   };
+}
+
+function assertKnownDocId(graph: MemoryLinkGraph, docId: string): void {
+  if (!graph.index.byId.has(docId)) {
+    throw new Error(`Unknown document ID for memory links: ${docId}`);
+  }
+}
+
+function groupRelations(
+  graph: MemoryLinkGraph,
+  relations: MemoryRelation[],
+  direction: "incoming" | "outgoing",
+): MemoryLinksGroup[] {
+  const grouped = new Map<MemoryRelationType, MemoryLinksGroup["items"]>();
+
+  for (const relation of relations) {
+    const relationType = relation.relation;
+    const relatedId = direction === "outgoing" ? relation.toId : relation.fromId;
+    const relatedEntry = graph.index.byId.get(relatedId);
+    const items = grouped.get(relationType) ?? [];
+    items.push({
+      id: relatedId,
+      docKind: relatedEntry?.docKind,
+      title: relatedEntry?.title,
+      sourceField: relation.sourceField,
+    });
+    grouped.set(relationType, items);
+  }
+
+  return Array.from(grouped.entries())
+    .sort((left, right) => left[0].localeCompare(right[0]))
+    .map(([relation, items]) => ({
+      relation,
+      items: [...items].sort(compareLinkItems),
+    }));
+}
+
+export function buildMemoryLinksBundle(
+  graph: MemoryLinkGraph,
+  docId: string,
+  options?: { depth?: number },
+): MemoryLinksBundle {
+  assertKnownDocId(graph, docId);
+
+  const center = graph.index.byId.get(docId)!;
+  const depth = Math.min(2, Math.max(1, options?.depth ?? 1));
+  const outgoing = getOutgoingMemoryRelations(graph, docId);
+  const incoming = getIncomingMemoryRelations(graph, docId);
+  const neighborhood = buildMemoryNeighborhood(graph, docId, { depth });
+
+  return {
+    center: {
+      id: center.id,
+      docKind: center.docKind,
+      title: center.title,
+      summary: center.summary,
+    },
+    depth,
+    outgoing: groupRelations(graph, outgoing, "outgoing"),
+    incoming: groupRelations(graph, incoming, "incoming"),
+    neighborhood: neighborhood.documentIds
+      .filter((id) => id !== docId)
+      .map((id) => {
+        const entry = graph.index.byId.get(id);
+        return {
+          id,
+          docKind: entry?.docKind,
+          title: entry?.title,
+        };
+      })
+      .sort(
+        (left, right) =>
+          left.id.localeCompare(right.id) ||
+          (left.docKind ?? "").localeCompare(right.docKind ?? "") ||
+          (left.title ?? "").localeCompare(right.title ?? ""),
+      ),
+  };
+}
+
+function renderSection(groups: MemoryLinksGroup[]): string[] {
+  if (groups.length === 0) {
+    return ["- none"];
+  }
+
+  return groups.flatMap((group) => [
+    `- ${group.relation}`,
+    ...group.items.map((item) => {
+      const kindLabel = item.docKind ? ` [${item.docKind}]` : "";
+      const titleLabel = item.title ? ` ${item.title}` : "";
+      return `  ${item.id}${kindLabel}${titleLabel} (${item.sourceField})`;
+    }),
+  ]);
+}
+
+export function renderMemoryLinksBundle(bundle: MemoryLinksBundle): string {
+  const neighborhoodLines =
+    bundle.neighborhood.length > 0
+      ? bundle.neighborhood.map((item) => `- ${item.id}${item.docKind ? ` [${item.docKind}]` : ""}${item.title ? ` ${item.title}` : ""}`)
+      : ["- none"];
+
+  return [
+    `${bundle.center.id} [${bundle.center.docKind}] ${bundle.center.title}`,
+    `Summary: ${bundle.center.summary}`,
+    `Depth: ${bundle.depth}`,
+    "",
+    "Outgoing:",
+    ...renderSection(bundle.outgoing),
+    "",
+    "Incoming:",
+    ...renderSection(bundle.incoming),
+    "",
+    "Neighborhood:",
+    ...neighborhoodLines,
+  ].join("\n");
 }

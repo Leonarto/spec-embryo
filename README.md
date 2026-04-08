@@ -83,6 +83,7 @@ web/
 - `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `memory query`: retrieve managed docs by text, kind, status, tags, IDs, backlinks, and one-hop neighborhoods with compact default output or stable JSON.
+- `memory links`: inspect outgoing links, backlinks, and deterministic one-hop or two-hop neighborhoods for any managed doc.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.
@@ -138,6 +139,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Adoption-aware `init` output that classifies fresh, legacy-docs, partial, and already-adopted repos before seeding files
 - Repo-local migration guide and direct-agent-brief artifacts for human-reviewed external adoption
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
+- `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
 
 ## Architecture
 
