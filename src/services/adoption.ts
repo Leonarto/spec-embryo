@@ -321,6 +321,16 @@ function doctorModeLines(): string[] {
   ];
 }
 
+function tagGuidanceLines(): string[] {
+  return [
+    "Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.",
+    "Preserve meaningful legacy topical labels as tags when they help another human or agent find related work later.",
+    "Prefer short, stable tags like `combat`, `adoption`, or `ui` over sentence-like labels.",
+    "Avoid unnecessary synonym drift when a repo already has a clear topical label; reuse the existing tag instead of inventing a near-duplicate.",
+    "Do not use tags as a replacement for canonical statuses, links, or dependencies.",
+  ];
+}
+
 export function renderMigrationGuideMarkdown(input: {
   projectName: string;
   memoryDir: string;
@@ -369,6 +379,10 @@ export function renderMigrationGuideMarkdown(input: {
     `- Spec statuses: \`${SPEC_STATUSES.join("`, `")}\``,
     `- Task statuses: \`${TASK_STATUSES.join("`, `")}\``,
     "- Do not replace these with synonyms like `planned` or `completed` inside managed SpM docs.",
+    "",
+    "## Tag Guidance For Retrieval",
+    "",
+    ...tagGuidanceLines().map((line) => `- ${line}`),
   ];
 
   if (partialChecks.length > 0) {
@@ -435,6 +449,7 @@ export function renderDirectAgentBrief(input: {
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",
     `- Use only canonical spec statuses: ${SPEC_STATUSES.join(", ")}.`,
     `- Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
+    ...tagGuidanceLines().map((line) => `- ${line}`),
   ];
 
   if (partialChecks.length > 0) {

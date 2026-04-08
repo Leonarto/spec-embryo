@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-049 is done: spm memory brief now compresses managed memory into compact implementation, review, or migration context for docs, specs, tasks, and topic queries."
-focus = "Start TASK-050 by teaching external adoption how tags support memory retrieval and query quality."
-active_spec_ids = ["SPEC-013"]
+summary = "SPEC-013 is done: Spec Embryo now has deterministic memory indexing, query, links, brief services, and explicit tag guidance for external adoption."
+focus = "Choose the next product slice after completing deterministic memory query, links, brief, and tag-adoption guidance."
+active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Document how legacy topical labels should be preserved as retrieval-friendly tags during adoption.", "Keep tag guidance soft-normalized rather than introducing a hard taxonomy in v1.", "Update migration artifacts so external repos understand why tags matter for memory query and brief flows."]
+next_action_hints = ["Review the new memory command surface end to end and decide whether the next slice should deepen retrieval, add bookmarks, or improve external adoption further.", "If another repo is using SpM externally, pressure-test the new memory commands there before adding more UI.", "Keep using compact doctor output by default and escalate to verbose or JSON only when needed."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T16:23:26.387Z"
+updated_at = "2026-04-08T17:46:44.969Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

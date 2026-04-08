@@ -156,6 +156,9 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Canonical Statuses");
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
+    expect(guide).toContain("Tag Guidance For Retrieval");
+    expect(guide).toContain("Treat tags as retrieval handles");
+    expect(guide).toContain("short, stable tags");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("spm ui");
@@ -165,6 +168,8 @@ describe("adoption guidance", () => {
     expect(brief).toContain("If doctor reports that the running CLI is newer");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
+    expect(brief).toContain("Treat tags as retrieval handles");
+    expect(brief).toContain("Do not use tags as a replacement");
   });
 
   test("adds upgrade commands when doctor reports a newer CLI version", () => {
@@ -213,6 +218,8 @@ describe("init adoption artifacts", () => {
       expect(brief).toContain("Treat any SpM seed scaffold as migration backlog");
       expect(guide).toContain("Reading Doctor Efficiently");
       expect(brief).toContain("Use `spm doctor` first for a cheap status");
+      expect(guide).toContain("Tag Guidance For Retrieval");
+      expect(brief).toContain("Treat tags as retrieval handles");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

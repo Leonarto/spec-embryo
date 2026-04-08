@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-013"
 title = "Add deterministic memory query and briefing services"
 summary = "Borrow Obsidian-style retrieval ideas such as backlinks, local graph neighborhoods, properties-aware search, aliases, and quick access, but implement them as deterministic CLI and service primitives for Spec Embryo memory."
-status = "active"
+status = "done"
 task_ids = ["TASK-046", "TASK-047", "TASK-048", "TASK-049", "TASK-050"]
 tags = ["memory", "retrieval", "query", "obsidian"]
 owner = "human-ai"
-updated_at = "2026-04-08T15:10:18.019Z"
+updated_at = "2026-04-08T17:46:44.892Z"
 +++
 
 # Problem

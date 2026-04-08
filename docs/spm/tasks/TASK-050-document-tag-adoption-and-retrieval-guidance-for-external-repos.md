@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-050"
 title = "Document tag adoption and retrieval guidance for external repos"
 summary = "Make spec format and adoption artifacts explicitly teach how tags should be preserved, normalized softly, and used as retrieval handles for later memory query flows."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-013"]
 depends_on = ["TASK-047"]
 blocked_by = []
 priority = 2
 owner_role = "writer"
 created_at = "2026-04-08T14:41:21.402Z"
+completed_at = "2026-04-08T17:46:44.895Z"
 tags = ["memory", "tags", "adoption"]
-updated_at = "2026-04-08T14:41:21.402Z"
+updated_at = "2026-04-08T17:46:44.895Z"
 +++
 
 # Scope
