@@ -38,6 +38,7 @@ export interface MemoryQueryResult {
   status?: string;
   tags: string[];
   filePath: string;
+  matchReasons: string[];
   relationHints: string[];
 }
 
@@ -59,6 +60,7 @@ export interface MemoryQueryBundle {
 interface ScoredEntry {
   entry: MemoryIndexEntry;
   score: number;
+  matchReasons: string[];
   relationHints: string[];
 }
 
@@ -84,9 +86,9 @@ function matchesTagFilter(entry: MemoryIndexEntry, requestedTags: string[]): boo
   });
 }
 
-function scoreTextMatch(entry: MemoryIndexEntry, text: string | undefined): number | undefined {
+function scoreTextMatch(entry: MemoryIndexEntry, text: string | undefined): { score: number; reasons: string[] } | undefined {
   if (!text) {
-    return 0;
+    return { score: 0, reasons: [] };
   }
 
   const phrase = normalizePhrase(text);
@@ -96,25 +98,32 @@ function scoreTextMatch(entry: MemoryIndexEntry, text: string | undefined): numb
   const lowerSummary = entry.summary.toLowerCase();
 
   let score = 0;
+  const reasons: string[] = [];
 
   if (lowerId === phrase) {
     score += 120;
+    reasons.push("exact id");
   } else if (lowerId.includes(phrase)) {
     score += 60;
+    reasons.push("id phrase");
   }
 
   if (lowerTitle === phrase) {
     score += 100;
+    reasons.push("exact title");
   } else if (lowerTitle.includes(phrase)) {
     score += 50;
+    reasons.push("title phrase");
   }
 
   if (lowerSummary.includes(phrase)) {
     score += 20;
+    reasons.push("summary phrase");
   }
 
   if (entry.normalizedText.includes(phrase)) {
     score += 10;
+    reasons.push("normalized text");
   }
 
   const allTermsMatch = queryTerms.every(
@@ -125,9 +134,16 @@ function scoreTextMatch(entry: MemoryIndexEntry, text: string | undefined): numb
 
   if (allTermsMatch) {
     score += queryTerms.length * 5;
+    reasons.push("all query terms");
   }
 
-  return score > 0 ? score : undefined;
+  if (entry.docKind === "spec" && score > 0) {
+    const taskCount = entry.document.docKind === "spec" ? entry.document.taskIds.length : 0;
+    score += 30 + Math.min(taskCount * 2, 10);
+    reasons.push("spec anchor");
+  }
+
+  return score > 0 ? { score, reasons: uniqueSorted(reasons) } : undefined;
 }
 
 function compareResults(left: ScoredEntry, right: ScoredEntry): number {
@@ -145,6 +161,36 @@ function uniqueSorted(values: string[]): string[] {
 
 function buildRelationHints(relations: MemoryRelation[], perspectiveId: string): string[] {
   return uniqueSorted(relations.map((relation) => relationHintLabel(relation, perspectiveId)));
+}
+
+function buildFilterReasons(entry: MemoryIndexEntry, filters: MemoryQueryFilters, requestedTags: string[]): string[] {
+  const reasons: string[] = [];
+
+  if (filters.docKind) {
+    reasons.push(`kind:${entry.docKind}`);
+  }
+
+  if (filters.status && entry.status) {
+    reasons.push(`status:${entry.status}`);
+  }
+
+  if (filters.id) {
+    reasons.push(`id:${entry.id}`);
+  }
+
+  if (requestedTags.length > 0) {
+    reasons.push(...requestedTags.map((tag) => `tag:${tag.trim().toLowerCase()}`));
+  }
+
+  if (filters.linkedTo) {
+    reasons.push(`linked:${filters.linkedTo}`);
+  }
+
+  if (filters.neighborOf) {
+    reasons.push(`neighbor:${filters.neighborOf}`);
+  }
+
+  return reasons;
 }
 
 export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQueryFilters): MemoryQueryBundle {
@@ -209,8 +255,8 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
         return [];
       }
 
-      const score = scoreTextMatch(entry, filters.text);
-      if (filters.text && score === undefined) {
+      const textScore = scoreTextMatch(entry, filters.text);
+      if (filters.text && textScore === undefined) {
         return [];
       }
 
@@ -232,13 +278,19 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
                     (relation.toId === neighborOf && relation.fromId === entry.id),
                 ),
                 entry.id,
-              )
-            : [];
+            )
+          : [];
+
+      const matchReasons = uniqueSorted([
+        ...buildFilterReasons(entry, filters, requestedTags),
+        ...(textScore?.reasons ?? []),
+      ]);
 
       return [
         {
           entry,
-          score: score ?? 0,
+          score: textScore?.score ?? 0,
+          matchReasons,
           relationHints,
         },
       ];
@@ -257,7 +309,7 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
       limit,
     },
     totalMatches: scored.length,
-    results: scored.slice(0, limit).map(({ entry, relationHints }) => ({
+    results: scored.slice(0, limit).map(({ entry, matchReasons, relationHints }) => ({
       id: entry.id,
       docKind: entry.docKind,
       title: entry.title,
@@ -265,6 +317,7 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
       status: entry.status,
       tags: entry.tags,
       filePath: entry.filePath,
+      matchReasons,
       relationHints,
     })),
   };
@@ -278,10 +331,11 @@ export function renderMemoryQueryBundle(bundle: MemoryQueryBundle): string {
   return bundle.results
     .map((result) => {
       const statusLabel = result.status ? ` ${result.status}` : "";
+      const reasonLine = result.matchReasons.length > 0 ? `\n  match: ${result.matchReasons.join(", ")}` : "";
       const relationLine =
         result.relationHints.length > 0 ? `\n  relations: ${result.relationHints.join(", ")}` : "";
       const tagLine = result.tags.length > 0 ? `\n  tags: ${result.tags.join(", ")}` : "";
-      return `${result.id} [${result.docKind}${statusLabel}] ${result.title}\n  ${result.summary}${relationLine}${tagLine}`;
+      return `${result.id} [${result.docKind}${statusLabel}] ${result.title}\n  ${result.summary}${reasonLine}${relationLine}${tagLine}`;
     })
     .join("\n\n");
 }

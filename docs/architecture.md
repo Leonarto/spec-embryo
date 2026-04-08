@@ -126,7 +126,7 @@ Deterministic by default:
 - write handoff and current-state files
 - parse and rewrite spec open-question and resolved-decision sections
 - render adoption-oriented migration guide and direct agent brief artifacts from deterministic repo inspection
-- index managed docs into deterministic retrieval entries and expose query/link/brief traversal by typed filters, backlinks, local neighborhoods, and compact context bundles
+- index managed docs into deterministic retrieval entries and expose query/link/brief traversal by typed filters, backlinks, local neighborhoods, compact context bundles, explicit match reasons, and deterministic concept-friendly ranking
 
 Non-deterministic only when genuinely needed:
 

@@ -17,6 +17,7 @@ describe("memory brief service", () => {
       const bundle = buildMemoryBriefBundle(context, { taskId: "TASK-001" });
 
       expect(bundle.center?.id).toBe("TASK-001");
+      expect(bundle.center?.matchReasons).toContain("explicit task");
       expect(bundle.current?.activeTaskIds).toContain("TASK-001");
       expect(bundle.neighbors.some((item) => item.id === "SPEC-001")).toBe(true);
       expect(bundle.nextInspectIds).toContain("TASK-001");
@@ -37,6 +38,7 @@ describe("memory brief service", () => {
       });
 
       expect(bundle.matches?.some((item) => item.id === "TASK-001")).toBe(true);
+      expect(bundle.matches?.some((item) => item.matchReasons.length > 0)).toBe(true);
       expect(bundle.current?.activeSpecIds).toContain("SPEC-001");
       expect(bundle.nextInspectIds.length).toBeGreaterThan(0);
     } finally {
@@ -55,6 +57,7 @@ describe("memory brief command", () => {
       const human = await runMemoryCommand(rootDir, parseArgs(["memory", "brief", "--task", "TASK-001"]));
       expect(human).toContain("Memory brief [implementation]");
       expect(human).toContain("Center: TASK-001");
+      expect(human).toContain("Match: explicit task");
       expect(human).toContain("Neighbors:");
 
       const json = await runMemoryCommand(
@@ -63,12 +66,13 @@ describe("memory brief command", () => {
       );
       const bundle = JSON.parse(json) as {
         request: { mode: string; profile: string };
-        matches: Array<{ id: string }>;
+        matches: Array<{ id: string; matchReasons: string[] }>;
       };
 
       expect(bundle.request.mode).toBe("text");
       expect(bundle.request.profile).toBe("migration");
       expect(bundle.matches.some((item) => item.id === "TASK-001")).toBe(true);
+      expect(bundle.matches.some((item) => item.matchReasons.length > 0)).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

@@ -33,6 +33,7 @@ export interface MemoryBriefBundle {
     summary: string;
     status?: string;
     tags: string[];
+    matchReasons: string[];
   };
   matches?: Array<{
     id: string;
@@ -40,6 +41,7 @@ export interface MemoryBriefBundle {
     title: string;
     summary: string;
     status?: string;
+    matchReasons: string[];
   }>;
   current?: {
     focus: string;
@@ -135,6 +137,7 @@ function toCenter(entry: MemoryIndexEntry) {
     summary: entry.summary,
     status: entry.status,
     tags: entry.tags,
+    matchReasons: [],
   };
 }
 
@@ -163,6 +166,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
       title: result.title,
       summary: result.summary,
       status: result.status,
+      matchReasons: result.matchReasons,
     }));
 
     return {
@@ -206,10 +210,17 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
         createdAt: handoff.createdAt,
       }))
     : [];
+  const center = toCenter(entry);
+  center.matchReasons =
+    mode === "task"
+      ? ["explicit task"]
+      : mode === "spec"
+        ? ["explicit spec"]
+        : ["explicit id"];
 
   return {
     request: { mode, value, profile, includeNeighbors, includeCurrent, includeHandoffs },
-    center: toCenter(entry),
+    center,
     current: includeCurrent
       ? {
           focus: context.currentState.focus,
@@ -240,6 +251,9 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
       `Center: ${bundle.center.id} [${bundle.center.docKind}${bundle.center.status ? ` ${bundle.center.status}` : ""}] ${bundle.center.title}`,
       `Summary: ${bundle.center.summary}`,
     );
+    if (bundle.center.matchReasons.length > 0) {
+      lines.push(`Match: ${bundle.center.matchReasons.join(", ")}`);
+    }
     if (bundle.center.tags.length > 0) {
       lines.push(`Tags: ${bundle.center.tags.join(", ")}`);
     }
@@ -250,7 +264,9 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
     lines.push(
       ...bundle.matches.map(
         (match) =>
-          `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""}] ${match.title}: ${match.summary}`,
+          `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""}] ${match.title}: ${match.summary}${
+            match.matchReasons.length > 0 ? ` (match: ${match.matchReasons.join(", ")})` : ""
+          }`,
       ),
     );
   }

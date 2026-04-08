@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-013 is done: Spec Embryo now has deterministic memory indexing, query, links, brief services, and explicit tag guidance for external adoption."
-focus = "Choose the next product slice after completing deterministic memory query, links, brief, and tag-adoption guidance."
+summary = "SPEC-014 is done. Deterministic memory retrieval now prefers stronger spec anchors for topic queries, exposes explicit match reasons, and includes agent-style regression evals."
+focus = "Choose the next memory or adoption slice."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Review the new memory command surface end to end and decide whether the next slice should deepen retrieval, add bookmarks, or improve external adoption further.", "If another repo is using SpM externally, pressure-test the new memory commands there before adding more UI.", "Keep using compact doctor output by default and escalate to verbose or JSON only when needed."]
+next_action_hints = ["Decide whether to keep investing in memory services, adoption ergonomics, or UI visualization next."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T17:46:44.969Z"
+updated_at = "2026-04-08T18:03:07.524Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 
