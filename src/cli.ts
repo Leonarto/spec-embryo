@@ -91,6 +91,7 @@ Usage:
   spm agents check [--json]
   spm memory query [--text "..."] [--doc-kind spec|task|handoff|current-state] [--status ...] [--tag ui,adoption] [--id SPEC-001] [--linked-to DOC-ID] [--neighbor-of DOC-ID] [--limit 20] [--json]
   spm memory links <DOC-ID> [--depth 1|2] [--json]
+  spm memory brief (--id DOC-ID | --spec SPEC-ID | --task TASK-ID | --text "...") [--include-neighbors] [--include-current] [--include-handoffs] [--profile implementation|review|migration] [--json]
   spm spec list [--status active]
   spm spec create --title "..." --summary "..." [--status proposed] [--task-ids TASK-001,TASK-002] [--tags foundation,cli] [--owner human-ai] [--json]
   spm spec set-status <SPEC-ID> <proposed|active|paused|done|archived> [--json]

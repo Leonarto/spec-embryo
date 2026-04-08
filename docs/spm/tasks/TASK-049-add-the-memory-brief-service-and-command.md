@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-049"
 title = "Add the memory brief service and command"
 summary = "Build compact implementation, review, or migration-oriented memory briefs for a spec, task, doc id, or topic query without dumping large document bodies by default."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-013"]
 depends_on = ["TASK-046"]
 blocked_by = []
 priority = 1
 owner_role = "builder"
 created_at = "2026-04-08T14:41:16.074Z"
+completed_at = "2026-04-08T16:23:26.386Z"
 tags = ["memory", "brief", "cli"]
-updated_at = "2026-04-08T14:41:16.074Z"
+updated_at = "2026-04-08T16:23:26.386Z"
 +++
 
 # Scope

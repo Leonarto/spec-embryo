@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-048 is done: spm memory links now exposes grouped outgoing relations, backlinks, and deterministic neighborhoods with compact human output and stable JSON."
-focus = "Start TASK-049 by turning indexed memory and link neighborhoods into compact working briefs."
+summary = "TASK-049 is done: spm memory brief now compresses managed memory into compact implementation, review, or migration context for docs, specs, tasks, and topic queries."
+focus = "Start TASK-050 by teaching external adoption how tags support memory retrieval and query quality."
 active_spec_ids = ["SPEC-013"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Reuse both memory-query and memory-links bundles when composing briefs instead of recomputing retrieval state.", "Keep brief output compact by default and profile-driven only where it changes emphasis.", "Add focused coverage for spec, task, and topic-oriented brief entry modes."]
+next_action_hints = ["Document how legacy topical labels should be preserved as retrieval-friendly tags during adoption.", "Keep tag guidance soft-normalized rather than introducing a hard taxonomy in v1.", "Update migration artifacts so external repos understand why tags matter for memory query and brief flows."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T16:17:53.838Z"
+updated_at = "2026-04-08T16:23:26.387Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

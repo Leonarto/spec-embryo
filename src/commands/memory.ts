@@ -1,6 +1,12 @@
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue } from "../cli.ts";
 import { loadProjectContext } from "../repository.ts";
+import {
+  buildMemoryBriefBundle,
+  MEMORY_BRIEF_PROFILES,
+  renderMemoryBriefBundle,
+  type MemoryBriefProfile,
+} from "../services/memory-brief.ts";
 import { buildMemoryLinkGraph, buildMemoryLinksBundle, renderMemoryLinksBundle } from "../services/memory-links.ts";
 import {
   buildMemoryQueryBundle,
@@ -61,6 +67,20 @@ function parseStatus(value: string | undefined): MemoryQueryStatus | undefined {
   );
 }
 
+function parseBriefProfile(value: string | undefined): MemoryBriefProfile | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  if (MEMORY_BRIEF_PROFILES.includes(value as MemoryBriefProfile)) {
+    return value as MemoryBriefProfile;
+  }
+
+  throw new Error(
+    `Invalid memory brief profile: ${value}. Expected one of ${MEMORY_BRIEF_PROFILES.join(", ")}.`,
+  );
+}
+
 export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
   if (parsed.subcommand === "query") {
     const context = await loadProjectContext(rootDir);
@@ -101,5 +121,25 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     return renderMemoryLinksBundle(bundle);
   }
 
-  throw new Error("Supported memory commands in this slice are `memory query` and `memory links`.");
+  if (parsed.subcommand === "brief") {
+    const context = await loadProjectContext(rootDir);
+    const bundle = buildMemoryBriefBundle(context, {
+      id: flagValue(parsed, "id"),
+      specId: flagValue(parsed, "spec"),
+      taskId: flagValue(parsed, "task"),
+      text: flagValue(parsed, "text"),
+      includeNeighbors: parsed.flags.has("include-neighbors") ? true : undefined,
+      includeCurrent: parsed.flags.has("include-current") ? true : undefined,
+      includeHandoffs: parsed.flags.has("include-handoffs") ? true : undefined,
+      profile: parseBriefProfile(flagValue(parsed, "profile")),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderMemoryBriefBundle(bundle);
+  }
+
+  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, and `memory brief`.");
 }
