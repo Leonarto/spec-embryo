@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-044 is complete: init-generated migration guides and direct agent briefs now explicitly teach when to use spm doctor, spm doctor --verbose, and spm doctor --json."
-focus = "Choose the next slice after clarifying doctor mode guidance in adoption artifacts."
+summary = "TASK-045 is complete locally: packaged spm ui now disables Svelte dev prebundling when running from node_modules so global installs can load virtual CSS modules correctly."
+focus = "Choose the next slice after fixing packaged spm ui virtual CSS loading."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Commit the doctor-mode guidance refinement before starting the next feature.", "Pressure-test the updated migration guide in another adopted repo and confirm the agent follows the cheap-by-default doctor flow.", "Consider whether other long human-facing commands should adopt the same explicit default-versus-verbose teaching."]
+next_action_hints = ["Commit the packaged ui CSS-loading fix before starting the next feature.", "Publish a patch release so external projects can pick up the packaged-runtime fix.", "Re-test spm ui in a globally installed external repo after upgrading to confirm the virtual CSS warnings are gone."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T02:56:39.298Z"
+updated_at = "2026-04-08T12:35:28.840Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 
