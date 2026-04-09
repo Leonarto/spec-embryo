@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-059"
 title = "Tighten memory tag matching semantics"
 summary = "Move memory tag filtering toward predictable normalized tag semantics instead of permissive substring matches that can drift as the corpus grows."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-015"]
 depends_on = []
 blocked_by = []
 priority = 1
 owner_role = "builder"
 created_at = "2026-04-08T20:09:28.109Z"
+completed_at = "2026-04-09T02:01:57.913Z"
 tags = ["memory", "tags", "retrieval"]
-updated_at = "2026-04-08T20:09:28.109Z"
+updated_at = "2026-04-09T02:01:57.913Z"
 +++
 
 # Scope

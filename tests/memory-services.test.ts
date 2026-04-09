@@ -3,7 +3,7 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { initializeProject, loadProjectContext } from "../src/repository.ts";
-import { buildMemoryIndex } from "../src/services/memory-index.ts";
+import { buildMemoryIndex, extractBodySearchValues } from "../src/services/memory-index.ts";
 import {
   buildMemoryLinkGraph,
   buildMemoryNeighborhood,
@@ -12,6 +12,54 @@ import {
 } from "../src/services/memory-links.ts";
 
 describe("memory retrieval foundation services", () => {
+  test("extracts section-aware body search values while skipping fenced-code noise", () => {
+    const values = extractBodySearchValues(`
+# Problem
+
+Agents need stronger retrieval trust.
+
+## Resolved Decisions
+
+- Keep deterministic ranking.
+- Avoid vector databases.
+
+\`\`\`ts
+const noisy = "do not index me";
+\`\`\`
+
+## Notes
+
+Use [memory query](https://example.com) for navigation.
+`);
+
+    expect(values).toContain("Problem Agents need stronger retrieval trust.");
+    expect(values).toContain("Resolved Decisions");
+    expect(values).toContain("Resolved Decisions Keep deterministic ranking.");
+    expect(values).toContain("Resolved Decisions Avoid vector databases.");
+    expect(values).toContain("Notes Use memory query for navigation.");
+    expect(values.some((value) => value.includes("noisy"))).toBe(false);
+    expect(values).not.toContain("Problem");
+  });
+
+  test("recovers body indexing after an unclosed fenced block", () => {
+    const values = extractBodySearchValues(`
+# Problem
+
+Keep the adoption guidance searchable.
+
+\`\`\`ts
+const noisy = "skip me";
+
+## Notes
+
+Index the prose that comes after the unfinished fence.
+`);
+
+    expect(values).toContain("Problem Keep the adoption guidance searchable.");
+    expect(values).toContain("Notes Index the prose that comes after the unfinished fence.");
+    expect(values.some((value) => value.includes("noisy"))).toBe(false);
+  });
+
   test("builds a deterministic index from managed docs with normalized retrieval terms", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-"));
 

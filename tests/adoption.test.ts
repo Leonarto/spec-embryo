@@ -159,6 +159,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Tag Guidance For Retrieval");
     expect(guide).toContain("Treat tags as retrieval handles");
     expect(guide).toContain("short, stable tags");
+    expect(guide).toContain("normalize spaces, underscores, and hyphens");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("spm ui");
@@ -169,6 +170,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
     expect(brief).toContain("Treat tags as retrieval handles");
+    expect(brief).toContain("Do not expect partial substring matches");
     expect(brief).toContain("Do not use tags as a replacement");
   });
 
@@ -220,6 +222,7 @@ describe("init adoption artifacts", () => {
       expect(brief).toContain("Use `spm doctor` first for a cheap status");
       expect(guide).toContain("Tag Guidance For Retrieval");
       expect(brief).toContain("Treat tags as retrieval handles");
+      expect(brief).toContain("Do not expect partial substring matches");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

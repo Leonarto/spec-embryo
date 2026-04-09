@@ -326,6 +326,8 @@ function tagGuidanceLines(): string[] {
     "Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.",
     "Preserve meaningful legacy topical labels as tags when they help another human or agent find related work later.",
     "Prefer short, stable tags like `combat`, `adoption`, or `ui` over sentence-like labels.",
+    "Remember that memory tag filters normalize spaces, underscores, and hyphens to one canonical tag value.",
+    "Do not expect partial substring matches from tag filters; use the actual tag you want to retrieve.",
     "Avoid unnecessary synonym drift when a repo already has a clear topical label; reuse the existing tag instead of inventing a near-duplicate.",
     "Do not use tags as a replacement for canonical statuses, links, or dependencies.",
   ];

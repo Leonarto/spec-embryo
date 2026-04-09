@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-015"
 title = "Improve memory retrieval precision and workflow confidence"
 summary = "Refine retrieval precision, tag semantics, and end-to-end workflow coverage so memory commands stay trustworthy as the repo grows."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-057", "TASK-058", "TASK-059"]
 tags = ["memory", "retrieval", "precision", "testing"]
 owner = "human-ai"
-updated_at = "2026-04-08T20:09:28.109Z"
+updated_at = "2026-04-09T02:21:25.757Z"
 +++
 
 # Problem

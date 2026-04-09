@@ -64,6 +64,21 @@ interface ScoredEntry {
   relationHints: string[];
 }
 
+function normalizeTagValue(value: string): string | undefined {
+  const parts = value
+    .trim()
+    .toLowerCase()
+    .split(/[\s_-]+/u)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (parts.length === 0) {
+    return undefined;
+  }
+
+  return parts.join("-");
+}
+
 function normalizePhrase(value: string): string {
   return value.trim().toLowerCase().replace(/\s+/gu, " ");
 }
@@ -92,11 +107,13 @@ function matchesTagFilter(entry: MemoryIndexEntry, requestedTags: string[]): boo
     return true;
   }
 
-  const tagTerms = buildNormalizedTerms(entry.tags);
-  return requestedTags.every((tag) => {
-    const queryTerms = buildNormalizedTerms([tag]);
-    return queryTerms.every((term) => tagTerms.some((candidate) => candidate.includes(term)));
-  });
+  const normalizedTags = new Set(
+    entry.tags
+      .map((tag) => normalizeTagValue(tag))
+      .filter((tag): tag is string => Boolean(tag)),
+  );
+
+  return requestedTags.every((tag) => normalizedTags.has(tag));
 }
 
 function scoreTextMatch(entry: MemoryIndexEntry, text: string | undefined): { score: number; reasons: string[] } | undefined {
@@ -209,7 +226,11 @@ function buildFilterReasons(entry: MemoryIndexEntry, filters: MemoryQueryFilters
 export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQueryFilters): MemoryQueryBundle {
   const limit = filters.limit && filters.limit > 0 ? filters.limit : 20;
   const requestedText = normalizeRequestedText(filters.text);
-  const requestedTags = (filters.tags ?? []).map((tag) => tag.trim()).filter(Boolean);
+  const requestedTags = uniqueSorted(
+    (filters.tags ?? [])
+      .map((tag) => normalizeTagValue(tag))
+      .filter((tag): tag is string => Boolean(tag)),
+  );
   const graph = buildMemoryLinkGraph(context);
   const knownIds = new Set(graph.index.byId.keys());
   const linkedTo = filters.linkedTo?.trim();

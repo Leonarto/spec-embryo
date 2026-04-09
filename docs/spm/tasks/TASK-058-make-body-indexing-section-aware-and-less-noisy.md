@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-058"
 title = "Make body indexing section-aware and less noisy"
 summary = "Refine managed body indexing so retrieval prefers meaningful section text over raw line fragments while staying deterministic."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-015"]
 depends_on = []
 blocked_by = []
 priority = 1
 owner_role = "builder"
 created_at = "2026-04-08T20:09:28.109Z"
+completed_at = "2026-04-09T00:53:02.987Z"
 tags = ["memory", "retrieval", "indexing"]
-updated_at = "2026-04-08T20:09:28.109Z"
+updated_at = "2026-04-09T00:53:02.987Z"
 +++
 
 # Scope

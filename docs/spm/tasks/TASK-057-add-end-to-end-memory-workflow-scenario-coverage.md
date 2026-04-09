@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-057"
 title = "Add end-to-end memory workflow scenario coverage"
 summary = "Create higher-level scenario tests that exercise query, links, and brief together across realistic multi-spec memory workflows."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-015"]
 depends_on = []
 blocked_by = []
 priority = 2
 owner_role = "reviewer"
 created_at = "2026-04-08T20:09:28.102Z"
+completed_at = "2026-04-09T02:21:25.625Z"
 tags = ["memory", "testing", "workflow"]
-updated_at = "2026-04-08T20:09:28.102Z"
+updated_at = "2026-04-09T02:21:25.625Z"
 +++
 
 # Scope

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-014 and SPEC-016 are done. Managed document creation now serializes spec/task ID allocation through a shared repository lock, and SPEC-015 remains the next proposed memory-quality slice."
+summary = "SPEC-015 is done. Memory retrieval now has section-aware body indexing, exact normalized tag filters, and end-to-end workflow scenario coverage across query, links, and brief."
 focus = "Choose the next memory or adoption slice."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Review SPEC-015 and decide whether to activate it as the next memory-quality slice."]
+next_action_hints = ["Choose the next memory or adoption slice based on the latest retrieval and adoption work."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-08T20:10:32.706Z"
+updated_at = "2026-04-09T02:21:25.757Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

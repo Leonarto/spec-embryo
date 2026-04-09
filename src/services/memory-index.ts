@@ -33,20 +33,150 @@ export interface MemoryIndex {
   byKind: Map<MemoryDocKind, MemoryIndexEntry[]>;
 }
 
-function extractBodySearchValues(body: string): string[] {
-  return body
-    .replace(/\r\n/g, "\n")
-    .split("\n")
-    .map((line) =>
-      line
-        .trim()
-        .replace(/^#{1,6}\s+/u, "")
-        .replace(/^[-*+]\s+/u, "")
-        .replace(/^\d+\.\s+/u, "")
-        .replace(/^>\s+/u, "")
-        .replace(/`/gu, ""),
-    )
-    .filter((line) => line.length > 0 && !line.startsWith("```"));
+interface BodySection {
+  heading?: string;
+  chunks: string[];
+}
+
+function isGenericHeading(value: string): boolean {
+  const normalized = value.trim().toLowerCase();
+  return new Set([
+    "problem",
+    "goals",
+    "non-goals",
+    "notes",
+    "narrative",
+    "scope",
+    "constraints",
+    "acceptance criteria",
+    "current state",
+  ]).has(normalized);
+}
+
+function cleanBodyLine(rawLine: string): string {
+  return rawLine
+    .trim()
+    .replace(/^#{1,6}\s+/u, "")
+    .replace(/^[-*+]\s+(?:\[[ xX]\]\s+)?/u, "")
+    .replace(/^\d+\.\s+/u, "")
+    .replace(/^>\s+/u, "")
+    .replace(/!\[([^\]]*)\]\([^)]+\)/gu, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/gu, "$1")
+    .replace(/`+/gu, "")
+    .replace(/[*_~]+/gu, "")
+    .replace(/\s+/gu, " ")
+    .trim();
+}
+
+function buildSectionSearchValues(section: BodySection): string[] {
+  const values: string[] = [];
+  const heading = section.heading?.trim();
+  const informativeHeading = heading && !isGenericHeading(heading);
+
+  if (informativeHeading) {
+    values.push(heading);
+  }
+
+  for (const chunk of section.chunks) {
+    values.push(heading ? `${heading} ${chunk}` : chunk);
+  }
+
+  return values;
+}
+
+export function extractBodySearchValues(body: string): string[] {
+  const lines = body.replace(/\r\n/g, "\n").split("\n");
+  const sections: BodySection[] = [];
+  let current: BodySection = { chunks: [] };
+  let paragraphLines: string[] = [];
+  let inFence = false;
+  let recoverUnclosedFence = false;
+
+  const flushParagraph = (): void => {
+    if (paragraphLines.length === 0) {
+      return;
+    }
+
+    current.chunks.push(paragraphLines.join(" "));
+    paragraphLines = [];
+  };
+
+  const flushSection = (): void => {
+    flushParagraph();
+    if (current.heading || current.chunks.length > 0) {
+      sections.push(current);
+    }
+    current = { chunks: [] };
+  };
+
+  for (const [index, rawLine] of lines.entries()) {
+    const trimmed = rawLine.trim();
+
+    if (trimmed.startsWith("```")) {
+      flushParagraph();
+
+      if (inFence) {
+        inFence = false;
+        recoverUnclosedFence = false;
+        continue;
+      }
+
+      recoverUnclosedFence = !lines.slice(index + 1).some((line) => line.trim().startsWith("```"));
+      inFence = true;
+      continue;
+    }
+
+    if (inFence) {
+      // Recover from an unclosed fence once the author resumes normal markdown.
+      if (recoverUnclosedFence && (trimmed.length === 0 || /^#{1,6}\s+.+$/u.test(trimmed))) {
+        inFence = false;
+        recoverUnclosedFence = false;
+
+        if (trimmed.length === 0) {
+          flushParagraph();
+          continue;
+        }
+      } else {
+        continue;
+      }
+    }
+
+    const headingMatch = trimmed.match(/^#{1,6}\s+(.+)$/u);
+    if (headingMatch) {
+      flushSection();
+      current.heading = cleanBodyLine(headingMatch[1] ?? "");
+      continue;
+    }
+
+    if (trimmed.length === 0) {
+      flushParagraph();
+      continue;
+    }
+
+    if (/^---+$|^\*\*\*+$|^___+$/u.test(trimmed)) {
+      flushParagraph();
+      continue;
+    }
+
+    const cleaned = cleanBodyLine(rawLine);
+    if (cleaned.length === 0) {
+      continue;
+    }
+
+    if (/^[-*+]\s+/u.test(trimmed) || /^\d+\.\s+/u.test(trimmed)) {
+      flushParagraph();
+      current.chunks.push(cleaned);
+      continue;
+    }
+
+    paragraphLines.push(cleaned);
+  }
+
+  flushSection();
+
+  return sections
+    .flatMap((section) => buildSectionSearchValues(section))
+    .filter((value) => value.trim().length > 0);
 }
 
 function tokenize(value: string): string[] {
