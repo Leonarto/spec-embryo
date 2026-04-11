@@ -1,6 +1,6 @@
 {
   "name": "@leonarto/spec-embryo",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Spec Embryo: local-first, spec-first, CLI-first project memory and orchestration for AI-assisted software work.",
   "module": "src/index.ts",
   "type": "module",
@@ -21,6 +21,18 @@
     "agent"
   ],
   "license": "MIT",
+  "files": [
+    "README.md",
+    "src",
+    "web/package.json",
+    "web/src",
+    "web/svelte-plugin-options.js",
+    "web/svelte.config.js",
+    "web/tsconfig.json",
+    "web/vite-paths.ts",
+    "web/vite.config.ts",
+    "tsconfig.json"
+  ],
   "bin": {
     "spec-embryo": "src/index.ts",
     "spm": "src/index.ts"
