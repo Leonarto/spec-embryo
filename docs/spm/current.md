@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-015 is done. Memory retrieval now has section-aware body indexing, exact normalized tag filters, and end-to-end workflow scenario coverage across query, links, and brief."
-focus = "Choose the next memory or adoption slice."
+summary = "SPEC-017 plus TASK-064 are done, including review fixes for invalid Nexus AGENTS modes and scoped AGENTS validation. Spec Embryo now has Nexus guardrails in product code and this repo is explicitly Nexus-enabled with a local GitNexus index, root AGENTS coexistence contract, and local Nexus/Claude artifacts ignored."
+focus = "Choose whether the next slice should add runtime Nexus-powered review or resume flows, or return to memory and adoption work."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Choose the next memory or adoption slice based on the latest retrieval and adoption work."]
+next_action_hints = ["Use GitNexus for code-impact checks while keeping spm as the planning source of truth.", "Consider a follow-up spec for review-prepare or resume-time Nexus integration if the manual workflow proves useful."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-09T02:21:25.757Z"
+updated_at = "2026-04-11T03:29:46.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

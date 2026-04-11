@@ -1,6 +1,6 @@
 # AGENTS
 
-This is the root operating guide for humans and agents working in this repo. Read it first, then read the nearest nested `AGENTS.md` in the folder you are changing.
+Read this first, then read the nearest nested `AGENTS.md` in the folder you are changing.
 
 ## Project shape
 
@@ -14,31 +14,37 @@ CLI names:
 
 Core layers:
 
-- storage and file IO: `src/storage.ts`, `src/frontmatter.ts`, `src/repository.ts`
-- domain model and schemas: `src/domain.ts`
+- storage/IO: `src/storage.ts`, `src/frontmatter.ts`, `src/repository.ts`
+- domain schemas: `src/domain.ts`
 - deterministic engine: `src/engine.ts`
-- deterministic product services: `src/services/`
+- product services: `src/services/`
 - CLI surface: `src/index.ts`, `src/cli.ts`, `src/commands/`
 - execution backends: `src/backends/`
 - managed memory home: `docs/spm/` or `spm/`
 - visual server: `web/`
-- repo docs and skills: `docs/`, `skills/`, `.specpm/`
+- docs and skills: `docs/`, `skills/`, `.specpm/`
 
 ## Working rules
 
 - Keep deterministic logic as the default. Do not introduce model-dependent behavior when explicit code is enough.
-- Prefer updating the nearest source-of-truth docs together with code: specs, tasks, current state, handoffs, and relevant `AGENTS.md`.
+- Prefer updating source-of-truth docs with code: specs, tasks, current state, handoffs, and relevant `AGENTS.md`.
 - When working on the Spec Embryo repo itself, use the repo-local skill at `skills/spm-self-hosting/SKILL.md`.
 - When `spm` already provides the needed project-memory view, use the CLI before falling back to raw file inspection.
 - When touching the local dashboard, keep `web/` as a read-only view over shared deterministic services rather than inventing web-only parsing or state.
-- When authoring or materially revising a spec, use `skills/spec-writer/SKILL.md`, iterate key decisions with the user, then use `skills/spec-reviewer/SKILL.md` and fix the spec before finalizing it.
-- For npm releases of `@leonarto/spec-embryo`, use `skills/publish/SKILL.md` and stop before final `bun publish`; hand the exact command to the user for 2FA.
-- Treat `review` as a real gate for tasks. If review finds issues, keep the task in `review` or move it back to active work; use `done` only after the findings are fixed.
-- After review fixes are in, commit before the next slice so later diffs and reviews stay clean.
+- When authoring or materially revising a spec, use `skills/spec-writer/SKILL.md`, iterate key decisions, then use `skills/spec-reviewer/SKILL.md` and fix findings before finalizing.
+- For npm releases, use `skills/publish/SKILL.md`; stop before final `bun publish` and hand the command to the user for 2FA.
+- Treat `review` as a real gate. If review finds issues, keep the task in `review` or move it back; use `done` only after fixes.
+- After review fixes, commit before the next slice so diffs and reviews stay clean.
 - Keep folder-local `AGENTS.md` files additive. Root policy lives here; nested files should only add local context.
 - If you create a growing subsystem or folder, add a local `AGENTS.md` there early.
 - Always aim for at least 80% test coverage overall.
-- Whenever you add or materially change code, add or update tests in the same change unless the code is genuinely untestable and the reason is explicit.
+- Add or update tests with code changes unless the code is genuinely untestable and the reason is explicit.
+
+## Nexus Coexistence
+
+- Use `spm` as the source of truth for specs, tasks, current state, handoffs, adoption structure, and deterministic workflow.
+- Use Nexus for code impact, related-code, and blast-radius analysis only.
+- Do not let Nexus replace or overwrite root `AGENTS.md`; keep Nexus guidance additive or scoped below the root.
 
 ## Required AGENTS maintenance
 
@@ -54,7 +60,7 @@ When updating any `AGENTS.md`, use `skills/agents-md-maintainer/SKILL.md`. If AG
 
 ## Size and performance policy
 
-There is no single vendor-prescribed sweet spot for repo instruction files. Budgets here are approximate and enforced by `bun run check:agents` plus the project policy in `.specpm/config.toml`.
+Budgets here are approximate and enforced by `bun run check:agents` plus `.specpm/config.toml`.
 
 The current default assumes a `400000` token GPT-5/Codex-sized context window and derives root + chain budgets from context ratios. Folder-local budgets scale from that root policy.
 

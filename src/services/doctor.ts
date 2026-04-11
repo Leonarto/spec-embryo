@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { delimiter, join, relative } from "node:path";
 import type {
   CurrentStateDocument,
   HandoffDocument,
@@ -16,10 +16,17 @@ import {
 import { parseTomlFrontmatter } from "../frontmatter.ts";
 import { createDefaultConfig, readProjectConfig } from "../repository.ts";
 import { resolveProjectPaths } from "../paths.ts";
-import { buildAdoptionArtifactPaths, buildAdoptionGuidance, renderDirectAgentBrief } from "./adoption.ts";
+import {
+  buildAdoptionArtifactPaths,
+  buildAdoptionGuidance,
+  NEXUS_COEXISTENCE_HEADING,
+  nexusCoexistenceLines,
+  renderDirectAgentBrief,
+} from "./adoption.ts";
 import { inspectAdoptionState, type AdoptionInspection } from "./layout.ts";
 import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
 import { CLI_VERSION, compareCliVersions } from "./version.ts";
+import { findAgentsFiles } from "./agents.ts";
 
 export type DoctorSeverity = "blocking" | "warning" | "info";
 export type DoctorOverallStatus = "healthy" | "needs-attention" | "blocked";
@@ -250,6 +257,129 @@ function detectSeedScaffold(currentState: CurrentStateDocument | undefined, spec
   );
 }
 
+async function commandExists(command: string | undefined): Promise<boolean> {
+  if (!command) {
+    return false;
+  }
+
+  if (command.includes("/")) {
+    return pathExists(command);
+  }
+
+  const rawPath = process.env.PATH;
+  if (!rawPath) {
+    return false;
+  }
+
+  const candidates = rawPath
+    .split(delimiter)
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .flatMap((segment) => {
+      return process.platform === "win32"
+        ? [join(segment, command), join(segment, `${command}.exe`), join(segment, `${command}.cmd`)]
+        : [join(segment, command)];
+    });
+
+  for (const candidate of candidates) {
+    if (await pathExists(candidate)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function agentsFileContainsNexusContract(content: string): boolean {
+  return (
+    content.includes(NEXUS_COEXISTENCE_HEADING) &&
+    content.includes("Use `spm` as the source of truth") &&
+    content.includes("Use Nexus for code impact, related-code, and blast-radius analysis only.") &&
+    content.includes("Do not let Nexus replace or overwrite root `AGENTS.md`")
+  );
+}
+
+async function validateRootNexusGuidance(rootDir: string, findings: DoctorFinding[]): Promise<void> {
+  const rootAgentsFile = join(rootDir, "AGENTS.md");
+  if (!(await pathExists(rootAgentsFile))) {
+    pushFinding(
+      findings,
+      "warning",
+      "nexus-missing-root-agents-guidance",
+      "Nexus is enabled but the repo has no root AGENTS.md that defines how Nexus should coexist with `spm`.",
+      rootAgentsFile,
+      `Add a \`${NEXUS_COEXISTENCE_HEADING}\` section that says ${nexusCoexistenceLines()[1]?.toLowerCase() ?? "spm remains the source of truth"}`,
+    );
+    return;
+  }
+
+  const rootAgents = await readUtf8(rootAgentsFile);
+  if (!agentsFileContainsNexusContract(rootAgents)) {
+    pushFinding(
+      findings,
+      "warning",
+      "nexus-missing-coexistence-contract",
+      "Nexus is enabled but root AGENTS guidance does not yet describe the bounded coexistence contract with `spm`.",
+      rootAgentsFile,
+      `Add a \`${NEXUS_COEXISTENCE_HEADING}\` section that keeps \`spm\` as the planning source of truth and limits Nexus to code-impact analysis.`,
+    );
+  }
+}
+
+async function validateScopedNexusGuidance(rootDir: string, findings: DoctorFinding[]): Promise<void> {
+  const scopedAgentsFiles = (await findAgentsFiles(rootDir)).filter((file) => relative(rootDir, file) !== "AGENTS.md");
+
+  for (const agentsFile of scopedAgentsFiles) {
+    const content = await readUtf8(agentsFile);
+    if (agentsFileContainsNexusContract(content)) {
+      return;
+    }
+  }
+
+  pushFinding(
+    findings,
+    "warning",
+    "nexus-missing-scoped-agents-guidance",
+    "Nexus is enabled in scoped AGENTS mode, but no nested AGENTS.md contains the bounded coexistence contract with `spm`.",
+    rootDir,
+    `Add a \`${NEXUS_COEXISTENCE_HEADING}\` section to the nearest scoped AGENTS.md that keeps \`spm\` as the planning source of truth and limits Nexus to code-impact analysis.`,
+  );
+}
+
+async function validateNexusIntegration(rootDir: string, config: ProjectConfig, findings: DoctorFinding[]): Promise<void> {
+  if (!config.nexus.enabled) {
+    return;
+  }
+
+  if (config.nexus.rootAgentsMode === "managed-by-nexus") {
+    pushFinding(
+      findings,
+      "blocking",
+      "nexus-unsafe-root-agents-mode",
+      "Nexus is configured to manage root AGENTS guidance, which would let it displace Spec Embryo's planning authority.",
+      join(rootDir, ".specpm", "config.toml"),
+      "Set `nexus.root_agents_mode` to `reference-only` or `scoped` so root AGENTS ownership stays with `spm`.",
+    );
+  }
+
+  if (!(await commandExists(config.nexus.command))) {
+    pushFinding(
+      findings,
+      "warning",
+      "nexus-command-missing",
+      `Nexus is enabled but the configured command could not be found: ${config.nexus.command ?? "(missing command)"}.`,
+      join(rootDir, ".specpm", "config.toml"),
+      "Install Nexus separately using the upstream instructions, verify the configured command locally, then re-run `spm doctor`.",
+    );
+  }
+
+  if (config.nexus.rootAgentsMode === "scoped") {
+    await validateScopedNexusGuidance(rootDir, findings);
+  } else {
+    await validateRootNexusGuidance(rootDir, findings);
+  }
+}
+
 export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> {
   const configFile = join(rootDir, ".specpm", "config.toml");
   const configExists = await pathExists(configFile);
@@ -290,6 +420,10 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
       configFile,
       "Re-run `spm doctor` or `spm init` after reviewing the release changes if you want this repo to adopt the newer guidance and defaults.",
     );
+  }
+
+  if (config) {
+    await validateNexusIntegration(rootDir, config, findings);
   }
 
   const adoption = await inspectAdoptionState(rootDir, { config });

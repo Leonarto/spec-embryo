@@ -31,6 +31,18 @@ export interface AdoptionArtifactPaths {
   agentBriefFile: string;
 }
 
+export const NEXUS_COEXISTENCE_HEADING = "Nexus Coexistence";
+
+export function nexusCoexistenceLines(): string[] {
+  return [
+    "Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.",
+    "Use `spm` as the source of truth for specs, tasks, current state, handoffs, adoption structure, and deterministic workflow.",
+    "Use Nexus for code impact, related-code, and blast-radius analysis only.",
+    "Do not let Nexus replace or overwrite root `AGENTS.md`; keep any Nexus-specific guidance additive or scoped below the root.",
+    "After enabling Nexus in `.specpm/config.toml`, re-run `spm doctor` so the bounded coexistence checks can confirm the setup.",
+  ];
+}
+
 function buildRelativePath(baseDir: string, leaf: string): string {
   const normalizedBase = baseDir.replace(/\/+$/u, "");
   return normalizedBase.length === 0 ? leaf : `${normalizedBase}/${leaf}`;
@@ -333,6 +345,15 @@ function tagGuidanceLines(): string[] {
   ];
 }
 
+function nexusInstallSteps(): string[] {
+  return [
+    "Install Nexus separately from Spec Embryo by following the upstream Nexus instructions for your environment.",
+    "Verify that the configured Nexus command resolves locally before enabling it in `.specpm/config.toml`.",
+    "Enable the `[nexus]` section only after the repo already understands the basic `spm` workflow.",
+    "Add the bounded coexistence wording to root `AGENTS.md`, then re-run `spm doctor`.",
+  ];
+}
+
 export function renderMigrationGuideMarkdown(input: {
   projectName: string;
   memoryDir: string;
@@ -385,6 +406,14 @@ export function renderMigrationGuideMarkdown(input: {
     "## Tag Guidance For Retrieval",
     "",
     ...tagGuidanceLines().map((line) => `- ${line}`),
+    "",
+    `## ${NEXUS_COEXISTENCE_HEADING}`,
+    "",
+    ...nexusCoexistenceLines().map((line) => `- ${line}`),
+    "",
+    "## Nexus Setup Flow",
+    "",
+    ...nexusInstallSteps().map((line, index) => `${index + 1}. ${line}`),
   ];
 
   if (partialChecks.length > 0) {
@@ -452,6 +481,7 @@ export function renderDirectAgentBrief(input: {
     `- Use only canonical spec statuses: ${SPEC_STATUSES.join(", ")}.`,
     `- Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
     ...tagGuidanceLines().map((line) => `- ${line}`),
+    ...nexusCoexistenceLines().map((line) => `- ${line}`),
   ];
 
   if (partialChecks.length > 0) {

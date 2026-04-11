@@ -2,11 +2,13 @@ export const SPEC_STATUSES = ["proposed", "active", "paused", "done", "archived"
 export const TASK_STATUSES = ["todo", "in_progress", "blocked", "review", "done", "cancelled"] as const;
 export const HANDOFF_KINDS = ["checkpoint", "resume", "decision", "release"] as const;
 export const BACKEND_NAMES = ["deterministic", "prompt", "codex", "claude"] as const;
+export const NEXUS_ROOT_AGENTS_MODES = ["reference-only", "scoped", "managed-by-nexus"] as const;
 
 export type SpecStatus = (typeof SPEC_STATUSES)[number];
 export type TaskStatus = (typeof TASK_STATUSES)[number];
 export type HandoffKind = (typeof HANDOFF_KINDS)[number];
 export type BackendName = (typeof BACKEND_NAMES)[number];
+export type NexusRootAgentsMode = (typeof NEXUS_ROOT_AGENTS_MODES)[number];
 
 export function isSpecStatus(value: string): value is SpecStatus {
   return SPEC_STATUSES.includes(value as SpecStatus);
@@ -74,6 +76,13 @@ export interface ExecutionBackendConfig {
   args?: string[];
 }
 
+export interface NexusConfig {
+  enabled: boolean;
+  command?: string;
+  args: string[];
+  rootAgentsMode: NexusRootAgentsMode;
+}
+
 export interface AgentsConfig {
   contextWindowTokens: number;
   rootTargetRatio: number;
@@ -97,6 +106,7 @@ export interface ProjectConfig {
   defaults: {
     resumeBackend: BackendName;
   };
+  nexus: NexusConfig;
   backends: {
     deterministic: { enabled: boolean };
     prompt: { enabled: boolean };
@@ -259,6 +269,7 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
 
   const defaults = isRecord(data.defaults) ? data.defaults : {};
   const agents = isRecord(data.agents) ? data.agents : {};
+  const nexus = isRecord(data.nexus) ? data.nexus : {};
   const backends = isRecord(data.backends) ? data.backends : {};
   const deterministicBackend = isRecord(backends.deterministic) ? backends.deterministic : {};
   const promptBackend = isRecord(backends.prompt) ? backends.prompt : {};
@@ -320,6 +331,18 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
     },
     defaults: {
       resumeBackend: asEnum(defaults.resume_backend, BACKEND_NAMES, "defaults.resume_backend", ".specpm/config.toml", "deterministic"),
+    },
+    nexus: {
+      enabled: nexus.enabled === true,
+      command: asOptionalString(nexus.command),
+      args: asStringArray(nexus.args, "nexus.args", ".specpm/config.toml"),
+      rootAgentsMode: asEnumWithUndefinedFallback(
+        nexus.root_agents_mode,
+        NEXUS_ROOT_AGENTS_MODES,
+        "nexus.root_agents_mode",
+        ".specpm/config.toml",
+        "reference-only",
+      ),
     },
     backends: {
       deterministic: {

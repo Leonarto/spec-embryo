@@ -53,6 +53,20 @@ bun run src/index.ts status
 
 `spm` is the primary short command. `spec-embryo` is the long-form name.
 
+## Optional Nexus
+
+Spec Embryo can coexist with an external Nexus installation for code-impact analysis, but Nexus is optional and is not bundled with `spm`.
+
+Safe setup flow:
+
+1. Install Nexus separately by following the upstream Nexus instructions for your environment.
+2. Verify the configured Nexus command resolves locally.
+3. Enable the `[nexus]` section in `.specpm/config.toml`.
+4. Add bounded coexistence wording to root `AGENTS.md` so `spm` stays the source of truth for specs, tasks, current state, handoffs, and adoption workflows.
+5. Re-run `spm doctor`.
+
+Use `spm` for project memory and deterministic workflow. Use Nexus only for code impact, related-code, and blast-radius analysis.
+
 ## Source-of-truth layout
 
 ```text
@@ -78,7 +92,7 @@ web/
 - `init`: act as the primary adoption entrypoint by classifying repo state, discovering a docs/specs surface when appropriate, creating or completing the managed memory home, and writing a repo-local migration guide plus direct-agent-brief file.
 - `init --json`: return the same adoption classification plus a structured next-step guide and direct agent brief that the user can hand to an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
-- `doctor`: inspect repo-memory health, adoption state, drift, broken links, and recorded tool-version lag with a concise default summary that keeps recurring agent reads cheap.
+- `doctor`: inspect repo-memory health, adoption state, drift, broken links, recorded tool-version lag, and bounded Nexus coexistence when Nexus is enabled, with a concise default summary that keeps recurring agent reads cheap.
 - `doctor --verbose`: include the full adoption guide, next-command sequence, and copy-pasteable direct agent brief.
 - `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
@@ -142,6 +156,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
 - `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
 - `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, local neighborhoods, and recent handoffs
+- Optional external Nexus guardrails through config, doctor checks, and adoption guidance so code-graph analysis can complement `spm` without replacing it
 
 ## Architecture
 

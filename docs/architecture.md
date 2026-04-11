@@ -18,7 +18,7 @@ This keeps the repo-native memory system stable even as future interfaces evolve
 
 The repo is the source of truth. V1 uses:
 
-- `.specpm/config.toml` for tool configuration and backend settings
+- `.specpm/config.toml` for tool configuration, optional external integration settings, and backend settings
 - `.specpm/config.toml` also holds the project-standard AGENTS context-budget policy
 - `.specpm/config.toml` also records the adopted repo's last written `tool_version` so doctor can surface newer CLI guidance
 - `docs/spm/` or `spm/` as the managed memory home
@@ -30,7 +30,7 @@ The repo is the source of truth. V1 uses:
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
-When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide and direct brief.
+When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide and direct brief. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
 
 ## Domain model
 
@@ -111,6 +111,17 @@ Core fields:
 
 Backends are adapters. The core tool remains useful without them.
 
+### Optional Nexus integration
+
+Core fields:
+
+- enabled flag
+- optional command
+- optional args
+- root AGENTS coexistence mode
+
+Nexus is modeled as an optional external code-analysis complement. It is not a required dependency and it does not replace managed specs, tasks, current state, handoffs, or adoption workflows. When enabled, `doctor` validates that the repo still keeps root planning authority with `spm`.
+
 ## Deterministic vs non-deterministic boundaries
 
 Deterministic by default:
@@ -126,6 +137,7 @@ Deterministic by default:
 - write handoff and current-state files
 - parse and rewrite spec open-question and resolved-decision sections
 - render adoption-oriented migration guide and direct agent brief artifacts from deterministic repo inspection
+- validate bounded coexistence with optional external code-graph tooling through config, command-availability, and AGENTS contract checks
 - index managed docs into deterministic retrieval entries and expose query/link/brief traversal by typed filters, backlinks, local neighborhoods, compact context bundles, explicit match reasons, and deterministic concept-friendly ranking
 
 Non-deterministic only when genuinely needed:
@@ -199,3 +211,4 @@ The v1 structure is meant to grow cleanly into:
 - analytical views that group work by spec set and lifecycle window without leaving the file-backed model
 - interactive timeline tracing that stays URL-driven and deterministic so a selected dependency neighborhood can be shared in a handoff or review link
 - a later optional backend or database without invalidating the file-backed model
+- optional deeper Nexus-style integrations for review prep or resume enrichment once the external coexistence contract has proven stable

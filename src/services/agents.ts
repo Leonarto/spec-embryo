@@ -46,7 +46,7 @@ export interface AgentsHealthReport {
   };
 }
 
-const EXCLUDED_DIRS = new Set([".git", "node_modules", "dist", "coverage"]);
+const EXCLUDED_DIRS = new Set([".git", ".gitnexus", ".claude", "node_modules", "dist", "coverage"]);
 const RULES: Record<string, { targetMultiplier: number; hardCapMultiplier: number }> = {
   ".": { targetMultiplier: 1, hardCapMultiplier: 1 },
   ".specpm": { targetMultiplier: 1 / 3, hardCapMultiplier: 1 / 3 },

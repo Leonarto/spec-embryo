@@ -1,4 +1,4 @@
-tool_version = "0.1.5"
+tool_version = "0.1.9"
 project_name = "spec-embryo"
 memory_dir = "docs/spm"
 state_file = "docs/spm/current.md"
@@ -18,6 +18,12 @@ absolute_chain_hard_cap = 8000
 
 [defaults]
 resume_backend = "deterministic"
+
+[nexus]
+enabled = true
+command = "gitnexus"
+args = []
+root_agents_mode = "reference-only"
 
 [backends.deterministic]
 enabled = true

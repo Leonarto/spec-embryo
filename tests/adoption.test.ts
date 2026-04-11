@@ -156,23 +156,28 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Canonical Statuses");
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
-    expect(guide).toContain("Tag Guidance For Retrieval");
-    expect(guide).toContain("Treat tags as retrieval handles");
-    expect(guide).toContain("short, stable tags");
-    expect(guide).toContain("normalize spaces, underscores, and hyphens");
-    expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
-    expect(brief).toContain("Before declaring adoption complete, check:");
-    expect(brief).toContain("spm ui");
+      expect(guide).toContain("Tag Guidance For Retrieval");
+      expect(guide).toContain("Treat tags as retrieval handles");
+      expect(guide).toContain("short, stable tags");
+      expect(guide).toContain("normalize spaces, underscores, and hyphens");
+      expect(guide).toContain("Nexus Coexistence");
+      expect(guide).toContain("Nexus is optional and external to Spec Embryo");
+      expect(guide).toContain("Do not let Nexus replace or overwrite root `AGENTS.md`");
+      expect(guide).toContain("Nexus Setup Flow");
+      expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
+      expect(brief).toContain("Before declaring adoption complete, check:");
+      expect(brief).toContain("spm ui");
     expect(brief).toContain("Use `spm doctor` first for a cheap status");
     expect(brief).toContain("Use `spm doctor --verbose` only when");
     expect(brief).toContain("Use `spm doctor --json` when an agent needs structured findings");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
-    expect(brief).toContain("Treat tags as retrieval handles");
-    expect(brief).toContain("Do not expect partial substring matches");
-    expect(brief).toContain("Do not use tags as a replacement");
-  });
+      expect(brief).toContain("Treat tags as retrieval handles");
+      expect(brief).toContain("Do not expect partial substring matches");
+      expect(brief).toContain("Do not use tags as a replacement");
+      expect(brief).toContain("Use Nexus for code impact, related-code, and blast-radius analysis only.");
+    });
 
   test("adds upgrade commands when doctor reports a newer CLI version", () => {
     const guidance = buildAdoptionGuidance({
@@ -223,6 +228,8 @@ describe("init adoption artifacts", () => {
       expect(guide).toContain("Tag Guidance For Retrieval");
       expect(brief).toContain("Treat tags as retrieval handles");
       expect(brief).toContain("Do not expect partial substring matches");
+      expect(guide).toContain("Nexus Coexistence");
+      expect(brief).toContain("Nexus is optional and external to Spec Embryo");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

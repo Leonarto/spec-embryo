@@ -27,6 +27,12 @@ absolute_chain_hard_cap = 8000
 [defaults]
 resume_backend = "deterministic"
 
+[nexus]
+enabled = false
+command = "nexus"
+args = []
+root_agents_mode = "reference-only"
+
 [backends.deterministic]
 enabled = true
 
