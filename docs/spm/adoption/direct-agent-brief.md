@@ -12,14 +12,38 @@ What to inspect first:
 
 How to work:
 - Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.
+- Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.
+- Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.
+- Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.
 - Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.
 - Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.
 - Update AGENTS files and local skills when adoption changes how future agents should work in this repo.
+- Use only canonical spec statuses: proposed, active, paused, done, archived.
+- Use only canonical task statuses: todo, in_progress, blocked, review, done, cancelled.
+- Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.
+- Preserve meaningful legacy topical labels as tags when they help another human or agent find related work later.
+- Prefer short, stable tags like `combat`, `adoption`, or `ui` over sentence-like labels.
+- Remember that memory tag filters normalize spaces, underscores, and hyphens to one canonical tag value.
+- Do not expect partial substring matches from tag filters; use the actual tag you want to retrieve.
+- Avoid unnecessary synonym drift when a repo already has a clear topical label; reuse the existing tag instead of inventing a near-duplicate.
+- Do not use tags as a replacement for canonical statuses, links, or dependencies.
+- Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.
+- Use `spm` as the source of truth for specs, tasks, current state, handoffs, adoption structure, and deterministic workflow.
+- Use Nexus for code impact, related-code, and blast-radius analysis only.
+- Do not let Nexus replace or overwrite root `AGENTS.md`; keep any Nexus-specific guidance additive or scoped below the root.
+- Use `spm nexus setup` to preview bounded Nexus changes, then ask the human before running `spm nexus setup --apply`.
+- After enabling Nexus in `.specpm/config.toml`, re-run `spm doctor` so the bounded coexistence checks can confirm the setup.
 
 Deterministic commands to prefer:
 - spm doctor
 - spm current set --focus "..." --summary "..."
 - spm handoff --title "Initial adoption checkpoint"
+
+If doctor reports that the running CLI is newer than the repo's recorded tool version:
+- If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.
+- Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
+- Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
+- If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
 
 Do not assume:
 - Do not replace or delete legacy project docs before preserving their intent in managed memory.

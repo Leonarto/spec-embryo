@@ -120,7 +120,7 @@ Core fields:
 - optional args
 - root AGENTS coexistence mode
 
-Nexus is modeled as an optional external code-analysis complement. It is not a required dependency and it does not replace managed specs, tasks, current state, handoffs, or adoption workflows. When enabled, `doctor` validates that the repo still keeps root planning authority with `spm`.
+Nexus is modeled as an optional external code-analysis complement. It is not a required dependency and it does not replace managed specs, tasks, current state, handoffs, or adoption workflows. `spm nexus setup` previews or applies the bounded repo-local setup in one pass, while `doctor` remains read-only and validates that the repo still keeps planning authority with `spm`.
 
 ## Deterministic vs non-deterministic boundaries
 

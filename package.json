@@ -1,6 +1,6 @@
 {
   "name": "@leonarto/spec-embryo",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Spec Embryo: local-first, spec-first, CLI-first project memory and orchestration for AI-assisted software work.",
   "module": "src/index.ts",
   "type": "module",

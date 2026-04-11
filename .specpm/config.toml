@@ -1,4 +1,4 @@
-tool_version = "0.1.10"
+tool_version = "0.1.11"
 project_name = "spec-embryo"
 memory_dir = "docs/spm"
 state_file = "docs/spm/current.md"

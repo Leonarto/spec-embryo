@@ -45,6 +45,7 @@ Core layers:
 - Use `spm` as the source of truth for specs, tasks, current state, handoffs, adoption structure, and deterministic workflow.
 - Use Nexus for code impact, related-code, and blast-radius analysis only.
 - Do not let Nexus replace or overwrite root `AGENTS.md`; keep Nexus guidance additive or scoped below the root.
+- Run `spm nexus setup` to preview; ask before `spm nexus setup --apply`.
 
 ## Required AGENTS maintenance
 

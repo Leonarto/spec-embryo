@@ -39,6 +39,7 @@ export function nexusCoexistenceLines(): string[] {
     "Use `spm` as the source of truth for specs, tasks, current state, handoffs, adoption structure, and deterministic workflow.",
     "Use Nexus for code impact, related-code, and blast-radius analysis only.",
     "Do not let Nexus replace or overwrite root `AGENTS.md`; keep any Nexus-specific guidance additive or scoped below the root.",
+    "Use `spm nexus setup` to preview bounded Nexus changes, then ask the human before running `spm nexus setup --apply`.",
     "After enabling Nexus in `.specpm/config.toml`, re-run `spm doctor` so the bounded coexistence checks can confirm the setup.",
   ];
 }
@@ -348,9 +349,10 @@ function tagGuidanceLines(): string[] {
 function nexusInstallSteps(): string[] {
   return [
     "Install Nexus separately from Spec Embryo by following the upstream Nexus instructions for your environment.",
-    "Verify that the configured Nexus command resolves locally before enabling it in `.specpm/config.toml`.",
-    "Enable the `[nexus]` section only after the repo already understands the basic `spm` workflow.",
-    "Add the bounded coexistence wording to root `AGENTS.md`, then re-run `spm doctor`.",
+    "Run `spm nexus setup` to show the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.",
+    "Ask the human whether to enable bounded Nexus coexistence for this repo.",
+    "If approved, run `spm nexus setup --apply` instead of editing `.specpm/config.toml` and `AGENTS.md` by hand.",
+    "Run `spm doctor` after apply, then run the recommended GitNexus indexing command if the external tool is installed.",
   ];
 }
 

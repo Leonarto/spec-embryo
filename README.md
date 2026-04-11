@@ -60,10 +60,10 @@ Spec Embryo can coexist with an external Nexus installation for code-impact anal
 Safe setup flow:
 
 1. Install Nexus separately by following the upstream Nexus instructions for your environment.
-2. Verify the configured Nexus command resolves locally.
-3. Enable the `[nexus]` section in `.specpm/config.toml`.
-4. Add bounded coexistence wording to root `AGENTS.md` so `spm` stays the source of truth for specs, tasks, current state, handoffs, and adoption workflows.
-5. Re-run `spm doctor`.
+2. Run `spm nexus setup` to preview the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes.
+3. If the human approves, run `spm nexus setup --apply`.
+4. Re-run `spm doctor`.
+5. Run the recommended GitNexus indexing command if the external tool is installed.
 
 Use `spm` for project memory and deterministic workflow. Use Nexus only for code impact, related-code, and blast-radius analysis.
 
@@ -96,6 +96,7 @@ web/
 - `doctor --verbose`: include the full adoption guide, next-command sequence, and copy-pasteable direct agent brief.
 - `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
+- `nexus setup`: preview or apply the bounded optional Nexus setup across config, AGENTS guidance, local artifact ignore rules, and adoption artifacts.
 - `memory query`: retrieve managed docs by text, kind, status, tags, IDs, backlinks, and one-hop neighborhoods with compact default output, stable JSON, deterministic match reasons, concept-friendly ranking, and body-text retrieval over managed Markdown.
 - `memory links`: inspect outgoing links, backlinks, and deterministic one-hop or two-hop neighborhoods for any managed doc.
 - `memory brief`: compress managed memory into compact implementation, review, or migration context for a doc, spec, task, or topic query, including why a center or text match was selected and allowing explicit inclusion/exclusion of neighbors, current state, and handoffs.
@@ -156,7 +157,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
 - `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
 - `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, local neighborhoods, and recent handoffs
-- Optional external Nexus guardrails through config, doctor checks, and adoption guidance so code-graph analysis can complement `spm` without replacing it
+- Optional external Nexus guardrails through config, doctor checks, adoption guidance, and `spm nexus setup` so code-graph analysis can complement `spm` without replacing it
 
 ## Architecture
 

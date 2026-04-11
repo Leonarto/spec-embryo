@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-017 plus TASK-064 are done, including review fixes for invalid Nexus AGENTS modes and scoped AGENTS validation. Spec Embryo now has Nexus guardrails in product code and this repo is explicitly Nexus-enabled with a local GitNexus index, root AGENTS coexistence contract, and local Nexus/Claude artifacts ignored."
-focus = "Choose whether the next slice should add runtime Nexus-powered review or resume flows, or return to memory and adoption work."
+summary = "SPEC-018 and TASK-065 are done. spm now has a first-class nexus setup command that previews or applies bounded Nexus config, AGENTS guidance, local artifact ignore rules, and adoption artifact refreshes so external-project agents can ask the human once instead of manually chaining doctor, init, config, and AGENTS edits."
+focus = "Choose the next slice after one-step Nexus setup orchestration."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Use GitNexus for code-impact checks while keeping spm as the planning source of truth.", "Consider a follow-up spec for review-prepare or resume-time Nexus integration if the manual workflow proves useful."]
+next_action_hints = ["Use spm nexus setup in external repos to preview bounded Nexus activation before applying it.", "Consider a later runtime Nexus integration such as review prep or resume enrichment if the setup flow proves useful."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-11T03:29:46.000Z"
+updated_at = "2026-04-11T20:14:03.718Z"
 tags = ["v1", "self-hosting", "spec-workflow", "ui"]
 +++
 

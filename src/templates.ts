@@ -29,7 +29,7 @@ resume_backend = "deterministic"
 
 [nexus]
 enabled = false
-command = "nexus"
+command = "gitnexus"
 args = []
 root_agents_mode = "reference-only"
 

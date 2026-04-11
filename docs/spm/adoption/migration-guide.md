@@ -31,6 +31,45 @@ This guide explains how to adopt Spec Embryo into **spec-embryo** without confus
 - Computing deterministic status, blockers, dependency-derived next actions, and timeline/kanban projections.
 - Rendering the built-in UI and surfacing the repo memory that UI reads from local files.
 
+## Reading Doctor Efficiently
+
+- Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.
+- Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.
+- Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.
+
+## Canonical Statuses
+
+- Spec statuses: `proposed`, `active`, `paused`, `done`, `archived`
+- Task statuses: `todo`, `in_progress`, `blocked`, `review`, `done`, `cancelled`
+- Do not replace these with synonyms like `planned` or `completed` inside managed SpM docs.
+
+## Tag Guidance For Retrieval
+
+- Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.
+- Preserve meaningful legacy topical labels as tags when they help another human or agent find related work later.
+- Prefer short, stable tags like `combat`, `adoption`, or `ui` over sentence-like labels.
+- Remember that memory tag filters normalize spaces, underscores, and hyphens to one canonical tag value.
+- Do not expect partial substring matches from tag filters; use the actual tag you want to retrieve.
+- Avoid unnecessary synonym drift when a repo already has a clear topical label; reuse the existing tag instead of inventing a near-duplicate.
+- Do not use tags as a replacement for canonical statuses, links, or dependencies.
+
+## Nexus Coexistence
+
+- Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.
+- Use `spm` as the source of truth for specs, tasks, current state, handoffs, adoption structure, and deterministic workflow.
+- Use Nexus for code impact, related-code, and blast-radius analysis only.
+- Do not let Nexus replace or overwrite root `AGENTS.md`; keep any Nexus-specific guidance additive or scoped below the root.
+- Use `spm nexus setup` to preview bounded Nexus changes, then ask the human before running `spm nexus setup --apply`.
+- After enabling Nexus in `.specpm/config.toml`, re-run `spm doctor` so the bounded coexistence checks can confirm the setup.
+
+## Nexus Setup Flow
+
+1. Install Nexus separately from Spec Embryo by following the upstream Nexus instructions for your environment.
+2. Run `spm nexus setup` to show the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.
+3. Ask the human whether to enable bounded Nexus coexistence for this repo.
+4. If approved, run `spm nexus setup --apply` instead of editing `.specpm/config.toml` and `AGENTS.md` by hand.
+5. Run `spm doctor` after apply, then run the recommended GitNexus indexing command if the external tool is installed.
+
 ## User-Mediated Agent Handoff
 
 1. Run the relevant `spm` command such as `spm init`, `spm doctor`, or `spm spec import-prompt`.
@@ -44,6 +83,13 @@ This guide explains how to adopt Spec Embryo into **spec-embryo** without confus
 - `spm doctor` — Verify the adopted layout before trusting normal resume and UI flows.
 - `spm current set --focus "..." --summary "..."` — Create the first explicit checkpoint so another human or agent can answer where work should continue.
 - `spm handoff --title "Initial adoption checkpoint"` — Capture the migration state once the first meaningful setup pass is complete.
+
+## Adopting Newer SpM Guidance
+
+1. If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.
+2. Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
+3. Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
+4. If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
 
 ## First-Week Sequence
 

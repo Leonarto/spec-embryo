@@ -164,6 +164,7 @@ describe("adoption guidance", () => {
       expect(guide).toContain("Nexus is optional and external to Spec Embryo");
       expect(guide).toContain("Do not let Nexus replace or overwrite root `AGENTS.md`");
       expect(guide).toContain("Nexus Setup Flow");
+      expect(guide).toContain("spm nexus setup --apply");
       expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
       expect(brief).toContain("Before declaring adoption complete, check:");
       expect(brief).toContain("spm ui");
@@ -177,6 +178,7 @@ describe("adoption guidance", () => {
       expect(brief).toContain("Do not expect partial substring matches");
       expect(brief).toContain("Do not use tags as a replacement");
       expect(brief).toContain("Use Nexus for code impact, related-code, and blast-radius analysis only.");
+      expect(brief).toContain("spm nexus setup --apply");
     });
 
   test("adds upgrade commands when doctor reports a newer CLI version", () => {
