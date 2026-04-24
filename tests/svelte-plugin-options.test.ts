@@ -1,5 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { buildSvelteVitePluginOptions, isPackagedSvelteApp } from "../web/svelte-plugin-options.js";
+import {
+  buildPackagedViteOptimizeDeps,
+  buildSvelteVitePluginOptions,
+  isPackagedSvelteApp,
+} from "../web/svelte-plugin-options.js";
 
 describe("svelte plugin options", () => {
   test("detects packaged installs from node_modules paths", () => {
@@ -29,5 +33,21 @@ describe("svelte plugin options", () => {
         "file:///Users/example/dev/spec-pm/web/svelte.config.js",
       ),
     ).toEqual({});
+  });
+
+  test("forces Mermaid dependency optimization for packaged installs only", () => {
+    expect(
+      buildPackagedViteOptimizeDeps(
+        "file:///Users/example/.bun/install/global/node_modules/@leonarto/spec-embryo/web/vite.config.ts",
+      ),
+    ).toEqual({
+      include: ["mermaid", "dayjs"],
+    });
+
+    expect(
+      buildPackagedViteOptimizeDeps(
+        "file:///Users/example/dev/spec-pm/web/vite.config.ts",
+      ),
+    ).toBeUndefined();
   });
 });

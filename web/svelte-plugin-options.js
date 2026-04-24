@@ -16,3 +16,16 @@ export function buildSvelteVitePluginOptions(configUrl = import.meta.url) {
     prebundleSvelteLibraries: false,
   };
 }
+
+export function buildPackagedViteOptimizeDeps(configUrl = import.meta.url) {
+  if (!isPackagedSvelteApp(configUrl)) {
+    return undefined;
+  }
+
+  return {
+    // Packaged `spm ui` can resolve Mermaid's `dayjs` dependency from the global
+    // Bun install tree. Force both through Vite optimization so browser imports
+    // get the CommonJS default interop wrapper instead of raw `/@fs/.../dayjs.min.js`.
+    include: ["mermaid", "dayjs"],
+  };
+}
