@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-019 is active. TASK-069 is done, and spm now has a deterministic memory consolidation flow that promotes session notes into durable handoffs with duplicate, contradiction, related-doc, and staleness checks."
-focus = "Start TASK-071 to improve retrieval ordering and section-level packing on top of the new context-pack and consolidation layers."
+summary = "SPEC-019 is active. TASK-071 is done, and spm now promotes section-level evidence earlier in memory briefs and context packs so agents can start from smaller, stronger slices before opening whole documents."
+focus = "Start TASK-070 to add deterministic context and memory evaluation harnesses on top of the new packing, scope, consolidation, and retrieval-ordering layers."
 active_spec_ids = ["SPEC-019"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Start TASK-071 by improving section-level evidence extraction and result ordering for memory packs and briefs.", "Keep the new consolidation outputs and scope labels stable while tightening retrieval assembly.", "Unblock TASK-072 only after TASK-071 defines a stable prompt-bundle ordering contract."]
+next_action_hints = ["Start TASK-070 by defining eval fixtures and metrics for retrieval, packing, and consolidation quality.", "Reuse the new section-level evidence and consolidation outputs as observable signals in the eval suite.", "Keep TASK-072 blocked until cache-aware bundle assembly can build on the now-stable ordering contract from TASK-071."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-25T23:38:57.370Z"
+updated_at = "2026-04-25T23:43:48.406Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

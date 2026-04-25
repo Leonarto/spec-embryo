@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-071"
 title = "Improve retrieval ordering and section-level packing"
 summary = "Rank and assemble compact context so the strongest evidence appears first, whole documents are avoided when possible, and long-context attention is used more effectively."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-019"]
 depends_on = ["TASK-066", "TASK-067", "TASK-068"]
 blocked_by = []
 priority = 2
 created_at = "2026-04-25T22:42:06.199Z"
+completed_at = "2026-04-25T23:43:48.417Z"
 tags = ["retrieval", "context", "ranking"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-25T23:43:48.417Z"
 +++
 
 # Scope

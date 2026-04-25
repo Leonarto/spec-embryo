@@ -100,8 +100,8 @@ web/
 - `nexus setup`: preview or apply the bounded optional Nexus setup across config, AGENTS guidance, local artifact ignore rules, and adoption artifacts.
 - `memory query`: retrieve managed docs by text, kind, scope, status, tags, IDs, backlinks, and one-hop neighborhoods with compact default output, stable JSON, deterministic match reasons, concept-friendly ranking, and body-text retrieval over managed Markdown.
 - `memory links`: inspect outgoing links, backlinks, and deterministic one-hop or two-hop neighborhoods for any managed doc.
-- `memory brief`: compress managed memory into compact implementation, review, or migration context for a doc, spec, task, or topic query, including why a center or text match was selected and allowing explicit inclusion/exclusion of neighbors, current state, handoffs, and memory scopes.
-- `memory pack`: build a first-class compact context pack for implementation, review, or migration work so another human or agent can start from must-read context and expand into supporting or offloaded detail only when needed.
+- `memory brief`: compress managed memory into compact implementation, review, or migration context for a doc, spec, task, or topic query, including why a center or text match was selected, smaller section-level evidence slices, and explicit inclusion/exclusion of neighbors, current state, handoffs, and memory scopes.
+- `memory pack`: build a first-class compact context pack for implementation, review, or migration work so another human or agent can start from must-read context, inspect top evidence sections early, and expand into supporting or offloaded detail only when needed.
 - `memory scopes`: inspect the configured session, repo, and org-style memory namespaces plus their write-policy expectations.
 - `memory consolidate`: dry-run or apply promotion of a session `memory-note` into durable repo memory, with explicit duplicate, contradiction, related-doc, and staleness signals before any write happens.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
@@ -161,8 +161,8 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Repo-local migration guide and direct-agent-brief artifacts for human-reviewed external adoption
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
 - `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
-- `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, local neighborhoods, and recent handoffs
-- `spm memory pack` plus prompt-return context packs so human and agent flows can share one deterministic compact-context shape with must-read, supporting, and offloaded detail
+- `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, section-level evidence slices, local neighborhoods, and recent handoffs
+- `spm memory pack` plus prompt-return context packs so human and agent flows can share one deterministic compact-context shape with must-read, supporting, section-level evidence, and offloaded detail
 - Scoped memory namespaces where core managed docs remain `repo` scope and optional `memory-note` files can live in `session` or `org` scopes with explicit write policies and scope-aware retrieval
 - `spm memory consolidate` so quick session captures can be reviewed, promoted into durable handoffs, and retired with deterministic duplicate, contradiction, and stale-note checks
 - Optional external Nexus guardrails through config, doctor checks, adoption guidance, and `spm nexus setup` so code-graph analysis can complement `spm` without replacing it

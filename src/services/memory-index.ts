@@ -41,6 +41,11 @@ interface BodySection {
   chunks: string[];
 }
 
+export interface BodySearchSection {
+  heading?: string;
+  text: string;
+}
+
 function isGenericHeading(value: string): boolean {
   const normalized = value.trim().toLowerCase();
   return new Set([
@@ -87,7 +92,7 @@ function buildSectionSearchValues(section: BodySection): string[] {
   return values;
 }
 
-export function extractBodySearchValues(body: string): string[] {
+function extractBodySectionsInternal(body: string): BodySection[] {
   const lines = body.replace(/\r\n/g, "\n").split("\n");
   const sections: BodySection[] = [];
   let current: BodySection = { chunks: [] };
@@ -177,7 +182,22 @@ export function extractBodySearchValues(body: string): string[] {
 
   flushSection();
 
-  return sections
+  return sections;
+}
+
+export function extractBodySections(body: string): BodySearchSection[] {
+  return extractBodySectionsInternal(body)
+    .flatMap((section) =>
+      section.chunks.map((chunk) => ({
+        heading: section.heading,
+        text: chunk,
+      })),
+    )
+    .filter((section) => section.text.trim().length > 0);
+}
+
+export function extractBodySearchValues(body: string): string[] {
+  return extractBodySectionsInternal(body)
     .flatMap((section) => buildSectionSearchValues(section))
     .filter((value) => value.trim().length > 0);
 }

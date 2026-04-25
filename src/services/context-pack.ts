@@ -1,6 +1,7 @@
 import type { MemoryScopeName, ProjectContext, ResumeContext } from "../domain.ts";
 import {
   buildMemoryBriefBundle,
+  type MemoryBriefEvidence,
   type MemoryBriefBundle,
   type MemoryBriefRequest,
 } from "./memory-brief.ts";
@@ -12,6 +13,7 @@ export interface ContextPackItem {
   kind:
     | "center"
     | "match"
+    | "evidence"
     | "current"
     | "neighbor"
     | "handoff"
@@ -108,6 +110,21 @@ function toMemoryHandoffItem(handoff: MemoryBriefBundle["handoffs"][number]): Co
   };
 }
 
+function toEvidenceItem(
+  owner: { id: string; scope: MemoryScopeName; title: string },
+  evidence: MemoryBriefEvidence,
+  reasonPrefix: string,
+): ContextPackItem {
+  return {
+    kind: "evidence",
+    ref: owner.id,
+    scope: owner.scope,
+    title: `${owner.id}${evidence.heading ? ` ${evidence.heading}` : ` ${owner.title}`}`,
+    summary: evidence.text,
+    reason: `${reasonPrefix} ${evidence.reason}`.trim(),
+  };
+}
+
 export function buildMemoryContextPack(context: ProjectContext, request: MemoryBriefRequest): ContextPackBundle {
   const brief = buildMemoryBriefBundle(context, request);
   const profile = brief.request.profile;
@@ -116,16 +133,26 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
 
   if (brief.center) {
     mustReadNow.push({
-        kind: "center",
-        ref: brief.center.id,
-        scope: brief.center.scope,
-        title: `${brief.center.id} ${brief.center.title}`,
+      kind: "center",
+      ref: brief.center.id,
+      scope: brief.center.scope,
+      title: `${brief.center.id} ${brief.center.title}`,
       summary: brief.center.summary,
       reason: brief.center.matchReasons.join(", ") || "Explicit target document anchors the pack.",
     });
+    if (brief.center.evidence[0]) {
+      mustReadNow.push(
+        toEvidenceItem(
+          { id: brief.center.id, scope: brief.center.scope, title: brief.center.title },
+          brief.center.evidence[0],
+          "Top section-level evidence for the explicit target.",
+        ),
+      );
+    }
   } else if (brief.matches) {
+    const topMatches = brief.matches.slice(0, 2);
     mustReadNow.push(
-      ...brief.matches.slice(0, 2).map((match) => ({
+      ...topMatches.map((match) => ({
         kind: "match" as const,
         ref: match.id,
         scope: match.scope,
@@ -134,6 +161,18 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
         reason: match.matchReasons.join(", ") || "Topical retrieval match selected for the compact pack.",
       })),
     );
+    const topEvidence = topMatches
+      .flatMap((match) =>
+        match.evidence.slice(0, 1).map((evidence) =>
+          toEvidenceItem(
+            { id: match.id, scope: match.scope, title: match.title },
+            evidence,
+            "Top section-level evidence for this retrieval match.",
+          ),
+        ),
+      )
+      .slice(0, 1);
+    mustReadNow.push(...topEvidence);
   }
 
   const currentItem = buildMemoryCurrentItem(brief);
@@ -161,6 +200,31 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
         summary: match.summary,
         reason: match.matchReasons.join(", ") || "Additional topical match retained as supporting context.",
       })),
+    );
+  }
+
+  if (brief.center) {
+    const center = brief.center;
+    supporting.push(
+      ...center.evidence.slice(1).map((evidence) =>
+        toEvidenceItem(
+          { id: center.id, scope: center.scope, title: center.title },
+          evidence,
+          "Additional section-level evidence kept nearby for compact expansion.",
+        ),
+      ),
+    );
+  } else if (brief.matches) {
+    supporting.push(
+      ...brief.matches.slice(0, 2).flatMap((match) =>
+        match.evidence.slice(brief.matches[0] === match ? 1 : 0, 2).map((evidence) =>
+          toEvidenceItem(
+            { id: match.id, scope: match.scope, title: match.title },
+            evidence,
+            "Supporting section-level evidence retained ahead of broader expansion material.",
+          ),
+        ),
+      ),
     );
   }
 

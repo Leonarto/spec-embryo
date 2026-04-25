@@ -27,6 +27,7 @@ describe("context pack service", () => {
       expect(pack.source).toBe("memory");
       expect(pack.profile).toBe("implementation");
       expect(pack.mustReadNow.some((item) => item.ref === "TASK-001")).toBe(true);
+      expect(pack.mustReadNow.some((item) => item.kind === "evidence" && item.ref === "TASK-001")).toBe(true);
       expect(pack.mustReadNow.every((item) => item.scope === "repo")).toBe(true);
       expect(pack.mustReadNow.some((item) => item.kind === "current")).toBe(true);
       expect(pack.supporting.some((item) => item.ref === "SPEC-001")).toBe(true);
@@ -101,6 +102,7 @@ describe("memory pack command", () => {
       );
       expect(human).toContain("Context pack [migration] from memory");
       expect(human).toContain("Must read now:");
+      expect(human).toContain("[evidence");
       expect(human).toContain("Supporting context:");
       expect(human).toContain("Offloaded detail:");
 

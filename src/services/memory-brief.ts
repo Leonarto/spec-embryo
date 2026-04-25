@@ -1,5 +1,11 @@
 import type { HandoffDocument, MemoryScopeName, ProjectContext } from "../domain.ts";
-import { buildMemoryIndex, type MemoryIndexEntry } from "./memory-index.ts";
+import {
+  buildMemoryIndex,
+  buildNormalizedTerms,
+  extractBodySections,
+  type BodySearchSection,
+  type MemoryIndexEntry,
+} from "./memory-index.ts";
 import { buildMemoryNeighborhood, buildMemoryLinkGraph } from "./memory-links.ts";
 import { buildMemoryQueryBundle, type MemoryQueryScope } from "./memory-query.ts";
 
@@ -37,6 +43,7 @@ export interface MemoryBriefBundle {
     status?: string;
     tags: string[];
     matchReasons: string[];
+    evidence: MemoryBriefEvidence[];
   };
   matches?: Array<{
     id: string;
@@ -46,6 +53,7 @@ export interface MemoryBriefBundle {
     summary: string;
     status?: string;
     matchReasons: string[];
+    evidence: MemoryBriefEvidence[];
   }>;
   current?: {
     focus: string;
@@ -67,6 +75,12 @@ export interface MemoryBriefBundle {
     createdAt: string;
   }>;
   nextInspectIds: string[];
+}
+
+export interface MemoryBriefEvidence {
+  heading?: string;
+  text: string;
+  reason: string;
 }
 
 function resolveProfile(profile: string | undefined): MemoryBriefProfile {
@@ -134,7 +148,89 @@ function pickRelatedHandoffs(context: ProjectContext, centerId: string, profile:
   return context.handoffs.slice(0, profile === "migration" ? 2 : 1);
 }
 
-function toCenter(entry: MemoryIndexEntry) {
+function truncateEvidenceText(value: string, maxLength = 180): string {
+  const trimmed = value.trim().replace(/\s+/gu, " ");
+  if (trimmed.length <= maxLength) {
+    return trimmed;
+  }
+
+  return `${trimmed.slice(0, maxLength - 1).trimEnd()}…`;
+}
+
+function buildEvidenceReason(score: number, phraseMatched: boolean, termMatches: number, explicit: boolean): string {
+  if (explicit) {
+    return "Section selected from the explicit target to avoid stuffing the whole document into the brief.";
+  }
+
+  if (phraseMatched) {
+    return "Section contains the query phrase and was promoted as the strongest supporting evidence.";
+  }
+
+  if (termMatches > 1 || score >= 6) {
+    return "Section has strong query-term overlap and was promoted ahead of broader document context.";
+  }
+
+  return "Section retained as compact evidence for this retrieval match.";
+}
+
+function scoreSection(section: BodySearchSection, queryText: string | undefined): {
+  score: number;
+  phraseMatched: boolean;
+  termMatches: number;
+} {
+  if (!queryText) {
+    return {
+      score: section.heading ? 3 : 1,
+      phraseMatched: false,
+      termMatches: 0,
+    };
+  }
+
+  const phrase = queryText.trim().toLowerCase().replace(/\s+/gu, " ");
+  const normalized = `${section.heading ? `${section.heading} ` : ""}${section.text}`.toLowerCase();
+  const terms = buildNormalizedTerms([queryText]);
+  const termMatches = terms.filter((term) => normalized.includes(term)).length;
+  const phraseMatched = phrase.length > 0 && normalized.includes(phrase);
+
+  return {
+    score: (phraseMatched ? 8 : 0) + termMatches * 2 + (section.heading ? 1 : 0),
+    phraseMatched,
+    termMatches,
+  };
+}
+
+function buildDocumentEvidence(entry: MemoryIndexEntry, queryText: string | undefined, explicit: boolean): MemoryBriefEvidence[] {
+  const sections = extractBodySections(entry.document.body);
+  if (sections.length === 0) {
+    return [];
+  }
+
+  return sections
+    .map((section, index) => {
+      const scored = scoreSection(section, explicit ? undefined : queryText);
+      return {
+        heading: section.heading,
+        text: truncateEvidenceText(section.text),
+        reason: buildEvidenceReason(scored.score, scored.phraseMatched, scored.termMatches, explicit),
+        score: scored.score,
+        index,
+      };
+    })
+    .sort(
+      (left, right) =>
+        right.score - left.score ||
+        left.index - right.index ||
+        left.text.localeCompare(right.text),
+    )
+    .slice(0, 2)
+    .map(({ heading, text, reason }) => ({
+      heading,
+      text,
+      reason,
+    }));
+}
+
+function toCenter(entry: MemoryIndexEntry, queryText?: string) {
   return {
     id: entry.id,
     docKind: entry.docKind,
@@ -144,6 +240,7 @@ function toCenter(entry: MemoryIndexEntry) {
     status: entry.status,
     tags: entry.tags,
     matchReasons: [],
+    evidence: buildDocumentEvidence(entry, queryText, true),
   };
 }
 
@@ -210,6 +307,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
       summary: result.summary,
       status: result.status,
       matchReasons: result.matchReasons,
+      evidence: buildDocumentEvidence(index.byId.get(result.id)!, value, false),
     }));
     const neighbors = includeNeighbors ? buildNeighborItems(graph, matches.slice(0, 2).map((item) => item.id)) : [];
 
@@ -257,7 +355,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
         createdAt: handoff.createdAt,
       }))
     : [];
-  const center = toCenter(entry);
+  const center = toCenter(entry, value);
   center.matchReasons =
     mode === "task"
       ? ["explicit task"]
@@ -304,17 +402,30 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
     if (bundle.center.tags.length > 0) {
       lines.push(`Tags: ${bundle.center.tags.join(", ")}`);
     }
+    if (bundle.center.evidence.length > 0) {
+      lines.push("Evidence:");
+      lines.push(
+        ...bundle.center.evidence.map((evidence) =>
+          `- ${evidence.heading ? `${evidence.heading}: ` : ""}${evidence.text} (reason: ${evidence.reason})`,
+        ),
+      );
+    }
   }
 
   if (bundle.matches && bundle.matches.length > 0) {
     lines.push("", "Matches:");
     lines.push(
-      ...bundle.matches.map(
-        (match) =>
-          `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""} scope:${match.scope}] ${match.title}: ${match.summary}${
-            match.matchReasons.length > 0 ? ` (match: ${match.matchReasons.join(", ")})` : ""
-          }`,
-      ),
+      ...bundle.matches.map((match) => {
+        const evidenceSummary =
+          match.evidence.length > 0
+            ? ` | evidence: ${match.evidence
+                .map((evidence) => `${evidence.heading ? `${evidence.heading}: ` : ""}${evidence.text}`)
+                .join(" || ")}`
+            : "";
+        return `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""} scope:${match.scope}] ${match.title}: ${match.summary}${
+          match.matchReasons.length > 0 ? ` (match: ${match.matchReasons.join(", ")})` : ""
+        }${evidenceSummary}`;
+      }),
     );
   }
 
