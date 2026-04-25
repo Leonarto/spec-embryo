@@ -7,7 +7,7 @@ Spec Embryo is intentionally split into seven layers:
 1. Storage and file layer: filesystem access, TOML frontmatter parsing, config loading, and durable writes.
 2. Domain model: typed documents for specs, tasks, handoffs, current state, and backend config.
 3. Deterministic engine: linking, validation, git inspection, blockers, ready work, critical path, and next-action derivation.
-4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
+4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `memory eval`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
 5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, memory indexing/querying/briefing/packing/consolidation, section-level evidence extraction, layout normalization, and other reusable logic above the repository layer.
 6. Local visual server: a SvelteKit app that renders managed memory through shared deterministic services rather than a second parser.
 7. Execution backends: deterministic text output, prompt-return output, and optional subprocess adapters.
@@ -196,6 +196,7 @@ Spec Embryo is meant to work alongside coding agents such as Codex and Claude, n
 - When choosing between building more in-tool "intelligence" and improving context selection, compaction, ordering, or evaluation, prefer the latter.
 - New context features should justify themselves through reproducibility, token efficiency, or better repo-specific grounding rather than by duplicating behavior the model already performs natively.
 - Retrieval and context-pack flows should prefer smaller stable evidence sections before escalating to whole-document expansion.
+- Eval flows should stay deterministic, runnable in CI, and readable enough that future context changes extend the same measurement surface instead of inventing private one-off checks.
 
 This boundary keeps Spec Embryo useful across providers while avoiding a fragile second assistant hidden inside the tool.
 

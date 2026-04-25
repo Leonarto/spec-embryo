@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-070"
 title = "Add context and memory evaluation harnesses"
 summary = "Measure retrieval, injection, consolidation, and context-pack quality so spm context features can improve with evidence instead of intuition."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-019"]
 depends_on = ["TASK-066", "TASK-067", "TASK-068", "TASK-069"]
 blocked_by = []
 priority = 2
 created_at = "2026-04-25T22:41:59.585Z"
+completed_at = "2026-04-25T23:53:50.410Z"
 tags = ["evals", "memory", "context"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-25T23:53:50.410Z"
 +++
 
 # Scope

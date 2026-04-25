@@ -8,6 +8,12 @@ import {
   type MemoryConsolidationTarget,
 } from "../services/memory-consolidation.ts";
 import { buildMemoryContextPack, renderContextPack } from "../services/context-pack.ts";
+import {
+  buildMemoryEvalBundle,
+  MEMORY_EVAL_SUITES,
+  renderMemoryEvalBundle,
+  type MemoryEvalSuite,
+} from "../services/memory-evals.ts";
 import { buildMemoryScopesBundle, renderMemoryScopesBundle } from "../services/memory-scopes.ts";
 import {
   buildMemoryBriefBundle,
@@ -47,6 +53,24 @@ function parsePositiveInteger(value: string | undefined, flagName: string): numb
   }
 
   return parsed;
+}
+
+function parseEvalSuites(value: string | undefined): MemoryEvalSuite[] {
+  if (!value) {
+    return [...MEMORY_EVAL_SUITES];
+  }
+
+  const suites = parseCommaList(value);
+  if (suites.length === 0) {
+    return [...MEMORY_EVAL_SUITES];
+  }
+
+  const invalid = suites.filter((suite) => !MEMORY_EVAL_SUITES.includes(suite as MemoryEvalSuite));
+  if (invalid.length > 0) {
+    throw new Error(`Invalid memory eval suite: ${invalid[0]}. Expected one of ${MEMORY_EVAL_SUITES.join(", ")}.`);
+  }
+
+  return suites as MemoryEvalSuite[];
 }
 
 function parseDocKind(value: string | undefined): MemoryQueryDocKind | undefined {
@@ -257,5 +281,15 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     return renderMemoryConsolidationBundle(bundle);
   }
 
-  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, and `memory consolidate`.");
+  if (parsed.subcommand === "eval") {
+    const bundle = await buildMemoryEvalBundle(rootDir, parseEvalSuites(flagValue(parsed, "suite")));
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderMemoryEvalBundle(bundle);
+  }
+
+  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, and `memory eval`.");
 }

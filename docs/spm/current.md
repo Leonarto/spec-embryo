@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-019 is active. TASK-071 is done, and spm now promotes section-level evidence earlier in memory briefs and context packs so agents can start from smaller, stronger slices before opening whole documents."
-focus = "Start TASK-070 to add deterministic context and memory evaluation harnesses on top of the new packing, scope, consolidation, and retrieval-ordering layers."
+summary = "SPEC-019 is active. TASK-070 is done, and spm now has a runnable memory eval harness that measures retrieval, pack, consolidation, and source-of-truth injection quality with deterministic scenario suites."
+focus = "Start TASK-072 to add prompt-cache-aware backend bundle assembly on top of the now-stable context-pack ordering contract."
 active_spec_ids = ["SPEC-019"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Start TASK-070 by defining eval fixtures and metrics for retrieval, packing, and consolidation quality.", "Reuse the new section-level evidence and consolidation outputs as observable signals in the eval suite.", "Keep TASK-072 blocked until cache-aware bundle assembly can build on the now-stable ordering contract from TASK-071."]
+next_action_hints = ["Start TASK-072 by identifying which prompt-bundle sections are stable enough to become cache-friendly prefixes.", "Keep the new memory eval harness green while reshaping backend prompt assembly.", "Preserve the deterministic source-of-truth semantics while separating stable prefix material from volatile task-specific tails."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-25T23:43:48.406Z"
+updated_at = "2026-04-25T23:53:50.409Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
