@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-018 and TASK-065 are done, and SPEC-019 is now active to improve context lifecycle and context-pack optimization so spm can package repo knowledge more effectively for Codex, Claude, and deterministic-only workflows without duplicating model-native reasoning."
-focus = "Define and implement the first context-lifecycle slice after the one-step Nexus setup work, starting with deterministic context-pack planning and compaction."
+summary = "SPEC-019 is active. TASK-067 is done, and spm now has a first-class memory pack plus prompt-return context packs so compact context can be assembled deterministically before expanding into larger repo detail."
+focus = "Start TASK-068 to add scoped memory namespaces and access rules on top of the new context-pack foundation."
 active_spec_ids = ["SPEC-019"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Start TASK-067 by defining the first deterministic context-pack shape, compaction rules, and output contract.", "Decide the first context-pack surface area before adding scoped memory or consolidation flows.", "Keep future context work focused on durable packaging, scopes, consolidation, and evals instead of rebuilding model-native reasoning."]
+next_action_hints = ["Start TASK-068 by defining deterministic session, repo, and org memory scopes.", "Keep context-pack consumers compatible while adding scoped retrieval and write rules.", "Use the new memory/context-pack tests as the baseline before changing retrieval surfaces further."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-25T22:52:00.000Z"
+updated_at = "2026-04-25T23:04:13.500Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

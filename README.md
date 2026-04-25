@@ -101,6 +101,7 @@ web/
 - `memory query`: retrieve managed docs by text, kind, status, tags, IDs, backlinks, and one-hop neighborhoods with compact default output, stable JSON, deterministic match reasons, concept-friendly ranking, and body-text retrieval over managed Markdown.
 - `memory links`: inspect outgoing links, backlinks, and deterministic one-hop or two-hop neighborhoods for any managed doc.
 - `memory brief`: compress managed memory into compact implementation, review, or migration context for a doc, spec, task, or topic query, including why a center or text match was selected and allowing explicit inclusion/exclusion of neighbors, current state, and handoffs.
+- `memory pack`: build a first-class compact context pack for implementation, review, or migration work so another human or agent can start from must-read context and expand into supporting or offloaded detail only when needed.
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.
@@ -159,6 +160,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
 - `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
 - `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, local neighborhoods, and recent handoffs
+- `spm memory pack` plus prompt-return context packs so human and agent flows can share one deterministic compact-context shape with must-read, supporting, and offloaded detail
 - Optional external Nexus guardrails through config, doctor checks, adoption guidance, and `spm nexus setup` so code-graph analysis can complement `spm` without replacing it
 
 ## Architecture

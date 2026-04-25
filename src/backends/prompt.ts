@@ -1,5 +1,6 @@
 import type { ResumeContext } from "../domain.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
+import { buildResumeContextPack, type ContextPackBundle } from "../services/context-pack.ts";
 
 export interface PromptBundle {
   context: {
@@ -52,11 +53,13 @@ export interface PromptBundle {
     changed_items: ResumeContext["changedItems"];
     next_actions: string[];
   };
+  context_pack: ContextPackBundle;
   recommended_prompt: string;
   expected_output_format: {
     summary_sections: string[];
     require_explicit_file_refs: boolean;
     prefer_deterministic_updates: boolean;
+    context_pack_first: boolean;
   };
   subtask_prompts: Array<{
     task_id: string;
@@ -65,6 +68,8 @@ export interface PromptBundle {
 }
 
 export function buildPromptBundle(context: ResumeContext): PromptBundle {
+  const contextPack = buildResumeContextPack(context);
+
   return {
     context: {
       project_name: context.projectName,
@@ -118,10 +123,12 @@ export function buildPromptBundle(context: ResumeContext): PromptBundle {
       changed_items: context.changedItems,
       next_actions: context.nextActions,
     },
+    context_pack: contextPack,
     recommended_prompt: [
       "You are resuming work on this repository.",
       `Current focus: ${context.focus}`,
       "Use the structured context provided by Spec Embryo as the source of truth.",
+      "Start from the context pack first, then expand into supporting context only if needed.",
       "Do not restate everything. First answer:",
       "1. where the project currently is",
       "2. what should happen next",
@@ -133,6 +140,7 @@ export function buildPromptBundle(context: ResumeContext): PromptBundle {
       summary_sections: ["where-we-are", "next-step", "blockers", "docs-to-touch"],
       require_explicit_file_refs: true,
       prefer_deterministic_updates: true,
+      context_pack_first: true,
     },
     subtask_prompts: context.readyTasks.slice(0, 3).map((entry) => ({
       task_id: entry.task.id,
@@ -147,6 +155,9 @@ export function renderPromptBundleText(bundle: PromptBundle): string {
     "",
     "Expected output format:",
     JSON.stringify(bundle.expected_output_format, null, 2),
+    "",
+    "Context pack:",
+    JSON.stringify(bundle.context_pack, null, 2),
     "",
     "Structured context:",
     JSON.stringify(bundle.context, null, 2),

@@ -92,6 +92,7 @@ Usage:
   spm memory query [--text "..."] [--doc-kind spec|task|handoff|current-state] [--status ...] [--tag ui,adoption] [--id SPEC-001] [--linked-to DOC-ID] [--neighbor-of DOC-ID] [--limit 20] [--json]
   spm memory links <DOC-ID> [--depth 1|2] [--json]
   spm memory brief (--id DOC-ID | --spec SPEC-ID | --task TASK-ID | --text "...") [--include-neighbors|--no-neighbors] [--include-current|--no-current] [--include-handoffs|--no-handoffs] [--profile implementation|review|migration] [--json]
+  spm memory pack (--id DOC-ID | --spec SPEC-ID | --task TASK-ID | --text "...") [--include-neighbors|--no-neighbors] [--include-current|--no-current] [--include-handoffs|--no-handoffs] [--profile implementation|review|migration] [--json]
   spm nexus setup [--apply] [--command gitnexus] [--root-agents-mode reference-only|scoped] [--json]
   spm spec list [--status active]
   spm spec create --title "..." --summary "..." [--status proposed] [--task-ids TASK-001,TASK-002] [--tags foundation,cli] [--owner human-ai] [--json]

@@ -1,6 +1,7 @@
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue } from "../cli.ts";
 import { loadProjectContext } from "../repository.ts";
+import { buildMemoryContextPack, renderContextPack } from "../services/context-pack.ts";
 import {
   buildMemoryBriefBundle,
   MEMORY_BRIEF_PROFILES,
@@ -164,5 +165,25 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     return renderMemoryBriefBundle(bundle);
   }
 
-  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, and `memory brief`.");
+  if (parsed.subcommand === "pack") {
+    const context = await loadProjectContext(rootDir);
+    const bundle = buildMemoryContextPack(context, {
+      id: flagValue(parsed, "id"),
+      specId: flagValue(parsed, "spec"),
+      taskId: flagValue(parsed, "task"),
+      text: flagValue(parsed, "text"),
+      includeNeighbors: parseOptionalBooleanFlag(parsed, "include-neighbors", "no-neighbors"),
+      includeCurrent: parseOptionalBooleanFlag(parsed, "include-current", "no-current"),
+      includeHandoffs: parseOptionalBooleanFlag(parsed, "include-handoffs", "no-handoffs"),
+      profile: parseBriefProfile(flagValue(parsed, "profile")),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderContextPack(bundle);
+  }
+
+  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, and `memory pack`.");
 }

@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-067"
 title = "Add deterministic context-pack planning and compaction"
 summary = "Build compact context-pack flows that offload large detail into durable artifacts, expose progressive disclosure, and keep active prompts small and explicit."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-019"]
 depends_on = ["TASK-066"]
 blocked_by = []
 priority = 1
 created_at = "2026-04-25T22:41:46.493Z"
+completed_at = "2026-04-25T23:04:03.863Z"
 tags = ["context", "memory", "cli", "retrieval"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-25T23:04:03.863Z"
 +++
 
 # Scope
