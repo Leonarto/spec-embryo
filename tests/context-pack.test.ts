@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { buildPromptBundle, renderPromptBundleText } from "../src/backends/prompt.ts";
@@ -8,6 +8,12 @@ import { runMemoryCommand } from "../src/commands/memory.ts";
 import { buildResumeContext } from "../src/engine.ts";
 import { initializeProject, loadProjectContext } from "../src/repository.ts";
 import { buildMemoryContextPack, buildResumeContextPack } from "../src/services/context-pack.ts";
+
+async function writeMemoryNote(rootDir: string, scope: "session" | "org", fileName: string, body: string): Promise<void> {
+  const dir = join(rootDir, ".specpm", "memory", scope);
+  await mkdir(dir, { recursive: true });
+  await Bun.write(join(dir, fileName), body);
+}
 
 describe("context pack service", () => {
   test("builds a compact memory pack around an explicit task target", async () => {
@@ -21,9 +27,41 @@ describe("context pack service", () => {
       expect(pack.source).toBe("memory");
       expect(pack.profile).toBe("implementation");
       expect(pack.mustReadNow.some((item) => item.ref === "TASK-001")).toBe(true);
+      expect(pack.mustReadNow.every((item) => item.scope === "repo")).toBe(true);
       expect(pack.mustReadNow.some((item) => item.kind === "current")).toBe(true);
       expect(pack.supporting.some((item) => item.ref === "SPEC-001")).toBe(true);
       expect(pack.nextInspectIds).toContain("TASK-001");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("preserves non-repo scope information inside compact packs", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-context-pack-"));
+
+    try {
+      await initializeProject(rootDir);
+      await writeMemoryNote(
+        rootDir,
+        "session",
+        "NOTE-SESSION-pack.md",
+        `+++
+doc_kind = "memory-note"
+id = "NOTE-SESSION-PACK"
+title = "Session pack note"
+summary = "Session-scoped detail for the current flow."
+tags = ["session", "pack"]
+updated_at = "2026-04-26T00:00:00.000Z"
++++
+
+Use this note for the current local flow.
+`,
+      );
+      const context = await loadProjectContext(rootDir);
+      const pack = buildMemoryContextPack(context, { text: "session pack", scope: "session" });
+
+      expect(pack.mustReadNow.some((item) => item.ref === "NOTE-SESSION-PACK" && item.scope === "session")).toBe(true);
+      expect(pack.offloaded.every((artifact) => !artifact.scope || artifact.scope === "session")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -40,6 +78,7 @@ describe("context pack service", () => {
       expect(pack.source).toBe("resume");
       expect(pack.profile).toBe("resume");
       expect(pack.mustReadNow[0]?.kind).toBe("focus");
+      expect(pack.mustReadNow.every((item) => item.scope === "repo")).toBe(true);
       expect(pack.mustReadNow.some((item) => item.kind === "next-actions")).toBe(true);
       expect(pack.mustReadNow.some((item) => item.kind === "active-spec")).toBe(true);
       expect(pack.nextInspectIds).toContain("SPEC-001");

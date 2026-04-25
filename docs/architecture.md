@@ -21,12 +21,14 @@ The repo is the source of truth. V1 uses:
 - `.specpm/config.toml` for tool configuration, optional external integration settings, and backend settings
 - `.specpm/config.toml` also holds the project-standard AGENTS context-budget policy
 - `.specpm/config.toml` also records the adopted repo's last written `tool_version` so doctor can surface newer CLI guidance
+- `.specpm/config.toml` also defines optional scoped memory namespaces for session and org-style note collections
 - `docs/spm/` or `spm/` as the managed memory home
 - `<memory-home>/current.md` for explicit current state
 - `<memory-home>/handoffs/*.md` for durable handoff checkpoints
 - `<memory-home>/specs/*.md` for spec documents
 - `<memory-home>/tasks/*.md` for task documents
 - `<memory-home>/skills/` for managed agent metadata
+- `.specpm/memory/session/` and `.specpm/memory/org/` as optional scoped `memory-note` homes when those namespaces are enabled
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
@@ -100,6 +102,19 @@ Core fields:
 
 This file is the fastest way to answer “where was I?” after a pause.
 
+### Memory note
+
+Core fields:
+
+- `id`
+- `title`
+- `summary`
+- `tags`
+- scope, inferred from the configured session or org memory home
+- write policy, inherited from the configured memory scope
+
+Memory notes are lightweight scoped context documents. They let Spec Embryo distinguish fast local notes or broader shared guidance from canonical repo memory without turning those scopes into a second planning authority.
+
 ### Execution backend
 
 Core fields:
@@ -121,6 +136,22 @@ Core fields:
 - root AGENTS coexistence mode
 
 Nexus is modeled as an optional external code-analysis complement. It is not a required dependency and it does not replace managed specs, tasks, current state, handoffs, or adoption workflows. `spm nexus setup` previews or applies the bounded repo-local setup in one pass, while `doctor` remains read-only and validates that the repo still keeps planning authority with `spm`.
+
+### Memory scopes
+
+Core fields:
+
+- enabled flag
+- directory for file-backed note scopes
+- write policy
+
+The first scoped-memory model is intentionally simple:
+
+- `repo`: the canonical managed memory home for specs, tasks, current state, and handoffs
+- `session`: optional `memory-note` files for fast-changing local notes
+- `org`: optional `memory-note` files for broader shared guidance, defaulting to read-only intent
+
+Retrieval and context packs can filter or label these scopes explicitly, but repo memory remains the default source of truth for project execution.
 
 ## Deterministic vs non-deterministic boundaries
 

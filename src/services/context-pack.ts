@@ -1,5 +1,4 @@
-import type { ResumeContext } from "../domain.ts";
-import type { ProjectContext } from "../domain.ts";
+import type { MemoryScopeName, ProjectContext, ResumeContext } from "../domain.ts";
 import {
   buildMemoryBriefBundle,
   type MemoryBriefBundle,
@@ -24,6 +23,7 @@ export interface ContextPackItem {
     | "ready-task"
     | "changed-item";
   ref?: string;
+  scope: MemoryScopeName;
   title: string;
   summary: string;
   reason: string;
@@ -32,6 +32,7 @@ export interface ContextPackItem {
 export interface ContextPackArtifact {
   kind: "inspect-doc" | "inspect-handoff" | "inspect-change" | "inspect-task";
   ref: string;
+  scope?: MemoryScopeName;
   note: string;
 }
 
@@ -78,6 +79,7 @@ function buildMemoryCurrentItem(bundle: MemoryBriefBundle): ContextPackItem | un
   return {
     kind: "current",
     ref: "CURRENT",
+    scope: "repo",
     title: bundle.current.focus,
     summary: `Summary: ${bundle.current.summary}; active specs: ${compactList(bundle.current.activeSpecIds, 2)}; active tasks: ${compactList(bundle.current.activeTaskIds, 3)}.`,
     reason: "Current project state keeps the pack aligned with the repo's active focus.",
@@ -88,6 +90,7 @@ function toMemoryNeighborItem(neighbor: MemoryBriefBundle["neighbors"][number]):
   return {
     kind: "neighbor",
     ref: neighbor.id,
+    scope: neighbor.scope ?? "repo",
     title: `${neighbor.id}${neighbor.title ? ` ${neighbor.title}` : ""}`,
     summary: `Linked ${neighbor.docKind ?? "document"} kept compact for local context expansion.`,
     reason: "Directly linked context is often the cheapest next expansion if the center is not enough.",
@@ -98,6 +101,7 @@ function toMemoryHandoffItem(handoff: MemoryBriefBundle["handoffs"][number]): Co
   return {
     kind: "handoff",
     ref: handoff.id,
+    scope: "repo",
     title: `${handoff.id} ${handoff.title}`,
     summary: handoff.summary,
     reason: "Recent handoffs preserve interrupted intent without forcing the whole history into the pack.",
@@ -112,9 +116,10 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
 
   if (brief.center) {
     mustReadNow.push({
-      kind: "center",
-      ref: brief.center.id,
-      title: `${brief.center.id} ${brief.center.title}`,
+        kind: "center",
+        ref: brief.center.id,
+        scope: brief.center.scope,
+        title: `${brief.center.id} ${brief.center.title}`,
       summary: brief.center.summary,
       reason: brief.center.matchReasons.join(", ") || "Explicit target document anchors the pack.",
     });
@@ -123,6 +128,7 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
       ...brief.matches.slice(0, 2).map((match) => ({
         kind: "match" as const,
         ref: match.id,
+        scope: match.scope,
         title: `${match.id} ${match.title}`,
         summary: match.summary,
         reason: match.matchReasons.join(", ") || "Topical retrieval match selected for the compact pack.",
@@ -140,6 +146,7 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
       ...brief.matches.slice(0, 2).map((match) => ({
         kind: "match" as const,
         ref: match.id,
+        scope: match.scope,
         title: `${match.id} ${match.title}`,
         summary: match.summary,
         reason: match.matchReasons.join(", ") || "Related match retained as supporting context.",
@@ -164,16 +171,19 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
     ...(brief.matches ?? []).slice(brief.center ? 2 : 4).map((match) => ({
       kind: "inspect-doc" as const,
       ref: match.id,
+      scope: match.scope,
       note: `Retrieved match kept out of the active pack: ${match.title}`,
     })),
     ...brief.neighbors.slice(2).map((neighbor) => ({
       kind: "inspect-doc" as const,
       ref: neighbor.id,
+      scope: neighbor.scope,
       note: `Linked context available on expansion${neighbor.title ? `: ${neighbor.title}` : ""}`,
     })),
     ...brief.handoffs.slice(1).map((handoff) => ({
       kind: "inspect-handoff" as const,
       ref: handoff.id,
+      scope: "repo",
       note: `Recent handoff kept offloaded: ${handoff.title}`,
     })),
   ]);
@@ -215,6 +225,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
   const mustReadNow: ContextPackItem[] = [
     {
       kind: "focus",
+      scope: "repo",
       title: context.focus,
       summary: context.summary,
       reason: "Current focus is the smallest stable anchor for resuming work.",
@@ -224,6 +235,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
   if (context.nextActions.length > 0) {
     mustReadNow.push({
       kind: "next-actions",
+      scope: "repo",
       title: "Deterministic next actions",
       summary: context.nextActions.slice(0, 2).join(" | "),
       reason: "Resume should start from the repo's explicit next steps before expanding supporting context.",
@@ -234,6 +246,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.activeSpecs.slice(0, 2).map((spec) => ({
       kind: "active-spec" as const,
       ref: spec.id,
+      scope: "repo",
       title: `${spec.id} ${spec.title}`,
       summary: `Status: ${spec.status}; linked tasks: ${compactList(spec.taskIds, 4)}.`,
       reason: "Active specs define the stable planning surface around the current work.",
@@ -244,6 +257,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.activeTasks.slice(0, 3).map((entry) => ({
       kind: "active-task" as const,
       ref: entry.task.id,
+      scope: "repo",
       title: `${entry.task.id} ${entry.task.title}`,
       summary: `Status: ${entry.task.status}; unmet dependencies: ${compactList(entry.unmetDependencies, 3)}.`,
       reason: "Active tasks are the narrowest concrete execution anchors for the next slice.",
@@ -254,6 +268,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.blockedTasks.slice(0, 2).map((entry) => ({
       kind: "blocked-task" as const,
       ref: entry.task.id,
+      scope: "repo",
       title: `${entry.task.id} ${entry.task.title}`,
       summary: `Blocked by: ${compactList(entry.unmetDependencies, 3)}.`,
       reason: "Blocked work changes what is safe to pick up next.",
@@ -264,6 +279,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.readyTasks.slice(0, 2).map((entry) => ({
       kind: "ready-task" as const,
       ref: entry.task.id,
+      scope: "repo",
       title: `${entry.task.id} ${entry.task.title}`,
       summary: `Priority: p${entry.task.priority}.`,
       reason: "Ready tasks are useful expansion material if the current slice is finished or blocked.",
@@ -271,6 +287,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.changedItems.slice(0, 3).map((item) => ({
       kind: "changed-item" as const,
       ref: item.path,
+      scope: "repo",
       title: item.path,
       summary: toChangedItemSummary(item),
       reason: "Recent changed files help localize the working set without pasting large diffs into the pack.",
@@ -281,6 +298,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     supporting.push({
       kind: "handoff",
       ref: context.recentHandoff.id,
+      scope: "repo",
       title: `${context.recentHandoff.id} ${context.recentHandoff.title}`,
       summary: context.recentHandoff.summary,
       reason: "The latest handoff preserves prior intent that may not be obvious from status alone.",
@@ -291,11 +309,13 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.readyTasks.slice(2).map((entry) => ({
       kind: "inspect-task" as const,
       ref: entry.task.id,
+      scope: "repo",
       note: `Additional ready task kept out of the active pack: ${entry.task.title}`,
     })),
     ...context.changedItems.slice(3).map((item) => ({
       kind: "inspect-change" as const,
       ref: item.path,
+      scope: "repo",
       note: `Changed file available for deeper inspection: ${toChangedItemSummary(item)}`,
     })),
   ]);
@@ -327,7 +347,7 @@ function renderItems(items: ContextPackItem[]): string[] {
 
   return items.map((item) => {
     const ref = item.ref ? `${item.ref} ` : "";
-    return `- [${item.kind}] ${ref}${item.title}: ${item.summary} (reason: ${item.reason})`;
+    return `- [${item.kind} scope:${item.scope}] ${ref}${item.title}: ${item.summary} (reason: ${item.reason})`;
   });
 }
 
@@ -336,7 +356,7 @@ function renderArtifacts(artifacts: ContextPackArtifact[]): string[] {
     return ["- none"];
   }
 
-  return artifacts.map((artifact) => `- [${artifact.kind}] ${artifact.ref}: ${artifact.note}`);
+  return artifacts.map((artifact) => `- [${artifact.kind}${artifact.scope ? ` scope:${artifact.scope}` : ""}] ${artifact.ref}: ${artifact.note}`);
 }
 
 export function renderContextPack(bundle: ContextPackBundle): string {

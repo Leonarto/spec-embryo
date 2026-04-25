@@ -1,7 +1,7 @@
-import type { HandoffDocument, ProjectContext } from "../domain.ts";
+import type { HandoffDocument, MemoryScopeName, ProjectContext } from "../domain.ts";
 import { buildMemoryIndex, type MemoryIndexEntry } from "./memory-index.ts";
 import { buildMemoryNeighborhood, buildMemoryLinkGraph } from "./memory-links.ts";
-import { buildMemoryQueryBundle } from "./memory-query.ts";
+import { buildMemoryQueryBundle, type MemoryQueryScope } from "./memory-query.ts";
 
 export const MEMORY_BRIEF_PROFILES = ["implementation", "review", "migration"] as const;
 export type MemoryBriefProfile = (typeof MEMORY_BRIEF_PROFILES)[number];
@@ -15,6 +15,7 @@ export interface MemoryBriefRequest {
   includeCurrent?: boolean;
   includeHandoffs?: boolean;
   profile?: MemoryBriefProfile;
+  scope?: MemoryQueryScope;
 }
 
 export interface MemoryBriefBundle {
@@ -22,6 +23,7 @@ export interface MemoryBriefBundle {
     mode: "id" | "spec" | "task" | "text";
     value: string;
     profile: MemoryBriefProfile;
+    scope?: MemoryQueryScope;
     includeNeighbors: boolean;
     includeCurrent: boolean;
     includeHandoffs: boolean;
@@ -29,6 +31,7 @@ export interface MemoryBriefBundle {
   center?: {
     id: string;
     docKind: string;
+    scope: MemoryScopeName;
     title: string;
     summary: string;
     status?: string;
@@ -38,6 +41,7 @@ export interface MemoryBriefBundle {
   matches?: Array<{
     id: string;
     docKind: string;
+    scope: MemoryScopeName;
     title: string;
     summary: string;
     status?: string;
@@ -53,6 +57,7 @@ export interface MemoryBriefBundle {
   neighbors: Array<{
     id: string;
     docKind?: string;
+    scope?: MemoryScopeName;
     title?: string;
   }>;
   handoffs: Array<{
@@ -133,6 +138,7 @@ function toCenter(entry: MemoryIndexEntry) {
   return {
     id: entry.id,
     docKind: entry.docKind,
+    scope: entry.scope,
     title: entry.title,
     summary: entry.summary,
     status: entry.status,
@@ -148,7 +154,7 @@ function uniqueIds(values: string[]): string[] {
 function buildNeighborItems(
   graph: ReturnType<typeof buildMemoryLinkGraph>,
   centerIds: string[],
-): Array<{ id: string; docKind?: string; title?: string }> {
+): Array<{ id: string; docKind?: string; scope?: MemoryScopeName; title?: string }> {
   const centerIdSet = new Set(centerIds);
   const neighborIds = new Set<string>();
 
@@ -167,6 +173,7 @@ function buildNeighborItems(
       return {
         id,
         docKind: entry?.docKind,
+        scope: entry?.scope,
         title: entry?.title,
       };
     })
@@ -184,18 +191,21 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
   const includeNeighbors = request.includeNeighbors ?? true;
   const includeCurrent = request.includeCurrent ?? true;
   const includeHandoffs = request.includeHandoffs ?? includeHandoffsByDefault(profile);
+  const scope = request.scope;
   const index = buildMemoryIndex(context);
   const graph = buildMemoryLinkGraph(context);
 
   if (mode === "text") {
     const query = buildMemoryQueryBundle(context, {
       text: value,
+      scope,
       limit: profile === "review" ? 5 : 4,
     });
 
     const matches = query.results.map((result) => ({
       id: result.id,
       docKind: result.docKind,
+      scope: result.scope,
       title: result.title,
       summary: result.summary,
       status: result.status,
@@ -204,7 +214,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
     const neighbors = includeNeighbors ? buildNeighborItems(graph, matches.slice(0, 2).map((item) => item.id)) : [];
 
     return {
-      request: { mode, value, profile, includeNeighbors, includeCurrent, includeHandoffs },
+      request: { mode, value, profile, scope, includeNeighbors, includeCurrent, includeHandoffs },
       matches,
       current: includeCurrent
         ? {
@@ -235,6 +245,9 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
   }
 
   const entry = assertKnownEntry(index.byId.get(value), mode, value);
+  if (scope && entry.scope !== scope) {
+    throw new Error(`Requested document ${entry.id} is in scope ${entry.scope}, not ${scope}.`);
+  }
   const neighbors = includeNeighbors ? buildNeighborItems(graph, [entry.id]) : [];
   const handoffs = includeHandoffs
     ? pickRelatedHandoffs(context, entry.id, profile).map((handoff) => ({
@@ -253,7 +266,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
         : ["explicit id"];
 
   return {
-    request: { mode, value, profile, includeNeighbors, includeCurrent, includeHandoffs },
+    request: { mode, value, profile, scope, includeNeighbors, includeCurrent, includeHandoffs },
     center,
     current: includeCurrent
       ? {
@@ -282,7 +295,7 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
   if (bundle.center) {
     lines.push(
       "",
-      `Center: ${bundle.center.id} [${bundle.center.docKind}${bundle.center.status ? ` ${bundle.center.status}` : ""}] ${bundle.center.title}`,
+      `Center: ${bundle.center.id} [${bundle.center.docKind}${bundle.center.status ? ` ${bundle.center.status}` : ""} scope:${bundle.center.scope}] ${bundle.center.title}`,
       `Summary: ${bundle.center.summary}`,
     );
     if (bundle.center.matchReasons.length > 0) {
@@ -298,7 +311,7 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
     lines.push(
       ...bundle.matches.map(
         (match) =>
-          `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""}] ${match.title}: ${match.summary}${
+          `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""} scope:${match.scope}] ${match.title}: ${match.summary}${
             match.matchReasons.length > 0 ? ` (match: ${match.matchReasons.join(", ")})` : ""
           }`,
       ),
@@ -321,7 +334,7 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
     lines.push(
       ...bundle.neighbors.map(
         (neighbor) =>
-          `- ${neighbor.id}${neighbor.docKind ? ` [${neighbor.docKind}]` : ""}${neighbor.title ? ` ${neighbor.title}` : ""}`,
+          `- ${neighbor.id}${neighbor.docKind ? ` [${neighbor.docKind}${neighbor.scope ? ` scope:${neighbor.scope}` : ""}]` : ""}${neighbor.title ? ` ${neighbor.title}` : ""}`,
       ),
     );
   }

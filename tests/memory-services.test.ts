@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { initializeProject, loadProjectContext } from "../src/repository.ts";
@@ -12,6 +12,12 @@ import {
 } from "../src/services/memory-links.ts";
 
 describe("memory retrieval foundation services", () => {
+  async function writeMemoryNote(rootDir: string, scope: "session" | "org", fileName: string, body: string): Promise<void> {
+    const dir = join(rootDir, ".specpm", "memory", scope);
+    await mkdir(dir, { recursive: true });
+    await Bun.write(join(dir, fileName), body);
+  }
+
   test("extracts section-aware body search values while skipping fenced-code noise", () => {
     const values = extractBodySearchValues(`
 # Problem
@@ -65,6 +71,22 @@ Index the prose that comes after the unfinished fence.
 
     try {
       await initializeProject(rootDir);
+      await writeMemoryNote(
+        rootDir,
+        "session",
+        "NOTE-SESSION-001.md",
+        `+++
+doc_kind = "memory-note"
+id = "NOTE-SESSION-001"
+title = "Local scratch"
+summary = "Session scoped note."
+tags = ["session", "scratch"]
+updated_at = "2026-04-26T00:00:00.000Z"
++++
+
+Keep local scratch notes here.
+`,
+      );
       const context = await loadProjectContext(rootDir);
       const index = buildMemoryIndex(context);
 
@@ -82,7 +104,13 @@ Index the prose that comes after the unfinished fence.
 
       const currentEntry = index.byId.get("CURRENT");
       expect(currentEntry?.docKind).toBe("current-state");
+      expect(currentEntry?.scope).toBe("repo");
       expect(currentEntry?.normalizedTerms).toContain("current");
+
+      const noteEntry = index.byId.get("NOTE-SESSION-001");
+      expect(noteEntry?.docKind).toBe("memory-note");
+      expect(noteEntry?.scope).toBe("session");
+      expect(noteEntry?.normalizedTerms).toContain("scratch");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

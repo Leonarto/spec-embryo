@@ -5,6 +5,8 @@ import type {
   CurrentStateDocument,
   GitSnapshot,
   HandoffDocument,
+  MemoryNoteDocument,
+  MemoryScopeWritePolicy,
   ProjectConfig,
   ProjectContext,
   SpecDocument,
@@ -15,6 +17,7 @@ import type {
 import {
   parseCurrentStateDocument,
   parseHandoffDocument,
+  parseMemoryNoteDocument,
   parseProjectConfig,
   parseSpecDocument,
   parseTaskDocument,
@@ -123,6 +126,18 @@ async function loadMarkdownCollection<T>(
 ): Promise<T[]> {
   const files = await listMarkdownFiles(dirPath);
   return Promise.all(files.map((filePath) => loadMarkdownDocument(filePath, parser)));
+}
+
+async function loadScopedMemoryNotes(
+  dirPath: string,
+  scope: "session" | "org",
+  writePolicy: MemoryScopeWritePolicy,
+): Promise<MemoryNoteDocument[]> {
+  const notes = await loadMarkdownCollection<MemoryNoteDocument>(
+    dirPath,
+    (filePath, attributes, body) => parseMemoryNoteDocument(filePath, attributes, body, scope, writePolicy),
+  );
+  return notes.sort((left, right) => left.id.localeCompare(right.id));
 }
 
 function serializeSpecDocument(spec: SpecDocument, updatedAt: string): string {
@@ -302,11 +317,17 @@ export async function loadProjectContext(rootDir: string): Promise<ProjectContex
   const config = await readProjectConfig(rootDir);
   const paths = resolveProjectPaths(rootDir, config);
 
-  const [currentState, specs, tasks, handoffs, gitSnapshot] = await Promise.all([
+  const [currentState, specs, tasks, handoffs, sessionNotes, orgNotes, gitSnapshot] = await Promise.all([
     readCurrentState(paths),
     loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument),
     loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument),
     loadMarkdownCollection<HandoffDocument>(paths.handoffsDir, parseHandoffDocument),
+    config.memoryScopes.session.enabled
+      ? loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
+      : Promise.resolve([]),
+    config.memoryScopes.org.enabled
+      ? loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
+      : Promise.resolve([]),
     readGitSnapshot(rootDir),
   ]);
 
@@ -319,6 +340,8 @@ export async function loadProjectContext(rootDir: string): Promise<ProjectContex
     specs,
     tasks,
     handoffs,
+    sessionNotes,
+    orgNotes,
     git: gitSnapshot,
   };
 }
@@ -362,6 +385,8 @@ export async function initializeProject(
     ensureDir(paths.specsDir),
     ensureDir(paths.tasksDir),
     ensureDir(paths.skillsDir),
+    ensureDir(paths.sessionMemoryDir),
+    ensureDir(paths.orgMemoryDir),
   ]);
 
   const existingSpecFiles = await listMarkdownFiles(paths.specsDir);

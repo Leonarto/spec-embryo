@@ -1,17 +1,20 @@
 import type {
   CurrentStateDocument,
   HandoffDocument,
+  MemoryNoteDocument,
+  MemoryScopeName,
   ProjectContext,
   SpecDocument,
   TaskDocument,
 } from "../domain.ts";
 
-export type MemoryDocument = SpecDocument | TaskDocument | HandoffDocument | CurrentStateDocument;
+export type MemoryDocument = SpecDocument | TaskDocument | HandoffDocument | CurrentStateDocument | MemoryNoteDocument;
 export type MemoryDocKind = MemoryDocument["docKind"];
 
 export interface MemoryIndexEntry {
   id: string;
   docKind: MemoryDocKind;
+  scope: MemoryScopeName;
   title: string;
   summary: string;
   tags: string[];
@@ -225,6 +228,7 @@ function toIndexEntry(document: MemoryDocument): MemoryIndexEntry {
   return {
     id: document.id,
     docKind: document.docKind,
+    scope: document.docKind === "memory-note" ? document.scope : "repo",
     title: document.title,
     summary: document.summary,
     tags: document.tags,
@@ -259,6 +263,8 @@ export function buildMemoryIndex(context: ProjectContext): MemoryIndex {
     ...context.specs.map((spec) => toIndexEntry(spec)),
     ...context.tasks.map((task) => toIndexEntry(task)),
     ...context.handoffs.map((handoff) => toIndexEntry(handoff)),
+    ...context.sessionNotes.map((note) => toIndexEntry(note)),
+    ...context.orgNotes.map((note) => toIndexEntry(note)),
   ].sort((left, right) => left.id.localeCompare(right.id));
 
   const byId = new Map(entries.map((entry) => [entry.id, entry] as const));

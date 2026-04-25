@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-068"
 title = "Add scoped memory namespaces and access rules"
 summary = "Introduce explicit session, repo, and org-style memory scopes so retrieval and writes stay bounded and predictable for long-running agent work."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-019"]
 depends_on = ["TASK-066"]
 blocked_by = []
 priority = 2
 created_at = "2026-04-25T22:41:50.697Z"
+completed_at = "2026-04-25T23:18:40.124Z"
 tags = ["memory", "context", "policy"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-25T23:18:40.124Z"
 +++
 
 # Scope

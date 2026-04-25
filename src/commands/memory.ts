@@ -2,6 +2,7 @@ import type { ParsedArgs } from "../cli.ts";
 import { flagValue } from "../cli.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildMemoryContextPack, renderContextPack } from "../services/context-pack.ts";
+import { buildMemoryScopesBundle, renderMemoryScopesBundle } from "../services/memory-scopes.ts";
 import {
   buildMemoryBriefBundle,
   MEMORY_BRIEF_PROFILES,
@@ -12,9 +13,11 @@ import { buildMemoryLinkGraph, buildMemoryLinksBundle, renderMemoryLinksBundle }
 import {
   buildMemoryQueryBundle,
   MEMORY_QUERY_DOC_KINDS,
+  MEMORY_QUERY_SCOPES,
   MEMORY_QUERY_STATUSES,
   renderMemoryQueryBundle,
   type MemoryQueryDocKind,
+  type MemoryQueryScope,
   type MemoryQueryStatus,
 } from "../services/memory-query.ts";
 
@@ -68,6 +71,20 @@ function parseStatus(value: string | undefined): MemoryQueryStatus | undefined {
   );
 }
 
+function parseScope(value: string | undefined): MemoryQueryScope | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  if (MEMORY_QUERY_SCOPES.includes(value as MemoryQueryScope)) {
+    return value as MemoryQueryScope;
+  }
+
+  throw new Error(
+    `Invalid memory scope: ${value}. Expected one of ${MEMORY_QUERY_SCOPES.join(", ")}.`,
+  );
+}
+
 function parseBriefProfile(value: string | undefined): MemoryBriefProfile | undefined {
   if (!value) {
     return undefined;
@@ -111,6 +128,7 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     const bundle = buildMemoryQueryBundle(context, {
       text: flagValue(parsed, "text"),
       docKind: parseDocKind(flagValue(parsed, "doc-kind")),
+      scope: parseScope(flagValue(parsed, "scope")),
       status: parseStatus(flagValue(parsed, "status")),
       tags: parseCommaList(flagValue(parsed, "tag")),
       id: flagValue(parsed, "id"),
@@ -152,6 +170,7 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       specId: flagValue(parsed, "spec"),
       taskId: flagValue(parsed, "task"),
       text: flagValue(parsed, "text"),
+      scope: parseScope(flagValue(parsed, "scope")),
       includeNeighbors: parseOptionalBooleanFlag(parsed, "include-neighbors", "no-neighbors"),
       includeCurrent: parseOptionalBooleanFlag(parsed, "include-current", "no-current"),
       includeHandoffs: parseOptionalBooleanFlag(parsed, "include-handoffs", "no-handoffs"),
@@ -172,6 +191,7 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       specId: flagValue(parsed, "spec"),
       taskId: flagValue(parsed, "task"),
       text: flagValue(parsed, "text"),
+      scope: parseScope(flagValue(parsed, "scope")),
       includeNeighbors: parseOptionalBooleanFlag(parsed, "include-neighbors", "no-neighbors"),
       includeCurrent: parseOptionalBooleanFlag(parsed, "include-current", "no-current"),
       includeHandoffs: parseOptionalBooleanFlag(parsed, "include-handoffs", "no-handoffs"),
@@ -185,5 +205,16 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     return renderContextPack(bundle);
   }
 
-  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, and `memory pack`.");
+  if (parsed.subcommand === "scopes") {
+    const context = await loadProjectContext(rootDir);
+    const bundle = buildMemoryScopesBundle(context);
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderMemoryScopesBundle(bundle);
+  }
+
+  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, `memory pack`, and `memory scopes`.");
 }

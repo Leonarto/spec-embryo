@@ -15,6 +15,16 @@ specs_dir = ${JSON.stringify(managed.specsDir)}
 tasks_dir = ${JSON.stringify(managed.tasksDir)}
 skills_dir = ${JSON.stringify(managed.skillsDir)}
 
+[memory_scopes.session]
+enabled = true
+dir = ".specpm/memory/session"
+write_policy = "read-write"
+
+[memory_scopes.org]
+enabled = true
+dir = ".specpm/memory/org"
+write_policy = "read-only"
+
 [agents]
 context_window_tokens = 400000
 root_target_ratio = 0.00225

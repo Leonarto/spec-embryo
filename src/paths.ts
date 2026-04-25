@@ -12,6 +12,8 @@ export interface ProjectPaths {
   specsDir: string;
   tasksDir: string;
   skillsDir: string;
+  sessionMemoryDir: string;
+  orgMemoryDir: string;
   templatesDir: string;
 }
 
@@ -27,6 +29,8 @@ export function resolveProjectPaths(rootDir: string, config?: ProjectConfig): Pr
     specsDir: config ? join(rootDir, config.specsDir) : join(rootDir, "docs", "spm", "specs"),
     tasksDir: config ? join(rootDir, config.tasksDir) : join(rootDir, "docs", "spm", "tasks"),
     skillsDir: config ? join(rootDir, config.skillsDir) : join(rootDir, "docs", "spm", "skills"),
+    sessionMemoryDir: config ? join(rootDir, config.memoryScopes?.session?.dir ?? ".specpm/memory/session") : join(rootDir, ".specpm", "memory", "session"),
+    orgMemoryDir: config ? join(rootDir, config.memoryScopes?.org?.dir ?? ".specpm/memory/org") : join(rootDir, ".specpm", "memory", "org"),
     templatesDir: join(rootDir, ".specpm", "templates"),
   };
 }

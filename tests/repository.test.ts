@@ -277,6 +277,8 @@ describe("repository status updates", () => {
 
       const configRaw = await readFile(join(rootDir, ".specpm/config.toml"), "utf8");
       expect(configRaw).toContain(`tool_version = "${CLI_VERSION}"`);
+      expect(configRaw).toContain("[memory_scopes.session]");
+      expect(configRaw).toContain('write_policy = "read-only"');
       expect(configRaw).toContain("[nexus]");
       expect(configRaw).toContain('enabled = false');
       expect(configRaw).toContain('root_agents_mode = "reference-only"');

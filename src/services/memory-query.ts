@@ -1,8 +1,8 @@
-import type { ProjectContext, SpecStatus, TaskStatus } from "../domain.ts";
+import type { MemoryScopeName, ProjectContext, SpecStatus, TaskStatus } from "../domain.ts";
 import { buildNormalizedTerms, type MemoryDocKind, type MemoryIndexEntry } from "./memory-index.ts";
 import { buildMemoryLinkGraph, buildMemoryNeighborhood, type MemoryRelation } from "./memory-links.ts";
 
-export const MEMORY_QUERY_DOC_KINDS = ["spec", "task", "handoff", "current-state"] as const;
+export const MEMORY_QUERY_DOC_KINDS = ["spec", "task", "handoff", "current-state", "memory-note"] as const;
 export const MEMORY_QUERY_STATUSES = [
   "proposed",
   "active",
@@ -15,13 +15,16 @@ export const MEMORY_QUERY_STATUSES = [
   "review",
   "cancelled",
 ] as const;
+export const MEMORY_QUERY_SCOPES = ["session", "repo", "org"] as const;
 
 export type MemoryQueryDocKind = (typeof MEMORY_QUERY_DOC_KINDS)[number];
 export type MemoryQueryStatus = SpecStatus | TaskStatus;
+export type MemoryQueryScope = (typeof MEMORY_QUERY_SCOPES)[number];
 
 export interface MemoryQueryFilters {
   text?: string;
   docKind?: MemoryQueryDocKind;
+  scope?: MemoryQueryScope;
   status?: MemoryQueryStatus;
   tags?: string[];
   id?: string;
@@ -33,6 +36,7 @@ export interface MemoryQueryFilters {
 export interface MemoryQueryResult {
   id: string;
   docKind: MemoryDocKind;
+  scope: MemoryScopeName;
   title: string;
   summary: string;
   status?: string;
@@ -46,6 +50,7 @@ export interface MemoryQueryBundle {
   filters: {
     text?: string;
     docKind?: MemoryQueryDocKind;
+    scope?: MemoryQueryScope;
     status?: MemoryQueryStatus;
     tags: string[];
     id?: string;
@@ -200,6 +205,10 @@ function buildFilterReasons(entry: MemoryIndexEntry, filters: MemoryQueryFilters
     reasons.push(`kind:${entry.docKind}`);
   }
 
+  if (filters.scope) {
+    reasons.push(`scope:${entry.scope}`);
+  }
+
   if (filters.status && entry.status) {
     reasons.push(`status:${entry.status}`);
   }
@@ -270,6 +279,10 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
         return [];
       }
 
+      if (filters.scope && entry.scope !== filters.scope) {
+        return [];
+      }
+
       if (filters.status && entry.status !== filters.status) {
         return [];
       }
@@ -336,6 +349,7 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
     filters: {
       text: requestedText,
       docKind: filters.docKind,
+      scope: filters.scope,
       status: filters.status,
       tags: requestedTags,
       id: filters.id?.trim() || undefined,
@@ -347,6 +361,7 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
     results: scored.slice(0, limit).map(({ entry, matchReasons, relationHints }) => ({
       id: entry.id,
       docKind: entry.docKind,
+      scope: entry.scope,
       title: entry.title,
       summary: entry.summary,
       status: entry.status,
@@ -370,7 +385,7 @@ export function renderMemoryQueryBundle(bundle: MemoryQueryBundle): string {
       const relationLine =
         result.relationHints.length > 0 ? `\n  relations: ${result.relationHints.join(", ")}` : "";
       const tagLine = result.tags.length > 0 ? `\n  tags: ${result.tags.join(", ")}` : "";
-      return `${result.id} [${result.docKind}${statusLabel}] ${result.title}\n  ${result.summary}${reasonLine}${relationLine}${tagLine}`;
+      return `${result.id} [${result.docKind}${statusLabel} scope:${result.scope}] ${result.title}\n  ${result.summary}${reasonLine}${relationLine}${tagLine}`;
     })
     .join("\n\n");
 }

@@ -1,11 +1,17 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { parseArgs } from "../src/cli.ts";
 import { runMemoryCommand } from "../src/commands/memory.ts";
 import { createSpec, loadProjectContext, initializeProject } from "../src/repository.ts";
 import { buildMemoryQueryBundle } from "../src/services/memory-query.ts";
+
+async function writeMemoryNote(rootDir: string, scope: "session" | "org", fileName: string, body: string): Promise<void> {
+  const dir = join(rootDir, ".specpm", "memory", scope);
+  await mkdir(dir, { recursive: true });
+  await Bun.write(join(dir, fileName), body);
+}
 
 describe("memory query service", () => {
   test("retrieves managed docs by typed filters and normalized tags", async () => {
@@ -119,6 +125,67 @@ describe("memory query service", () => {
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("supports scoped note retrieval without changing repo-memory defaults", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-query-"));
+
+    try {
+      await initializeProject(rootDir);
+      await writeMemoryNote(
+        rootDir,
+        "session",
+        "NOTE-SESSION-current-scratchpad.md",
+        `+++
+doc_kind = "memory-note"
+id = "NOTE-SESSION-001"
+title = "Current scratchpad"
+summary = "Session-local implementation notes."
+tags = ["scratch", "session"]
+updated_at = "2026-04-26T00:00:00.000Z"
++++
+
+# Notes
+
+Track the current scratch plan here.
+`,
+      );
+      await writeMemoryNote(
+        rootDir,
+        "org",
+        "NOTE-ORG-style-guide.md",
+        `+++
+doc_kind = "memory-note"
+id = "NOTE-ORG-001"
+title = "Shared style guide"
+summary = "Org-level guidance for future agents."
+tags = ["policy", "org"]
+updated_at = "2026-04-26T00:00:00.000Z"
++++
+
+# Guidance
+
+Prefer stable file references and concise answers.
+`,
+      );
+
+      const context = await loadProjectContext(rootDir);
+
+      const sessionBundle = buildMemoryQueryBundle(context, { scope: "session", docKind: "memory-note" });
+      expect(sessionBundle.totalMatches).toBe(1);
+      expect(sessionBundle.results[0]?.id).toBe("NOTE-SESSION-001");
+      expect(sessionBundle.results[0]?.scope).toBe("session");
+
+      const orgBundle = buildMemoryQueryBundle(context, { scope: "org", text: "style guide" });
+      expect(orgBundle.results[0]?.id).toBe("NOTE-ORG-001");
+      expect(orgBundle.results[0]?.scope).toBe("org");
+
+      const repoBundle = buildMemoryQueryBundle(context, { scope: "repo", tags: ["seed"] });
+      expect(repoBundle.results.some((result) => result.id === "SPEC-001")).toBe(true);
+      expect(repoBundle.results.some((result) => result.scope !== "repo")).toBe(false);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });
 
 describe("memory query command", () => {
@@ -134,7 +201,7 @@ describe("memory query command", () => {
       });
 
       const human = await runMemoryCommand(rootDir, parseArgs(["memory", "query", "--tag", "seed", "--limit", "2"]));
-      expect(human).toContain("SPEC-001 [spec active]");
+      expect(human).toContain("SPEC-001 [spec active scope:repo]");
       expect(human).toContain("match:");
       expect(human).toContain("tags: adoption, seed");
 
@@ -157,6 +224,37 @@ describe("memory query command", () => {
         parseArgs(["memory", "query", "--tag", "self hosting", "--limit", "3"]),
       );
       expect(normalizedTagHuman).toContain("match: tag:self-hosting");
+
+      await writeMemoryNote(
+        rootDir,
+        "session",
+        "NOTE-SESSION-work-log.md",
+        `+++
+doc_kind = "memory-note"
+id = "NOTE-SESSION-002"
+title = "Work log"
+summary = "Session notes for the current flow."
+tags = ["session"]
+updated_at = "2026-04-26T00:00:00.000Z"
++++
+
+Keep the local work log here.
+`,
+      );
+
+      const scopedHuman = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "query", "--scope", "session", "--doc-kind", "memory-note"]),
+      );
+      expect(scopedHuman).toContain("NOTE-SESSION-002 [memory-note scope:session]");
+
+      const scopesJson = await runMemoryCommand(rootDir, parseArgs(["memory", "scopes", "--json"]));
+      const scopesBundle = JSON.parse(scopesJson) as {
+        scopes: Array<{ scope: string; writePolicy: string; documentCount: number }>;
+      };
+
+      expect(scopesBundle.scopes.some((scope) => scope.scope === "repo" && scope.writePolicy === "read-write")).toBe(true);
+      expect(scopesBundle.scopes.some((scope) => scope.scope === "session" && scope.documentCount === 1)).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -170,6 +268,9 @@ describe("memory query command", () => {
 
       await expect(runMemoryCommand(rootDir, parseArgs(["memory", "query", "--doc-kind", "note"]))).rejects.toThrow(
         "Invalid memory doc kind",
+      );
+      await expect(runMemoryCommand(rootDir, parseArgs(["memory", "query", "--scope", "team"]))).rejects.toThrow(
+        "Invalid memory scope",
       );
       await expect(
         runMemoryCommand(rootDir, parseArgs(["memory", "query", "--text", "   "])),
