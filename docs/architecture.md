@@ -149,6 +149,17 @@ Non-deterministic only when genuinely needed:
 
 That is why prompt-return mode exists: if an AI is already calling Spec Embryo, the tool should return high-signal structured context and a recommended brief instead of nesting another model call.
 
+## Context management principles
+
+Spec Embryo is meant to work alongside coding agents such as Codex and Claude, not to impersonate them.
+
+- `spm` should own durable repo memory, deterministic retrieval, context packaging, memory policy, and reviewable file-backed state.
+- The model should own live reasoning, short-lived synthesis, and conversational adaptation over that context.
+- When choosing between building more in-tool "intelligence" and improving context selection, compaction, ordering, or evaluation, prefer the latter.
+- New context features should justify themselves through reproducibility, token efficiency, or better repo-specific grounding rather than by duplicating behavior the model already performs natively.
+
+This boundary keeps Spec Embryo useful across providers while avoiding a fragile second assistant hidden inside the tool.
+
 ## Local visual server
 
 The first local visual server lives under `web/` and is launched through `spm ui`.

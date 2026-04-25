@@ -10,6 +10,7 @@
 - Review-gated execution: implementation work should pass through review before it is marked done, and review findings must be fixed before a task leaves the review gate.
 - Resume-friendly: current state and handoffs make interrupted work easy to continue.
 - Agent-native without agent-dependence: prompt-return is first-class, subprocess backends are adapters, and the tool is useful with zero agent configured.
+- Assistant-sidecar, not assistant-clone: `spm` should own durable repo memory, deterministic context packaging, and project workflow while letting Codex, Claude, or other agents own live reasoning and conversational adaptation.
 
 ## V1 workflow
 
@@ -149,6 +150,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
 - Interactive timeline tracing with URL-driven task selection, distinct upstream/downstream highlighting, and related-spec emphasis for cross-spec diagnosis
 - Prompt-return backend for agent-safe orchestration
+- A product direction that treats context management as packaging, scoping, consolidation, and evaluation work rather than trying to recreate model-native reasoning inside the tool
 - Handoff file generation
 - Deterministic spec/task creation with automatic back-linking
 - Initial spec/task/current-state templates and seed files
