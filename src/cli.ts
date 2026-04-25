@@ -94,6 +94,7 @@ Usage:
   spm memory brief (--id DOC-ID | --spec SPEC-ID | --task TASK-ID | --text "...") [--scope session|repo|org] [--include-neighbors|--no-neighbors] [--include-current|--no-current] [--include-handoffs|--no-handoffs] [--profile implementation|review|migration] [--json]
   spm memory pack (--id DOC-ID | --spec SPEC-ID | --task TASK-ID | --text "...") [--scope session|repo|org] [--include-neighbors|--no-neighbors] [--include-current|--no-current] [--include-handoffs|--no-handoffs] [--profile implementation|review|migration] [--json]
   spm memory scopes [--json]
+  spm memory consolidate <NOTE-ID> [--apply] [--target handoff] [--title "..."] [--keep-source] [--json]
   spm nexus setup [--apply] [--command gitnexus] [--root-agents-mode reference-only|scoped] [--json]
   spm spec list [--status active]
   spm spec create --title "..." --summary "..." [--status proposed] [--task-ids TASK-001,TASK-002] [--tags foundation,cli] [--owner human-ai] [--json]

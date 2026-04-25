@@ -78,6 +78,12 @@ export interface MemoryNoteDocument extends BaseDocument {
   docKind: "memory-note";
   scope: Exclude<MemoryScopeName, "repo">;
   writePolicy: MemoryScopeWritePolicy;
+  createdAt?: string;
+  expiresAt?: string;
+  consolidatedAt?: string;
+  promotedTo?: string;
+  archivedAt?: string;
+  archiveReason?: string;
 }
 
 export interface ExecutionBackendConfig {
@@ -534,6 +540,12 @@ export function parseMemoryNoteDocument(
     title: asString(attributes.title, "title", filePath),
     summary: asString(attributes.summary, "summary", filePath, "No summary provided."),
     tags: asStringArray(attributes.tags, "tags", filePath),
+    createdAt: asOptionalString(attributes.created_at),
+    expiresAt: asOptionalString(attributes.expires_at),
+    consolidatedAt: asOptionalString(attributes.consolidated_at),
+    promotedTo: asOptionalString(attributes.promoted_to),
+    archivedAt: asOptionalString(attributes.archived_at),
+    archiveReason: asOptionalString(attributes.archive_reason),
     updatedAt: asOptionalString(attributes.updated_at),
     body: body.trim(),
     filePath,

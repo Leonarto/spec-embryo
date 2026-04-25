@@ -1,6 +1,12 @@
 import type { ParsedArgs } from "../cli.ts";
-import { flagValue } from "../cli.ts";
+import { flagValue, hasFlag } from "../cli.ts";
 import { loadProjectContext } from "../repository.ts";
+import {
+  buildMemoryConsolidationBundle,
+  MEMORY_CONSOLIDATION_TARGETS,
+  renderMemoryConsolidationBundle,
+  type MemoryConsolidationTarget,
+} from "../services/memory-consolidation.ts";
 import { buildMemoryContextPack, renderContextPack } from "../services/context-pack.ts";
 import { buildMemoryScopesBundle, renderMemoryScopesBundle } from "../services/memory-scopes.ts";
 import {
@@ -82,6 +88,20 @@ function parseScope(value: string | undefined): MemoryQueryScope | undefined {
 
   throw new Error(
     `Invalid memory scope: ${value}. Expected one of ${MEMORY_QUERY_SCOPES.join(", ")}.`,
+  );
+}
+
+function parseConsolidationTarget(value: string | undefined): MemoryConsolidationTarget | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  if (MEMORY_CONSOLIDATION_TARGETS.includes(value as MemoryConsolidationTarget)) {
+    return value as MemoryConsolidationTarget;
+  }
+
+  throw new Error(
+    `Invalid memory consolidation target: ${value}. Expected one of ${MEMORY_CONSOLIDATION_TARGETS.join(", ")}.`,
   );
 }
 
@@ -216,5 +236,26 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     return renderMemoryScopesBundle(bundle);
   }
 
-  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, `memory pack`, and `memory scopes`.");
+  if (parsed.subcommand === "consolidate") {
+    const noteId = parsed.positionals[2];
+    if (!noteId) {
+      throw new Error("`memory consolidate` requires <NOTE-ID>.");
+    }
+
+    const bundle = await buildMemoryConsolidationBundle(rootDir, {
+      noteId,
+      apply: hasFlag(parsed, "apply"),
+      target: parseConsolidationTarget(flagValue(parsed, "target")),
+      title: flagValue(parsed, "title"),
+      keepSource: hasFlag(parsed, "keep-source"),
+    });
+
+    if (parsed.flags.has("json")) {
+      return JSON.stringify(bundle, null, 2);
+    }
+
+    return renderMemoryConsolidationBundle(bundle);
+  }
+
+  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, and `memory consolidate`.");
 }

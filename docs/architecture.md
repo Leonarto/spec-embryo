@@ -7,8 +7,8 @@ Spec Embryo is intentionally split into seven layers:
 1. Storage and file layer: filesystem access, TOML frontmatter parsing, config loading, and durable writes.
 2. Domain model: typed documents for specs, tasks, handoffs, current state, and backend config.
 3. Deterministic engine: linking, validation, git inspection, blockers, ready work, critical path, and next-action derivation.
-4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory query`, `memory links`, `memory brief`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
-5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, memory indexing/querying/briefing, layout normalization, and other reusable logic above the repository layer.
+4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
+5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, memory indexing/querying/briefing/packing/consolidation, layout normalization, and other reusable logic above the repository layer.
 6. Local visual server: a SvelteKit app that renders managed memory through shared deterministic services rather than a second parser.
 7. Execution backends: deterministic text output, prompt-return output, and optional subprocess adapters.
 
@@ -110,6 +110,12 @@ Core fields:
 - `title`
 - `summary`
 - `tags`
+- optional `created_at`
+- optional `expires_at`
+- optional `consolidated_at`
+- optional `promoted_to`
+- optional `archived_at`
+- optional `archive_reason`
 - scope, inferred from the configured session or org memory home
 - write policy, inherited from the configured memory scope
 
@@ -152,6 +158,7 @@ The first scoped-memory model is intentionally simple:
 - `org`: optional `memory-note` files for broader shared guidance, defaulting to read-only intent
 
 Retrieval and context packs can filter or label these scopes explicitly, but repo memory remains the default source of truth for project execution.
+Session notes are intentionally a capture layer, not durable truth: `spm memory consolidate` reviews duplicates, contradictions, related repo docs, and stale markers before promoting a note into durable repo memory such as a handoff.
 
 ## Deterministic vs non-deterministic boundaries
 

@@ -6,6 +6,7 @@ import type {
   GitSnapshot,
   HandoffDocument,
   MemoryNoteDocument,
+  MemoryScopeName,
   MemoryScopeWritePolicy,
   ProjectConfig,
   ProjectContext,
@@ -140,6 +141,14 @@ async function loadScopedMemoryNotes(
   return notes.sort((left, right) => left.id.localeCompare(right.id));
 }
 
+function allMemoryNotes(context: ProjectContext): MemoryNoteDocument[] {
+  return [...context.sessionNotes, ...context.orgNotes];
+}
+
+function memoryScopeDir(paths: ReturnType<typeof resolveProjectPaths>, scope: Exclude<MemoryScopeName, "repo">): string {
+  return scope === "session" ? paths.sessionMemoryDir : paths.orgMemoryDir;
+}
+
 function serializeSpecDocument(spec: SpecDocument, updatedAt: string): string {
   return serializeTomlFrontmatter(
     {
@@ -179,6 +188,26 @@ function serializeTaskDocument(task: TaskDocument, updatedAt: string): string {
       updated_at: updatedAt,
     },
     task.body,
+  );
+}
+
+function serializeMemoryNoteDocument(note: MemoryNoteDocument, updatedAt: string): string {
+  return serializeTomlFrontmatter(
+    {
+      doc_kind: note.docKind,
+      id: note.id,
+      title: note.title,
+      summary: note.summary,
+      created_at: note.createdAt,
+      expires_at: note.expiresAt,
+      consolidated_at: note.consolidatedAt,
+      promoted_to: note.promotedTo,
+      archived_at: note.archivedAt,
+      archive_reason: note.archiveReason,
+      tags: note.tags,
+      updated_at: updatedAt,
+    },
+    note.body,
   );
 }
 
@@ -640,6 +669,44 @@ export async function restoreTask(rootDir: string, taskId: string): Promise<Task
     archiveReason: undefined,
     updatedAt: now,
   }));
+}
+
+export async function findMemoryNote(rootDir: string, noteId: string): Promise<MemoryNoteDocument> {
+  const context = await loadProjectContext(rootDir);
+  const note = allMemoryNotes(context).find((entry) => entry.id === noteId);
+
+  if (!note) {
+    throw new Error(`Memory note not found: ${noteId}`);
+  }
+
+  return note;
+}
+
+export async function updateMemoryNote(
+  rootDir: string,
+  noteId: string,
+  updater: (note: MemoryNoteDocument, now: string) => MemoryNoteDocument,
+): Promise<MemoryNoteDocument> {
+  const config = await readProjectConfig(rootDir);
+  const paths = resolveProjectPaths(rootDir, config);
+  const sessionNotes = config.memoryScopes.session.enabled
+    ? await loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
+    : [];
+  const orgNotes = config.memoryScopes.org.enabled
+    ? await loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
+    : [];
+  const note = [...sessionNotes, ...orgNotes].find((entry) => entry.id === noteId);
+
+  if (!note) {
+    throw new Error(`Memory note not found: ${noteId}`);
+  }
+
+  const now = new Date().toISOString();
+  const nextNote = updater(note, now);
+  const scopeDir = memoryScopeDir(paths, nextNote.scope);
+  await ensureDir(scopeDir);
+  await writeUtf8(nextNote.filePath, serializeMemoryNoteDocument(nextNote, nextNote.updatedAt ?? now));
+  return nextNote;
 }
 
 function parseAgeToMilliseconds(value: string): number {

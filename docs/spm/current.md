@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-019 is active. TASK-068 is done, and spm now has explicit session, repo, and org memory scopes, scope-aware retrieval, scope-aware context packs, and a memory scopes inspection command."
-focus = "Start TASK-069 to add memory consolidation and staleness management on top of the new scoped-memory model."
+summary = "SPEC-019 is active. TASK-069 is done, and spm now has a deterministic memory consolidation flow that promotes session notes into durable handoffs with duplicate, contradiction, related-doc, and staleness checks."
+focus = "Start TASK-071 to improve retrieval ordering and section-level packing on top of the new context-pack and consolidation layers."
 active_spec_ids = ["SPEC-019"]
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Start TASK-069 by defining how session notes are promoted or merged into durable repo memory.", "Keep the new memory scope filters and context-pack scope labels stable while adding consolidation rules.", "Reuse the scoped-memory tests as the baseline before changing note lifecycle behavior further."]
+next_action_hints = ["Start TASK-071 by improving section-level evidence extraction and result ordering for memory packs and briefs.", "Keep the new consolidation outputs and scope labels stable while tightening retrieval assembly.", "Unblock TASK-072 only after TASK-071 defines a stable prompt-bundle ordering contract."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-25T23:18:40.124Z"
+updated_at = "2026-04-25T23:38:57.370Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

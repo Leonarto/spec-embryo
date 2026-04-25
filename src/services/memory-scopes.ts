@@ -16,6 +16,8 @@ export interface MemoryScopesBundle {
 
 export function buildMemoryScopesBundle(context: ProjectContext): MemoryScopesBundle {
   const paths = resolveProjectPaths(context.rootDir, context.config);
+  const activeSessionNotes = context.sessionNotes.filter((note) => !note.archivedAt);
+  const activeOrgNotes = context.orgNotes.filter((note) => !note.archivedAt);
   const toRelative = (absolutePath: string): string => {
     const rel = relative(context.rootDir, absolutePath);
     return rel.length > 0 ? rel : ".";
@@ -37,7 +39,7 @@ export function buildMemoryScopesBundle(context: ProjectContext): MemoryScopesBu
         enabled: context.config.memoryScopes.session.enabled,
         writePolicy: context.config.memoryScopes.session.writePolicy,
         dir: toRelative(paths.sessionMemoryDir),
-        documentCount: context.sessionNotes.length,
+        documentCount: activeSessionNotes.length,
         documentKinds: ["memory-note"],
         note: "Fast-changing local notes that can later be consolidated into repo memory.",
       },
@@ -46,7 +48,7 @@ export function buildMemoryScopesBundle(context: ProjectContext): MemoryScopesBu
         enabled: context.config.memoryScopes.org.enabled,
         writePolicy: context.config.memoryScopes.org.writePolicy,
         dir: toRelative(paths.orgMemoryDir),
-        documentCount: context.orgNotes.length,
+        documentCount: activeOrgNotes.length,
         documentKinds: ["memory-note"],
         note: "Shared guidance scope intended for broader policy or reference material.",
       },

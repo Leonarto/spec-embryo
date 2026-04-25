@@ -263,8 +263,8 @@ export function buildMemoryIndex(context: ProjectContext): MemoryIndex {
     ...context.specs.map((spec) => toIndexEntry(spec)),
     ...context.tasks.map((task) => toIndexEntry(task)),
     ...context.handoffs.map((handoff) => toIndexEntry(handoff)),
-    ...context.sessionNotes.map((note) => toIndexEntry(note)),
-    ...context.orgNotes.map((note) => toIndexEntry(note)),
+    ...context.sessionNotes.filter((note) => !note.archivedAt).map((note) => toIndexEntry(note)),
+    ...context.orgNotes.filter((note) => !note.archivedAt).map((note) => toIndexEntry(note)),
   ].sort((left, right) => left.id.localeCompare(right.id));
 
   const byId = new Map(entries.map((entry) => [entry.id, entry] as const));

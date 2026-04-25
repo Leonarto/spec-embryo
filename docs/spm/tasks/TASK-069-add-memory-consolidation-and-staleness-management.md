@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-069"
 title = "Add memory consolidation and staleness management"
 summary = "Separate quick capture from later consolidation so managed memory can dedupe, resolve conflicts, and retire stale context without bloating active prompts."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-019"]
 depends_on = ["TASK-066", "TASK-068"]
 blocked_by = []
 priority = 2
 created_at = "2026-04-25T22:41:55.017Z"
+completed_at = "2026-04-25T23:38:57.370Z"
 tags = ["memory", "consolidation", "context"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-25T23:38:57.370Z"
 +++
 
 # Scope
