@@ -8,6 +8,7 @@ This folder is the thin CLI command layer.
 - Status, creation, and current-state commands should validate inputs, then delegate deterministic rewrites to repository helpers.
 - Agent-facing migration commands should return structured bundles from deterministic scans rather than embedding ad hoc prompt logic in the handler.
 - `init` stays a thin guided entrypoint: reusable services own repo classification, adoption artifacts, and scaffold rules; the handler should only prompt when a human choice is required.
+- `init` should render adoption artifacts from the repo state that exists after initialization, so doctor drift checks and repo-local guidance agree on the same contract.
 - `doctor` stays read-only in the command layer. Its default human output should be concise, and any copy-pasteable brief or long guidance should come from reusable services behind explicit verbose or JSON modes.
 - `memory` commands should validate typed filters, note-scope inputs, and inclusion/exclusion flags in the handler, then delegate retrieval, note mutation, ranking, and rendering to reusable services.
 - `nexus` commands should stay thin over deterministic setup services; keep the default path read-only and require explicit `--apply` for file writes.

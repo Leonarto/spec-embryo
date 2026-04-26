@@ -3,8 +3,10 @@ import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import type { ParsedArgs } from "../cli.ts";
 import { flagValue, formatPath, hasFlag } from "../cli.ts";
+import { parseTomlFrontmatter } from "../frontmatter.ts";
+import { resolveProjectPaths } from "../paths.ts";
 import { initializeProject, readProjectConfig, writeAdoptionArtifacts } from "../repository.ts";
-import { pathExists } from "../storage.ts";
+import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
 import {
   buildAdoptionGuidance,
   renderAdoptionGuidance,
@@ -44,19 +46,62 @@ async function promptForLayoutChoice(candidates: Array<{ relativePath: string; r
   }
 }
 
+function hasSeedTag(attributes: unknown): boolean {
+  if (!attributes || typeof attributes !== "object" || !("tags" in attributes)) {
+    return false;
+  }
+
+  const tags = (attributes as { tags?: unknown }).tags;
+  return Array.isArray(tags) && tags.some((tag) => tag === "seed");
+}
+
+async function detectSeedScaffoldBestEffort(
+  rootDir: string,
+  memoryDir: string,
+): Promise<boolean> {
+  const paths = resolveProjectPaths(rootDir, await readProjectConfig(rootDir));
+  const files: string[] = [];
+
+  if (paths.memoryDir.endsWith(memoryDir) && (await pathExists(paths.stateFile))) {
+    files.push(paths.stateFile);
+  }
+
+  for (const dirPath of [paths.specsDir, paths.tasksDir]) {
+    if (!(await pathExists(dirPath))) {
+      continue;
+    }
+
+    files.push(...(await listMarkdownFiles(dirPath)));
+  }
+
+  for (const filePath of files) {
+    try {
+      const raw = await readUtf8(filePath);
+      const { attributes } = parseTomlFrontmatter(raw);
+      if (hasSeedTag(attributes)) {
+        return true;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return false;
+}
+
 export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
   const explicitHome = flagValue(parsed, "home");
   const configFile = join(rootDir, ".specpm", "config.toml");
   const existingConfig = (await pathExists(configFile)) ? await readProjectConfig(rootDir) : undefined;
-  const inspection = await inspectAdoptionState(rootDir, {
+  const preInitInspection = await inspectAdoptionState(rootDir, {
     explicitHome,
     standalone: hasFlag(parsed, "standalone"),
     config: existingConfig,
   });
 
-  let memoryDir = explicitHome ? normalizeManagedHomeInput(explicitHome) : inspection.layoutChoice.memoryDir;
-  if (inspection.layoutChoice.requiresChoice) {
-    memoryDir = await promptForLayoutChoice(inspection.layoutChoice.candidates);
+  let memoryDir = explicitHome ? normalizeManagedHomeInput(explicitHome) : preInitInspection.layoutChoice.memoryDir;
+  if (preInitInspection.layoutChoice.requiresChoice) {
+    memoryDir = await promptForLayoutChoice(preInitInspection.layoutChoice.candidates);
   }
 
   const result = await initializeProject(rootDir, {
@@ -64,6 +109,10 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     memoryDir,
   });
   const projectConfig = await readProjectConfig(rootDir);
+  const seedScaffoldDetected = await detectSeedScaffoldBestEffort(rootDir, result.memoryDir);
+  const inspection = await inspectAdoptionState(rootDir, {
+    config: projectConfig,
+  });
   const guidance = buildAdoptionGuidance({
     adoption: inspection,
     memoryDir: result.memoryDir,
@@ -71,6 +120,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     refreshed: result.refreshed.map((filePath) => formatPath(rootDir, filePath)),
     skipped: result.skipped.map((filePath) => formatPath(rootDir, filePath)),
     commandContext: "init",
+    seedScaffoldDetected,
   });
   const directAgentBrief = renderDirectAgentBrief({
     projectName: projectConfig.projectName,
@@ -105,6 +155,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
         adopted_home: inspection.layoutChoice.adoptedHome,
         adoption_state: inspection.state,
         inspection,
+        pre_init_inspection: preInitInspection,
         sequence: result.sequence,
         created: [...result.created, ...adoptionArtifacts.created].map((filePath) => formatPath(rootDir, filePath)),
         refreshed: [...result.refreshed, ...adoptionArtifacts.refreshed].map((filePath) => formatPath(rootDir, filePath)),

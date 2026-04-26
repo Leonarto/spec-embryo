@@ -10,6 +10,7 @@ import {
   renderDirectAgentBrief,
   renderMigrationGuideMarkdown,
 } from "../src/services/adoption.ts";
+import { buildDoctorReport } from "../src/services/doctor.ts";
 import type { AdoptionInspection } from "../src/services/layout.ts";
 import type { DoctorFinding } from "../src/services/doctor.ts";
 
@@ -247,6 +248,10 @@ describe("init adoption artifacts", () => {
       expect(brief).toContain("Do not expect partial substring matches");
       expect(guide).toContain("Nexus Coexistence");
       expect(brief).toContain("Nexus is optional and external to Spec Embryo");
+
+      const doctorReport = await buildDoctorReport(rootDir);
+      expect(doctorReport.findings.some((finding) => finding.code === "stale-adoption-migration-guide")).toBe(false);
+      expect(doctorReport.findings.some((finding) => finding.code === "stale-adoption-agent-brief")).toBe(false);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -290,6 +295,38 @@ describe("init adoption artifacts", () => {
       expect(nextGuide).toContain("Current Memory Workflow");
       expect(nextBrief).toContain("Refresh your SpM usage policy");
       expect(parsed.skipped.some((path) => path.endsWith("/current.md") || path === "spm/current.md")).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("still refreshes adoption artifacts when existing managed docs are malformed", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-init-broken-"));
+
+    try {
+      const initialOutput = await runInitCommand(rootDir, parseArgs(["init", "--json"]));
+      const initial = JSON.parse(initialOutput) as {
+        memory_dir: string;
+        migration_guide_file: string;
+        direct_agent_brief_file: string;
+      };
+      const specFile = join(rootDir, initial.memory_dir, "specs", "SPEC-001-adopt-spec-embryo-memory-for-this-repository.md");
+      const specRaw = await readFile(specFile, "utf8");
+      await writeFile(specFile, specRaw.replace('status = "active"', 'status = "planned"'), "utf8");
+
+      const output = await runInitCommand(rootDir, parseArgs(["init", "--json"]));
+      const parsed = JSON.parse(output) as {
+        migration_guide_file: string;
+        direct_agent_brief_file: string;
+      };
+
+      const guide = await readFile(join(rootDir, parsed.migration_guide_file), "utf8");
+      const brief = await readFile(join(rootDir, parsed.direct_agent_brief_file), "utf8");
+
+      expect(parsed.migration_guide_file).toBe(initial.migration_guide_file);
+      expect(parsed.direct_agent_brief_file).toBe(initial.direct_agent_brief_file);
+      expect(guide).toContain("Current Memory Workflow");
+      expect(brief).toContain("Treat any SpM seed scaffold as migration backlog");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

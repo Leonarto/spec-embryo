@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-021"
 title = "Teach upgraded agents to refresh SpM capabilities and usage policies"
 summary = "Make doctor/init/adoption guidance explicitly tell agents when a newer SpM version changes available workflows, especially scoped memory management, so they refresh behavior instead of using stale assumptions."
-status = "active"
+status = "done"
 task_ids = ["TASK-075"]
 tags = ["adoption", "doctor", "memory", "agent-guidance"]
 owner = "human-ai"
-updated_at = "2026-04-26T00:46:23.050Z"
+updated_at = "2026-04-26T01:12:31.275Z"
 +++
 
 # Problem

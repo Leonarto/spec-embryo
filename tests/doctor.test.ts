@@ -2,6 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
+import { parseArgs } from "../src/cli.ts";
+import { runInitCommand } from "../src/commands/init.ts";
 import { buildDoctorReport, renderDoctorReport } from "../src/services/doctor.ts";
 import { initializeProject } from "../src/repository.ts";
 import { CLI_VERSION } from "../src/services/version.ts";
@@ -35,7 +37,7 @@ root_agents_mode = "${replacement.rootAgentsMode}"
 }
 
 describe("doctor service", () => {
-  test("reports a healthy adopted repo", async () => {
+  test("reports missing adoption artifacts on a configured repo without generated guidance", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-doctor-"));
 
     try {
@@ -46,8 +48,10 @@ describe("doctor service", () => {
       expect(report.adoption.state).toBe("adopted");
       expect(report.config.valid).toBe(true);
       expect(report.summary.blockingCount).toBe(0);
-      expect(report.summary.warningCount).toBe(1);
+      expect(report.summary.warningCount).toBe(3);
       expect(report.findings.some((finding) => finding.code === "seed-scaffold-present")).toBe(true);
+      expect(report.findings.some((finding) => finding.code === "missing-adoption-migration-guide")).toBe(true);
+      expect(report.findings.some((finding) => finding.code === "missing-adoption-agent-brief")).toBe(true);
       expect(report.guidance.agentOrientation.some((item) => item.includes("not the adopted repo's product direction"))).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
       expect(report.directAgentBriefFile).toBe("docs/spm/adoption/direct-agent-brief.md");
@@ -112,6 +116,30 @@ describe("doctor service", () => {
       expect(report.guidance.capabilityRefresh.actions.some((item) => item.includes("spm doctor --verbose"))).toBe(true);
       expect(report.directAgentBrief).toContain("spm memory note create");
       expect(report.directAgentBrief).toContain("Refresh your SpM usage policy");
+      expect(report.findings.some((finding) => finding.code === "missing-adoption-migration-guide")).toBe(true);
+      expect(report.findings.some((finding) => finding.code === "missing-adoption-agent-brief")).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("warns when generated adoption artifacts are stale", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-doctor-"));
+
+    try {
+      const initOutput = await runInitCommand(rootDir, parseArgs(["init", "--json"]));
+      const parsed = JSON.parse(initOutput) as {
+        migration_guide_file: string;
+        direct_agent_brief_file: string;
+      };
+      await writeFile(join(rootDir, parsed.migration_guide_file), "# stale migration guide\n", "utf8");
+      await writeFile(join(rootDir, parsed.direct_agent_brief_file), "# stale brief\n", "utf8");
+
+      const report = await buildDoctorReport(rootDir);
+
+      expect(report.findings.some((finding) => finding.code === "stale-adoption-migration-guide")).toBe(true);
+      expect(report.findings.some((finding) => finding.code === "stale-adoption-agent-brief")).toBe(true);
+      expect(report.findings.find((finding) => finding.code === "stale-adoption-agent-brief")?.hint).toContain("Run `spm init`");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

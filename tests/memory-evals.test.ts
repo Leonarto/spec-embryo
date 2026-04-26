@@ -12,7 +12,7 @@ const repoRoot = join(import.meta.dir, "..");
 describe("agent-style memory retrieval evals", () => {
   test("adoption queries prefer the parent spec as the conceptual anchor", async () => {
     const context = await loadProjectContext(repoRoot);
-    const bundle = buildMemoryQueryBundle(context, { text: "adoption", limit: 5 });
+    const bundle = buildMemoryQueryBundle(context, { text: "adoption", limit: 10 });
 
     expect(bundle.results[0]?.id).toBe("SPEC-010");
     expect(bundle.results[0]?.matchReasons).toContain("spec anchor");

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-021 is active. TASK-075 is in review after teaching doctor and adoption guidance to surface the current memory workflow and require capability refresh on SpM upgrades."
-focus = "Review TASK-075 and, if it is clean, close SPEC-021."
-active_spec_ids = ["SPEC-021"]
-active_task_ids = ["TASK-075"]
+summary = "SPEC-022 is done. The adoption-artifact drift detection slice is complete and the repo is ready to choose the next product slice."
+focus = "Choose the next Spec Embryo product slice."
+active_spec_ids = []
+active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Run review on TASK-075 before closing SPEC-021.", "If review is clean, mark TASK-075 done and then close SPEC-021.", "Keep doctor, init artifacts, JSON guidance, and direct agent briefs aligned."]
+next_action_hints = ["Choose the next managed spec and task before starting new implementation work.", "Keep adoption, doctor, and init guidance aligned as new product work lands."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T00:53:02.000Z"
+updated_at = "2026-04-26T01:41:18.001Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

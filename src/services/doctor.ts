@@ -22,6 +22,7 @@ import {
   NEXUS_COEXISTENCE_HEADING,
   nexusCoexistenceLines,
   renderDirectAgentBrief,
+  renderMigrationGuideMarkdown,
 } from "./adoption.ts";
 import { inspectAdoptionState, type AdoptionInspection } from "./layout.ts";
 import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
@@ -380,6 +381,62 @@ async function validateNexusIntegration(rootDir: string, config: ProjectConfig, 
   }
 }
 
+async function validateAdoptionArtifacts(
+  rootDir: string,
+  options: {
+    artifactPaths: ReturnType<typeof buildAdoptionArtifactPaths>;
+    expectedMigrationGuide: string;
+    expectedAgentBrief: string;
+    shouldValidate: boolean;
+    findings: DoctorFinding[];
+  },
+): Promise<void> {
+  if (!options.shouldValidate) {
+    return;
+  }
+
+  const checks = [
+    {
+      filePath: join(rootDir, options.artifactPaths.migrationGuideFile),
+      codeBase: "adoption-migration-guide",
+      label: "migration guide",
+      expected: options.expectedMigrationGuide,
+    },
+    {
+      filePath: join(rootDir, options.artifactPaths.agentBriefFile),
+      codeBase: "adoption-agent-brief",
+      label: "direct agent brief",
+      expected: options.expectedAgentBrief,
+    },
+  ];
+
+  for (const check of checks) {
+    if (!(await pathExists(check.filePath))) {
+      pushFinding(
+        options.findings,
+        "warning",
+        `missing-${check.codeBase}`,
+        `The generated adoption ${check.label} is missing.`,
+        check.filePath,
+        "Run `spm init` to regenerate the deterministic adoption artifacts before another agent relies on stale or missing repo-local guidance.",
+      );
+      continue;
+    }
+
+    const existing = await readUtf8(check.filePath);
+    if (existing !== check.expected) {
+      pushFinding(
+        options.findings,
+        "warning",
+        `stale-${check.codeBase}`,
+        `The generated adoption ${check.label} no longer matches the current CLI guidance renderer.`,
+        check.filePath,
+        "Run `spm init` to refresh the generated adoption artifacts so repo-local guidance matches the currently installed CLI.",
+      );
+    }
+  }
+}
+
 export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> {
   const configFile = join(rootDir, ".specpm", "config.toml");
   const configExists = await pathExists(configFile);
@@ -562,13 +619,37 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     commandContext: "doctor",
     seedScaffoldDetected,
   });
+  const artifactGuidance = buildAdoptionGuidance({
+    adoption,
+    memoryDir: config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm",
+    commandContext: "init",
+    seedScaffoldDetected,
+  });
   const memoryDir = config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm";
   const artifactPaths = buildAdoptionArtifactPaths(memoryDir);
+  const migrationGuide = renderMigrationGuideMarkdown({
+    projectName: effectiveConfig.projectName,
+    memoryDir,
+    adoption,
+    guidance: artifactGuidance,
+  });
   const directAgentBrief = renderDirectAgentBrief({
     projectName: effectiveConfig.projectName,
     memoryDir,
     adoption,
     guidance,
+  });
+  await validateAdoptionArtifacts(rootDir, {
+    artifactPaths,
+    expectedMigrationGuide: migrationGuide,
+    expectedAgentBrief: renderDirectAgentBrief({
+      projectName: effectiveConfig.projectName,
+      memoryDir,
+      adoption,
+      guidance: artifactGuidance,
+    }),
+    shouldValidate: Boolean(config),
+    findings,
   });
 
   return {
