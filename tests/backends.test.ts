@@ -123,6 +123,60 @@ describe("deterministic backend", () => {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }
   });
+
+  test("notes omitted raw git changes when the Git Changes section is truncated", async () => {
+    const fixture = await createResumeFixture();
+
+    try {
+      runGit(fixture.rootDir, ["init"]);
+      runGit(fixture.rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(fixture.rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(fixture.rootDir, ["add", "."]);
+      runGit(fixture.rootDir, ["commit", "-m", "initial"]);
+
+      for (let index = 1; index <= 11; index += 1) {
+        await Bun.write(join(fixture.rootDir, `scratch-${index}.md`), `# scratch ${index}\n`);
+      }
+
+      const projectContext = await loadProjectContext(fixture.rootDir);
+      const backend = resolveResumeBackend("deterministic", projectContext.config);
+      const result = await backend.run(buildResumeContext(projectContext), {
+        rootDir: fixture.rootDir,
+        config: projectContext.config,
+      });
+
+      expect(result.text).toContain("... and 1 more git change.");
+    } finally {
+      await rm(fixture.rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("does not note omitted raw git changes when the Git Changes section is complete", async () => {
+    const fixture = await createResumeFixture();
+
+    try {
+      runGit(fixture.rootDir, ["init"]);
+      runGit(fixture.rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(fixture.rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(fixture.rootDir, ["add", "."]);
+      runGit(fixture.rootDir, ["commit", "-m", "initial"]);
+
+      for (let index = 1; index <= 10; index += 1) {
+        await Bun.write(join(fixture.rootDir, `scratch-${index}.md`), `# scratch ${index}\n`);
+      }
+
+      const projectContext = await loadProjectContext(fixture.rootDir);
+      const backend = resolveResumeBackend("deterministic", projectContext.config);
+      const result = await backend.run(buildResumeContext(projectContext), {
+        rootDir: fixture.rootDir,
+        config: projectContext.config,
+      });
+
+      expect(result.text).not.toContain("more git change");
+    } finally {
+      await rm(fixture.rootDir, { recursive: true, force: true });
+    }
+  });
 });
 
 describe("subprocess backends", () => {

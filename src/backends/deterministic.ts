@@ -6,6 +6,24 @@ function section(title: string, lines: string[]): string {
   return [title, ...lines.map((line) => `  ${line}`)].join("\n");
 }
 
+function truncatedLinesWithNote(
+  lines: string[],
+  limit: number,
+  noun: string,
+): string[] {
+  const visibleLines = lines.slice(0, limit);
+  const omittedCount = Math.max(lines.length - visibleLines.length, 0);
+
+  if (omittedCount === 0) {
+    return visibleLines;
+  }
+
+  return [
+    ...visibleLines,
+    `... and ${omittedCount} more ${noun}${omittedCount === 1 ? "" : "s"}.`,
+  ];
+}
+
 export class DeterministicBackend implements ResumeBackend {
   name = "deterministic" as const;
 
@@ -83,7 +101,7 @@ export class DeterministicBackend implements ResumeBackend {
     }
 
     if (context.git.shortStatus.length > 0) {
-      sections.push(section("Git Changes", context.git.shortStatus.slice(0, 10)));
+      sections.push(section("Git Changes", truncatedLinesWithNote(context.git.shortStatus, 10, "git change")));
     }
 
     if (context.changedItems.length > 0) {

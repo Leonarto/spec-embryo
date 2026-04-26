@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-028 is complete after adding omitted changed-item counts to human summary surfaces when the visible list is truncated."
-focus = "Choose the next product slice and keep changed-item reporting aligned across human summaries and structured consumers."
-active_spec_ids = []
-active_task_ids = []
+summary = "SPEC-029 is active. TASK-083 is in review after adding omitted raw git-change counts to deterministic resume output when the Git Changes section is truncated."
+focus = "Review TASK-083 and keep truncation signaling aligned across changed-item and raw git summary surfaces."
+active_spec_ids = ["SPEC-029"]
+active_task_ids = ["TASK-083"]
 blocked_task_ids = []
-next_action_hints = ["Choose the next managed spec/task slice before widening changed-item summary behavior again.", "Keep structured changed-item arrays in their original git-derived order.", "If the next slice touches human changed-item summaries again, update the shared truncation helper and the structured regressions together."]
+next_action_hints = ["Review TASK-083 before moving it to done.", "Keep structured outputs unchanged while human-readable raw git summaries gain the truncation signal.", "If review is clean, mark TASK-083 done and then close SPEC-029."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T03:31:55.000Z"
+updated_at = "2026-04-26T03:42:12.411Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-SPEC-028 is now complete. Human changed-item summaries explicitly say when the visible list is truncated, while structured changed-item arrays remain complete and unchanged.
+SPEC-028 is complete, and SPEC-029 is now at its first review gate. TASK-083 makes the deterministic backend's raw Git Changes section explicitly say when additional short-status lines were omitted, just like the changed-item summaries now do.
 
 ## Notes
 
@@ -33,4 +33,4 @@ SPEC-028 is now complete. Human changed-item summaries explicitly say when the v
 - New substantive specs should follow the explicit draft -> user iteration -> review -> fix loop.
 - The repo should increasingly manage itself through `docs/spm/` and `spm` commands instead of ad hoc memory.
 - Managed document creation now relies on a shared repository lock; future create flows should preserve that invariant instead of adding unsynchronized ID allocation paths.
-- Changed-item reporting now has five coupled invariants: identity-plus-path human formatting, one normalized `changeHint` for compact summaries, one compact raw `statusCode` for structured consumers, a managed-first presentation order limited to human status-style summaries, and an explicit omitted-count signal when those human summaries are truncated.
+- Changed-item reporting now has five coupled invariants: identity-plus-path human formatting, one normalized `changeHint` for compact summaries, one compact raw `statusCode` for structured consumers, a managed-first presentation order limited to human status-style summaries, and an explicit omitted-count signal when human-visible summary slices are truncated.
