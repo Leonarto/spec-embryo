@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-084"
 title = "Share truncation-note helpers across text surfaces"
 summary = "Move omitted-count math and note wording into shared deterministic helpers used by status and deterministic backend text output."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-030"]
 depends_on = []
 blocked_by = []
 priority = 2
 owner_role = "builder"
 created_at = "2026-04-26T04:15:00.000Z"
+completed_at = "2026-04-26T04:45:00.000Z"
 tags = ["git", "status", "ux", "deterministic"]
-updated_at = "2026-04-26T04:15:00.000Z"
+updated_at = "2026-04-26T04:45:00.000Z"
 +++
 
 # Scope

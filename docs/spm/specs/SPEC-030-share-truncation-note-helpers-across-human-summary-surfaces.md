@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-030"
 title = "Share truncation-note helpers across human summary surfaces"
 summary = "Keep omitted-count wording and truncation math aligned across status and deterministic backend text surfaces by moving the logic into shared deterministic helpers."
-status = "active"
+status = "done"
 task_ids = ["TASK-084"]
 tags = ["git", "status", "ux", "deterministic"]
 owner = "human-ai"
-updated_at = "2026-04-26T04:15:00.000Z"
+updated_at = "2026-04-26T04:45:00.000Z"
 +++
 
 # Problem

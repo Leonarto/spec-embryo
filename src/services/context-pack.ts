@@ -1,5 +1,10 @@
 import type { MemoryScopeName, ProjectContext, ResumeContext } from "../domain.ts";
-import { formatChangedItemSummary, orderChangedItemsForHumanSummary } from "../engine.ts";
+import {
+  formatChangedItemSummary,
+  formatOmittedCountNote,
+  orderChangedItemsForHumanSummary,
+  sliceWithOmittedCount,
+} from "../engine.ts";
 import {
   buildMemoryBriefBundle,
   type MemoryBriefEvidence,
@@ -24,6 +29,7 @@ export interface ContextPackItem {
     | "active-task"
     | "blocked-task"
     | "ready-task"
+    | "changed-summary"
     | "changed-item";
   ref?: string;
   scope: MemoryScopeName;
@@ -284,6 +290,7 @@ function toChangedItemSummary(item: ResumeContext["changedItems"][number]): stri
 
 export function buildResumeContextPack(context: ResumeContext): ContextPackBundle {
   const humanChangedItems = orderChangedItemsForHumanSummary(context.changedItems);
+  const changedItemSlice = sliceWithOmittedCount(humanChangedItems, 3);
   const mustReadNow: ContextPackItem[] = [
     {
       kind: "focus",
@@ -346,7 +353,17 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
       summary: `Priority: p${entry.task.priority}.`,
       reason: "Ready tasks are useful expansion material if the current slice is finished or blocked.",
     })),
-    ...humanChangedItems.slice(0, 3).map((item) => ({
+    ...(changedItemSlice.omittedCount > 0
+      ? [{
+          kind: "changed-summary" as const,
+          ref: "changed-items",
+          scope: "repo" as const,
+          title: "Additional changed files are offloaded",
+          summary: formatOmittedCountNote(changedItemSlice.omittedCount, "changed file")!,
+          reason: "Resume context packs should say when changed-file detail was intentionally compacted out of the active slice.",
+        }]
+      : []),
+    ...changedItemSlice.visibleItems.map((item) => ({
       kind: "changed-item" as const,
       ref: item.path,
       scope: "repo",
@@ -374,7 +391,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
       scope: "repo",
       note: `Additional ready task kept out of the active pack: ${entry.task.title}`,
     })),
-    ...humanChangedItems.slice(3).map((item) => ({
+    ...humanChangedItems.slice(changedItemSlice.visibleItems.length).map((item) => ({
       kind: "inspect-change" as const,
       ref: item.path,
       scope: "repo",

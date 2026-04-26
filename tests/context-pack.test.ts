@@ -131,6 +131,37 @@ Use this note for the current local flow.
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("notes when additional changed files were offloaded from the resume context pack", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-context-pack-"));
+
+    try {
+      await initializeProject(rootDir);
+      runGit(rootDir, ["init"]);
+      runGit(rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(rootDir, ["add", "."]);
+      runGit(rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(rootDir, "docs/spm/current.md");
+      const currentRaw = await readFile(currentFile, "utf8");
+      await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
+
+      for (let index = 1; index <= 4; index += 1) {
+        await writeFile(join(rootDir, `scratch-${index}.md`), `# scratch ${index}\n`, "utf8");
+      }
+
+      const projectContext = await loadProjectContext(rootDir);
+      const pack = buildResumeContextPack(buildResumeContext(projectContext));
+      const summaryItem = pack.supporting.find((item) => item.kind === "changed-summary");
+
+      expect(summaryItem?.summary).toBe("... and 2 more changed files.");
+      expect(pack.supporting.filter((item) => item.kind === "changed-item")).toHaveLength(3);
+      expect(pack.offloaded.some((artifact) => artifact.kind === "inspect-change" && artifact.ref === "scratch-4.md")).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });
 
 describe("memory pack command", () => {
@@ -179,6 +210,7 @@ describe("prompt bundle integration", () => {
       expect(bundle.context_pack.profile).toBe("resume");
       expect(bundle.expected_output_format.context_pack_first).toBe(true);
       expect(bundle.context_pack.mustReadNow.some((item) => item.kind === "focus")).toBe(true);
+      expect(bundle.context_pack.supporting.some((item) => item.kind === "changed-summary")).toBe(false);
       expect(text).toContain("Context pack:");
       expect(text).toContain("\"profile\": \"resume\"");
     } finally {
