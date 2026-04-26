@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-024"
 title = "Improve human-facing changed-item reporting"
 summary = "Show both managed document identity and concrete relative path in human status-style outputs so repo changes are easier to inspect and reconcile."
-status = "active"
+status = "done"
 task_ids = ["TASK-078"]
 tags = ["git", "status", "ux"]
 owner = "human-ai"
-updated_at = "2026-04-26T02:04:42.634Z"
+updated_at = "2026-04-26T02:24:25.719Z"
 +++
 
 # Problem

@@ -61,7 +61,7 @@ describe("prompt backend helpers", () => {
 });
 
 describe("deterministic backend", () => {
-  test("renders changed managed items with both identity and path", async () => {
+  test("renders changed managed items with a compact hint, identity, and path", async () => {
     const fixture = await createResumeFixture();
 
     try {
@@ -81,7 +81,7 @@ describe("deterministic backend", () => {
         config: projectContext.config,
       });
 
-      expect(result.text).toContain("[current-state] CURRENT: Current Project State (docs/spm/current.md)");
+      expect(result.text).toContain("[current-state] M CURRENT: Current Project State (docs/spm/current.md)");
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }

@@ -21,7 +21,7 @@ function runGit(rootDir: string, args: string[]): string {
 }
 
 describe("status command", () => {
-  test("shows managed changed item identity together with the concrete path", async () => {
+  test("shows managed changed item identity together with the change hint and concrete path", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-status-"));
 
     try {
@@ -39,8 +39,8 @@ describe("status command", () => {
 
       const output = await runStatusCommand(rootDir, parseArgs(["status"]));
 
-      expect(output).toContain("[current-state] CURRENT: Current Project State (docs/spm/current.md)");
-      expect(output).toContain("[other] README.md");
+      expect(output).toContain("[current-state] M CURRENT: Current Project State (docs/spm/current.md)");
+      expect(output).toContain("[other] ?? README.md");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

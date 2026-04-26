@@ -102,7 +102,7 @@ Use this note for the current local flow.
     }
   });
 
-  test("includes changed managed item summaries with both identity and path", async () => {
+  test("includes changed managed item summaries with a compact hint, identity, and path", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-context-pack-"));
 
     try {
@@ -121,7 +121,7 @@ Use this note for the current local flow.
       const pack = buildResumeContextPack(buildResumeContext(projectContext));
       const changedItem = pack.supporting.find((item) => item.kind === "changed-item" && item.ref === "docs/spm/current.md");
 
-      expect(changedItem?.summary).toBe("CURRENT: Current Project State (docs/spm/current.md)");
+      expect(changedItem?.summary).toBe("M CURRENT: Current Project State (docs/spm/current.md)");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

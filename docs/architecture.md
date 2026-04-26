@@ -169,7 +169,7 @@ Deterministic by default:
 - validate document shape
 - link specs to tasks
 - inspect git state
-- derive changed managed docs from git state
+- derive changed managed docs from git state, including one normalized change hint per item for shared status-style summaries
 - compute blocker and ready-task sets
 - derive next actions when rules are explicit
 - compute a simple critical path from dependencies

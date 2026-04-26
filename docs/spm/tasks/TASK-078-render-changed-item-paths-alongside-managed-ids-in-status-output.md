@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-078"
 title = "Render changed-item paths alongside managed ids in status output"
 summary = "Update human-readable status reporting so changed managed docs show both their spec/task/current identity and their concrete relative path."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-024"]
 depends_on = []
 blocked_by = []
 priority = 2
 owner_role = "builder"
 created_at = "2026-04-26T02:03:33.049Z"
+completed_at = "2026-04-26T02:24:25.702Z"
 tags = ["git", "status", "ux"]
-updated_at = "2026-04-26T02:07:19.592Z"
+updated_at = "2026-04-26T02:24:25.702Z"
 +++
 
 # Scope

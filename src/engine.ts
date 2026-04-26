@@ -84,13 +84,36 @@ function splitRenamePath(rawPath: string): string[] {
   return [rawPath];
 }
 
-function parseGitStatusPath(line: string): string | undefined {
-  if (line.length < 3) {
+function normalizeGitChangeHint(rawStatus: string): string {
+  const compact = rawStatus.trim();
+  if (compact === "??") {
+    return "??";
+  }
+
+  for (const char of rawStatus) {
+    if (char === " " || char === "?") {
+      continue;
+    }
+
+    return char;
+  }
+
+  return compact[0] || "M";
+}
+
+function parseGitStatusRecord(line: string): { path: string; changeHint: string } | undefined {
+  if (line.length < 2) {
     return undefined;
   }
 
+  const rawStatus =
+    line.length >= 3 && line[2] === " "
+      ? line.slice(0, 2)
+      : line[1] === " "
+        ? line[0]!
+        : undefined;
   const rawPath =
-    line[2] === " "
+    line.length >= 3 && line[2] === " "
       ? line.slice(3).trim()
       : line[1] === " "
         ? line.slice(2).trim()
@@ -101,16 +124,24 @@ function parseGitStatusPath(line: string): string | undefined {
   }
 
   const renameParts = splitRenamePath(rawPath).map((part) => decodeGitQuotedPath(part.trim()));
-  return renameParts[renameParts.length - 1] || undefined;
+  const path = renameParts[renameParts.length - 1];
+  if (!path || !rawStatus) {
+    return undefined;
+  }
+
+  return {
+    path,
+    changeHint: normalizeGitChangeHint(rawStatus),
+  };
 }
 
 export function formatChangedItemSummary(item: ChangedItemSummary): string {
   if (item.kind === "other") {
-    return item.path;
+    return `${item.changeHint} ${item.path}`;
   }
 
   const identity = item.id ? `${item.id}${item.title ? `: ${item.title}` : ""}` : item.path;
-  return `${identity} (${item.path})`;
+  return `${item.changeHint} ${identity} (${item.path})`;
 }
 
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {
@@ -146,37 +177,43 @@ export function deriveChangedItems(context: ProjectContext): ChangedItemSummary[
   const items: ChangedItemSummary[] = [];
 
   for (const line of context.git.shortStatus) {
-    const path = parseGitStatusPath(line);
-    if (!path || seen.has(path)) {
+    const record = parseGitStatusRecord(line);
+    if (!record || seen.has(record.path)) {
       continue;
     }
 
-    seen.add(path);
+    seen.add(record.path);
 
-    const spec = specByPath.get(path);
+    const spec = specByPath.get(record.path);
     if (spec) {
-      items.push({ kind: "spec", path, id: spec.id, title: spec.title });
+      items.push({ kind: "spec", changeHint: record.changeHint, path: record.path, id: spec.id, title: spec.title });
       continue;
     }
 
-    const task = taskByPath.get(path);
+    const task = taskByPath.get(record.path);
     if (task) {
-      items.push({ kind: "task", path, id: task.id, title: task.title });
+      items.push({ kind: "task", changeHint: record.changeHint, path: record.path, id: task.id, title: task.title });
       continue;
     }
 
-    if (path === currentStatePath) {
-      items.push({ kind: "current-state", path, id: context.currentState.id, title: context.currentState.title });
+    if (record.path === currentStatePath) {
+      items.push({
+        kind: "current-state",
+        changeHint: record.changeHint,
+        path: record.path,
+        id: context.currentState.id,
+        title: context.currentState.title,
+      });
       continue;
     }
 
-    const handoff = handoffByPath.get(path);
+    const handoff = handoffByPath.get(record.path);
     if (handoff) {
-      items.push({ kind: "handoff", path, id: handoff.id, title: handoff.title });
+      items.push({ kind: "handoff", changeHint: record.changeHint, path: record.path, id: handoff.id, title: handoff.title });
       continue;
     }
 
-    items.push({ kind: "other", path });
+    items.push({ kind: "other", changeHint: record.changeHint, path: record.path });
   }
 
   return items;

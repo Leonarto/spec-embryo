@@ -164,6 +164,7 @@ describe("engine", () => {
 
     const changedItems = deriveChangedItems(changedContext);
     expect(changedItems.map((item) => item.kind)).toEqual(["spec", "task", "current-state", "other"]);
+    expect(changedItems.map((item) => item.changeHint)).toEqual(["M", "M", "M", "??"]);
     expect(changedItems[0]?.id).toBe("SPEC-001");
     expect(changedItems[1]?.id).toBe("TASK-002");
     expect(changedItems[2]?.kind).toBe("current-state");
@@ -202,9 +203,27 @@ describe("engine", () => {
       "docs/spm/specs/New Spec.md",
       "notes with spaces.md",
     ]);
+    expect(changedItems.map((item) => item.changeHint)).toEqual(["M", "R", "??"]);
     expect(changedItems[0]?.kind).toBe("current-state");
     expect(changedItems[1]?.id).toBe("SPEC-001");
     expect(changedItems[2]?.kind).toBe("other");
+  });
+
+  test("preserves left-to-right precedence for mixed tracked status columns", () => {
+    const mixedStatusContext: ProjectContext = {
+      ...context,
+      git: {
+        ...context.git,
+        dirty: true,
+        shortStatus: ["MD docs/spm/current.md"],
+      },
+    };
+
+    const changedItems = deriveChangedItems(mixedStatusContext);
+
+    expect(changedItems).toHaveLength(1);
+    expect(changedItems[0]?.kind).toBe("current-state");
+    expect(changedItems[0]?.changeHint).toBe("M");
   });
 
   test("includes changed managed docs in next actions when available", () => {
