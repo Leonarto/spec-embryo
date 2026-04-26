@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-023"
 title = "Harden git change parsing and changed-item reporting"
 summary = "Make changed-item derivation preserve real relative paths from git short status so status, resume, and context surfaces classify repo changes correctly."
-status = "active"
+status = "done"
 task_ids = ["TASK-077"]
 tags = ["git", "status", "resume"]
 owner = "human-ai"
-updated_at = "2026-04-26T01:44:01.101Z"
+updated_at = "2026-04-26T02:02:44.525Z"
 +++
 
 # Problem
