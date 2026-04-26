@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-032"
 title = "Promote offloaded changed files into resume next-inspect guidance"
 summary = "Make resume context packs include the highest-value offloaded changed-file refs in `nextInspectIds` so prompt-return callers can expand directly into the omitted file trail."
-status = "active"
+status = "done"
 task_ids = ["TASK-086"]
 tags = ["context", "resume", "git", "ux"]
 owner = "human-ai"
-updated_at = "2026-04-26T05:05:00.000Z"
+updated_at = "2026-04-26T05:25:00.000Z"
 +++
 
 # Problem

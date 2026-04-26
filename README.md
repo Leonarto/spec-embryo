@@ -169,7 +169,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
 - `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
 - `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, section-level evidence slices, local neighborhoods, and recent handoffs
-- `spm memory pack` plus prompt-return context packs so human and agent flows can share one deterministic compact-context shape with must-read, supporting, section-level evidence, and offloaded detail
+- `spm memory pack` plus prompt-return context packs so human and agent flows can share one deterministic compact-context shape with must-read, supporting, section-level evidence, offloaded detail, and typed next-inspect expansion trails
 - Scoped memory namespaces where core managed docs remain `repo` scope and optional `memory-note` files can live in `session` or `org` scopes with explicit write policies and scope-aware retrieval
 - `spm memory note create`, `update`, `archive`, `restore`, and `list` so session-first capture and controlled note lifecycle management no longer depend on raw file edits
 - `spm memory consolidate` so quick session captures can be reviewed, promoted into durable handoffs, and retired with deterministic duplicate, contradiction, and stale-note checks

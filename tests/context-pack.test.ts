@@ -46,6 +46,7 @@ describe("context pack service", () => {
       expect(pack.mustReadNow.some((item) => item.kind === "current")).toBe(true);
       expect(pack.supporting.some((item) => item.ref === "SPEC-001")).toBe(true);
       expect(pack.nextInspectIds).toContain("TASK-001");
+      expect(pack.nextInspect.some((item) => item.kind === "managed-doc" && item.ref === "TASK-001")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -97,6 +98,7 @@ Use this note for the current local flow.
       expect(pack.mustReadNow.some((item) => item.kind === "next-actions")).toBe(true);
       expect(pack.mustReadNow.some((item) => item.kind === "active-spec")).toBe(true);
       expect(pack.nextInspectIds).toContain("SPEC-001");
+      expect(pack.nextInspect.some((item) => item.kind === "managed-doc" && item.ref === "SPEC-001")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -160,6 +162,8 @@ Use this note for the current local flow.
       expect(pack.offloaded.some((artifact) => artifact.kind === "inspect-change" && artifact.ref === "scratch-4.md")).toBe(true);
       expect(pack.nextInspectIds).toContain("scratch-3.md");
       expect(pack.nextInspectIds).toContain("scratch-4.md");
+      expect(pack.nextInspect.some((item) => item.kind === "change-path" && item.ref === "scratch-3.md")).toBe(true);
+      expect(pack.nextInspect.some((item) => item.kind === "change-path" && item.ref === "scratch-4.md")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -213,6 +217,7 @@ describe("prompt bundle integration", () => {
       expect(bundle.expected_output_format.context_pack_first).toBe(true);
       expect(bundle.context_pack.mustReadNow.some((item) => item.kind === "focus")).toBe(true);
       expect(bundle.context_pack.supporting.some((item) => item.kind === "changed-summary")).toBe(false);
+      expect(bundle.context_pack.nextInspect.every((item) => item.kind === "managed-doc")).toBe(true);
       expect(text).toContain("Context pack:");
       expect(text).toContain("\"profile\": \"resume\"");
     } finally {

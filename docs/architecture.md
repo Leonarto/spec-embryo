@@ -196,7 +196,7 @@ Spec Embryo is meant to work alongside coding agents such as Codex and Claude, n
 - The model should own live reasoning, short-lived synthesis, and conversational adaptation over that context.
 - When choosing between building more in-tool "intelligence" and improving context selection, compaction, ordering, or evaluation, prefer the latter.
 - New context features should justify themselves through reproducibility, token efficiency, or better repo-specific grounding rather than by duplicating behavior the model already performs natively.
-- Retrieval and context-pack flows should prefer smaller stable evidence sections before escalating to whole-document expansion.
+- Retrieval and context-pack flows should prefer smaller stable evidence sections before escalating to whole-document expansion, and they should expose deterministic typed expansion trails when multiple ref kinds are present.
 - Eval flows should stay deterministic, runnable in CI, and readable enough that future context changes extend the same measurement surface instead of inventing private one-off checks.
 
 This boundary keeps Spec Embryo useful across providers while avoiding a fragile second assistant hidden inside the tool.

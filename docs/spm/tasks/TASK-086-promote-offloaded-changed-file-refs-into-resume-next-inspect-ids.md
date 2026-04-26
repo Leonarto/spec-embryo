@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-086"
 title = "Promote offloaded changed-file refs into resume next-inspect ids"
 summary = "Append the highest-value offloaded changed-file refs to resume-pack `nextInspectIds` so prompt-return callers can expand directly into omitted changed-file detail."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-032"]
 depends_on = []
 blocked_by = []
 priority = 2
 owner_role = "builder"
 created_at = "2026-04-26T05:05:00.000Z"
+completed_at = "2026-04-26T05:25:00.000Z"
 tags = ["context", "resume", "git", "ux"]
-updated_at = "2026-04-26T05:05:00.000Z"
+updated_at = "2026-04-26T05:25:00.000Z"
 +++
 
 # Scope

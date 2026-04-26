@@ -45,6 +45,13 @@ export interface ContextPackArtifact {
   note: string;
 }
 
+export interface ContextPackInspectRef {
+  kind: "managed-doc" | "change-path";
+  ref: string;
+  scope?: MemoryScopeName;
+  note: string;
+}
+
 export interface ContextPackBundle {
   source: "memory" | "resume";
   profile: ContextPackProfile;
@@ -55,6 +62,7 @@ export interface ContextPackBundle {
   mustReadNow: ContextPackItem[];
   supporting: ContextPackItem[];
   offloaded: ContextPackArtifact[];
+  nextInspect: ContextPackInspectRef[];
   nextInspectIds: string[];
 }
 
@@ -66,6 +74,23 @@ function compactList(values: string[], limit: number): string {
 function uniqueRefs<T extends { ref: string; note: string; kind: ContextPackArtifact["kind"] }>(values: T[]): T[] {
   const seen = new Set<string>();
   const result: T[] = [];
+
+  for (const value of values) {
+    const key = `${value.kind}:${value.ref}`;
+    if (seen.has(key)) {
+      continue;
+    }
+
+    seen.add(key);
+    result.push(value);
+  }
+
+  return result;
+}
+
+function uniqueInspectRefs(values: ContextPackInspectRef[]): ContextPackInspectRef[] {
+  const seen = new Set<string>();
+  const result: ContextPackInspectRef[] = [];
 
   for (const value of values) {
     const key = `${value.kind}:${value.ref}`;
@@ -270,6 +295,32 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
     brief.current?.summary ??
     "Compact context assembled from managed repo memory.";
 
+  const inspectScopeByRef = new Map<string, MemoryScopeName>();
+  if (brief.center) {
+    inspectScopeByRef.set(brief.center.id, brief.center.scope);
+  }
+  for (const match of brief.matches ?? []) {
+    inspectScopeByRef.set(match.id, match.scope);
+  }
+  for (const neighbor of brief.neighbors) {
+    inspectScopeByRef.set(neighbor.id, neighbor.scope ?? "repo");
+  }
+  for (const handoff of brief.handoffs) {
+    inspectScopeByRef.set(handoff.id, "repo");
+  }
+  if (brief.current) {
+    inspectScopeByRef.set("CURRENT", "repo");
+  }
+
+  const nextInspect = uniqueInspectRefs(
+    brief.nextInspectIds.map((ref) => ({
+      kind: "managed-doc" as const,
+      ref,
+      scope: inspectScopeByRef.get(ref),
+      note: "Managed document suggested for direct expansion.",
+    })),
+  );
+
   return {
     source: "memory",
     profile,
@@ -280,7 +331,8 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
     mustReadNow,
     supporting,
     offloaded,
-    nextInspectIds: brief.nextInspectIds,
+    nextInspect,
+    nextInspectIds: nextInspect.map((item) => item.ref),
   };
 }
 
@@ -404,6 +456,33 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     .map((artifact) => artifact.ref)
     .slice(0, 2);
 
+  const nextInspect = uniqueInspectRefs([
+    ...context.activeSpecs.map((spec) => ({
+      kind: "managed-doc" as const,
+      ref: spec.id,
+      scope: "repo" as const,
+      note: "Active spec is a primary resume expansion target.",
+    })),
+    ...context.activeTasks.map((entry) => ({
+      kind: "managed-doc" as const,
+      ref: entry.task.id,
+      scope: "repo" as const,
+      note: "Active task is a primary resume expansion target.",
+    })),
+    ...context.readyTasks.slice(0, 2).map((entry) => ({
+      kind: "managed-doc" as const,
+      ref: entry.task.id,
+      scope: "repo" as const,
+      note: "Ready task is a useful follow-up expansion target.",
+    })),
+    ...offloadedChangeRefs.map((ref) => ({
+      kind: "change-path" as const,
+      ref,
+      scope: "repo" as const,
+      note: "Offloaded changed file promoted into the direct resume expansion trail.",
+    })),
+  ]).slice(0, 8);
+
   return {
     source: "resume",
     profile: "resume",
@@ -414,14 +493,8 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     mustReadNow,
     supporting,
     offloaded,
-    nextInspectIds: Array.from(
-      new Set([
-        ...context.activeSpecs.map((spec) => spec.id),
-        ...context.activeTasks.map((entry) => entry.task.id),
-        ...context.readyTasks.slice(0, 2).map((entry) => entry.task.id),
-        ...offloadedChangeRefs,
-      ]),
-    ).slice(0, 8),
+    nextInspect,
+    nextInspectIds: nextInspect.map((item) => item.ref),
   };
 }
 
