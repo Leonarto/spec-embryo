@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-073"
 title = "Add deterministic memory note create and update flows"
 summary = "Support first-class CLI creation and deterministic metadata updates for scoped memory-note documents, with session-first capture and org-scope policy enforcement."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-020"]
 depends_on = []
 blocked_by = []
 priority = 1
 owner_role = "builder"
 created_at = "2026-04-26T00:17:45.224Z"
+completed_at = "2026-04-26T00:30:38.969Z"
 tags = ["memory", "notes", "cli"]
-updated_at = "2026-04-26T00:25:29.314Z"
+updated_at = "2026-04-26T00:30:38.969Z"
 +++
 
 # Scope
