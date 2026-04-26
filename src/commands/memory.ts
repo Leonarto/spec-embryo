@@ -9,9 +9,13 @@ import {
 } from "../services/memory-consolidation.ts";
 import { buildMemoryContextPack, renderContextPack } from "../services/context-pack.ts";
 import {
+  buildArchiveMemoryNoteBundle,
   buildCreateMemoryNoteBundle,
+  buildMemoryNoteListBundle,
+  buildRestoreMemoryNoteBundle,
   buildUpdateMemoryNoteBundle,
   MEMORY_NOTE_SCOPES,
+  renderMemoryNoteListBundle,
   renderMemoryNoteMutationBundle,
   type MemoryNoteScope,
 } from "../services/memory-note.ts";
@@ -232,7 +236,43 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       return renderMemoryNoteMutationBundle(bundle);
     }
 
-    throw new Error("Supported note commands are `memory note create` and `memory note update`.");
+    if (noteAction === "archive") {
+      const noteId = parsed.positionals[3];
+      const bundle = await buildArchiveMemoryNoteBundle(rootDir, noteId ?? "", flagValue(parsed, "reason"));
+
+      if (parsed.flags.has("json")) {
+        return JSON.stringify(bundle, null, 2);
+      }
+
+      return renderMemoryNoteMutationBundle(bundle);
+    }
+
+    if (noteAction === "restore") {
+      const noteId = parsed.positionals[3];
+      const bundle = await buildRestoreMemoryNoteBundle(rootDir, noteId ?? "");
+
+      if (parsed.flags.has("json")) {
+        return JSON.stringify(bundle, null, 2);
+      }
+
+      return renderMemoryNoteMutationBundle(bundle);
+    }
+
+    if (noteAction === "list") {
+      const bundle = await buildMemoryNoteListBundle(rootDir, {
+        scope: parseMemoryNoteScope(flagValue(parsed, "scope")),
+        includeArchived: hasFlag(parsed, "include-archived"),
+        limit: parsePositiveInteger(flagValue(parsed, "limit"), "--limit"),
+      });
+
+      if (parsed.flags.has("json")) {
+        return JSON.stringify(bundle, null, 2);
+      }
+
+      return renderMemoryNoteListBundle(bundle);
+    }
+
+    throw new Error("Supported note commands are `memory note create`, `memory note update`, `memory note archive`, `memory note restore`, and `memory note list`.");
   }
 
   if (parsed.subcommand === "query") {

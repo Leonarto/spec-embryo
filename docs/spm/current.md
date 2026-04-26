@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-020 is active. TASK-073 is in review after adding first-class CLI create/update flows for scoped memory notes with deterministic IDs and write-policy enforcement."
-focus = "Review and, if needed, fix TASK-073 before starting the archive/list follow-up in TASK-074."
+summary = "SPEC-020 is active. TASK-074 is in review after adding deterministic archive, restore, and list workflows for scoped memory notes."
+focus = "Review TASK-074 and, if it is clean, close SPEC-020 and choose the next roadmap slice."
 active_spec_ids = ["SPEC-020"]
-active_task_ids = ["TASK-073"]
+active_task_ids = ["TASK-074"]
 blocked_task_ids = []
-next_action_hints = ["Run review on TASK-073 before extending the note workflow further.", "If review is clean, mark TASK-073 done and then start TASK-074 for archive and note-centric inspection flows.", "Keep the new memory note commands aligned with scope write policy and repository lock invariants."]
+next_action_hints = ["Run review on TASK-074 before closing SPEC-020.", "If review is clean, mark TASK-074 done and then close SPEC-020.", "Keep the memory note lifecycle aligned with scope write-policy, retrieval, consolidation, and eval invariants."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T00:25:29.351Z"
+updated_at = "2026-04-26T00:39:50.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The repo is now recursive enough to carry its own managed roadmap and core workflows. SPEC-019 is the active planning slice and defines how Spec Embryo should improve context lifecycle and packaging without drifting into a hidden second assistant. The CLI can mutate status, create new spec/task docs with deterministic IDs and back-links, and now serializes concurrent create flows so task/spec IDs no longer collide under parallel work.
+The repo is currently closing out SPEC-020, which turns scoped `memory-note` documents into a first-class CLI workflow instead of a file format that only power users can edit by hand. TASK-073 landed deterministic note creation and update flows, and TASK-074 now adds archive, restore, and note-centric listing so the lightweight scoped-memory layer can be managed end to end without raw file edits.
 
 ## Notes
 
@@ -33,4 +33,4 @@ The repo is now recursive enough to carry its own managed roadmap and core workf
 - New substantive specs should follow the explicit draft -> user iteration -> review -> fix loop.
 - The repo should increasingly manage itself through `docs/spm/` and `spm` commands instead of ad hoc memory.
 - Managed document creation now relies on a shared repository lock; future create flows should preserve that invariant instead of adding unsynchronized ID allocation paths.
-- The local visual server should stay mostly read-only apart from narrow deterministic mutation flows such as answering spec open questions from the detail view.
+- The scoped memory-note lifecycle now includes create, update, archive, restore, and list flows; consolidation remains the explicit promotion path from session notes into durable repo memory.

@@ -211,4 +211,147 @@ Policy content.
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("archives and restores a session note through the CLI", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-note-"));
+
+    try {
+      await initializeProject(rootDir);
+      const created = JSON.parse(
+        await runMemoryCommand(
+          rootDir,
+          parseArgs([
+            "memory",
+            "note",
+            "create",
+            "--scope",
+            "session",
+            "--title",
+            "Archive me later",
+            "--json",
+          ]),
+        ),
+      ) as { note: { id: string } };
+
+      const archived = await runMemoryCommand(
+        rootDir,
+        parseArgs([
+          "memory",
+          "note",
+          "archive",
+          created.note.id,
+          "--reason",
+          "No longer needed in the active set",
+          "--json",
+        ]),
+      );
+      const archivedBundle = JSON.parse(archived) as {
+        action: string;
+        note: { archivedAt?: string };
+        changedFields: string[];
+      };
+
+      expect(archivedBundle.action).toBe("archive");
+      expect(archivedBundle.note.archivedAt).toBeDefined();
+      expect(archivedBundle.changedFields).toContain("archivedAt");
+
+      const activeList = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "note", "list", "--scope", "session"]),
+      );
+      expect(activeList).not.toContain(created.note.id);
+
+      const archivedList = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "note", "list", "--scope", "session", "--include-archived"]),
+      );
+      expect(archivedList).toContain(created.note.id);
+      expect(archivedList).toContain("archive reason: No longer needed in the active set");
+
+      const restored = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "note", "restore", created.note.id, "--json"]),
+      );
+      const restoredBundle = JSON.parse(restored) as {
+        action: string;
+        note: { archivedAt?: string };
+      };
+
+      expect(restoredBundle.action).toBe("restore");
+      expect(restoredBundle.note.archivedAt).toBeUndefined();
+
+      const note = await findMemoryNote(rootDir, created.note.id);
+      expect(note.archivedAt).toBeUndefined();
+      expect(note.archiveReason).toBeUndefined();
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("lists notes with scoped and archived filters", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-note-"));
+
+    try {
+      await initializeProject(rootDir);
+      const first = JSON.parse(
+        await runMemoryCommand(
+          rootDir,
+          parseArgs([
+            "memory",
+            "note",
+            "create",
+            "--scope",
+            "session",
+            "--title",
+            "Alpha session note",
+            "--summary",
+            "First session note.",
+            "--json",
+          ]),
+        ),
+      ) as { note: { id: string } };
+      const second = JSON.parse(
+        await runMemoryCommand(
+          rootDir,
+          parseArgs([
+            "memory",
+            "note",
+            "create",
+            "--scope",
+            "session",
+            "--title",
+            "Beta session note",
+            "--summary",
+            "Second session note.",
+            "--json",
+          ]),
+        ),
+      ) as { note: { id: string } };
+
+      await runMemoryCommand(rootDir, parseArgs(["memory", "note", "archive", first.note.id]));
+
+      const human = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "note", "list", "--scope", "session", "--limit", "5"]),
+      );
+      expect(human).toContain("Memory notes [scope:session]");
+      expect(human).toContain(second.note.id);
+      expect(human).not.toContain(first.note.id);
+
+      const json = await runMemoryCommand(
+        rootDir,
+        parseArgs(["memory", "note", "list", "--scope", "session", "--include-archived", "--json"]),
+      );
+      const bundle = JSON.parse(json) as {
+        totalMatches: number;
+        notes: Array<{ id: string; archivedAt?: string }>;
+      };
+
+      expect(bundle.totalMatches).toBe(2);
+      expect(bundle.notes.some((note) => note.id === first.note.id && note.archivedAt)).toBe(true);
+      expect(bundle.notes.some((note) => note.id === second.note.id && !note.archivedAt)).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });

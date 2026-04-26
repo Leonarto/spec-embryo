@@ -98,7 +98,7 @@ web/
 - `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `nexus setup`: preview or apply the bounded optional Nexus setup across config, AGENTS guidance, local artifact ignore rules, and adoption artifacts.
-- `memory note`: create and update scoped `memory-note` documents through deterministic CLI flows instead of editing `.specpm/memory/...` files by hand.
+- `memory note`: create, update, archive, restore, and list scoped `memory-note` documents through deterministic CLI flows instead of editing `.specpm/memory/...` files by hand.
 - `memory query`: retrieve managed docs by text, kind, scope, status, tags, IDs, backlinks, and one-hop neighborhoods with compact default output, stable JSON, deterministic match reasons, concept-friendly ranking, and body-text retrieval over managed Markdown.
 - `memory links`: inspect outgoing links, backlinks, and deterministic one-hop or two-hop neighborhoods for any managed doc.
 - `memory brief`: compress managed memory into compact implementation, review, or migration context for a doc, spec, task, or topic query, including why a center or text match was selected, smaller section-level evidence slices, and explicit inclusion/exclusion of neighbors, current state, handoffs, and memory scopes.
@@ -171,7 +171,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, section-level evidence slices, local neighborhoods, and recent handoffs
 - `spm memory pack` plus prompt-return context packs so human and agent flows can share one deterministic compact-context shape with must-read, supporting, section-level evidence, and offloaded detail
 - Scoped memory namespaces where core managed docs remain `repo` scope and optional `memory-note` files can live in `session` or `org` scopes with explicit write policies and scope-aware retrieval
-- `spm memory note create` and `spm memory note update` so session-first capture and controlled org-scope note management no longer depend on raw file edits
+- `spm memory note create`, `update`, `archive`, `restore`, and `list` so session-first capture and controlled note lifecycle management no longer depend on raw file edits
 - `spm memory consolidate` so quick session captures can be reviewed, promoted into durable handoffs, and retired with deterministic duplicate, contradiction, and stale-note checks
 - `spm memory eval` as a runnable eval harness for retrieval, context-pack, consolidation, and injection quality across both the live repo and synthetic fixture scenarios
 - Optional external Nexus guardrails through config, doctor checks, adoption guidance, and `spm nexus setup` so code-graph analysis can complement `spm` without replacing it

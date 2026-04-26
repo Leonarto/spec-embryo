@@ -120,7 +120,7 @@ Core fields:
 - write policy, inherited from the configured memory scope
 
 Memory notes are lightweight scoped context documents. They let Spec Embryo distinguish fast local notes or broader shared guidance from canonical repo memory without turning those scopes into a second planning authority.
-The first write path for them lives under `spm memory note`, so session capture and allowed org-note edits can happen through deterministic CLI flows instead of raw file editing.
+The first write path for them lives under `spm memory note`, so session capture, allowed org-note edits, and deterministic archive/list workflows can happen through CLI flows instead of raw file editing.
 
 ### Execution backend
 

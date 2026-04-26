@@ -1,6 +1,7 @@
 import {
   createMemoryNote,
   findMemoryNote,
+  loadProjectContext,
   updateMemoryNote,
   type CreateMemoryNoteInput,
 } from "../repository.ts";
@@ -29,7 +30,7 @@ export interface UpdateMemoryNoteRequest {
 }
 
 export interface MemoryNoteMutationBundle {
-  action: "create" | "update";
+  action: "create" | "update" | "archive" | "restore";
   note: {
     id: string;
     scope: MemoryNoteScope;
@@ -44,6 +45,29 @@ export interface MemoryNoteMutationBundle {
     filePath: string;
   };
   changedFields: string[];
+}
+
+export interface MemoryNoteListBundle {
+  filters: {
+    scope?: MemoryNoteScope;
+    includeArchived: boolean;
+    limit: number;
+  };
+  totalMatches: number;
+  notes: Array<{
+    id: string;
+    scope: MemoryNoteScope;
+    title: string;
+    summary: string;
+    tags: string[];
+    expiresAt?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    archivedAt?: string;
+    archiveReason?: string;
+    writePolicy: "read-only" | "read-write";
+    filePath: string;
+  }>;
 }
 
 function parseTags(tags: string[] | undefined): string[] | undefined {
@@ -89,6 +113,23 @@ function toBundle(action: "create" | "update", note: MemoryNoteDocument, changed
       filePath: note.filePath,
     },
     changedFields,
+  };
+}
+
+function toListNote(note: MemoryNoteDocument): MemoryNoteListBundle["notes"][number] {
+  return {
+    id: note.id,
+    scope: note.scope,
+    title: note.title,
+    summary: note.summary,
+    tags: note.tags,
+    expiresAt: note.expiresAt,
+    createdAt: note.createdAt,
+    updatedAt: note.updatedAt,
+    archivedAt: note.archivedAt,
+    archiveReason: note.archiveReason,
+    writePolicy: note.writePolicy,
+    filePath: note.filePath,
   };
 }
 
@@ -158,9 +199,84 @@ export async function buildUpdateMemoryNoteBundle(
   return toBundle("update", note, fields);
 }
 
+export async function buildArchiveMemoryNoteBundle(
+  rootDir: string,
+  noteId: string,
+  reason?: string,
+): Promise<MemoryNoteMutationBundle> {
+  const trimmed = noteId.trim();
+  if (trimmed.length === 0) {
+    throw new Error("`memory note archive` requires <NOTE-ID>.");
+  }
+
+  await findMemoryNote(rootDir, trimmed);
+  const note = await updateMemoryNote(rootDir, trimmed, (current, now) => ({
+    ...current,
+    archivedAt: current.archivedAt ?? now,
+    archiveReason: reason?.trim() || current.archiveReason,
+    updatedAt: now,
+  }));
+
+  return toBundle("archive", note, ["archivedAt", ...(reason?.trim() ? ["archiveReason"] : [])]);
+}
+
+export async function buildRestoreMemoryNoteBundle(
+  rootDir: string,
+  noteId: string,
+): Promise<MemoryNoteMutationBundle> {
+  const trimmed = noteId.trim();
+  if (trimmed.length === 0) {
+    throw new Error("`memory note restore` requires <NOTE-ID>.");
+  }
+
+  await findMemoryNote(rootDir, trimmed);
+  const note = await updateMemoryNote(rootDir, trimmed, (current, now) => ({
+    ...current,
+    archivedAt: undefined,
+    archiveReason: undefined,
+    updatedAt: now,
+  }));
+
+  return toBundle("restore", note, ["archivedAt", "archiveReason"]);
+}
+
+export async function buildMemoryNoteListBundle(
+  rootDir: string,
+  options: {
+    scope?: MemoryNoteScope;
+    includeArchived?: boolean;
+    limit?: number;
+  } = {},
+): Promise<MemoryNoteListBundle> {
+  const context = await loadProjectContext(rootDir);
+  const limit = options.limit && options.limit > 0 ? options.limit : 20;
+  const notes = [...context.sessionNotes, ...context.orgNotes]
+    .filter((note) => (options.scope ? note.scope === options.scope : true))
+    .filter((note) => (options.includeArchived ? true : !note.archivedAt))
+    .sort((left, right) => left.id.localeCompare(right.id));
+
+  return {
+    filters: {
+      scope: options.scope,
+      includeArchived: options.includeArchived === true,
+      limit,
+    },
+    totalMatches: notes.length,
+    notes: notes.slice(0, limit).map(toListNote),
+  };
+}
+
 export function renderMemoryNoteMutationBundle(bundle: MemoryNoteMutationBundle): string {
   return [
-    `${bundle.action === "create" ? "Created" : "Updated"} memory note ${bundle.note.id}`,
+    `${
+      bundle.action === "create"
+        ? "Created"
+        : bundle.action === "update"
+          ? "Updated"
+          : bundle.action === "archive"
+            ? "Archived"
+            : "Restored"
+    } memory note ${bundle.note.id}`,
     `Scope: ${bundle.note.scope}`,
     `Title: ${bundle.note.title}`,
     `Summary: ${bundle.note.summary}`,
@@ -170,4 +286,27 @@ export function renderMemoryNoteMutationBundle(bundle: MemoryNoteMutationBundle)
     `Changed fields: ${bundle.changedFields.join(", ") || "none"}`,
     `Path: ${bundle.note.filePath}`,
   ].join("\n");
+}
+
+export function renderMemoryNoteListBundle(bundle: MemoryNoteListBundle): string {
+  const lines = [
+    `Memory notes${bundle.filters.scope ? ` [scope:${bundle.filters.scope}]` : ""}${bundle.filters.includeArchived ? " including archived" : ""}`,
+    `Total matches: ${bundle.totalMatches}`,
+  ];
+
+  if (bundle.notes.length === 0) {
+    lines.push("", "- none");
+    return lines.join("\n");
+  }
+
+  lines.push(
+    "",
+    ...bundle.notes.map((note) =>
+      `- ${note.id} [scope:${note.scope}${note.archivedAt ? " archived" : ""}] ${note.title}: ${note.summary}${
+        note.expiresAt ? ` | expires: ${note.expiresAt}` : ""
+      }${note.archiveReason ? ` | archive reason: ${note.archiveReason}` : ""}`,
+    ),
+  );
+
+  return lines.join("\n");
 }
