@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-023 is done. Git short-status parsing now preserves correct relative paths, and the repo is ready for the next product slice."
-focus = "Choose the next Spec Embryo product slice."
-active_spec_ids = []
-active_task_ids = []
+summary = "SPEC-024 is active. TASK-078 is in review after improving human-facing changed-item reporting so managed changes carry both identity and concrete path across status-style text outputs."
+focus = "Review TASK-078 and, if it is clean, close SPEC-024."
+active_spec_ids = ["SPEC-024"]
+active_task_ids = ["TASK-078"]
 blocked_task_ids = []
-next_action_hints = ["Choose the next managed spec and task before starting new implementation work.", "Keep git snapshot capture and changed-item derivation aligned as new status/reporting work lands."]
+next_action_hints = ["Run review on TASK-078 before closing SPEC-024.", "If review is clean, mark TASK-078 done and then close SPEC-024.", "Keep changed-item formatting consistent across status, deterministic backend, and context-pack summaries."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T02:02:44.523Z"
+updated_at = "2026-04-26T02:07:19.594Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The repo is now working on SPEC-021, which closes the gap between "a newer SpM version exists" and "agents actually refresh how they use SpM under that newer version." The immediate slice is TASK-075: doctor, init adoption artifacts, and the direct agent brief need to teach the current scoped-memory workflow explicitly and tell upgraded agents to refresh their usage policy when the installed CLI is newer than the repo's recorded tool version.
+The repo is now working on SPEC-024, which tightens the human-facing side of changed-item reporting after the git short-status parser hardening in the previous slice. The immediate slice is TASK-078: status-style text outputs should show both the managed identity and the concrete relative path for changed docs so humans and agents can reconcile `spm` output against `git status` without guesswork.
 
 ## Notes
 
@@ -33,4 +33,4 @@ The repo is now working on SPEC-021, which closes the gap between "a newer SpM v
 - New substantive specs should follow the explicit draft -> user iteration -> review -> fix loop.
 - The repo should increasingly manage itself through `docs/spm/` and `spm` commands instead of ad hoc memory.
 - Managed document creation now relies on a shared repository lock; future create flows should preserve that invariant instead of adding unsynchronized ID allocation paths.
-- Scoped memory now has a first-class note lifecycle, so adoption and doctor guidance should steer agents toward `spm memory note`, `spm memory scopes`, and `spm memory consolidate` instead of raw scoped note-file edits.
+- Changed-item formatting now needs to stay consistent across `spm status`, deterministic resume text, and compact context-pack summaries whenever we adjust these human-facing surfaces.

@@ -1,4 +1,5 @@
 import type { MemoryScopeName, ProjectContext, ResumeContext } from "../domain.ts";
+import { formatChangedItemSummary } from "../engine.ts";
 import {
   buildMemoryBriefBundle,
   type MemoryBriefEvidence,
@@ -278,11 +279,7 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
 }
 
 function toChangedItemSummary(item: ResumeContext["changedItems"][number]): string {
-  if (item.kind === "other") {
-    return item.path;
-  }
-
-  return `${item.id}: ${item.title}`;
+  return formatChangedItemSummary(item);
 }
 
 export function buildResumeContextPack(context: ResumeContext): ContextPackBundle {

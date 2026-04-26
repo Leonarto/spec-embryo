@@ -104,6 +104,15 @@ function parseGitStatusPath(line: string): string | undefined {
   return renameParts[renameParts.length - 1] || undefined;
 }
 
+export function formatChangedItemSummary(item: ChangedItemSummary): string {
+  if (item.kind === "other") {
+    return item.path;
+  }
+
+  const identity = item.id ? `${item.id}${item.title ? `: ${item.title}` : ""}` : item.path;
+  return `${identity} (${item.path})`;
+}
+
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {
   return new Map(tasks.map((task) => [task.id, task]));
 }

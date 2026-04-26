@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { spawnSync } from "node:child_process";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -8,6 +9,19 @@ import { resolveResumeBackend } from "../src/backends/index.ts";
 import { buildPromptBundle, renderPromptBundleText } from "../src/backends/prompt.ts";
 import { buildSubprocessLaunchPlan } from "../src/backends/subprocess.ts";
 import { initializeProject, loadProjectContext } from "../src/repository.ts";
+
+function runGit(rootDir: string, args: string[]): string {
+  const result = spawnSync("git", args, {
+    cwd: rootDir,
+    encoding: "utf8",
+  });
+
+  if (result.status !== 0) {
+    throw new Error(result.stderr || `git ${args.join(" ")} failed`);
+  }
+
+  return result.stdout;
+}
 
 async function createResumeFixture() {
   const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-backends-"));
@@ -40,6 +54,34 @@ describe("prompt backend helpers", () => {
       expect(text).toContain("Stable repo context:");
       expect(text).toContain("Volatile execution context:");
       expect(text).toContain("Structured context:");
+    } finally {
+      await rm(fixture.rootDir, { recursive: true, force: true });
+    }
+  });
+});
+
+describe("deterministic backend", () => {
+  test("renders changed managed items with both identity and path", async () => {
+    const fixture = await createResumeFixture();
+
+    try {
+      runGit(fixture.rootDir, ["init"]);
+      runGit(fixture.rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(fixture.rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(fixture.rootDir, ["add", "."]);
+      runGit(fixture.rootDir, ["commit", "-m", "initial"]);
+      const currentFile = join(fixture.rootDir, "docs/spm/current.md");
+      const raw = await readFile(currentFile, "utf8");
+      await Bun.write(currentFile, `${raw}\ntracked change\n`);
+
+      const projectContext = await loadProjectContext(fixture.rootDir);
+      const backend = resolveResumeBackend("deterministic", projectContext.config);
+      const result = await backend.run(buildResumeContext(projectContext), {
+        rootDir: fixture.rootDir,
+        config: projectContext.config,
+      });
+
+      expect(result.text).toContain("[current-state] CURRENT: Current Project State (docs/spm/current.md)");
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, mkdir, rm } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { buildPromptBundle, renderPromptBundleText } from "../src/backends/prompt.ts";
@@ -13,6 +14,19 @@ async function writeMemoryNote(rootDir: string, scope: "session" | "org", fileNa
   const dir = join(rootDir, ".specpm", "memory", scope);
   await mkdir(dir, { recursive: true });
   await Bun.write(join(dir, fileName), body);
+}
+
+function runGit(rootDir: string, args: string[]): string {
+  const result = spawnSync("git", args, {
+    cwd: rootDir,
+    encoding: "utf8",
+  });
+
+  if (result.status !== 0) {
+    throw new Error(result.stderr || `git ${args.join(" ")} failed`);
+  }
+
+  return result.stdout;
 }
 
 describe("context pack service", () => {
@@ -83,6 +97,31 @@ Use this note for the current local flow.
       expect(pack.mustReadNow.some((item) => item.kind === "next-actions")).toBe(true);
       expect(pack.mustReadNow.some((item) => item.kind === "active-spec")).toBe(true);
       expect(pack.nextInspectIds).toContain("SPEC-001");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("includes changed managed item summaries with both identity and path", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-context-pack-"));
+
+    try {
+      await initializeProject(rootDir);
+      runGit(rootDir, ["init"]);
+      runGit(rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(rootDir, ["add", "."]);
+      runGit(rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(rootDir, "docs/spm/current.md");
+      const currentRaw = await readFile(currentFile, "utf8");
+      await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
+
+      const projectContext = await loadProjectContext(rootDir);
+      const pack = buildResumeContextPack(buildResumeContext(projectContext));
+      const changedItem = pack.supporting.find((item) => item.kind === "changed-item" && item.ref === "docs/spm/current.md");
+
+      expect(changedItem?.summary).toBe("CURRENT: Current Project State (docs/spm/current.md)");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

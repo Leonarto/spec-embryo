@@ -1,5 +1,5 @@
 import type { ParsedArgs } from "../cli.ts";
-import { deriveStatusSnapshot, deriveNextActions } from "../engine.ts";
+import { deriveStatusSnapshot, deriveNextActions, formatChangedItemSummary } from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "../services/agents.ts";
 
@@ -78,8 +78,7 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
   if (snapshot.changedItems.length > 0) {
     lines.push("", "Changed items:");
     for (const item of snapshot.changedItems.slice(0, 10)) {
-      const label = item.id ? `${item.id}${item.title ? `: ${item.title}` : ""}` : item.path;
-      lines.push(`- [${item.kind}] ${label}`);
+      lines.push(`- [${item.kind}] ${formatChangedItemSummary(item)}`);
     }
   }
 
