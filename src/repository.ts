@@ -65,6 +65,20 @@ function nextNumericId(existingIds: string[], prefix: "SPEC" | "TASK"): string {
   return `${prefix}-${String(max + 1).padStart(3, "0")}`;
 }
 
+function nextScopedMemoryNoteId(existingIds: string[], scope: "session" | "org"): string {
+  const prefix = scope === "session" ? "NOTE-SESSION" : "NOTE-ORG";
+  const max = existingIds.reduce((highest, id) => {
+    const match = id.match(new RegExp(`^${prefix}-(\\d+)$`));
+    if (!match) {
+      return highest;
+    }
+
+    return Math.max(highest, Number.parseInt(match[1]!, 10));
+  }, 0);
+
+  return `${prefix}-${String(max + 1).padStart(3, "0")}`;
+}
+
 async function withDocumentCreateLock<T>(rootDir: string, work: () => Promise<T>): Promise<T> {
   const paths = resolveProjectPaths(rootDir);
   return withLock(join(paths.specpmDir, "locks", "document-create.lock"), work);
@@ -211,6 +225,27 @@ function serializeMemoryNoteDocument(note: MemoryNoteDocument, updatedAt: string
   );
 }
 
+function memoryScopeConfigForWrite(
+  config: ProjectConfig,
+  scope: Exclude<MemoryScopeName, "repo">,
+): ProjectConfig["memoryScopes"]["session"] | ProjectConfig["memoryScopes"]["org"] {
+  return scope === "session" ? config.memoryScopes.session : config.memoryScopes.org;
+}
+
+function assertMemoryScopeEnabledAndWritable(
+  config: ProjectConfig,
+  scope: Exclude<MemoryScopeName, "repo">,
+): void {
+  const scopeConfig = memoryScopeConfigForWrite(config, scope);
+  if (!scopeConfig.enabled) {
+    throw new Error(`Memory scope is disabled: ${scope}`);
+  }
+
+  if (scopeConfig.writePolicy !== "read-write") {
+    throw new Error(`Memory scope is read-only under current config: ${scope}`);
+  }
+}
+
 function buildCreatedSpecBody(input: { title: string }): string {
   return `# Problem
 
@@ -274,6 +309,15 @@ export interface UpdateCurrentStateInput {
 
 export interface ArchiveTaskInput {
   reason?: string;
+}
+
+export interface CreateMemoryNoteInput {
+  scope: "session" | "org";
+  title: string;
+  summary?: string;
+  tags?: string[];
+  expiresAt?: string;
+  body?: string;
 }
 
 export interface AnswerSpecQuestionsResult {
@@ -701,12 +745,59 @@ export async function updateMemoryNote(
     throw new Error(`Memory note not found: ${noteId}`);
   }
 
+  if (note.writePolicy !== "read-write") {
+    throw new Error(`Memory note ${note.id} is not writable under the configured scope policy.`);
+  }
+
   const now = new Date().toISOString();
   const nextNote = updater(note, now);
   const scopeDir = memoryScopeDir(paths, nextNote.scope);
   await ensureDir(scopeDir);
   await writeUtf8(nextNote.filePath, serializeMemoryNoteDocument(nextNote, nextNote.updatedAt ?? now));
   return nextNote;
+}
+
+export async function createMemoryNote(rootDir: string, input: CreateMemoryNoteInput): Promise<MemoryNoteDocument> {
+  return withDocumentCreateLock(rootDir, async () => {
+    const config = await readProjectConfig(rootDir);
+    assertMemoryScopeEnabledAndWritable(config, input.scope);
+    const paths = resolveProjectPaths(rootDir, config);
+    const sessionNotes = config.memoryScopes.session.enabled
+      ? await loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
+      : [];
+    const orgNotes = config.memoryScopes.org.enabled
+      ? await loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
+      : [];
+    const existingNotes = [...sessionNotes, ...orgNotes];
+    const now = new Date().toISOString();
+    const id = nextScopedMemoryNoteId(existingNotes.map((note) => note.id), input.scope);
+    const fileName = `${id}-${slugify(input.title) || "note"}.md`;
+    const scopeDir = memoryScopeDir(paths, input.scope);
+    const filePath = join(scopeDir, fileName);
+    const note: MemoryNoteDocument = {
+      docKind: "memory-note",
+      id,
+      title: input.title.trim(),
+      summary: input.summary?.trim() || "No summary provided.",
+      tags: uniqueStrings(input.tags ?? []),
+      createdAt: now,
+      expiresAt: input.expiresAt?.trim() || undefined,
+      consolidatedAt: undefined,
+      promotedTo: undefined,
+      archivedAt: undefined,
+      archiveReason: undefined,
+      updatedAt: now,
+      body: input.body?.trim() || "# Notes",
+      filePath,
+      scope: input.scope,
+      writePolicy: "read-write",
+    };
+
+    await ensureDir(scopeDir);
+    await writeUtf8(filePath, serializeMemoryNoteDocument(note, now));
+
+    return note;
+  });
 }
 
 function parseAgeToMilliseconds(value: string): number {

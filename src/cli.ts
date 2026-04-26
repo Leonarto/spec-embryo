@@ -89,6 +89,8 @@ Usage:
   spm resume [--backend deterministic|prompt|codex|claude] [--json] [--spawn]
   spm handoff [--title "Checkpoint"] [--note "extra note"]
   spm agents check [--json]
+  spm memory note create --scope session|org --title "..." [--summary "..."] [--tags a,b] [--expires-at 2026-05-01T12:00:00.000Z] [--body "..."] [--json]
+  spm memory note update <NOTE-ID> [--title "..."] [--summary "..."] [--tags a,b] [--expires-at 2026-05-01T12:00:00.000Z | --clear-expires-at] [--body "..."] [--json]
   spm memory query [--text "..."] [--doc-kind spec|task|handoff|current-state|memory-note] [--scope session|repo|org] [--status ...] [--tag ui,adoption] [--id SPEC-001] [--linked-to DOC-ID] [--neighbor-of DOC-ID] [--limit 20] [--json]
   spm memory links <DOC-ID> [--depth 1|2] [--json]
   spm memory brief (--id DOC-ID | --spec SPEC-ID | --task TASK-ID | --text "...") [--scope session|repo|org] [--include-neighbors|--no-neighbors] [--include-current|--no-current] [--include-handoffs|--no-handoffs] [--profile implementation|review|migration] [--json]

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-019 is done. Spec Embryo now has compact context packs, scoped memory, consolidation, section-level retrieval ordering, deterministic memory evals, and cache-aware prompt bundle assembly across prompt-return and subprocess backends."
-focus = "Choose the next product slice now that the full context-lifecycle roadmap in SPEC-019 is complete."
-active_spec_ids = []
-active_task_ids = []
+summary = "SPEC-020 is active. TASK-073 is in review after adding first-class CLI create/update flows for scoped memory notes with deterministic IDs and write-policy enforcement."
+focus = "Review and, if needed, fix TASK-073 before starting the archive/list follow-up in TASK-074."
+active_spec_ids = ["SPEC-020"]
+active_task_ids = ["TASK-073"]
 blocked_task_ids = []
-next_action_hints = ["Review the finished SPEC-019 capabilities and decide what should follow the context-lifecycle roadmap.", "Use the spm memory eval command as a standing regression check for future context changes.", "If the next slice touches subprocess or prompt-return behavior, preserve the stable-prefix and variable-tail prompt contract."]
+next_action_hints = ["Run review on TASK-073 before extending the note workflow further.", "If review is clean, mark TASK-073 done and then start TASK-074 for archive and note-centric inspection flows.", "Keep the new memory note commands aligned with scope write policy and repository lock invariants."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T00:05:45.499Z"
+updated_at = "2026-04-26T00:25:29.351Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

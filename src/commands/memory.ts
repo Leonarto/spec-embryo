@@ -9,6 +9,13 @@ import {
 } from "../services/memory-consolidation.ts";
 import { buildMemoryContextPack, renderContextPack } from "../services/context-pack.ts";
 import {
+  buildCreateMemoryNoteBundle,
+  buildUpdateMemoryNoteBundle,
+  MEMORY_NOTE_SCOPES,
+  renderMemoryNoteMutationBundle,
+  type MemoryNoteScope,
+} from "../services/memory-note.ts";
+import {
   buildMemoryEvalBundle,
   MEMORY_EVAL_SUITES,
   renderMemoryEvalBundle,
@@ -115,6 +122,20 @@ function parseScope(value: string | undefined): MemoryQueryScope | undefined {
   );
 }
 
+function parseMemoryNoteScope(value: string | undefined): MemoryNoteScope | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  if (MEMORY_NOTE_SCOPES.includes(value as MemoryNoteScope)) {
+    return value as MemoryNoteScope;
+  }
+
+  throw new Error(
+    `Invalid memory note scope: ${value}. Expected one of ${MEMORY_NOTE_SCOPES.join(", ")}.`,
+  );
+}
+
 function parseConsolidationTarget(value: string | undefined): MemoryConsolidationTarget | undefined {
   if (!value) {
     return undefined;
@@ -167,6 +188,53 @@ function parseOptionalBooleanFlag(
 }
 
 export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
+  if (parsed.subcommand === "note") {
+    const noteAction = parsed.positionals[2];
+
+    if (noteAction === "create") {
+      const scope = parseMemoryNoteScope(flagValue(parsed, "scope"));
+      if (!scope) {
+        throw new Error("`memory note create` requires `--scope session|org`.");
+      }
+
+      const bundle = await buildCreateMemoryNoteBundle(rootDir, {
+        scope,
+        title: flagValue(parsed, "title") ?? "",
+        summary: flagValue(parsed, "summary"),
+        tags: parseCommaList(flagValue(parsed, "tags")),
+        expiresAt: flagValue(parsed, "expires-at"),
+        body: flagValue(parsed, "body"),
+      });
+
+      if (parsed.flags.has("json")) {
+        return JSON.stringify(bundle, null, 2);
+      }
+
+      return renderMemoryNoteMutationBundle(bundle);
+    }
+
+    if (noteAction === "update") {
+      const noteId = parsed.positionals[3];
+      const bundle = await buildUpdateMemoryNoteBundle(rootDir, {
+        noteId: noteId ?? "",
+        title: flagValue(parsed, "title"),
+        summary: flagValue(parsed, "summary"),
+        tags: parsed.flags.has("tags") ? parseCommaList(flagValue(parsed, "tags")) : undefined,
+        expiresAt: flagValue(parsed, "expires-at"),
+        clearExpiresAt: hasFlag(parsed, "clear-expires-at"),
+        body: flagValue(parsed, "body"),
+      });
+
+      if (parsed.flags.has("json")) {
+        return JSON.stringify(bundle, null, 2);
+      }
+
+      return renderMemoryNoteMutationBundle(bundle);
+    }
+
+    throw new Error("Supported note commands are `memory note create` and `memory note update`.");
+  }
+
   if (parsed.subcommand === "query") {
     const context = await loadProjectContext(rootDir);
     const bundle = buildMemoryQueryBundle(context, {
@@ -291,5 +359,5 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
     return renderMemoryEvalBundle(bundle);
   }
 
-  throw new Error("Supported memory commands in this slice are `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, and `memory eval`.");
+  throw new Error("Supported memory commands in this slice are `memory note`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, and `memory eval`.");
 }

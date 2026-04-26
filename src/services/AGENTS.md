@@ -4,11 +4,9 @@ This folder contains reusable deterministic product services.
 
 - Keep services reusable, deterministic, and light on side effects.
 - Put cross-command workflow logic here, not in handlers.
-- Dashboard- and timeline-specific shaping should be projections over canonical repo state, never a second state system.
-- Spec parsing, adoption inspection, doctor findings, and adoption guidance belong here so `init`, `doctor`, and UI stay aligned.
-- Memory retrieval/link/brief services should reuse canonical `ProjectContext`, typed relations, deterministic neighborhoods, match reasons, section-aware body indexing, spec-friendly ranking, and normalized tag matching (`dark mode` == `dark-mode` == `dark_mode`, not substrings).
-- Adoption guidance must distinguish temporary onboarding scaffold from the adopted repo's real product memory.
-- Adoption guidance should explain what `spm` is, when to use it, and which deterministic work it already handles.
+- Dashboard-, adoption-, and doctor-facing shaping should project canonical repo state instead of inventing a second state system.
+- Memory retrieval/link/brief/note services should reuse canonical `ProjectContext`, explicit match reasons, section-aware indexing, normalized tag semantics, and scope write-policy enforcement.
+- Adoption guidance must distinguish temporary onboarding scaffold from the adopted repo's real product memory and explain what `spm` already handles.
 - Nexus services keep Nexus external, dry-run before writes, and preserve `spm` ownership of AGENTS/config.
 - Adoption guidance should produce a repo-local migration guide plus a direct agent brief, including AGENTS, skills, cleanup, and `spm ui` readiness checks for partial adoption.
 - Doctor-style services should surface newer CLI `tool_version` guidance and findings even when some files fail to parse.
