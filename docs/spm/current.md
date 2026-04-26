@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-019 is active. TASK-070 is done, and spm now has a runnable memory eval harness that measures retrieval, pack, consolidation, and source-of-truth injection quality with deterministic scenario suites."
-focus = "Start TASK-072 to add prompt-cache-aware backend bundle assembly on top of the now-stable context-pack ordering contract."
-active_spec_ids = ["SPEC-019"]
+summary = "SPEC-019 is done. Spec Embryo now has compact context packs, scoped memory, consolidation, section-level retrieval ordering, deterministic memory evals, and cache-aware prompt bundle assembly across prompt-return and subprocess backends."
+focus = "Choose the next product slice now that the full context-lifecycle roadmap in SPEC-019 is complete."
+active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Start TASK-072 by identifying which prompt-bundle sections are stable enough to become cache-friendly prefixes.", "Keep the new memory eval harness green while reshaping backend prompt assembly.", "Preserve the deterministic source-of-truth semantics while separating stable prefix material from volatile task-specific tails."]
+next_action_hints = ["Review the finished SPEC-019 capabilities and decide what should follow the context-lifecycle roadmap.", "Use the spm memory eval command as a standing regression check for future context changes.", "If the next slice touches subprocess or prompt-return behavior, preserve the stable-prefix and variable-tail prompt contract."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-25T23:53:50.409Z"
+updated_at = "2026-04-26T00:05:45.499Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

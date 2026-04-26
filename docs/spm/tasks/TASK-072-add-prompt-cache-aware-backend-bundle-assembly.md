@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-072"
 title = "Add prompt-cache-aware backend bundle assembly"
 summary = "Assemble backend prompt bundles with stable prefixes and variable tails so API-facing flows can benefit from provider-side prompt caching without changing repo memory semantics."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-019"]
 depends_on = ["TASK-066", "TASK-067", "TASK-071"]
 blocked_by = []
 priority = 3
 created_at = "2026-04-25T22:42:10.880Z"
+completed_at = "2026-04-26T00:05:32.572Z"
 tags = ["backends", "prompt", "optimization"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-26T00:05:32.572Z"
 +++
 
 # Scope

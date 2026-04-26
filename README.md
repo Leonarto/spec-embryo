@@ -132,11 +132,15 @@ When a subprocess backend is enabled, Spec Embryo now gives it a stable launch c
 
 - prompt text token: `{prompt}` or `{prompt_text}`
 - prompt bundle JSON token: `{prompt_bundle}`
+- stable prompt prefix token: `{prompt_stable_prefix}`
+- variable prompt tail token: `{prompt_variable_tail}`
 - prompt text file token: `{prompt_text_file}` or legacy `{prompt_file}`
 - prompt bundle file token: `{prompt_bundle_file}` or `{bundle_file}`
-- env vars: `SPM_BACKEND_NAME`, `SPM_PROJECT_ROOT`, `SPM_PROMPT_FILE`, `SPM_PROMPT_TEXT_FILE`, `SPM_PROMPT_BUNDLE_FILE`
+- stable prompt prefix file token: `{prompt_stable_prefix_file}`
+- variable prompt tail file token: `{prompt_variable_tail_file}`
+- env vars: `SPM_BACKEND_NAME`, `SPM_PROJECT_ROOT`, `SPM_PROMPT_FILE`, `SPM_PROMPT_TEXT_FILE`, `SPM_PROMPT_BUNDLE_FILE`, `SPM_PROMPT_STABLE_PREFIX_FILE`, `SPM_PROMPT_VARIABLE_TAIL_FILE`
 
-That keeps prompt-return and subprocess execution aligned instead of making each backend invent its own prompt packaging.
+That keeps prompt-return and subprocess execution aligned instead of making each backend invent its own prompt packaging, while also separating stable prompt prefixes from more volatile execution tails for backends that can benefit from cache-friendly assembly.
 
 ## What is implemented now
 
@@ -154,6 +158,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
 - Interactive timeline tracing with URL-driven task selection, distinct upstream/downstream highlighting, and related-spec emphasis for cross-spec diagnosis
 - Prompt-return backend for agent-safe orchestration
+- Prompt bundle assembly that separates stable prefixes from variable tails while preserving one shared deterministic prompt contract across prompt-return and subprocess adapters
 - A product direction that treats context management as packaging, scoping, consolidation, and evaluation work rather than trying to recreate model-native reasoning inside the tool
 - Handoff file generation
 - Deterministic spec/task creation with automatic back-linking

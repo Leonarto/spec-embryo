@@ -21,9 +21,13 @@ export interface SubprocessLaunchPlan {
   promptBundle: ReturnType<typeof buildPromptBundle>;
   promptText: string;
   promptBundleText: string;
+  promptStablePrefixText: string;
+  promptVariableTailText: string;
   artifactPaths: {
     promptTextFile: string;
     promptBundleFile: string;
+    promptStablePrefixFile: string;
+    promptVariableTailFile: string;
   };
   env: Record<string, string>;
 }
@@ -32,6 +36,8 @@ function buildArtifactPaths(rootDir: string, backend: BackendName): SubprocessLa
   return {
     promptTextFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt.txt`),
     promptBundleFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt.json`),
+    promptStablePrefixFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt-prefix.txt`),
+    promptVariableTailFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt-tail.txt`),
   };
 }
 
@@ -44,15 +50,21 @@ export function buildSubprocessLaunchPlan(
   const promptBundle = buildPromptBundle(context);
   const promptBundleText = JSON.stringify(promptBundle, null, 2);
   const promptText = renderPromptBundleText(promptBundle);
+  const promptStablePrefixText = promptBundle.cache_assembly.stable_prefix_text;
+  const promptVariableTailText = promptBundle.cache_assembly.variable_tail_text;
   const artifactPaths = buildArtifactPaths(options.rootDir, backend);
 
   const replacements = {
     prompt: promptText,
     prompt_text: promptText,
     prompt_bundle: promptBundleText,
+    prompt_stable_prefix: promptStablePrefixText,
+    prompt_variable_tail: promptVariableTailText,
     prompt_file: artifactPaths.promptTextFile,
     prompt_text_file: artifactPaths.promptTextFile,
     prompt_bundle_file: artifactPaths.promptBundleFile,
+    prompt_stable_prefix_file: artifactPaths.promptStablePrefixFile,
+    prompt_variable_tail_file: artifactPaths.promptVariableTailFile,
     bundle_file: artifactPaths.promptBundleFile,
   };
 
@@ -64,6 +76,8 @@ export function buildSubprocessLaunchPlan(
     SPM_PROMPT_FILE: artifactPaths.promptTextFile,
     SPM_PROMPT_TEXT_FILE: artifactPaths.promptTextFile,
     SPM_PROMPT_BUNDLE_FILE: artifactPaths.promptBundleFile,
+    SPM_PROMPT_STABLE_PREFIX_FILE: artifactPaths.promptStablePrefixFile,
+    SPM_PROMPT_VARIABLE_TAIL_FILE: artifactPaths.promptVariableTailFile,
   };
 
   return {
@@ -74,6 +88,8 @@ export function buildSubprocessLaunchPlan(
     promptBundle,
     promptText,
     promptBundleText,
+    promptStablePrefixText,
+    promptVariableTailText,
     artifactPaths,
     env,
   };
@@ -92,8 +108,10 @@ function renderPreviewText(plan: SubprocessLaunchPlan): string {
     "Prompt contract:",
     `- prompt text file: ${plan.artifactPaths.promptTextFile}`,
     `- prompt bundle file: ${plan.artifactPaths.promptBundleFile}`,
-    "- token replacements: {prompt}, {prompt_text}, {prompt_bundle}, {prompt_file}, {prompt_text_file}, {prompt_bundle_file}, {bundle_file}",
-    "- env vars: SPM_BACKEND_NAME, SPM_PROJECT_ROOT, SPM_PROMPT_FILE, SPM_PROMPT_TEXT_FILE, SPM_PROMPT_BUNDLE_FILE",
+    `- stable prefix file: ${plan.artifactPaths.promptStablePrefixFile}`,
+    `- variable tail file: ${plan.artifactPaths.promptVariableTailFile}`,
+    "- token replacements: {prompt}, {prompt_text}, {prompt_bundle}, {prompt_stable_prefix}, {prompt_variable_tail}, {prompt_file}, {prompt_text_file}, {prompt_bundle_file}, {prompt_stable_prefix_file}, {prompt_variable_tail_file}, {bundle_file}",
+    "- env vars: SPM_BACKEND_NAME, SPM_PROJECT_ROOT, SPM_PROMPT_FILE, SPM_PROMPT_TEXT_FILE, SPM_PROMPT_BUNDLE_FILE, SPM_PROMPT_STABLE_PREFIX_FILE, SPM_PROMPT_VARIABLE_TAIL_FILE",
     "",
     "Prompt preview:",
     plan.promptText,
@@ -137,6 +155,8 @@ export abstract class SubprocessBackend implements ResumeBackend {
         artifact_paths: plan.artifactPaths,
         prompt_bundle: plan.promptBundle,
         prompt_text: plan.promptText,
+        prompt_stable_prefix: plan.promptStablePrefixText,
+        prompt_variable_tail: plan.promptVariableTailText,
       };
 
       return {
@@ -147,6 +167,8 @@ export abstract class SubprocessBackend implements ResumeBackend {
 
     await writeUtf8(plan.artifactPaths.promptBundleFile, plan.promptBundleText);
     await writeUtf8(plan.artifactPaths.promptTextFile, plan.promptText);
+    await writeUtf8(plan.artifactPaths.promptStablePrefixFile, plan.promptStablePrefixText);
+    await writeUtf8(plan.artifactPaths.promptVariableTailFile, plan.promptVariableTailText);
 
     const child = spawn(plan.command, plan.args, {
       cwd: options.rootDir,

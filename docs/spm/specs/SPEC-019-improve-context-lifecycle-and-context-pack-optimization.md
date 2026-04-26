@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-019"
 title = "Improve context lifecycle and context-pack optimization"
 summary = "Make spm a better context orchestrator for Codex and Claude by adding compact context packs, scoped memory, consolidation, evals, retrieval ordering, and cache-aware prompt assembly without duplicating model-native reasoning."
-status = "active"
+status = "done"
 task_ids = ["TASK-066", "TASK-067", "TASK-068", "TASK-069", "TASK-070", "TASK-071", "TASK-072"]
 tags = ["context", "memory", "agents", "optimization"]
-updated_at = "2026-04-25T22:56:00.000Z"
+updated_at = "2026-04-26T00:05:32.636Z"
 +++
 
 # Problem

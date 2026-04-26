@@ -245,11 +245,11 @@ Backends like `CodexBackend` and `ClaudeBackend` sit behind a shared subprocess 
 The shared adapter owns the prompt contract:
 
 - it builds the same prompt bundle used by prompt-return mode
-- it renders a readable prompt text artifact and a JSON bundle artifact
-- it exposes stable token replacements such as `{prompt_text_file}` and `{prompt_bundle_file}`
-- it exports stable env vars such as `SPM_PROMPT_TEXT_FILE` and `SPM_PROMPT_BUNDLE_FILE`
+- it renders a readable prompt text artifact, a JSON bundle artifact, and separate stable-prefix / variable-tail prompt artifacts
+- it exposes stable token replacements such as `{prompt_text_file}`, `{prompt_bundle_file}`, `{prompt_stable_prefix_file}`, and `{prompt_variable_tail_file}`
+- it exports stable env vars such as `SPM_PROMPT_TEXT_FILE`, `SPM_PROMPT_BUNDLE_FILE`, `SPM_PROMPT_STABLE_PREFIX_FILE`, and `SPM_PROMPT_VARIABLE_TAIL_FILE`
 
-That keeps subprocess orchestration deterministic and prevents backend-specific prompt drift.
+That keeps subprocess orchestration deterministic, prevents backend-specific prompt drift, and lets cache-aware backends reuse a slower-changing prefix without changing the repo-memory contract.
 
 ## Future growth path
 
