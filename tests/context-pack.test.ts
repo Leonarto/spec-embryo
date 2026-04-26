@@ -158,6 +158,8 @@ Use this note for the current local flow.
       expect(summaryItem?.summary).toBe("... and 2 more changed files.");
       expect(pack.supporting.filter((item) => item.kind === "changed-item")).toHaveLength(3);
       expect(pack.offloaded.some((artifact) => artifact.kind === "inspect-change" && artifact.ref === "scratch-4.md")).toBe(true);
+      expect(pack.nextInspectIds).toContain("scratch-3.md");
+      expect(pack.nextInspectIds).toContain("scratch-4.md");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

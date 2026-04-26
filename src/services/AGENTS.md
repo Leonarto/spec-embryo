@@ -7,6 +7,7 @@ This folder contains reusable deterministic product services.
 - Dashboard, adoption, and doctor services should project canonical repo state instead of inventing a second state system.
 - Memory retrieval/link/brief/note services should reuse canonical `ProjectContext`, explicit match reasons, section-aware indexing, normalized tag semantics, and scope write-policy enforcement.
 - Context-pack services should keep compaction explicit; if changed-file or other supporting detail is truncated out of the active pack, surface that omission deterministically instead of making callers infer it from missing entries.
+- When context-pack detail is offloaded, keep `nextInspectIds` aligned with the highest-value omitted refs so prompt-return callers get a deterministic expansion trail.
 - Adoption/doctor guidance must explain what `spm` already handles, distinguish scaffold from real repo memory, write the migration-guide/direct-agent-brief pair, and surface version-aware capability refresh plus adoption-artifact drift against the same post-init contract.
 - Nexus services keep Nexus external, dry-run before writes, and preserve `spm` ownership of AGENTS/config.
 - Doctor human output stays concise by default; long guidance and the direct brief belong to verbose or JSON reads.

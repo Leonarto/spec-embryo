@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-085"
 title = "Add offloaded changed-file note to resume context packs"
 summary = "Make resume context packs explicitly say when changed-file detail was offloaded while preserving visible changed items and per-file inspect-change artifacts."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-031"]
 depends_on = []
 blocked_by = []
 priority = 2
 owner_role = "builder"
 created_at = "2026-04-26T04:45:00.000Z"
+completed_at = "2026-04-26T05:05:00.000Z"
 tags = ["context", "resume", "git", "ux"]
-updated_at = "2026-04-26T04:45:00.000Z"
+updated_at = "2026-04-26T05:05:00.000Z"
 +++
 
 # Scope

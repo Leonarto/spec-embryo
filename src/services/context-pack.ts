@@ -399,6 +399,11 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     })),
   ]);
 
+  const offloadedChangeRefs = offloaded
+    .filter((artifact) => artifact.kind === "inspect-change")
+    .map((artifact) => artifact.ref)
+    .slice(0, 2);
+
   return {
     source: "resume",
     profile: "resume",
@@ -414,6 +419,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
         ...context.activeSpecs.map((spec) => spec.id),
         ...context.activeTasks.map((entry) => entry.task.id),
         ...context.readyTasks.slice(0, 2).map((entry) => entry.task.id),
+        ...offloadedChangeRefs,
       ]),
     ).slice(0, 8),
   };
