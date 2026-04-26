@@ -167,6 +167,44 @@ describe("engine", () => {
     expect(changedItems[0]?.id).toBe("SPEC-001");
     expect(changedItems[1]?.id).toBe("TASK-002");
     expect(changedItems[2]?.kind).toBe("current-state");
+    expect(changedItems[3]?.path).toBe("README.md");
+  });
+
+  test("accepts tracked lines that already lost the leading status column and decodes quoted rename targets", () => {
+    const renamedContext: ProjectContext = {
+      ...context,
+      currentState: {
+        ...context.currentState,
+        filePath: "/tmp/spec-embryo/docs/spm/current state.md",
+      },
+      specs: [
+        {
+          ...context.specs[0]!,
+          title: "Foundation Renamed",
+          filePath: "/tmp/spec-embryo/docs/spm/specs/New Spec.md",
+        },
+      ],
+      git: {
+        ...context.git,
+        dirty: true,
+        shortStatus: [
+          "M docs/spm/current state.md",
+          'R  "docs/spm/specs/Old Spec.md" -> "docs/spm/specs/New Spec.md"',
+          '?? "notes with spaces.md"',
+        ],
+      },
+    };
+
+    const changedItems = deriveChangedItems(renamedContext);
+
+    expect(changedItems.map((item) => item.path)).toEqual([
+      "docs/spm/current state.md",
+      "docs/spm/specs/New Spec.md",
+      "notes with spaces.md",
+    ]);
+    expect(changedItems[0]?.kind).toBe("current-state");
+    expect(changedItems[1]?.id).toBe("SPEC-001");
+    expect(changedItems[2]?.kind).toBe("other");
   });
 
   test("includes changed managed docs in next actions when available", () => {

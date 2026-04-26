@@ -18,18 +18,90 @@ function unique<T>(items: T[]): T[] {
   return [...new Set(items)];
 }
 
+function decodeGitQuotedPath(value: string): string {
+  if (!(value.startsWith('"') && value.endsWith('"')) || value.length < 2) {
+    return value;
+  }
+
+  const inner = value.slice(1, -1);
+  return inner.replace(/\\([0-7]{3}|["\\abfnrtv])/g, (_match, token: string) => {
+    if (/^[0-7]{3}$/u.test(token)) {
+      return String.fromCharCode(Number.parseInt(token, 8));
+    }
+
+    switch (token) {
+      case '"':
+        return '"';
+      case "\\":
+        return "\\";
+      case "a":
+        return "\u0007";
+      case "b":
+        return "\b";
+      case "f":
+        return "\f";
+      case "n":
+        return "\n";
+      case "r":
+        return "\r";
+      case "t":
+        return "\t";
+      case "v":
+        return "\u000b";
+      default:
+        return token;
+    }
+  });
+}
+
+function splitRenamePath(rawPath: string): string[] {
+  let inQuotes = false;
+  let escaped = false;
+
+  for (let index = 0; index <= rawPath.length - 4; index += 1) {
+    const char = rawPath[index]!;
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+
+    if (inQuotes && char === "\\") {
+      escaped = true;
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (!inQuotes && rawPath.slice(index, index + 4) === " -> ") {
+      return [rawPath.slice(0, index), rawPath.slice(index + 4)];
+    }
+  }
+
+  return [rawPath];
+}
+
 function parseGitStatusPath(line: string): string | undefined {
-  if (line.length < 4) {
+  if (line.length < 3) {
     return undefined;
   }
 
-  const rawPath = line.slice(3).trim();
-  if (rawPath.length === 0) {
+  const rawPath =
+    line[2] === " "
+      ? line.slice(3).trim()
+      : line[1] === " "
+        ? line.slice(2).trim()
+        : undefined;
+
+  if (!rawPath || rawPath.length === 0) {
     return undefined;
   }
 
-  const renameParts = rawPath.split(" -> ");
-  return renameParts[renameParts.length - 1]?.trim() || undefined;
+  const renameParts = splitRenamePath(rawPath).map((part) => decodeGitQuotedPath(part.trim()));
+  return renameParts[renameParts.length - 1] || undefined;
 }
 
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {

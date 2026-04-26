@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { spawnSync } from "node:child_process";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -10,12 +11,26 @@ import {
   createSpec,
   createTask,
   initializeProject,
+  loadProjectContext,
   restoreTask,
   setSpecStatus,
   setTaskStatus,
   updateCurrentState,
 } from "../src/repository.ts";
 import { CLI_VERSION } from "../src/services/version.ts";
+
+function runGit(rootDir: string, args: string[]): string {
+  const result = spawnSync("git", args, {
+    cwd: rootDir,
+    encoding: "utf8",
+  });
+
+  if (result.status !== 0) {
+    throw new Error(result.stderr || `git ${args.join(" ")} failed`);
+  }
+
+  return result.stdout;
+}
 
 describe("repository status updates", () => {
   test("updates a spec status and preserves the body", async () => {
@@ -302,6 +317,29 @@ describe("repository status updates", () => {
       expect(await Bun.file(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md")).exists()).toBe(true);
       expect(await Bun.file(join(rootDir, "docs/spm/specs/SPEC-003-adopt-spec-embryo-memory-for-this-repository.md")).exists()).toBe(false);
       expect(await Bun.file(join(rootDir, "docs/spm/tasks/TASK-005-inventory-the-real-project-direction-and-existing-docs.md")).exists()).toBe(false);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("preserves leading spaces in git short status output", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      runGit(rootDir, ["init"]);
+      runGit(rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(rootDir, ["add", "."]);
+      runGit(rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(rootDir, "docs/spm/current.md");
+      const raw = await readFile(currentFile, "utf8");
+      await writeFile(currentFile, `${raw}\ntracked change\n`, "utf8");
+
+      const context = await loadProjectContext(rootDir);
+
+      expect(context.git.shortStatus).toContain(" M docs/spm/current.md");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

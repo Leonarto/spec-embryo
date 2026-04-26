@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-022 is done. The adoption-artifact drift detection slice is complete and the repo is ready to choose the next product slice."
-focus = "Choose the next Spec Embryo product slice."
-active_spec_ids = []
-active_task_ids = []
+summary = "SPEC-023 is active. TASK-077 is in review after hardening git short-status parsing so changed-item reporting preserves correct relative paths for tracked, renamed, and quoted paths."
+focus = "Review TASK-077 and, if it is clean, close SPEC-023."
+active_spec_ids = ["SPEC-023"]
+active_task_ids = ["TASK-077"]
 blocked_task_ids = []
-next_action_hints = ["Choose the next managed spec and task before starting new implementation work.", "Keep adoption, doctor, and init guidance aligned as new product work lands."]
+next_action_hints = ["Run review on TASK-077 before closing SPEC-023.", "If review is clean, mark TASK-077 done and then close SPEC-023.", "Keep git snapshot capture and changed-item derivation aligned across status and resume flows."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T01:41:18.001Z"
+updated_at = "2026-04-26T01:46:42.442Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

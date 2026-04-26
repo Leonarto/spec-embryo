@@ -123,7 +123,7 @@ function git(rootDir: string, args: string[]): string {
     return "";
   }
 
-  return result.stdout.trim();
+  return result.stdout.trimEnd();
 }
 
 async function loadMarkdownDocument<T>(
