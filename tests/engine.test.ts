@@ -1,6 +1,12 @@
 import { describe, expect, test } from "bun:test";
 import type { ProjectContext } from "../src/domain.ts";
-import { buildResumeContext, deriveChangedItems, deriveStatusSnapshot } from "../src/engine.ts";
+import {
+  buildResumeContext,
+  deriveChangedItems,
+  deriveStatusSnapshot,
+  formatOmittedCountNote,
+  sliceWithOmittedCount,
+} from "../src/engine.ts";
 
 const context: ProjectContext = {
   rootDir: "/tmp/spec-embryo",
@@ -227,6 +233,16 @@ describe("engine", () => {
     expect(changedItems[0]?.kind).toBe("current-state");
     expect(changedItems[0]?.changeHint).toBe("M");
     expect(changedItems[0]?.statusCode).toBe("MD");
+  });
+
+  test("shares omitted-count note formatting across truncated summary surfaces", () => {
+    const truncated = sliceWithOmittedCount(["a", "b", "c"], 2);
+
+    expect(truncated.visibleItems).toEqual(["a", "b"]);
+    expect(truncated.omittedCount).toBe(1);
+    expect(formatOmittedCountNote(truncated.omittedCount, "git change")).toBe("... and 1 more git change.");
+    expect(formatOmittedCountNote(2, "changed file")).toBe("... and 2 more changed files.");
+    expect(formatOmittedCountNote(0, "changed file")).toBeUndefined();
   });
 
   test("includes changed managed docs in next actions when available", () => {

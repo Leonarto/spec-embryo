@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-029"
 title = "Show omitted git-change counts in deterministic resume output"
 summary = "Make the deterministic backend say when additional raw git short-status lines were omitted from the visible Git Changes section so resume text stays explicit about truncation."
-status = "active"
+status = "done"
 task_ids = ["TASK-083"]
 tags = ["git", "status", "resume"]
 owner = "human-ai"
-updated_at = "2026-04-26T03:40:30.740Z"
+updated_at = "2026-04-26T04:15:00.000Z"
 +++
 
 # Problem

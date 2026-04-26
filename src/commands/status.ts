@@ -1,5 +1,11 @@
 import type { ParsedArgs } from "../cli.ts";
-import { deriveStatusSnapshot, deriveNextActions, formatChangedItemSummary, humanChangedItemSummarySlice } from "../engine.ts";
+import {
+  deriveStatusSnapshot,
+  deriveNextActions,
+  formatChangedItemSummary,
+  formatOmittedCountNote,
+  humanChangedItemSummarySlice,
+} from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "../services/agents.ts";
 
@@ -81,8 +87,9 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
     for (const item of changedItems.visibleItems) {
       lines.push(`- [${item.kind}] ${formatChangedItemSummary(item)}`);
     }
-    if (changedItems.omittedCount > 0) {
-      lines.push(`- ... and ${changedItems.omittedCount} more changed file${changedItems.omittedCount === 1 ? "" : "s"}.`);
+    const omittedNote = formatOmittedCountNote(changedItems.omittedCount, "changed file");
+    if (omittedNote) {
+      lines.push(`- ${omittedNote}`);
     }
   }
 

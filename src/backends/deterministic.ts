@@ -1,27 +1,14 @@
 import type { ResumeContext } from "../domain.ts";
-import { formatChangedItemSummary, humanChangedItemSummarySlice } from "../engine.ts";
+import {
+  formatChangedItemSummary,
+  formatOmittedCountNote,
+  humanChangedItemSummarySlice,
+  sliceWithOmittedCount,
+} from "../engine.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
 
 function section(title: string, lines: string[]): string {
   return [title, ...lines.map((line) => `  ${line}`)].join("\n");
-}
-
-function truncatedLinesWithNote(
-  lines: string[],
-  limit: number,
-  noun: string,
-): string[] {
-  const visibleLines = lines.slice(0, limit);
-  const omittedCount = Math.max(lines.length - visibleLines.length, 0);
-
-  if (omittedCount === 0) {
-    return visibleLines;
-  }
-
-  return [
-    ...visibleLines,
-    `... and ${omittedCount} more ${noun}${omittedCount === 1 ? "" : "s"}.`,
-  ];
 }
 
 export class DeterministicBackend implements ResumeBackend {
@@ -101,19 +88,25 @@ export class DeterministicBackend implements ResumeBackend {
     }
 
     if (context.git.shortStatus.length > 0) {
-      sections.push(section("Git Changes", truncatedLinesWithNote(context.git.shortStatus, 10, "git change")));
+      const gitChanges = sliceWithOmittedCount(context.git.shortStatus, 10);
+      const omittedGitNote = formatOmittedCountNote(gitChanges.omittedCount, "git change");
+      sections.push(
+        section("Git Changes", [
+          ...gitChanges.visibleItems,
+          ...(omittedGitNote ? [omittedGitNote] : []),
+        ]),
+      );
     }
 
     if (context.changedItems.length > 0) {
       const changedItems = humanChangedItemSummarySlice(context.changedItems, 10);
+      const omittedNote = formatOmittedCountNote(changedItems.omittedCount, "changed file");
       sections.push(
         section(
           "Changed Items",
           [
             ...changedItems.visibleItems.map((item) => `[${item.kind}] ${formatChangedItemSummary(item)}`),
-            ...(changedItems.omittedCount > 0
-              ? [`... and ${changedItems.omittedCount} more changed file${changedItems.omittedCount === 1 ? "" : "s"}.`]
-              : []),
+            ...(omittedNote ? [omittedNote] : []),
           ],
         ),
       );

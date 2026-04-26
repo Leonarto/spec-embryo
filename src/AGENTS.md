@@ -18,5 +18,5 @@ Rules:
 - Extend `domain.ts` first when new document types or config shapes appear.
 - Task lifecycle semantics live in the shared task document model; if completion, cancellation, or archival behavior changes, update task parsing and serialization together.
 - Spec/task creation that allocates new IDs or rewrites linked docs must stay serialized through the shared repository lock in `storage.ts`; do not add parallel create paths that bypass it.
-- Changed-item summaries are shared resume/status context, not command-local text; if git change reporting changes, keep the parsed raw status code, normalized hint, and human-readable summary shape consistent across `engine.ts`, backends, context-pack services, and status output.
+- Changed-item summaries are shared resume/status context, not command-local text; if git change reporting changes, keep the parsed raw status code, normalized hint, truncation-note helpers, and human-readable summary shape consistent across `engine.ts`, backends, context-pack services, and status output.
 - Add or update nested `AGENTS.md` files if a subarea becomes meaningfully more complex.

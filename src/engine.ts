@@ -165,6 +165,32 @@ export function orderChangedItemsForHumanSummary(items: ChangedItemSummary[]): C
   return [...managed, ...unmanaged];
 }
 
+export function sliceWithOmittedCount<T>(
+  items: T[],
+  limit = 10,
+): {
+  visibleItems: T[];
+  omittedCount: number;
+} {
+  const visibleItems = items.slice(0, limit);
+  return {
+    visibleItems,
+    omittedCount: Math.max(items.length - visibleItems.length, 0),
+  };
+}
+
+export function formatOmittedCountNote(
+  omittedCount: number,
+  singularNoun: string,
+  pluralNoun = `${singularNoun}s`,
+): string | undefined {
+  if (omittedCount <= 0) {
+    return undefined;
+  }
+
+  return `... and ${omittedCount} more ${omittedCount === 1 ? singularNoun : pluralNoun}.`;
+}
+
 export function humanChangedItemSummarySlice(
   items: ChangedItemSummary[],
   limit = 10,
@@ -173,11 +199,7 @@ export function humanChangedItemSummarySlice(
   omittedCount: number;
 } {
   const orderedItems = orderChangedItemsForHumanSummary(items);
-  const visibleItems = orderedItems.slice(0, limit);
-  return {
-    visibleItems,
-    omittedCount: Math.max(orderedItems.length - visibleItems.length, 0),
-  };
+  return sliceWithOmittedCount(orderedItems, limit);
 }
 
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {
