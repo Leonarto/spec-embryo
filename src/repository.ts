@@ -424,6 +424,7 @@ export interface InitResult {
   sequence: string[];
   adoptedHome?: string;
   created: string[];
+  refreshed: string[];
   skipped: string[];
 }
 
@@ -432,6 +433,7 @@ export interface AdoptionArtifactsWriteResult {
   migrationGuideFile: string;
   agentBriefFile: string;
   created: string[];
+  refreshed: string[];
   skipped: string[];
 }
 
@@ -448,6 +450,7 @@ export async function initializeProject(
   const paths = resolveProjectPaths(rootDir, config);
   const timestamp = new Date().toISOString();
   const created: string[] = [];
+  const refreshed: string[] = [];
   const skipped: string[] = [];
 
   await Promise.all([
@@ -466,8 +469,8 @@ export async function initializeProject(
   const existingTaskFiles = await listMarkdownFiles(paths.tasksDir);
   const shouldSeedAdoptionScaffold = existingSpecFiles.length === 0 && existingTaskFiles.length === 0;
 
-  const files: Array<{ path: string; content: string }> = [
-    { path: paths.configFile, content: createConfigToml(projectName, memoryDir) },
+  const files: Array<{ path: string; content: string; refreshOnInit?: boolean }> = [
+    { path: paths.configFile, content: createConfigToml(projectName, memoryDir), refreshOnInit: true },
     {
       path: paths.stateFile,
       content: shouldSeedAdoptionScaffold
@@ -497,6 +500,14 @@ export async function initializeProject(
     if (options?.force || !(await pathExists(file.path))) {
       await writeUtf8(file.path, file.content);
       created.push(file.path);
+    } else if (file.refreshOnInit) {
+      const existing = await readUtf8(file.path);
+      if (existing !== file.content) {
+        await writeUtf8(file.path, file.content);
+        refreshed.push(file.path);
+      } else {
+        skipped.push(file.path);
+      }
     } else {
       skipped.push(file.path);
     }
@@ -506,6 +517,7 @@ export async function initializeProject(
     memoryDir,
     sequence: initSequenceDescription(memoryDir),
     created,
+    refreshed,
     skipped,
   };
 }
@@ -526,6 +538,7 @@ export async function writeAdoptionArtifacts(
   const migrationGuideFile = join(rootDir, artifactPaths.migrationGuideFile);
   const agentBriefFile = join(rootDir, artifactPaths.agentBriefFile);
   const created: string[] = [];
+  const refreshed: string[] = [];
   const skipped: string[] = [];
 
   await ensureDir(adoptionDir);
@@ -540,7 +553,13 @@ export async function writeAdoptionArtifacts(
       await writeUtf8(file.path, file.content);
       created.push(file.path);
     } else {
-      skipped.push(file.path);
+      const existing = await readUtf8(file.path);
+      if (existing !== file.content) {
+        await writeUtf8(file.path, file.content);
+        refreshed.push(file.path);
+      } else {
+        skipped.push(file.path);
+      }
     }
   }
 
@@ -549,6 +568,7 @@ export async function writeAdoptionArtifacts(
     migrationGuideFile,
     agentBriefFile,
     created,
+    refreshed,
     skipped,
   };
 }

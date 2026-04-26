@@ -68,6 +68,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     adoption: inspection,
     memoryDir: result.memoryDir,
     created: result.created.map((filePath) => formatPath(rootDir, filePath)),
+    refreshed: result.refreshed.map((filePath) => formatPath(rootDir, filePath)),
     skipped: result.skipped.map((filePath) => formatPath(rootDir, filePath)),
     commandContext: "init",
   });
@@ -94,6 +95,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     },
   );
   const createdLines = [...result.created, ...adoptionArtifacts.created].map((filePath) => `created ${formatPath(rootDir, filePath)}`);
+  const refreshedLines = [...result.refreshed, ...adoptionArtifacts.refreshed].map((filePath) => `refreshed ${formatPath(rootDir, filePath)}`);
   const skippedLines = [...result.skipped, ...adoptionArtifacts.skipped].map((filePath) => `kept ${formatPath(rootDir, filePath)}`);
 
   if (parsed.flags.has("json")) {
@@ -105,6 +107,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
         inspection,
         sequence: result.sequence,
         created: [...result.created, ...adoptionArtifacts.created].map((filePath) => formatPath(rootDir, filePath)),
+        refreshed: [...result.refreshed, ...adoptionArtifacts.refreshed].map((filePath) => formatPath(rootDir, filePath)),
         skipped: [...result.skipped, ...adoptionArtifacts.skipped].map((filePath) => formatPath(rootDir, filePath)),
         migration_guide_file: formatPath(rootDir, adoptionArtifacts.migrationGuideFile),
         direct_agent_brief_file: formatPath(rootDir, adoptionArtifacts.agentBriefFile),
@@ -136,6 +139,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     ...directAgentBrief.trimEnd().split("\n"),
     "",
     ...createdLines,
+    ...(refreshedLines.length > 0 ? ["", ...refreshedLines] : []),
     ...(skippedLines.length > 0 ? ["", ...skippedLines] : []),
   ].join("\n");
 }

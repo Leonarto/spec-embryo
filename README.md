@@ -94,8 +94,8 @@ web/
 - `init --json`: return the same adoption classification plus a structured next-step guide and direct agent brief that the user can hand to an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
 - `doctor`: inspect repo-memory health, adoption state, drift, broken links, recorded tool-version lag, and bounded Nexus coexistence when Nexus is enabled, with a concise default summary that keeps recurring agent reads cheap.
-- `doctor --verbose`: include the full adoption guide, next-command sequence, and copy-pasteable direct agent brief.
-- `doctor --json`: return structured findings plus deterministic migration, first-week guidance, version/update metadata, and the direct agent brief for agent continuation.
+- `doctor --verbose`: include the full adoption guide, current memory-workflow guidance, version-aware capability refresh guidance, next-command sequence, and copy-pasteable direct agent brief.
+- `doctor --json`: return structured findings plus deterministic migration, memory-workflow guidance, capability-refresh metadata, version/update metadata, and the direct agent brief for agent continuation.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `nexus setup`: preview or apply the bounded optional Nexus setup across config, AGENTS guidance, local artifact ignore rules, and adoption artifacts.
 - `memory note`: create, update, archive, restore, and list scoped `memory-note` documents through deterministic CLI flows instead of editing `.specpm/memory/...` files by hand.

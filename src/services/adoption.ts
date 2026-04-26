@@ -14,10 +14,22 @@ export interface SpmOrientation {
   deterministicResponsibilities: string[];
 }
 
+export interface MemoryWorkflowGuidance {
+  preferredWorkflows: string[];
+}
+
+export interface CapabilityRefreshGuidance {
+  required: boolean;
+  reason?: string;
+  actions: string[];
+}
+
 export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
+  memoryWorkflow: MemoryWorkflowGuidance;
+  capabilityRefresh: CapabilityRefreshGuidance;
   whatFound: string[];
   whatChanged: string[];
   remainingWork: string[];
@@ -79,12 +91,14 @@ export function buildAdoptionGuidance(input: {
   adoption: AdoptionInspection;
   memoryDir: string;
   created?: string[];
+  refreshed?: string[];
   skipped?: string[];
   doctorFindings?: DoctorFinding[];
   commandContext?: "init" | "doctor";
   seedScaffoldDetected?: boolean;
 }): AdoptionGuidance {
   const created = input.created ?? [];
+  const refreshed = input.refreshed ?? [];
   const skipped = input.skipped ?? [];
   const doctorFindings = input.doctorFindings ?? [];
   const warningOrBlockingFindings = doctorFindings.filter(
@@ -96,6 +110,16 @@ export function buildAdoptionGuidance(input: {
   const whatFound = [...input.adoption.findings];
   const whatChanged: string[] = [];
   const remainingWork: string[] = [];
+  const memoryWorkflow: MemoryWorkflowGuidance = {
+    preferredWorkflows: memoryWorkflowLines(),
+  };
+  const capabilityRefresh: CapabilityRefreshGuidance = {
+    required: toolUpgradeAvailable,
+    reason: toolUpgradeAvailable
+      ? "The running CLI is newer than the repo's recorded tool version, so repo-local usage guidance may lag the currently installed SpM workflow."
+      : undefined,
+    actions: toolUpgradeAvailable ? capabilityRefreshLines() : [],
+  };
   const spmOrientation: SpmOrientation = {
     whatSpmIs:
       "spm is Spec Embryo's local-first CLI for project memory. It reads and writes the repo's managed specs, tasks, handoffs, and current state so humans and agents share the same file-backed source of truth.",
@@ -127,6 +151,10 @@ export function buildAdoptionGuidance(input: {
     whatChanged.push(`Created ${created.length} managed file${created.length === 1 ? "" : "s"} under \`${input.memoryDir}\` and \`.specpm/\`.`);
   } else {
     whatChanged.push("No new managed files were created in this run.");
+  }
+
+  if (refreshed.length > 0) {
+    whatChanged.push(`Refreshed ${refreshed.length} deterministic file${refreshed.length === 1 ? "" : "s"} so repo-local guidance and config match the current CLI behavior.`);
   }
 
   if (skipped.length > 0) {
@@ -190,14 +218,19 @@ export function buildAdoptionGuidance(input: {
 
   if (toolUpgradeAvailable) {
     remainingWork.push("The running Spec Embryo CLI is newer than the repo's recorded tool version, so this repo may benefit from refreshed adoption guidance or defaults.");
+    remainingWork.push("Before continuing work, refresh the agent's SpM usage policy from the current doctor guidance so newer workflows are used intentionally instead of inherited from stale repo-local artifacts.");
     recommendedCommands.push(
       {
         command: "spm init",
-        reason: "Refresh adoption artifacts and any missing deterministic defaults with the newer installed CLI version.",
+        reason: "Refresh adoption artifacts, recorded tool version, and repo-local agent guidance with the newer installed CLI version.",
       },
       {
         command: "spm doctor",
-        reason: "Verify the repo again after the refresh and confirm whether any migration follow-up changed under the newer guidance.",
+        reason: "Verify the repo again after the refresh and confirm whether any migration follow-up or usage guidance changed under the newer CLI.",
+      },
+      {
+        command: "spm memory scopes",
+        reason: "Inspect the current session and org scope policy before assuming older note-management habits still match this repo's supported workflow.",
       },
     );
   }
@@ -244,6 +277,8 @@ export function buildAdoptionGuidance(input: {
             : "This repo is fresh to Spec Embryo and now needs its first real spec/task/current-state content.",
     spmOrientation,
     agentOrientation,
+    memoryWorkflow,
+    capabilityRefresh,
     whatFound,
     whatChanged,
     remainingWork,
@@ -269,6 +304,17 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Agent orientation:",
     ...guidance.agentOrientation.map((item) => `- ${item}`),
+    "",
+    "Current memory workflow:",
+    ...guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
+    "",
+    "Capability refresh:",
+    ...(guidance.capabilityRefresh.required
+      ? [
+          `- ${guidance.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
+          ...guidance.capabilityRefresh.actions.map((item) => `- ${item}`),
+        ]
+      : ["- No version-driven capability refresh is currently required."]),
     "",
     "What was found:",
     ...guidance.whatFound.map((item) => `- ${item}`),
@@ -320,7 +366,9 @@ function partialAdoptionChecklines(adoption: AdoptionInspection): string[] {
 function upgradeFlowLines(): string[] {
   return [
     "If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.",
+    "Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work, because repo-local guidance may lag the installed CLI.",
     "Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.",
+    "After the refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.",
     "Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.",
     "If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.",
   ];
@@ -331,6 +379,15 @@ function doctorModeLines(): string[] {
     "Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.",
     "Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.",
     "Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.",
+  ];
+}
+
+function memoryWorkflowLines(): string[] {
+  return [
+    "Use `spm memory note create` for fast session capture instead of hand-editing `.specpm/memory/...` note files.",
+    "Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.",
+    "Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.",
+    "Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.",
   ];
 }
 
@@ -353,6 +410,16 @@ function nexusInstallSteps(): string[] {
     "Ask the human whether to enable bounded Nexus coexistence for this repo.",
     "If approved, run `spm nexus setup --apply` instead of editing `.specpm/config.toml` and `AGENTS.md` by hand.",
     "Run `spm doctor` after apply, then run the recommended GitNexus indexing command if the external tool is installed.",
+  ];
+}
+
+function capabilityRefreshLines(): string[] {
+  return [
+    "The running CLI is newer than the repo's recorded `tool_version`, so repo-local AGENTS or adoption artifacts may lag the current SpM workflow.",
+    "Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work.",
+    "After refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.",
+    "Re-run `spm init` if you want repo-local adoption artifacts and the recorded tool version refreshed under the newer CLI.",
+    "Run `spm doctor` again after the refresh so the repo's guidance and health checks are confirmed under the newer version.",
   ];
 }
 
@@ -409,6 +476,10 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     ...tagGuidanceLines().map((line) => `- ${line}`),
     "",
+    "## Current Memory Workflow",
+    "",
+    ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
+    "",
     `## ${NEXUS_COEXISTENCE_HEADING}`,
     "",
     ...nexusCoexistenceLines().map((line) => `- ${line}`),
@@ -443,7 +514,9 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Adopting Newer SpM Guidance",
     "",
-    ...upgradeFlowLines().map((line, index) => `${index + 1}. ${line}`),
+    ...(input.guidance.capabilityRefresh.required
+      ? input.guidance.capabilityRefresh.actions.map((line, index) => `${index + 1}. ${line}`)
+      : upgradeFlowLines().map((line, index) => `${index + 1}. ${line}`)),
     "",
     "## First-Week Sequence",
     "",
@@ -477,6 +550,7 @@ export function renderDirectAgentBrief(input: {
     "How to work:",
     "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",
     ...doctorModeLines().map((line) => `- ${line}`),
+    ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",
@@ -496,7 +570,9 @@ export function renderDirectAgentBrief(input: {
     ...input.guidance.recommendedCommands.map((item) => `- ${item.command}`),
     "",
     "If doctor reports that the running CLI is newer than the repo's recorded tool version:",
-    ...upgradeFlowLines().map((line) => `- ${line}`),
+    ...(input.guidance.capabilityRefresh.required
+      ? input.guidance.capabilityRefresh.actions.map((line) => `- ${line}`)
+      : upgradeFlowLines().map((line) => `- ${line}`)),
     "",
     "Do not assume:",
     "- Do not replace or delete legacy project docs before preserving their intent in managed memory.",

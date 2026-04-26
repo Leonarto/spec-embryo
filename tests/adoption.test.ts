@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { parseArgs } from "../src/cli.ts";
@@ -51,6 +51,8 @@ describe("adoption guidance", () => {
     expect(guidance.overview).toContain("importable");
     expect(guidance.spmOrientation.whatSpmIs).toContain("local-first CLI");
     expect(guidance.spmOrientation.whenToUse.length).toBeGreaterThan(0);
+    expect(guidance.memoryWorkflow.preferredWorkflows.some((item) => item.includes("spm memory note create"))).toBe(true);
+    expect(guidance.capabilityRefresh.required).toBe(false);
     expect(guidance.recommendedCommands.some((item) => item.command.includes("spec import-prompt --source docs"))).toBe(true);
     expect(guidance.remainingWork.some((item) => item.includes("Legacy docs"))).toBe(true);
   });
@@ -156,7 +158,10 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Canonical Statuses");
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
-      expect(guide).toContain("Tag Guidance For Retrieval");
+    expect(guide).toContain("Tag Guidance For Retrieval");
+    expect(guide).toContain("Current Memory Workflow");
+    expect(guide).toContain("spm memory note create");
+    expect(guide).toContain("spm memory consolidate");
       expect(guide).toContain("Treat tags as retrieval handles");
       expect(guide).toContain("short, stable tags");
       expect(guide).toContain("normalize spaces, underscores, and hyphens");
@@ -171,6 +176,9 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Use `spm doctor` first for a cheap status");
     expect(brief).toContain("Use `spm doctor --verbose` only when");
     expect(brief).toContain("Use `spm doctor --json` when an agent needs structured findings");
+    expect(brief).toContain("spm memory note create");
+    expect(brief).toContain("spm memory scopes");
+    expect(brief).toContain("spm memory consolidate");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
@@ -199,8 +207,13 @@ describe("adoption guidance", () => {
     });
 
     expect(guidance.remainingWork.some((item) => item.includes("newer than the repo's recorded tool version"))).toBe(true);
+    expect(guidance.remainingWork.some((item) => item.includes("refresh the agent's SpM usage policy"))).toBe(true);
+    expect(guidance.capabilityRefresh.required).toBe(true);
+    expect(guidance.capabilityRefresh.reason).toContain("repo-local usage guidance may lag");
+    expect(guidance.capabilityRefresh.actions.some((item) => item.includes("Refresh your SpM usage policy"))).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm init")).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm doctor")).toBe(true);
+    expect(guidance.recommendedCommands.some((item) => item.command === "spm memory scopes")).toBe(true);
   });
 });
 
@@ -226,12 +239,57 @@ describe("init adoption artifacts", () => {
       expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
       expect(brief).toContain("Treat any SpM seed scaffold as migration backlog");
       expect(guide).toContain("Reading Doctor Efficiently");
+      expect(guide).toContain("Current Memory Workflow");
       expect(brief).toContain("Use `spm doctor` first for a cheap status");
+      expect(brief).toContain("spm memory note update`, `archive`, `restore`, and `list`");
       expect(guide).toContain("Tag Guidance For Retrieval");
       expect(brief).toContain("Treat tags as retrieval handles");
       expect(brief).toContain("Do not expect partial substring matches");
       expect(guide).toContain("Nexus Coexistence");
       expect(brief).toContain("Nexus is optional and external to Spec Embryo");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("refreshes config and adoption artifacts on upgraded adopted repos without force", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-init-refresh-"));
+
+    try {
+      const initialOutput = await runInitCommand(rootDir, parseArgs(["init", "--json"]));
+      const initial = JSON.parse(initialOutput) as {
+        migration_guide_file: string;
+        direct_agent_brief_file: string;
+      };
+
+      const configFile = join(rootDir, ".specpm", "config.toml");
+      const guideFile = join(rootDir, initial.migration_guide_file);
+      const briefFile = join(rootDir, initial.direct_agent_brief_file);
+
+      const configRaw = await readFile(configFile, "utf8");
+      await writeFile(configFile, configRaw.replace(/tool_version = ".*"/u, 'tool_version = "0.1.0"'), "utf8");
+      await writeFile(guideFile, "# stale migration guide\n", "utf8");
+      await writeFile(briefFile, "# stale brief\n", "utf8");
+
+      const output = await runInitCommand(rootDir, parseArgs(["init", "--json"]));
+      const parsed = JSON.parse(output) as {
+        refreshed: string[];
+        skipped: string[];
+      };
+
+      const refreshed = new Set(parsed.refreshed);
+      expect(refreshed.has(".specpm/config.toml")).toBe(true);
+      expect(refreshed.has(initial.migration_guide_file)).toBe(true);
+      expect(refreshed.has(initial.direct_agent_brief_file)).toBe(true);
+
+      const nextConfig = await readFile(configFile, "utf8");
+      const nextGuide = await readFile(guideFile, "utf8");
+      const nextBrief = await readFile(briefFile, "utf8");
+
+      expect(nextConfig).not.toContain('tool_version = "0.1.0"');
+      expect(nextGuide).toContain("Current Memory Workflow");
+      expect(nextBrief).toContain("Refresh your SpM usage policy");
+      expect(parsed.skipped.some((path) => path.endsWith("/current.md") || path === "spm/current.md")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-020"
 title = "Add first-class memory note capture and management flows"
 summary = "Let humans and agents create and manage scoped memory notes through deterministic CLI commands instead of editing files by hand."
-status = "active"
+status = "done"
 task_ids = ["TASK-073", "TASK-074"]
 tags = ["memory", "notes", "cli"]
 owner = "human-ai"
-updated_at = "2026-04-26T00:17:45.282Z"
+updated_at = "2026-04-26T00:46:22.987Z"
 +++
 
 # Problem

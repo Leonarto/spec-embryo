@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-020 is active. TASK-074 is in review after adding deterministic archive, restore, and list workflows for scoped memory notes."
-focus = "Review TASK-074 and, if it is clean, close SPEC-020 and choose the next roadmap slice."
-active_spec_ids = ["SPEC-020"]
-active_task_ids = ["TASK-074"]
+summary = "SPEC-021 is active. TASK-075 is in review after teaching doctor and adoption guidance to surface the current memory workflow and require capability refresh on SpM upgrades."
+focus = "Review TASK-075 and, if it is clean, close SPEC-021."
+active_spec_ids = ["SPEC-021"]
+active_task_ids = ["TASK-075"]
 blocked_task_ids = []
-next_action_hints = ["Run review on TASK-074 before closing SPEC-020.", "If review is clean, mark TASK-074 done and then close SPEC-020.", "Keep the memory note lifecycle aligned with scope write-policy, retrieval, consolidation, and eval invariants."]
+next_action_hints = ["Run review on TASK-075 before closing SPEC-021.", "If review is clean, mark TASK-075 done and then close SPEC-021.", "Keep doctor, init artifacts, JSON guidance, and direct agent briefs aligned."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T00:39:50.000Z"
+updated_at = "2026-04-26T00:53:02.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The repo is currently closing out SPEC-020, which turns scoped `memory-note` documents into a first-class CLI workflow instead of a file format that only power users can edit by hand. TASK-073 landed deterministic note creation and update flows, and TASK-074 now adds archive, restore, and note-centric listing so the lightweight scoped-memory layer can be managed end to end without raw file edits.
+The repo is now working on SPEC-021, which closes the gap between "a newer SpM version exists" and "agents actually refresh how they use SpM under that newer version." The immediate slice is TASK-075: doctor, init adoption artifacts, and the direct agent brief need to teach the current scoped-memory workflow explicitly and tell upgraded agents to refresh their usage policy when the installed CLI is newer than the repo's recorded tool version.
 
 ## Notes
 
@@ -33,4 +33,4 @@ The repo is currently closing out SPEC-020, which turns scoped `memory-note` doc
 - New substantive specs should follow the explicit draft -> user iteration -> review -> fix loop.
 - The repo should increasingly manage itself through `docs/spm/` and `spm` commands instead of ad hoc memory.
 - Managed document creation now relies on a shared repository lock; future create flows should preserve that invariant instead of adding unsynchronized ID allocation paths.
-- The scoped memory-note lifecycle now includes create, update, archive, restore, and list flows; consolidation remains the explicit promotion path from session notes into durable repo memory.
+- Scoped memory now has a first-class note lifecycle, so adoption and doctor guidance should steer agents toward `spm memory note`, `spm memory scopes`, and `spm memory consolidate` instead of raw scoped note-file edits.

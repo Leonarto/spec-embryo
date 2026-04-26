@@ -418,7 +418,7 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
       "tool-upgrade-available",
       `This repo was last initialized or reshaped with Spec Embryo ${config.toolVersion}, but the running CLI is ${CLI_VERSION}.`,
       configFile,
-      "Re-run `spm doctor` or `spm init` after reviewing the release changes if you want this repo to adopt the newer guidance and defaults.",
+      "Refresh your SpM usage policy from `spm doctor --verbose` or `spm doctor --json`, then re-run `spm init` if you want this repo to adopt the newer guidance, agent brief, and defaults.",
     );
   }
 
@@ -632,6 +632,11 @@ export function renderDoctorReport(report: DoctorReport, options: DoctorRenderOp
       "Run `spm doctor --verbose` for the full adoption guide and direct agent brief.",
       "Use `spm doctor --json` when an agent only needs structured findings and metadata.",
     );
+    if (report.versions.updateAvailable) {
+      lines.push(
+        "The running CLI is newer than this repo's recorded tool version; use those richer doctor modes to refresh capability guidance before continuing work.",
+      );
+    }
     return lines.join("\n");
   }
 
@@ -652,6 +657,17 @@ export function renderDoctorReport(report: DoctorReport, options: DoctorRenderOp
     "",
     "Agent orientation:",
     ...report.guidance.agentOrientation.map((item) => `- ${item}`),
+    "",
+    "Current memory workflow:",
+    ...report.guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
+    "",
+    "Capability refresh:",
+    ...(report.guidance.capabilityRefresh.required
+      ? [
+          `- ${report.guidance.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
+          ...report.guidance.capabilityRefresh.actions.map((item) => `- ${item}`),
+        ]
+      : ["- No version-driven capability refresh is currently required."]),
     "",
     "What was found:",
     ...report.guidance.whatFound.map((item) => `- ${item}`),

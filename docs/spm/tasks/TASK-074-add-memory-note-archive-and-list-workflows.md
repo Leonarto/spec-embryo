@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-074"
 title = "Add memory note archive and list workflows"
 summary = "Support deterministic archiving and note-centric inspection flows so captured memory can be managed without raw file edits."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-020"]
 depends_on = ["TASK-073"]
 blocked_by = []
 priority = 2
 owner_role = "builder"
 created_at = "2026-04-26T00:17:45.282Z"
+completed_at = "2026-04-26T00:46:22.953Z"
 tags = ["memory", "notes", "workflow"]
-updated_at = "2026-04-26T00:39:12.030Z"
+updated_at = "2026-04-26T00:46:22.953Z"
 +++
 
 # Scope

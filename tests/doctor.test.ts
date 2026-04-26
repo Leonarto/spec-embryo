@@ -107,6 +107,11 @@ describe("doctor service", () => {
       expect(report.versions.projectToolVersion).toBe("0.1.0");
       expect(report.versions.updateAvailable).toBe(true);
       expect(report.findings.some((finding) => finding.code === "tool-upgrade-available")).toBe(true);
+      expect(report.findings.find((finding) => finding.code === "tool-upgrade-available")?.hint).toContain("Refresh your SpM usage policy");
+      expect(report.guidance.capabilityRefresh.required).toBe(true);
+      expect(report.guidance.capabilityRefresh.actions.some((item) => item.includes("spm doctor --verbose"))).toBe(true);
+      expect(report.directAgentBrief).toContain("spm memory note create");
+      expect(report.directAgentBrief).toContain("Refresh your SpM usage policy");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -148,6 +153,9 @@ describe("doctor service", () => {
       expect(concise).not.toContain("Direct agent brief (copy this to the current coding agent):");
 
       expect(verbose).toContain("Adoption summary:");
+      expect(verbose).toContain("Current memory workflow:");
+      expect(verbose).toContain("Capability refresh:");
+      expect(verbose).toContain("spm memory note create");
       expect(verbose).toContain("Direct agent brief (copy this to the current coding agent):");
     } finally {
       await rm(rootDir, { recursive: true, force: true });

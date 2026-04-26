@@ -15,6 +15,10 @@ How to work:
 - Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.
 - Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.
 - Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.
+- Use `spm memory note create` for fast session capture instead of hand-editing `.specpm/memory/...` note files.
+- Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.
+- Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
+- Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
 - Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.
 - Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.
 - Update AGENTS files and local skills when adoption changes how future agents should work in this repo.
@@ -41,7 +45,9 @@ Deterministic commands to prefer:
 
 If doctor reports that the running CLI is newer than the repo's recorded tool version:
 - If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.
+- Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work, because repo-local guidance may lag the installed CLI.
 - Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
+- After the refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.
 - Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
 - If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
 

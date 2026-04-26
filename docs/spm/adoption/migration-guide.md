@@ -1,6 +1,6 @@
 # Spec Embryo Migration Guide
 
-This guide explains how to adopt Spec Embryo into **spec-embryo** without confusing the adoption scaffold for the repository's real product roadmap.
+This guide explains how to adopt Spec Embryo into **spec-pm** without confusing the adoption scaffold for the repository's real product roadmap.
 
 ## What SpM Is
 
@@ -53,6 +53,13 @@ This guide explains how to adopt Spec Embryo into **spec-embryo** without confus
 - Avoid unnecessary synonym drift when a repo already has a clear topical label; reuse the existing tag instead of inventing a near-duplicate.
 - Do not use tags as a replacement for canonical statuses, links, or dependencies.
 
+## Current Memory Workflow
+
+- Use `spm memory note create` for fast session capture instead of hand-editing `.specpm/memory/...` note files.
+- Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.
+- Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
+- Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
+
 ## Nexus Coexistence
 
 - Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.
@@ -87,9 +94,11 @@ This guide explains how to adopt Spec Embryo into **spec-embryo** without confus
 ## Adopting Newer SpM Guidance
 
 1. If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.
-2. Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
-3. Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
-4. If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
+2. Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work, because repo-local guidance may lag the installed CLI.
+3. Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
+4. After the refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.
+5. Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
+6. If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
 
 ## First-Week Sequence
 

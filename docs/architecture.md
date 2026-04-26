@@ -32,7 +32,7 @@ The repo is the source of truth. V1 uses:
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
-When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide and direct brief. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
+When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide, current memory-workflow guidance, version-aware capability refresh guidance, and direct brief. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
 
 ## Domain model
 
