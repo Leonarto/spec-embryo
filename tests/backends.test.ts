@@ -73,6 +73,9 @@ describe("deterministic backend", () => {
       const currentFile = join(fixture.rootDir, "docs/spm/current.md");
       const raw = await readFile(currentFile, "utf8");
       await Bun.write(currentFile, `${raw}\ntracked change\n`);
+      const configFile = join(fixture.rootDir, ".specpm/config.toml");
+      const configRaw = await readFile(configFile, "utf8");
+      await Bun.write(configFile, `${configRaw}\n`);
 
       const projectContext = await loadProjectContext(fixture.rootDir);
       const backend = resolveResumeBackend("deterministic", projectContext.config);
@@ -82,6 +85,9 @@ describe("deterministic backend", () => {
       });
 
       expect(result.text).toContain("[current-state] M CURRENT: Current Project State (docs/spm/current.md)");
+      expect(result.text.indexOf("[current-state] M CURRENT: Current Project State (docs/spm/current.md)")).toBeLessThan(
+        result.text.indexOf("[other] M .specpm/config.toml"),
+      );
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }

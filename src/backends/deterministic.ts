@@ -1,5 +1,5 @@
 import type { ResumeContext } from "../domain.ts";
-import { formatChangedItemSummary } from "../engine.ts";
+import { formatChangedItemSummary, orderChangedItemsForHumanSummary } from "../engine.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
 
 function section(title: string, lines: string[]): string {
@@ -90,7 +90,7 @@ export class DeterministicBackend implements ResumeBackend {
       sections.push(
         section(
           "Changed Items",
-          context.changedItems.slice(0, 10).map((item) => `[${item.kind}] ${formatChangedItemSummary(item)}`),
+          orderChangedItemsForHumanSummary(context.changedItems).slice(0, 10).map((item) => `[${item.kind}] ${formatChangedItemSummary(item)}`),
         ),
       );
     }

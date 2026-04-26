@@ -1,5 +1,5 @@
 import type { MemoryScopeName, ProjectContext, ResumeContext } from "../domain.ts";
-import { formatChangedItemSummary } from "../engine.ts";
+import { formatChangedItemSummary, orderChangedItemsForHumanSummary } from "../engine.ts";
 import {
   buildMemoryBriefBundle,
   type MemoryBriefEvidence,
@@ -283,6 +283,7 @@ function toChangedItemSummary(item: ResumeContext["changedItems"][number]): stri
 }
 
 export function buildResumeContextPack(context: ResumeContext): ContextPackBundle {
+  const humanChangedItems = orderChangedItemsForHumanSummary(context.changedItems);
   const mustReadNow: ContextPackItem[] = [
     {
       kind: "focus",
@@ -345,7 +346,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
       summary: `Priority: p${entry.task.priority}.`,
       reason: "Ready tasks are useful expansion material if the current slice is finished or blocked.",
     })),
-    ...context.changedItems.slice(0, 3).map((item) => ({
+    ...humanChangedItems.slice(0, 3).map((item) => ({
       kind: "changed-item" as const,
       ref: item.path,
       scope: "repo",
@@ -373,7 +374,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
       scope: "repo",
       note: `Additional ready task kept out of the active pack: ${entry.task.title}`,
     })),
-    ...context.changedItems.slice(3).map((item) => ({
+    ...humanChangedItems.slice(3).map((item) => ({
       kind: "inspect-change" as const,
       ref: item.path,
       scope: "repo",

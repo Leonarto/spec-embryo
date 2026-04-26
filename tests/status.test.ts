@@ -35,12 +35,17 @@ describe("status command", () => {
       const currentFile = join(rootDir, "docs/spm/current.md");
       const currentRaw = await readFile(currentFile, "utf8");
       await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
-      await writeFile(join(rootDir, "README.md"), "# scratch\n", "utf8");
+      const configFile = join(rootDir, ".specpm/config.toml");
+      const configRaw = await readFile(configFile, "utf8");
+      await writeFile(configFile, `${configRaw}\n`, "utf8");
 
       const output = await runStatusCommand(rootDir, parseArgs(["status"]));
 
       expect(output).toContain("[current-state] M CURRENT: Current Project State (docs/spm/current.md)");
-      expect(output).toContain("[other] ?? README.md");
+      expect(output).toContain("[other] M .specpm/config.toml");
+      expect(output.indexOf("[current-state] M CURRENT: Current Project State (docs/spm/current.md)")).toBeLessThan(
+        output.indexOf("[other] M .specpm/config.toml"),
+      );
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -60,6 +65,9 @@ describe("status command", () => {
       const currentFile = join(rootDir, "docs/spm/current.md");
       const currentRaw = await readFile(currentFile, "utf8");
       await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
+      const configFile = join(rootDir, ".specpm/config.toml");
+      const configRaw = await readFile(configFile, "utf8");
+      await writeFile(configFile, `${configRaw}\n`, "utf8");
 
       const output = await runStatusCommand(rootDir, parseArgs(["status", "--json"]));
       const payload = JSON.parse(output) as {
@@ -76,6 +84,8 @@ describe("status command", () => {
           }),
         ]),
       );
+      expect(payload.changed_items[0]?.kind).toBe("other");
+      expect(payload.changed_items[0]?.path).toBe(".specpm/config.toml");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

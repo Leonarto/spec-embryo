@@ -150,6 +150,21 @@ export function formatChangedItemSummary(item: ChangedItemSummary): string {
   return `${item.changeHint} ${identity} (${item.path})`;
 }
 
+export function orderChangedItemsForHumanSummary(items: ChangedItemSummary[]): ChangedItemSummary[] {
+  const managed: ChangedItemSummary[] = [];
+  const unmanaged: ChangedItemSummary[] = [];
+
+  for (const item of items) {
+    if (item.kind === "other") {
+      unmanaged.push(item);
+    } else {
+      managed.push(item);
+    }
+  }
+
+  return [...managed, ...unmanaged];
+}
+
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {
   return new Map(tasks.map((task) => [task.id, task]));
 }

@@ -116,12 +116,17 @@ Use this note for the current local flow.
       const currentFile = join(rootDir, "docs/spm/current.md");
       const currentRaw = await readFile(currentFile, "utf8");
       await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
+      const configFile = join(rootDir, ".specpm/config.toml");
+      const configRaw = await readFile(configFile, "utf8");
+      await writeFile(configFile, `${configRaw}\n`, "utf8");
 
       const projectContext = await loadProjectContext(rootDir);
       const pack = buildResumeContextPack(buildResumeContext(projectContext));
-      const changedItem = pack.supporting.find((item) => item.kind === "changed-item" && item.ref === "docs/spm/current.md");
+      const changedItems = pack.supporting.filter((item) => item.kind === "changed-item");
+      const changedItem = changedItems.find((item) => item.ref === "docs/spm/current.md");
 
       expect(changedItem?.summary).toBe("M CURRENT: Current Project State (docs/spm/current.md)");
+      expect(changedItems[0]?.ref).toBe("docs/spm/current.md");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
