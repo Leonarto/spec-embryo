@@ -148,7 +148,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Bun + TypeScript CLI with small, typed modules
 - Markdown + TOML frontmatter document model
 - Deterministic parsing and validation
-- Git-aware status and resume summaries, including deterministic changed-item derivation with shared identity, path, and compact change-type hints
+- Git-aware status and resume summaries, including deterministic changed-item derivation with shared identity/path human summaries plus compact raw status codes for structured consumers
 - Task dependency graph and simple critical path derivation
 - Local SvelteKit workspace launched through `spm ui`
 - Workspace views for overview dashboard, task Kanban, Specs, and a compact grouped Gantt timeline

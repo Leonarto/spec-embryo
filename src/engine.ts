@@ -101,7 +101,12 @@ function normalizeGitChangeHint(rawStatus: string): string {
   return compact[0] || "M";
 }
 
-function parseGitStatusRecord(line: string): { path: string; changeHint: string } | undefined {
+function compactGitStatusCode(rawStatus: string): string {
+  const compact = rawStatus.replace(/\s+/g, "");
+  return compact.length > 0 ? compact : rawStatus.trim() || "M";
+}
+
+function parseGitStatusRecord(line: string): { path: string; changeHint: string; statusCode: string } | undefined {
   if (line.length < 2) {
     return undefined;
   }
@@ -132,6 +137,7 @@ function parseGitStatusRecord(line: string): { path: string; changeHint: string 
   return {
     path,
     changeHint: normalizeGitChangeHint(rawStatus),
+    statusCode: compactGitStatusCode(rawStatus),
   };
 }
 
@@ -186,13 +192,13 @@ export function deriveChangedItems(context: ProjectContext): ChangedItemSummary[
 
     const spec = specByPath.get(record.path);
     if (spec) {
-      items.push({ kind: "spec", changeHint: record.changeHint, path: record.path, id: spec.id, title: spec.title });
+      items.push({ kind: "spec", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path, id: spec.id, title: spec.title });
       continue;
     }
 
     const task = taskByPath.get(record.path);
     if (task) {
-      items.push({ kind: "task", changeHint: record.changeHint, path: record.path, id: task.id, title: task.title });
+      items.push({ kind: "task", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path, id: task.id, title: task.title });
       continue;
     }
 
@@ -200,6 +206,7 @@ export function deriveChangedItems(context: ProjectContext): ChangedItemSummary[
       items.push({
         kind: "current-state",
         changeHint: record.changeHint,
+        statusCode: record.statusCode,
         path: record.path,
         id: context.currentState.id,
         title: context.currentState.title,
@@ -209,11 +216,11 @@ export function deriveChangedItems(context: ProjectContext): ChangedItemSummary[
 
     const handoff = handoffByPath.get(record.path);
     if (handoff) {
-      items.push({ kind: "handoff", changeHint: record.changeHint, path: record.path, id: handoff.id, title: handoff.title });
+      items.push({ kind: "handoff", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path, id: handoff.id, title: handoff.title });
       continue;
     }
 
-    items.push({ kind: "other", changeHint: record.changeHint, path: record.path });
+    items.push({ kind: "other", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path });
   }
 
   return items;

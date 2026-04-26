@@ -45,4 +45,39 @@ describe("status command", () => {
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("includes compact raw git status codes in structured changed-item output", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-status-"));
+
+    try {
+      await initializeProject(rootDir);
+      runGit(rootDir, ["init"]);
+      runGit(rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(rootDir, ["add", "."]);
+      runGit(rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(rootDir, "docs/spm/current.md");
+      const currentRaw = await readFile(currentFile, "utf8");
+      await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
+
+      const output = await runStatusCommand(rootDir, parseArgs(["status", "--json"]));
+      const payload = JSON.parse(output) as {
+        changed_items: Array<{ kind: string; path: string; changeHint: string; statusCode: string }>;
+      };
+
+      expect(payload.changed_items).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            kind: "current-state",
+            path: "docs/spm/current.md",
+            changeHint: "M",
+            statusCode: "M",
+          }),
+        ]),
+      );
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });

@@ -158,6 +158,7 @@ export interface GitSnapshot {
 export interface ChangedItemSummary {
   kind: "spec" | "task" | "current-state" | "handoff" | "other";
   changeHint: string;
+  statusCode: string;
   path: string;
   id?: string;
   title?: string;
