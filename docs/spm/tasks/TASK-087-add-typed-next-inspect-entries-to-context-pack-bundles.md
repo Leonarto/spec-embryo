@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-087"
 title = "Add typed next-inspect entries to context-pack bundles"
 summary = "Expose a typed next-inspect trail in context-pack bundles while preserving the legacy flat nextInspectIds list."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-033"]
 depends_on = []
 blocked_by = []
 priority = 2
 owner_role = "builder"
 created_at = "2026-04-26T05:25:00.000Z"
+completed_at = "2026-04-26T18:09:32.433Z"
 tags = ["context", "resume", "prompt", "ux"]
-updated_at = "2026-04-26T05:25:00.000Z"
+updated_at = "2026-04-26T18:09:32.433Z"
 +++
 
 # Scope

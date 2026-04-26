@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-033 is active. TASK-087 is in review after adding typed next-inspect entries to context-pack bundles while preserving legacy nextInspectIds."
-focus = "Review TASK-087 and keep typed context-pack expansion trails aligned with legacy nextInspectIds."
-active_spec_ids = ["SPEC-033"]
-active_task_ids = ["TASK-087"]
+summary = "All current managed implementation slices are complete; the repo is being prepared for the 0.2.0 npm publish."
+focus = "Prepare 0.2.0 release"
+active_spec_ids = []
+active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Review TASK-087 before moving it to done.", "Keep typed nextInspect entries and legacy nextInspectIds aligned across memory and resume context packs.", "If review is clean, mark TASK-087 done and then close SPEC-033."]
+next_action_hints = ["Bump package version to 0.2.0.", "Run deterministic release checks plus bun publish --dry-run --access public.", "After the dry run passes, execute bun publish --access public."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-26T05:25:00.000Z"
+updated_at = "2026-04-26T18:09:42.804Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

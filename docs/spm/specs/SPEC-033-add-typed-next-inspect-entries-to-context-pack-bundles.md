@@ -3,11 +3,11 @@ doc_kind = "spec"
 id = "SPEC-033"
 title = "Add typed next-inspect entries to context-pack bundles"
 summary = "Expose typed next-inspect entries in context-pack bundles so prompt-return consumers can tell managed document refs from changed-file paths while preserving the legacy flat id list."
-status = "active"
+status = "done"
 task_ids = ["TASK-087"]
 tags = ["context", "resume", "prompt", "ux"]
 owner = "human-ai"
-updated_at = "2026-04-26T05:25:00.000Z"
+updated_at = "2026-04-26T18:09:37.563Z"
 +++
 
 # Problem
