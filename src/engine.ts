@@ -165,6 +165,21 @@ export function orderChangedItemsForHumanSummary(items: ChangedItemSummary[]): C
   return [...managed, ...unmanaged];
 }
 
+export function humanChangedItemSummarySlice(
+  items: ChangedItemSummary[],
+  limit = 10,
+): {
+  visibleItems: ChangedItemSummary[];
+  omittedCount: number;
+} {
+  const orderedItems = orderChangedItemsForHumanSummary(items);
+  const visibleItems = orderedItems.slice(0, limit);
+  return {
+    visibleItems,
+    omittedCount: Math.max(orderedItems.length - visibleItems.length, 0),
+  };
+}
+
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {
   return new Map(tasks.map((task) => [task.id, task]));
 }

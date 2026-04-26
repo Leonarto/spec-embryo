@@ -90,4 +90,36 @@ describe("status command", () => {
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("notes when additional changed files were omitted from human output", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-status-"));
+
+    try {
+      await initializeProject(rootDir);
+      runGit(rootDir, ["init"]);
+      runGit(rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(rootDir, ["add", "."]);
+      runGit(rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(rootDir, "docs/spm/current.md");
+      const currentRaw = await readFile(currentFile, "utf8");
+      await writeFile(currentFile, `${currentRaw}\ntracked change\n`, "utf8");
+
+      for (let index = 1; index <= 11; index += 1) {
+        await writeFile(join(rootDir, `scratch-${index}.md`), `# scratch ${index}\n`, "utf8");
+      }
+
+      const output = await runStatusCommand(rootDir, parseArgs(["status"]));
+      expect(output).toContain("... and 2 more changed files.");
+
+      const json = await runStatusCommand(rootDir, parseArgs(["status", "--json"]));
+      const payload = JSON.parse(json) as {
+        changed_items: Array<{ path: string }>;
+      };
+      expect(payload.changed_items).toHaveLength(12);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });

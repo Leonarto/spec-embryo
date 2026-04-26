@@ -92,6 +92,37 @@ describe("deterministic backend", () => {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }
   });
+
+  test("notes omitted changed files when the human summary is truncated", async () => {
+    const fixture = await createResumeFixture();
+
+    try {
+      runGit(fixture.rootDir, ["init"]);
+      runGit(fixture.rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(fixture.rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(fixture.rootDir, ["add", "."]);
+      runGit(fixture.rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(fixture.rootDir, "docs/spm/current.md");
+      const raw = await readFile(currentFile, "utf8");
+      await Bun.write(currentFile, `${raw}\ntracked change\n`);
+
+      for (let index = 1; index <= 11; index += 1) {
+        await Bun.write(join(fixture.rootDir, `scratch-${index}.md`), `# scratch ${index}\n`);
+      }
+
+      const projectContext = await loadProjectContext(fixture.rootDir);
+      const backend = resolveResumeBackend("deterministic", projectContext.config);
+      const result = await backend.run(buildResumeContext(projectContext), {
+        rootDir: fixture.rootDir,
+        config: projectContext.config,
+      });
+
+      expect(result.text).toContain("... and 2 more changed files.");
+    } finally {
+      await rm(fixture.rootDir, { recursive: true, force: true });
+    }
+  });
 });
 
 describe("subprocess backends", () => {

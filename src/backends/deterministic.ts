@@ -1,5 +1,5 @@
 import type { ResumeContext } from "../domain.ts";
-import { formatChangedItemSummary, orderChangedItemsForHumanSummary } from "../engine.ts";
+import { formatChangedItemSummary, humanChangedItemSummarySlice } from "../engine.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
 
 function section(title: string, lines: string[]): string {
@@ -87,10 +87,16 @@ export class DeterministicBackend implements ResumeBackend {
     }
 
     if (context.changedItems.length > 0) {
+      const changedItems = humanChangedItemSummarySlice(context.changedItems, 10);
       sections.push(
         section(
           "Changed Items",
-          orderChangedItemsForHumanSummary(context.changedItems).slice(0, 10).map((item) => `[${item.kind}] ${formatChangedItemSummary(item)}`),
+          [
+            ...changedItems.visibleItems.map((item) => `[${item.kind}] ${formatChangedItemSummary(item)}`),
+            ...(changedItems.omittedCount > 0
+              ? [`... and ${changedItems.omittedCount} more changed file${changedItems.omittedCount === 1 ? "" : "s"}.`]
+              : []),
+          ],
         ),
       );
     }
