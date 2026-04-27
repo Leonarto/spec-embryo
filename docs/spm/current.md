@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-092 is in review after teaching doctor, agent brief, and adoption artifacts to point at spm agent snippet as the narrow bounded-AGENTS path."
-focus = "Teach adoption surfaces to point at the direct agent snippet command"
-active_spec_ids = ["SPEC-036"]
-active_task_ids = ["TASK-092"]
+summary = "SPEC-037 is complete after making concise doctor output point callers at spm agent snippet; the next adoption discoverability slice is ready to be chosen."
+focus = "Choose the next adoption discoverability slice"
+active_spec_ids = []
+active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Review TASK-092 and confirm the new snippet-command hint stays shared across adoption surfaces.", "Verify doctor, migration guide, direct agent brief, and agent brief all point to spm agent snippet consistently.", "If review passes, close SPEC-036 and choose the next product slice."]
+next_action_hints = ["Pick the next adoption discoverability improvement from the agent-facing command surfaces.", "Prefer another small shared-wording slice instead of opening a new workflow branch.", "Keep doctor, agent brief, and agent snippet discoverable without duplicating instruction layers."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T02:22:58.868Z"
+updated_at = "2026-04-27T14:45:12.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The `0.2.0` memory and context work is complete, and SPEC-034 has now pushed that adoption story further: upgraded and newly-adopted agents get one shared workflow loop plus a bounded external `AGENTS.md` snippet that points them toward `spm status`, `docs/spm/current.md`, and `spm memory pack` only when it is warranted. TASK-090 is now at review after wiring that snippet through the same deterministic adoption guidance used by `doctor`, `init`, generated migration artifacts, and `spm agent brief`.
+SPEC-037 is now complete: concise `spm doctor` output points at `spm agent snippet` using the same shared adoption wording already used by the broader guides and briefs. That closes the narrow bounded-guidance discoverability gap. The repo is ready to open the next adjacent adoption slice, ideally another small command-discoverability improvement that reuses shared wording instead of expanding the workflow surface.
 
 ## Notes
 

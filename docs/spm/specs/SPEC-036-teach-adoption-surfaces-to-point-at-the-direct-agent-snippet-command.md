@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-036"
 title = "Teach adoption surfaces to point at the direct agent snippet command"
 summary = "Make doctor, agent brief, and adoption artifacts explicitly mention the direct snippet command when callers want only bounded AGENTS guidance."
-status = "active"
+status = "done"
 task_ids = ["TASK-092"]
 tags = ["adoption", "agents", "external-repos"]
-updated_at = "2026-04-27T02:19:46.257Z"
+updated_at = "2026-04-27T03:06:40.520Z"
 +++
 
 # Problem

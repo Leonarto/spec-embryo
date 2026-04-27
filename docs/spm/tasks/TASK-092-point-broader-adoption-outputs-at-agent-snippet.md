@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-092"
 title = "Point broader adoption outputs at agent snippet"
 summary = "Reference spm agent snippet from doctor and agent brief surfaces when users only need the bounded AGENTS guidance."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-036"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-27T02:19:46.257Z"
+completed_at = "2026-04-27T03:06:40.477Z"
 tags = []
-updated_at = "2026-04-27T02:22:58.760Z"
+updated_at = "2026-04-27T03:06:40.477Z"
 +++
 
 # Scope
