@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-040 is complete after separating direct command discoverability from snippet guidance; the next adoption data-structure slice is ready to be chosen."
-focus = "Choose the next adoption data-structure slice"
+summary = "Release prep for 0.3.0 is in progress after the adoption-guidance improvements that shipped since 0.2.0."
+focus = "Prepare the 0.3.0 release"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pick the next adjacent adoption slice from the shared agent-facing guidance surfaces.", "Prefer promoting the new direct-command structure into reusable structured data rather than adding more wording variants.", "Keep snippet content, direct command guidance, and JSON guidance aligned."]
+next_action_hints = ["Finish deterministic release verification before handing the publish command to the human.", "Publish 0.3.0 after the dry run is clean and the release-prep commit is in place.", "Resume the next adoption data-structure slice after the release is out."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T19:51:00.000Z"
+updated_at = "2026-04-27T21:05:00.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-SPEC-040 is now complete: the broader adoption and agent-facing outputs separate direct command discoverability from snippet-only guidance, which makes the long-form surfaces easier to scan without changing the actual command contract. The next adjacent slice should focus on structured reuse of that split, so JSON and typed consumers can benefit from the same separation instead of relying on render-only section layout.
+Release prep for 0.3.0 is underway. The work since 0.2.0 materially improved agent adoption and context orchestration surfaces: `spm agent brief`, `spm agent snippet`, shared adoption guidance across `doctor`/`init`, scoped memory-note workflows, context packs, and stronger changed-item reporting are all in the published release scope. The current tree intentionally pauses before the next adoption data-structure slice so the release can ship from a clean committed checkpoint.
 
 ## Notes
 

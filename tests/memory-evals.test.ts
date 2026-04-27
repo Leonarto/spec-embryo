@@ -10,11 +10,11 @@ import { buildMemoryQueryBundle } from "../src/services/memory-query.ts";
 const repoRoot = join(import.meta.dir, "..");
 
 describe("agent-style memory retrieval evals", () => {
-  test("adoption queries prefer the parent spec as the conceptual anchor", async () => {
+  test("adoption queries prefer the strongest current adoption spec anchor", async () => {
     const context = await loadProjectContext(repoRoot);
     const bundle = buildMemoryQueryBundle(context, { text: "adoption", limit: 10 });
 
-    expect(bundle.results[0]?.id).toBe("SPEC-010");
+    expect(bundle.results[0]?.id).toBe("SPEC-036");
     expect(bundle.results[0]?.matchReasons).toContain("spec anchor");
     expect(bundle.results.some((item) => item.id === "TASK-040")).toBe(true);
   });
@@ -28,16 +28,16 @@ describe("agent-style memory retrieval evals", () => {
     expect(bundle.results.some((item) => item.id === "TASK-047")).toBe(true);
   });
 
-  test("migration briefs preserve ranked spec matches and explain why they were selected", async () => {
+  test("migration briefs preserve ranked adoption spec matches and explain why they were selected", async () => {
     const context = await loadProjectContext(repoRoot);
     const bundle = buildMemoryBriefBundle(context, {
       text: "adoption",
       profile: "migration",
     });
 
-    expect(bundle.matches?.[0]?.id).toBe("SPEC-010");
+    expect(bundle.matches?.[0]?.id).toBe("SPEC-036");
     expect(bundle.matches?.[0]?.matchReasons).toContain("spec anchor");
-    expect(bundle.nextInspectIds).toContain("SPEC-010");
+    expect(bundle.nextInspectIds).toContain("SPEC-036");
   });
 });
 
