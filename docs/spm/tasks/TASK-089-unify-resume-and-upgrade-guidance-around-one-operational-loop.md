@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-089"
 title = "Unify resume and upgrade guidance around one operational loop"
 summary = "Teach doctor, init, and generated adoption artifacts to converge on one short repeatable SpM usage loop instead of scattering the guidance across multiple surfaces."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-034"]
 depends_on = ["TASK-088"]
 blocked_by = []
 priority = 1
 created_at = "2026-04-26T23:34:52.549Z"
+completed_at = "2026-04-27T00:51:39.613Z"
 tags = ["adoption", "doctor", "resume"]
-updated_at = "2026-04-27T00:29:56.294Z"
+updated_at = "2026-04-27T00:51:39.613Z"
 +++
 
 # Scope

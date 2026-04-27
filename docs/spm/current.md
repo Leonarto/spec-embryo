@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-089 is in review after unifying doctor, init, and adoption artifacts around the same short SpM workflow loop."
+summary = "TASK-090 is defining the bounded external AGENTS snippet that reuses the shared SpM workflow loop without taking over host repo instructions."
 focus = "Define the next adoption slice after 0.2.0"
 active_spec_ids = ["SPEC-034"]
-active_task_ids = ["TASK-089"]
+active_task_ids = ["TASK-090"]
 blocked_task_ids = []
-next_action_hints = ["Review TASK-089 and confirm the shared workflow loop is consistent across doctor, init, and adoption artifacts.", "If review passes, move to TASK-090 to add the bounded external AGENTS snippet.", "Keep the shared loop concise enough that future adoption surfaces can reuse it without bloat."]
+next_action_hints = ["Define a short external AGENTS snippet around spm status, current.md, and conditional memory pack usage.", "Render the snippet from shared adoption guidance instead of hard-coding parallel wording.", "Keep the snippet optional and bounded so it coexists with host repo guidance."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T00:29:56.360Z"
+updated_at = "2026-04-27T00:51:39.615Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

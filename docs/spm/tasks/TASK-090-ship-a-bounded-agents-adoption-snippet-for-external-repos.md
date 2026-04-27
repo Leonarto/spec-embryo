@@ -3,14 +3,14 @@ doc_kind = "task"
 id = "TASK-090"
 title = "Ship a bounded AGENTS adoption snippet for external repos"
 summary = "Provide a short deterministic AGENTS snippet that makes upgraded agents check the right SpM surfaces before multi-step or resume-heavy work."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-034"]
 depends_on = ["TASK-088", "TASK-089"]
 blocked_by = []
 priority = 2
 created_at = "2026-04-26T23:34:52.642Z"
 tags = ["adoption", "agents", "external-repos"]
-updated_at = "2026-04-26T23:38:04.000Z"
+updated_at = "2026-04-27T00:51:39.615Z"
 +++
 
 # Scope
