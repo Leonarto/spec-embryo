@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-089 is aligning doctor, init, and adoption artifacts around the same short SpM workflow loop introduced by agent brief."
+summary = "TASK-089 is in review after unifying doctor, init, and adoption artifacts around the same short SpM workflow loop."
 focus = "Define the next adoption slice after 0.2.0"
 active_spec_ids = ["SPEC-034"]
 active_task_ids = ["TASK-089"]
 blocked_task_ids = []
-next_action_hints = ["Refactor shared adoption guidance so doctor, init artifacts, and agent brief all teach the same operational loop.", "Keep upgrade refresh additive to the same loop rather than a separate workflow.", "Preserve concise surfaces while reusing one deterministic guidance source."]
+next_action_hints = ["Review TASK-089 and confirm the shared workflow loop is consistent across doctor, init, and adoption artifacts.", "If review passes, move to TASK-090 to add the bounded external AGENTS snippet.", "Keep the shared loop concise enough that future adoption surfaces can reuse it without bloat."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T00:26:24.718Z"
+updated_at = "2026-04-27T00:29:56.360Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 

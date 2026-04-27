@@ -1,5 +1,5 @@
 import type { CapabilityRefreshGuidance } from "./adoption.ts";
-import { doctorModeLines, workflowLoopLines } from "./adoption.ts";
+import { doctorModeLines } from "./adoption.ts";
 import type { DoctorReport } from "./doctor.ts";
 
 export interface AgentWorkflowBrief {
@@ -29,9 +29,7 @@ function currentStateFile(memoryDir: string): string {
 export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrief {
   const memoryDir = report.config.memoryDir ?? report.adoption.layoutChoice.memoryDir ?? "docs/spm";
   const currentFile = currentStateFile(memoryDir);
-  const currentStateMissing = report.findings.some((finding) => finding.code === "missing-current-state");
-  const currentStateAvailable =
-    !currentStateMissing && (report.config.valid || report.adoption.state === "adopted" || report.adoption.state === "partially-adopted");
+  const currentStateAvailable = report.guidance.workflowLoop.currentStateAvailable;
 
   return {
     overview: report.guidance.overview,
@@ -51,7 +49,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
         ? `Read \`${currentFile}\` before multi-step or resume-heavy work so you start from the explicit checkpoint instead of guessing from code alone.`
         : `If \`${currentFile}\` is still missing, run \`spm init\` or write the first checkpoint with \`spm current set\` before relying on resume-heavy work.`,
     ],
-    workflowLoop: workflowLoopLines(memoryDir, { currentStateAvailable }),
+    workflowLoop: report.guidance.workflowLoop.steps,
     scopedMemoryWorkflow: report.guidance.memoryWorkflow.preferredWorkflows,
     doctorModes: doctorModeLines(),
     capabilityRefresh: report.guidance.capabilityRefresh,

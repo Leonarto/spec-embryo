@@ -18,6 +18,11 @@ export interface MemoryWorkflowGuidance {
   preferredWorkflows: string[];
 }
 
+export interface WorkflowLoopGuidance {
+  currentStateAvailable: boolean;
+  steps: string[];
+}
+
 export interface CapabilityRefreshGuidance {
   required: boolean;
   reason?: string;
@@ -28,6 +33,7 @@ export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
+  workflowLoop: WorkflowLoopGuidance;
   memoryWorkflow: MemoryWorkflowGuidance;
   capabilityRefresh: CapabilityRefreshGuidance;
   whatFound: string[];
@@ -87,6 +93,26 @@ function uniqueCommands(suggestions: AdoptionCommandSuggestion[]): AdoptionComma
   return deduped;
 }
 
+function currentStateAvailableForGuidance(input: {
+  adoption: AdoptionInspection;
+  doctorFindings: DoctorFinding[];
+  commandContext?: "init" | "doctor";
+}): boolean {
+  if (input.commandContext === "init") {
+    return true;
+  }
+
+  if (
+    input.doctorFindings.some(
+      (finding) => finding.code === "missing-current-state" || finding.code === "invalid-current-state",
+    )
+  ) {
+    return false;
+  }
+
+  return input.adoption.state === "adopted" || input.adoption.state === "partially-adopted";
+}
+
 export function buildAdoptionGuidance(input: {
   adoption: AdoptionInspection;
   memoryDir: string;
@@ -110,6 +136,15 @@ export function buildAdoptionGuidance(input: {
   const whatFound = [...input.adoption.findings];
   const whatChanged: string[] = [];
   const remainingWork: string[] = [];
+  const currentStateAvailable = currentStateAvailableForGuidance({
+    adoption: input.adoption,
+    doctorFindings,
+    commandContext: input.commandContext,
+  });
+  const workflowLoop: WorkflowLoopGuidance = {
+    currentStateAvailable,
+    steps: workflowLoopLines(input.memoryDir, { currentStateAvailable }),
+  };
   const memoryWorkflow: MemoryWorkflowGuidance = {
     preferredWorkflows: memoryWorkflowLines(),
   };
@@ -277,6 +312,7 @@ export function buildAdoptionGuidance(input: {
             : "This repo is fresh to Spec Embryo and now needs its first real spec/task/current-state content.",
     spmOrientation,
     agentOrientation,
+    workflowLoop,
     memoryWorkflow,
     capabilityRefresh,
     whatFound,
@@ -304,6 +340,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Agent orientation:",
     ...guidance.agentOrientation.map((item) => `- ${item}`),
+    "",
+    "Default workflow loop:",
+    ...guidance.workflowLoop.steps.map((item, index) => `${index + 1}. ${item}`),
     "",
     "Current memory workflow:",
     ...guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
@@ -368,7 +407,8 @@ function upgradeFlowLines(): string[] {
     "If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.",
     "Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work, because repo-local guidance may lag the installed CLI.",
     "Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.",
-    "After the refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.",
+    "After the refresh, continue with the same SpM workflow loop described above instead of switching to a separate upgrade-only workflow.",
+    "Within that same loop, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.",
     "Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.",
     "If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.",
   ];
@@ -429,7 +469,8 @@ function capabilityRefreshLines(): string[] {
   return [
     "The running CLI is newer than the repo's recorded `tool_version`, so repo-local AGENTS or adoption artifacts may lag the current SpM workflow.",
     "Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work.",
-    "After refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.",
+    "After refresh, continue with the same SpM workflow loop described above instead of switching to an upgrade-only workflow.",
+    "Within that same loop, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.",
     "Re-run `spm init` if you want repo-local adoption artifacts and the recorded tool version refreshed under the newer CLI.",
     "Run `spm doctor` again after the refresh so the repo's guidance and health checks are confirmed under the newer version.",
   ];
@@ -477,6 +518,10 @@ export function renderMigrationGuideMarkdown(input: {
     "## Reading Doctor Efficiently",
     "",
     ...doctorModeLines().map((line) => `- ${line}`),
+    "",
+    "## Default Workflow Loop",
+    "",
+    ...input.guidance.workflowLoop.steps.map((line, index) => `${index + 1}. ${line}`),
     "",
     "## Canonical Statuses",
     "",
@@ -562,6 +607,7 @@ export function renderDirectAgentBrief(input: {
     "How to work:",
     "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",
     ...doctorModeLines().map((line) => `- ${line}`),
+    ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",

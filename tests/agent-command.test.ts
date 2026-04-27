@@ -52,6 +52,35 @@ describe("agent command", () => {
     }
   });
 
+  test("treats an unreadable current state file as unavailable", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agent-"));
+
+    try {
+      await initializeProject(rootDir);
+      const stateFile = join(rootDir, "docs", "spm", "current.md");
+      const raw = await Bun.file(stateFile).text();
+      await writeFile(stateFile, raw.replace('doc_kind = "current-state"', 'doc_kind = 7'), "utf8");
+
+      const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
+      const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        repo: { currentStateAvailable: boolean; currentStateFile: string };
+        startHere: string[];
+        workflowLoop: string[];
+      };
+
+      expect(output).toContain("spm init");
+      expect(output).toContain("spm current set");
+      expect(output).toContain("Current checkpoint: docs/spm/current.md (not present yet)");
+      expect(output).not.toContain("Read `docs/spm/current.md` before multi-step or resume-heavy work");
+      expect(parsed.repo.currentStateAvailable).toBe(false);
+      expect(parsed.repo.currentStateFile).toBe("docs/spm/current.md");
+      expect(parsed.startHere.some((item) => item.includes("spm init"))).toBe(true);
+      expect(parsed.workflowLoop.some((item) => item.includes("current.md` is still missing"))).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
   test("returns structured upgrade-aware guidance as json", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agent-"));
 

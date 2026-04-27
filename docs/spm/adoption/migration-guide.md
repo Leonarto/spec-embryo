@@ -37,6 +37,14 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.
 - Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.
 
+## Default Workflow Loop
+
+1. Start with `spm status` for a cheap state, version, and findings summary.
+2. Read `docs/spm/current.md` for the repo's explicit checkpoint before broad implementation work.
+3. If context is broad, stale, or cross-cutting, use `spm memory pack` before diving into code.
+4. If you are resuming context-heavy work, inspect temporary scoped notes with `spm memory note list` instead of assuming they are already reflected in current state.
+5. Use `spm memory consolidate` to promote durable truth instead of treating session notes as canonical project memory.
+
 ## Canonical Statuses
 
 - Spec statuses: `proposed`, `active`, `paused`, `done`, `archived`
@@ -96,9 +104,10 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 1. If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.
 2. Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work, because repo-local guidance may lag the installed CLI.
 3. Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
-4. After the refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.
-5. Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
-6. If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
+4. After the refresh, continue with the same SpM workflow loop described above instead of switching to a separate upgrade-only workflow.
+5. Within that same loop, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.
+6. Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
+7. If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
 
 ## First-Week Sequence
 

@@ -156,6 +156,9 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Use `spm doctor` first for a cheap status");
     expect(guide).toContain("Use `spm doctor --verbose` only when");
     expect(guide).toContain("Use `spm doctor --json` when an agent needs structured findings");
+    expect(guide).toContain("Default Workflow Loop");
+    expect(guide).toContain("spm status");
+    expect(guide).toContain("spm memory pack");
     expect(guide).toContain("Canonical Statuses");
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
@@ -177,6 +180,8 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Use `spm doctor` first for a cheap status");
     expect(brief).toContain("Use `spm doctor --verbose` only when");
     expect(brief).toContain("Use `spm doctor --json` when an agent needs structured findings");
+    expect(brief).toContain("Loop 1: Start with `spm status`");
+    expect(brief).toContain("spm memory pack");
     expect(brief).toContain("spm memory note create");
     expect(brief).toContain("spm memory scopes");
     expect(brief).toContain("spm memory consolidate");
@@ -240,8 +245,10 @@ describe("init adoption artifacts", () => {
       expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
       expect(brief).toContain("Treat any SpM seed scaffold as migration backlog");
       expect(guide).toContain("Reading Doctor Efficiently");
+      expect(guide).toContain("Default Workflow Loop");
       expect(guide).toContain("Current Memory Workflow");
       expect(brief).toContain("Use `spm doctor` first for a cheap status");
+      expect(brief).toContain("Loop 1: Start with `spm status`");
       expect(brief).toContain("spm memory note update`, `archive`, `restore`, and `list`");
       expect(guide).toContain("Tag Guidance For Retrieval");
       expect(brief).toContain("Treat tags as retrieval handles");

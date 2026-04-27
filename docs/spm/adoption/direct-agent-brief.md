@@ -15,6 +15,11 @@ How to work:
 - Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.
 - Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.
 - Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.
+- Loop 1: Start with `spm status` for a cheap state, version, and findings summary.
+- Loop 2: Read `docs/spm/current.md` for the repo's explicit checkpoint before broad implementation work.
+- Loop 3: If context is broad, stale, or cross-cutting, use `spm memory pack` before diving into code.
+- Loop 4: If you are resuming context-heavy work, inspect temporary scoped notes with `spm memory note list` instead of assuming they are already reflected in current state.
+- Loop 5: Use `spm memory consolidate` to promote durable truth instead of treating session notes as canonical project memory.
 - Use `spm memory note create` for fast session capture instead of hand-editing `.specpm/memory/...` note files.
 - Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
@@ -47,7 +52,8 @@ If doctor reports that the running CLI is newer than the repo's recorded tool ve
 - If `spm doctor` says the running CLI is newer than the repo's recorded `tool_version`, update the installed package first if needed.
 - Refresh your SpM usage policy from the current `spm doctor --verbose` or `spm doctor --json` output before continuing work, because repo-local guidance may lag the installed CLI.
 - Re-run `spm init` to refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version.
-- After the refresh, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.
+- After the refresh, continue with the same SpM workflow loop described above instead of switching to a separate upgrade-only workflow.
+- Within that same loop, prefer the current scoped-memory workflow (`spm memory note ...`, `spm memory scopes`, and `spm memory consolidate`) instead of raw scoped note-file edits.
 - Run `spm doctor` again to confirm the repo under the newer guidance before continuing migration work.
 - If legacy docs are still the source of truth, regenerate the import brief so the current agent sees the newer migration guidance.
 
