@@ -68,6 +68,13 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
 - Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
 
+## Memory Workflow Commands
+
+- `spm memory note create --scope session --title "..."` — Capture temporary session context through the CLI instead of hand-editing scoped note files.
+- `spm memory note list --scope session` — Inspect temporary session notes explicitly when resuming context-heavy work.
+- `spm memory scopes` — Confirm which memory scopes exist in this repo and whether they are writable before assuming a note workflow.
+- `spm memory consolidate <NOTE-ID>` — Promote a session note into durable repo memory instead of treating session notes as canonical truth.
+
 ## Direct Agent Commands
 
 - If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.

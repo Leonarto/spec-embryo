@@ -16,6 +16,7 @@ export interface SpmOrientation {
 
 export interface MemoryWorkflowGuidance {
   preferredWorkflows: string[];
+  commands: AdoptionCommandSuggestion[];
 }
 
 export interface DirectAgentCommandGuidance {
@@ -163,6 +164,7 @@ export function buildAdoptionGuidance(input: {
   };
   const memoryWorkflow: MemoryWorkflowGuidance = {
     preferredWorkflows: memoryWorkflowLines(),
+    commands: memoryWorkflowCommandSuggestions(),
   };
   const directAgentCommands: DirectAgentCommandGuidance = {
     commands: directAgentCommandLines(),
@@ -465,6 +467,27 @@ function memoryWorkflowLines(): string[] {
   ];
 }
 
+function memoryWorkflowCommandSuggestions(): AdoptionCommandSuggestion[] {
+  return [
+    {
+      command: 'spm memory note create --scope session --title "..."',
+      reason: "Capture temporary session context through the CLI instead of hand-editing scoped note files.",
+    },
+    {
+      command: "spm memory note list --scope session",
+      reason: "Inspect temporary session notes explicitly when resuming context-heavy work.",
+    },
+    {
+      command: "spm memory scopes",
+      reason: "Confirm which memory scopes exist in this repo and whether they are writable before assuming a note workflow.",
+    },
+    {
+      command: "spm memory consolidate <NOTE-ID>",
+      reason: "Promote a session note into durable repo memory instead of treating session notes as canonical truth.",
+    },
+  ];
+}
+
 export function agentSnippetCommandLines(): string[] {
   return [
     "If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.",
@@ -612,6 +635,10 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "",
+    "## Memory Workflow Commands",
+    "",
+    ...input.guidance.memoryWorkflow.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    "",
     "## Direct Agent Commands",
     "",
     ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
@@ -696,6 +723,8 @@ export function renderDirectAgentBrief(input: {
     ...doctorModeLines().map((line) => `- ${line}`),
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
+    "Scoped memory commands:",
+    ...input.guidance.memoryWorkflow.commands.map((item) => `- ${item.command} — ${item.reason}`),
     "Direct agent commands:",
     ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
     `- If you need to refresh host-repo \`AGENTS.md\`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.`,

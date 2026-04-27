@@ -1,4 +1,4 @@
-import type { CapabilityRefreshGuidance } from "./adoption.ts";
+import type { AdoptionCommandSuggestion, CapabilityRefreshGuidance } from "./adoption.ts";
 import { doctorModeLines } from "./adoption.ts";
 import type { DoctorReport } from "./doctor.ts";
 
@@ -18,6 +18,7 @@ export interface AgentWorkflowBrief {
   startHere: string[];
   workflowLoop: string[];
   scopedMemoryWorkflow: string[];
+  scopedMemoryCommands: AdoptionCommandSuggestion[];
   directAgentCommands: string[];
   externalAgentsSnippet: {
     note: string;
@@ -65,6 +66,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     ],
     workflowLoop: report.guidance.workflowLoop.steps,
     scopedMemoryWorkflow: report.guidance.memoryWorkflow.preferredWorkflows,
+    scopedMemoryCommands: report.guidance.memoryWorkflow.commands,
     directAgentCommands: report.guidance.directAgentCommands.commands,
     externalAgentsSnippet: report.guidance.externalAgentsSnippet,
     doctorModes: doctorModeLines(),
@@ -101,6 +103,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "Scoped memory workflow:",
     ...brief.scopedMemoryWorkflow.map((item) => `- ${item}`),
+    "",
+    "Scoped memory commands:",
+    ...brief.scopedMemoryCommands.map((item) => `- ${item.command} — ${item.reason}`),
     "",
     "Direct agent commands:",
     ...brief.directAgentCommands.map((item) => `- ${item}`),

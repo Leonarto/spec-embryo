@@ -16,6 +16,7 @@ describe("agent command", () => {
 
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
       const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        scopedMemoryCommands: Array<{ command: string; reason: string }>;
         directAgentCommands: string[];
       };
 
@@ -25,12 +26,16 @@ describe("agent command", () => {
       expect(output).toContain("docs/spm/current.md");
       expect(output).toContain("spm memory pack");
       expect(output).toContain("spm memory note create");
+      expect(output).toContain("Scoped memory commands:");
+      expect(output).toContain('spm memory note create --scope session --title "..."');
       expect(output).toContain("Direct agent commands:");
       expect(output).toContain("Optional AGENTS.md snippet:");
       expect(output).toContain("## Optional SpM workflow");
       expect(output).toContain("spm agent brief");
       expect(output).toContain("spm agent snippet");
       expect(output).toContain("No version-driven capability refresh is currently required.");
+      expect(parsed.scopedMemoryCommands.some((item) => item.command.includes("spm memory note create --scope session"))).toBe(true);
+      expect(parsed.scopedMemoryCommands.some((item) => item.command === "spm memory consolidate <NOTE-ID>")).toBe(true);
       expect(parsed.directAgentCommands.some((item) => item.includes("spm agent brief"))).toBe(true);
       expect(parsed.directAgentCommands.some((item) => item.includes("spm agent snippet"))).toBe(true);
     } finally {
@@ -135,6 +140,7 @@ describe("agent command", () => {
         repo: { updateAvailable: boolean; currentStateFile: string; currentStateAvailable: boolean };
         workflowLoop: string[];
         scopedMemoryWorkflow: string[];
+        scopedMemoryCommands: Array<{ command: string; reason: string }>;
         externalAgentsSnippet: { note: string; snippetLines: string[] };
         capabilityRefresh: { required: boolean; actions: string[] };
       };
@@ -144,6 +150,7 @@ describe("agent command", () => {
       expect(parsed.repo.currentStateAvailable).toBe(true);
       expect(parsed.workflowLoop[0]).toContain("spm status");
       expect(parsed.scopedMemoryWorkflow.some((item) => item.includes("spm memory scopes"))).toBe(true);
+      expect(parsed.scopedMemoryCommands.some((item) => item.command === "spm memory scopes")).toBe(true);
       expect(parsed.externalAgentsSnippet.note).toContain("Optional additive snippet");
       expect(parsed.externalAgentsSnippet.snippetLines[1]).toContain("spm status");
       expect(parsed.capabilityRefresh.required).toBe(true);

@@ -53,6 +53,8 @@ describe("adoption guidance", () => {
     expect(guidance.spmOrientation.whatSpmIs).toContain("local-first CLI");
     expect(guidance.spmOrientation.whenToUse.length).toBeGreaterThan(0);
     expect(guidance.memoryWorkflow.preferredWorkflows.some((item) => item.includes("spm memory note create"))).toBe(true);
+    expect(guidance.memoryWorkflow.commands.some((item) => item.command.includes("spm memory note create --scope session"))).toBe(true);
+    expect(guidance.memoryWorkflow.commands.some((item) => item.command === "spm memory consolidate <NOTE-ID>")).toBe(true);
     expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent brief"))).toBe(true);
     expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent snippet"))).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
@@ -171,6 +173,8 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Current Memory Workflow");
     expect(guide).toContain("spm memory note create");
     expect(guide).toContain("spm memory consolidate");
+    expect(guide).toContain("## Memory Workflow Commands");
+    expect(guide).toContain('`spm memory note create --scope session --title "..."`');
     expect(guide).toContain("## Direct Agent Commands");
     expect(guide).toContain("Optional External AGENTS.md Snippet");
     expect(guide).toContain("Optional additive snippet for host-repo `AGENTS.md` files");
@@ -197,6 +201,8 @@ describe("adoption guidance", () => {
     expect(brief).toContain("spm memory note create");
     expect(brief).toContain("spm memory scopes");
     expect(brief).toContain("spm memory consolidate");
+    expect(brief).toContain("Scoped memory commands:");
+    expect(brief).toContain('spm memory note create --scope session --title "..."');
     expect(brief).toContain("Direct agent commands:");
     expect(brief).toContain("spm agent brief");
     expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");

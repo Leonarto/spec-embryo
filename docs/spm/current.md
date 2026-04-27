@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-041 is complete after promoting direct agent command guidance into shared typed adoption data for JSON and renderer consumers."
+summary = "SPEC-042 is complete after promoting the scoped memory workflow command set into shared typed adoption guidance and agent brief JSON."
 focus = "Choose the next adoption or agent-guidance slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep direct command guidance, snippet guidance, and JSON adoption outputs aligned from one shared contract."]
+next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep memory workflow guidance, direct command guidance, and JSON adoption outputs aligned from one shared contract."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T21:40:00.000Z"
+updated_at = "2026-04-27T22:05:00.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The 0.3.0 release is out, and the queued follow-up slice is now complete as well. `SPEC-041` / `TASK-097` finished the structured-data follow-through to the earlier command-discoverability work by making direct agent commands part of the shared typed adoption contract and agent-brief JSON instead of leaving them as render-only text. The repo is back at a clean decision point for the next adoption or agent-guidance improvement.
+`SPEC-042` is now complete. The scoped memory workflow no longer depends on prose alone for discovery: session-note capture, scope inspection, and consolidation are exposed as shared typed command guidance in the adoption contract and in `spm agent brief --json`, while the human renderers reuse the same source for consistency. The repo is back at a clean decision point for the next adoption or agent-guidance improvement.
 
 ## Notes
 
