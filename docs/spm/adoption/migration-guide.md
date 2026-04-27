@@ -68,6 +68,13 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
 - Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
 
+## Direct Agent Commands
+
+- If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.
+- Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.
+- If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
+- Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
+
 ## Optional External AGENTS.md Snippet
 
 - Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.
@@ -79,12 +86,6 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Use `spm memory pack` only when context is broad, stale, or cross-cutting.
 - Treat session notes as temporary until promoted with `spm memory consolidate`.
 ```
-
-- If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.
-- Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.
-
-- If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
-- Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
 
 ## Nexus Coexistence
 

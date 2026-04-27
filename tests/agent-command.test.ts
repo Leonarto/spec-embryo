@@ -22,6 +22,7 @@ describe("agent command", () => {
       expect(output).toContain("docs/spm/current.md");
       expect(output).toContain("spm memory pack");
       expect(output).toContain("spm memory note create");
+      expect(output).toContain("Direct agent commands:");
       expect(output).toContain("Optional AGENTS.md snippet:");
       expect(output).toContain("## Optional SpM workflow");
       expect(output).toContain("spm agent brief");

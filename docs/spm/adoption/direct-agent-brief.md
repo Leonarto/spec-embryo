@@ -24,11 +24,12 @@ How to work:
 - Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
 - Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
+Direct agent commands:
 - If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.
 - Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.
-- If you need to refresh host-repo `AGENTS.md`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.
 - If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
 - Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
+- If you need to refresh host-repo `AGENTS.md`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.
 - Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.
 - Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.
 - Update AGENTS files and local skills when adoption changes how future agents should work in this repo.

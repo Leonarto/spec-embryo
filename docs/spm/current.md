@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-039 is complete after teaching broader adoption outputs to point at spm agent brief; the next adoption discoverability slice is ready to be chosen."
-focus = "Choose the next adoption discoverability slice"
+summary = "SPEC-040 is complete after separating direct command discoverability from snippet guidance; the next adoption data-structure slice is ready to be chosen."
+focus = "Choose the next adoption data-structure slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pick the next adoption discoverability improvement from the shared agent-facing surfaces.", "Prefer reshaping existing wording and sections instead of adding another command surface.", "Keep direct command guidance and snippet guidance easy to distinguish."]
+next_action_hints = ["Pick the next adjacent adoption slice from the shared agent-facing guidance surfaces.", "Prefer promoting the new direct-command structure into reusable structured data rather than adding more wording variants.", "Keep snippet content, direct command guidance, and JSON guidance aligned."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T19:35:01.000Z"
+updated_at = "2026-04-27T19:51:00.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-SPEC-039 is now complete: the broader adoption and agent-facing surfaces point at `spm agent brief` as well as the snippet path, so users do not have to infer the direct workflow command only from concise doctor output. The next adjacent slice should improve structure, not add more commands: direct command guidance and external snippet guidance now coexist in the same sections, and separating those concepts would make the adoption outputs easier to scan.
+SPEC-040 is now complete: the broader adoption and agent-facing outputs separate direct command discoverability from snippet-only guidance, which makes the long-form surfaces easier to scan without changing the actual command contract. The next adjacent slice should focus on structured reuse of that split, so JSON and typed consumers can benefit from the same separation instead of relying on render-only section layout.
 
 ## Notes
 
