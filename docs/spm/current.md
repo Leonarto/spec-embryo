@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-038 is complete after making concise doctor output point callers at spm agent brief; the next adoption discoverability slice is ready to be chosen."
+summary = "SPEC-039 is complete after teaching broader adoption outputs to point at spm agent brief; the next adoption discoverability slice is ready to be chosen."
 focus = "Choose the next adoption discoverability slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pick the next adoption discoverability improvement from the broader agent-facing command surfaces.", "Prefer another shared-wording slice instead of inventing a parallel workflow.", "Keep doctor, agent brief, and agent snippet discoverable without bloating default outputs."]
+next_action_hints = ["Pick the next adoption discoverability improvement from the shared agent-facing surfaces.", "Prefer reshaping existing wording and sections instead of adding another command surface.", "Keep direct command guidance and snippet guidance easy to distinguish."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T18:19:40.000Z"
+updated_at = "2026-04-27T19:35:01.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-SPEC-038 is now complete: concise `spm doctor` output points at `spm agent brief` and `spm agent snippet`, giving callers both the steady-state workflow path and the narrower bounded-`AGENTS.md` path without forcing `doctor --verbose`. The repo is ready for the next adjacent adoption slice, ideally one that teaches the broader adoption surfaces to reference the direct `spm agent brief` command with the same shared wording.
+SPEC-039 is now complete: the broader adoption and agent-facing surfaces point at `spm agent brief` as well as the snippet path, so users do not have to infer the direct workflow command only from concise doctor output. The next adjacent slice should improve structure, not add more commands: direct command guidance and external snippet guidance now coexist in the same sections, and separating those concepts would make the adoption outputs easier to scan.
 
 ## Notes
 

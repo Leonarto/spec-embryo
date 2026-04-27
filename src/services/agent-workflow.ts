@@ -1,5 +1,5 @@
 import type { CapabilityRefreshGuidance } from "./adoption.ts";
-import { agentSnippetCommandLines, doctorModeLines } from "./adoption.ts";
+import { agentBriefCommandLines, agentSnippetCommandLines, doctorModeLines } from "./adoption.ts";
 import type { DoctorReport } from "./doctor.ts";
 
 export interface AgentWorkflowBrief {
@@ -105,6 +105,7 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "```md",
     ...brief.externalAgentsSnippet.snippetLines,
     "```",
+    ...agentBriefCommandLines().map((item) => `- ${item}`),
     ...agentSnippetCommandLines().map((item) => `- ${item}`),
     "",
     "Doctor modes:",

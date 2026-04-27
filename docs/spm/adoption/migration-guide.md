@@ -80,6 +80,9 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Treat session notes as temporary until promoted with `spm memory consolidate`.
 ```
 
+- If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.
+- Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.
+
 - If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
 - Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
 

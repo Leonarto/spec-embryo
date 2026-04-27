@@ -24,6 +24,7 @@ describe("agent command", () => {
       expect(output).toContain("spm memory note create");
       expect(output).toContain("Optional AGENTS.md snippet:");
       expect(output).toContain("## Optional SpM workflow");
+      expect(output).toContain("spm agent brief");
       expect(output).toContain("spm agent snippet");
       expect(output).toContain("No version-driven capability refresh is currently required.");
     } finally {

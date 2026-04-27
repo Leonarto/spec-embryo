@@ -173,6 +173,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Optional additive snippet for host-repo `AGENTS.md` files");
     expect(guide).toContain("## Optional SpM workflow");
     expect(guide).toContain("Use `spm memory pack` only when context is broad, stale, or cross-cutting.");
+    expect(guide).toContain("run `spm agent brief`");
     expect(guide).toContain("run `spm agent snippet`");
     expect(guide).toContain("Treat tags as retrieval handles");
     expect(guide).toContain("short, stable tags");
@@ -193,6 +194,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("spm memory note create");
     expect(brief).toContain("spm memory scopes");
     expect(brief).toContain("spm memory consolidate");
+    expect(brief).toContain("spm agent brief");
     expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
     expect(brief).toContain("spm agent snippet");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
