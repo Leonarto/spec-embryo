@@ -2,6 +2,7 @@
 
 import { cwd, exit } from "node:process";
 import { helpText, parseArgs } from "./cli.ts";
+import { runAgentCommand } from "./commands/agent.ts";
 import { runAgentsCommand } from "./commands/agents.ts";
 import { runCurrentCommand } from "./commands/current.ts";
 import { runDoctorCommand } from "./commands/doctor.ts";
@@ -60,6 +61,9 @@ async function main(): Promise<void> {
       break;
     case "agents":
       output = await runAgentsCommand(rootDir, parsed);
+      break;
+    case "agent":
+      output = await runAgentCommand(rootDir, parsed);
       break;
     case "memory":
       output = await runMemoryCommand(rootDir, parsed);

@@ -7,7 +7,7 @@ Spec Embryo is intentionally split into seven layers:
 1. Storage and file layer: filesystem access, TOML frontmatter parsing, config loading, and durable writes.
 2. Domain model: typed documents for specs, tasks, handoffs, current state, and backend config.
 3. Deterministic engine: linking, validation, git inspection, blockers, ready work, critical path, and next-action derivation.
-4. CLI command layer: thin commands for `init`, `doctor`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory note`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `memory eval`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
+4. CLI command layer: thin commands for `init`, `doctor`, `agent brief`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory note`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `memory eval`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
 5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, memory indexing/querying/briefing/packing/consolidation, section-level evidence extraction, layout normalization, and other reusable logic above the repository layer.
 6. Local visual server: a SvelteKit app that renders managed memory through shared deterministic services rather than a second parser.
 7. Execution backends: deterministic text output, prompt-return output, and optional subprocess adapters.
@@ -32,7 +32,7 @@ The repo is the source of truth. V1 uses:
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
-When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide, current memory-workflow guidance, version-aware capability refresh guidance, and direct brief. It also validates that the generated repo-local adoption artifacts still match the current deterministic renderer, so stale migration guides and agent briefs can be refreshed before another agent relies on them. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
+When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide, current memory-workflow guidance, version-aware capability refresh guidance, and direct brief. `agent brief` now exposes a shorter steady-state workflow surface for agents that only need to know how to use SpM in the current repo today. `doctor` also validates that the generated repo-local adoption artifacts still match the current deterministic renderer, so stale migration guides and agent briefs can be refreshed before another agent relies on them. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
 
 ## Domain model
 
@@ -176,6 +176,7 @@ Deterministic by default:
 - write handoff and current-state files
 - parse and rewrite spec open-question and resolved-decision sections
 - render adoption-oriented migration guide and direct agent brief artifacts from deterministic repo inspection
+- render one short agent-workflow brief from the same deterministic adoption guidance data used by doctor and init artifacts
 - validate bounded coexistence with optional external code-graph tooling through config, command-availability, and AGENTS contract checks
 - index managed docs into deterministic retrieval entries and expose query/link/brief traversal by typed filters, backlinks, local neighborhoods, section-level evidence slices, compact context bundles, explicit match reasons, and deterministic concept-friendly ranking
 

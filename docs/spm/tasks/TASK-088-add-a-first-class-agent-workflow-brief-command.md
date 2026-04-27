@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-088"
 title = "Add a first-class agent workflow brief command"
 summary = "Expose one short deterministic command that teaches an agent how to use SpM in this repo today, especially for resume-heavy and upgrade-aware work."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-034"]
 depends_on = []
 blocked_by = []
 priority = 1
 created_at = "2026-04-26T23:34:30.571Z"
+completed_at = "2026-04-27T00:26:24.630Z"
 tags = ["adoption", "agent-guidance", "cli"]
-updated_at = "2026-04-26T23:38:04.000Z"
+updated_at = "2026-04-27T00:26:24.630Z"
 +++
 
 # Scope

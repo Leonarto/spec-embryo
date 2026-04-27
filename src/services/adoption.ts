@@ -374,7 +374,7 @@ function upgradeFlowLines(): string[] {
   ];
 }
 
-function doctorModeLines(): string[] {
+export function doctorModeLines(): string[] {
   return [
     "Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.",
     "Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.",
@@ -388,6 +388,18 @@ function memoryWorkflowLines(): string[] {
     "Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.",
     "Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.",
     "Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.",
+  ];
+}
+
+export function workflowLoopLines(memoryDir: string, options: { currentStateAvailable: boolean }): string[] {
+  return [
+    "Start with `spm status` for a cheap state, version, and findings summary.",
+    options.currentStateAvailable
+      ? `Read \`${buildRelativePath(memoryDir, "current.md")}\` for the repo's explicit checkpoint before broad implementation work.`
+      : "If `current.md` is still missing, complete adoption with `spm init` or create the first checkpoint with `spm current set` before relying on resume-heavy workflow.",
+    "If context is broad, stale, or cross-cutting, use `spm memory pack` before diving into code.",
+    "If you are resuming context-heavy work, inspect temporary scoped notes with `spm memory note list` instead of assuming they are already reflected in current state.",
+    "Use `spm memory consolidate` to promote durable truth instead of treating session notes as canonical project memory.",
   ];
 }
 
