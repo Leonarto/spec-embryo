@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-034"
 title = "Make SpM easier for agents to adopt and use consistently"
 summary = "Define a tighter adoption and resume story so upgraded and newly-adopted agents reliably use SpM's current context workflows instead of treating them as optional."
-status = "active"
+status = "done"
 task_ids = ["TASK-088", "TASK-089", "TASK-090"]
 tags = ["adoption", "doctor", "agent-guidance", "context"]
-updated_at = "2026-04-26T23:38:04.187Z"
+updated_at = "2026-04-27T01:42:52.018Z"
 +++
 
 # Overview

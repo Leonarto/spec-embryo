@@ -30,6 +30,30 @@ describe("agent command", () => {
     }
   });
 
+  test("renders the bounded AGENTS snippet directly", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agent-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const output = await runAgentCommand(rootDir, parseArgs(["agent", "snippet"]));
+      const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "snippet", "--json"]))) as {
+        note: string;
+        snippetLines: string[];
+      };
+
+      expect(output).toContain("Spec Embryo AGENTS.md snippet");
+      expect(output).toContain("## Optional SpM workflow");
+      expect(output).toContain("spm status");
+      expect(output).toContain("spm memory pack");
+      expect(parsed.note).toContain("Optional additive snippet");
+      expect(parsed.snippetLines[0]).toBe("## Optional SpM workflow");
+      expect(parsed.snippetLines.some((item) => item.includes("spm status"))).toBe(true);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
   test("avoids pointing fresh repos at a missing current state file", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agent-"));
 
@@ -128,7 +152,24 @@ describe("agent command", () => {
       await initializeProject(rootDir);
 
       await expect(runAgentCommand(rootDir, parseArgs(["agent", "plan"]))).rejects.toThrow(
-        "Supported agent commands are `agent` and `agent brief`.",
+        "Supported agent commands are `agent`, `agent brief`, and `agent snippet`.",
+      );
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("rejects unsupported subcommands before unhealthy repo state is loaded", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agent-"));
+
+    try {
+      await initializeProject(rootDir);
+      const stateFile = join(rootDir, "docs", "spm", "current.md");
+      const raw = await Bun.file(stateFile).text();
+      await writeFile(stateFile, raw.replace('doc_kind = "current-state"', 'doc_kind = 7'), "utf8");
+
+      await expect(runAgentCommand(rootDir, parseArgs(["agent", "plan"]))).rejects.toThrow(
+        "Supported agent commands are `agent`, `agent brief`, and `agent snippet`.",
       );
     } finally {
       await rm(rootDir, { recursive: true, force: true });

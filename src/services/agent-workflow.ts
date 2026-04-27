@@ -26,6 +26,11 @@ export interface AgentWorkflowBrief {
   capabilityRefresh: CapabilityRefreshGuidance;
 }
 
+export interface AgentSnippet {
+  note: string;
+  snippetLines: string[];
+}
+
 function currentStateFile(memoryDir: string): string {
   const normalized = memoryDir.replace(/\/+$/u, "");
   return normalized.length === 0 ? "current.md" : `${normalized}/current.md`;
@@ -62,6 +67,13 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     externalAgentsSnippet: report.guidance.externalAgentsSnippet,
     doctorModes: doctorModeLines(),
     capabilityRefresh: report.guidance.capabilityRefresh,
+  };
+}
+
+export function buildAgentSnippet(report: DoctorReport): AgentSnippet {
+  return {
+    note: report.guidance.externalAgentsSnippet.note,
+    snippetLines: report.guidance.externalAgentsSnippet.snippetLines,
   };
 }
 
@@ -108,5 +120,16 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "Repo-local guide files:",
     `- Current checkpoint: ${brief.repo.currentStateFile}${brief.repo.currentStateStatus === "available" ? "" : brief.repo.currentStateStatus === "missing" ? " (not present yet)" : " (currently unreadable)"}`,
     `- Direct agent brief: ${brief.repo.directAgentBriefFile}`,
+  ].join("\n");
+}
+
+export function renderAgentSnippet(snippet: AgentSnippet): string {
+  return [
+    "Spec Embryo AGENTS.md snippet",
+    "",
+    `- ${snippet.note}`,
+    "```md",
+    ...snippet.snippetLines,
+    "```",
   ].join("\n");
 }

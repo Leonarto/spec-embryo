@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-090 is in review after adding a bounded external AGENTS snippet to the shared adoption guidance used by doctor, init, migration artifacts, and agent brief."
-focus = "Define the next adoption slice after 0.2.0"
-active_spec_ids = ["SPEC-034"]
-active_task_ids = ["TASK-090"]
+summary = "TASK-091 is in review after adding a direct agent snippet command that returns the bounded external AGENTS guidance without scraping larger adoption outputs."
+focus = "Add a first-class bounded AGENTS snippet command"
+active_spec_ids = ["SPEC-035"]
+active_task_ids = ["TASK-091"]
 blocked_task_ids = []
-next_action_hints = ["Review TASK-090 and confirm the bounded external AGENTS snippet stays additive to host repo guidance.", "Verify the snippet stays aligned across doctor, init artifacts, and spm agent brief output.", "If review passes, close SPEC-034 and choose the next adoption or workflow slice."]
+next_action_hints = ["Review TASK-091 and confirm agent snippet output stays aligned with the shared adoption guidance.", "Verify the new command remains a thin read-only wrapper over the shared service layer.", "If review passes, close SPEC-035 and choose the next product slice."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T00:57:01.000Z"
+updated_at = "2026-04-27T01:45:18.962Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
