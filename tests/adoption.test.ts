@@ -173,6 +173,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Optional additive snippet for host-repo `AGENTS.md` files");
     expect(guide).toContain("## Optional SpM workflow");
     expect(guide).toContain("Use `spm memory pack` only when context is broad, stale, or cross-cutting.");
+    expect(guide).toContain("run `spm agent snippet`");
     expect(guide).toContain("Treat tags as retrieval handles");
     expect(guide).toContain("short, stable tags");
     expect(guide).toContain("normalize spaces, underscores, and hyphens");
@@ -193,6 +194,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("spm memory scopes");
     expect(brief).toContain("spm memory consolidate");
     expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
+    expect(brief).toContain("spm agent snippet");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
@@ -256,9 +258,11 @@ describe("init adoption artifacts", () => {
       expect(guide).toContain("Default Workflow Loop");
       expect(guide).toContain("Current Memory Workflow");
       expect(guide).toContain("Optional External AGENTS.md Snippet");
+      expect(guide).toContain("spm agent snippet");
       expect(brief).toContain("Use `spm doctor` first for a cheap status");
       expect(brief).toContain("Loop 1: Start with `spm status`");
       expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
+      expect(brief).toContain("spm agent snippet");
       expect(brief).toContain("spm memory note update`, `archive`, `restore`, and `list`");
       expect(guide).toContain("Tag Guidance For Retrieval");
       expect(brief).toContain("Treat tags as retrieval handles");

@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-035"
 title = "Add a first-class bounded AGENTS snippet command"
 summary = "Expose the external-repo SpM AGENTS snippet directly so humans and agents can retrieve it without scraping larger adoption outputs."
-status = "active"
+status = "done"
 task_ids = ["TASK-091"]
 tags = ["adoption", "agents", "external-repos"]
-updated_at = "2026-04-27T01:42:23.424Z"
+updated_at = "2026-04-27T02:19:46.200Z"
 +++
 
 # Problem

@@ -368,6 +368,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "```md",
     ...guidance.externalAgentsSnippet.snippetLines,
     "```",
+    ...agentSnippetCommandLines().map((item) => `- ${item}`),
     "",
     "Capability refresh:",
     ...(guidance.capabilityRefresh.required
@@ -450,6 +451,13 @@ function memoryWorkflowLines(): string[] {
     "Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.",
     "Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.",
     "Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.",
+  ];
+}
+
+export function agentSnippetCommandLines(): string[] {
+  return [
+    "If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.",
+    "Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.",
   ];
 }
 
@@ -590,6 +598,8 @@ export function renderMigrationGuideMarkdown(input: {
     ...input.guidance.externalAgentsSnippet.snippetLines,
     "```",
     "",
+    ...agentSnippetCommandLines().map((line) => `- ${line}`),
+    "",
     `## ${NEXUS_COEXISTENCE_HEADING}`,
     "",
     ...nexusCoexistenceLines().map((line) => `- ${line}`),
@@ -663,6 +673,7 @@ export function renderDirectAgentBrief(input: {
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     `- If you need to refresh host-repo \`AGENTS.md\`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.`,
+    ...agentSnippetCommandLines().map((line) => `- ${line}`),
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",

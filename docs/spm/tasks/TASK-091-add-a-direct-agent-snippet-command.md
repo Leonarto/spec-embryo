@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-091"
 title = "Add a direct agent snippet command"
 summary = "Expose the bounded external AGENTS snippet as a first-class command with human and JSON output."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-035"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-27T01:42:23.424Z"
+completed_at = "2026-04-27T02:19:46.208Z"
 tags = []
-updated_at = "2026-04-27T01:45:18.863Z"
+updated_at = "2026-04-27T02:19:46.208Z"
 +++
 
 # Scope

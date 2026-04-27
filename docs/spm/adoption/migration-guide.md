@@ -80,6 +80,9 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Treat session notes as temporary until promoted with `spm memory consolidate`.
 ```
 
+- If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
+- Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
+
 ## Nexus Coexistence
 
 - Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.

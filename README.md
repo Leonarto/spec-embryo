@@ -96,7 +96,7 @@ web/
 - `init --json`: return the same adoption classification plus a structured next-step guide and direct agent brief that the user can hand to an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
 - `doctor`: inspect repo-memory health, adoption state, generated-adoption-artifact drift, broken links, recorded tool-version lag, and bounded Nexus coexistence when Nexus is enabled, with a concise default summary that keeps recurring agent reads cheap.
-- `doctor --verbose`: include the full adoption guide, current memory-workflow guidance, a bounded external `AGENTS.md` snippet, version-aware capability refresh guidance, next-command sequence, and copy-pasteable direct agent brief.
+- `doctor --verbose`: include the full adoption guide, current memory-workflow guidance, a bounded external `AGENTS.md` snippet, explicit `spm agent snippet` discoverability, version-aware capability refresh guidance, next-command sequence, and copy-pasteable direct agent brief.
 - `doctor --json`: return structured findings plus deterministic migration, memory-workflow guidance, bounded external `AGENTS.md` snippet guidance, capability-refresh metadata, version/update metadata, and the direct agent brief for agent continuation.
 - `agent brief`: return one short deterministic "how to use SpM here today" workflow for agents, with the default resume loop, scoped-memory guidance, bounded external `AGENTS.md` snippet guidance, doctor-mode escalation, and version-aware capability refresh in either human or JSON form.
 - `agent snippet`: return only the bounded external `AGENTS.md` snippet so humans or wrapper agents can retrieve the additive SpM guidance directly in human or JSON form.
