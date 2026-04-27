@@ -53,6 +53,9 @@ describe("adoption guidance", () => {
     expect(guidance.spmOrientation.whatSpmIs).toContain("local-first CLI");
     expect(guidance.spmOrientation.whenToUse.length).toBeGreaterThan(0);
     expect(guidance.memoryWorkflow.preferredWorkflows.some((item) => item.includes("spm memory note create"))).toBe(true);
+    expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
+    expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
+    expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
     expect(guidance.capabilityRefresh.required).toBe(false);
     expect(guidance.recommendedCommands.some((item) => item.command.includes("spec import-prompt --source docs"))).toBe(true);
     expect(guidance.remainingWork.some((item) => item.includes("Legacy docs"))).toBe(true);
@@ -166,17 +169,21 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Current Memory Workflow");
     expect(guide).toContain("spm memory note create");
     expect(guide).toContain("spm memory consolidate");
-      expect(guide).toContain("Treat tags as retrieval handles");
-      expect(guide).toContain("short, stable tags");
-      expect(guide).toContain("normalize spaces, underscores, and hyphens");
-      expect(guide).toContain("Nexus Coexistence");
-      expect(guide).toContain("Nexus is optional and external to Spec Embryo");
-      expect(guide).toContain("Do not let Nexus replace or overwrite root `AGENTS.md`");
-      expect(guide).toContain("Nexus Setup Flow");
-      expect(guide).toContain("spm nexus setup --apply");
-      expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
-      expect(brief).toContain("Before declaring adoption complete, check:");
-      expect(brief).toContain("spm ui");
+    expect(guide).toContain("Optional External AGENTS.md Snippet");
+    expect(guide).toContain("Optional additive snippet for host-repo `AGENTS.md` files");
+    expect(guide).toContain("## Optional SpM workflow");
+    expect(guide).toContain("Use `spm memory pack` only when context is broad, stale, or cross-cutting.");
+    expect(guide).toContain("Treat tags as retrieval handles");
+    expect(guide).toContain("short, stable tags");
+    expect(guide).toContain("normalize spaces, underscores, and hyphens");
+    expect(guide).toContain("Nexus Coexistence");
+    expect(guide).toContain("Nexus is optional and external to Spec Embryo");
+    expect(guide).toContain("Do not let Nexus replace or overwrite root `AGENTS.md`");
+    expect(guide).toContain("Nexus Setup Flow");
+    expect(guide).toContain("spm nexus setup --apply");
+    expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
+    expect(brief).toContain("Before declaring adoption complete, check:");
+    expect(brief).toContain("spm ui");
     expect(brief).toContain("Use `spm doctor` first for a cheap status");
     expect(brief).toContain("Use `spm doctor --verbose` only when");
     expect(brief).toContain("Use `spm doctor --json` when an agent needs structured findings");
@@ -185,15 +192,16 @@ describe("adoption guidance", () => {
     expect(brief).toContain("spm memory note create");
     expect(brief).toContain("spm memory scopes");
     expect(brief).toContain("spm memory consolidate");
+    expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
-      expect(brief).toContain("Treat tags as retrieval handles");
-      expect(brief).toContain("Do not expect partial substring matches");
-      expect(brief).toContain("Do not use tags as a replacement");
-      expect(brief).toContain("Use Nexus for code impact, related-code, and blast-radius analysis only.");
-      expect(brief).toContain("spm nexus setup --apply");
-    });
+    expect(brief).toContain("Treat tags as retrieval handles");
+    expect(brief).toContain("Do not expect partial substring matches");
+    expect(brief).toContain("Do not use tags as a replacement");
+    expect(brief).toContain("Use Nexus for code impact, related-code, and blast-radius analysis only.");
+    expect(brief).toContain("spm nexus setup --apply");
+  });
 
   test("adds upgrade commands when doctor reports a newer CLI version", () => {
     const guidance = buildAdoptionGuidance({
@@ -247,8 +255,10 @@ describe("init adoption artifacts", () => {
       expect(guide).toContain("Reading Doctor Efficiently");
       expect(guide).toContain("Default Workflow Loop");
       expect(guide).toContain("Current Memory Workflow");
+      expect(guide).toContain("Optional External AGENTS.md Snippet");
       expect(brief).toContain("Use `spm doctor` first for a cheap status");
       expect(brief).toContain("Loop 1: Start with `spm status`");
+      expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
       expect(brief).toContain("spm memory note update`, `archive`, `restore`, and `list`");
       expect(guide).toContain("Tag Guidance For Retrieval");
       expect(brief).toContain("Treat tags as retrieval handles");

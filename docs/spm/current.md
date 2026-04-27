@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-090 is defining the bounded external AGENTS snippet that reuses the shared SpM workflow loop without taking over host repo instructions."
+summary = "TASK-090 is in review after adding a bounded external AGENTS snippet to the shared adoption guidance used by doctor, init, migration artifacts, and agent brief."
 focus = "Define the next adoption slice after 0.2.0"
 active_spec_ids = ["SPEC-034"]
 active_task_ids = ["TASK-090"]
 blocked_task_ids = []
-next_action_hints = ["Define a short external AGENTS snippet around spm status, current.md, and conditional memory pack usage.", "Render the snippet from shared adoption guidance instead of hard-coding parallel wording.", "Keep the snippet optional and bounded so it coexists with host repo guidance."]
+next_action_hints = ["Review TASK-090 and confirm the bounded external AGENTS snippet stays additive to host repo guidance.", "Verify the snippet stays aligned across doctor, init artifacts, and spm agent brief output.", "If review passes, close SPEC-034 and choose the next adoption or workflow slice."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T00:51:39.615Z"
+updated_at = "2026-04-27T00:57:01.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The `0.2.0` memory and context work is complete, but the next adoption gap is now clearer: upgraded and newly-adopted agents can still miss the best SpM workflow because it is spread across doctor output, adoption artifacts, current state, and memory commands. SPEC-034 is the next planning slice for that problem, with the first goal being a single short operational loop that makes `spm status`, `docs/spm/current.md`, `spm memory pack`, and scoped-memory workflows easier to notice and use consistently.
+The `0.2.0` memory and context work is complete, and SPEC-034 has now pushed that adoption story further: upgraded and newly-adopted agents get one shared workflow loop plus a bounded external `AGENTS.md` snippet that points them toward `spm status`, `docs/spm/current.md`, and `spm memory pack` only when it is warranted. TASK-090 is now at review after wiring that snippet through the same deterministic adoption guidance used by `doctor`, `init`, generated migration artifacts, and `spm agent brief`.
 
 ## Notes
 

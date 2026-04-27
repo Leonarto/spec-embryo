@@ -9,6 +9,7 @@ export interface AgentWorkflowBrief {
     memoryDir: string;
     currentStateFile: string;
     currentStateAvailable: boolean;
+    currentStateStatus: "available" | "missing" | "unreadable";
     directAgentBriefFile: string;
     cliVersion: string;
     projectToolVersion?: string;
@@ -17,6 +18,10 @@ export interface AgentWorkflowBrief {
   startHere: string[];
   workflowLoop: string[];
   scopedMemoryWorkflow: string[];
+  externalAgentsSnippet: {
+    note: string;
+    snippetLines: string[];
+  };
   doctorModes: string[];
   capabilityRefresh: CapabilityRefreshGuidance;
 }
@@ -29,7 +34,7 @@ function currentStateFile(memoryDir: string): string {
 export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrief {
   const memoryDir = report.config.memoryDir ?? report.adoption.layoutChoice.memoryDir ?? "docs/spm";
   const currentFile = currentStateFile(memoryDir);
-  const currentStateAvailable = report.guidance.workflowLoop.currentStateAvailable;
+  const { currentStateAvailable, currentStateStatus } = report.guidance.workflowLoop;
 
   return {
     overview: report.guidance.overview,
@@ -38,6 +43,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
       memoryDir,
       currentStateFile: currentFile,
       currentStateAvailable,
+      currentStateStatus,
       directAgentBriefFile: report.directAgentBriefFile,
       cliVersion: report.versions.cliVersion,
       projectToolVersion: report.versions.projectToolVersion,
@@ -45,12 +51,15 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     },
     startHere: [
       "Run `spm status` for the cheapest trustworthy repo-memory summary.",
-      currentStateAvailable
+      currentStateStatus === "available"
         ? `Read \`${currentFile}\` before multi-step or resume-heavy work so you start from the explicit checkpoint instead of guessing from code alone.`
-        : `If \`${currentFile}\` is still missing, run \`spm init\` or write the first checkpoint with \`spm current set\` before relying on resume-heavy work.`,
+        : currentStateStatus === "missing"
+          ? `If \`${currentFile}\` is still missing, run \`spm init\` or write the first checkpoint with \`spm current set\` before relying on resume-heavy work.`
+          : `If \`${currentFile}\` is unreadable, repair its frontmatter and re-run \`spm doctor\` before relying on resume-heavy work.`,
     ],
     workflowLoop: report.guidance.workflowLoop.steps,
     scopedMemoryWorkflow: report.guidance.memoryWorkflow.preferredWorkflows,
+    externalAgentsSnippet: report.guidance.externalAgentsSnippet,
     doctorModes: doctorModeLines(),
     capabilityRefresh: report.guidance.capabilityRefresh,
   };
@@ -79,6 +88,12 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "Scoped memory workflow:",
     ...brief.scopedMemoryWorkflow.map((item) => `- ${item}`),
     "",
+    "Optional AGENTS.md snippet:",
+    `- ${brief.externalAgentsSnippet.note}`,
+    "```md",
+    ...brief.externalAgentsSnippet.snippetLines,
+    "```",
+    "",
     "Doctor modes:",
     ...brief.doctorModes.map((item) => `- ${item}`),
     "",
@@ -91,7 +106,7 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
       : ["- No version-driven capability refresh is currently required."]),
     "",
     "Repo-local guide files:",
-    `- Current checkpoint: ${brief.repo.currentStateFile}${brief.repo.currentStateAvailable ? "" : " (not present yet)"}`,
+    `- Current checkpoint: ${brief.repo.currentStateFile}${brief.repo.currentStateStatus === "available" ? "" : brief.repo.currentStateStatus === "missing" ? " (not present yet)" : " (currently unreadable)"}`,
     `- Direct agent brief: ${brief.repo.directAgentBriefFile}`,
   ].join("\n");
 }

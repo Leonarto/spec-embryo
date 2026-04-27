@@ -95,9 +95,9 @@ web/
 - `init --json`: return the same adoption classification plus a structured next-step guide and direct agent brief that the user can hand to an already-running agent.
 - `reshape`: bring project memory back to the standard managed layout if it drifted.
 - `doctor`: inspect repo-memory health, adoption state, generated-adoption-artifact drift, broken links, recorded tool-version lag, and bounded Nexus coexistence when Nexus is enabled, with a concise default summary that keeps recurring agent reads cheap.
-- `doctor --verbose`: include the full adoption guide, current memory-workflow guidance, version-aware capability refresh guidance, next-command sequence, and copy-pasteable direct agent brief.
-- `doctor --json`: return structured findings plus deterministic migration, memory-workflow guidance, capability-refresh metadata, version/update metadata, and the direct agent brief for agent continuation.
-- `agent brief`: return one short deterministic "how to use SpM here today" workflow for agents, with the default resume loop, scoped-memory guidance, doctor-mode escalation, and version-aware capability refresh in either human or JSON form.
+- `doctor --verbose`: include the full adoption guide, current memory-workflow guidance, a bounded external `AGENTS.md` snippet, version-aware capability refresh guidance, next-command sequence, and copy-pasteable direct agent brief.
+- `doctor --json`: return structured findings plus deterministic migration, memory-workflow guidance, bounded external `AGENTS.md` snippet guidance, capability-refresh metadata, version/update metadata, and the direct agent brief for agent continuation.
+- `agent brief`: return one short deterministic "how to use SpM here today" workflow for agents, with the default resume loop, scoped-memory guidance, bounded external `AGENTS.md` snippet guidance, doctor-mode escalation, and version-aware capability refresh in either human or JSON form.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `nexus setup`: preview or apply the bounded optional Nexus setup across config, AGENTS guidance, local artifact ignore rules, and adoption artifacts.
 - `memory note`: create, update, archive, restore, and list scoped `memory-note` documents through deterministic CLI flows instead of editing `.specpm/memory/...` files by hand.
@@ -168,7 +168,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - Initial spec/task/current-state templates and seed files
 - Adoption-aware `init` output that classifies fresh, legacy-docs, partial, and already-adopted repos before seeding files
 - Repo-local migration guide and direct-agent-brief artifacts for human-reviewed external adoption
-- `spm agent brief` as a first-class repo-local usage brief so upgraded or newly-adopted agents can learn the current SpM workflow from one short deterministic surface
+- `spm agent brief` as a first-class repo-local usage brief so upgraded or newly-adopted agents can learn the current SpM workflow from one short deterministic surface, including an optional bounded `AGENTS.md` snippet for host repos that want a minimal SpM reminder without surrendering their own instruction layer
 - Deterministic memory indexing, typed link graphs, and the first `spm memory query` retrieval command over managed memory
 - `spm memory links` for grouped backlinks, outgoing relations, and deterministic local neighborhoods over managed memory
 - `spm memory brief` for compact working context built from current state, retrieval matches, explicit match reasons, section-level evidence slices, local neighborhoods, and recent handoffs

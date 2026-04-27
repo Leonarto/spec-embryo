@@ -68,6 +68,18 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
 - Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
 
+## Optional External AGENTS.md Snippet
+
+- Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.
+
+```md
+## Optional SpM workflow
+- Before multi-step or resume-heavy work, run `spm status`.
+- Read `docs/spm/current.md` before broad implementation work so you start from the repo's explicit checkpoint.
+- Use `spm memory pack` only when context is broad, stale, or cross-cutting.
+- Treat session notes as temporary until promoted with `spm memory consolidate`.
+```
+
 ## Nexus Coexistence
 
 - Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.

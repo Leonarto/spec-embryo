@@ -24,6 +24,7 @@ How to work:
 - Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.
 - Use `spm memory consolidate` to promote a session note into durable repo memory; do not treat session notes as canonical project truth.
+- If you need to refresh host-repo `AGENTS.md`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.
 - Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.
 - Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.
 - Update AGENTS files and local skills when adoption changes how future agents should work in this repo.

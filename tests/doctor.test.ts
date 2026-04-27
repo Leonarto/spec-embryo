@@ -182,6 +182,8 @@ describe("doctor service", () => {
 
       expect(verbose).toContain("Adoption summary:");
       expect(verbose).toContain("Current memory workflow:");
+      expect(verbose).toContain("Optional external AGENTS.md snippet:");
+      expect(verbose).toContain("## Optional SpM workflow");
       expect(verbose).toContain("Capability refresh:");
       expect(verbose).toContain("spm memory note create");
       expect(verbose).toContain("Direct agent brief (copy this to the current coding agent):");

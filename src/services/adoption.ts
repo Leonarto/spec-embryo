@@ -18,8 +18,11 @@ export interface MemoryWorkflowGuidance {
   preferredWorkflows: string[];
 }
 
+export type CurrentStateGuidanceStatus = "available" | "missing" | "unreadable";
+
 export interface WorkflowLoopGuidance {
   currentStateAvailable: boolean;
+  currentStateStatus: CurrentStateGuidanceStatus;
   steps: string[];
 }
 
@@ -29,12 +32,18 @@ export interface CapabilityRefreshGuidance {
   actions: string[];
 }
 
+export interface ExternalAgentsSnippetGuidance {
+  note: string;
+  snippetLines: string[];
+}
+
 export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
   workflowLoop: WorkflowLoopGuidance;
   memoryWorkflow: MemoryWorkflowGuidance;
+  externalAgentsSnippet: ExternalAgentsSnippetGuidance;
   capabilityRefresh: CapabilityRefreshGuidance;
   whatFound: string[];
   whatChanged: string[];
@@ -93,24 +102,24 @@ function uniqueCommands(suggestions: AdoptionCommandSuggestion[]): AdoptionComma
   return deduped;
 }
 
-function currentStateAvailableForGuidance(input: {
+function currentStateStatusForGuidance(input: {
   adoption: AdoptionInspection;
   doctorFindings: DoctorFinding[];
   commandContext?: "init" | "doctor";
-}): boolean {
+}): CurrentStateGuidanceStatus {
   if (input.commandContext === "init") {
-    return true;
+    return "available";
   }
 
-  if (
-    input.doctorFindings.some(
-      (finding) => finding.code === "missing-current-state" || finding.code === "invalid-current-state",
-    )
-  ) {
-    return false;
+  if (input.doctorFindings.some((finding) => finding.code === "invalid-current-state")) {
+    return "unreadable";
   }
 
-  return input.adoption.state === "adopted" || input.adoption.state === "partially-adopted";
+  if (input.doctorFindings.some((finding) => finding.code === "missing-current-state")) {
+    return "missing";
+  }
+
+  return input.adoption.state === "adopted" || input.adoption.state === "partially-adopted" ? "available" : "missing";
 }
 
 export function buildAdoptionGuidance(input: {
@@ -136,17 +145,23 @@ export function buildAdoptionGuidance(input: {
   const whatFound = [...input.adoption.findings];
   const whatChanged: string[] = [];
   const remainingWork: string[] = [];
-  const currentStateAvailable = currentStateAvailableForGuidance({
+  const currentStateStatus = currentStateStatusForGuidance({
     adoption: input.adoption,
     doctorFindings,
     commandContext: input.commandContext,
   });
+  const currentStateAvailable = currentStateStatus === "available";
   const workflowLoop: WorkflowLoopGuidance = {
     currentStateAvailable,
-    steps: workflowLoopLines(input.memoryDir, { currentStateAvailable }),
+    currentStateStatus,
+    steps: workflowLoopLines(input.memoryDir, { currentStateStatus }),
   };
   const memoryWorkflow: MemoryWorkflowGuidance = {
     preferredWorkflows: memoryWorkflowLines(),
+  };
+  const externalAgentsSnippet: ExternalAgentsSnippetGuidance = {
+    note: "Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.",
+    snippetLines: externalAgentsSnippetLines(input.memoryDir, { currentStateStatus }),
   };
   const capabilityRefresh: CapabilityRefreshGuidance = {
     required: toolUpgradeAvailable,
@@ -314,6 +329,7 @@ export function buildAdoptionGuidance(input: {
     agentOrientation,
     workflowLoop,
     memoryWorkflow,
+    externalAgentsSnippet,
     capabilityRefresh,
     whatFound,
     whatChanged,
@@ -346,6 +362,12 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Current memory workflow:",
     ...guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
+    "",
+    "Optional external AGENTS.md snippet:",
+    `- ${guidance.externalAgentsSnippet.note}`,
+    "```md",
+    ...guidance.externalAgentsSnippet.snippetLines,
+    "```",
     "",
     "Capability refresh:",
     ...(guidance.capabilityRefresh.required
@@ -431,15 +453,38 @@ function memoryWorkflowLines(): string[] {
   ];
 }
 
-export function workflowLoopLines(memoryDir: string, options: { currentStateAvailable: boolean }): string[] {
+export function workflowLoopLines(memoryDir: string, options: { currentStateStatus: CurrentStateGuidanceStatus }): string[] {
+  const currentStateLine =
+    options.currentStateStatus === "available"
+      ? `Read \`${buildRelativePath(memoryDir, "current.md")}\` for the repo's explicit checkpoint before broad implementation work.`
+      : options.currentStateStatus === "missing"
+        ? "If `current.md` is still missing, complete adoption with `spm init` or create the first checkpoint with `spm current set` before relying on resume-heavy workflow."
+        : "If `current.md` is unreadable, repair its frontmatter and re-run `spm doctor` before relying on resume-heavy workflow.";
+
   return [
     "Start with `spm status` for a cheap state, version, and findings summary.",
-    options.currentStateAvailable
-      ? `Read \`${buildRelativePath(memoryDir, "current.md")}\` for the repo's explicit checkpoint before broad implementation work.`
-      : "If `current.md` is still missing, complete adoption with `spm init` or create the first checkpoint with `spm current set` before relying on resume-heavy workflow.",
+    currentStateLine,
     "If context is broad, stale, or cross-cutting, use `spm memory pack` before diving into code.",
     "If you are resuming context-heavy work, inspect temporary scoped notes with `spm memory note list` instead of assuming they are already reflected in current state.",
     "Use `spm memory consolidate` to promote durable truth instead of treating session notes as canonical project memory.",
+  ];
+}
+
+function externalAgentsSnippetLines(memoryDir: string, options: { currentStateStatus: CurrentStateGuidanceStatus }): string[] {
+  const currentStateFile = buildRelativePath(memoryDir, "current.md");
+  const currentStateLine =
+    options.currentStateStatus === "available"
+      ? `- Read \`${currentStateFile}\` before broad implementation work so you start from the repo's explicit checkpoint.`
+      : options.currentStateStatus === "missing"
+        ? `- If \`${currentStateFile}\` is missing, run \`spm init\` or create the first checkpoint with \`spm current set\` before relying on resume-heavy workflow.`
+        : `- If \`${currentStateFile}\` is unreadable, repair its frontmatter and re-run \`spm doctor\` before relying on resume-heavy workflow.`;
+
+  return [
+    "## Optional SpM workflow",
+    "- Before multi-step or resume-heavy work, run `spm status`.",
+    currentStateLine,
+    "- Use `spm memory pack` only when context is broad, stale, or cross-cutting.",
+    "- Treat session notes as temporary until promoted with `spm memory consolidate`.",
   ];
 }
 
@@ -537,6 +582,14 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "",
+    "## Optional External AGENTS.md Snippet",
+    "",
+    `- ${input.guidance.externalAgentsSnippet.note}`,
+    "",
+    "```md",
+    ...input.guidance.externalAgentsSnippet.snippetLines,
+    "```",
+    "",
     `## ${NEXUS_COEXISTENCE_HEADING}`,
     "",
     ...nexusCoexistenceLines().map((line) => `- ${line}`),
@@ -609,6 +662,7 @@ export function renderDirectAgentBrief(input: {
     ...doctorModeLines().map((line) => `- ${line}`),
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
+    `- If you need to refresh host-repo \`AGENTS.md\`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.`,
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",
