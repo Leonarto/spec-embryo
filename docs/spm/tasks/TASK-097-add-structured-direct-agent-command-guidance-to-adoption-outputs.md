@@ -3,14 +3,14 @@ doc_kind = "task"
 id = "TASK-097"
 title = "Add structured direct-agent-command guidance to adoption outputs"
 summary = "Expose the direct agent command list in shared guidance and agent brief JSON instead of leaving it as render-only text."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-041"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-27T19:51:59.094Z"
 tags = []
-updated_at = "2026-04-27T19:52:49.000Z"
+updated_at = "2026-04-27T21:40:00.000Z"
 +++
 
 # Scope

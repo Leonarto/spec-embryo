@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "TASK-097 is in review after promoting direct agent command guidance into shared typed adoption data so JSON and renderer consumers stay aligned."
-focus = "Expose direct agent commands in structured adoption guidance"
-active_spec_ids = ["SPEC-041"]
-active_task_ids = ["TASK-097"]
+summary = "SPEC-041 is complete after promoting direct agent command guidance into shared typed adoption data for JSON and renderer consumers."
+focus = "Choose the next adoption or agent-guidance slice"
+active_spec_ids = []
+active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Review the new directAgentCommands structured field across adoption guidance and agent brief JSON.", "Confirm the renderers are consuming shared data instead of recomputing the direct-command section.", "Keep snippet content, direct command guidance, and JSON guidance aligned."]
+next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep direct command guidance, snippet guidance, and JSON adoption outputs aligned from one shared contract."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T21:32:00.000Z"
+updated_at = "2026-04-27T21:40:00.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-The 0.3.0 release is now published, so the repo focus returns to the next adoption data-structure slice. `TASK-097` is the active review gate: direct agent command guidance now exists as shared typed adoption data and in agent-brief JSON, not just in human-rendered text. This slice should be validated as the structured-data follow-through to the earlier command-discoverability work before the next adoption guidance refinement is chosen.
+The 0.3.0 release is out, and the queued follow-up slice is now complete as well. `SPEC-041` / `TASK-097` finished the structured-data follow-through to the earlier command-discoverability work by making direct agent commands part of the shared typed adoption contract and agent-brief JSON instead of leaving them as render-only text. The repo is back at a clean decision point for the next adoption or agent-guidance improvement.
 
 ## Notes
 

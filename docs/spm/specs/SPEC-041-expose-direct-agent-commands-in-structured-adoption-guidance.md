@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-041"
 title = "Expose direct agent commands in structured adoption guidance"
 summary = "Promote direct agent command guidance into shared typed data so JSON and renderer consumers stay aligned."
-status = "active"
+status = "done"
 task_ids = ["TASK-097"]
 tags = ["adoption", "agents", "json"]
-updated_at = "2026-04-27T19:52:49.000Z"
+updated_at = "2026-04-27T21:40:00.000Z"
 +++
 
 # Problem
