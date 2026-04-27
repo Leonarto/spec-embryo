@@ -177,6 +177,7 @@ describe("doctor service", () => {
       expect(concise).toContain("Spec Embryo doctor");
       expect(concise).toContain("Findings:");
       expect(concise).toContain("Run `spm doctor --verbose`");
+      expect(concise).toContain("spm agent brief");
       expect(concise).toContain("spm agent snippet");
       expect(concise).not.toContain("Adoption summary:");
       expect(concise).not.toContain("Direct agent brief (copy this to the current coding agent):");

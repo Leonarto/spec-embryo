@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-037 is complete after making concise doctor output point callers at spm agent snippet; the next adoption discoverability slice is ready to be chosen."
+summary = "SPEC-038 is complete after making concise doctor output point callers at spm agent brief; the next adoption discoverability slice is ready to be chosen."
 focus = "Choose the next adoption discoverability slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Pick the next adoption discoverability improvement from the agent-facing command surfaces.", "Prefer another small shared-wording slice instead of opening a new workflow branch.", "Keep doctor, agent brief, and agent snippet discoverable without duplicating instruction layers."]
+next_action_hints = ["Pick the next adoption discoverability improvement from the broader agent-facing command surfaces.", "Prefer another shared-wording slice instead of inventing a parallel workflow.", "Keep doctor, agent brief, and agent snippet discoverable without bloating default outputs."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T14:45:12.000Z"
+updated_at = "2026-04-27T18:19:40.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-SPEC-037 is now complete: concise `spm doctor` output points at `spm agent snippet` using the same shared adoption wording already used by the broader guides and briefs. That closes the narrow bounded-guidance discoverability gap. The repo is ready to open the next adjacent adoption slice, ideally another small command-discoverability improvement that reuses shared wording instead of expanding the workflow surface.
+SPEC-038 is now complete: concise `spm doctor` output points at `spm agent brief` and `spm agent snippet`, giving callers both the steady-state workflow path and the narrower bounded-`AGENTS.md` path without forcing `doctor --verbose`. The repo is ready for the next adjacent adoption slice, ideally one that teaches the broader adoption surfaces to reference the direct `spm agent brief` command with the same shared wording.
 
 ## Notes
 

@@ -461,6 +461,13 @@ export function agentSnippetCommandLines(): string[] {
   ];
 }
 
+export function agentBriefCommandLines(): string[] {
+  return [
+    "If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.",
+    "Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.",
+  ];
+}
+
 export function workflowLoopLines(memoryDir: string, options: { currentStateStatus: CurrentStateGuidanceStatus }): string[] {
   const currentStateLine =
     options.currentStateStatus === "available"

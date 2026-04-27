@@ -17,6 +17,7 @@ import { parseTomlFrontmatter } from "../frontmatter.ts";
 import { createDefaultConfig, readProjectConfig } from "../repository.ts";
 import { resolveProjectPaths } from "../paths.ts";
 import {
+  agentBriefCommandLines,
   agentSnippetCommandLines,
   buildAdoptionArtifactPaths,
   buildAdoptionGuidance,
@@ -714,6 +715,7 @@ export function renderDoctorReport(report: DoctorReport, options: DoctorRenderOp
       "",
       "Run `spm doctor --verbose` for the full adoption guide and direct agent brief.",
       "Use `spm doctor --json` when an agent only needs structured findings and metadata.",
+      ...agentBriefCommandLines(),
       ...agentSnippetCommandLines(),
     );
     if (report.versions.updateAvailable) {
