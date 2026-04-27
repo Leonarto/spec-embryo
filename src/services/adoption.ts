@@ -18,6 +18,10 @@ export interface MemoryWorkflowGuidance {
   preferredWorkflows: string[];
 }
 
+export interface DirectAgentCommandGuidance {
+  commands: string[];
+}
+
 export type CurrentStateGuidanceStatus = "available" | "missing" | "unreadable";
 
 export interface WorkflowLoopGuidance {
@@ -43,6 +47,7 @@ export interface AdoptionGuidance {
   agentOrientation: string[];
   workflowLoop: WorkflowLoopGuidance;
   memoryWorkflow: MemoryWorkflowGuidance;
+  directAgentCommands: DirectAgentCommandGuidance;
   externalAgentsSnippet: ExternalAgentsSnippetGuidance;
   capabilityRefresh: CapabilityRefreshGuidance;
   whatFound: string[];
@@ -158,6 +163,9 @@ export function buildAdoptionGuidance(input: {
   };
   const memoryWorkflow: MemoryWorkflowGuidance = {
     preferredWorkflows: memoryWorkflowLines(),
+  };
+  const directAgentCommands: DirectAgentCommandGuidance = {
+    commands: directAgentCommandLines(),
   };
   const externalAgentsSnippet: ExternalAgentsSnippetGuidance = {
     note: "Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.",
@@ -329,6 +337,7 @@ export function buildAdoptionGuidance(input: {
     agentOrientation,
     workflowLoop,
     memoryWorkflow,
+    directAgentCommands,
     externalAgentsSnippet,
     capabilityRefresh,
     whatFound,
@@ -364,7 +373,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     ...guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
     "",
     "Direct agent commands:",
-    ...directAgentCommandLines().map((item) => `- ${item}`),
+    ...guidance.directAgentCommands.commands.map((item) => `- ${item}`),
     "",
     "Optional external AGENTS.md snippet:",
     `- ${guidance.externalAgentsSnippet.note}`,
@@ -605,7 +614,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Direct Agent Commands",
     "",
-    ...directAgentCommandLines().map((line) => `- ${line}`),
+    ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
     "",
     "## Optional External AGENTS.md Snippet",
     "",
@@ -688,7 +697,7 @@ export function renderDirectAgentBrief(input: {
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "Direct agent commands:",
-    ...directAgentCommandLines().map((line) => `- ${line}`),
+    ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
     `- If you need to refresh host-repo \`AGENTS.md\`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.`,
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",

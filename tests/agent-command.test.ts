@@ -15,6 +15,9 @@ describe("agent command", () => {
       await initializeProject(rootDir);
 
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
+      const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        directAgentCommands: string[];
+      };
 
       expect(output).toContain("Spec Embryo agent brief");
       expect(output).toContain("Start here:");
@@ -28,6 +31,8 @@ describe("agent command", () => {
       expect(output).toContain("spm agent brief");
       expect(output).toContain("spm agent snippet");
       expect(output).toContain("No version-driven capability refresh is currently required.");
+      expect(parsed.directAgentCommands.some((item) => item.includes("spm agent brief"))).toBe(true);
+      expect(parsed.directAgentCommands.some((item) => item.includes("spm agent snippet"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

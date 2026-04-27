@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "Release prep for 0.3.0 is in progress after the adoption-guidance improvements that shipped since 0.2.0."
-focus = "Prepare the 0.3.0 release"
-active_spec_ids = []
-active_task_ids = []
+summary = "TASK-097 is in review after promoting direct agent command guidance into shared typed adoption data so JSON and renderer consumers stay aligned."
+focus = "Expose direct agent commands in structured adoption guidance"
+active_spec_ids = ["SPEC-041"]
+active_task_ids = ["TASK-097"]
 blocked_task_ids = []
-next_action_hints = ["Finish deterministic release verification before handing the publish command to the human.", "Publish 0.3.0 after the dry run is clean and the release-prep commit is in place.", "Resume the next adoption data-structure slice after the release is out."]
+next_action_hints = ["Review the new directAgentCommands structured field across adoption guidance and agent brief JSON.", "Confirm the renderers are consuming shared data instead of recomputing the direct-command section.", "Keep snippet content, direct command guidance, and JSON guidance aligned."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T21:05:00.000Z"
+updated_at = "2026-04-27T21:32:00.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-Release prep for 0.3.0 is underway. The work since 0.2.0 materially improved agent adoption and context orchestration surfaces: `spm agent brief`, `spm agent snippet`, shared adoption guidance across `doctor`/`init`, scoped memory-note workflows, context packs, and stronger changed-item reporting are all in the published release scope. The current tree intentionally pauses before the next adoption data-structure slice so the release can ship from a clean committed checkpoint.
+The 0.3.0 release is now published, so the repo focus returns to the next adoption data-structure slice. `TASK-097` is the active review gate: direct agent command guidance now exists as shared typed adoption data and in agent-brief JSON, not just in human-rendered text. This slice should be validated as the structured-data follow-through to the earlier command-discoverability work before the next adoption guidance refinement is chosen.
 
 ## Notes
 

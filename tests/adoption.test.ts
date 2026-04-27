@@ -53,6 +53,8 @@ describe("adoption guidance", () => {
     expect(guidance.spmOrientation.whatSpmIs).toContain("local-first CLI");
     expect(guidance.spmOrientation.whenToUse.length).toBeGreaterThan(0);
     expect(guidance.memoryWorkflow.preferredWorkflows.some((item) => item.includes("spm memory note create"))).toBe(true);
+    expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent brief"))).toBe(true);
+    expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent snippet"))).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
     expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
     expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
