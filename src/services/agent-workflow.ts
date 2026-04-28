@@ -30,6 +30,7 @@ export interface AgentWorkflowBrief {
     note: string;
     snippetLines: string[];
   };
+  nexusCoexistence: string[];
   capabilityRefresh: CapabilityRefreshGuidance;
 }
 
@@ -81,6 +82,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     directAgentCommands: report.guidance.directAgentCommands.commands,
     directAgentCommandSuggestions: report.guidance.directAgentCommands.suggestions,
     externalAgentsSnippet: report.guidance.externalAgentsSnippet,
+    nexusCoexistence: report.guidance.nexusCoexistence.lines,
     capabilityRefresh: report.guidance.capabilityRefresh,
   };
 }
@@ -141,6 +143,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "```md",
     ...brief.externalAgentsSnippet.snippetLines,
     "```",
+    "",
+    "Nexus coexistence:",
+    ...brief.nexusCoexistence.map((item) => `- ${item}`),
     "",
     "Doctor modes:",
     ...brief.doctorModes.map((item) => `- ${item}`),

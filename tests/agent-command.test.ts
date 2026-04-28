@@ -24,15 +24,18 @@ describe("agent command", () => {
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
         directAgentCommands: string[];
         directAgentCommandSuggestions: Array<{ command: string; reason: string }>;
+        nexusCoexistence: string[];
       };
 
       expect(output).toContain("Spec Embryo agent brief");
       expect(output).toContain("Start here:");
       expect(output).toContain("What to inspect first:");
       expect(output).toContain("Tag guidance:");
+      expect(output).toContain("Nexus coexistence:");
       expect(output).toContain("spm status");
       expect(output).toContain("Inspect `docs` as likely source material");
       expect(output).toContain("Treat tags as retrieval handles");
+      expect(output).toContain("Nexus is optional and external to Spec Embryo");
       expect(output).toContain("docs/spm/current.md");
       expect(output).toContain("spm memory pack");
       expect(output).toContain("Workflow loop commands:");
@@ -50,6 +53,7 @@ describe("agent command", () => {
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --json")).toBe(true);
       expect(parsed.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
       expect(parsed.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
+      expect(parsed.nexusCoexistence.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
       expect(output).toContain("Direct agent commands:");
       expect(output).toContain("Direct agent command suggestions:");
       expect(output).toContain("Optional AGENTS.md snippet:");
@@ -82,15 +86,18 @@ describe("agent command", () => {
         sourceMaterialHints: string[];
         tagGuidance: string[];
         partialAdoptionChecks: string[];
+        nexusCoexistence: string[];
       };
 
       expect(output).toContain("What to inspect first:");
       expect(output).toContain("Tag guidance:");
+      expect(output).toContain("Nexus coexistence:");
       expect(output).toContain("Partial adoption checks:");
       expect(output).toContain("existing specs and tasks still need conversion");
       expect(parsed.repo.adoptionState).toBe("partially-adopted");
       expect(parsed.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
       expect(parsed.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
+      expect(parsed.nexusCoexistence.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
       expect(parsed.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });

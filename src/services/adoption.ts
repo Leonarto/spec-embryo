@@ -51,6 +51,10 @@ export interface ExternalAgentsSnippetGuidance {
   snippetLines: string[];
 }
 
+export interface NexusCoexistenceGuidance {
+  lines: string[];
+}
+
 export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
@@ -63,6 +67,7 @@ export interface AdoptionGuidance {
   memoryWorkflow: MemoryWorkflowGuidance;
   directAgentCommands: DirectAgentCommandGuidance;
   externalAgentsSnippet: ExternalAgentsSnippetGuidance;
+  nexusCoexistence: NexusCoexistenceGuidance;
   capabilityRefresh: CapabilityRefreshGuidance;
   whatFound: string[];
   whatChanged: string[];
@@ -191,6 +196,9 @@ export function buildAdoptionGuidance(input: {
   const externalAgentsSnippet: ExternalAgentsSnippetGuidance = {
     note: "Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.",
     snippetLines: externalAgentsSnippetLines(input.memoryDir, { currentStateStatus }),
+  };
+  const nexusCoexistence: NexusCoexistenceGuidance = {
+    lines: nexusCoexistenceLines(),
   };
   const capabilityRefresh: CapabilityRefreshGuidance = {
     required: toolUpgradeAvailable,
@@ -366,6 +374,7 @@ export function buildAdoptionGuidance(input: {
     memoryWorkflow,
     directAgentCommands,
     externalAgentsSnippet,
+    nexusCoexistence,
     capabilityRefresh,
     whatFound,
     whatChanged,
@@ -428,6 +437,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "```md",
     ...guidance.externalAgentsSnippet.snippetLines,
     "```",
+    "",
+    `${NEXUS_COEXISTENCE_HEADING}:`,
+    ...guidance.nexusCoexistence.lines.map((item) => `- ${item}`),
     "",
     "Capability refresh:",
     ...(guidance.capabilityRefresh.required
@@ -836,7 +848,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     `## ${NEXUS_COEXISTENCE_HEADING}`,
     "",
-    ...nexusCoexistenceLines().map((line) => `- ${line}`),
+    ...input.guidance.nexusCoexistence.lines.map((line) => `- ${line}`),
     "",
     "## Nexus Setup Flow",
     "",
@@ -928,7 +940,7 @@ export function renderDirectAgentBrief(input: {
     `- Use only canonical spec statuses: ${SPEC_STATUSES.join(", ")}.`,
     `- Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
     ...input.guidance.tagGuidance.map((line) => `- ${line}`),
-    ...nexusCoexistenceLines().map((line) => `- ${line}`),
+    ...input.guidance.nexusCoexistence.lines.map((line) => `- ${line}`),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {

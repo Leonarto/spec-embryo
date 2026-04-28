@@ -3,14 +3,14 @@ doc_kind = "task"
 id = "TASK-106"
 title = "Add structured tag guidance to adoption outputs"
 summary = "Expose tag-handling expectations as shared structured adoption guidance for doctor and agent brief surfaces."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-050"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-28T16:20:00Z"
 tags = []
-updated_at = "2026-04-28T16:21:42.035Z"
+updated_at = "2026-04-28T16:40:00Z"
 +++
 
 # Scope

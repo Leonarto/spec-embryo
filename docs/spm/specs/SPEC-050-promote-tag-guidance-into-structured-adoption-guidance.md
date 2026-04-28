@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-050"
 title = "Promote tag guidance into structured adoption guidance"
 summary = "Expose the existing tag-handling guidance as shared structured adoption data so wrappers and agents can consume retrieval expectations without scraping prose."
-status = "active"
+status = "done"
 task_ids = ["TASK-106"]
 tags = ["adoption", "agents", "memory", "json"]
-updated_at = "2026-04-28T16:20:00Z"
+updated_at = "2026-04-28T16:40:00Z"
 +++
 
 # Overview
