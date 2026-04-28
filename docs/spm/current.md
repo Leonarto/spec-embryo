@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-047 is complete after adding structured capability-refresh review checks to shared adoption guidance."
-focus = "Choose the next adoption or agent-guidance slice"
-active_spec_ids = []
-active_task_ids = []
+summary = "SPEC-048 is active to promote partial-adoption checks into structured guidance for JSON-first callers."
+focus = "Add structured partial-adoption checks across shared adoption guidance and agent brief JSON."
+active_spec_ids = ["SPEC-048"]
+active_task_ids = ["TASK-104"]
 blocked_task_ids = []
-next_action_hints = ["Prefer the next slice that turns another adoption-only prose checklist into structured data for wrappers.", "Keep shared adoption guidance aligned across doctor, init, direct agent brief, and `spm agent brief --json` from one deterministic contract.", "Favor small additive slices over broad wording churn."]
+next_action_hints = ["Expose the existing partial-adoption checklist as shared data instead of recomputing it inside prose renderers.", "Flow the same partial-adoption checklist into `spm agent brief --json` and the short human brief.", "Keep fully adopted repos on the empty-list path so the change remains additive and quiet."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T15:20:00Z"
+updated_at = "2026-04-28T15:30:00Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-047` is now complete. Capability refresh guidance keeps its existing text actions and typed commands, and it now also exposes structured review checks so JSON-first callers can tell what to verify after an SpM upgrade without scraping prose. The next meaningful slice should keep tightening the shared adoption contract instead of duplicating the same guidance in more renderers.
+`SPEC-048` is now active. Partial-adoption cleanup guidance still exists only as prose in the migration and direct-agent surfaces, which means wrappers and JSON-first callers cannot reliably tell what to review when adoption is incomplete. This slice promotes that checklist into shared structured guidance so the short agent brief, doctor JSON, and human adoption artifacts all stay aligned from one field.
 
 ## Notes
 

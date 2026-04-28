@@ -55,6 +55,7 @@ export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
+  partialAdoptionChecks: string[];
   workflowLoop: WorkflowLoopGuidance;
   doctorModes: DoctorModeGuidance;
   memoryWorkflow: MemoryWorkflowGuidance;
@@ -355,6 +356,7 @@ export function buildAdoptionGuidance(input: {
             : "This repo is fresh to Spec Embryo and now needs its first real spec/task/current-state content.",
     spmOrientation,
     agentOrientation,
+    partialAdoptionChecks: partialAdoptionChecklines(input.adoption),
     workflowLoop,
     doctorModes,
     memoryWorkflow,
@@ -407,6 +409,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Direct agent command suggestions:",
     ...guidance.directAgentCommands.suggestions.map((item) => `- ${item.command} — ${item.reason}`),
+    ...(guidance.partialAdoptionChecks.length > 0
+      ? ["", "Partial adoption checks:", ...guidance.partialAdoptionChecks.map((item) => `- ${item}`)]
+      : []),
     "",
     "Optional external AGENTS.md snippet:",
     `- ${guidance.externalAgentsSnippet.note}`,
@@ -740,7 +745,6 @@ export function renderMigrationGuideMarkdown(input: {
 }): string {
   const artifactPaths = buildAdoptionArtifactPaths(input.memoryDir);
   const sourceLines = sourceMaterialLines(input.adoption);
-  const partialChecks = partialAdoptionChecklines(input.adoption);
   const lines = [
     "# Spec Embryo Migration Guide",
     "",
@@ -830,12 +834,12 @@ export function renderMigrationGuideMarkdown(input: {
     ...nexusInstallSteps().map((line, index) => `${index + 1}. ${line}`),
   ];
 
-  if (partialChecks.length > 0) {
+  if (input.guidance.partialAdoptionChecks.length > 0) {
     lines.push(
       "",
       "## Partial Adoption Checks",
       "",
-      ...partialChecks.map((line) => `- ${line}`),
+      ...input.guidance.partialAdoptionChecks.map((line) => `- ${line}`),
     );
   }
 
@@ -881,7 +885,6 @@ export function renderDirectAgentBrief(input: {
   guidance: AdoptionGuidance;
 }): string {
   const sourceLines = sourceMaterialLines(input.adoption);
-  const partialChecks = partialAdoptionChecklines(input.adoption);
   const lines = [
     "You are helping adopt Spec Embryo into this repository.",
     "",
@@ -920,8 +923,12 @@ export function renderDirectAgentBrief(input: {
     ...nexusCoexistenceLines().map((line) => `- ${line}`),
   ];
 
-  if (partialChecks.length > 0) {
-    lines.push("", "Before declaring adoption complete, check:", ...partialChecks.map((line) => `- ${line}`));
+  if (input.guidance.partialAdoptionChecks.length > 0) {
+    lines.push(
+      "",
+      "Before declaring adoption complete, check:",
+      ...input.guidance.partialAdoptionChecks.map((line) => `- ${line}`),
+    );
   }
 
   lines.push(

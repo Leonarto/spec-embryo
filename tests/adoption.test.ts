@@ -120,6 +120,7 @@ describe("adoption guidance", () => {
     expect(guidance.recommendedCommands.some((item) => item.command === "spm doctor --json")).toBe(true);
     expect(guidance.remainingWork.some((item) => item.includes("still needs migration or cleanup"))).toBe(true);
     expect(guidance.remainingWork.some((item) => item.includes("Doctor reported 1 issue"))).toBe(true);
+    expect(guidance.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
   });
 
   test("renders migration artifacts for the user-mediated adoption loop", () => {
@@ -166,6 +167,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("User-Mediated Agent Handoff");
     expect(guide).toContain("Copy the direct agent brief");
     expect(guide).toContain("Partial Adoption Checks");
+    expect(guide).toContain("Check whether existing specs and tasks still need conversion into the managed SpM shape.");
     expect(guide).toContain("Adopting Newer SpM Guidance");
     expect(guide).toContain("Re-run `spm init`");
     expect(guide).toContain("`spm doctor --verbose`");
@@ -209,6 +211,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("spm nexus setup --apply");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("Before declaring adoption complete, check:");
+    expect(brief).toContain("Check whether task statuses and dependencies describe the real work accurately enough for the UI and resume flows.");
     expect(brief).toContain("spm ui");
     expect(brief).toContain("Use `spm doctor` first for a cheap status");
     expect(brief).toContain("Use `spm doctor --verbose` only when");

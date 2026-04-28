@@ -58,6 +58,7 @@ describe("doctor service", () => {
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm status")).toBe(true);
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "read docs/spm/current.md")).toBe(true);
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm memory pack")).toBe(true);
+      expect(report.guidance.partialAdoptionChecks).toHaveLength(0);
       expect(report.guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
       expect(report.directAgentBriefFile).toBe("docs/spm/adoption/direct-agent-brief.md");
@@ -201,6 +202,23 @@ describe("doctor service", () => {
       expect(verbose).toContain("Capability refresh:");
       expect(verbose).toContain("spm memory note create");
       expect(verbose).toContain("Direct agent brief (copy this to the current coding agent):");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("surfaces structured partial-adoption checks when cleanup is still needed", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-doctor-"));
+
+    try {
+      await initializeProject(rootDir);
+      await rm(join(rootDir, "docs", "spm", "current.md"));
+
+      const report = await buildDoctorReport(rootDir);
+
+      expect(report.adoption.state).toBe("partially-adopted");
+      expect(report.guidance.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
+      expect(report.directAgentBrief).toContain("Before declaring adoption complete, check:");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

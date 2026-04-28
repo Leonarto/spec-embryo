@@ -16,6 +16,7 @@ describe("agent command", () => {
 
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
       const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        partialAdoptionChecks: string[];
         workflowLoopCommands: Array<{ command: string; reason: string }>;
         doctorModeCommands: Array<{ command: string; reason: string }>;
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
@@ -54,6 +55,29 @@ describe("agent command", () => {
       expect(parsed.directAgentCommands.some((item) => item.includes("spm agent snippet"))).toBe(true);
       expect(parsed.directAgentCommandSuggestions.some((item) => item.command === "spm agent brief")).toBe(true);
       expect(parsed.directAgentCommandSuggestions.some((item) => item.command === "spm agent snippet --json")).toBe(true);
+      expect(parsed.partialAdoptionChecks).toHaveLength(0);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("returns structured partial-adoption checks when cleanup is still needed", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agent-"));
+
+    try {
+      await initializeProject(rootDir);
+      await rm(join(rootDir, "docs", "spm", "current.md"));
+
+      const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
+      const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        repo: { adoptionState: string };
+        partialAdoptionChecks: string[];
+      };
+
+      expect(output).toContain("Partial adoption checks:");
+      expect(output).toContain("existing specs and tasks still need conversion");
+      expect(parsed.repo.adoptionState).toBe("partially-adopted");
+      expect(parsed.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
