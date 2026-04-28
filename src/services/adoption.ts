@@ -55,6 +55,7 @@ export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
+  sourceMaterialHints: string[];
   partialAdoptionChecks: string[];
   workflowLoop: WorkflowLoopGuidance;
   doctorModes: DoctorModeGuidance;
@@ -356,6 +357,7 @@ export function buildAdoptionGuidance(input: {
             : "This repo is fresh to Spec Embryo and now needs its first real spec/task/current-state content.",
     spmOrientation,
     agentOrientation,
+    sourceMaterialHints: sourceMaterialLines(input.adoption),
     partialAdoptionChecks: partialAdoptionChecklines(input.adoption),
     workflowLoop,
     doctorModes,
@@ -394,6 +396,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Doctor Mode Commands:",
     ...guidance.doctorModes.commands.map((item) => `- ${item.command} — ${item.reason}`),
+    "",
+    "Source material hints:",
+    ...guidance.sourceMaterialHints.map((item) => `- ${item}`),
     "",
     "Default workflow loop:",
     ...guidance.workflowLoop.steps.map((item, index) => `${index + 1}. ${item}`),
@@ -744,7 +749,6 @@ export function renderMigrationGuideMarkdown(input: {
   guidance: AdoptionGuidance;
 }): string {
   const artifactPaths = buildAdoptionArtifactPaths(input.memoryDir);
-  const sourceLines = sourceMaterialLines(input.adoption);
   const lines = [
     "# Spec Embryo Migration Guide",
     "",
@@ -769,7 +773,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Source Material To Inspect First",
     "",
-    ...sourceLines.map((line) => `- ${line}`),
+    ...input.guidance.sourceMaterialHints.map((line) => `- ${line}`),
     "",
     "## What SpM Already Handles Deterministically",
     "",
@@ -884,7 +888,6 @@ export function renderDirectAgentBrief(input: {
   adoption: AdoptionInspection;
   guidance: AdoptionGuidance;
 }): string {
-  const sourceLines = sourceMaterialLines(input.adoption);
   const lines = [
     "You are helping adopt Spec Embryo into this repository.",
     "",
@@ -896,7 +899,7 @@ export function renderDirectAgentBrief(input: {
     `- The managed memory home for this repo is \`${input.memoryDir}\`.`,
     "",
     "What to inspect first:",
-    ...sourceLines.map((line) => `- ${line}`),
+    ...input.guidance.sourceMaterialHints.map((line) => `- ${line}`),
     "",
     "How to work:",
     "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",

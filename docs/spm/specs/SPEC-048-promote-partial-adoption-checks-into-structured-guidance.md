@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-048"
 title = "Promote partial-adoption checks into structured guidance"
 summary = "Expose the partial-adoption cleanup checklist as shared structured guidance so wrappers and agents can consume it without scraping prose-only adoption artifacts."
-status = "active"
+status = "done"
 task_ids = ["TASK-104"]
 tags = ["adoption", "agents", "doctor", "json"]
-updated_at = "2026-04-28T15:30:00Z"
+updated_at = "2026-04-28T16:00:00Z"
 +++
 
 # Overview

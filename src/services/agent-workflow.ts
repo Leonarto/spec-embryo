@@ -15,6 +15,7 @@ export interface AgentWorkflowBrief {
     updateAvailable: boolean;
   };
   startHere: string[];
+  sourceMaterialHints: string[];
   partialAdoptionChecks: string[];
   workflowLoop: string[];
   workflowLoopCommands: AdoptionCommandSuggestion[];
@@ -67,6 +68,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
           ? `If \`${currentFile}\` is still missing, run \`spm init\` or write the first checkpoint with \`spm current set\` before relying on resume-heavy work.`
           : `If \`${currentFile}\` is unreadable, repair its frontmatter and re-run \`spm doctor\` before relying on resume-heavy work.`,
     ],
+    sourceMaterialHints: report.guidance.sourceMaterialHints,
     partialAdoptionChecks: report.guidance.partialAdoptionChecks,
     workflowLoop: report.guidance.workflowLoop.steps,
     workflowLoopCommands: report.guidance.workflowLoop.commands,
@@ -104,6 +106,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "Start here:",
     ...brief.startHere.map((item) => `- ${item}`),
+    "",
+    "What to inspect first:",
+    ...brief.sourceMaterialHints.map((item) => `- ${item}`),
     ...(brief.partialAdoptionChecks.length > 0
       ? ["", "Partial adoption checks:", ...brief.partialAdoptionChecks.map((item) => `- ${item}`)]
       : []),

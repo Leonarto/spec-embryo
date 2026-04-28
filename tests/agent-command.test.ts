@@ -16,6 +16,7 @@ describe("agent command", () => {
 
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
       const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        sourceMaterialHints: string[];
         partialAdoptionChecks: string[];
         workflowLoopCommands: Array<{ command: string; reason: string }>;
         doctorModeCommands: Array<{ command: string; reason: string }>;
@@ -26,7 +27,9 @@ describe("agent command", () => {
 
       expect(output).toContain("Spec Embryo agent brief");
       expect(output).toContain("Start here:");
+      expect(output).toContain("What to inspect first:");
       expect(output).toContain("spm status");
+      expect(output).toContain("Inspect `docs` as likely source material");
       expect(output).toContain("docs/spm/current.md");
       expect(output).toContain("spm memory pack");
       expect(output).toContain("Workflow loop commands:");
@@ -42,6 +45,7 @@ describe("agent command", () => {
       expect(parsed.workflowLoopCommands.some((item) => item.command === "spm memory pack")).toBe(true);
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor")).toBe(true);
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --json")).toBe(true);
+      expect(parsed.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
       expect(output).toContain("Direct agent commands:");
       expect(output).toContain("Direct agent command suggestions:");
       expect(output).toContain("Optional AGENTS.md snippet:");
@@ -71,12 +75,15 @@ describe("agent command", () => {
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
       const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
         repo: { adoptionState: string };
+        sourceMaterialHints: string[];
         partialAdoptionChecks: string[];
       };
 
+      expect(output).toContain("What to inspect first:");
       expect(output).toContain("Partial adoption checks:");
       expect(output).toContain("existing specs and tasks still need conversion");
       expect(parsed.repo.adoptionState).toBe("partially-adopted");
+      expect(parsed.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
       expect(parsed.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });

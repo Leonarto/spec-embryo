@@ -3,14 +3,14 @@ doc_kind = "task"
 id = "TASK-104"
 title = "Add structured partial-adoption checks to adoption outputs"
 summary = "Expose the partial-adoption cleanup checklist as shared data across doctor and agent guidance surfaces."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-048"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-28T15:30:00Z"
 tags = []
-updated_at = "2026-04-28T15:29:38.531Z"
+updated_at = "2026-04-28T16:00:00Z"
 +++
 
 # Scope

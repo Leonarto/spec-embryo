@@ -66,6 +66,7 @@ describe("adoption guidance", () => {
     expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent snippet"))).toBe(true);
     expect(guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
     expect(guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent snippet --json")).toBe(true);
+    expect(guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
     expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
     expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
@@ -166,6 +167,8 @@ describe("adoption guidance", () => {
     expect(artifactPaths.agentBriefFile).toBe("specs/spm/adoption/direct-agent-brief.md");
     expect(guide).toContain("User-Mediated Agent Handoff");
     expect(guide).toContain("Copy the direct agent brief");
+    expect(guide).toContain("## Source Material To Inspect First");
+    expect(guide).toContain("Inspect `specs` as likely source material for the real project direction and migration work.");
     expect(guide).toContain("Partial Adoption Checks");
     expect(guide).toContain("Check whether existing specs and tasks still need conversion into the managed SpM shape.");
     expect(guide).toContain("Adopting Newer SpM Guidance");
@@ -210,6 +213,8 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Nexus Setup Flow");
     expect(guide).toContain("spm nexus setup --apply");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
+    expect(brief).toContain("What to inspect first:");
+    expect(brief).toContain("Inspect `specs` as likely source material for the real project direction and migration work.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("Check whether task statuses and dependencies describe the real work accurately enough for the UI and resume flows.");
     expect(brief).toContain("spm ui");
