@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "No active implementation slice is open; the next work should be chosen from the next adoption-guidance refinement."
-focus = "Choose the next structured adoption-guidance improvement now that Nexus setup guidance includes review checks."
+summary = "Release prep is in progress for 0.3.1 after the latest adoption-guidance and Nexus structured-data improvements."
+focus = "Verify publish readiness for 0.3.1 and hand the final publish command to the human."
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Keep extending adoption guidance through shared structured data instead of renderer-only prose.", "Prefer small additive slices that improve JSON-first agent consumers without changing existing workflow wording.", "Open the next slice from the same adoption and agent-guidance seam so the contract stays coherent."]
+next_action_hints = ["Finish deterministic release verification for 0.3.1 before publishing.", "Keep the worktree clean and the recorded tool version aligned with the package version.", "After publish, capture the next product slice from the adoption and agent-guidance seam."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T18:45:00Z"
+updated_at = "2026-04-28T19:05:00Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-054` is complete. Nexus setup steps, commands, and review checks now live in shared structured adoption data, so doctor JSON, the short agent brief, and the human adoption artifacts all stay aligned on one bounded Nexus enablement contract. No follow-up slice is active yet; the next work should continue tightening JSON-first adoption guidance from this shared surface.
+`SPEC-054` is complete. Nexus setup steps, commands, and review checks now live in shared structured adoption data, so doctor JSON, the short agent brief, and the human adoption artifacts all stay aligned on one bounded Nexus enablement contract. The repo is now in release prep for `0.3.1`; once deterministic verification and `bun publish --dry-run --access public` pass, the human can run the final publish command and then choose the next adoption-guidance slice.
 
 ## Notes
 

@@ -16,7 +16,7 @@ describe("agent-style memory retrieval evals", () => {
 
     expect(bundle.results[0]?.id).toBe("SPEC-036");
     expect(bundle.results[0]?.matchReasons).toContain("spec anchor");
-    expect(bundle.results.some((item) => item.id === "TASK-040")).toBe(true);
+    expect(bundle.results.some((item) => item.id === "SPEC-054")).toBe(true);
   });
 
   test("memory command family queries surface the umbrella spec before narrower tasks", async () => {
