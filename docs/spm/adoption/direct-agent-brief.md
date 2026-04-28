@@ -74,6 +74,10 @@ Nexus setup flow:
 - Step 3: Ask the human whether to enable bounded Nexus coexistence for this repo.
 - Step 4: If approved, run `spm nexus setup --apply` instead of editing `.specpm/config.toml` and `AGENTS.md` by hand.
 - Step 5: Run `spm doctor` after apply, then run the recommended GitNexus indexing command if the external tool is installed.
+Nexus setup commands:
+- spm nexus setup — Preview the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.
+- spm nexus setup --apply — Apply the bounded Nexus coexistence changes through SpM instead of hand-editing config and AGENTS files. Ask the human before running this command.
+- spm doctor — Re-check the repo after enabling Nexus so the coexistence guidance and health checks reflect the new setup.
 
 Deterministic commands to prefer:
 - spm doctor

@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "No active implementation slice is open; the next work should be chosen from the next adoption-guidance refinement."
-focus = "Choose the next structured adoption-guidance improvement now that Nexus setup flow is shared data."
-active_spec_ids = []
-active_task_ids = []
+summary = "SPEC-053 is active to promote Nexus setup commands into structured adoption data for JSON-first callers."
+focus = "Add typed Nexus setup command suggestions across shared adoption guidance and agent brief JSON."
+active_spec_ids = ["SPEC-053"]
+active_task_ids = ["TASK-109"]
 blocked_task_ids = []
-next_action_hints = ["Keep extending adoption guidance through shared structured data instead of renderer-only prose.", "Prefer small additive slices that improve JSON-first agent consumers without changing existing workflow wording.", "Open the next slice from the same adoption/agent-guidance seam so the contract stays coherent."]
+next_action_hints = ["Expose bounded Nexus setup commands as shared data instead of leaving them embedded only in prose sections.", "Flow the same Nexus setup commands into `spm agent brief --json` and the short human brief.", "Keep the setup flow wording intact while adding typed command suggestions for JSON-first callers."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T17:20:00Z"
+updated_at = "2026-04-28T17:30:00Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-052` is complete. Nexus setup flow now lives in shared structured adoption data, so doctor JSON, the short agent brief, and the human adoption artifacts all read from the same bounded setup sequence instead of recomputing it in prose-only renderers. No follow-up slice is active yet; the next work should continue tightening JSON-first adoption guidance from this shared contract.
+`SPEC-053` is now active. Nexus setup flow steps already live in shared structured adoption data, but JSON-first callers still need to infer the actual bounded commands from prose sections. This slice promotes those setup commands into the shared contract so doctor JSON, the short agent brief, and the human adoption artifacts all stay aligned on one typed Nexus enablement surface.
 
 ## Notes
 

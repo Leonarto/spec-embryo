@@ -32,12 +32,18 @@ export interface AgentWorkflowBrief {
   };
   nexusCoexistence: string[];
   nexusSetup: string[];
+  nexusSetupCommands: AdoptionCommandSuggestion[];
   capabilityRefresh: CapabilityRefreshGuidance;
 }
 
 export interface AgentSnippet {
   note: string;
   snippetLines: string[];
+}
+
+function renderCommandSuggestion(suggestion: AdoptionCommandSuggestion): string {
+  const approvalNote = suggestion.requiresHumanApproval ? " Ask the human before running this command." : "";
+  return `- ${suggestion.command} — ${suggestion.reason}${approvalNote}`;
 }
 
 function currentStateFile(memoryDir: string): string {
@@ -85,6 +91,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     externalAgentsSnippet: report.guidance.externalAgentsSnippet,
     nexusCoexistence: report.guidance.nexusCoexistence.lines,
     nexusSetup: report.guidance.nexusSetup.steps,
+    nexusSetupCommands: report.guidance.nexusSetup.commands,
     capabilityRefresh: report.guidance.capabilityRefresh,
   };
 }
@@ -126,19 +133,19 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     ...brief.workflowLoop.map((item, index) => `${index + 1}. ${item}`),
     "",
     "Workflow loop commands:",
-    ...brief.workflowLoopCommands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...brief.workflowLoopCommands.map(renderCommandSuggestion),
     "",
     "Scoped memory workflow:",
     ...brief.scopedMemoryWorkflow.map((item) => `- ${item}`),
     "",
     "Scoped memory commands:",
-    ...brief.scopedMemoryCommands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...brief.scopedMemoryCommands.map(renderCommandSuggestion),
     "",
     "Direct agent commands:",
     ...brief.directAgentCommands.map((item) => `- ${item}`),
     "",
     "Direct agent command suggestions:",
-    ...brief.directAgentCommandSuggestions.map((item) => `- ${item.command} — ${item.reason}`),
+    ...brief.directAgentCommandSuggestions.map(renderCommandSuggestion),
     "",
     "Optional AGENTS.md snippet:",
     `- ${brief.externalAgentsSnippet.note}`,
@@ -152,6 +159,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "Nexus setup flow:",
     ...brief.nexusSetup.map((item, index) => `${index + 1}. ${item}`),
     "",
+    "Nexus setup commands:",
+    ...brief.nexusSetupCommands.map(renderCommandSuggestion),
+    "",
     "Doctor modes:",
     ...brief.doctorModes.map((item) => `- ${item}`),
     "",
@@ -162,7 +172,7 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     ...(brief.capabilityRefresh.required
       ? [
           `- ${brief.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
-          ...brief.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
+          ...brief.capabilityRefresh.commands.map(renderCommandSuggestion),
           ...brief.capabilityRefresh.reviewChecks.map((item) => `- Review: ${item}`),
           ...brief.capabilityRefresh.actions.map((item) => `- ${item}`),
         ]

@@ -5,6 +5,7 @@ import { SPEC_STATUSES, TASK_STATUSES } from "../domain.ts";
 export interface AdoptionCommandSuggestion {
   command: string;
   reason: string;
+  requiresHumanApproval?: boolean;
 }
 
 export interface SpmOrientation {
@@ -57,6 +58,7 @@ export interface NexusCoexistenceGuidance {
 
 export interface NexusSetupGuidance {
   steps: string[];
+  commands: AdoptionCommandSuggestion[];
 }
 
 export interface AdoptionGuidance {
@@ -129,6 +131,16 @@ function uniqueCommands(suggestions: AdoptionCommandSuggestion[]): AdoptionComma
   }
 
   return deduped;
+}
+
+function renderCommandSuggestion(suggestion: AdoptionCommandSuggestion): string {
+  const approvalNote = suggestion.requiresHumanApproval ? " Ask the human before running this command." : "";
+  return `- ${suggestion.command} — ${suggestion.reason}${approvalNote}`;
+}
+
+function renderMarkdownCommandSuggestion(suggestion: AdoptionCommandSuggestion): string {
+  const approvalNote = suggestion.requiresHumanApproval ? " Ask the human before running this command." : "";
+  return `- \`${suggestion.command}\` — ${suggestion.reason}${approvalNote}`;
 }
 
 function currentStateStatusForGuidance(input: {
@@ -207,6 +219,7 @@ export function buildAdoptionGuidance(input: {
   };
   const nexusSetup: NexusSetupGuidance = {
     steps: nexusInstallSteps(),
+    commands: nexusSetupCommandSuggestions(),
   };
   const capabilityRefresh: CapabilityRefreshGuidance = {
     required: toolUpgradeAvailable,
@@ -415,7 +428,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     ...guidance.doctorModes.preferredModes.map((item) => `- ${item}`),
     "",
     "Doctor Mode Commands:",
-    ...guidance.doctorModes.commands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...guidance.doctorModes.commands.map(renderCommandSuggestion),
     "",
     "Source material hints:",
     ...guidance.sourceMaterialHints.map((item) => `- ${item}`),
@@ -427,7 +440,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     ...guidance.workflowLoop.steps.map((item, index) => `${index + 1}. ${item}`),
     "",
     "Workflow loop commands:",
-    ...guidance.workflowLoop.commands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...guidance.workflowLoop.commands.map(renderCommandSuggestion),
     "",
     "Current memory workflow:",
     ...guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
@@ -436,7 +449,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     ...guidance.directAgentCommands.commands.map((item) => `- ${item}`),
     "",
     "Direct agent command suggestions:",
-    ...guidance.directAgentCommands.suggestions.map((item) => `- ${item.command} — ${item.reason}`),
+    ...guidance.directAgentCommands.suggestions.map(renderCommandSuggestion),
     ...(guidance.partialAdoptionChecks.length > 0
       ? ["", "Partial adoption checks:", ...guidance.partialAdoptionChecks.map((item) => `- ${item}`)]
       : []),
@@ -453,11 +466,14 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "Nexus setup flow:",
     ...guidance.nexusSetup.steps.map((item, index) => `${index + 1}. ${item}`),
     "",
+    "Nexus setup commands:",
+    ...guidance.nexusSetup.commands.map(renderCommandSuggestion),
+    "",
     "Capability refresh:",
     ...(guidance.capabilityRefresh.required
       ? [
           `- ${guidance.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
-          ...guidance.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
+          ...guidance.capabilityRefresh.commands.map(renderCommandSuggestion),
           ...guidance.capabilityRefresh.reviewChecks.map((item) => `- Review: ${item}`),
           ...guidance.capabilityRefresh.actions.map((item) => `- ${item}`),
         ]
@@ -473,7 +489,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     ...guidance.remainingWork.map((item) => `- ${item}`),
     "",
     "Recommended next commands:",
-    ...guidance.recommendedCommands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...guidance.recommendedCommands.map(renderCommandSuggestion),
     "",
     "First-week sequence:",
     ...guidance.firstWeekSequence.map((item, index) => `${index + 1}. ${item}`),
@@ -726,6 +742,24 @@ function nexusInstallSteps(): string[] {
   ];
 }
 
+function nexusSetupCommandSuggestions(): AdoptionCommandSuggestion[] {
+  return [
+    {
+      command: "spm nexus setup",
+      reason: "Preview the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.",
+    },
+    {
+      command: "spm nexus setup --apply",
+      reason: "Apply the bounded Nexus coexistence changes through SpM instead of hand-editing config and AGENTS files.",
+      requiresHumanApproval: true,
+    },
+    {
+      command: "spm doctor",
+      reason: "Re-check the repo after enabling Nexus so the coexistence guidance and health checks reflect the new setup.",
+    },
+  ];
+}
+
 function capabilityRefreshLines(): string[] {
   return [
     "The running CLI is newer than the repo's recorded `tool_version`, so repo-local AGENTS or adoption artifacts may lag the current SpM workflow.",
@@ -814,7 +848,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Doctor Mode Commands",
     "",
-    ...input.guidance.doctorModes.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    ...input.guidance.doctorModes.commands.map(renderMarkdownCommandSuggestion),
     "",
     "## Default Workflow Loop",
     "",
@@ -822,7 +856,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Workflow Loop Commands",
     "",
-    ...input.guidance.workflowLoop.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    ...input.guidance.workflowLoop.commands.map(renderMarkdownCommandSuggestion),
     "",
     "## Canonical Statuses",
     "",
@@ -840,7 +874,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Memory Workflow Commands",
     "",
-    ...input.guidance.memoryWorkflow.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    ...input.guidance.memoryWorkflow.commands.map(renderMarkdownCommandSuggestion),
     "",
     "## Direct Agent Commands",
     "",
@@ -848,7 +882,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Direct Agent Command Suggestions",
     "",
-    ...input.guidance.directAgentCommands.suggestions.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    ...input.guidance.directAgentCommands.suggestions.map(renderMarkdownCommandSuggestion),
     "",
     "## Optional External AGENTS.md Snippet",
     "",
@@ -865,6 +899,10 @@ export function renderMigrationGuideMarkdown(input: {
     "## Nexus Setup Flow",
     "",
     ...input.guidance.nexusSetup.steps.map((line, index) => `${index + 1}. ${line}`),
+    "",
+    "## Nexus Setup Commands",
+    "",
+    ...input.guidance.nexusSetup.commands.map(renderMarkdownCommandSuggestion),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {
@@ -888,13 +926,13 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Recommended Next Commands",
     "",
-    ...input.guidance.recommendedCommands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    ...input.guidance.recommendedCommands.map(renderMarkdownCommandSuggestion),
     "",
     "## Adopting Newer SpM Guidance",
     "",
     ...(input.guidance.capabilityRefresh.required
       ? [
-          ...input.guidance.capabilityRefresh.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+          ...input.guidance.capabilityRefresh.commands.map(renderMarkdownCommandSuggestion),
           "",
           "Review these checks after the refresh:",
           ...input.guidance.capabilityRefresh.reviewChecks.map((item) => `- ${item}`),
@@ -934,17 +972,17 @@ export function renderDirectAgentBrief(input: {
     "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",
     ...input.guidance.doctorModes.preferredModes.map((line) => `- ${line}`),
     "Doctor mode commands:",
-    ...input.guidance.doctorModes.commands.map((line) => `- ${line.command} — ${line.reason}`),
+    ...input.guidance.doctorModes.commands.map(renderCommandSuggestion),
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     "Workflow loop commands:",
-    ...input.guidance.workflowLoop.commands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...input.guidance.workflowLoop.commands.map(renderCommandSuggestion),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "Scoped memory commands:",
-    ...input.guidance.memoryWorkflow.commands.map((item) => `- ${item.command} — ${item.reason}`),
+    ...input.guidance.memoryWorkflow.commands.map(renderCommandSuggestion),
     "Direct agent commands:",
     ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
     "Direct agent command suggestions:",
-    ...input.guidance.directAgentCommands.suggestions.map((item) => `- ${item.command} — ${item.reason}`),
+    ...input.guidance.directAgentCommands.suggestions.map(renderCommandSuggestion),
     `- If you need to refresh host-repo \`AGENTS.md\`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.`,
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",
@@ -955,6 +993,8 @@ export function renderDirectAgentBrief(input: {
     ...input.guidance.nexusCoexistence.lines.map((line) => `- ${line}`),
     "Nexus setup flow:",
     ...input.guidance.nexusSetup.steps.map((line, index) => `- Step ${index + 1}: ${line}`),
+    "Nexus setup commands:",
+    ...input.guidance.nexusSetup.commands.map(renderCommandSuggestion),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {
@@ -973,7 +1013,7 @@ export function renderDirectAgentBrief(input: {
     "If doctor reports that the running CLI is newer than the repo's recorded tool version:",
     ...(input.guidance.capabilityRefresh.required
       ? [
-          ...input.guidance.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
+          ...input.guidance.capabilityRefresh.commands.map(renderCommandSuggestion),
           ...input.guidance.capabilityRefresh.reviewChecks.map((item) => `- Review: ${item}`),
           ...input.guidance.capabilityRefresh.actions.map((line) => `- ${line}`),
         ]

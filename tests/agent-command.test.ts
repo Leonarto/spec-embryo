@@ -26,6 +26,7 @@ describe("agent command", () => {
         directAgentCommandSuggestions: Array<{ command: string; reason: string }>;
         nexusCoexistence: string[];
         nexusSetup: string[];
+        nexusSetupCommands: Array<{ command: string; reason: string; requiresHumanApproval?: boolean }>;
       };
 
       expect(output).toContain("Spec Embryo agent brief");
@@ -34,6 +35,7 @@ describe("agent command", () => {
       expect(output).toContain("Tag guidance:");
       expect(output).toContain("Nexus coexistence:");
       expect(output).toContain("Nexus setup flow:");
+      expect(output).toContain("Nexus setup commands:");
       expect(output).toContain("spm status");
       expect(output).toContain("Inspect `docs` as likely source material");
       expect(output).toContain("Treat tags as retrieval handles");
@@ -57,6 +59,10 @@ describe("agent command", () => {
       expect(parsed.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
       expect(parsed.nexusCoexistence.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
       expect(parsed.nexusSetup.some((item) => item.includes("Run `spm nexus setup`"))).toBe(true);
+      expect(parsed.nexusSetupCommands.some((item) => item.command === "spm nexus setup")).toBe(true);
+      expect(parsed.nexusSetupCommands.some((item) => item.command === "spm nexus setup --apply")).toBe(true);
+      expect(parsed.nexusSetupCommands.find((item) => item.command === "spm nexus setup --apply")?.requiresHumanApproval).toBe(true);
+      expect(output).toContain("Ask the human before running this command.");
       expect(output).toContain("Direct agent commands:");
       expect(output).toContain("Direct agent command suggestions:");
       expect(output).toContain("Optional AGENTS.md snippet:");
@@ -91,6 +97,7 @@ describe("agent command", () => {
         partialAdoptionChecks: string[];
         nexusCoexistence: string[];
         nexusSetup: string[];
+        nexusSetupCommands: Array<{ command: string; reason: string; requiresHumanApproval?: boolean }>;
       };
 
       expect(output).toContain("What to inspect first:");
@@ -104,6 +111,8 @@ describe("agent command", () => {
       expect(parsed.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
       expect(parsed.nexusCoexistence.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
       expect(parsed.nexusSetup.some((item) => item.includes("Run `spm nexus setup`"))).toBe(true);
+      expect(parsed.nexusSetupCommands.some((item) => item.command === "spm nexus setup")).toBe(true);
+      expect(parsed.nexusSetupCommands.find((item) => item.command === "spm nexus setup --apply")?.requiresHumanApproval).toBe(true);
       expect(parsed.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
