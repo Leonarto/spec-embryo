@@ -137,6 +137,7 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     ...(brief.capabilityRefresh.required
       ? [
           `- ${brief.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
+          ...brief.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
           ...brief.capabilityRefresh.actions.map((item) => `- ${item}`),
         ]
       : ["- No version-driven capability refresh is currently required."]),

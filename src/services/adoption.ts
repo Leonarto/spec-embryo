@@ -42,6 +42,7 @@ export interface CapabilityRefreshGuidance {
   required: boolean;
   reason?: string;
   actions: string[];
+  commands: AdoptionCommandSuggestion[];
 }
 
 export interface ExternalAgentsSnippetGuidance {
@@ -193,6 +194,7 @@ export function buildAdoptionGuidance(input: {
       ? "The running CLI is newer than the repo's recorded tool version, so repo-local usage guidance may lag the currently installed SpM workflow."
       : undefined,
     actions: toolUpgradeAvailable ? capabilityRefreshLines() : [],
+    commands: toolUpgradeAvailable ? capabilityRefreshCommandSuggestions() : [],
   };
   const spmOrientation: SpmOrientation = {
     whatSpmIs:
@@ -414,6 +416,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     ...(guidance.capabilityRefresh.required
       ? [
           `- ${guidance.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
+          ...guidance.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
           ...guidance.capabilityRefresh.actions.map((item) => `- ${item}`),
         ]
       : ["- No version-driven capability refresh is currently required."]),
@@ -692,6 +695,31 @@ function capabilityRefreshLines(): string[] {
   ];
 }
 
+function capabilityRefreshCommandSuggestions(): AdoptionCommandSuggestion[] {
+  return [
+    {
+      command: "spm doctor --verbose",
+      reason: "Refresh the repo's current SpM usage policy from the full human-readable adoption guidance before continuing work.",
+    },
+    {
+      command: "spm doctor --json",
+      reason: "Refresh the same usage policy in structured form when a wrapper or downstream tool should avoid prose scraping.",
+    },
+    {
+      command: "spm init",
+      reason: "Refresh deterministic adoption artifacts, missing defaults, and the repo's recorded tool version under the newer CLI.",
+    },
+    {
+      command: "spm doctor",
+      reason: "Re-check the repo under the refreshed guidance and confirm whether any migration follow-up remains.",
+    },
+    {
+      command: "spm memory scopes",
+      reason: "Verify that scoped-memory policy still matches the current CLI instead of assuming older note-management habits remain valid.",
+    },
+  ];
+}
+
 export function renderMigrationGuideMarkdown(input: {
   projectName: string;
   memoryDir: string;
@@ -816,7 +844,11 @@ export function renderMigrationGuideMarkdown(input: {
     "## Adopting Newer SpM Guidance",
     "",
     ...(input.guidance.capabilityRefresh.required
-      ? input.guidance.capabilityRefresh.actions.map((line, index) => `${index + 1}. ${line}`)
+      ? [
+          ...input.guidance.capabilityRefresh.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
+          "",
+          ...input.guidance.capabilityRefresh.actions.map((line, index) => `${index + 1}. ${line}`),
+        ]
       : upgradeFlowLines().map((line, index) => `${index + 1}. ${line}`)),
     "",
     "## First-Week Sequence",
@@ -884,7 +916,10 @@ export function renderDirectAgentBrief(input: {
     "",
     "If doctor reports that the running CLI is newer than the repo's recorded tool version:",
     ...(input.guidance.capabilityRefresh.required
-      ? input.guidance.capabilityRefresh.actions.map((line) => `- ${line}`)
+      ? [
+          ...input.guidance.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
+          ...input.guidance.capabilityRefresh.actions.map((line) => `- ${line}`),
+        ]
       : upgradeFlowLines().map((line) => `- ${line}`)),
     "",
     "Do not assume:",

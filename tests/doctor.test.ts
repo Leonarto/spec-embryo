@@ -119,6 +119,8 @@ describe("doctor service", () => {
       expect(report.findings.some((finding) => finding.code === "tool-upgrade-available")).toBe(true);
       expect(report.findings.find((finding) => finding.code === "tool-upgrade-available")?.hint).toContain("Refresh your SpM usage policy");
       expect(report.guidance.capabilityRefresh.required).toBe(true);
+      expect(report.guidance.capabilityRefresh.commands.some((item) => item.command === "spm init")).toBe(true);
+      expect(report.guidance.capabilityRefresh.commands.some((item) => item.command === "spm doctor --verbose")).toBe(true);
       expect(report.guidance.capabilityRefresh.actions.some((item) => item.includes("spm doctor --verbose"))).toBe(true);
       expect(report.directAgentBrief).toContain("spm memory note create");
       expect(report.directAgentBrief).toContain("Refresh your SpM usage policy");

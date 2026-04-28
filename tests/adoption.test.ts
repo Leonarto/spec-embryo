@@ -168,6 +168,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Partial Adoption Checks");
     expect(guide).toContain("Adopting Newer SpM Guidance");
     expect(guide).toContain("Re-run `spm init`");
+    expect(guide).toContain("`spm doctor --verbose`");
     expect(guide).toContain("Reading Doctor Efficiently");
     expect(guide).toContain("Use `spm doctor` first for a cheap status");
     expect(guide).toContain("Use `spm doctor --verbose` only when");
@@ -228,6 +229,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
     expect(brief).toContain("spm agent snippet");
     expect(brief).toContain("If doctor reports that the running CLI is newer");
+    expect(brief).toContain("spm doctor --verbose");
     expect(brief).toContain("Use only canonical spec statuses");
     expect(brief).toContain("Use only canonical task statuses");
     expect(brief).toContain("Treat tags as retrieval handles");
@@ -259,6 +261,8 @@ describe("adoption guidance", () => {
     expect(guidance.capabilityRefresh.required).toBe(true);
     expect(guidance.capabilityRefresh.reason).toContain("repo-local usage guidance may lag");
     expect(guidance.capabilityRefresh.actions.some((item) => item.includes("Refresh your SpM usage policy"))).toBe(true);
+    expect(guidance.capabilityRefresh.commands.some((item) => item.command === "spm init")).toBe(true);
+    expect(guidance.capabilityRefresh.commands.some((item) => item.command === "spm doctor --json")).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm init")).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm doctor")).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm memory scopes")).toBe(true);

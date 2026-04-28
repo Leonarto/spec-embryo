@@ -171,7 +171,7 @@ describe("agent command", () => {
         scopedMemoryWorkflow: string[];
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
         externalAgentsSnippet: { note: string; snippetLines: string[] };
-        capabilityRefresh: { required: boolean; actions: string[] };
+        capabilityRefresh: { required: boolean; actions: string[]; commands: Array<{ command: string; reason: string }> };
       };
 
       expect(parsed.repo.updateAvailable).toBe(true);
@@ -187,6 +187,8 @@ describe("agent command", () => {
       expect(parsed.externalAgentsSnippet.note).toContain("Optional additive snippet");
       expect(parsed.externalAgentsSnippet.snippetLines[1]).toContain("spm status");
       expect(parsed.capabilityRefresh.required).toBe(true);
+      expect(parsed.capabilityRefresh.commands.some((item) => item.command === "spm init")).toBe(true);
+      expect(parsed.capabilityRefresh.commands.some((item) => item.command === "spm doctor --verbose")).toBe(true);
       expect(parsed.capabilityRefresh.actions.some((item) => item.includes("Refresh your SpM usage policy"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
