@@ -16,6 +16,7 @@ export interface AgentWorkflowBrief {
   };
   startHere: string[];
   sourceMaterialHints: string[];
+  tagGuidance: string[];
   partialAdoptionChecks: string[];
   workflowLoop: string[];
   workflowLoopCommands: AdoptionCommandSuggestion[];
@@ -69,6 +70,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
           : `If \`${currentFile}\` is unreadable, repair its frontmatter and re-run \`spm doctor\` before relying on resume-heavy work.`,
     ],
     sourceMaterialHints: report.guidance.sourceMaterialHints,
+    tagGuidance: report.guidance.tagGuidance,
     partialAdoptionChecks: report.guidance.partialAdoptionChecks,
     workflowLoop: report.guidance.workflowLoop.steps,
     workflowLoopCommands: report.guidance.workflowLoop.commands,
@@ -109,6 +111,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "What to inspect first:",
     ...brief.sourceMaterialHints.map((item) => `- ${item}`),
+    "",
+    "Tag guidance:",
+    ...brief.tagGuidance.map((item) => `- ${item}`),
     ...(brief.partialAdoptionChecks.length > 0
       ? ["", "Partial adoption checks:", ...brief.partialAdoptionChecks.map((item) => `- ${item}`)]
       : []),

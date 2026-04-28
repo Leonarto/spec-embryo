@@ -3,14 +3,14 @@ doc_kind = "task"
 id = "TASK-105"
 title = "Add structured source-material hints to adoption outputs"
 summary = "Expose initial migration-reading targets as shared structured adoption guidance for doctor and agent brief surfaces."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-049"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-28T16:00:00Z"
 tags = []
-updated_at = "2026-04-28T16:11:33.527Z"
+updated_at = "2026-04-28T16:20:00Z"
 +++
 
 # Scope

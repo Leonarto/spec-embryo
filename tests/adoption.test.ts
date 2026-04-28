@@ -67,6 +67,7 @@ describe("adoption guidance", () => {
     expect(guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
     expect(guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent snippet --json")).toBe(true);
     expect(guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
+    expect(guidance.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
     expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
     expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
@@ -190,6 +191,7 @@ describe("adoption guidance", () => {
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
     expect(guide).toContain("Tag Guidance For Retrieval");
+    expect(guide).toContain("Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.");
     expect(guide).toContain("Current Memory Workflow");
     expect(guide).toContain("spm memory note create");
     expect(guide).toContain("spm memory consolidate");
@@ -215,6 +217,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("What to inspect first:");
     expect(brief).toContain("Inspect `specs` as likely source material for the real project direction and migration work.");
+    expect(brief).toContain("Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("Check whether task statuses and dependencies describe the real work accurately enough for the UI and resume flows.");
     expect(brief).toContain("spm ui");

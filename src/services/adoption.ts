@@ -56,6 +56,7 @@ export interface AdoptionGuidance {
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
   sourceMaterialHints: string[];
+  tagGuidance: string[];
   partialAdoptionChecks: string[];
   workflowLoop: WorkflowLoopGuidance;
   doctorModes: DoctorModeGuidance;
@@ -358,6 +359,7 @@ export function buildAdoptionGuidance(input: {
     spmOrientation,
     agentOrientation,
     sourceMaterialHints: sourceMaterialLines(input.adoption),
+    tagGuidance: tagGuidanceLines(),
     partialAdoptionChecks: partialAdoptionChecklines(input.adoption),
     workflowLoop,
     doctorModes,
@@ -399,6 +401,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Source material hints:",
     ...guidance.sourceMaterialHints.map((item) => `- ${item}`),
+    "",
+    "Tag guidance:",
+    ...guidance.tagGuidance.map((item) => `- ${item}`),
     "",
     "Default workflow loop:",
     ...guidance.workflowLoop.steps.map((item, index) => `${index + 1}. ${item}`),
@@ -803,7 +808,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Tag Guidance For Retrieval",
     "",
-    ...tagGuidanceLines().map((line) => `- ${line}`),
+    ...input.guidance.tagGuidance.map((line) => `- ${line}`),
     "",
     "## Current Memory Workflow",
     "",
@@ -922,7 +927,7 @@ export function renderDirectAgentBrief(input: {
     "- Update AGENTS files and local skills when adoption changes how future agents should work in this repo.",
     `- Use only canonical spec statuses: ${SPEC_STATUSES.join(", ")}.`,
     `- Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
-    ...tagGuidanceLines().map((line) => `- ${line}`),
+    ...input.guidance.tagGuidance.map((line) => `- ${line}`),
     ...nexusCoexistenceLines().map((line) => `- ${line}`),
   ];
 

@@ -59,6 +59,7 @@ describe("doctor service", () => {
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "read docs/spm/current.md")).toBe(true);
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm memory pack")).toBe(true);
       expect(report.guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
+      expect(report.guidance.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
       expect(report.guidance.partialAdoptionChecks).toHaveLength(0);
       expect(report.guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
@@ -219,6 +220,7 @@ describe("doctor service", () => {
 
       expect(report.adoption.state).toBe("partially-adopted");
       expect(report.guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
+      expect(report.guidance.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
       expect(report.guidance.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
       expect(report.directAgentBrief).toContain("Before declaring adoption complete, check:");
     } finally {

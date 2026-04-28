@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-049"
 title = "Promote source-material hints into structured guidance"
 summary = "Expose the existing source-material inspection hints as shared structured guidance so wrappers and agents can consume the initial migration-reading targets without scraping prose."
-status = "active"
+status = "done"
 task_ids = ["TASK-105"]
 tags = ["adoption", "agents", "doctor", "json"]
-updated_at = "2026-04-28T16:00:00Z"
+updated_at = "2026-04-28T16:20:00Z"
 +++
 
 # Overview

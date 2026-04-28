@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-049 is active to promote source-material hints into structured guidance for JSON-first callers."
-focus = "Add structured source-material hints across shared adoption guidance and agent brief JSON."
-active_spec_ids = ["SPEC-049"]
-active_task_ids = ["TASK-105"]
+summary = "SPEC-050 is active to promote tag guidance into structured adoption guidance for JSON-first callers."
+focus = "Add structured tag guidance across shared adoption guidance and agent brief JSON."
+active_spec_ids = ["SPEC-050"]
+active_task_ids = ["TASK-106"]
 blocked_task_ids = []
-next_action_hints = ["Expose the existing source-material hints as shared data instead of recomputing them inside prose renderers.", "Flow the same source-material hints into `spm agent brief --json` and the short human brief.", "Keep the fallback no-candidates hint intact so the change stays additive for fresh repos too."]
+next_action_hints = ["Expose the existing tag guidance as shared data instead of recomputing it inside prose renderers.", "Flow the same tag guidance into `spm agent brief --json` and the short human brief.", "Keep the current tag-guidance wording and order intact so the change stays additive for existing readers."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T16:00:00Z"
+updated_at = "2026-04-28T16:20:00Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-049` is now active. Source-material guidance still exists only as prose in the migration and direct-agent surfaces, which means wrappers and JSON-first callers cannot reliably tell which docs or specs SpM wants inspected before migration work continues. This slice promotes those initial inspection hints into shared structured guidance so the short agent brief, doctor JSON, and human adoption artifacts all stay aligned from one field.
+`SPEC-050` is now active. Tag guidance still exists only as prose in the migration and direct-agent surfaces, which means wrappers and JSON-first callers cannot reliably tell how SpM expects tags to behave for retrieval and memory workflows without scraping text. This slice promotes that guidance into shared structured adoption data so the short agent brief, doctor JSON, and human adoption artifacts all stay aligned from one field.
 
 ## Notes
 
