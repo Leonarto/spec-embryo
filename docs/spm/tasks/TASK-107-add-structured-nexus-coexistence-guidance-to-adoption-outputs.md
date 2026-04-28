@@ -3,14 +3,14 @@ doc_kind = "task"
 id = "TASK-107"
 title = "Add structured Nexus coexistence guidance to adoption outputs"
 summary = "Expose the bounded Nexus coexistence contract as shared structured adoption guidance for doctor and agent brief surfaces."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-051"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-28T16:40:00Z"
 tags = []
-updated_at = "2026-04-28T16:37:04.070Z"
+updated_at = "2026-04-28T17:00:00Z"
 +++
 
 # Scope

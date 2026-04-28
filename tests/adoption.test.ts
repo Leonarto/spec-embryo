@@ -69,6 +69,7 @@ describe("adoption guidance", () => {
     expect(guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
     expect(guidance.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
     expect(guidance.nexusCoexistence.lines.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
+    expect(guidance.nexusSetup.steps.some((item) => item.includes("Run `spm nexus setup`"))).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
     expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
     expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
@@ -220,6 +221,8 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Inspect `specs` as likely source material for the real project direction and migration work.");
     expect(brief).toContain("Treat tags as retrieval handles for `spm memory query` and `spm memory brief`, not as decorative metadata.");
     expect(brief).toContain("Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.");
+    expect(brief).toContain("Nexus setup flow:");
+    expect(brief).toContain("Step 2: Run `spm nexus setup` to show the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("Check whether task statuses and dependencies describe the real work accurately enough for the UI and resume flows.");
     expect(brief).toContain("spm ui");

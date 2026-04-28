@@ -61,6 +61,7 @@ describe("doctor service", () => {
       expect(report.guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
       expect(report.guidance.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
       expect(report.guidance.nexusCoexistence.lines.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
+      expect(report.guidance.nexusSetup.steps.some((item) => item.includes("Run `spm nexus setup`"))).toBe(true);
       expect(report.guidance.partialAdoptionChecks).toHaveLength(0);
       expect(report.guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
@@ -223,6 +224,7 @@ describe("doctor service", () => {
       expect(report.guidance.sourceMaterialHints.some((item) => item.includes("Inspect `docs`"))).toBe(true);
       expect(report.guidance.tagGuidance.some((item) => item.includes("Treat tags as retrieval handles"))).toBe(true);
       expect(report.guidance.nexusCoexistence.lines.some((item) => item.includes("Nexus is optional and external"))).toBe(true);
+      expect(report.guidance.nexusSetup.steps.some((item) => item.includes("Run `spm nexus setup`"))).toBe(true);
       expect(report.guidance.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
       expect(report.directAgentBrief).toContain("Before declaring adoption complete, check:");
     } finally {

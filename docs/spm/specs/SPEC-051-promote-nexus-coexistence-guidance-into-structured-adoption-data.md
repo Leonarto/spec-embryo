@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-051"
 title = "Promote Nexus coexistence guidance into structured adoption data"
 summary = "Expose the existing Nexus coexistence guidance as shared structured adoption data so wrappers and agents can consume the bounded coexistence contract without scraping prose."
-status = "active"
+status = "done"
 task_ids = ["TASK-107"]
 tags = ["adoption", "agents", "nexus", "json"]
-updated_at = "2026-04-28T16:40:00Z"
+updated_at = "2026-04-28T17:00:00Z"
 +++
 
 # Overview

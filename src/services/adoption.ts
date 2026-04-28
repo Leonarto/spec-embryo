@@ -55,6 +55,10 @@ export interface NexusCoexistenceGuidance {
   lines: string[];
 }
 
+export interface NexusSetupGuidance {
+  steps: string[];
+}
+
 export interface AdoptionGuidance {
   overview: string;
   spmOrientation: SpmOrientation;
@@ -68,6 +72,7 @@ export interface AdoptionGuidance {
   directAgentCommands: DirectAgentCommandGuidance;
   externalAgentsSnippet: ExternalAgentsSnippetGuidance;
   nexusCoexistence: NexusCoexistenceGuidance;
+  nexusSetup: NexusSetupGuidance;
   capabilityRefresh: CapabilityRefreshGuidance;
   whatFound: string[];
   whatChanged: string[];
@@ -199,6 +204,9 @@ export function buildAdoptionGuidance(input: {
   };
   const nexusCoexistence: NexusCoexistenceGuidance = {
     lines: nexusCoexistenceLines(),
+  };
+  const nexusSetup: NexusSetupGuidance = {
+    steps: nexusInstallSteps(),
   };
   const capabilityRefresh: CapabilityRefreshGuidance = {
     required: toolUpgradeAvailable,
@@ -375,6 +383,7 @@ export function buildAdoptionGuidance(input: {
     directAgentCommands,
     externalAgentsSnippet,
     nexusCoexistence,
+    nexusSetup,
     capabilityRefresh,
     whatFound,
     whatChanged,
@@ -440,6 +449,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     `${NEXUS_COEXISTENCE_HEADING}:`,
     ...guidance.nexusCoexistence.lines.map((item) => `- ${item}`),
+    "",
+    "Nexus setup flow:",
+    ...guidance.nexusSetup.steps.map((item, index) => `${index + 1}. ${item}`),
     "",
     "Capability refresh:",
     ...(guidance.capabilityRefresh.required
@@ -852,7 +864,7 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Nexus Setup Flow",
     "",
-    ...nexusInstallSteps().map((line, index) => `${index + 1}. ${line}`),
+    ...input.guidance.nexusSetup.steps.map((line, index) => `${index + 1}. ${line}`),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {
@@ -941,6 +953,8 @@ export function renderDirectAgentBrief(input: {
     `- Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
     ...input.guidance.tagGuidance.map((line) => `- ${line}`),
     ...input.guidance.nexusCoexistence.lines.map((line) => `- ${line}`),
+    "Nexus setup flow:",
+    ...input.guidance.nexusSetup.steps.map((line, index) => `- Step ${index + 1}: ${line}`),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {

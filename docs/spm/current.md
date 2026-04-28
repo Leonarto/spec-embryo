@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-051 is active to promote Nexus coexistence guidance into structured adoption data for JSON-first callers."
-focus = "Add structured Nexus coexistence guidance across shared adoption guidance and agent brief JSON."
-active_spec_ids = ["SPEC-051"]
-active_task_ids = ["TASK-107"]
+summary = "No active implementation slice is open; the next work should be chosen from the next adoption-guidance refinement."
+focus = "Choose the next structured adoption-guidance improvement now that Nexus setup flow is shared data."
+active_spec_ids = []
+active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Expose the existing Nexus coexistence guidance as shared data instead of recomputing it inside prose renderers.", "Flow the same Nexus coexistence guidance into `spm agent brief --json` and the short human brief.", "Keep the current coexistence wording and order intact so the change stays additive for existing readers."]
+next_action_hints = ["Keep extending adoption guidance through shared structured data instead of renderer-only prose.", "Prefer small additive slices that improve JSON-first agent consumers without changing existing workflow wording.", "Open the next slice from the same adoption/agent-guidance seam so the contract stays coherent."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T16:40:00Z"
+updated_at = "2026-04-28T17:20:00Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-051` is now active. Nexus coexistence guidance still exists only as prose in the migration and direct-agent surfaces, which means wrappers and JSON-first callers cannot reliably consume the bounded coexistence contract without scraping text. This slice promotes that coexistence guidance into shared structured adoption data so the short agent brief, doctor JSON, and human adoption artifacts all stay aligned from one field.
+`SPEC-052` is complete. Nexus setup flow now lives in shared structured adoption data, so doctor JSON, the short agent brief, and the human adoption artifacts all read from the same bounded setup sequence instead of recomputing it in prose-only renderers. No follow-up slice is active yet; the next work should continue tightening JSON-first adoption guidance from this shared contract.
 
 ## Notes
 

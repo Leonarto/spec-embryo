@@ -68,6 +68,12 @@ Direct agent command suggestions:
 - Do not let Nexus replace or overwrite root `AGENTS.md`; keep any Nexus-specific guidance additive or scoped below the root.
 - Use `spm nexus setup` to preview bounded Nexus changes, then ask the human before running `spm nexus setup --apply`.
 - After enabling Nexus in `.specpm/config.toml`, re-run `spm doctor` so the bounded coexistence checks can confirm the setup.
+Nexus setup flow:
+- Step 1: Install Nexus separately from Spec Embryo by following the upstream Nexus instructions for your environment.
+- Step 2: Run `spm nexus setup` to show the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.
+- Step 3: Ask the human whether to enable bounded Nexus coexistence for this repo.
+- Step 4: If approved, run `spm nexus setup --apply` instead of editing `.specpm/config.toml` and `AGENTS.md` by hand.
+- Step 5: Run `spm doctor` after apply, then run the recommended GitNexus indexing command if the external tool is installed.
 
 Deterministic commands to prefer:
 - spm doctor
