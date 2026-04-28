@@ -26,6 +26,7 @@ export interface DoctorModeGuidance {
 
 export interface DirectAgentCommandGuidance {
   commands: string[];
+  suggestions: AdoptionCommandSuggestion[];
 }
 
 export type CurrentStateGuidanceStatus = "available" | "missing" | "unreadable";
@@ -180,6 +181,7 @@ export function buildAdoptionGuidance(input: {
   };
   const directAgentCommands: DirectAgentCommandGuidance = {
     commands: directAgentCommandLines(),
+    suggestions: directAgentCommandSuggestions(),
   };
   const externalAgentsSnippet: ExternalAgentsSnippetGuidance = {
     note: "Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.",
@@ -399,6 +401,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "Direct agent commands:",
     ...guidance.directAgentCommands.commands.map((item) => `- ${item}`),
     "",
+    "Direct agent command suggestions:",
+    ...guidance.directAgentCommands.suggestions.map((item) => `- ${item.command} — ${item.reason}`),
+    "",
     "Optional external AGENTS.md snippet:",
     `- ${guidance.externalAgentsSnippet.note}`,
     "```md",
@@ -543,6 +548,27 @@ export function agentBriefCommandLines(): string[] {
 
 export function directAgentCommandLines(): string[] {
   return [...agentBriefCommandLines(), ...agentSnippetCommandLines()];
+}
+
+function directAgentCommandSuggestions(): AdoptionCommandSuggestion[] {
+  return [
+    {
+      command: "spm agent brief",
+      reason: "Use the shorter steady-state workflow surface when you need to know how SpM should be used in this repo today.",
+    },
+    {
+      command: "spm agent brief --json",
+      reason: "Use the same steady-state workflow surface in typed form when a wrapper or downstream tool should avoid prose scraping.",
+    },
+    {
+      command: "spm agent snippet",
+      reason: "Retrieve only the bounded external AGENTS guidance when the caller does not need the broader adoption or repo-workflow brief.",
+    },
+    {
+      command: "spm agent snippet --json",
+      reason: "Return that bounded AGENTS guidance as typed data for wrappers or automation.",
+    },
+  ];
 }
 
 export function workflowLoopLines(memoryDir: string, options: { currentStateStatus: CurrentStateGuidanceStatus }): string[] {
@@ -743,6 +769,10 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
     "",
+    "## Direct Agent Command Suggestions",
+    "",
+    ...input.guidance.directAgentCommands.suggestions.map((item) => `- \`${item.command}\` — ${item.reason}`),
+    "",
     "## Optional External AGENTS.md Snippet",
     "",
     `- ${input.guidance.externalAgentsSnippet.note}`,
@@ -831,6 +861,8 @@ export function renderDirectAgentBrief(input: {
     ...input.guidance.memoryWorkflow.commands.map((item) => `- ${item.command} — ${item.reason}`),
     "Direct agent commands:",
     ...input.guidance.directAgentCommands.commands.map((line) => `- ${line}`),
+    "Direct agent command suggestions:",
+    ...input.guidance.directAgentCommands.suggestions.map((item) => `- ${item.command} — ${item.reason}`),
     `- If you need to refresh host-repo \`AGENTS.md\`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.`,
     "- Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.",
     "- Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.",

@@ -20,6 +20,7 @@ describe("agent command", () => {
         doctorModeCommands: Array<{ command: string; reason: string }>;
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
         directAgentCommands: string[];
+        directAgentCommandSuggestions: Array<{ command: string; reason: string }>;
       };
 
       expect(output).toContain("Spec Embryo agent brief");
@@ -41,6 +42,7 @@ describe("agent command", () => {
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor")).toBe(true);
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --json")).toBe(true);
       expect(output).toContain("Direct agent commands:");
+      expect(output).toContain("Direct agent command suggestions:");
       expect(output).toContain("Optional AGENTS.md snippet:");
       expect(output).toContain("## Optional SpM workflow");
       expect(output).toContain("spm agent brief");
@@ -50,6 +52,8 @@ describe("agent command", () => {
       expect(parsed.scopedMemoryCommands.some((item) => item.command === "spm memory consolidate <NOTE-ID>")).toBe(true);
       expect(parsed.directAgentCommands.some((item) => item.includes("spm agent brief"))).toBe(true);
       expect(parsed.directAgentCommands.some((item) => item.includes("spm agent snippet"))).toBe(true);
+      expect(parsed.directAgentCommandSuggestions.some((item) => item.command === "spm agent brief")).toBe(true);
+      expect(parsed.directAgentCommandSuggestions.some((item) => item.command === "spm agent snippet --json")).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

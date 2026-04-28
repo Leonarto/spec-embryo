@@ -96,6 +96,13 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
 - Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
 
+## Direct Agent Command Suggestions
+
+- `spm agent brief` — Use the shorter steady-state workflow surface when you need to know how SpM should be used in this repo today.
+- `spm agent brief --json` — Use the same steady-state workflow surface in typed form when a wrapper or downstream tool should avoid prose scraping.
+- `spm agent snippet` — Retrieve only the bounded external AGENTS guidance when the caller does not need the broader adoption or repo-workflow brief.
+- `spm agent snippet --json` — Return that bounded AGENTS guidance as typed data for wrappers or automation.
+
 ## Optional External AGENTS.md Snippet
 
 - Optional additive snippet for host-repo `AGENTS.md` files. Keep the repo's own product and coding rules primary; only add this if it fills a real SpM workflow gap.

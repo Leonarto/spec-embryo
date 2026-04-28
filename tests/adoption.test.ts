@@ -64,6 +64,8 @@ describe("adoption guidance", () => {
     expect(guidance.memoryWorkflow.commands.some((item) => item.command === "spm memory consolidate <NOTE-ID>")).toBe(true);
     expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent brief"))).toBe(true);
     expect(guidance.directAgentCommands.commands.some((item) => item.includes("spm agent snippet"))).toBe(true);
+    expect(guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
+    expect(guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent snippet --json")).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
     expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
     expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
@@ -188,6 +190,8 @@ describe("adoption guidance", () => {
     expect(guide).toContain("## Memory Workflow Commands");
     expect(guide).toContain('`spm memory note create --scope session --title "..."`');
     expect(guide).toContain("## Direct Agent Commands");
+    expect(guide).toContain("## Direct Agent Command Suggestions");
+    expect(guide).toContain("`spm agent brief --json`");
     expect(guide).toContain("Optional External AGENTS.md Snippet");
     expect(guide).toContain("Optional additive snippet for host-repo `AGENTS.md` files");
     expect(guide).toContain("## Optional SpM workflow");
@@ -219,6 +223,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Scoped memory commands:");
     expect(brief).toContain('spm memory note create --scope session --title "..."');
     expect(brief).toContain("Direct agent commands:");
+    expect(brief).toContain("Direct agent command suggestions:");
     expect(brief).toContain("spm agent brief");
     expect(brief).toContain("reuse the bounded SpM snippet from the migration guide");
     expect(brief).toContain("spm agent snippet");

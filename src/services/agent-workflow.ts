@@ -22,6 +22,7 @@ export interface AgentWorkflowBrief {
   scopedMemoryWorkflow: string[];
   scopedMemoryCommands: AdoptionCommandSuggestion[];
   directAgentCommands: string[];
+  directAgentCommandSuggestions: AdoptionCommandSuggestion[];
   externalAgentsSnippet: {
     note: string;
     snippetLines: string[];
@@ -72,6 +73,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     scopedMemoryWorkflow: report.guidance.memoryWorkflow.preferredWorkflows,
     scopedMemoryCommands: report.guidance.memoryWorkflow.commands,
     directAgentCommands: report.guidance.directAgentCommands.commands,
+    directAgentCommandSuggestions: report.guidance.directAgentCommands.suggestions,
     externalAgentsSnippet: report.guidance.externalAgentsSnippet,
     capabilityRefresh: report.guidance.capabilityRefresh,
   };
@@ -115,6 +117,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "Direct agent commands:",
     ...brief.directAgentCommands.map((item) => `- ${item}`),
+    "",
+    "Direct agent command suggestions:",
+    ...brief.directAgentCommandSuggestions.map((item) => `- ${item.command} — ${item.reason}`),
     "",
     "Optional AGENTS.md snippet:",
     `- ${brief.externalAgentsSnippet.note}`,

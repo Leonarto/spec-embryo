@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-044 is complete after promoting workflow-loop commands into shared typed adoption guidance."
+summary = "SPEC-045 is complete after adding typed direct-agent command suggestions beside the existing text contract."
 focus = "Choose the next adoption or agent-guidance slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep workflow-loop guidance, doctor mode guidance, memory workflow guidance, and direct command guidance aligned from one shared contract."]
+next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep workflow-loop guidance, doctor mode guidance, memory workflow guidance, direct command guidance, and upgrade guidance aligned from one shared contract."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T14:28:58Z"
+updated_at = "2026-04-28T14:47:19Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-044` is now complete. The adoption contract exposes a typed `workflowLoop.commands` list beside the existing prose steps, and that shared command data now flows through `doctor --json`, `spm agent brief --json`, the migration guide, and the direct agent brief. The healthy, missing, and unreadable current-state branches are all preserved in the structured contract, so JSON-first consumers no longer lose the checkpoint step that human readers already relied on.
+`SPEC-045` is now complete. The adoption contract carries typed direct-agent command suggestions for `spm agent brief` and `spm agent snippet` alongside the older text lines, and that shared suggestion data now flows through `doctor --json`, `spm agent brief --json`, the migration guide, and the direct agent brief. The change stayed additive, so wrappers can opt into the stronger structure without breaking existing consumers of the text list.
 
 ## Notes
 

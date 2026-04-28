@@ -44,6 +44,11 @@ Direct agent commands:
 - Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.
 - If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
 - Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
+Direct agent command suggestions:
+- spm agent brief — Use the shorter steady-state workflow surface when you need to know how SpM should be used in this repo today.
+- spm agent brief --json — Use the same steady-state workflow surface in typed form when a wrapper or downstream tool should avoid prose scraping.
+- spm agent snippet — Retrieve only the bounded external AGENTS guidance when the caller does not need the broader adoption or repo-workflow brief.
+- spm agent snippet --json — Return that bounded AGENTS guidance as typed data for wrappers or automation.
 - If you need to refresh host-repo `AGENTS.md`, reuse the bounded SpM snippet from the migration guide instead of inventing parallel wording.
 - Use the scaffold to migrate existing documentation into managed specs, tasks, current state, and AGENTS guidance.
 - Keep statuses, dependencies, and current focus trustworthy so `spm ui` reflects real progress and blockers.

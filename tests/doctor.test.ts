@@ -58,6 +58,7 @@ describe("doctor service", () => {
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm status")).toBe(true);
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "read docs/spm/current.md")).toBe(true);
       expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm memory pack")).toBe(true);
+      expect(report.guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
       expect(report.directAgentBriefFile).toBe("docs/spm/adoption/direct-agent-brief.md");
       expect(report.directAgentBrief).toContain("You are helping adopt Spec Embryo into this repository.");
