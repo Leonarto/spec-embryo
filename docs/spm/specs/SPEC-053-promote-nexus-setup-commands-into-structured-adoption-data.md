@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-053"
 title = "Promote Nexus setup commands into structured adoption data"
 summary = "Expose the existing Nexus setup command guidance as shared structured adoption data so wrappers and agents can consume the bounded enablement commands without scraping prose."
-status = "active"
+status = "done"
 task_ids = ["TASK-109"]
 tags = ["adoption", "agents", "nexus", "json"]
-updated_at = "2026-04-28T17:30:00Z"
+updated_at = "2026-04-28T18:24:34.919Z"
 +++
 
 # Overview

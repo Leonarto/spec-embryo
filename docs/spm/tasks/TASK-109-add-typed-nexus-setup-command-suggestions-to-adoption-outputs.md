@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-109"
 title = "Add typed Nexus setup command suggestions to adoption outputs"
 summary = "Expose bounded Nexus setup commands as shared structured adoption guidance for doctor and agent brief surfaces."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-053"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-04-28T17:30:00Z"
+completed_at = "2026-04-28T18:24:34.920Z"
 tags = []
-updated_at = "2026-04-28T17:22:25.006Z"
+updated_at = "2026-04-28T18:24:34.920Z"
 +++
 
 # Scope

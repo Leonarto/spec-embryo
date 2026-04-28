@@ -59,6 +59,7 @@ export interface NexusCoexistenceGuidance {
 export interface NexusSetupGuidance {
   steps: string[];
   commands: AdoptionCommandSuggestion[];
+  reviewChecks: string[];
 }
 
 export interface AdoptionGuidance {
@@ -220,6 +221,7 @@ export function buildAdoptionGuidance(input: {
   const nexusSetup: NexusSetupGuidance = {
     steps: nexusInstallSteps(),
     commands: nexusSetupCommandSuggestions(),
+    reviewChecks: nexusSetupReviewChecks(),
   };
   const capabilityRefresh: CapabilityRefreshGuidance = {
     required: toolUpgradeAvailable,
@@ -468,6 +470,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Nexus setup commands:",
     ...guidance.nexusSetup.commands.map(renderCommandSuggestion),
+    "",
+    "Nexus setup review checks:",
+    ...guidance.nexusSetup.reviewChecks.map((item) => `- ${item}`),
     "",
     "Capability refresh:",
     ...(guidance.capabilityRefresh.required
@@ -760,6 +765,15 @@ function nexusSetupCommandSuggestions(): AdoptionCommandSuggestion[] {
   ];
 }
 
+function nexusSetupReviewChecks(): string[] {
+  return [
+    "Confirm the human approved bounded Nexus coexistence before `spm nexus setup --apply` was run.",
+    "Confirm `spm doctor` is healthy after apply so the bounded coexistence checks pass under the new setup.",
+    "Confirm root `AGENTS.md` guidance still keeps SpM as the source of truth and any Nexus guidance remains additive or scoped.",
+    "If the external GitNexus tool is installed, confirm the recommended indexing command was run after apply.",
+  ];
+}
+
 function capabilityRefreshLines(): string[] {
   return [
     "The running CLI is newer than the repo's recorded `tool_version`, so repo-local AGENTS or adoption artifacts may lag the current SpM workflow.",
@@ -903,6 +917,10 @@ export function renderMigrationGuideMarkdown(input: {
     "## Nexus Setup Commands",
     "",
     ...input.guidance.nexusSetup.commands.map(renderMarkdownCommandSuggestion),
+    "",
+    "## Nexus Setup Review Checks",
+    "",
+    ...input.guidance.nexusSetup.reviewChecks.map((item) => `- ${item}`),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {
@@ -995,6 +1013,8 @@ export function renderDirectAgentBrief(input: {
     ...input.guidance.nexusSetup.steps.map((line, index) => `- Step ${index + 1}: ${line}`),
     "Nexus setup commands:",
     ...input.guidance.nexusSetup.commands.map(renderCommandSuggestion),
+    "Nexus setup review checks:",
+    ...input.guidance.nexusSetup.reviewChecks.map((item) => `- ${item}`),
   ];
 
   if (input.guidance.partialAdoptionChecks.length > 0) {

@@ -65,6 +65,7 @@ describe("doctor service", () => {
       expect(report.guidance.nexusSetup.commands.some((item) => item.command === "spm nexus setup")).toBe(true);
       expect(report.guidance.nexusSetup.commands.some((item) => item.command === "spm nexus setup --apply")).toBe(true);
       expect(report.guidance.nexusSetup.commands.find((item) => item.command === "spm nexus setup --apply")?.requiresHumanApproval).toBe(true);
+      expect(report.guidance.nexusSetup.reviewChecks.some((item) => item.includes("human approved bounded Nexus coexistence"))).toBe(true);
       expect(report.guidance.partialAdoptionChecks).toHaveLength(0);
       expect(report.guidance.directAgentCommands.suggestions.some((item) => item.command === "spm agent brief")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
@@ -230,6 +231,7 @@ describe("doctor service", () => {
       expect(report.guidance.nexusSetup.steps.some((item) => item.includes("Run `spm nexus setup`"))).toBe(true);
       expect(report.guidance.nexusSetup.commands.some((item) => item.command === "spm nexus setup")).toBe(true);
       expect(report.guidance.nexusSetup.commands.find((item) => item.command === "spm nexus setup --apply")?.requiresHumanApproval).toBe(true);
+      expect(report.guidance.nexusSetup.reviewChecks.some((item) => item.includes("recommended indexing command"))).toBe(true);
       expect(report.guidance.partialAdoptionChecks.some((item) => item.includes("existing specs and tasks still need conversion"))).toBe(true);
       expect(report.directAgentBrief).toContain("Before declaring adoption complete, check:");
     } finally {

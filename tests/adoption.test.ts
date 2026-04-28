@@ -73,6 +73,7 @@ describe("adoption guidance", () => {
     expect(guidance.nexusSetup.commands.some((item) => item.command === "spm nexus setup")).toBe(true);
     expect(guidance.nexusSetup.commands.some((item) => item.command === "spm nexus setup --apply")).toBe(true);
     expect(guidance.nexusSetup.commands.find((item) => item.command === "spm nexus setup --apply")?.requiresHumanApproval).toBe(true);
+    expect(guidance.nexusSetup.reviewChecks.some((item) => item.includes("human approved bounded Nexus coexistence"))).toBe(true);
     expect(guidance.externalAgentsSnippet.note).toContain("Optional additive snippet");
     expect(guidance.externalAgentsSnippet.snippetLines[0]).toBe("## Optional SpM workflow");
     expect(guidance.externalAgentsSnippet.snippetLines.some((item) => item.includes("spm memory pack"))).toBe(true);
@@ -222,6 +223,8 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Nexus Setup Commands");
     expect(guide).toContain("`spm nexus setup`");
     expect(guide).toContain("Ask the human before running this command.");
+    expect(guide).toContain("Nexus Setup Review Checks");
+    expect(guide).toContain("Confirm `spm doctor` is healthy after apply");
     expect(brief).toContain("You are helping adopt Spec Embryo into this repository.");
     expect(brief).toContain("What to inspect first:");
     expect(brief).toContain("Inspect `specs` as likely source material for the real project direction and migration work.");
@@ -229,9 +232,11 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Nexus is optional and external to Spec Embryo; install and upgrade it separately using the upstream project instructions.");
     expect(brief).toContain("Nexus setup flow:");
     expect(brief).toContain("Nexus setup commands:");
+    expect(brief).toContain("Nexus setup review checks:");
     expect(brief).toContain("Step 2: Run `spm nexus setup` to show the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.");
     expect(brief).toContain("spm nexus setup --apply");
     expect(brief).toContain("Ask the human before running this command.");
+    expect(brief).toContain("Confirm root `AGENTS.md` guidance still keeps SpM as the source of truth");
     expect(brief).toContain("Before declaring adoption complete, check:");
     expect(brief).toContain("Check whether task statuses and dependencies describe the real work accurately enough for the UI and resume flows.");
     expect(brief).toContain("spm ui");

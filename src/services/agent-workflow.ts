@@ -33,6 +33,7 @@ export interface AgentWorkflowBrief {
   nexusCoexistence: string[];
   nexusSetup: string[];
   nexusSetupCommands: AdoptionCommandSuggestion[];
+  nexusSetupReviewChecks: string[];
   capabilityRefresh: CapabilityRefreshGuidance;
 }
 
@@ -92,6 +93,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
     nexusCoexistence: report.guidance.nexusCoexistence.lines,
     nexusSetup: report.guidance.nexusSetup.steps,
     nexusSetupCommands: report.guidance.nexusSetup.commands,
+    nexusSetupReviewChecks: report.guidance.nexusSetup.reviewChecks,
     capabilityRefresh: report.guidance.capabilityRefresh,
   };
 }
@@ -161,6 +163,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "Nexus setup commands:",
     ...brief.nexusSetupCommands.map(renderCommandSuggestion),
+    "",
+    "Nexus setup review checks:",
+    ...brief.nexusSetupReviewChecks.map((item) => `- ${item}`),
     "",
     "Doctor modes:",
     ...brief.doctorModes.map((item) => `- ${item}`),

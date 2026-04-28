@@ -78,6 +78,11 @@ Nexus setup commands:
 - spm nexus setup — Preview the repo-local config, AGENTS, ignore-rule, and adoption-artifact changes before writing anything.
 - spm nexus setup --apply — Apply the bounded Nexus coexistence changes through SpM instead of hand-editing config and AGENTS files. Ask the human before running this command.
 - spm doctor — Re-check the repo after enabling Nexus so the coexistence guidance and health checks reflect the new setup.
+Nexus setup review checks:
+- Confirm the human approved bounded Nexus coexistence before `spm nexus setup --apply` was run.
+- Confirm `spm doctor` is healthy after apply so the bounded coexistence checks pass under the new setup.
+- Confirm root `AGENTS.md` guidance still keeps SpM as the source of truth and any Nexus guidance remains additive or scoped.
+- If the external GitNexus tool is installed, confirm the recommended indexing command was run after apply.
 
 Deterministic commands to prefer:
 - spm doctor
