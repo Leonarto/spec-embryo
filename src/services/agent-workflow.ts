@@ -1,5 +1,4 @@
 import type { AdoptionCommandSuggestion, CapabilityRefreshGuidance } from "./adoption.ts";
-import { doctorModeLines } from "./adoption.ts";
 import type { DoctorReport } from "./doctor.ts";
 
 export interface AgentWorkflowBrief {
@@ -17,6 +16,8 @@ export interface AgentWorkflowBrief {
   };
   startHere: string[];
   workflowLoop: string[];
+  doctorModes: string[];
+  doctorModeCommands: AdoptionCommandSuggestion[];
   scopedMemoryWorkflow: string[];
   scopedMemoryCommands: AdoptionCommandSuggestion[];
   directAgentCommands: string[];
@@ -24,7 +25,6 @@ export interface AgentWorkflowBrief {
     note: string;
     snippetLines: string[];
   };
-  doctorModes: string[];
   capabilityRefresh: CapabilityRefreshGuidance;
 }
 
@@ -65,11 +65,12 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
           : `If \`${currentFile}\` is unreadable, repair its frontmatter and re-run \`spm doctor\` before relying on resume-heavy work.`,
     ],
     workflowLoop: report.guidance.workflowLoop.steps,
+    doctorModes: report.guidance.doctorModes.preferredModes,
+    doctorModeCommands: report.guidance.doctorModes.commands,
     scopedMemoryWorkflow: report.guidance.memoryWorkflow.preferredWorkflows,
     scopedMemoryCommands: report.guidance.memoryWorkflow.commands,
     directAgentCommands: report.guidance.directAgentCommands.commands,
     externalAgentsSnippet: report.guidance.externalAgentsSnippet,
-    doctorModes: doctorModeLines(),
     capabilityRefresh: report.guidance.capabilityRefresh,
   };
 }
@@ -118,6 +119,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "Doctor modes:",
     ...brief.doctorModes.map((item) => `- ${item}`),
+    "",
+    "Doctor mode commands:",
+    ...brief.doctorModeCommands.map((item) => `- ${item.command} — ${item.reason}`),
     "",
     "Capability refresh:",
     ...(brief.capabilityRefresh.required

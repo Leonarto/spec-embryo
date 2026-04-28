@@ -16,6 +16,7 @@ describe("agent command", () => {
 
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
       const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        doctorModeCommands: Array<{ command: string; reason: string }>;
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
         directAgentCommands: string[];
       };
@@ -28,6 +29,10 @@ describe("agent command", () => {
       expect(output).toContain("spm memory note create");
       expect(output).toContain("Scoped memory commands:");
       expect(output).toContain('spm memory note create --scope session --title "..."');
+      expect(output).toContain("Doctor mode commands:");
+      expect(output).toContain("spm doctor --json");
+      expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor")).toBe(true);
+      expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --json")).toBe(true);
       expect(output).toContain("Direct agent commands:");
       expect(output).toContain("Optional AGENTS.md snippet:");
       expect(output).toContain("## Optional SpM workflow");
@@ -139,6 +144,8 @@ describe("agent command", () => {
       const parsed = JSON.parse(output) as {
         repo: { updateAvailable: boolean; currentStateFile: string; currentStateAvailable: boolean };
         workflowLoop: string[];
+        doctorModes: string[];
+        doctorModeCommands: Array<{ command: string; reason: string }>;
         scopedMemoryWorkflow: string[];
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
         externalAgentsSnippet: { note: string; snippetLines: string[] };
@@ -149,6 +156,8 @@ describe("agent command", () => {
       expect(parsed.repo.currentStateFile).toBe("docs/spm/current.md");
       expect(parsed.repo.currentStateAvailable).toBe(true);
       expect(parsed.workflowLoop[0]).toContain("spm status");
+      expect(parsed.doctorModes.some((item) => item.includes("spm doctor --verbose"))).toBe(true);
+      expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --verbose")).toBe(true);
       expect(parsed.scopedMemoryWorkflow.some((item) => item.includes("spm memory scopes"))).toBe(true);
       expect(parsed.scopedMemoryCommands.some((item) => item.command === "spm memory scopes")).toBe(true);
       expect(parsed.externalAgentsSnippet.note).toContain("Optional additive snippet");

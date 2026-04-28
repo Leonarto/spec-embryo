@@ -37,6 +37,12 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 - Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.
 - Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.
 
+## Doctor Mode Commands
+
+- `spm doctor` — Start with the concise health, version, config, and findings check before reading broader guidance.
+- `spm doctor --verbose` — Expand into the long adoption guide and inline direct agent brief only when the concise report is not enough.
+- `spm doctor --json` — Use the structured report when another agent or wrapper should consume findings and guidance without scraping prose.
+
 ## Default Workflow Loop
 
 1. Start with `spm status` for a cheap state, version, and findings summary.

@@ -52,6 +52,9 @@ describe("adoption guidance", () => {
     expect(guidance.overview).toContain("importable");
     expect(guidance.spmOrientation.whatSpmIs).toContain("local-first CLI");
     expect(guidance.spmOrientation.whenToUse.length).toBeGreaterThan(0);
+    expect(guidance.doctorModes.preferredModes.some((item) => item.includes("spm doctor --json"))).toBe(true);
+    expect(guidance.doctorModes.commands.some((item) => item.command === "spm doctor")).toBe(true);
+    expect(guidance.doctorModes.commands.some((item) => item.command === "spm doctor --verbose")).toBe(true);
     expect(guidance.memoryWorkflow.preferredWorkflows.some((item) => item.includes("spm memory note create"))).toBe(true);
     expect(guidance.memoryWorkflow.commands.some((item) => item.command.includes("spm memory note create --scope session"))).toBe(true);
     expect(guidance.memoryWorkflow.commands.some((item) => item.command === "spm memory consolidate <NOTE-ID>")).toBe(true);
@@ -163,6 +166,8 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Use `spm doctor` first for a cheap status");
     expect(guide).toContain("Use `spm doctor --verbose` only when");
     expect(guide).toContain("Use `spm doctor --json` when an agent needs structured findings");
+    expect(guide).toContain("## Doctor Mode Commands");
+    expect(guide).toContain("`spm doctor --verbose`");
     expect(guide).toContain("Default Workflow Loop");
     expect(guide).toContain("spm status");
     expect(guide).toContain("spm memory pack");
@@ -196,6 +201,8 @@ describe("adoption guidance", () => {
     expect(brief).toContain("Use `spm doctor` first for a cheap status");
     expect(brief).toContain("Use `spm doctor --verbose` only when");
     expect(brief).toContain("Use `spm doctor --json` when an agent needs structured findings");
+    expect(brief).toContain("Doctor mode commands:");
+    expect(brief).toContain("spm doctor --json");
     expect(brief).toContain("Loop 1: Start with `spm status`");
     expect(brief).toContain("spm memory pack");
     expect(brief).toContain("spm memory note create");

@@ -53,6 +53,8 @@ describe("doctor service", () => {
       expect(report.findings.some((finding) => finding.code === "missing-adoption-migration-guide")).toBe(true);
       expect(report.findings.some((finding) => finding.code === "missing-adoption-agent-brief")).toBe(true);
       expect(report.guidance.agentOrientation.some((item) => item.includes("not the adopted repo's product direction"))).toBe(true);
+      expect(report.guidance.doctorModes.commands.some((item) => item.command === "spm doctor")).toBe(true);
+      expect(report.guidance.doctorModes.commands.some((item) => item.command === "spm doctor --json")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
       expect(report.directAgentBriefFile).toBe("docs/spm/adoption/direct-agent-brief.md");
       expect(report.directAgentBrief).toContain("You are helping adopt Spec Embryo into this repository.");
@@ -183,6 +185,8 @@ describe("doctor service", () => {
       expect(concise).not.toContain("Direct agent brief (copy this to the current coding agent):");
 
       expect(verbose).toContain("Adoption summary:");
+      expect(verbose).toContain("Reading Doctor Efficiently:");
+      expect(verbose).toContain("Doctor Mode Commands:");
       expect(verbose).toContain("Current memory workflow:");
       expect(verbose).toContain("Optional external AGENTS.md snippet:");
       expect(verbose).toContain("## Optional SpM workflow");

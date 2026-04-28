@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-042 is complete after promoting the scoped memory workflow command set into shared typed adoption guidance and agent brief JSON."
+summary = "SPEC-043 is complete after promoting doctor mode guidance into shared typed adoption data and agent brief JSON."
 focus = "Choose the next adoption or agent-guidance slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep memory workflow guidance, direct command guidance, and JSON adoption outputs aligned from one shared contract."]
+next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep doctor mode guidance, memory workflow guidance, direct command guidance, and JSON adoption outputs aligned from one shared contract."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-27T22:05:00.000Z"
+updated_at = "2026-04-28T01:05:00.000Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-042` is now complete. The scoped memory workflow no longer depends on prose alone for discovery: session-note capture, scope inspection, and consolidation are exposed as shared typed command guidance in the adoption contract and in `spm agent brief --json`, while the human renderers reuse the same source for consistency. The repo is back at a clean decision point for the next adoption or agent-guidance improvement.
+`SPEC-043` is now complete. `spm doctor` no longer depends on prose alone for discoverability inside the adoption contract: concise, verbose, and JSON doctor paths are exposed as shared typed command guidance in both `doctor --json` and `spm agent brief --json`, while the human renderers reuse the same source for consistency. The repo is back at a clean decision point for the next adoption or agent-guidance improvement.
 
 ## Notes
 

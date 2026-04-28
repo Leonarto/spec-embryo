@@ -19,6 +19,11 @@ export interface MemoryWorkflowGuidance {
   commands: AdoptionCommandSuggestion[];
 }
 
+export interface DoctorModeGuidance {
+  preferredModes: string[];
+  commands: AdoptionCommandSuggestion[];
+}
+
 export interface DirectAgentCommandGuidance {
   commands: string[];
 }
@@ -47,6 +52,7 @@ export interface AdoptionGuidance {
   spmOrientation: SpmOrientation;
   agentOrientation: string[];
   workflowLoop: WorkflowLoopGuidance;
+  doctorModes: DoctorModeGuidance;
   memoryWorkflow: MemoryWorkflowGuidance;
   directAgentCommands: DirectAgentCommandGuidance;
   externalAgentsSnippet: ExternalAgentsSnippetGuidance;
@@ -161,6 +167,10 @@ export function buildAdoptionGuidance(input: {
     currentStateAvailable,
     currentStateStatus,
     steps: workflowLoopLines(input.memoryDir, { currentStateStatus }),
+  };
+  const doctorModes: DoctorModeGuidance = {
+    preferredModes: doctorModeLines(),
+    commands: doctorModeCommandSuggestions(),
   };
   const memoryWorkflow: MemoryWorkflowGuidance = {
     preferredWorkflows: memoryWorkflowLines(),
@@ -338,6 +348,7 @@ export function buildAdoptionGuidance(input: {
     spmOrientation,
     agentOrientation,
     workflowLoop,
+    doctorModes,
     memoryWorkflow,
     directAgentCommands,
     externalAgentsSnippet,
@@ -367,6 +378,12 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "",
     "Agent orientation:",
     ...guidance.agentOrientation.map((item) => `- ${item}`),
+    "",
+    "Reading Doctor Efficiently:",
+    ...guidance.doctorModes.preferredModes.map((item) => `- ${item}`),
+    "",
+    "Doctor Mode Commands:",
+    ...guidance.doctorModes.commands.map((item) => `- ${item.command} — ${item.reason}`),
     "",
     "Default workflow loop:",
     ...guidance.workflowLoop.steps.map((item, index) => `${index + 1}. ${item}`),
@@ -455,6 +472,23 @@ export function doctorModeLines(): string[] {
     "Use `spm doctor` first for a cheap status, findings, versions, config, and counts check.",
     "Use `spm doctor --verbose` only when you need the long adoption guide, next-command context, or the full direct agent brief in the terminal output.",
     "Use `spm doctor --json` when an agent needs structured findings and guidance instead of scraping human-readable text.",
+  ];
+}
+
+function doctorModeCommandSuggestions(): AdoptionCommandSuggestion[] {
+  return [
+    {
+      command: "spm doctor",
+      reason: "Start with the concise health, version, config, and findings check before reading broader guidance.",
+    },
+    {
+      command: "spm doctor --verbose",
+      reason: "Expand into the long adoption guide and inline direct agent brief only when the concise report is not enough.",
+    },
+    {
+      command: "spm doctor --json",
+      reason: "Use the structured report when another agent or wrapper should consume findings and guidance without scraping prose.",
+    },
   ];
 }
 
@@ -615,7 +649,11 @@ export function renderMigrationGuideMarkdown(input: {
     "",
     "## Reading Doctor Efficiently",
     "",
-    ...doctorModeLines().map((line) => `- ${line}`),
+    ...input.guidance.doctorModes.preferredModes.map((line) => `- ${line}`),
+    "",
+    "## Doctor Mode Commands",
+    "",
+    ...input.guidance.doctorModes.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
     "",
     "## Default Workflow Loop",
     "",
@@ -720,7 +758,9 @@ export function renderDirectAgentBrief(input: {
     "",
     "How to work:",
     "- Use `spm` before ad hoc interpretation when it already exposes the needed state, structure, or migration guidance.",
-    ...doctorModeLines().map((line) => `- ${line}`),
+    ...input.guidance.doctorModes.preferredModes.map((line) => `- ${line}`),
+    "Doctor mode commands:",
+    ...input.guidance.doctorModes.commands.map((line) => `- ${line.command} — ${line.reason}`),
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "Scoped memory commands:",
