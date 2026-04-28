@@ -240,11 +240,12 @@ describe("adoption guidance", () => {
   });
 
   test("adds upgrade commands when doctor reports a newer CLI version", () => {
+    const adoption = createInspection({
+      state: "adopted",
+      findings: ["The managed memory home is already present."],
+    });
     const guidance = buildAdoptionGuidance({
-      adoption: createInspection({
-        state: "adopted",
-        findings: ["The managed memory home is already present."],
-      }),
+      adoption,
       memoryDir: "docs/spm",
       doctorFindings: [
         {
@@ -255,6 +256,18 @@ describe("adoption guidance", () => {
       ],
       commandContext: "doctor",
     });
+    const guide = renderMigrationGuideMarkdown({
+      projectName: "Nina",
+      memoryDir: "docs/spm",
+      adoption,
+      guidance,
+    });
+    const brief = renderDirectAgentBrief({
+      projectName: "Nina",
+      memoryDir: "docs/spm",
+      adoption,
+      guidance,
+    });
 
     expect(guidance.remainingWork.some((item) => item.includes("newer than the repo's recorded tool version"))).toBe(true);
     expect(guidance.remainingWork.some((item) => item.includes("refresh the agent's SpM usage policy"))).toBe(true);
@@ -263,6 +276,10 @@ describe("adoption guidance", () => {
     expect(guidance.capabilityRefresh.actions.some((item) => item.includes("Refresh your SpM usage policy"))).toBe(true);
     expect(guidance.capabilityRefresh.commands.some((item) => item.command === "spm init")).toBe(true);
     expect(guidance.capabilityRefresh.commands.some((item) => item.command === "spm doctor --json")).toBe(true);
+    expect(guidance.capabilityRefresh.reviewChecks.some((item) => item.includes("recorded tool version"))).toBe(true);
+    expect(guide).toContain("Review these checks after the refresh:");
+    expect(guide).toContain("Confirm the repo's recorded tool version and adoption artifacts now match the newer installed CLI.");
+    expect(brief).toContain("Review: Confirm the repo's recorded tool version and adoption artifacts now match the newer installed CLI.");
     expect(guidance.recommendedCommands.some((item) => item.command === "spm init")).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm doctor")).toBe(true);
     expect(guidance.recommendedCommands.some((item) => item.command === "spm memory scopes")).toBe(true);

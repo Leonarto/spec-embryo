@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-046 is complete after adding typed capability-refresh command suggestions for upgrade-aware adopters."
+summary = "SPEC-047 is complete after adding structured capability-refresh review checks to shared adoption guidance."
 focus = "Choose the next adoption or agent-guidance slice"
 active_spec_ids = []
 active_task_ids = []
 blocked_task_ids = []
-next_action_hints = ["Capture the next meaningful adoption or agent-guidance improvement as a new spec/task slice before adding more wording variants.", "Prefer follow-on work that increases structured reuse or discoverability instead of duplicating the same guidance across more surfaces.", "Keep workflow-loop guidance, doctor mode guidance, memory workflow guidance, direct command guidance, and upgrade guidance aligned from one shared contract."]
+next_action_hints = ["Prefer the next slice that turns another adoption-only prose checklist into structured data for wrappers.", "Keep shared adoption guidance aligned across doctor, init, direct agent brief, and `spm agent brief --json` from one deterministic contract.", "Favor small additive slices over broad wording churn."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-04-28T15:05:49Z"
+updated_at = "2026-04-28T15:20:00Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -25,7 +25,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 ## Narrative
 
-`SPEC-046` is now complete. Capability refresh guidance still keeps its original text actions, but it now also carries typed `command/reason` suggestions for upgrade-aware flows such as `spm doctor --verbose`, `spm doctor --json`, `spm init`, `spm doctor`, and `spm memory scopes`. That shared upgrade guidance now flows through `doctor --json` and `spm agent brief --json` without forcing wrappers to scrape prose.
+`SPEC-047` is now complete. Capability refresh guidance keeps its existing text actions and typed commands, and it now also exposes structured review checks so JSON-first callers can tell what to verify after an SpM upgrade without scraping prose. The next meaningful slice should keep tightening the shared adoption contract instead of duplicating the same guidance in more renderers.
 
 ## Notes
 

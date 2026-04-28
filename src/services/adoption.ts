@@ -43,6 +43,7 @@ export interface CapabilityRefreshGuidance {
   reason?: string;
   actions: string[];
   commands: AdoptionCommandSuggestion[];
+  reviewChecks: string[];
 }
 
 export interface ExternalAgentsSnippetGuidance {
@@ -195,6 +196,7 @@ export function buildAdoptionGuidance(input: {
       : undefined,
     actions: toolUpgradeAvailable ? capabilityRefreshLines() : [],
     commands: toolUpgradeAvailable ? capabilityRefreshCommandSuggestions() : [],
+    reviewChecks: toolUpgradeAvailable ? capabilityRefreshReviewChecks() : [],
   };
   const spmOrientation: SpmOrientation = {
     whatSpmIs:
@@ -417,6 +419,7 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
       ? [
           `- ${guidance.capabilityRefresh.reason ?? "Refresh current SpM usage guidance before continuing work."}`,
           ...guidance.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
+          ...guidance.capabilityRefresh.reviewChecks.map((item) => `- Review: ${item}`),
           ...guidance.capabilityRefresh.actions.map((item) => `- ${item}`),
         ]
       : ["- No version-driven capability refresh is currently required."]),
@@ -720,6 +723,15 @@ function capabilityRefreshCommandSuggestions(): AdoptionCommandSuggestion[] {
   ];
 }
 
+function capabilityRefreshReviewChecks(): string[] {
+  return [
+    "Confirm the repo's recorded tool version and adoption artifacts now match the newer installed CLI.",
+    "Confirm doctor findings still make sense under the refreshed guidance instead of relying on stale repo-local instructions.",
+    "Confirm the scoped-memory workflow and note-management policy still match what this repo supports after the upgrade.",
+    "Confirm any migration or import guidance handed to another agent was regenerated under the newer CLI if the old guidance was still the source of truth.",
+  ];
+}
+
 export function renderMigrationGuideMarkdown(input: {
   projectName: string;
   memoryDir: string;
@@ -847,6 +859,9 @@ export function renderMigrationGuideMarkdown(input: {
       ? [
           ...input.guidance.capabilityRefresh.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
           "",
+          "Review these checks after the refresh:",
+          ...input.guidance.capabilityRefresh.reviewChecks.map((item) => `- ${item}`),
+          "",
           ...input.guidance.capabilityRefresh.actions.map((line, index) => `${index + 1}. ${line}`),
         ]
       : upgradeFlowLines().map((line, index) => `${index + 1}. ${line}`)),
@@ -918,6 +933,7 @@ export function renderDirectAgentBrief(input: {
     ...(input.guidance.capabilityRefresh.required
       ? [
           ...input.guidance.capabilityRefresh.commands.map((item) => `- ${item.command} — ${item.reason}`),
+          ...input.guidance.capabilityRefresh.reviewChecks.map((item) => `- Review: ${item}`),
           ...input.guidance.capabilityRefresh.actions.map((line) => `- ${line}`),
         ]
       : upgradeFlowLines().map((line) => `- ${line}`)),
