@@ -16,6 +16,7 @@ describe("agent command", () => {
 
       const output = await runAgentCommand(rootDir, parseArgs(["agent"]));
       const parsed = JSON.parse(await runAgentCommand(rootDir, parseArgs(["agent", "--json"]))) as {
+        workflowLoopCommands: Array<{ command: string; reason: string }>;
         doctorModeCommands: Array<{ command: string; reason: string }>;
         scopedMemoryCommands: Array<{ command: string; reason: string }>;
         directAgentCommands: string[];
@@ -26,11 +27,17 @@ describe("agent command", () => {
       expect(output).toContain("spm status");
       expect(output).toContain("docs/spm/current.md");
       expect(output).toContain("spm memory pack");
+      expect(output).toContain("Workflow loop commands:");
+      expect(output).toContain("spm status");
+      expect(output).toContain("read docs/spm/current.md");
       expect(output).toContain("spm memory note create");
       expect(output).toContain("Scoped memory commands:");
       expect(output).toContain('spm memory note create --scope session --title "..."');
       expect(output).toContain("Doctor mode commands:");
       expect(output).toContain("spm doctor --json");
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm status")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "read docs/spm/current.md")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm memory pack")).toBe(true);
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor")).toBe(true);
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --json")).toBe(true);
       expect(output).toContain("Direct agent commands:");
@@ -81,6 +88,7 @@ describe("agent command", () => {
         repo: { currentStateAvailable: boolean; currentStateFile: string; currentStateStatus: string };
         startHere: string[];
         workflowLoop: string[];
+        workflowLoopCommands: Array<{ command: string; reason: string }>;
         externalAgentsSnippet: { snippetLines: string[] };
       };
 
@@ -93,6 +101,9 @@ describe("agent command", () => {
       expect(parsed.repo.currentStateStatus).toBe("missing");
       expect(parsed.startHere.some((item) => item.includes("spm init"))).toBe(true);
       expect(parsed.workflowLoop.some((item) => item.includes("current.md` is still missing"))).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm init")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command.includes("spm current set"))).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "read spm/current.md")).toBe(false);
       expect(parsed.externalAgentsSnippet.snippetLines.some((item) => item.includes("`spm current set`"))).toBe(true);
     } finally {
       await rm(rootDir, { recursive: true, force: true });
@@ -113,6 +124,7 @@ describe("agent command", () => {
         repo: { currentStateAvailable: boolean; currentStateFile: string; currentStateStatus: string };
         startHere: string[];
         workflowLoop: string[];
+        workflowLoopCommands: Array<{ command: string; reason: string }>;
         externalAgentsSnippet: { snippetLines: string[] };
       };
 
@@ -124,6 +136,11 @@ describe("agent command", () => {
       expect(parsed.repo.currentStateStatus).toBe("unreadable");
       expect(parsed.startHere.some((item) => item.includes("repair its frontmatter"))).toBe(true);
       expect(parsed.workflowLoop.some((item) => item.includes("repair its frontmatter"))).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm status")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "repair docs/spm/current.md")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm memory pack")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm init")).toBe(false);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "read docs/spm/current.md")).toBe(false);
       expect(parsed.externalAgentsSnippet.snippetLines.some((item) => item.includes("repair its frontmatter"))).toBe(true);
       expect(parsed.externalAgentsSnippet.snippetLines.some((item) => item.includes("`spm current set`"))).toBe(false);
     } finally {
@@ -144,6 +161,7 @@ describe("agent command", () => {
       const parsed = JSON.parse(output) as {
         repo: { updateAvailable: boolean; currentStateFile: string; currentStateAvailable: boolean };
         workflowLoop: string[];
+        workflowLoopCommands: Array<{ command: string; reason: string }>;
         doctorModes: string[];
         doctorModeCommands: Array<{ command: string; reason: string }>;
         scopedMemoryWorkflow: string[];
@@ -156,6 +174,8 @@ describe("agent command", () => {
       expect(parsed.repo.currentStateFile).toBe("docs/spm/current.md");
       expect(parsed.repo.currentStateAvailable).toBe(true);
       expect(parsed.workflowLoop[0]).toContain("spm status");
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "spm status")).toBe(true);
+      expect(parsed.workflowLoopCommands.some((item) => item.command === "read docs/spm/current.md")).toBe(true);
       expect(parsed.doctorModes.some((item) => item.includes("spm doctor --verbose"))).toBe(true);
       expect(parsed.doctorModeCommands.some((item) => item.command === "spm doctor --verbose")).toBe(true);
       expect(parsed.scopedMemoryWorkflow.some((item) => item.includes("spm memory scopes"))).toBe(true);

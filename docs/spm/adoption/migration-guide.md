@@ -51,6 +51,14 @@ This guide explains how to adopt Spec Embryo into **spec-pm** without confusing 
 4. If you are resuming context-heavy work, inspect temporary scoped notes with `spm memory note list` instead of assuming they are already reflected in current state.
 5. Use `spm memory consolidate` to promote durable truth instead of treating session notes as canonical project memory.
 
+## Workflow Loop Commands
+
+- `spm status` — Start with the cheapest trustworthy state, version, and findings summary before diving into code or docs.
+- `read docs/spm/current.md` — Review the repo's explicit checkpoint before broad implementation work instead of inferring current focus from code alone.
+- `spm memory pack` — Use the compact repo-aware context pack when the task spans multiple specs, docs, or stale branches of work.
+- `spm memory note list --scope session` — Check temporary session capture explicitly when resuming context-heavy work instead of assuming it already reached current state.
+- `spm memory consolidate <NOTE-ID>` — Promote durable truth intentionally instead of treating session notes as canonical project memory.
+
 ## Canonical Statuses
 
 - Spec statuses: `proposed`, `active`, `paused`, `done`, `archived`

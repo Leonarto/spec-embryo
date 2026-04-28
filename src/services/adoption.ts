@@ -34,6 +34,7 @@ export interface WorkflowLoopGuidance {
   currentStateAvailable: boolean;
   currentStateStatus: CurrentStateGuidanceStatus;
   steps: string[];
+  commands: AdoptionCommandSuggestion[];
 }
 
 export interface CapabilityRefreshGuidance {
@@ -167,6 +168,7 @@ export function buildAdoptionGuidance(input: {
     currentStateAvailable,
     currentStateStatus,
     steps: workflowLoopLines(input.memoryDir, { currentStateStatus }),
+    commands: workflowLoopCommandSuggestions(input.memoryDir, { currentStateStatus }),
   };
   const doctorModes: DoctorModeGuidance = {
     preferredModes: doctorModeLines(),
@@ -388,6 +390,9 @@ export function renderAdoptionGuidance(guidance: AdoptionGuidance): string[] {
     "Default workflow loop:",
     ...guidance.workflowLoop.steps.map((item, index) => `${index + 1}. ${item}`),
     "",
+    "Workflow loop commands:",
+    ...guidance.workflowLoop.commands.map((item) => `- ${item.command} — ${item.reason}`),
+    "",
     "Current memory workflow:",
     ...guidance.memoryWorkflow.preferredWorkflows.map((item) => `- ${item}`),
     "",
@@ -557,6 +562,59 @@ export function workflowLoopLines(memoryDir: string, options: { currentStateStat
   ];
 }
 
+function workflowLoopCommandSuggestions(
+  memoryDir: string,
+  options: { currentStateStatus: CurrentStateGuidanceStatus },
+): AdoptionCommandSuggestion[] {
+  const currentStateFile = buildRelativePath(memoryDir, "current.md");
+  const suggestions: AdoptionCommandSuggestion[] = [
+    {
+      command: "spm status",
+      reason: "Start with the cheapest trustworthy state, version, and findings summary before diving into code or docs.",
+    },
+    {
+      command: `read ${currentStateFile}`,
+      reason: "Review the repo's explicit checkpoint before broad implementation work instead of inferring current focus from code alone.",
+    },
+    {
+      command: "spm memory pack",
+      reason: "Use the compact repo-aware context pack when the task spans multiple specs, docs, or stale branches of work.",
+    },
+    {
+      command: "spm memory note list --scope session",
+      reason: "Check temporary session capture explicitly when resuming context-heavy work instead of assuming it already reached current state.",
+    },
+    {
+      command: "spm memory consolidate <NOTE-ID>",
+      reason: "Promote durable truth intentionally instead of treating session notes as canonical project memory.",
+    },
+  ];
+
+  if (options.currentStateStatus === "missing") {
+    suggestions.splice(
+      1,
+      1,
+      {
+        command: "spm init",
+        reason: "Finish deterministic adoption setup before leaning on a workflow loop that depends on managed current state.",
+      },
+      {
+        command: 'spm current set --focus "..." --summary "..."',
+        reason: `Create the first checkpoint in \`${buildRelativePath(memoryDir, "current.md")}\` so resume-heavy work has an explicit repo-local source of truth.`,
+      },
+    );
+  }
+
+  if (options.currentStateStatus === "unreadable") {
+    suggestions.splice(1, 1, {
+      command: `repair ${currentStateFile}`,
+      reason: "Fix the unreadable checkpoint frontmatter and re-run doctor before relying on resume-heavy workflow.",
+    });
+  }
+
+  return suggestions;
+}
+
 function externalAgentsSnippetLines(memoryDir: string, options: { currentStateStatus: CurrentStateGuidanceStatus }): string[] {
   const currentStateFile = buildRelativePath(memoryDir, "current.md");
   const currentStateLine =
@@ -658,6 +716,10 @@ export function renderMigrationGuideMarkdown(input: {
     "## Default Workflow Loop",
     "",
     ...input.guidance.workflowLoop.steps.map((line, index) => `${index + 1}. ${line}`),
+    "",
+    "## Workflow Loop Commands",
+    "",
+    ...input.guidance.workflowLoop.commands.map((item) => `- \`${item.command}\` — ${item.reason}`),
     "",
     "## Canonical Statuses",
     "",
@@ -762,6 +824,8 @@ export function renderDirectAgentBrief(input: {
     "Doctor mode commands:",
     ...input.guidance.doctorModes.commands.map((line) => `- ${line.command} — ${line.reason}`),
     ...input.guidance.workflowLoop.steps.map((line, index) => `- Loop ${index + 1}: ${line}`),
+    "Workflow loop commands:",
+    ...input.guidance.workflowLoop.commands.map((item) => `- ${item.command} — ${item.reason}`),
     ...input.guidance.memoryWorkflow.preferredWorkflows.map((line) => `- ${line}`),
     "Scoped memory commands:",
     ...input.guidance.memoryWorkflow.commands.map((item) => `- ${item.command} — ${item.reason}`),

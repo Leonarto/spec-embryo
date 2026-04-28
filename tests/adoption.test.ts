@@ -55,6 +55,10 @@ describe("adoption guidance", () => {
     expect(guidance.doctorModes.preferredModes.some((item) => item.includes("spm doctor --json"))).toBe(true);
     expect(guidance.doctorModes.commands.some((item) => item.command === "spm doctor")).toBe(true);
     expect(guidance.doctorModes.commands.some((item) => item.command === "spm doctor --verbose")).toBe(true);
+    expect(guidance.workflowLoop.commands.some((item) => item.command === "spm status")).toBe(true);
+    expect(guidance.workflowLoop.commands.some((item) => item.command === "spm init")).toBe(true);
+    expect(guidance.workflowLoop.commands.some((item) => item.command.includes("spm current set"))).toBe(true);
+    expect(guidance.workflowLoop.commands.some((item) => item.command === "spm memory pack")).toBe(true);
     expect(guidance.memoryWorkflow.preferredWorkflows.some((item) => item.includes("spm memory note create"))).toBe(true);
     expect(guidance.memoryWorkflow.commands.some((item) => item.command.includes("spm memory note create --scope session"))).toBe(true);
     expect(guidance.memoryWorkflow.commands.some((item) => item.command === "spm memory consolidate <NOTE-ID>")).toBe(true);
@@ -171,6 +175,9 @@ describe("adoption guidance", () => {
     expect(guide).toContain("Default Workflow Loop");
     expect(guide).toContain("spm status");
     expect(guide).toContain("spm memory pack");
+    expect(guide).toContain("## Workflow Loop Commands");
+    expect(guide).toContain("`spm status`");
+    expect(guide).toContain("`read specs/spm/current.md`");
     expect(guide).toContain("Canonical Statuses");
     expect(guide).toContain("planned");
     expect(guide).toContain("completed");
@@ -205,6 +212,7 @@ describe("adoption guidance", () => {
     expect(brief).toContain("spm doctor --json");
     expect(brief).toContain("Loop 1: Start with `spm status`");
     expect(brief).toContain("spm memory pack");
+    expect(brief).toContain("Workflow loop commands:");
     expect(brief).toContain("spm memory note create");
     expect(brief).toContain("spm memory scopes");
     expect(brief).toContain("spm memory consolidate");

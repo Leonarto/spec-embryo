@@ -24,6 +24,12 @@ Doctor mode commands:
 - Loop 3: If context is broad, stale, or cross-cutting, use `spm memory pack` before diving into code.
 - Loop 4: If you are resuming context-heavy work, inspect temporary scoped notes with `spm memory note list` instead of assuming they are already reflected in current state.
 - Loop 5: Use `spm memory consolidate` to promote durable truth instead of treating session notes as canonical project memory.
+Workflow loop commands:
+- spm status — Start with the cheapest trustworthy state, version, and findings summary before diving into code or docs.
+- read docs/spm/current.md — Review the repo's explicit checkpoint before broad implementation work instead of inferring current focus from code alone.
+- spm memory pack — Use the compact repo-aware context pack when the task spans multiple specs, docs, or stale branches of work.
+- spm memory note list --scope session — Check temporary session capture explicitly when resuming context-heavy work instead of assuming it already reached current state.
+- spm memory consolidate <NOTE-ID> — Promote durable truth intentionally instead of treating session notes as canonical project memory.
 - Use `spm memory note create` for fast session capture instead of hand-editing `.specpm/memory/...` note files.
 - Use `spm memory note update`, `archive`, `restore`, and `list` for deterministic scoped note lifecycle management.
 - Use `spm memory scopes` before assuming that the `session` or `org` scope exists or is writable in this repo.

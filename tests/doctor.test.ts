@@ -55,6 +55,9 @@ describe("doctor service", () => {
       expect(report.guidance.agentOrientation.some((item) => item.includes("not the adopted repo's product direction"))).toBe(true);
       expect(report.guidance.doctorModes.commands.some((item) => item.command === "spm doctor")).toBe(true);
       expect(report.guidance.doctorModes.commands.some((item) => item.command === "spm doctor --json")).toBe(true);
+      expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm status")).toBe(true);
+      expect(report.guidance.workflowLoop.commands.some((item) => item.command === "read docs/spm/current.md")).toBe(true);
+      expect(report.guidance.workflowLoop.commands.some((item) => item.command === "spm memory pack")).toBe(true);
       expect(report.migrationGuideFile).toBe("docs/spm/adoption/migration-guide.md");
       expect(report.directAgentBriefFile).toBe("docs/spm/adoption/direct-agent-brief.md");
       expect(report.directAgentBrief).toContain("You are helping adopt Spec Embryo into this repository.");

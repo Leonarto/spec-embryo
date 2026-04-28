@@ -16,6 +16,7 @@ export interface AgentWorkflowBrief {
   };
   startHere: string[];
   workflowLoop: string[];
+  workflowLoopCommands: AdoptionCommandSuggestion[];
   doctorModes: string[];
   doctorModeCommands: AdoptionCommandSuggestion[];
   scopedMemoryWorkflow: string[];
@@ -65,6 +66,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
           : `If \`${currentFile}\` is unreadable, repair its frontmatter and re-run \`spm doctor\` before relying on resume-heavy work.`,
     ],
     workflowLoop: report.guidance.workflowLoop.steps,
+    workflowLoopCommands: report.guidance.workflowLoop.commands,
     doctorModes: report.guidance.doctorModes.preferredModes,
     doctorModeCommands: report.guidance.doctorModes.commands,
     scopedMemoryWorkflow: report.guidance.memoryWorkflow.preferredWorkflows,
@@ -101,6 +103,9 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "",
     "Default workflow loop:",
     ...brief.workflowLoop.map((item, index) => `${index + 1}. ${item}`),
+    "",
+    "Workflow loop commands:",
+    ...brief.workflowLoopCommands.map((item) => `- ${item.command} — ${item.reason}`),
     "",
     "Scoped memory workflow:",
     ...brief.scopedMemoryWorkflow.map((item) => `- ${item}`),
