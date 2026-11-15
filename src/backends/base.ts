@@ -1,4 +1,4 @@
-import type { BackendName, ProjectConfig, ResumeContext } from "../domain.ts";
+import type { BackendName, HarnessInvocation, ProjectConfig, ResumeContext } from "../domain.ts";
 
 export interface BackendRunOptions {
   rootDir: string;
@@ -6,11 +6,16 @@ export interface BackendRunOptions {
   json?: boolean;
   spawn?: boolean;
   maxContextBytes?: number;
+  timeoutMs?: number;
+  retainArtifacts?: boolean;
+  cancellationSignal?: AbortSignal;
 }
 
 export interface BackendRunResult {
   text: string;
   json?: unknown;
+  invocation?: HarnessInvocation;
+  exitCode?: number;
 }
 
 export interface ResumeBackend {

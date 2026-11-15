@@ -164,6 +164,24 @@ Prompt-return and subprocess adapters share one bundle and renderer. The stable 
 
 `--max-context-bytes` accepts integers from 4096 to 1048576. The limit covers the complete assembled prompt, including prefix and tail, measured in UTF-8 bytes rather than tokens. Oversized text keeps identity/focus and blocked state first, then useful references with omission counts and an expansion command. JSON data stays complete; only rendered prompt fields are bounded. Invalid limits fail with usage exit code 2.
 
+Subprocess execution requires `--spawn`. Preview artifact paths contain `{run-id}` and are templates; previews reserve no files. Actual invocations create four prompt artifacts in a private random directory under `.specpm/tmp/`, with an ownership marker. Concurrent runs use separate directories. Artifacts are removed after confirmed process closure; `--retain-artifacts` keeps them explicitly for diagnostics. Unverified process-tree closure also retains files with a warning. Crashes can leave residue; SpM does not sweep stale, foreign, or active directories.
+
+If a same-group descendant remains alive after its parent and inherited streams close on macOS/Linux, SpM reports `unknown`, preserves the parent's exit code, and retains artifacts for that background work. It does not terminate background descendants merely because the parent exited normally.
+
+`resume --json --spawn` emits one versioned SpM JSON document, including failures. Child stdout becomes data in `invocation.output`: at most the first 1048576 bytes, trimmed to a complete UTF-8 character, while remaining output is drained. `stdout_bytes` reports bytes received and `stdout_truncated` reports overflow. Child stderr remains diagnostic. Human execution keeps inherited terminal streams.
+
+The invocation terminal state is `completed`, `failed`, `cancelled`, `timed_out`, or `unknown`; it includes the child's `exit_code` and `signal`. Managed cancellation also records `cancellation_signal`, so a child that exits zero after SIGINT still reports cancellation. A successful process does not verify work or mark a task done. `--timeout-ms` accepts a positive safe integer and measures elapsed time from successful spawn without resetting on activity; omitting it means no timeout. SIGINT/SIGTERM are forwarded to the controlled process group on macOS/Linux, with 2000 ms grace before SIGKILL and at most 1000 ms more to observe closure. Processes that deliberately detach are outside that group guarantee. Windows supports best-effort direct-child cancellation and reports `unknown` when tree closure is unverified. SIGKILL or a runtime/system crash may prevent a final envelope.
+
+| SpM exit | Meaning |
+| --- | --- |
+| 0 | Read, preview, or completed process |
+| 2 | Invalid usage or spawn precondition |
+| 1 | Process/artifact/context failure or unknown closure |
+| 124 | Timeout with confirmed closure |
+| 130 / 143 | Managed SIGINT / SIGTERM cancellation with confirmed closure |
+
+The original child exit remains in `invocation.exit_code`, including when SpM normalizes its own exit. Configured commands and arguments remain explicit; wrappers do not install tools, bypass harness permissions, retry agent calls, or parse provider-specific events.
+
 ## What is implemented now
 
 - Bun + TypeScript CLI with small, typed modules

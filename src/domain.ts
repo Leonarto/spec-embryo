@@ -234,6 +234,18 @@ export interface ResumeContextSnapshot {
   sources: Array<{ id: string; path: string; content_hash: string | null }>;
 }
 
+export interface HarnessInvocation {
+  state: "completed" | "failed" | "cancelled" | "timed_out" | "unknown";
+  exit_code: number | null;
+  signal: NodeJS.Signals | null;
+  cancellation_signal?: "SIGINT" | "SIGTERM";
+  output: string;
+  stdout_bytes: number;
+  stdout_truncated: boolean;
+  error?: { type: "usage" | "precondition" | "context" | "artifact" | "spawn" | "process" | "cancelled" | "timeout" | "unknown"; message: string };
+  warnings: string[];
+}
+
 function fail(message: string): never {
   throw new Error(message);
 }

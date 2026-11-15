@@ -9,3 +9,4 @@ Tests should protect deterministic behavior and source-of-truth parsing.
 - Keep fixtures minimal and readable.
 - When a test touches git state, locks, subprocesses, or packaged UI paths, keep it isolated and update `spm tests diagnose` if the sensitive area changes.
 - `harness-context.test.ts` protects selected-source byte provenance, canonical resume fingerprints, committed interruption windows, invariant prompt prefixes, and UTF-8 rendering budgets using isolated temporary repos.
+- `harness-process.test.ts` uses local fake executables for concurrent artifacts, output draining, typed failures, timeout, and child/grandchild cancellation; never invoke paid agent APIs in these tests.

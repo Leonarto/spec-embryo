@@ -271,6 +271,7 @@ describe("subprocess backends", () => {
         config: fixture.config,
         json: true,
         spawn: true,
+        retainArtifacts: true,
       });
 
       const payload = JSON.parse(result.text) as {

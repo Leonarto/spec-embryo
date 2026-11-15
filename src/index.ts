@@ -16,7 +16,7 @@ import { runPortfolioCommand } from "./commands/portfolio.ts";
 import { runProfileCommand } from "./commands/profile.ts";
 import { runReleaseCommand } from "./commands/release.ts";
 import { runReshapeCommand } from "./commands/reshape.ts";
-import { ResumeCommandError, runResumeCommand } from "./commands/resume.ts";
+import { ResumeCommandError, runResumeCommandResult } from "./commands/resume.ts";
 import { runSpecCommand } from "./commands/spec.ts";
 import { runStatusCommand } from "./commands/status.ts";
 import { runTaskCommand } from "./commands/task.ts";
@@ -59,9 +59,22 @@ async function main(): Promise<void> {
     case "reshape":
       output = await runReshapeCommand(rootDir, parsed);
       break;
-    case "resume":
-      output = await runResumeCommand(rootDir, parsed);
-      break;
+    case "resume": {
+      // Keep capturable signals from interrupting the final JSON write after the
+      // runner has removed its forwarding handlers and closed the child.
+      const printingGuard = () => {};
+      process.on("SIGINT", printingGuard); process.on("SIGTERM", printingGuard);
+      try {
+        const result = await runResumeCommandResult(rootDir, parsed);
+        process.exitCode = result.exitCode;
+        if (result.text) await new Promise<void>((resolve, reject) => {
+          process.stdout.write(`${result.text}\n`, (error) => error ? reject(error) : resolve());
+        });
+      } finally {
+        process.off("SIGINT", printingGuard); process.off("SIGTERM", printingGuard);
+      }
+      return;
+    }
     case "handoff":
       output = await runHandoffCommand(rootDir, parsed);
       break;

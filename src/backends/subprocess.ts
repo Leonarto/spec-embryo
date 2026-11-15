@@ -1,9 +1,9 @@
-import { spawn } from "node:child_process";
 import { join } from "node:path";
-import { writeUtf8 } from "../storage.ts";
-import type { BackendName, ExecutionBackendConfig, ResumeContext } from "../domain.ts";
+import type { BackendName, ExecutionBackendConfig, HarnessInvocation, ResumeContext } from "../domain.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
 import { buildPromptBundle, renderPromptBundleText } from "./prompt.ts";
+import { cancelledInvocation, failedInvocation, invocationExitCode, runHarnessProcess } from "../services/harness-process.ts";
+import { cleanupHarnessArtifacts, markHarnessArtifacts, reserveHarnessArtifacts, writeHarnessArtifactFiles, type HarnessArtifactReservation } from "../services/harness-artifacts.ts";
 
 function replaceToken(token: string, replacements: Record<string, string>): string {
   let output = token;
@@ -30,14 +30,16 @@ export interface SubprocessLaunchPlan {
     promptVariableTailFile: string;
   };
   env: Record<string, string>;
+  artifactPathsAreTemplates: boolean;
 }
 
-function buildArtifactPaths(rootDir: string, backend: BackendName): SubprocessLaunchPlan["artifactPaths"] {
+function buildArtifactPaths(rootDir: string, backend: BackendName, artifactDirectory?: string): SubprocessLaunchPlan["artifactPaths"] {
+  const directory = artifactDirectory ?? join(rootDir, ".specpm", "tmp", "{run-id}");
   return {
-    promptTextFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt.txt`),
-    promptBundleFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt.json`),
-    promptStablePrefixFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt-prefix.txt`),
-    promptVariableTailFile: join(rootDir, ".specpm", "tmp", `${backend}-resume-prompt-tail.txt`),
+    promptTextFile: join(directory, `${backend}-resume-prompt.txt`),
+    promptBundleFile: join(directory, `${backend}-resume-prompt.json`),
+    promptStablePrefixFile: join(directory, `${backend}-resume-prompt-prefix.txt`),
+    promptVariableTailFile: join(directory, `${backend}-resume-prompt-tail.txt`),
   };
 }
 
@@ -46,13 +48,14 @@ export function buildSubprocessLaunchPlan(
   backendConfig: ExecutionBackendConfig,
   context: ResumeContext,
   options: BackendRunOptions,
+  artifactDirectory?: string,
 ): SubprocessLaunchPlan {
   const promptBundle = buildPromptBundle(context, options.maxContextBytes);
   const promptBundleText = JSON.stringify(promptBundle, null, 2);
   const promptText = renderPromptBundleText(promptBundle);
   const promptStablePrefixText = promptBundle.cache_assembly.stable_prefix_text;
   const promptVariableTailText = promptBundle.cache_assembly.variable_tail_text;
-  const artifactPaths = buildArtifactPaths(options.rootDir, backend);
+  const artifactPaths = buildArtifactPaths(options.rootDir, backend, artifactDirectory);
 
   const replacements = {
     prompt: promptText,
@@ -92,6 +95,7 @@ export function buildSubprocessLaunchPlan(
     promptVariableTailText,
     artifactPaths,
     env,
+    artifactPathsAreTemplates: !artifactDirectory,
   };
 }
 
@@ -106,6 +110,7 @@ function renderPreviewText(plan: SubprocessLaunchPlan): string {
     commandLine,
     "",
     "Prompt contract:",
+    "- preview artifact paths are templates; no directory or files have been reserved",
     `- prompt text file: ${plan.artifactPaths.promptTextFile}`,
     `- prompt bundle file: ${plan.artifactPaths.promptBundleFile}`,
     `- stable prefix file: ${plan.artifactPaths.promptStablePrefixFile}`,
@@ -128,20 +133,24 @@ export abstract class SubprocessBackend implements ResumeBackend {
   }
 
   async run(context: ResumeContext, options: BackendRunOptions): Promise<BackendRunResult> {
-    const plan = buildSubprocessLaunchPlan(this.name, this.config, context, options);
+    let plan = buildSubprocessLaunchPlan(this.name, this.config, context, options);
 
     if (plan.mode === "disabled" || !plan.command) {
+      const invocation = options.spawn ? failedInvocation("precondition", "Backend is disabled or missing a command.") : undefined;
       const payload = {
         backend: this.name,
         mode: "disabled" as const,
         reason: "Backend is disabled or missing a command.",
         prompt_bundle: plan.promptBundle,
+        ...(invocation ? { invocation } : {}),
       };
       return {
         text: options.json
           ? JSON.stringify(payload, null, 2)
           : `${this.name} backend is disabled. Enable it in .specpm/config.toml or use --backend prompt.`,
         json: payload,
+        invocation,
+        exitCode: invocation ? invocationExitCode(invocation) : 0,
       };
     }
 
@@ -153,6 +162,7 @@ export abstract class SubprocessBackend implements ResumeBackend {
         args: plan.args,
         env: plan.env,
         artifact_paths: plan.artifactPaths,
+        artifact_paths_are_templates: true,
         prompt_bundle: plan.promptBundle,
         prompt_text: plan.promptText,
         prompt_stable_prefix: plan.promptStablePrefixText,
@@ -165,56 +175,46 @@ export abstract class SubprocessBackend implements ResumeBackend {
       };
     }
 
-    await writeUtf8(plan.artifactPaths.promptBundleFile, plan.promptBundleText);
-    await writeUtf8(plan.artifactPaths.promptTextFile, plan.promptText);
-    await writeUtf8(plan.artifactPaths.promptStablePrefixFile, plan.promptStablePrefixText);
-    await writeUtf8(plan.artifactPaths.promptVariableTailFile, plan.promptVariableTailText);
-
-    const child = spawn(plan.command, plan.args, {
-      cwd: options.rootDir,
-      env: {
-        ...process.env,
-        ...plan.env,
-      },
-      stdio: "inherit",
-    });
-
-    await new Promise<void>((resolve, reject) => {
-      child.on("exit", (code) => {
-        if (code === 0) {
-          resolve();
-          return;
-        }
-        reject(new Error(`${this.name} backend exited with code ${code ?? -1}`));
-      });
-      child.on("error", reject);
-    });
-
-    return {
-      text: options.json
-        ? JSON.stringify(
-            {
-              backend: this.name,
-              mode: "spawned",
-              command: plan.command,
-              args: plan.args,
-              env: plan.env,
-              artifact_paths: plan.artifactPaths,
-              prompt_bundle: plan.promptBundle,
-            },
-            null,
-            2,
-          )
-        : `${this.name} backend finished successfully.`,
-      json: {
-        backend: this.name,
-        mode: "spawned" as const,
-        command: plan.command,
-        args: plan.args,
-        env: plan.env,
-        artifact_paths: plan.artifactPaths,
-        prompt_bundle: plan.promptBundle,
-      },
+    let reservation: HarnessArtifactReservation | undefined;
+    let invocation: HarnessInvocation | undefined;
+    try {
+      if (options.cancellationSignal?.aborted) {
+        invocation = cancelledInvocation(options.cancellationSignal.reason === "SIGINT" ? "SIGINT" : "SIGTERM");
+      } else {
+        reservation = await reserveHarnessArtifacts(options.rootDir, this.name);
+        await markHarnessArtifacts(reservation);
+        plan = buildSubprocessLaunchPlan(this.name, this.config, context, options, reservation.directory);
+        await writeHarnessArtifactFiles([
+          [plan.artifactPaths.promptBundleFile, plan.promptBundleText],
+          [plan.artifactPaths.promptTextFile, plan.promptText],
+          [plan.artifactPaths.promptStablePrefixFile, plan.promptStablePrefixText],
+          [plan.artifactPaths.promptVariableTailFile, plan.promptVariableTailText],
+        ]);
+      }
+    } catch (error) {
+      invocation = failedInvocation("artifact", error instanceof Error ? error.message : String(error));
+    }
+    if (!invocation) {
+      invocation = await runHarnessProcess({ command: plan.command!, args: plan.args, cwd: options.rootDir,
+        env: plan.env, captureStdout: !!options.json, timeoutMs: options.timeoutMs, cancellationSignal: options.cancellationSignal });
+    }
+    let retained = !!reservation;
+    if (reservation && !options.retainArtifacts && invocation.state !== "unknown") {
+      const warning = await cleanupHarnessArtifacts(reservation);
+      if (warning) invocation.warnings.push(warning);
+      else retained = false;
+    }
+    if (retained) invocation.warnings.push(invocation.state === "unknown"
+      ? "Artifacts retained because process-tree closure is unverified."
+      : `Artifacts retained at ${reservation!.directory}${options.retainArtifacts ? " by --retain-artifacts" : " for inspection"}.`);
+    const payload = {
+      backend: this.name, mode: "spawned" as const, command: plan.command, args: plan.args,
+      env: plan.env, artifact_paths: plan.artifactPaths, artifact_paths_are_templates: plan.artifactPathsAreTemplates,
+      artifacts_retained: retained, prompt_bundle: plan.promptBundle, invocation,
     };
+    return { text: options.json ? JSON.stringify(payload, null, 2)
+      : [`${this.name} backend ${invocation.state}.${invocation.error ? ` ${invocation.error.message}` : " Process success does not verify the work; review remains required."}`,
+        ...invocation.warnings.map((warning) => `Warning: ${warning}`)].join("\n"),
+      json: payload, invocation, exitCode: invocationExitCode(invocation) };
   }
 }

@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-124"
 title = "Isolate and control optional backend subprocesses"
 summary = "Implement run-local artifacts, JSON-safe capture, timeout, cancellation and cleanup with reviewed process semantics."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-061"]
 depends_on = ["TASK-123"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.396Z"
+completed_at = "2026-11-15T19:02:28.480Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T18:31:13.396Z"
+updated_at = "2026-11-15T19:02:28.480Z"
 +++
 
 # Scope
@@ -29,4 +30,4 @@ Implement P0.3 of SPEC-061, including the contracts, edge cases and acceptance c
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+Implemented and approved by independent Astra review after fixing the surviving-descendant case. Independent regression confirms state unknown, retained artifacts and a successful delayed prompt read by the descendant. Independent affected suite: 25 tests and 280 assertions passed; EPIPE behavior verified. Historical full suite before the final fix: 218 passed, 91.73% function and 90.67% line coverage in the Bun scope. AGENTS and diff checks passed. Evidence: `/private/tmp/spm-task124-review.md`, `/private/tmp/spm-harness-slice2-review-fix.log`.
