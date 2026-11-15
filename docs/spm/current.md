@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-061 P0/P1 is implemented and independently reviewed; P2 remains conditional and inactive. SPEC-062 compact shell and shared queries are committed. Sol implements Tasks table and canonical detail extraction in parallel; Astra owns decisions and UX review."
+summary = "SPEC-061 P0/P1 is implemented and independently reviewed; P2 remains conditional and inactive. SPEC-062 compact shell and shared queries are committed. Sol implements Tasks table and shared graph optimization in parallel; Astra owns decisions and UX review."
 focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation and Astra High technical/UX review; preserve completed SPEC-061 native-harness interoperability."
 active_spec_ids = ["SPEC-062"]
-active_task_ids = ["TASK-127", "TASK-135"]
+active_task_ids = ["TASK-127", "TASK-136"]
 blocked_task_ids = []
-next_action_hints = ["Implement and independently review TASK-127 Tasks DataTable and TASK-135 canonical detail extraction in parallel.", "Commit each reviewed slice before TASK-128 inspector integration consumes both.", "Preserve inspection/copy-only UI scope and existing spec-question response behavior; later slices add drawer, Specs workflow and timeline volume."]
+next_action_hints = ["Implement and independently review TASK-127 Tasks table and TASK-136 contract-preserving graph optimization in parallel.", "TASK-135 detail extraction is approved and committed; TASK-128 waits only for TASK-127.", "After inspector integration, Specs/questions and Timeline may proceed in parallel; final acceptance waits for both and the graph checkpoint."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-15T20:45:15.012Z"
+updated_at = "2026-11-15T21:05:29.645Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -29,7 +29,7 @@ The post-`0.3.1` roadmap implementation is complete. `SPEC-055` through `SPEC-06
 
 The user authorized parallel implementation of `SPEC-061` and `SPEC-062`. Sol 6.1 High implements both tracks; Astra High owns technical decisions and UX review. A separate Astra investigates implementation and context practices, including simplicity, code relationships, review and model routing. Baseline commit `fa025f2` preserves the previous roadmap and reviewed plans. UI scope remains inspection, filtering, selection, and copying, preserving the existing spec-question response workflow.
 
-SPEC-061 P0/P1 is complete through `d164e75`; P2 is explicitly deferred. SPEC-062 shell (`1b1d47a`) and shared query/refresh foundation (`0893166`) are complete. TASK-127 (Tasks table) and TASK-135 (canonical detail extraction) now run in parallel with disjoint file ownership; TASK-128 consumes both only after independent reviews and commits. The research report remains `docs/agent-workflow-research.md`; its two proposed skills are not installed, while bounded slices and independent review practices are in use.
+SPEC-061 P0/P1 is complete through `d164e75`; P2 is explicitly deferred. SPEC-062 shell (`1b1d47a`) and shared query/refresh foundation (`0893166`) are complete. TASK-135 canonical detail extraction is approved and committed as `def5e38`. TASK-127 (Tasks table) and TASK-136 (contract-preserving graph optimization) now run in parallel with disjoint file ownership. TASK-128 can consume the detail extraction after TASK-127 is reviewed and committed; TASK-130 also waits for the graph checkpoint. The research report remains `docs/agent-workflow-research.md`; its two proposed skills are not installed, while bounded slices and independent review practices are in use.
 
 ## Notes
 
