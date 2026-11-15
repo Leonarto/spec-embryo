@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-135"
 title = "Extract reusable canonical detail views for inspector integration"
 summary = "Prepare TASK-128 by extracting existing task/spec detail content with immediate canonical-page consumers, in parallel with the Tasks table."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-126"]
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T20:18:45.780Z"
 tags = ["parallel-implementation", "ui"]
-updated_at = "2026-11-15T20:18:45.780Z"
+updated_at = "2026-11-15T20:44:44.220Z"
 +++
 
 # Astra-approved extraction scope
