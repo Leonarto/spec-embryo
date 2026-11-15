@@ -335,3 +335,8 @@ Después de los commits revisados de TASK-127 y TASK-135, TASK-128 integra el in
 
 
 TASK-136 adelanta la optimización determinista de engine/dashboard con DTOs idénticos después del commit de TASK-135, aprovechando el ejecutor disponible mientras avanza la tabla. Depende funcionalmente de TASK-126. TASK-130 espera TASK-128 y TASK-136; añade los contratos de diagnóstico y el UI de Timeline después. El oráculo fijado al código anterior debe demostrar equivalencia antes de aprobar la optimización.
+
+
+## Precisión del gate de carga
+
+TASK-131 contiene el protocolo de medición aprobado por Astra: warm ≤800 ms y cold ≤2.5 s miden navegación hasta filas correctas visibles e hidratadas, no sólo HTTP. Cold reinicia servidor, navegador/perfil y cachés de aplicación propias del harness; la caché del sistema operativo queda sin controlar y se declara así. No requiere purgar cachés globales. Cada ruta tiene 20 muestras seriales y p95 nearest-rank; warm añade cinco warmups, cold no precalienta. Startup, TTFB/transporte y render se informan separados. Los resultados HTTP de TASK-126 no certifican por sí solos el gate final.
