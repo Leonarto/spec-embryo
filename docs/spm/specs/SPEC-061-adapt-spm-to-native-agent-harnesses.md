@@ -4,16 +4,16 @@ id = "SPEC-061"
 title = "Adapt SpM to native agent harnesses"
 summary = "Evaluate and plan deterministic interoperability with current Codex and Claude harnesses, preserving native orchestration and durable project memory."
 status = "active"
-task_ids = ["TASK-123", "TASK-124"]
+task_ids = ["TASK-123", "TASK-124", "TASK-132", "TASK-133", "TASK-134"]
 tags = ["agents", "interoperability", "context"]
-updated_at = "2026-11-15T18:31:37.412Z"
+updated_at = "2026-11-15T18:47:28.298Z"
 +++
 
 # Adaptar SpM a los harnesses nativos de agentes
 
 ## Estado de la propuesta
 
-Plan estratégico y técnico revisado; el usuario autorizó su implementación el 2026-11-15. El análisis usa el working tree del 15 de noviembre de 2026, incluidos los cambios existentes de SPEC-055–060. No considera esos cambios como funcionalidades pendientes por el hecho de no estar en el último commit. Las decisiones de producto se mantienen propuestas hasta la revisión y selección del siguiente slice.
+Plan estratégico y técnico revisado; el usuario autorizó su implementación el 2026-11-15. El análisis usa el working tree del 15 de noviembre de 2026, incluidos los cambios existentes de SPEC-055–060. No considera esos cambios como funcionalidades pendientes por el hecho de no estar en el último commit. P0 y P1 están autorizados para implementación por fases revisadas; P2 mantiene sus condiciones de evidencia y no se activa automáticamente.
 
 ## Problema y decisión de producto
 
@@ -149,3 +149,114 @@ Dirección recomendada: aceptar P0 como próximo slice del área de agentes y ma
 ## Revisión de planificación
 
 Revisión independiente con Astra High: **APPROVED como plan**. Se resolvieron H1 (límites de contexto/stdout, timeout, gracia y plataformas), H2 (envelope JSON de fallos y códigos de salida) y H3 (fingerprint determinista independiente del reloj y de IDs de ejecución). P0 tiene decisiones suficientes para preparar su implementación; P1/P2 requieren slices posteriores. La spec permanece `proposed`: esta revisión no implementa ni verifica el producto.
+
+
+# Contrato de ejecución P1 — revisión independiente aprobada
+
+# SPEC-061 P1: diseño ejecutable acotado
+
+Fecha: 2026-11-15. Autor de decisiones: Astra High. Ejecutor: Sol 6.1 High. Este documento concreta P1 bajo la autorización actual de implementar ambos planes; no modifica archivos de producto, specs ni estado. Integrador: incorporar decisiones a SPEC-061 y crear tareas después de revisión del diseño. P0 termina review/fixes/commit antes de iniciar P1.
+
+## Decisiones y alcance
+
+1. El camino principal sigue siendo CLI nativa → SpM. Diagnóstico de harness se solicita explícitamente; doctor normal no ejecuta herramientas nuevas.
+2. Instalar presets sólo dentro del repo con preview/apply; jamás editar configuración personal, habilitar permisos ni declarar confianza por el usuario. El propio trabajo de implementación prueba installs en fixtures, no instala hooks reales sin encargo específico.
+3. Hooks entregan referencias y metadatos deterministas pequeños, no cuerpos/foco/títulos arbitrarios de documentos como instrucciones de mayor autoridad.
+4. Adaptadores estructurados normalizan salida; no eligen modelos, despachan subagentes ni modifican flags de permisos. Evidencia persistente es opt-in, mínima y específica de ejecución.
+5. Completar P1 en tres slices: diagnóstico/adopción; hooks; salida estructurada/recibos/handoff. P2 continúa condicionado a pilotos con una limitación demostrada; este diseño no incorpora MCP ni App Server.
+
+## Mejoras de investigación aplicables ahora
+
+Aplicar brief por slice (objetivo, refs, invariantes, ownership, pruebas/cierre), revisión de una versión identificable y evidencia con comando/fixture/resultado real. Trazar productor → consumidores → tests antes de extraer responsabilidades. Reutilizar mustReadNow/supporting/offloaded/nextInspect. Mantener handlers finos y crear abstracciones por dos usos reales o responsabilidad compleja única, no por reducir líneas.
+
+No instalar las dos skills propuestas todavía; no routing automático, métricas de complejidad como gate único, nuevo grafo persistente ni ampliación de root AGENTS. `memory-evals` injection mide inclusión de contexto y no acredita defensa ante prompt injection.
+
+## Slice P1-A: diagnóstico e instrucciones
+
+### Superficie
+
+- `spm doctor --harness codex|claude [--json]` y `spm agent brief --harness codex|claude [--json]` agregan la misma proyección `harness`; sin flag conservan comportamiento y shape actuales salvo campos opcionales ausentes.
+- `spm agent snippet --harness codex|claude` entrega guía acotada, sin procesos ni escrituras. Usa servicios de adopción, no copia nueva de políticas.
+- No detectar proveedor automáticamente por variables de entorno o por marcas en textos. Flag es selección para la consulta, no configuración persistente.
+
+### Diagnóstico
+
+Servicio puro separado de probes inyectables. Resolver ejecutable de PATH; registrar path canónico y versión cruda/parseada. Sólo comandos allowlisted: `--version`, `--help` y, para Codex, `exec --help` y `exec resume --help` si se necesita comprobar flags. Sin shell, stdin ignorado, timeout total de 2000 ms por proceso, máximo 64 KiB combinado stdout/stderr drenado, sin red ni modelos. La ausencia/timeout/error/semver no parseable no falla doctor del proyecto.
+
+Contrato: provider, executable nullable, version nullable, probeStatus (`available|missing|timeout|error|not-requested`), capabilities con estados `observed|documented|unsupported|unverified`, instructionFiles existentes (paths, no contenido), warnings y suggestedCommands. `observed` sólo prueba lo observado: flag anunciado por help no certifica funcionamiento del modelo ni carga efectiva de instrucciones. Versiones prerelease/desconocidas quedan unverified para compatibilidad nativa aunque sus flags puedan aparecer como observed. No tabla abierta del tipo versión >= X garantiza todo.
+
+Población inicial: fixture doc-profile `2026-11-15`, CLI local Codex `0.169.0-alpha.11.1` y Claude `2.1.309` como evidencia de probes, no compatibilidad universal. Un smoke con version/help sirve para diagnóstico; no lanzar sesiones pagadas para probar.
+
+Inspeccionar exclusivamente raíz del repo: AGENTS.md, CLAUDE.md, CLAUDE.local.md, .claude/CLAUDE.md, .claude/settings.json, .codex/hooks.json y .codex/config.toml. No recorrer home ni transcripciones. Reconocer imports `@AGENTS.md` y bloques SpM existentes; reportar posible duplicación/sombreado, nunca afirmar que el harness efectivamente cargó un archivo. Para Claude, documentación actual permite AGENTS bajo condiciones de configuración/archivos; si no es verificable, sugerir revisión manual y el snippet, sin crear CLAUDE.md. La guía no reemplaza AGENTS raíz ni instala bridges automáticamente.
+
+AC: normal doctor ejecuta cero probes; provider missing no cambia health del proyecto; procesos colgados terminan; args de usuario nunca se convierten en shell; JSON legacy intacto; guía breve no repite el workflow completo.
+
+## Slice P1-B: presets de contexto
+
+### Superficie y formatos
+
+- `spm hooks plan --harness codex|claude [--json]`: preview de un preset, archivos destino y diff; no muta.
+- `spm hooks install --harness codex|claude --apply [--json]`: aplica exclusivamente plan repo-local bajo lock. Sin `--apply` devuelve el mismo preview. Flags `--event`/`--events` de hooks Git son incompatibles con `--harness`; el flujo Git existente conserva su contrato.
+- `spm hooks remove --harness codex|claude [--apply] [--json]`: preview/remoción sólo de entries SpM reconocidas exactas; modificaciones ajenas producen conflicto y no se borran.
+- `spm agent hook-context --harness codex|claude`: handler read-only de stdin JSON nativo. No acepta backend/spawn/modelo; no llama a otro agente.
+
+Codex destino `.codex/hooks.json`; Claude `.claude/settings.json`. Un entry SessionStart con matcher `^(startup|resume|compact)$`, command `spm agent hook-context --harness <provider>`, timeout 5 segundos. Comando constante sin interpolar paths ni stdin. Añadir resolución explícita, porque index.ts actualmente usa cwd sin búsqueda ascendente: comenzar en realpath del cwd del proceso, buscar el marker `.specpm/config.toml` más cercano en ancestros y parar en el primer límite Git (`.git` directorio o archivo) o filesystem root. En un límite Git sin marker, repo no gestionado: no saltar al proyecto padre. Validar marker dentro del root y no usar cwd de stdin. Windows conserva preset command simple si PATH contiene spm; no usa quoting POSIX adicional. Si CLI no está disponible, preview sigue siendo útil y avisa; instalación no afirma que el hook vaya a ejecutarse.
+
+La instalación reconoce entradas equivalentes por firma exacta (evento, matcher y command), pero propiedad requiere manifest en `.specpm/harness-hooks.json` con version, provider, target y hash canónico del entry COMPLETO. Sin manifest no se presume ownership: una entry idéntica preexistente sólo permite proponer adopción en preview y registrarla mediante apply explícito; no reemplazarla ni eliminarla. Remove requiere manifest y hash completo vigente idéntico, incluyendo timeout/otros campos; cualquier cambio externo produce conflicto. No añadir campos custom desconocidos al schema del proveedor. JSON inválido o forma hooks incompatible falla antes de escribir. Preservar todas las claves y handlers ajenos, orden relativo y valores; serialización formato JSON consistente, diff explícito. Operación idempotente bajo lock compartido y atomic rename; cada archivo es atómico, no prometer transacción multiarchivo. Si falla manifest después del archivo nativo, informar instalación parcial recuperable: el rerun propone adopción exacta, no duplica ni elimina. Symlinks de targets que resuelven fuera del repo se rechazan. Hooks inline Codex o otros handlers similares se diagnostican como posible duplicación; no borrar ni fusionar automáticamente configuración fuera del target.
+
+### Handler seguro y acotado
+
+Stdin máximo 64 KiB UTF-8; aceptar sólo object con hook_event_name=SessionStart y source allowlisted. Ignorar campos desconocidos; no leer transcript_path, no usar cwd de stdin como autoridad para acceder a otro repo. Event/source desconocido, JSON inválido o repo no gestionado: devolver envelope nativo sin contexto, warning corto y exit 0, nunca bloqueando la sesión. Leer input tiene deadline 1000 ms y la ejecución total deadline 4000 ms desde entrada al handler (incluye stdin). El proceso padre controla reloj/resultado y carga contexto en un subprocess interno read-only terminable, invocado sin shell con el mismo ejecutable/entrypoint del paquete y una opción worker privada validada. El worker no vuelve a crear workers. Al deadline el padre termina el worker/grupo y emite fallback; no usar Promise.race sobre loadProjectContext en el mismo hilo, pues contiene spawnSync de Git. Ningún stream del worker va directo al stdout final. Windows informa diagnóstico si no puede garantizar terminar descendientes; siempre acaba el handler principal. No instalar PostCompact además de SessionStart compact para no duplicar contexto.
+
+Salida nativa con hookSpecificOutput.hookEventName y additionalContext; nunca continue:false, decision:block ni permisos. additionalContext máximo 8192 bytes UTF-8. Contiene instrucciones estáticas del producto para consultar `spm resume --backend prompt --json`, IDs/paths canónicos de refs seleccionadas, snapshot hash si disponible, conteos/estados y aviso de omisiones. No incluye cuerpos, resúmenes, títulos, focus ni output de comandos arbitrarios; rutas escapadas como datos JSON y lista claramente delimitada. Limitar refs determinísticamente y conservar comando de expansión. No sustituye AGENTS ni dice que los documentos tengan autoridad superior. Errores se anuncian con warning acotado, sin stack/env; exit 0 también para errores recuperables del hook. CLI manual equivalente sigue disponible.
+
+AC: startup/resume/compact producen una inyección; otras fuentes no; bytes e input limitados; lectura/preview cero escrituras; install twice no diff; configuración ajena intacta; archivos inválidos/externos no se alteran; remove sólo propia firma; timeout no bloquea harness; fixture desde subcarpeta resuelve mismo repo; no cuerpo de documento ni secreto de transcript aparece en salida.
+
+## Slice P1-C: salida nativa, referencia de sesión y evidencia
+
+### Adaptación opt-in
+
+`spm resume --backend codex|claude --protocol codex-jsonl|claude-json|claude-stream-json [--spawn] [--json]` selecciona parser, no añade flags al comando configurado. Validar pareja provider/protocol. Preview muestra la selección y requisitos de args; config sigue siendo del usuario. Guía ofrece ejemplos de args nativos verificados (Codex exec --json; Claude -p --output-format json o stream-json --verbose), nunca flags que eludan permisos. Sin protocol se mantiene wrapper genérico de P0. Parseo captura pipes aun sin --json y renderiza sólo resultado normalizado; no recrear stream interactivo.
+
+Parsers puros separados, fixtures versionados con source URL/fecha/version cuando se conoce. Inputs de 1 MiB cap P0; para JSONL procesar incrementalmente mientras se drena stdout para conservar terminal aunque stdout retenido se trunque. Decoder UTF-8 incremental conserva bytes multibyte entre chunks; invalid UTF-8 marca parse incompleto. Línea individual máximo 256 KiB; descartar oversized line hasta su newline y marcar parse incompleto, nunca éxito inferido. Warnings máximo 32 entradas de 256 bytes, luego contador omitidas. Estado conservado acotado a línea parcial, últimos ID/terminal/texto y warnings, no array de eventos. Final message máximo 64 KiB UTF-8, marcada truncada; truncar texto válido no vuelve incompleto el parse. No conservar reasoning/tool transcript. Claude JSON monolítico >1 MiB no se parsea como resultado completo: unknown con truncamiento explícito. Campos/eventos desconocidos válidos se ignoran. JSON malformado, línea oversized, parcial al EOF, UTF-8 inválido, IDs contradictorios o terminal incompatible dejan un indicador fatal sticky; un success posterior jamás lo borra. Un stream completo sin terminal es unknown. Probar terminal después de >1 MiB, splits multibyte y garbage después de success.
+
+Normalizado `native_result`: provider, protocol, session_id nullable, terminal (`completed|failed|unknown`), final_text nullable, final_text_truncated, warnings. Invocation P0 conserva su estado de proceso por separado. Codex: thread.started aporta thread_id; turn.completed es terminal completado; turn.failed/error relevante declara fallo; último agent_message completado del turno aporta texto. Claude: result success/no is_error aporta completado; result is_error/error subtype declara fallo; session_id tomado de los records acordes. IDs contradictorios, múltiples terminales incompatibles o fallo de parse nunca se convierten en completed. Si proceso falla/timeout/cancel, el resultado combinado nunca se informa exitoso aunque exista terminal previo; la evidencia conserva ambos estados sin confundirlos. Ningún completed marca tareas done.
+
+### Persistencia mínima y reanudación
+
+`--record` crea recibo opt-in en `.specpm/runs/<random-id>.json` después del cierre, exclusive create, modo 0600 cuando plataforma lo permita. Sin flag no se guarda historial de ejecución. No almacenar stdout/stderr, final_text, transcript ni env: sólo version, runId, provider/protocol, canonical repo root, session_id, snapshot inicial/final, guard final descrito abajo, invocation/native terminal, timestamps, changed file refs observadas y warnings. El snapshot final se captura tras cierre/cleanup de artifacts P0, no se presenta como el inicial. `verification` inicia []: exit del agente no es prueba de tests. Ownership de recibo/ID evita sobreescritura; no GC automático en P1. Documentar retención local y borrado manual seguro. No mutar .gitignore desde --record: sugerir exclusión local como recomendación visible. Excluir del guard sólo el path exacto del recibo propio, identificado antes del spawn, para que escribirlo no invalide su propio handoff. No ocultar todos los archivos .specpm ni cambios ajenos. No comparar directamente el fingerprint P0 al aplicar: su changed_items puede incluir el recibo nuevo.
+
+Guard final independiente del snapshot público P0: HEAD/null, conjunto exacto de changed paths (normalizado, sin recibo propio), hashes de bytes de fuentes managed seleccionadas y de todo archivo código/dato changed al inicio O al final. Path borrado conserva sentinel missing; symlink usa lstat/readlink sin seguir fuera del repo. Lectura stream para hashing, sólo hash/path almacenados. Al apply repetir el mismo conjunto y comprobar además nuevos changed paths; así una segunda edición de un archivo ya dirty invalida el guard aunque Git status siga igual. Fallo/permisos, repo cambiando durante observación o límite de 10000 paths/1 MiB de receipt producen guard incomplete: se conserva resultado de invocación y preview útil, pero apply no se habilita. No prometer snapshot atómico ni detección de cambios fuera de archivos observados y sets Git.
+
+`--session-ref <receipt-id>` carga sólo ID UUID generado por SpM dentro de `.specpm/runs`, exige schema exacto válido, tamaño ≤1 MiB, provider/protocol/root exactos y session_id no vacío; paths libres y `latest` fuera. Verificar realpath de runs bajo root y rechazar directorio/archivo symlink. Session ID se pasa como argv literal, no shell. Inserta `{session_id}` sólo en args configurados que incluyan ese token: sin token, abortar antes de spawn en lugar de fingir resume. No copiar prompts de recibo, siempre construir contexto actual. Repo movido/otro worktree/otro provider requiere nueva sesión, mensaje explicativo; no remap automático. Nunca scrapea la carpeta privada del harness para encontrar sesiones.
+
+### Propuesta de handoff
+
+`spm handoff --from-run <receipt-id> [--apply] [--json]` por defecto produce borrador determinista con snapshot base/final, refs, estados de invocación, cambios observados y verificaciones observadas vacías cuando no existen. No copiar respuesta del modelo ni afirmar que terminó la tarea. Para writes requiere --apply y servicio/repositorio existente; la forma handoff actual sin --from-run mantiene su comportamiento. Antes de aplicar recalcular guard final bajo lock de escritura del repositorio: si cambió o es incomplete, devolver conflicto y borrador, sin forzar. Revisión/done no se modifica nunca. No agregar ejecución automática de tests para rellenar verification ni aceptar claims del stream como pruebas; un humano/agente puede añadir comprobaciones explícitamente mediante nota del workflow existente.
+
+Todos los nuevos caminos --json retornan un solo envelope versionado también ante error controlable, mediante catch central antes de imprimir. Errores de argumentos/precondición exit 2, I/O exit 1, resultado exitoso exit 0; el hook siempre fallback nativo + exit 0 en fallos recuperables. Si falla guard/snapshot final/record después del child, preservar invocation/native_result y agregar evidence_error; nunca perder el resultado del proceso ni reemplazarlo por excepción sin envelope. --record solicitado y fallido hace exit 1 sin fingir recibo guardado. No prometer resultado tras SIGKILL/crash externo.
+
+AC: fixtures de éxito/error/terminal faltante/id conflictivo/malformed/oversized/Unicode pasan; eventos desconocidos no fallan por sí solos pero no prueban éxito; error proceso domina éxito aparente; --record no contiene transcript/env/output; receipt se rechaza con root/provider distinto; session token obligatorio; ningún write con preview; handoff stale no escribe y apply usa capa canónica; tests con fake child, sin llamadas a modelos.
+
+## Precisiones de la segunda revisión independiente
+
+- El guard obtiene paths Git exactos con salida delimitada por NUL y untracked files expandidos (`git status --porcelain=v1 -z --untracked-files=all` o equivalente probado). No reutilizar sin expansión `git status --short`, que puede representar `.specpm/runs/` como una sola carpeta: impediría excluir únicamente el recibo propio. Parsear renames y nombres Unicode/espacios/newlines sin splitting por líneas. Verificar containment real de padres antes de acceder a archivos de guard, manifest y targets; validar sólo el symlink final no basta.
+- Los nuevos envelopes no sustituyen los exit codes P0 de invocación. Una invocación failed/unknown/timed_out/cancelled conserva su código P0 incluso si además falla evidence. Si el proceso completed, un protocolo opt-in failed/unknown o un error de evidencia solicitado devuelve 1; completed con protocolo válido y persistencia solicitada exitosa devuelve 0. Argumentos/precondiciones previos al spawn conservan 2. Guard incomplete sin error de captura se informa explícito y nunca habilita handoff apply.
+- En JSONL, EOF sin newline final se procesa si los bytes pendientes forman un JSON completo válido. Sólo un fragmento incompleto/inválido al EOF activa fatal; no rechazar un stream correcto por faltar el último salto de línea. El límite por línea y UTF-8 incremental siguen aplicando.
+- Session ID es dato opaco acotado (máximo 512 bytes UTF-8), no vacío, sin caracteres de control/whitespace y sin prefijo `-`; rechazar el recibo antes de spawn si incumple. Pasarlo por argv evita shell injection pero por sí solo no evita interpretarlo como opción del CLI. No inferir identidad de sesión ni obtenerla de carpetas privadas del harness.
+
+## Revisión del diseño y gates
+
+Autorrevisión spec-reviewer y revisión independiente Astra (paradigm_research): se cerraron diagnóstico con side effects implícitos (probes sólo explícitos), autoridad de hook (refs/IDs, no documento), duplicación postcompact (un event), identidad root/sesión (receipt exacto), fidelidad de evidencia (observed vs reported), cleanup peligroso (sin GC), coexistencia de hooks Git (ramas separadas), resolución ascendente nueva/bounded, deadline fuera del hilo spawnSync, guard de código ya dirty, recibo sin auto-invalidación, errores con JSON único, parser sticky/acotado y ownership por manifest+hash completo. Root/Astra debe verificar este delta antes de entregarlo al ejecutor; no hay preguntas nuevas de producto fuera del alcance ya autorizado.
+
+Cada slice termina revisión de diff congelado, tests focalizados, contratos legacy y check:agents; commit antes del siguiente. Cambios a comandos/services/backends y docs locales requieren mantenimiento AGENTS con skill correspondiente. Mantener root sin crecer. P1-B no debe instalarse en este repo real como efecto de las pruebas. P1-C usa fixtures sintéticos documentados y smoke version/help de los CLIs instalados; no afirmar compatibilidad de ejecución real no probada.
+
+## Fuentes oficiales verificadas
+
+- [Codex hooks](https://learn.chatgpt.com/docs/hooks): ubicación repo-local, SessionStart compact y formato additionalContext; esta salida llega como contexto developer, razón de limitarla a instrucciones estáticas y referencias.
+- [Claude hooks](https://code.claude.com/docs/en/hooks): SessionStart startup/resume/compact y envelope de additionalContext.
+- [Codex no interactivo](https://learn.chatgpt.com/docs/non-interactive-mode): JSONL y eventos thread/turn/item.
+- [Claude programático](https://code.claude.com/docs/en/headless): json/stream-json, result y session ID.
+- [Claude memoria](https://code.claude.com/docs/en/memory#agents-md): condiciones de AGENTS y coexistencia con CLAUDE; inspección estática no acredita carga efectiva.
+
+Las APIs descritas por proveedor son evidencia documental; límites, contratos CLI SpM y políticas de almacenamiento de este documento son decisiones locales de diseño.
