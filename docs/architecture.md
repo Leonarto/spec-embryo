@@ -335,3 +335,8 @@ The v1 structure is meant to grow cleanly into:
 - interactive timeline tracing that stays URL-driven and deterministic so a selected dependency neighborhood can be shared in a handoff or review link
 - a later optional backend or database without invalidating the file-backed model
 - optional deeper Nexus-style integrations for review prep or resume enrichment once the external coexistence contract has proven stable
+
+
+### Fresh document reads
+
+`repository.ts` decodes, parses and registers provenance from one fresh Buffer per document. `document-reader.ts` uses callback Buffer IO with a FIFO concurrency limit of 64 shared by all collections in each `loadProjectContext` call, including enabled session/org notes and current state. Standalone collections receive independent readers. Directories, config and Git remain freshly read; result ordering and fail-fast errors are preserved. Already-started reads may settle after failure, as with the previous Promise.all implementation. There is no process-global queue/cache, mtime shortcut or atomic filesystem snapshot guarantee.

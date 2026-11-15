@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-139"
 title = "Bound fresh project reads with per-load IO concurrency"
 summary = "Reduce project-loading overhead through fresh Buffer reads and a shared concurrency-64 pool while preserving ordering, errors and same-read provenance."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T23:31:07.419Z"
+completed_at = "2026-11-15T23:59:26.408Z"
 tags = ["parallel-implementation", "performance"]
-updated_at = "2026-11-15T23:45:30.778Z"
+updated_at = "2026-11-15T23:59:26.408Z"
 +++
 
 # Execution and review
@@ -20,7 +21,7 @@ Implementation: Sol 6.1 High (`harness_implementation`). Technical decisions and
 
 # Verification record
 
-Implementation pending; isolated prototype measurements below are not production acceptance.
+Implementation and serial integration APPROVED by independent Astra review. Exact 12-file snapshot reviewed; 9 product/evidence files and src/AGENTS retain identical bytes after application, while tests/AGENTS and architecture append only the approved guidance to preserve TASK-128. Isolated full suite: 347 tests, 7680 assertions; production LCOV scope 93.07% lines / 92.69% functions. Independent review: 36 tests / 825 assertions plus Node FIFO/error probes. Integrated repository/provenance/inspector/detail checks: 76 tests / 1180 assertions; web check 0 errors / 0 warnings; AGENTS passes. Final Node 5-warmup/20-sample context p95 improved 373.49 to 236.61 ms with equal context and source revision. This certifies the IO checkpoint, not the 300 ms hydrated-detail gate. Durable evidence: docs/project-read-performance-task139.md, its raw JSON and coverage JSON.
 
 # TASK-138 — measured producer optimization decision
 
@@ -114,3 +115,44 @@ Scope and sequencing are coherent: 128 commit → 139 implementation/review/comm
 Approved orchestration refinement: H may implement and independently review139 in an isolated exact `896ce55` checkout/archive with linked dependencies, excluding every dirty128 file. This changes only the operational start gate, not integration order or dependencies. H owns temporary139 source/tests/evidence; main workspace freeze remains untouched. Record baseline commit, exact product/test manifest and validation scope; do not claim integrated128 coverage from this older snapshot.
 
 Order: (1) isolated139 implementation/tests/review; (2)128 fixes reviewed and committed; (3) verify139 patch applies cleanly with only approved IO/tests/guidance changes and no copied generated artifacts; (4) apply serially to shared repo; (5) run affected repository/provenance tests plus newly integrated128 inspector/detail tests, web check, AGENTS and diff checks; review any conflict or changed implementation before commit; (6) commit139, then begin138. No task139 done/commit-integrated claim before this sequence. If final product bytes match the reviewed measured snapshot exactly, copying alone does not require rerunning the same microbenchmark; combined end-to-end performance remains138/131. Root reconciles managed docs rather than copying stale status from the isolated checkout.
+
+
+# Independent implementation and integration review
+
+# TASK-139 independent implementation review
+
+**Status: APPROVED — frozen implementation and integrated 12-file checkpoint. No findings.**
+
+Reviewed `/private/tmp/spm-task139-implementation` against exact base `896ce55779f8250af89821e7dd8de95ca0cffa8f`, using `/private/tmp/spm-task139-final-manifest.json` and `.sha256`. All 12 file hashes passed before final evidence inspection and again afterward. Authenticated all 148 tracked baseline src/web source files directly against Git objects; production tracked source differences are only repository plumbing and its guide, plus the new reader. No shared mutable TASK-130 source was reviewed or certified.
+
+## Semantics and failure review
+
+- `src/document-reader.ts:16` owns a fresh FIFO per factory invocation, caps active reads at 64 and releases admission on success, read error or synchronous setup throw. The draining flag keeps synchronous completions iterative; the settled guard prevents duplicate release. Admitted queue slots release job references and the exhausted array is cleared. There is no cache or global pool.
+- `src/repository.ts:400` constructs exactly one reader and passes it to current state, specs, tasks, handoffs and enabled session/org notes. Standalone collection operations obtain their own readers. Config, Git and directory enumeration are unchanged. Caller-supplied config and includeScopedMemory=false retain their contracts.
+- Parsing still consumes the returned Buffer once, then registers provenance against those same bytes and the exact parsed object. Result positions remain Promise.all/file-order based, with existing note-ID and handoff-date stable sorts. Missing-current synthetic provenance and symlink omission behavior remain unchanged.
+- Read/parse failures reject the public load without publishing partial context. Queued/active work can drain after rejection without a new cancellation promise; errors remain handled and later loads use independent queues.
+
+## Independent verification
+
+- Snapshot-only focused run: **36 pass, 0 fail, 825 assertions** across document-reader, project-read-freshness, harness-context, resume-window, workspace and details suites.
+- Separate Node v25.6.0 probe `/private/tmp/spm-task139-independent.mjs`: **4,097 jobs**, deliberately varied completion order, two read failures including one after fail-fast rejection, exact FIFO admission, peak 64, zero unhandled rejections and successful queue reuse. No benchmark rerun.
+- Existing integration test instruments the factory through test-only injection and observes one pool, all 501 documents across all six groups, max 64, correct scopes/policies/order and exact source hashes. Freshness tests cover restored-mtime same-length edits, atomic replacement, rename/delete, parsing/read failure recovery, raw invalid UTF-8, configuration and synthetic current defaults.
+- Inspected recorded full suite: **347 pass, 0 fail, 7,680 assertions**; web check 0 errors/0 warnings; AGENTS check passes. Independently recomputed LCOV counts: instrumented product src/web 89 files, 92.69% functions / 93.07% lines; all instrumented files 92.59% / 91.91%. This preserves the report's distinction from Bun's displayed aggregate and does not imply every uninstrumented product file was measured.
+
+## Measurement and documentation
+
+Verified final raw benchmark source hashes against the frozen code, the baseline repository hash against Git, all 20 samples per variant, medians/nearest-rank p95 calculations and equal context hashes/revisions/counts/serialized sizes. The runner checks equality for warmups too. Node context p95 improves **373.49 → 236.61 ms**, median **312.57 → 200.66 ms**. The matching fixture recipe and baseline/production module graphs are documented. No instrumentation is in production.
+
+The report correctly limits this to fresh context/index/projection/stringification on a warm, zero-note synthetic fixture. Baseline-first ordering, same-process GC and absent HTTP/hydrated-render measurement are disclosed. Enabled-note correctness is separately tested. This does **not** pass or relax the 300 ms end-to-end detail gate.
+
+The three guide deltas accurately describe the change; root must reconcile them with current shared docs instead of replacing files from the older isolated base. Approval covers the frozen implementation/evidence and intended guide deltas. Integration with committed TASK-128 and concurrent TASK-130 remains the coordinator's separate gate, followed by the normal reviewed commit before TASK-138.
+
+No product, managed-document or shared-repository edits were made during review; no browser used.
+
+## Integrated checkpoint recheck
+
+Verified `/private/tmp/spm-task139-integrated-manifest.json` against the live frozen 139 files after integration onto TASK-128 commit `051940b`. All 12 integrated hashes match; the 9 implementation/evidence files plus src/AGENTS.md are byte-identical to the approved snapshot. tests/AGENTS.md and docs/architecture.md preserve their complete committed 128 contents and add only the approved reader guidance. No earlier inspector guidance was removed.
+
+Reviewed coordinator integration logs: **76 pass, 0 fail, 1,180 assertions across 9 files**, including repository/freshness/hook/guard/resume and 128 inspector/detail coverage; web check **0 errors, 0 warnings**. Coordinator reports AGENTS check passing (tests guide 348/350). No benchmark repetition was needed for unchanged production bytes.
+
+The integrated 139 checkpoint is approved for the planned exact-file commit. This does not certify concurrent mutable TASK-130 sources or satisfy the pending end-to-end UI latency gate. No findings.

@@ -1,5 +1,4 @@
 import { join } from "node:path";
-import { readFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { parse as parseToml } from "smol-toml";
 import type {
@@ -31,6 +30,7 @@ import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLay
 import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
 import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
 import { registerDocumentSource } from "./services/document-provenance.ts";
+import { createDocumentReader, readDocumentBytes, type DocumentReader } from "./document-reader.ts";
 import { getProjectProfile, isProjectProfileName, writeProjectProfileManifest, type ProjectProfileName } from "./services/profiles.ts";
 import {
   createConfigToml,
@@ -132,8 +132,9 @@ function git(rootDir: string, args: string[]): string {
 async function loadMarkdownDocument<T>(
   filePath: string,
   parser: (filePath: string, attributes: unknown, body: string) => T,
+  readDocument: DocumentReader = readDocumentBytes,
 ): Promise<T> {
-  const bytes = await readFile(filePath);
+  const bytes = await readDocument(filePath);
   const raw = bytes.toString("utf8");
   const { attributes, body } = parseTomlFrontmatter(raw);
   return registerDocumentSource(parser(filePath, attributes, body), bytes);
@@ -142,19 +143,22 @@ async function loadMarkdownDocument<T>(
 async function loadMarkdownCollection<T>(
   dirPath: string,
   parser: (filePath: string, attributes: unknown, body: string) => T,
+  readDocument: DocumentReader = createDocumentReader(),
 ): Promise<T[]> {
   const files = await listMarkdownFiles(dirPath);
-  return Promise.all(files.map((filePath) => loadMarkdownDocument(filePath, parser)));
+  return Promise.all(files.map((filePath) => loadMarkdownDocument(filePath, parser, readDocument)));
 }
 
 async function loadScopedMemoryNotes(
   dirPath: string,
   scope: "session" | "org",
   writePolicy: MemoryScopeWritePolicy,
+  readDocument: DocumentReader = createDocumentReader(),
 ): Promise<MemoryNoteDocument[]> {
   const notes = await loadMarkdownCollection<MemoryNoteDocument>(
     dirPath,
     (filePath, attributes, body) => parseMemoryNoteDocument(filePath, attributes, body, scope, writePolicy),
+    readDocument,
   );
   return notes.sort((left, right) => left.id.localeCompare(right.id));
 }
@@ -345,7 +349,7 @@ export async function readProjectConfig(rootDir: string): Promise<ProjectConfig>
   return parseProjectConfig(parseToml(raw));
 }
 
-async function readCurrentState(paths: ReturnType<typeof resolveProjectPaths>): Promise<CurrentStateDocument> {
+async function readCurrentState(paths: ReturnType<typeof resolveProjectPaths>, readDocument: DocumentReader = readDocumentBytes): Promise<CurrentStateDocument> {
   if (!(await pathExists(paths.stateFile))) {
     return parseCurrentStateDocument(
       paths.stateFile,
@@ -365,7 +369,7 @@ async function readCurrentState(paths: ReturnType<typeof resolveProjectPaths>): 
     );
   }
 
-  return loadMarkdownDocument(paths.stateFile, parseCurrentStateDocument);
+  return loadMarkdownDocument(paths.stateFile, parseCurrentStateDocument, readDocument);
 }
 
 async function readGitSnapshot(rootDir: string): Promise<GitSnapshot> {
@@ -396,17 +400,18 @@ export async function loadProjectContext(rootDir: string, options: {
 } = {}): Promise<ProjectContext> {
   const config = options.config ?? await readProjectConfig(rootDir);
   const paths = resolveProjectPaths(rootDir, config);
+  const readDocument = createDocumentReader();
 
   const [currentState, specs, tasks, handoffs, sessionNotes, orgNotes, gitSnapshot] = await Promise.all([
-    readCurrentState(paths),
-    loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument),
-    loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument),
-    loadMarkdownCollection<HandoffDocument>(paths.handoffsDir, parseHandoffDocument),
+    readCurrentState(paths, readDocument),
+    loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument, readDocument),
+    loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument, readDocument),
+    loadMarkdownCollection<HandoffDocument>(paths.handoffsDir, parseHandoffDocument, readDocument),
     options.includeScopedMemory !== false && config.memoryScopes.session.enabled
-      ? loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
+      ? loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy, readDocument)
       : Promise.resolve([]),
     options.includeScopedMemory !== false && config.memoryScopes.org.enabled
-      ? loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
+      ? loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy, readDocument)
       : Promise.resolve([]),
     readGitSnapshot(rootDir),
   ]);
