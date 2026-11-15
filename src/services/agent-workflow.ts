@@ -1,7 +1,9 @@
 import type { AdoptionCommandSuggestion, CapabilityRefreshGuidance } from "./adoption.ts";
 import type { DoctorReport } from "./doctor.ts";
+import { renderHarnessDiagnostics, type HarnessDiagnosticReport } from "./harness-diagnostics.ts";
 
 export interface AgentWorkflowBrief {
+  harness?: HarnessDiagnosticReport;
   overview: string;
   repo: {
     adoptionState: DoctorReport["adoption"]["state"];
@@ -38,6 +40,7 @@ export interface AgentWorkflowBrief {
 }
 
 export interface AgentSnippet {
+  harness?: HarnessDiagnosticReport;
   note: string;
   snippetLines: string[];
 }
@@ -58,6 +61,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
   const { currentStateAvailable, currentStateStatus } = report.guidance.workflowLoop;
 
   return {
+    ...(report.harness ? { harness: report.harness } : {}),
     overview: report.guidance.overview,
     repo: {
       adoptionState: report.adoption.state,
@@ -100,6 +104,7 @@ export function buildAgentWorkflowBrief(report: DoctorReport): AgentWorkflowBrie
 
 export function buildAgentSnippet(report: DoctorReport): AgentSnippet {
   return {
+    ...(report.harness ? { harness: report.harness } : {}),
     note: report.guidance.externalAgentsSnippet.note,
     snippetLines: report.guidance.externalAgentsSnippet.snippetLines,
   };
@@ -186,6 +191,7 @@ export function renderAgentWorkflowBrief(brief: AgentWorkflowBrief): string {
     "Repo-local guide files:",
     `- Current checkpoint: ${brief.repo.currentStateFile}${brief.repo.currentStateStatus === "available" ? "" : brief.repo.currentStateStatus === "missing" ? " (not present yet)" : " (currently unreadable)"}`,
     `- Direct agent brief: ${brief.repo.directAgentBriefFile}`,
+    ...(brief.harness ? ["", renderHarnessDiagnostics(brief.harness)] : []),
   ].join("\n");
 }
 
@@ -197,5 +203,9 @@ export function renderAgentSnippet(snippet: AgentSnippet): string {
     "```md",
     ...snippet.snippetLines,
     "```",
+    ...(snippet.harness ? ["", `Harness adoption: ${snippet.harness.provider} (no CLI probes)`,
+      "Keep root AGENTS.md as the shared source. Review loading conditions before adding an import; this command creates no bridge.",
+      `Existing root instruction paths: ${snippet.harness.instructionFiles.join(", ") || "none observed"}`,
+      ...snippet.harness.warnings.map((warning) => `- ${warning}`)] : []),
   ].join("\n");
 }

@@ -10,6 +10,7 @@ export type SpecStatus = (typeof SPEC_STATUSES)[number];
 export type TaskStatus = (typeof TASK_STATUSES)[number];
 export type HandoffKind = (typeof HANDOFF_KINDS)[number];
 export type BackendName = (typeof BACKEND_NAMES)[number];
+export type HarnessProvider = "codex" | "claude";
 export type NexusRootAgentsMode = (typeof NEXUS_ROOT_AGENTS_MODES)[number];
 export type MemoryScopeName = (typeof MEMORY_SCOPE_NAMES)[number];
 export type MemoryScopeWritePolicy = (typeof MEMORY_SCOPE_WRITE_POLICIES)[number];

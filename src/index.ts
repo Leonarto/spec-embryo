@@ -23,6 +23,16 @@ import { runTaskCommand } from "./commands/task.ts";
 import { runTestsCommand } from "./commands/tests.ts";
 import { runUiCommand } from "./commands/ui.ts";
 import { readCliVersion } from "./services/version.ts";
+import { HarnessSelectionError } from "./services/harness-diagnostics.ts";
+import { withSchemaVersion } from "./services/contracts.ts";
+
+let outputStarted = false;
+async function writeOutput(text: string): Promise<void> {
+  outputStarted = true;
+  await new Promise<void>((resolve, reject) => {
+    process.stdout.write(`${text}\n`, (error) => error ? reject(error) : resolve());
+  });
+}
 
 async function main(): Promise<void> {
   const parsed = parseArgs(process.argv.slice(2));
@@ -67,9 +77,7 @@ async function main(): Promise<void> {
       try {
         const result = await runResumeCommandResult(rootDir, parsed);
         process.exitCode = result.exitCode;
-        if (result.text) await new Promise<void>((resolve, reject) => {
-          process.stdout.write(`${result.text}\n`, (error) => error ? reject(error) : resolve());
-        });
+        if (result.text) await writeOutput(result.text);
       } finally {
         process.off("SIGINT", printingGuard); process.off("SIGTERM", printingGuard);
       }
@@ -122,12 +130,22 @@ async function main(): Promise<void> {
   }
 
   if (output.length > 0) {
-    console.log(output);
+    if (parsed.flags.has("harness") && (parsed.command === "doctor" || parsed.command === "agent")) await writeOutput(output);
+    else console.log(output);
   }
 }
 
-main().catch((error) => {
+main().catch(async (error) => {
   const message = error instanceof Error ? error.message : String(error);
+  const parsed = parseArgs(process.argv.slice(2));
+  if (!outputStarted && (parsed.command === "doctor" || parsed.command === "agent") && parsed.flags.has("harness") && parsed.flags.has("json")) {
+    process.exitCode = error instanceof HarnessSelectionError ? 2 : 1;
+    try {
+      await writeOutput(JSON.stringify(withSchemaVersion({ harness: null,
+        error: { type: error instanceof HarnessSelectionError ? "usage" : "io", message } }), null, 2));
+    } catch { process.exitCode = 1; }
+    return;
+  }
   console.error(`spec-embryo error: ${message}`);
-  exit(error instanceof ResumeCommandError ? error.exitCode : 1);
+  exit(error instanceof ResumeCommandError || error instanceof HarnessSelectionError ? error.exitCode : 1);
 });

@@ -31,6 +31,7 @@ import { inspectAdoptionState, type AdoptionInspection } from "./layout.ts";
 import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
 import { CLI_VERSION, compareCliVersions } from "./version.ts";
 import { findAgentsFiles } from "./agents.ts";
+import { renderHarnessDiagnostics, type HarnessDiagnosticReport } from "./harness-diagnostics.ts";
 
 export type DoctorSeverity = "blocking" | "warning" | "info";
 export type DoctorOverallStatus = "healthy" | "needs-attention" | "blocked";
@@ -51,6 +52,7 @@ export interface DoctorSummary {
 }
 
 export interface DoctorReport {
+  harness?: HarnessDiagnosticReport;
   summary: DoctorSummary;
   adoption: AdoptionInspection;
   versions: {
@@ -709,6 +711,8 @@ export function renderDoctorReport(report: DoctorReport, options: DoctorRenderOp
       }
     }
   }
+
+  if (report.harness) lines.push("", renderHarnessDiagnostics(report.harness));
 
   if (!verbose) {
     lines.push(

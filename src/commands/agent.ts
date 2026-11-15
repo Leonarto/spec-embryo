@@ -7,13 +7,17 @@ import {
 } from "../services/agent-workflow.ts";
 import { buildDoctorReport } from "../services/doctor.ts";
 import { withSchemaVersion } from "../services/contracts.ts";
+import { buildHarnessDiagnostics, HarnessSelectionError, selectHarness } from "../services/harness-diagnostics.ts";
 
 export async function runAgentCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
+  const provider = selectHarness(parsed.flags.get("harness"));
   if (parsed.subcommand && parsed.subcommand !== "brief" && parsed.subcommand !== "snippet") {
+    if (provider) throw new HarnessSelectionError("Supported harness guidance commands are agent brief and agent snippet.");
     throw new Error("Supported agent commands are `agent`, `agent brief`, and `agent snippet`.");
   }
 
   const report = await buildDoctorReport(rootDir);
+  if (provider) report.harness = await buildHarnessDiagnostics(rootDir, provider, { probe: parsed.subcommand !== "snippet" });
   if (!parsed.subcommand || parsed.subcommand === "brief") {
     const brief = buildAgentWorkflowBrief(report);
 

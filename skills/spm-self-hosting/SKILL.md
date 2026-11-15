@@ -34,6 +34,8 @@ bun run spm spec import-prompt --source <folder> --instructions "..."
 bun run spm reshape --dry-run
 ```
 
+For explicit harness troubleshooting, use `spm doctor --harness codex|claude --json` or `spm agent brief --harness codex|claude --json`. These run bounded local version/help probes; ordinary doctor/brief do not. `spm agent snippet --harness codex|claude` returns shared adoption guidance without probes or writes. Inspect reported root instruction paths and loading conflicts manually; diagnosis never proves effective harness loading or installs a CLAUDE bridge, hooks, or permissions.
+
 ## Rules
 
 - Use `spm` when it already provides the needed project-memory view.
