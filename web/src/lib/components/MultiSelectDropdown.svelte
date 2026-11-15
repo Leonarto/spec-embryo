@@ -48,7 +48,8 @@
   const visibleIds = $derived(new Set(options.map((option: MultiSelectOption) => option.value)));
   let details: HTMLDetailsElement;
   function dismiss(event: KeyboardEvent) { if (event.key === "Escape" && !event.defaultPrevented && details?.open && details.contains(document.activeElement)) { event.preventDefault(); details.open = false; details.querySelector("summary")?.focus(); } }
-  function outside(event: PointerEvent) { if (details?.open && event.target instanceof Node && !details.contains(event.target)) details.open = false; }
+  function keyboardEvents(node: HTMLDetailsElement) { node.addEventListener('keydown', dismiss); return { destroy() { node.removeEventListener('keydown', dismiss); } }; }
+  function outside(event: MouseEvent) { if (details?.open && event.target instanceof Node && !details.contains(event.target)) details.open = false; }
   function toggle(value: string, checked: boolean) {
     const next = new Set(currentValues);
     if (checked) next.add(value); else next.delete(value);
@@ -57,8 +58,8 @@
   }
 </script>
 
-<svelte:window onkeydown={dismiss} onpointerdown={outside} />
-<details class="dropdown-shell" bind:this={details}>
+<svelte:window onclick={outside} />
+<details class="dropdown-shell" bind:this={details} use:keyboardEvents>
   <summary class="dropdown-trigger">
     <div class="summary-copy">
       <span class="summary-label">

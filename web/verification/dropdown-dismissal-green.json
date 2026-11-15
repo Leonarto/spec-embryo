@@ -1,0 +1,496 @@
+{
+  "capturedAt": "2026-11-15T22:27:17.368Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "select/mouse: selection stays open before Apply",
+      "pass": true
+    },
+    {
+      "name": "select/mouse: successful controls are unique",
+      "pass": true
+    },
+    {
+      "name": "select/mouse: first activation submits once with intended query/payload",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "scope",
+            "archived"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "archived",
+        "status": [],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "select/keyboard-enter: selection stays open before Apply",
+      "pass": true
+    },
+    {
+      "name": "select/keyboard-enter: successful controls are unique",
+      "pass": true
+    },
+    {
+      "name": "select/keyboard-enter: first activation submits once with intended query/payload",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "scope",
+            "archived"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "archived",
+        "status": [],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "select/keyboard-space: selection stays open before Apply",
+      "pass": true
+    },
+    {
+      "name": "select/keyboard-space: successful controls are unique",
+      "pass": true
+    },
+    {
+      "name": "select/keyboard-space: first activation submits once with intended query/payload",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "scope",
+            "archived"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "archived",
+        "status": [],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "multi/mouse: selection stays open before Apply",
+      "pass": true
+    },
+    {
+      "name": "multi/mouse: successful controls are unique",
+      "pass": true
+    },
+    {
+      "name": "multi/mouse: first activation submits once with intended query/payload",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "status",
+            "review"
+          ],
+          [
+            "scope",
+            "all"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "all",
+        "status": [
+          "review"
+        ],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "multi/keyboard-enter: selection stays open before Apply",
+      "pass": true
+    },
+    {
+      "name": "multi/keyboard-enter: successful controls are unique",
+      "pass": true
+    },
+    {
+      "name": "multi/keyboard-enter: first activation submits once with intended query/payload",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "status",
+            "review"
+          ],
+          [
+            "scope",
+            "all"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "all",
+        "status": [
+          "review"
+        ],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "multi/keyboard-space: selection stays open before Apply",
+      "pass": true
+    },
+    {
+      "name": "multi/keyboard-space: successful controls are unique",
+      "pass": true
+    },
+    {
+      "name": "multi/keyboard-space: first activation submits once with intended query/payload",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "status",
+            "review"
+          ],
+          [
+            "scope",
+            "all"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "all",
+        "status": [
+          "review"
+        ],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "select: first Escape only closes inner and focuses its summary",
+      "pass": true
+    },
+    {
+      "name": "select: Escape is defaultPrevented at host and draft remains intact",
+      "pass": true
+    },
+    {
+      "name": "select: second Escape closes Filters and focuses outer summary",
+      "pass": true
+    },
+    {
+      "name": "select: outside destination acts once after dropdown dismissal",
+      "pass": true
+    },
+    {
+      "name": "multi: first Escape only closes inner and focuses its summary",
+      "pass": true
+    },
+    {
+      "name": "multi: Escape is defaultPrevented at host and draft remains intact",
+      "pass": true
+    },
+    {
+      "name": "multi: second Escape closes Filters and focuses outer summary",
+      "pass": true
+    },
+    {
+      "name": "multi: outside destination acts once after dropdown dismissal",
+      "pass": true
+    },
+    {
+      "name": "select/touch: chosen dropdown remains open",
+      "pass": true
+    },
+    {
+      "name": "select/touch: first tap Apply submits once",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "scope",
+            "archived"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "archived",
+        "status": [],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "multi/touch: chosen dropdown remains open",
+      "pass": true
+    },
+    {
+      "name": "multi/touch: first tap Apply submits once",
+      "pass": true,
+      "detail": {
+        "params": [
+          [
+            "q",
+            ""
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "50"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "status",
+            "review"
+          ],
+          [
+            "scope",
+            "all"
+          ],
+          [
+            "priority",
+            ""
+          ]
+        ],
+        "submits": 1,
+        "scope": "all",
+        "status": [
+          "review"
+        ],
+        "page": 1,
+        "total": 200
+      }
+    },
+    {
+      "name": "Touch scroll/pointercancel preserves an open dropdown without a click",
+      "pass": true,
+      "detail": {
+        "scrollTop": 160.5,
+        "pointerCancels": 2,
+        "open": true
+      }
+    }
+  ],
+  "pass": true,
+  "baseCommit": "c546f106d775e8e104ee7d801aba2a125fcb6e2d",
+  "snapshot": "/private/tmp/spm-dropdown-checkpoint",
+  "sourceHashes": {
+    "web/src/lib/components/SelectDropdown.svelte": "30bd2e0d665f6bf067b8eebb744475ec60fe297926313ee126a28335ab604fdb",
+    "web/src/lib/components/MultiSelectDropdown.svelte": "27546e69dab85da3cd2f913d3a0f02d28229ab4aef5e2ed271a3902b9c3c7593",
+    "web/src/lib/components/Popover.svelte": "cd0bbf06661a6b2e83e867a22118bb4c46ecb27eeddc510ac372ba0fcba149fd"
+  },
+  "scope": "Only these3 components over committed c546f10, using committed Tasks consumer. No unreviewed Specs137 or inspector128 included."
+}

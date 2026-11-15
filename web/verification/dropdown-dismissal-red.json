@@ -1,0 +1,50 @@
+{
+  "baseCommit": "c546f106d775e8e104ee7d801aba2a125fcb6e2d",
+  "consumer": "Committed Tasks route; unmodified dropdowns, isolated preview on 5291",
+  "originalFirstClickLost": true,
+  "before": "/tasks?scope=all&page=2&pageSize=50&sort=id.asc",
+  "afterOneRealClick": "/tasks?scope=all&page=2&pageSize=50&sort=id.asc",
+  "fields": [
+    [
+      "q",
+      ""
+    ],
+    [
+      "sort",
+      "id.asc"
+    ],
+    [
+      "page",
+      "1"
+    ],
+    [
+      "pageSize",
+      "50"
+    ],
+    [
+      "view",
+      "table"
+    ],
+    [
+      "window",
+      ""
+    ],
+    [
+      "scope",
+      "unarchived"
+    ],
+    [
+      "priority",
+      ""
+    ]
+  ],
+  "method": "Open Filters then Archive scope; select Not archived; click Apply filters once with pointer. Observe unchanged URL after300ms although FormData requests page1/unarchived. No double click or forced click.",
+  "escapeBeforeNodeListeners": {
+    "consumer": "Same committed Tasks route; window keydown listeners",
+    "action": "Focus Archive scope radio then press Escape",
+    "outerFiltersOpen": false,
+    "innerArchiveScopeOpen": true,
+    "focus": "Filters summary",
+    "expected": "Only inner closes and its summary receives focus"
+  }
+}
