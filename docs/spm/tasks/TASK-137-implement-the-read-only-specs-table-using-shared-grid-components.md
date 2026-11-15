@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-137"
 title = "Implement the read-only Specs table using shared grid components"
 summary = "Extract the Specs table checkpoint from TASK-129 so it can run in parallel with the inspector, retaining canonical detail links until guarded integration."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-127"]
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T21:33:05.494Z"
 tags = ["parallel-implementation", "ui"]
-updated_at = "2026-11-15T21:33:05.494Z"
+updated_at = "2026-11-15T21:56:01.847Z"
 +++
 
 # Astra-approved parallel scope
