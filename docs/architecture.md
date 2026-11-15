@@ -214,7 +214,7 @@ The SvelteKit workspace lives under `web/` and is launched through `spm ui`. It 
 
 - `workspace-query.ts` normalizes URL facets, archive scope, stable sorting and pagination. Specs keep canonical status separate from the task scope used for progress. Lifecycle windows use completion/cancellation timestamps. Legacy analytical links retain archive behavior with an explicit notice.
 - `workspace.ts` projects bounded task/spec pages, searchable spec options, Overview signals, or timeline groups. Lists contain no document bodies, foreign-view arrays, or eager full spec catalog. The existing `buildDashboardData` facade keeps its public defaults; list/detail paths do not invoke its status/critical-path/timeline work.
-- `engine.buildTaskAnalysisIndex` builds canonical ID, unmet-dependency and direct-dependent indexes in O(V+E). Duplicate dependency references count a dependent once; only `done` satisfies a dependency. This does not replace the deferred critical-path/timeline algorithms.
+- `engine.buildTaskAnalysisIndex` builds canonical ID, unmet-dependency and direct-dependent indexes in O(V+E). Duplicate dependency references count a dependent once; only `done` satisfies a dependency. Status/dashboard reuse projection-local indexes; critical-path and Timeline placement now use iterative traversals with legacy ordering/cycle semantics preserved (TASK-136).
 - `lib/server/workspace.ts` stores a Promise on request locals before awaiting it, so layout and page reuse one canonical context/index. There is no global project cache. Detail builders accept this loaded source while root-directory wrappers remain compatible. Filesystem consistency is best effort, not transactional.
 - Layout sends project/git only. SSR page loads and read-only GET `/workspace-data` call the same discriminated route builder. Its no-store envelope includes schemaVersion 1, route, requestKey, revision, generatedAt, shell and the route DTO. `/workspace-options` returns searched/paged options plus selected IDs, not all titles. An omitted oversized option label carries a visible reason and navigable ID.
 - Request keys describe syntax-normalized URL intention before dataset-dependent ID filtering/page clamping. Revisions fingerprint loaded inputs/projections and exclude wall clock. Effective pagination and unavailable spec IDs are explicit metadata; refresh preserves URL intention, announces clamping/missing filters and accepts records that reappear.
@@ -223,14 +223,14 @@ The SvelteKit workspace lives under `web/` and is launched through `spm ui`. It 
 
 Legacy canonical missing-detail GET currently preserves HTTP 200 with `found:false` and its existing not-found view. SPEC-062 P4 must introduce coherent full-page HTTP 404 and an inspector-local missing state without dropping the list.
 
-Tasks default to the bounded Table; `view=board` explicitly limits scope to unarchived, while `simple=1` forces native Table semantics. Specs retain paginated cards until their table slice.
+Tasks default to the bounded Table; `view=board` explicitly limits scope to unarchived, while `simple=1` forces native Table semantics. Specs uses the same bounded DataTable and ColumnDef contracts, page-local selection, clipboard and project/entity preferences over WorkspaceSpecRow. Spec status is independent of linked-task scope; progressIsSubset labels scoped/windowed metrics. Canonical detail links remain the entry point until inspector integration.
 
 - `components/data-table/` accepts typed column descriptors and a current page, never fetching or deriving domain data. The same descriptors supply rendering and safe TSV text. Native SSR headers/links become a one-target roving grid only after mount; simple mode keeps normal Tab behavior.
 - Row-ID/column-key focus and page-local selection survive same-query refresh by ID reconciliation. User query changes clear selection; data-page clamping alone does not change URL intention. Hidden/reordered columns reconcile focus by stable key.
 - Versioned column/density preferences use an opaque SHA-256 namespace from the canonical realpath loaded on the server. Distinct roots with equal names remain separate; symlink aliases share preferences. Title sizing stays automatic until explicit numeric/pointer sizing; only the base width and mode are stored.
 - Toolbar search replaces history after 150 ms; presets preserve independent facets while changing only scope/status/page. Facet Apply and SSR GET links remain explicit navigation. Clipboard denial offers selectable text without reporting success.
 
-The inspector, draft guards, Specs table and timeline volume presentation remain subsequent SPEC-062 slices. Measurements and browser evidence live in `web/verification/`.
+The inspector, draft guards and timeline volume presentation remain subsequent SPEC-062 slices. Measurements and browser evidence live in `web/verification/`.
 
 ## AGENTS budget policy
 

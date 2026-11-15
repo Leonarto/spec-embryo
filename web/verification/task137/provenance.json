@@ -1,0 +1,12 @@
+{
+  "finalBaseCommit": "c32be17724e2895fde60137704a3f9caf0685d20",
+  "sourceHashes": {
+    "web/src/routes/specs/+page.svelte": "ddf6db3d336b80522b1f0c6b47277dcd73bc963279820c9b46d90124bb2bd858",
+    "web/src/lib/components/data-table/spec-columns.ts": "6b38574d57af26a2f18890fc4870f17ef2f328c811bf52c9843a89e9d2e2d658",
+    "tests/spec-table.test.ts": "0365f0db75bf8bc021de7156256b6a81f802b9120c1a9e4a5db295acae34cf4c",
+    "web/scripts/spec-table-check.mjs": "0b8e1c15e3846c5869b21f87537c5bbc4e830870417674040d89106afee86e1b",
+    "web/scripts/spec-table-http-check.ts": "65bf1b83931c057cb0d1f451d29dcffcb8d018c3ba22971a3bdd35f82b1523d1"
+  },
+  "excluded": "All unreviewed TASK-128 sources including workspace URL adapter. Prior valid phases explicitly identify c546f10.",
+  "isolation": "git archive base + two consumer product files and focused test; root/web dependencies linked, no install."
+}

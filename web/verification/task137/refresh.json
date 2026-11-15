@@ -1,0 +1,22 @@
+{
+  "phase": "refresh",
+  "capturedAt": "2026-11-15T22:16:36.006Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Specs same-query refresh preserves selected ID and focused row/key",
+      "pass": true
+    },
+    {
+      "name": "Specs refresh preserves unsubmitted taskScope radio draft",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "baseCommit": "c546f106d775e8e104ee7d801aba2a125fcb6e2d",
+  "sourceHashes": {
+    "web/src/routes/specs/+page.svelte": "ddf6db3d336b80522b1f0c6b47277dcd73bc963279820c9b46d90124bb2bd858",
+    "web/src/lib/components/data-table/spec-columns.ts": "6b38574d57af26a2f18890fc4870f17ef2f328c811bf52c9843a89e9d2e2d658"
+  },
+  "scope": "Specs consumer source unchanged from this checkpoint; later shared dropdown fix is event-only and separately verified. No inspector128 source consumed."
+}

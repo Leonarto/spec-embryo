@@ -1,0 +1,74 @@
+{
+  "phase": "nojs",
+  "capturedAt": "2026-11-15T22:16:39.937Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "all: SSR is native table",
+      "pass": true
+    },
+    {
+      "name": "all: native form has one taskScope",
+      "pass": true
+    },
+    {
+      "name": "all: real no-JS GET succeeds",
+      "pass": true
+    },
+    {
+      "name": "all: no-JS scope/page/facets and progress",
+      "pass": true
+    },
+    {
+      "name": "unarchived: SSR is native table",
+      "pass": true
+    },
+    {
+      "name": "unarchived: native form has one taskScope",
+      "pass": true
+    },
+    {
+      "name": "unarchived: real no-JS GET succeeds",
+      "pass": true
+    },
+    {
+      "name": "unarchived: no-JS scope/page/facets and progress",
+      "pass": true
+    },
+    {
+      "name": "archived: SSR is native table",
+      "pass": true
+    },
+    {
+      "name": "archived: native form has one taskScope",
+      "pass": true
+    },
+    {
+      "name": "archived: real no-JS GET succeeds",
+      "pass": true
+    },
+    {
+      "name": "archived: no-JS scope/page/facets and progress",
+      "pass": true
+    },
+    {
+      "name": "Native Specs sort link works without JavaScript",
+      "pass": true
+    },
+    {
+      "name": "Native Specs identity link reaches canonical route",
+      "pass": true
+    },
+    {
+      "name": "simple=1 retains native table after JS mount",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "baseCommit": "c546f106d775e8e104ee7d801aba2a125fcb6e2d",
+  "sourceHashes": {
+    "web/src/routes/specs/+page.svelte": "ddf6db3d336b80522b1f0c6b47277dcd73bc963279820c9b46d90124bb2bd858",
+    "web/src/lib/components/data-table/spec-columns.ts": "6b38574d57af26a2f18890fc4870f17ef2f328c811bf52c9843a89e9d2e2d658"
+  },
+  "scope": "Specs consumer source unchanged from this checkpoint; later shared dropdown fix is event-only and separately verified. No inspector128 source consumed."
+}
