@@ -19,7 +19,7 @@
     if(route==='specs'){params.delete('status');params.delete('spec_status');}
     if(showTimeWindow)params.delete('window');
     if(route==='tasks'||route==='specs')params.set('page','1');
-    if((route==='tasks'||route==='timeline')&&!controlledNames.includes('scope'))params.set('scope',filters.scope);else if(route==='specs')params.set('taskScope',filters.scope);
+    if((route==='tasks'||route==='timeline')&&!controlledNames.includes('scope'))params.set('scope',filters.scope);else if(route==='specs'&&!controlledNames.includes('taskScope'))params.set('taskScope',filters.scope);
     return [...params.entries()];
   });
   const clearHref=$derived.by(()=>{
