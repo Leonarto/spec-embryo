@@ -4,9 +4,9 @@ id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
 summary = "Implement a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
 status = "active"
-task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136"]
+task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136", "TASK-137"]
 tags = ["ui", "ux", "accessibility", "performance"]
-updated_at = "2026-11-15T20:58:20.291Z"
+updated_at = "2026-11-15T21:33:05.494Z"
 +++
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta
@@ -340,3 +340,6 @@ TASK-136 adelanta la optimización determinista de engine/dashboard con DTOs id�
 ## Precisión del gate de carga
 
 TASK-131 contiene el protocolo de medición aprobado por Astra: warm ≤800 ms y cold ≤2.5 s miden navegación hasta filas correctas visibles e hidratadas, no sólo HTTP. Cold reinicia servidor, navegador/perfil y cachés de aplicación propias del harness; la caché del sistema operativo queda sin controlar y se declara así. No requiere purgar cachés globales. Cada ruta tiene 20 muestras seriales y p95 nearest-rank; warm añade cinco warmups, cold no precalienta. Startup, TTFB/transporte y render se informan separados. Los resultados HTTP de TASK-126 no certifican por sí solos el gate final.
+
+
+TASK-137 separa la tabla de Specs de TASK-129 y la implementa tras TASK-127, en paralelo con TASK-128. Reutiliza el grid y los DTOs existentes y mantiene enlaces canónicos; no cambia el host, servicios ni preguntas. TASK-129 espera los commits revisados de TASK-128 y TASK-137 para integrar drawer y respuestas protegidas. Sólo Tasks conserva Board; no se añade una alternativa Cards para Specs.

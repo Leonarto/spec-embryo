@@ -70,3 +70,8 @@ Expose one reusable inspector host/controller and link activation helper to129/1
 ## Required targeted gate
 
 Direct URL/SSR/no-JS, keyboard open/close, modified clicks, desktop no-trap/mobile trap and resize/reflow; A→B delayed response,404/500/timeout/retry; open→filter→close→Back/Forward; reload with unowned history; outside-filter identity; selected_task unaffected by inspect; filter drafts/table selection/scroll preserved across inspector-only URL changes; no duplicate initial fetch and no list data request on inspector-only JS transitions. Warm detail latency remains measured, not assumed from service timing. Keep later129 dirty-form requirements explicit.
+
+
+# Integration seam for question drafts
+
+Astra requires the host/controller to centralize its actual open/close/entity/full-page/route transitions with immediate allowance in this read-only slice. TASK-129 adds the dirty/saving guard there without changing the public activation contract consumed by Timeline. Do not add unused question state/props now. Installed SvelteKit shallow popstate bypasses beforeNavigate; TASK-129 must gate accepted editor transitions and use its verified ledger for restore/prompt/replay, not pretend popstate is cancelable. Preserve the ledger and central transition design needed by that real forthcoming consumer.
