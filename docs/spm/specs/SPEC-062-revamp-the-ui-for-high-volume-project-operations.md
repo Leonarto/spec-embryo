@@ -4,9 +4,9 @@ id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
 summary = "Plan a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
 status = "active"
-task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131"]
+task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135"]
 tags = ["ui", "ux", "accessibility", "performance"]
-updated_at = "2026-11-15T18:31:37.627Z"
+updated_at = "2026-11-15T20:18:45.780Z"
 +++
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta

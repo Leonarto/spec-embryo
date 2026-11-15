@@ -5,7 +5,7 @@ title = "Add persistent entity inspector and reusable details"
 summary = "Implement inspect URLs, browser history, responsive drawers, focus restoration and shared detail views."
 status = "todo"
 spec_ids = ["SPEC-062"]
-depends_on = ["TASK-127"]
+depends_on = ["TASK-127", "TASK-135"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
@@ -30,3 +30,8 @@ Implement P4 of SPEC-062, including the contracts, edge cases and acceptance cri
 # Verification record
 
 Pending implementation. No acceptance criterion is claimed complete yet.
+
+
+# Missing detail contract
+
+Astra assigns HTTP404 for missing full-page task/spec GET routes and a coherent not-found presentation to this slice. A missing inspector entity shows a local not-found state while preserving the list. TASK-126 deliberately retained the legacy200+found:false GET behavior. Do not alter the existing question POST action as part of this HTTP correction.
