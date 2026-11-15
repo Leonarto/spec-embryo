@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-061 P0/P1 and SPEC-062 shell, queries, both tables, detail extraction and graph optimization are committed. Inspector verification continues; measured relation fan-out requires TASK-138 before guarded questions and final acceptance."
+summary = "SPEC-061 P0/P1 and UI shell, query services, both tables, graph optimization and persistent inspector are approved and committed. Parallel implementation now targets Timeline and fresh-read IO, followed by bounded detail relations, guarded questions and final acceptance."
 focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation and Astra High technical/UX review; preserve completed SPEC-061 native-harness interoperability."
 active_spec_ids = ["SPEC-062"]
-active_task_ids = ["TASK-128"]
+active_task_ids = ["TASK-130", "TASK-139"]
 blocked_task_ids = []
-next_action_hints = ["Finish TASK-128 inspector functional and DOM-containment gates, independent review and commit.", "Then implement shared bounded detail TASK-138 and Timeline TASK-130 in parallel with separate file ownership.", "TASK-129 guarded questions waits for TASK-138; TASK-131 validates final combined behavior, measured performance and package runtime."]
+next_action_hints = ["Implement TASK-130 Timeline while TASK-139 finishes isolated fresh-read IO review and serial integration after inspector commit051940b.", "Commit TASK-139 before TASK-138 bounded detail transport/readers; Timeline final integration waits for TASK-138.", "TASK-129 guarded questions waits for TASK-138; TASK-131 verifies final combined behavior, measured performance and package runtime."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-15T23:03:55.483Z"
+updated_at = "2026-11-15T23:45:30.830Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -29,7 +29,7 @@ The post-`0.3.1` roadmap implementation is complete. `SPEC-055` through `SPEC-06
 
 The user authorized parallel implementation of `SPEC-061` and `SPEC-062`. Sol 6.1 High implements both tracks; Astra High owns technical decisions and UX review. A separate Astra investigates implementation and context practices, including simplicity, code relationships, review and model routing. Baseline commit `fa025f2` preserves the previous roadmap and reviewed plans. UI scope remains inspection, filtering, selection, and copying, preserving the existing spec-question response workflow.
 
-SPEC-061 P0/P1 is complete through `d164e75`; P2 is explicitly deferred. SPEC-062 shell (`1b1d47a`) and shared query/refresh foundation (`0893166`) are complete. TASK-135 canonical detail extraction is approved and committed as `def5e38`. TASK-136 graph optimization is approved and committed as `d311060`. TASK-127 Tasks grid is approved and committed as `7386cb0`. TASK-137 Specs table is approved and committed as `439da07`, with shared filter/dropdown corrections committed separately. TASK-128 now integrates both tables with the inspector. One Sol owns product/browser verification; the other audits HTTP/SSR/import closure from a hashed isolated snapshot. A demonstrated Task/Spec relation fan-out requires TASK-138 after TASK-128: shared bounded transport and canonical/SSR/no-JS readers, preserving full relation access and the original detail latency gate. TASK-138 and TASK-130 run in parallel with separate ownership; TASK-129 waits for TASK-138. TASK-130 also consumes the completed graph checkpoint and integrates the committed detail contract before final review. The research report remains `docs/agent-workflow-research.md`; its two proposed skills are not installed, while bounded slices and independent review practices are in use.
+SPEC-061 P0/P1 is complete through `d164e75`; P2 is explicitly deferred. SPEC-062 shell (`1b1d47a`) and shared query/refresh foundation (`0893166`) are complete. TASK-135 canonical detail extraction is approved and committed as `def5e38`. TASK-136 graph optimization is approved and committed as `d311060`. TASK-127 Tasks grid is approved and committed as `7386cb0`. TASK-137 Specs table is approved and committed as `439da07`, with shared filter/dropdown corrections committed separately. TASK-128 persistent inspector is approved and committed as `051940b`, including its source-freshness, membership-message and Board-focus review fixes. One Sol now owns TASK-130 Timeline; the other implements TASK-139 fresh-read IO in an exact isolated baseline before serial integration and TASK-138 bounded details. A demonstrated Task/Spec relation fan-out requires TASK-138 after TASK-128: shared bounded transport and canonical/SSR/no-JS readers, preserving full relation access and the original detail latency gate. TASK-139 must be reviewed and committed before TASK-138; that producer/detail track and TASK-130 run in parallel with separate ownership; TASK-129 waits for TASK-138. TASK-130 also consumes the completed graph checkpoint and integrates the committed detail contract before final review. The research report remains `docs/agent-workflow-research.md`; its two proposed skills are not installed, while bounded slices and independent review practices are in use.
 
 ## Notes
 

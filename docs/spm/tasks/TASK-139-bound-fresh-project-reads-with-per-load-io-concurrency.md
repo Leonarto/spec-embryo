@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-139"
 title = "Bound fresh project reads with per-load IO concurrency"
 summary = "Reduce project-loading overhead through fresh Buffer reads and a shared concurrency-64 pool while preserving ordering, errors and same-read provenance."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128"]
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T23:31:07.419Z"
 tags = ["parallel-implementation", "performance"]
-updated_at = "2026-11-15T23:31:07.419Z"
+updated_at = "2026-11-15T23:45:30.778Z"
 +++
 
 # Execution and review
@@ -107,3 +107,10 @@ The controlled callback tests plus the real enabled-scopes fixture are complemen
 The proposed final Node benchmark compares production code with baseline using raw 5-warmup/20-serial samples and equality of complete contexts/revisions. The recorded 384.60→238.76 ms context p95 supports selecting this candidate; those supplied prototype figures were not independently reproduced in this design review and do not establish the 300 ms end-to-end UI gate. The zero-note timing fixture is correctly distinguished from enabled-note correctness evidence.
 
 Scope and sequencing are coherent: 128 commit → 139 implementation/review/commit → 138; Timeline-only 130 may proceed in parallel with 139. No cache, parser/domain change, web change, runtime switch, global semaphore or UV_THREADPOOL_SIZE change is authorized. Ready for implementation under the stated frozen-manifest review gate.
+
+
+## Isolated139 preparation while128 closes
+
+Approved orchestration refinement: H may implement and independently review139 in an isolated exact `896ce55` checkout/archive with linked dependencies, excluding every dirty128 file. This changes only the operational start gate, not integration order or dependencies. H owns temporary139 source/tests/evidence; main workspace freeze remains untouched. Record baseline commit, exact product/test manifest and validation scope; do not claim integrated128 coverage from this older snapshot.
+
+Order: (1) isolated139 implementation/tests/review; (2)128 fixes reviewed and committed; (3) verify139 patch applies cleanly with only approved IO/tests/guidance changes and no copied generated artifacts; (4) apply serially to shared repo; (5) run affected repository/provenance tests plus newly integrated128 inspector/detail tests, web check, AGENTS and diff checks; review any conflict or changed implementation before commit; (6) commit139, then begin138. No task139 done/commit-integrated claim before this sequence. If final product bytes match the reviewed measured snapshot exactly, copying alone does not require rerunning the same microbenchmark; combined end-to-end performance remains138/131. Root reconciles managed docs rather than copying stale status from the isolated checkout.

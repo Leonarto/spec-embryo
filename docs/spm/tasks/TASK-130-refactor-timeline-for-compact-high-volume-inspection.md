@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-130"
 title = "Refactor timeline for compact high-volume inspection"
 summary = "Preserve dependency tracing while bounding rendering and integrating the inspector."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128", "TASK-136"]
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.794Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T18:31:13.794Z"
+updated_at = "2026-11-15T23:45:30.729Z"
 +++
 
 # Scope
