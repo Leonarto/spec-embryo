@@ -78,3 +78,73 @@ Reserve workspace.ts/workspace-query.ts timeline-only additions and resource val
 # Graph checkpoint split
 
 TASK-136 now owns the contract-preserving graph optimizations described above and must be approved/committed before this task. TASK-130 consumes that result; it still owns additive diagnostics/nonfinite placement handling, Timeline rendering, fallback paging, inspector integration and final performance evidence. This split does not certify any UI acceptance criterion early.
+
+
+# Exact diagnostic transport contract
+
+# TASK-130 — bounded graph diagnostics and finite-unit transport
+
+Implement only in130.136's legacy oracle and finite/cyclic placement semantics remain authoritative. No scheduler, calendar, SCC repair, cycle enumeration or new dependency.
+
+## Producer and compatibility boundary
+
+Keep DashboardTimelineItem, buildTimelineProjection and buildDashboardData public numeric contracts/output unchanged, including136 oracle tests. Add one shared workspace-timeline projection adapter in src/services (not web parsing) which calls buildTimelineProjection exactly once, diagnoses its input graph once and maps its returned groups into the safe UI DTO. WorkspaceSource provides its existing canonical all-project task-ID set/index; do not reload the repository. The input graph uses the same already scope/window/spec-filtered cards and the same active/all mode filter as legacy placement. Its graph includes cancelled cards in all mode because those may affect dependencies, even though cancelled rows remain omitted. It is not a diagnosis of the entire unfiltered repository.
+
+Since nullable unit fields intentionally change the wire type, change ONLY route=timeline envelopes to schemaVersion2. Other route envelopes remain1; make the generic/union schemaVersion conditional on route and validate the expected route-specific version. Update Timeline SSR data, controlled endpoint, resource validator and fixtures together. No dual ambiguous version interpretation: an old client/new server or reverse rejects that response and retains its prior snapshot; reloading loads matching assets. This local runtime contract upgrade does not change CLI/dashboard facade APIs.130 owns the coordinated timeline DTO/validator patch;129 must not edit those branches concurrently.
+
+Finite results preserve taskCount, group/row order, row fields, numeric values, trace arrays and mode exactly. Diagnostics are additional metadata; they never change dependency satisfaction, progress, effort, selection, group membership or critical path.
+
+## Exact diagnostics object
+
+Required `timeline.diagnostics`:
+
+```ts
+type EdgeSample = {
+  taskId: string;
+  dependencyId: string;
+  dependencyIndex: number; // zero-based occurrence in that task's dependsOn
+};
+type Samples<T> = { count: number; samples: T[]; omittedCount: number };
+type TimelineDiagnostics = {
+  scope: 'filtered-timeline';
+  graphTaskCount: number;
+  missingReferences: Samples<EdgeSample>;
+  outsideViewReferenceCount: number;
+  backEdges: Samples<EdgeSample>;
+  hasCycles: boolean;
+  invalidPlacements: Samples<{
+    taskId: string;
+    fields: Array<'effort' | 'start' | 'end'>;
+  }>;
+  nonFiniteTotal: boolean;
+};
+```
+
+Each sampled category retains the first100 samples, independently (at most300 entries across the object). Counts are exact nonnegative safe integers, not truncated counts; omittedCount=count−samples.length. Samples contain identifiers only, never task bodies/titles or full paths. Bound here is sample cardinality; do not claim a separate arbitrary-byte budget that is not measured. Empty categories always have count0/samples[]/omittedCount0.
+
+Build a Map from filtered cards with legacy last-ID-wins values and first-insertion traversal order. graphTaskCount is its unique ID count, not rendered row count. Iterate every selected node's dependency array once in declared order. A dependency absent from the all-project ID set contributes one missingReferences occurrence. One present globally but absent from this filtered graph contributes one outsideViewReferenceCount; do not label a filtered-out/archived/completed dependency as missing. Duplicate references count as distinct occurrences and dependencyIndex makes their samples unambiguous. These unavailable edges remain ignored by placement exactly as before.
+
+For present graph edges, use a separate iterative three-color directed DFS, roots in the Map order and dependencies in declared order. A gray-target edge is one back-edge occurrence; duplicate edges to gray targets each count. Black-target edges are not back edges. Sample deterministically in discovery order. hasCycles is exactly backEdges.count>0; the count is NOT the number of unique cycles, SCCs, cyclic tasks or placement fallback events. This separate diagnostic traversal must not reuse legacy cycle-cache shortcuts, which intentionally have different semantics. One pass is O(V+E), with color/frame/maps O(V) and bounded sample storage; never compute transitive closure per row or enumerate cycles.
+
+## Unit-state transport and rendering
+
+Workspace Timeline v2 retains totalUnits but makes it number|null, and adds required `unitsState: 'available'|'unavailable'`. Each workspace row retains effort/start/end as number|null and adds `placementState: 'available'|'unavailable'`. Keep the legacy row type unchanged; derive a separate workspace row/group type with those explicit replacements.
+
+After the single legacy projection, scan its returned groups once. A row is unavailable iff any of its raw effort/start/end values is nonfinite. Replace ONLY the nonfinite fields with null, preserving other finite values; no clamp to zero, synthetic dates, guessed effort or strings such as 'Infinity'. invalidPlacements counts distinct affected task IDs, samples in first encountered group/row order, unioning fields in fixed effort/start/end order for a repeated ID. Keep every row, including unavailable ones. nonFiniteTotal records whether the raw totalUnits itself was nonfinite. If that flag is true OR there is any invalid placement, unitsState=unavailable and totalUnits=null; otherwise state=available and the exact legacy finite totalUnits is retained (empty graph remains1). Do not partially rescale unaffected rows and imply a complete schedule.
+
+No NaN/Infinity may cross the workspace JSON/SSR DTO boundary; validate before serialization, not by relying on JSON.stringify's silent null conversion. Legacy numeric APIs remain legacy; only the web adapter supplies this explicit JSON-safe contract. Current canonical effort is bounded1–8, so unit overflow is defensive input/projection validation, not a reason to alter normal effort or scope.
+
+UI: show a compact warning summary only when a diagnostic count/state warrants it. Label missing references separately from dependencies outside current filters. Back-edge message states that cycles were detected and relative positions use a deterministic fallback; never say 'N cycles'. An expandable list shows bounded samples and omitted counts. Missing targets have no fabricated detail link. Diagnostics do not block inspection/tracing/filtering.
+
+When unitsState=unavailable, suppress the ruler and ALL bars for that projection and show 'Relative placement unavailable' with the same semantic paginated list/inspection controls. Display unavailable numeric cells as 'Unavailable', preserving available finite cell values; no NaN/Infinity CSS, ratio/division, ticks or invented fallback scale. Finite cycles still render their unchanged legacy positions, accompanied by cycle warning. With available units, finite arithmetic remains unchanged; rendering must still guard computed CSS coordinates and adaptive-tick arithmetic against nonfinite intermediates.
+
+## Validator and targeted tests
+
+The Timeline v2 validator checks finite-or-null fields, row placementState consistency, available total finite>=1 / unavailable total null, diagnostic scope and enums, nonnegative safe counts, each sample<=100, omitted equality, valid dependencyIndex and field lists (nonempty, unique, fixed order), and hasCycles equivalence. Check invalidPlacements count versus unique unavailable task IDs and unitsState versus nonFiniteTotal/invalid count in one row scan. Reject inconsistent nulls/missing diagnostics/version mismatch; retain prior resource snapshot on rejection. No O(V²) .includes scans in these checks.
+
+Tests: exact legacy oracle remains untouched; for valid finite workspace results strip only the added metadata/state fields and compare legacy groups/values/selection. DAG, self-cycle, overlapping cycles, repeated gray edges, missing IDs versus scope/window/mode-excluded IDs, deterministic first100 and omitted counts, empty graph and duplicate-ID Map rules.10k chain and30k-edge fixtures must retain linear diagnosis and no recursion. Inject Infinity/NaN in card effort and finite-large overflow to cover unavailable propagation, JSON roundtrip/SSR safety, preserved rows and honest UI fallback; explicitly assert no CSS nonfinite values. Validate malformed v2 payloads/version1 rejection and unchanged Tasks/Specs/Overview validation. Record producer/projection/serialization cost separately; diagnostics do not satisfy final rendering/HTTP/131 gates by themselves.
+
+
+# Independent diagnostic design review
+
+A second Astra approved this design after checking the current producer, types, validator and runtime. Implementation must validate samples.length == min(count,100), exact omissions, sampled invalid IDs and field unions against rows, and all existing numeric metadata (including priority/counts) before serialization. This is design approval only, not implementation or final performance acceptance.

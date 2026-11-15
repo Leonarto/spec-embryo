@@ -91,6 +91,22 @@ Approve +layout.ts universal load resolving the detail component via import() on
 
 Closed lists must not execute detail/Mermaid imports or pull them through a static barrel. JS opening waits for module and DTO under the same identity/generation, with skeleton until both resolve. Stale module completion cannot replace a new entity; module errors remain local with Retry/canonical link, including SSR where the list remains available. Code-module import caching is allowed; it is not a global project context cache. Section/docking changes do not reimport or remount. Gate closed-list import/network closure, direct inspector SSR/noJS, no duplicate hydration fetch and delayed/failed module races.
 
+### Width controls are docked-only
+
+Resize handle/menu operate only docked. Overlay width is min(520px, CSS viewport−32px), fullscreen below768. Preserve the docked360–640 preference when entering overlay. Dock eligibility uses that preferred width plus>=560 table region and actual gap/borders; insufficient window space switches to overlay rather than silently rewriting the preference. While resizing docked, effective maximum=min(640, available workspace width−560−separation); expose it to aria-valuemax/HomeEnd and disable menu sizes that cannot fit, preventing the gesture itself from flipping mode. A breakpoint change ends an active drag/releases capture. If the width control holding focus disappears, focus the stable heading; do not close, navigate history or restore the table opener. The detail/editor subtree stays mounted.
+
+## Installed shallow-routing URL adapter
+
+Verified installed Kit runtime/client/client.js2357/2404: pushState/replaceState update browser history and page.state, not page.url. Shallow popstate may populate page.url from PAGE_URL_KEY carrying the routed/base URL. Therefore page.url alone cannot be inspector identity after shallow transitions.
+
+Use one workspaceURL() adapter, with reactive reads of BOTH page.url and page.state on every invocation. In browser return a fresh URL(location.href); on SSR return a fresh URL(page.url.href). State is only the reactive signal/ledger marker, never a second entity/section authority. No cached mutable URL store, local fallback variants, direct native history writes or reads of Kit private history keys. All shallow mutations keep using Kit APIs with a new state object preserving unrelated fields. Use the helper inside tracked derived/effect contexts, not a one-time module capture; ordinary event builders read it at activation time.
+
+Apply it consistently to controller identity/history proof, host links/copyLink, query href builders, Clear/filter forms, ListPager, and resource URL retargeting. Data-list request keys, search/draft reset keys and selection keys still exclude inspect/section through the shared list-intent helper. An inspector-only URL change cannot trigger list fetch/reseed, clear typed filters or replace a fresh snapshot with old SSR data. Ordinary list navigation still uses goto/GET and committed SSR seeds for its actual list key. No independent adapter listener should preempt Kit's navigation cancellation or create another router.
+
+Coordinate route ownership: Specs137 and Timeline builders also read page.url. Do not edit the Specs page concurrently with137 or let137 silently depend on unreviewed128 source. Serialize their adoption after the relevant reviewed commits, before claiming128's final cross-route query-preservation gate;129/130 keep using this single adapter rather than fork it.
+
+Targeted tests: direct SSR/hydration with no window access on server/no duplicate detail fetch; open/entity/section changes make address bar, inspector, copyLink and generated links agree; real Back/Forward with stale Kit page.url; apply filter/sort/pager after entity/section replacement retains the CURRENT inspect identity; open/close alone retains filter drafts/list selection/scroll and does not refetch list. Revalidate normal navigation/back across list queries with new SSR seeds, so URL observation never incorrectly applies a prior route's data.
+
 
 # Integration seam for question drafts
 
@@ -105,3 +121,13 @@ A second Astra approved the design after requiring one stable host/detail subtre
 # Initial shared-helper reservation
 
 After TASK-127 commits, TASK-137 first fixes AnalysisFilters' conditional taskScope hidden field under a short exclusive reservation. Do not edit that helper until root confirms the tiny patch is independently approved and committed; other inspector files can proceed. Then TASK-128 owns any helper changes needed to exclude inspect/section from draft-reset identity.
+
+
+# Specs adapter integration reservation
+
+TASK-137 finishes against committed shared components without importing the unreviewed inspector adapter. After its review/commit, root transfers Specs-page ownership to TASK-128 only for adopting workspaceURL in its URL builders before the final cross-route gate. Timeline adopts the adapter in TASK-130. This preserves parallel implementation without a circular dependency or overlapping page edits.
+
+
+# Parallel verification ownership
+
+After TASK-137 commit439da07, a second Sol owns only web/scripts/inspector-http-check.ts and web/verification/task128-http-report.{json,md}, with disposable fixtures. It verifies endpoint/SSR/404/closed-list import closure/request-key boundaries without browser ownership or product edits. Snapshot /private/tmp/spm-task128-http-source captured 171 identical before/after/copied source hashes on439da07 plus current128 changes; later deltas must be identified. The primary Sol retains interactive history/focus/races/modules/noJS-browser/theme tests. Merge both evidence sets into the final reviewed manifest.
