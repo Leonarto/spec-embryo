@@ -1,0 +1,65 @@
+{
+  "baseCommit": "f2b65aff57820aa1c419eef00ae7df7f9180ebbe",
+  "method": "Transitive static imports, including entry/app, entry/start, layout/error and selected list node; dynamic route references are not eager imports.",
+  "results": [
+    {
+      "route": "/specs",
+      "staticModuleCount": 23,
+      "forbiddenDetailOrMermaid": [],
+      "moduleNames": [
+        "AnalysisFilters",
+        "Icon",
+        "ListPager",
+        "ViewToolbar",
+        "chunk",
+        "circle-check-big",
+        "client",
+        "context.svelte",
+        "disclose-version",
+        "entry/app",
+        "entry/start",
+        "folder-kanban",
+        "git-branch",
+        "index-client",
+        "nodes/0",
+        "nodes/1",
+        "nodes/3",
+        "notebook-text",
+        "pause",
+        "preload-helper",
+        "sparkles",
+        "state",
+        "timer-reset"
+      ]
+    },
+    {
+      "route": "/tasks",
+      "staticModuleCount": 22,
+      "forbiddenDetailOrMermaid": [],
+      "moduleNames": [
+        "AnalysisFilters",
+        "Icon",
+        "ListPager",
+        "ViewToolbar",
+        "blocks",
+        "chunk",
+        "circle-check-big",
+        "client",
+        "context.svelte",
+        "disclose-version",
+        "entry/app",
+        "entry/start",
+        "folder-kanban",
+        "funnel",
+        "git-branch",
+        "index-client",
+        "nodes/0",
+        "nodes/1",
+        "nodes/5",
+        "notebook-text",
+        "preload-helper",
+        "state"
+      ]
+    }
+  ]
+}

@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-135"
 title = "Extract reusable canonical detail views for inspector integration"
 summary = "Prepare TASK-128 by extracting existing task/spec detail content with immediate canonical-page consumers, in parallel with the Tasks table."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-126"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T20:18:45.780Z"
+completed_at = "2026-11-15T21:05:26.078Z"
 tags = ["parallel-implementation", "ui"]
-updated_at = "2026-11-15T20:44:44.220Z"
+updated_at = "2026-11-15T21:05:26.078Z"
 +++
 
 # Astra-approved extraction scope
@@ -49,4 +50,4 @@ If changes beyond the above are necessary, stop that expansion and ask Astra/roo
 
 # Verification record
 
-Pending implementation.
+Astra independently approved all 21 frozen hashes with no findings. Both components preserve the original markup/styles exactly and are immediately consumed by the canonical pages. Isolated check/build passed against base f2b65af plus the slice; independent focused tests: 11 pass, 69 expectations. Desktop/mobile/missing/ordinary POST screenshots and exact pixel differences were checked; static production import closures exclude detail/DocumentBody/Mermaid from initial list loads. Existing missing GET 200 and question action remain unchanged for later tasks. Durable evidence: web/verification/task135-detail-extraction.md and its assets. Shared-tree TASK-127 changes were deliberately excluded from isolated certification; its review and final integration remain required.
