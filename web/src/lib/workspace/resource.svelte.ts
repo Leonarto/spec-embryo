@@ -14,6 +14,7 @@ export function useWorkspaceResource<Route extends WorkspaceRoute>(seed:()=>Work
   let unregister:(()=>void)|undefined;
   function preserveFocusedEntity(){
     const active=document.activeElement instanceof HTMLElement?document.activeElement:null;
+    if(active?.closest('[data-table-grid]'))return ()=>{}; // The grid restores its own row/column target.
     const card=active?.closest<HTMLElement>('[data-entity-id]');
     if(!card)return ()=>{};
     const identity=card.dataset.entityId!;

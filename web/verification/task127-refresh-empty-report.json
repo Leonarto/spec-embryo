@@ -1,0 +1,23 @@
+{
+  "phase": "refresh-empty",
+  "capturedAt": "2026-11-15T21:30:37.171Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Same URL clamped execution preserves surviving selection/focus",
+      "pass": true
+    },
+    {
+      "name": "Clamped page is announced",
+      "pass": true
+    },
+    {
+      "name": "Empty refresh returns focus to toolbar",
+      "pass": true
+    },
+    {
+      "name": "Empty refresh clears selection while keeping one header target",
+      "pass": true
+    }
+  ]
+}

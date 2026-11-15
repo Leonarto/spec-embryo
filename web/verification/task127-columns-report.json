@@ -1,0 +1,43 @@
+{
+  "phase": "columns",
+  "capturedAt": "2026-11-15T21:23:00.687Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Auto title uses available space within cap",
+      "pass": true
+    },
+    {
+      "name": "Numeric keyboard width reaches rendered column",
+      "pass": true
+    },
+    {
+      "name": "Explicit width survives viewport resize",
+      "pass": true
+    },
+    {
+      "name": "Keyboard can show optional column",
+      "pass": true
+    },
+    {
+      "name": "Keyboard can reorder optional column",
+      "pass": true
+    },
+    {
+      "name": "Reset restores auto title and default visible columns",
+      "pass": true
+    },
+    {
+      "name": "Versioned preferences survive reload",
+      "pass": true
+    },
+    {
+      "name": "Hiding columns preserves row selection",
+      "pass": true
+    },
+    {
+      "name": "Density toggles to40",
+      "pass": true
+    }
+  ]
+}

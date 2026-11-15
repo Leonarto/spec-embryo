@@ -1,12 +1,12 @@
 import { afterAll, beforeAll, describe, expect, spyOn, test } from "bun:test";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, rm, symlink, mkdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { ProjectContext, SpecDocument, TaskDocument } from "../src/domain.ts";
 import * as engine from "../src/engine.ts";
 import * as dashboard from "../src/services/dashboard.ts";
 import { initializeProject, loadProjectContext } from "../src/repository.ts";
-import { buildWorkspaceEnvelope, createWorkspaceSource, queryWorkspaceOptions, queryWorkspaceSpecs, queryWorkspaceTasks } from "../src/services/workspace.ts";
+import { buildWorkspaceEnvelope, createWorkspaceSource, loadWorkspaceSource, queryWorkspaceOptions, queryWorkspaceSpecs, queryWorkspaceTasks } from "../src/services/workspace.ts";
 import { parseWorkspaceListQuery } from "../src/services/workspace-query.ts";
 import { buildSpecDetailFromContext, buildTaskDetailFromContext } from "../src/services/details.ts";
 import { getWorkspaceRequestSource, type WorkspaceRequestState } from "../web/src/lib/server/workspace.ts";
@@ -22,6 +22,27 @@ beforeAll(async()=>{root=await mkdtemp(join(tmpdir(),'spm-workspace-tests-'));aw
 afterAll(async()=>{await rm(root,{recursive:true,force:true});});
 
 describe('bounded workspace projections',()=>{
+  test('uses stable opaque canonical-root identity across aliases and refresh, distinct for same-name roots',async()=>{
+    const container=await mkdtemp(join(tmpdir(),'spm-workspace-identity-'));
+    try {
+      const first=join(container,'one','same-name'),second=join(container,'two','same-name'),alias=join(container,'alias');await mkdir(first,{recursive:true});await mkdir(second,{recursive:true});await initializeProject(first);await initializeProject(second);await symlink(first,alias);
+      const a=await buildWorkspaceEnvelope(await loadWorkspaceSource(first),'tasks',params(''));
+      const b=await buildWorkspaceEnvelope(await loadWorkspaceSource(alias),'tasks',params(''));
+      const c=await buildWorkspaceEnvelope(await loadWorkspaceSource(second),'tasks',params(''));
+      expect(a.shell.project.name).toBe(c.shell.project.name);expect(a.shell.project.key).toMatch(/^[a-f0-9]{64}$/);expect(b.shell.project.key).toBe(a.shell.project.key);expect(c.shell.project.key).not.toBe(a.shell.project.key);
+      expect(a.shell.project.key).not.toContain(first);expect((await buildWorkspaceEnvelope(await loadWorkspaceSource(first),'tasks',params('page=2'))).shell.project.key).toBe(a.shell.project.key);
+    } finally {await rm(container,{recursive:true,force:true});}
+  });
+  test('Table supports archive scopes while Board remains explicitly unarchived',async()=>{
+    const source=createWorkspaceSource(context(),now);
+    const table=await buildWorkspaceEnvelope(source,'tasks',params('scope=archived'));
+    expect(table.data.view).toBe('table');expect(table.data.result.rows.map(row=>row.id)).toEqual(['TASK-1']);
+    const board=await buildWorkspaceEnvelope(source,'tasks',params('view=board&scope=archived'));
+    expect(board.data.view).toBe('board');expect(board.data.result.normalizedQuery).toMatchObject({scope:'unarchived'});expect(board.data.result.rows.some(row=>row.id==='TASK-1')).toBe(false);
+    const simple=await buildWorkspaceEnvelope(source,'tasks',params('view=board&scope=archived&simple=1'));
+    expect(simple.data.view).toBe('table');expect(simple.data.result.rows.map(row=>row.id)).toEqual(['TASK-1']);
+  });
+
   test('keeps request intention stable across page removal, empty results, and reappearing pages',async()=>{
     const make=(count:number)=>({...base,tasks:Array.from({length:count},(_,n)=>task(`TASK-${n}`)),specs:[spec('SPEC-1',[])]});
     const url=params('page=2');

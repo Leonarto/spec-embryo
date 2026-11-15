@@ -5,9 +5,16 @@ const params=(text:string)=>new URLSearchParams(text);
 describe("workspace query contracts",()=>{
   test("request identity normalizes aliases/syntax independently of dataset availability",()=>{
     expect(workspaceRequestKey('specs',params('spec=SPEC-001&spec_status=done'))).toBe(workspaceRequestKey('specs',params('status=done&spec=SPEC-001')));
-    expect(workspaceRequestKey('tasks',params('scope=archived&page=2'))).toBe(workspaceRequestKey('tasks',params('scope=unarchived&page=2')));
+    expect(workspaceRequestKey('tasks',params('view=board&scope=archived&page=2'))).toBe(workspaceRequestKey('tasks',params('view=board&scope=unarchived&page=2')));
     expect(workspaceRequestKey('tasks',params('page=2'))).not.toBe(workspaceRequestKey('tasks',params('page=1')));
     expect(workspaceRequestKey('tasks',params('spec=SPEC-001'))).not.toBe(workspaceRequestKey('tasks',params('spec=SPEC-002')));
+  });
+  test("defaults Tasks to Table, retains archive scope, and simple mode forces Table",()=>{
+    expect(normalizeViewQuery('tasks',params('')).view).toBe('table');
+    expect(workspaceRequestKey('tasks',params('scope=all'))).not.toBe(workspaceRequestKey('tasks',params('scope=archived')));
+    expect(normalizeViewQuery('tasks',params('view=board&simple=1')).view).toBe('table');
+    for(const view of ['board','table']){const q=normalizeViewQuery('tasks',params(`view=${view}&scope=all`));expect(normalizeViewQuery('tasks',serializeViewQuery(q))).toEqual(q);}
+    expect(normalizeViewQuery('specs',params('view=board')).view).toBeUndefined();
   });
   test("round trips non-default option page sizes without changing normalized identity",()=>{
     for(const route of ['tasks','specs','timeline'] as const){

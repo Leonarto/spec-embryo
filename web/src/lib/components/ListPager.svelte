@@ -2,13 +2,13 @@
   import { page } from "$app/state";
   import type { WorkspaceListQuery,WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
   import { normalizeViewQuery,serializeViewQuery } from "../../../../src/services/workspace-query.ts";
-  let {result,route}: {result:{totalMatching:number;page:number;requestedPage:number;pageSize:number;normalizedQuery:WorkspaceListQuery};route:WorkspaceRoute}=$props();
+  let {result,route,compact=false}: {result:{totalMatching:number;page:number;requestedPage:number;pageSize:number;normalizedQuery:WorkspaceListQuery};route:WorkspaceRoute;compact?:boolean}=$props();
   const last=$derived(Math.max(1,Math.ceil(result.totalMatching/result.pageSize)));
   function params(target:number){const query=normalizeViewQuery(route,page.url.searchParams);query.list={...result.normalizedQuery,page:target};return serializeViewQuery(query);}
   function href(target:number){return `${page.url.pathname}?${params(target)}`;}
   const hidden=$derived([...params(1).entries()].filter(([name])=>name!=='pageSize'));
 </script>
-<nav class="list-pager" aria-label="List pagination">
+<nav class="list-pager" class:compact aria-label="List pagination">
   {#if result.requestedPage!==result.page}<span class="page-notice" role="status">La página solicitada ya no existe; mostrando página {result.page}.</span>{/if}
   <span class="range">{result.totalMatching?(result.page-1)*result.pageSize+1:0}–{Math.min(result.page*result.pageSize,result.totalMatching)} of {result.totalMatching}</span>
   <div class="page-links">
@@ -24,9 +24,11 @@
 <style>
   .list-pager,.page-links,form,label { display:flex;align-items:center;gap:.5rem;flex-wrap:wrap; }
   .list-pager { justify-content:space-between;margin:.75rem 0;padding:.5rem .75rem;background:var(--surface);border:1px solid var(--border-subtle);border-radius:.25rem;font-size:.75rem; }
+  .list-pager.compact { margin:0;border-top:0;border-radius:0; }
   .range { font-variant-numeric:tabular-nums; }
   .page-notice { flex-basis:100%;color:var(--warning); }
   .page-links a { display:inline-flex;align-items:center;min-height:1.5rem;color:var(--accent); }
   .page-links>span,label { color:var(--text-muted); }
   select,button { min-height:1.5rem;padding:.125rem .375rem;border:1px solid var(--border-control);border-radius:.25rem;background:var(--surface);color:var(--text); }
+@media(pointer:coarse){a,select,button{min-height:2.75rem}.page-links a{min-height:2.75rem}}
 </style>

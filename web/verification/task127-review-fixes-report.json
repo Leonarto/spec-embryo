@@ -1,0 +1,55 @@
+{
+  "phase": "review-fixes",
+  "capturedAt": "2026-11-15T21:48:57.087Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Row Enter selects once",
+      "pass": true
+    },
+    {
+      "name": "Row Enter clears once",
+      "pass": true
+    },
+    {
+      "name": "Native row Space still toggles once",
+      "pass": true
+    },
+    {
+      "name": "Shift+Space still extends inclusive range",
+      "pass": true
+    },
+    {
+      "name": "Header Enter selects this page once",
+      "pass": true
+    },
+    {
+      "name": "Header Enter clears this page once",
+      "pass": true
+    },
+    {
+      "name": "Native header Space still toggles once",
+      "pass": true
+    },
+    {
+      "name": "Simple mode retains native Enter checkbox behavior",
+      "pass": true
+    },
+    {
+      "name": "Simple mode retains native Space checkbox behavior",
+      "pass": true
+    },
+    {
+      "name": "No-JS preset is readable text without inert select",
+      "pass": true
+    },
+    {
+      "name": "No-JS status GET remains operable",
+      "pass": true
+    },
+    {
+      "name": "No-JS scope GET remains operable",
+      "pass": true
+    }
+  ]
+}

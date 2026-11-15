@@ -1,0 +1,306 @@
+{
+  "phase": "layouts",
+  "capturedAt": "2026-11-15T21:28:12.636Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "light/1440: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "rows": 19,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "light: Table solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1647,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light: Table axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 29,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 7
+          }
+        ]
+      }
+    },
+    {
+      "name": "light/1280: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "height": 720,
+        "overflow": false,
+        "rows": 14,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "dark/1440: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "rows": 19,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "dark: Table solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1647,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark: Table axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 29,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 7
+          }
+        ]
+      }
+    },
+    {
+      "name": "dark/1280: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "height": 720,
+        "overflow": false,
+        "rows": 14,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "light: Board solid-surface contrast",
+      "pass": true,
+      "detail": {
+        "checked": 714,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light: Board axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 24,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "dark: Board solid-surface contrast",
+      "pass": true,
+      "detail": {
+        "checked": 714,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark: Board axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 24,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 0
+          }
+        ]
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "rows": 19,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "overflow": false,
+      "rows": 14,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "rows": 19,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 1280,
+      "height": 720,
+      "overflow": false,
+      "rows": 14,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "view": "table",
+      "checked": 1647,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "view": "table",
+      "checked": 1647,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "light",
+      "view": "board",
+      "checked": 714,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "view": "board",
+      "checked": 714,
+      "failures": [],
+      "skipped": []
+    }
+  ],
+  "axe": [
+    {
+      "theme": "light",
+      "view": "table",
+      "passes": 29,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "view": "table",
+      "passes": 29,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "view": "board",
+      "passes": 24,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 0
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "view": "board",
+      "passes": 24,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 0
+        }
+      ]
+    }
+  ],
+  "harnessNote": "Desktop/Board block completed before a touch locator timeout (anchored /^Status/ did not match whitespace). Touch checks were split into their own phase, selector corrected, and all four touch checks passed. No product change was needed for that locator."
+}

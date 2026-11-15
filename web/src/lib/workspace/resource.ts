@@ -35,9 +35,10 @@ function selection(v:unknown):boolean {
 
 /** Reject malformed transport data before it can replace a working rendered snapshot. */
 export function validateWorkspaceEnvelope(value:unknown,expected:Pick<WorkspaceEnvelope,'route'|'requestKey'>):value is WorkspaceEnvelope {
-  if(!object(value)||value.schemaVersion!==1||value.route!==expected.route||value.requestKey!==expected.requestKey||typeof value.revision!=='string'||!value.revision||typeof value.generatedAt!=='string'||!Number.isFinite(Date.parse(value.generatedAt))||!object(value.shell)||!object(value.shell.project)||typeof value.shell.project.name!=='string'||typeof value.shell.project.memoryDir!=='string'||!object(value.shell.git)||typeof value.shell.git.available!=='boolean'||typeof value.shell.git.dirty!=='boolean'||!object(value.data))return false;
+  if(!object(value)||value.schemaVersion!==1||value.route!==expected.route||value.requestKey!==expected.requestKey||typeof value.revision!=='string'||!value.revision||typeof value.generatedAt!=='string'||!Number.isFinite(Date.parse(value.generatedAt))||!object(value.shell)||!object(value.shell.project)||typeof value.shell.project.name!=='string'||typeof value.shell.project.memoryDir!=='string'||typeof value.shell.project.key!=='string'||!/^[a-f0-9]{64}$/.test(value.shell.project.key)||!object(value.shell.git)||typeof value.shell.git.available!=='boolean'||typeof value.shell.git.dirty!=='boolean'||!object(value.data))return false;
   const data=value.data;
   if(value.route==='tasks'||value.route==='specs'){
+    if(value.route==='tasks'&&!['table','board'].includes(data.view as string))return false;
     if(!object(data.result)||!filters(data.filters))return false;
     const result=data.result;
     return Array.isArray(result.rows)&&result.rows.length<=200&&result.rows.length<=(result.pageSize as number)&&result.rows.every(value.route==='tasks'?task:spec)&&integer(result.totalMatching)&&integer(result.totalInScope)&&integer(result.page,1)&&integer(result.requestedPage,1)&&[50,100,200].includes(result.pageSize as number)&&normalizedQuery(result.normalizedQuery,value.route==='tasks'?'task':'spec')&&typeof result.revision==='string'&&typeof result.generatedAt==='string'&&(value.route!=='specs'||typeof data.progressIsSubset==='boolean');

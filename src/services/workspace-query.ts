@@ -42,6 +42,7 @@ export interface WorkspaceTimelineQuery {
 export interface WorkspaceOptionsQuery { q: string; page: number; pageSize: number; selectedIds: string[] }
 export interface WorkspaceViewQuery {
   route: WorkspaceRoute;
+  view?: "table" | "board";
   list?: WorkspaceListQuery;
   timeline?: WorkspaceTimelineQuery;
   options: WorkspaceOptionsQuery;
@@ -138,13 +139,16 @@ export function normalizeViewQuery(route: WorkspaceRoute, params: URLSearchParam
   const inspect = rawInspect?.length === 2 && (rawInspect[0] === "task" || rawInspect[0] === "spec") && isWorkspaceEntityId(rawInspect[1]!,rawInspect[0]) ? { kind: rawInspect[0], id: rawInspect[1]! } as {kind:"task"|"spec";id:string} : undefined;
   const allowedSections = inspect?.kind === "spec" ? ["overview","relations","document","questions","decisions"] : ["overview","relations","document"];
   const section = inspect && allowedSections.includes(params.get("section") ?? "") ? params.get("section")! : undefined;
-  const value = { route, ...(list ? {list} : {}), ...(timeline ? {timeline} : {}), options, ...(inspect ? {inspect} : {}), ...(section ? {section} : {}), simple: params.get("simple") === "1" };
+  const simple = params.get("simple") === "1";
+  const view: WorkspaceViewQuery["view"] = route === "tasks" ? (simple || params.get("view") !== "board" ? "table" : "board") : undefined;
+  const value = { route, ...(view ? {view} : {}), ...(list ? {list} : {}), ...(timeline ? {timeline} : {}), options, ...(inspect ? {inspect} : {}), ...(section ? {section} : {}), simple };
   return { ...value, requestKey: JSON.stringify(value) };
 }
 
 /** Canonical URL allowlist. New user interactions write explicit archive scope. */
 export function serializeViewQuery(view: WorkspaceViewQuery, preserveLegacy = false): URLSearchParams {
   const params = view.list ? serializeWorkspaceListQuery(view.list,preserveLegacy) : new URLSearchParams();
+  if(view.route==="tasks")params.set("view",view.simple?"table":view.view??"table");
   if(view.timeline) {
     for(const id of view.timeline.specIds)params.append("spec",id);
     if(view.timeline.window)params.set("window",view.timeline.window);
@@ -170,6 +174,6 @@ export function transitionViewQuery(route: WorkspaceRoute, current: URLSearchPar
 /** Request identity follows URL intention, never a snapshot's available IDs/page count. */
 export function workspaceRequestKey(route: WorkspaceRoute, params: URLSearchParams): string {
   const intent=normalizeViewQuery(route,params);
-  if(intent.list?.kind==="task")intent.list.scope="unarchived";
+  if(intent.list?.kind==="task"&&intent.view==="board")intent.list.scope="unarchived";
   return normalizeViewQuery(route,serializeViewQuery(intent,true)).requestKey;
 }

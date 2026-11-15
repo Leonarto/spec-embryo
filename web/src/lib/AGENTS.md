@@ -10,5 +10,6 @@ Shared UI helpers and components.
 - `DocumentBody` renders root-parsed blocks; Mermaid is a view enhancement with tested token mapping in `mermaid-theme.ts`.
 - `workspace/` controls refresh ownership and shell registration; canonical detail pages stay unregistered until draft-aware support. Keep snapshots immutable and commit shell/data atomically.
 - `AnalysisFilters` accepts narrow filter DTOs. `SpecOptionsPicker` owns separate cancellable option requests; GET forms and page links work without JS.
+- `components/data-table/` owns generic bounded-page grid mechanics; Task columns supply server sort keys and clipboard text.
 - `ListPager` links start from effective pagination; refresh preserves requested URL and announces unavailable pages/filters.
 - Filter drafts reset on URL/Clear epochs, never refresh. Pickers separate typed search from the last submitted query and refresh that catalog under request ownership.

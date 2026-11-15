@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-127"
 title = "Implement spreadsheet-style Tasks table"
 summary = "Implement reusable accessible table, filters, columns, paging, selection and TSV copy while retaining Board."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-126"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.592Z"
+completed_at = "2026-11-15T21:55:56.818Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T20:41:42.080Z"
+updated_at = "2026-11-15T21:55:56.818Z"
 +++
 
 # Scope
@@ -29,7 +30,7 @@ Implement P3 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+Implemented and independently approved by Astra after three corrections. Final manifest: 63 files, all hashes matched. Evidence: 99 valid browser checks (69 retained + 12 corrective + 18 corrected layouts), 159 HTTP snapshot checks, 333 passing Bun tests; Bun coverage 91.43% functions / 91.80% lines, with Svelte/browser scope reported separately. Focused corrective tests: 22 pass / 185 expectations; check 0 errors/warnings, build/AGENTS/diff pass. Astra independently verified row/header Enter exactly once, native Space, no-JS GET filtering and actual dark theme. Desktop density: 19 rows at 1440x900, 14 at 1280x720; text at least 13px. Durable report: web/verification/SPEC-062-P3.md and task127-manifest.json. P4–P7 gates remain separate.
 
 
 # Detailed Astra table decisions
@@ -90,3 +91,13 @@ Preset activation changes only scope/status and resets page to1 plus selection; 
 
 
 Astra width clarification: title fills available width only in auto mode, bounded 200–800 px. Numeric and pointer resizing start from the effective width and switch to an exact explicit preference; viewport resizing does not alter that explicit width. Reset restores auto mode.
+
+
+# Parallel verification ownership
+
+After TASK-136 commit d311060, the second Sol contributes only `web/scripts/task127-http-check.ts` and `web/verification/task127-http-report.{json,md}` (exact names coordinated with the UI owner), plus disposable fixtures. This covers HTTP SSR/GET/import closure/row and payload bounds without browser ownership or product edits. The UI owner retains interactive browser checks, screenshots and product code. Both evidence sets must identify the tested source and join the final manifest before independent Astra review. HTTP markup inspection is not reported as a real no-JS browser interaction or final end-to-end performance gate.
+
+
+# Independent implementation review
+
+Astra verified the 55-file freeze and independently ran 22 focused tests (185 expectations), plus browser probes for selection, copy and focus reconciliation. The review initially requested three bounded corrections: Enter must activate enhanced-grid selection checkboxes once; the preset selector must not appear as an inert control before hydration/without JS (native GET facets remain available); theme evidence must assert the resolved theme, because one capture labeled dark was actually light. Product dark mode worked in the independent context. Sol corrected the three cases; Astra approved the exact final freeze after focused browser/code review. Superseded theme artifacts remain explicitly excluded from the 99 valid checks. No findings remain open.

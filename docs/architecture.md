@@ -223,7 +223,14 @@ The SvelteKit workspace lives under `web/` and is launched through `spm ui`. It 
 
 Legacy canonical missing-detail GET currently preserves HTTP 200 with `found:false` and its existing not-found view. SPEC-062 P4 must introduce coherent full-page HTTP 404 and an inspector-local missing state without dropping the list.
 
-The current list presentation is paginated Board/cards. The spreadsheet table, inspector, draft guards and timeline volume algorithms are subsequent SPEC-062 slices. Measurements and browser evidence live in `web/verification/`.
+Tasks default to the bounded Table; `view=board` explicitly limits scope to unarchived, while `simple=1` forces native Table semantics. Specs retain paginated cards until their table slice.
+
+- `components/data-table/` accepts typed column descriptors and a current page, never fetching or deriving domain data. The same descriptors supply rendering and safe TSV text. Native SSR headers/links become a one-target roving grid only after mount; simple mode keeps normal Tab behavior.
+- Row-ID/column-key focus and page-local selection survive same-query refresh by ID reconciliation. User query changes clear selection; data-page clamping alone does not change URL intention. Hidden/reordered columns reconcile focus by stable key.
+- Versioned column/density preferences use an opaque SHA-256 namespace from the canonical realpath loaded on the server. Distinct roots with equal names remain separate; symlink aliases share preferences. Title sizing stays automatic until explicit numeric/pointer sizing; only the base width and mode are stored.
+- Toolbar search replaces history after 150 ms; presets preserve independent facets while changing only scope/status/page. Facet Apply and SSR GET links remain explicit navigation. Clipboard denial offers selectable text without reporting success.
+
+The inspector, draft guards, Specs table and timeline volume presentation remain subsequent SPEC-062 slices. Measurements and browser evidence live in `web/verification/`.
 
 ## AGENTS budget policy
 

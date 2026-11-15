@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { realpath } from "node:fs/promises";
 import type { ProjectContext, SpecDocument, TaskDocument } from "../domain.ts";
 import { SPEC_STATUSES, TASK_STATUSES } from "../domain.ts";
 import { buildTaskAnalysisIndex, deriveNextActions, deriveStatusSnapshot, type TaskAnalysisIndex } from "../engine.ts";
@@ -23,14 +24,14 @@ export interface WorkspaceOptionsResult {
   options: WorkspaceSpecOption[]; selected: WorkspaceSpecOption[]; totalMatching: number;
   page: number; pageSize: number; q: string; revision: string;
 }
-export interface WorkspaceShellData { project: DashboardData["project"]; git: DashboardData["git"] }
+export interface WorkspaceShellData { project: DashboardData["project"] & {key:string}; git: DashboardData["git"] }
 export interface WorkspaceFilterData {
   selectedSpecIds: string[]; timeWindow?: WorkspaceWindow; hasActiveFilters: boolean;
   includesArchived: boolean; legacyArchive: boolean; scope: WorkspaceScope;
   unavailableSpecIds: string[];
   options: WorkspaceOptionsResult;
 }
-export interface WorkspaceTasksData { result: WorkspaceListResult<WorkspaceTaskRow,WorkspaceTaskQuery>; filters: WorkspaceFilterData }
+export interface WorkspaceTasksData { view:"table"|"board"; result: WorkspaceListResult<WorkspaceTaskRow,WorkspaceTaskQuery>; filters: WorkspaceFilterData }
 export interface WorkspaceSpecsData { result: WorkspaceListResult<WorkspaceSpecRow,WorkspaceSpecQuery>; filters: WorkspaceFilterData; progressIsSubset: boolean }
 export interface WorkspaceTimelineData { timeline: ReturnType<typeof buildTimelineProjection>; filters: WorkspaceFilterData }
 export interface WorkspaceOverviewData {
@@ -63,10 +64,10 @@ export function createWorkspaceSource(context: ProjectContext, now = Date.now())
   return { context, analysis, specById:new Map(context.specs.map(spec=>[spec.id,spec])), knownSpecIds:new Set(context.specs.map(spec=>spec.id)), revision, now,
     taskRows: () => rows ??= new Map([...analysis.byId.values()].map(task=>[task.id,{...toTaskCard(task,analysis.byId,analysis),updatedAt:task.updatedAt,createdAt:task.createdAt}])) };
 }
-export async function loadWorkspaceSource(rootDir: string, now = Date.now()): Promise<WorkspaceSource> { return createWorkspaceSource(await loadProjectContext(rootDir),now); }
+export async function loadWorkspaceSource(rootDir: string, now = Date.now()): Promise<WorkspaceSource> { return createWorkspaceSource(await loadProjectContext(await realpath(rootDir)),now); }
 export function buildWorkspaceShell(source: WorkspaceSource): WorkspaceShellData {
   const {context}=source;
-  return { project:{name:context.config.projectName,memoryDir:context.config.memoryDir},git:{available:context.git.available,branch:context.git.branch,dirty:context.git.dirty} };
+  return { project:{name:context.config.projectName,memoryDir:context.config.memoryDir,key:digest(`spm-workspace-v1\0${context.rootDir}`)},git:{available:context.git.available,branch:context.git.branch,dirty:context.git.dirty} };
 }
 function inScope(task: Pick<TaskDocument,"archivedAt">, scope: WorkspaceScope): boolean { return scope==="all" || (scope==="archived" ? Boolean(task.archivedAt) : !task.archivedAt); }
 function inWindow(task: Pick<TaskDocument,"completedAt"|"cancelledAt">, window: WorkspaceWindow | undefined, now: number): boolean {
@@ -159,9 +160,9 @@ export async function buildWorkspaceEnvelope<Route extends WorkspaceRoute>(sourc
   const requestedSpecIds=intent.list?.specIds??intent.timeline?.specIds??[];
   const requestKey=workspaceRequestKey(route,params);
   // Board is the temporary presentation until P3. It cannot claim archived records.
-  if(view.list?.kind==="task")view.list.scope="unarchived";
+  if(view.list?.kind==="task"&&view.view==="board")view.list.scope="unarchived";
   let data:WorkspaceRouteData[WorkspaceRoute];
-  if(route==="tasks") data={result:queryWorkspaceTasks(source,view.list as WorkspaceTaskQuery),filters:filters(source,view,requestedSpecIds)};
+  if(route==="tasks") data={view:view.view??"table",result:queryWorkspaceTasks(source,view.list as WorkspaceTaskQuery),filters:filters(source,view,requestedSpecIds)};
   else if(route==="specs") data={result:queryWorkspaceSpecs(source,view.list as WorkspaceSpecQuery),filters:filters(source,view,requestedSpecIds),progressIsSubset:Boolean((view.list as WorkspaceSpecQuery).window||(view.list as WorkspaceSpecQuery).taskScope!=="all")};
   else if(route==="timeline") {
     const query=view.timeline!;

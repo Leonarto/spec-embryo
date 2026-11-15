@@ -41,6 +41,6 @@ describe('controlled workspace resource',()=>{
   });
   test('validates schema and required displayed fields before accepting an envelope',()=>{
     expect(validateWorkspaceEnvelope(initial,initial)).toBe(true);
-    for(const invalid of [null,{}, {...initial,schemaVersion:2},{...initial,generatedAt:'bad'},{...initial,shell:{}},{...initial,data:{...initial.data,result:{...initial.data.result,rows:[{id:'TASK-1'}]}}}])expect(validateWorkspaceEnvelope(invalid,initial)).toBe(false);
+    for(const invalid of [null,{}, {...initial,shell:{...initial.shell,project:{...initial.shell.project,key:"not-a-root-key"}}},{...initial,data:{...initial.data,view:"unknown"}}, {...initial,schemaVersion:2},{...initial,generatedAt:'bad'},{...initial,shell:{}},{...initial,data:{...initial.data,result:{...initial.data.result,rows:[{id:'TASK-1'}]}}}])expect(validateWorkspaceEnvelope(invalid,initial)).toBe(false);
   });
 });

@@ -1,0 +1,1386 @@
+{
+  "schemaVersion": 1,
+  "scope": "HTTP-only SSR/GET and production static import audit. No page JavaScript, browser, keyboard, layout, selection, copy, prefs or warm/cold latency claims.",
+  "source": {
+    "baseCommit": "d311060e7455fa90471eba6d21e7bcdc120ec61a",
+    "snapshot": "/private/tmp/spm-task127-http-source",
+    "sha256": {
+      "package.json": "d2906d38b39bd11e3fc722b069a65bb1e7383f0692bc53dc0944558b3d162dff",
+      "src/AGENTS.md": "c2874d86a278b8587a9c6c77017316d71cbb8efcacc985256e45bd3ef13f7c57",
+      "src/backends/AGENTS.md": "601bd0d1fe62339aeb97a4c1e917ae569dfc7e39896682b885d756fa8ad7ed7c",
+      "src/backends/base.ts": "104736fd392d32d4e91e686c8a344c36b5efacf122fd28741c848088f021b68a",
+      "src/backends/deterministic.ts": "ef920ad953688a863f3deb685bb21306dfc21b97d942a8d8b219ffa6904828c6",
+      "src/backends/index.ts": "a2e688989ae0c0da49d49c58d66bad2aedde3d4f2b1cb01bea9d627079d17938",
+      "src/backends/prompt.ts": "5f6185bca6d245c37a780ea752471fb545de14fc5b5eb08e3a7b7d80d96d1032",
+      "src/backends/subprocess.ts": "c2cfef81671b3b732b6faa9cb3dc1cacff9f20e7b003f04fd2d785f63a818daf",
+      "src/cli.ts": "d6ad3aa0f10a7728edb11f77a16d4e77a661fb02883b22ff939353f2f511fd4a",
+      "src/commands/AGENTS.md": "76e0a7cd58994e643be604259ebba478f8196dedf640a58ffb0448354df51d52",
+      "src/commands/agent.ts": "bc63ab83c5dcef51be24bca3c26855efc44ec2fbbb553f784654eb543b2e210b",
+      "src/commands/agents.ts": "7223bb59eb393b9535061c9782fce4109f1c5f6a48e3e7612cde0e20777e7f5f",
+      "src/commands/current.ts": "0f75a3f5886153bf632b1034aa49e05072b613c9a318b0ca9b07782f32c9a8f4",
+      "src/commands/doctor.ts": "9e1bd75e3295e0f16c10445f556bd91b44c85319339706a48d0d6c9582f0556e",
+      "src/commands/handoff.ts": "c389199bfc1a10c29d9423aa0789e71b22184bc675f6e56bc26e456d077ff88d",
+      "src/commands/hook-context.ts": "631ce55c2d1ab8a9260a3adc8aaa5f361dd12e9180bb75815ac7aef9529578ef",
+      "src/commands/hooks.ts": "8e584f469aeaf11a907ad41ccf5fe5627f607ee1035f0f9158a3ecb0790aeea8",
+      "src/commands/import.ts": "e7cb3913d203a60814dd4fe2091f68563ecd6551a61426ec3f3b3967655bd6f3",
+      "src/commands/init.ts": "3c43b6e137fe8d3f23a0262b04c90a0d0da769541f1d969061fec65c61b08291",
+      "src/commands/memory.ts": "b65b19f95a6ea2e17f9758f60fd0e3bc4ed56cc2bd7042e56cb8788d9ee38d1a",
+      "src/commands/nexus.ts": "d612f45d4c0185851d5062844185fbd6b78e2a9cb0665831321f794fdd012f29",
+      "src/commands/portfolio.ts": "42ea9720bb1c584d2fef6d182b5d91d0973836a35b9688481f9a8a9a2ebb90cd",
+      "src/commands/profile.ts": "bad11840ddcf577933812cdf6d742ba86a20a7fbd5a1266bfd375bc18b8c7d84",
+      "src/commands/release.ts": "0bb5297ef124706b4cf0eb24a6e088aeb88d3a352c9eafedb619ba0909da7755",
+      "src/commands/reshape.ts": "f51d6d9886895d60e36a2b7ba9fafafda3e5e1e250e8883acabe73e87d82b920",
+      "src/commands/resume.ts": "f4426c0ab1f46da9e59155d3897c150603463e7c4c0123ba03c17f2bbcd333b9",
+      "src/commands/spec.ts": "0635c90e7254d51a05c2eb3f516a601ca359b72faa0bf5c93de2cf596c6ad015",
+      "src/commands/status.ts": "b4276dcaf27ba78ac010562671bebe6f5f11649951caec78ed9f2b34a8475c09",
+      "src/commands/task.ts": "06cf4fc38de355061d5ca347ca30bbf520b9eb0c20213d232a98cbb7ed937fbd",
+      "src/commands/tests.ts": "c0d48eeed181c90e2c663111b0ae1ab6a83ae095c253c4a6331b2dd823d5e6f8",
+      "src/commands/ui.ts": "6dbe2fa740abd8c4f6996dc9356f5344e6d6170583d95821c4f0104dd4c2a543",
+      "src/domain.ts": "287d6d865c1631be9fc8b0eaea14155e09c56e6bc798ec137cbe0f18a01a16ce",
+      "src/engine.ts": "004b9e9b58640f646532497c9eeb9ecbbd6e0a05fa7307c6da3290e0459b25be",
+      "src/frontmatter.ts": "ac138d3acc6a521548e90494ab29b245a46bb14048e30b49b1140faef7be66ff",
+      "src/index.ts": "5ccac1f1ad1692f88a89ce59c6b92c82a5fadd0c2a9b6cc1f081b665982ba4d5",
+      "src/paths.ts": "7c56e06a09f9a8a24d7802abd7570c58773092fc44f73e7760f4647294c07335",
+      "src/repository.ts": "0d2ec8b8070a570002323fc8ae445e00708680468c31d2092a3e3c8fa0da5945",
+      "src/services/AGENTS.md": "0b11e5eca5bf60a84d8bae4b569b04f33d4b422acdb1b665dec0298bf0d7c5eb",
+      "src/services/adoption.ts": "808f35df3ae4ab9f5477dbbda887802f279123bd827c94cd3ae08ab45e224e57",
+      "src/services/agent-workflow.ts": "3ea29d3a3ae64b318d35a8626ae1028661eb1cb4429d0a88a75dca12f6be5fb7",
+      "src/services/agents.ts": "5ad98c39b94b1ab447c80954dd46d10a565eefde847acebc99189a9a4ba428c4",
+      "src/services/context-pack.ts": "b5879b6f3120f3de45327b9f84c53c297f1fa1d64b426c0e8f39e72292388cf8",
+      "src/services/contracts.ts": "61f68ba4f9ad9f2641eec779667561575ac361aa0fddec782dc7b94ac971b97d",
+      "src/services/dashboard.ts": "fe23c3b31ada6d5ffb5114a588c232e79de9345a65967aba5e2fda0165a7d53e",
+      "src/services/details.ts": "541d98ddd58f1c411e74d2b221aa51ae3add36d7cfb818bde06f96a1b9e1b19e",
+      "src/services/doctor.ts": "7f02674b1da15d30d4a7ba42d2e5696bfc82f5b6d6182d72b8ea7b51823bf6d0",
+      "src/services/document-provenance.ts": "fa7fd76cc24bcc9eb7607717d7605f0d456005c6509b233993bc55222b91b009",
+      "src/services/harness-artifacts.ts": "b7b45983c64cc2866cceb0b63f8095476dd3b9ced8663fffaed45debda60fbc7",
+      "src/services/harness-context.ts": "4e49fb2e32944305115911dd39257bf9bb30a82bb7b7527bde8503663b5e676b",
+      "src/services/harness-diagnostics.ts": "4a495e8acbc747119d69264404f21130827a9a808e785e7d2bac83181027bb3a",
+      "src/services/harness-guard.ts": "1ddcda6da9a1e9c2c635102943f2f0d91e1f281e8320cf85ce15876aa5cd99da",
+      "src/services/harness-hook-context.ts": "bff13331121e0ee7c89c274fb5703383c2ed30daf5665b70d9a6931a55936491",
+      "src/services/harness-hooks.ts": "8790c64d661a2c47771369275fab9353a8a76d4be643701bad216f92b5cc0f2f",
+      "src/services/harness-native.ts": "a08514ebf599d2cc4e411eda195ce98ce09fa22b6d027bf0bbabb922ae69fe50",
+      "src/services/harness-paths.ts": "c5d24692a5556ce67b67670eda3eb35e9cdcbcc7e1f52bfeb3223e1ecce18d73",
+      "src/services/harness-probe.ts": "f65b57c145884e31ad9c3082e13b68da5db3f7ea24931759687c62b27e959825",
+      "src/services/harness-process.ts": "6a673abf256e4b39947ea978751317527a50155a0dd77a53494311b4a2e69d76",
+      "src/services/harness-receipts.ts": "caf9b340bf57c216f215f58bbb1d9d7536f6136246e9b39ce76144afc0566375",
+      "src/services/harness-run-evidence.ts": "4b82e38226566a6665c5307f80b31d261fa9523eddc3e437656e801069faae2e",
+      "src/services/harness-run-handoff.ts": "78fe782d29830b8f4fa0cee6afb403d03cbca62077785ae05e7f8aa6295b1db2",
+      "src/services/hooks.ts": "9eb73c7c987a3d71d85fdc1c8d09edc303b6d570edcfdb7cf15d83d886e29d48",
+      "src/services/layout.ts": "d4a6b04a22f4465ddf755659b1d0f5a643e862d96c847a29bcef97f1c6d57534",
+      "src/services/legacy-import.ts": "deddb69fe62091978f377e1bfb07f5344475d584e8de409b3fba22a0916de8ab",
+      "src/services/memory-brief.ts": "98058a78330d9e9d04e7f2c8bb4801e34a0b761387e15c9b497eede27664ea45",
+      "src/services/memory-consolidation.ts": "9a8a6b4fd7439f38f1a1c1350128c344f979c86fb108afb240ab6f25bf14b52f",
+      "src/services/memory-evals.ts": "d7f6d62e7bee3ff64ebec18c60e6eb99cab30261c07c8a300cb445b2320db425",
+      "src/services/memory-index.ts": "92075c2645bc60a075ff2959f269ee7b2836fd39af3734a4ab10fe3462f3fc0f",
+      "src/services/memory-links.ts": "6a55b09c5db81d80e37359d3e936d287403b1a3e1510b96cc787122e2a6e8bd8",
+      "src/services/memory-note.ts": "421fcaa54b697352343fc0af82950abf7ccb2d9008041f4e2c053e278e57d235",
+      "src/services/memory-query.ts": "10af3d9c2b6aace2110e6536278d850ec770b7003cb02b64a53a86ea72ed3d2f",
+      "src/services/memory-scopes.ts": "a7675cf85487c0facad0e992a628676965dabe3271fb04c9b53119f11ef61171",
+      "src/services/nexus.ts": "414c082c563c909165668080d799c862517b5060823304248e347577704d594b",
+      "src/services/portfolio.ts": "9a77e709afd4e35801ec518a9edc9efaa7e2d0de8f073faf93e44e08f4a62402",
+      "src/services/profiles.ts": "e718b6407017a9c2df0ec9ef8289469fd741ea749ce22185946aea810b99fca5",
+      "src/services/release.ts": "15b90a4f199ccabe41d3cd25df46759c2d266daf4f6989fb0b06d765727fd72d",
+      "src/services/resume-render.ts": "4b77f565fc789ccd867c2faac20a73824849af0bbdaddae3209668c23713e6ea",
+      "src/services/resume-snapshot.ts": "3a25345a4e1fd7dc38110cd9f241e19ba48899c7138ff5e34c77955ff1ef4701",
+      "src/services/resume-window.ts": "f2945f4dce06823dcdfc407052196f9e0d9eea97103dad6f35bd4653085f4df6",
+      "src/services/spec-answer-evaluation.ts": "1b1059f3f9e4b22fc491b5ab66fc22c94e06098cd668806863d240c012b7b904",
+      "src/services/spec-import.ts": "c34491dda5b5a75aa1772b534d476a5ac1c10ec4a0d2f0bd1b6524d3c323aad8",
+      "src/services/spec-questions.ts": "f74bc55e9c5988de80fdb80919444947daad933585b914616f194e93468c3095",
+      "src/services/test-diagnostics.ts": "d2e1718ce66672087967824227047ef4f02372ebea104a914f3af949df5646d7",
+      "src/services/ui.ts": "cead679299e7ebf7e6d4de74e7ed9d318e382f11e4d076acbcaab00d6aaf45d1",
+      "src/services/version.ts": "b7cc378332f689868593cfa0651e297392299ebc31a0d2ac6bc601c20b5c6a7b",
+      "src/services/workspace-query.ts": "ea876af5b776447af07eaa7a97cc052b5122d5d9a0ede84f601a93f510cc5177",
+      "src/services/workspace.ts": "3f07da04a8843dccd8b489a7c2dec329d7150712a22b7e8ce015ef1156374f10",
+      "src/storage.ts": "eab6460a20779e8c5f6165e5b573054ae7454317d943bc19fa55cd6f6d7a1a3e",
+      "src/templates.ts": "6996909ae2fd1721d553e57899691bf362ac9009b6b0d1a03fface92aee0e3a7",
+      "tsconfig.json": "17ea751748987e1847584e214939779dc67d36bf74c659bfbb68dcc530175c8e",
+      "web/package.json": "529256a017f89a051526e01213fd60a09c3d37e28f3e2f3f8664dc9e51b7bb18",
+      "web/src/AGENTS.md": "cd52398e69e2b078688467d7f32b05fc86fbebe836af5e03074c95e421eb52a2",
+      "web/src/app.css": "bd75f95aff2887e972f2a6a889dd8c422f80c9d2d98c51d8f8080931b6f6af41",
+      "web/src/app.d.ts": "905e52d945c95cadbc7ee8819797cf99f39c37f79db4a23020a6029a552857ea",
+      "web/src/app.html": "4ef47de32e173d9e2ea6d0d5c77d86c75233cb5ba28595adaa09f4c7d924368e",
+      "web/src/lib/AGENTS.md": "519aad7a508df6ce672e3e7d647b929c818238400c46dcc193e8ed12144b24b4",
+      "web/src/lib/components/AnalysisFilters.svelte": "86348f87030cd143e2f74ee794ffe0b128cb32d34ad57a0cd32e29d853448254",
+      "web/src/lib/components/ColorModeControl.svelte": "8b6a4075bdf94173300c8bdf82b864ad408eba281d4c6c67696dc918d104a824",
+      "web/src/lib/components/DocumentBody.svelte": "10aba6b7d6c0214cd1f5a87a5a50a9c0b8968e4e94a91707917fd474fab404ea",
+      "web/src/lib/components/IconButton.svelte": "ca780a253cc581c6750ef158930fdf70bcba79a42bf408914116dbc2c080a496",
+      "web/src/lib/components/ListPager.svelte": "49134327b36581231001787ac65ad7cb29bd6c929c45bd64af70903fe59e74ff",
+      "web/src/lib/components/MermaidBlock.svelte": "4cb7d982365454949dd38a45d869a18b161e0289b43407896ee356a7babb8ee5",
+      "web/src/lib/components/MultiSelectDropdown.svelte": "2755ba52283b443ccfd2f4fc8abf77636a42272abfb79be64353578f88c1a80f",
+      "web/src/lib/components/Popover.svelte": "e2d3396a80829bd22abd58fdc712d3c7e37cc1160fb328df574cd7e6b32551bc",
+      "web/src/lib/components/SelectDropdown.svelte": "f91ba39e7cdd9a6e7a40e8b107d3e5975639c4a974807c2e87034ed55b9462ce",
+      "web/src/lib/components/SpecOptionsPicker.svelte": "32ab974bbb5defb665a4ae491f6a0a90d19de425d67127c5fe082573a6ca8e5a",
+      "web/src/lib/components/TaskBoard.svelte": "66bf80c1bc7f1aa021dc9e46248334037b9d3b9022c0e56cc732db3a40f3de13",
+      "web/src/lib/components/ViewToolbar.svelte": "4ce702fed4e8d57e62cc43390025e6d824a5f466100bf204da583fb9934316e9",
+      "web/src/lib/components/data-table/AGENTS.md": "9476e1406eb440f3ccbf3d7f0e72e234f1b4fdb6629cb82e687e2cd3ca9f1b1e",
+      "web/src/lib/components/data-table/ColumnsPanel.svelte": "54517452b89160197408e0ae443380b2506c2ceaa1f8053ed26ebdb133783017",
+      "web/src/lib/components/data-table/DataTable.svelte": "2aa8755554756e766afd23b90e358d41821a59f0e2ea4d0741af725bc768a6a8",
+      "web/src/lib/components/data-table/SelectionBar.svelte": "3bf7a9c8b37ba50813f1bee61961fa9554719dfa7814d421395c66c4a3113742",
+      "web/src/lib/components/data-table/SortPanel.svelte": "0db8681313fbca6ec1a2e555e33cd29aa1bffca5c0988417d95c34244367a101",
+      "web/src/lib/components/data-table/clipboard.ts": "304377df1e4f380d967ae649369eb25cbd51210b7693a8011dd6794d33735378",
+      "web/src/lib/components/data-table/model.ts": "ab355cc2bce2e8e084944b082812dd413a7dcae0eee40a6d4e02214ee9567889",
+      "web/src/lib/components/data-table/preferences.ts": "dfc7d316f5700e573d509e916f385506bda8f4f319f873d43d0f930c94a11a3a",
+      "web/src/lib/components/data-table/task-columns.ts": "776e91e80e3d45d8b4fec4c106e62ea2b2f417539164ca07085bfdfce046bf50",
+      "web/src/lib/components/data-table/types.ts": "1f8f6aaaa50caa8c27f284b0f6318f37128ff7ce11c7d6ee91a5841a245334bc",
+      "web/src/lib/components/detail/AGENTS.md": "334288383f995834b643494879c4dcd6adaea97a1fc5e64dce2fb80f0db2c399",
+      "web/src/lib/components/detail/SpecDetail.svelte": "b464c872da0c0fd3605cd8480de17df26be37bfe72ca363f471d517b99664d6f",
+      "web/src/lib/components/detail/TaskDetail.svelte": "ac54b20520a1fae5079d5f233986cb12de0a0171f07ed48ad76876760dc872c7",
+      "web/src/lib/components/detail/types.ts": "c4c1c2a85d1cbe37a0e790de4d8aa0ec1b3152006f27ce94f70ac92ceb49b22c",
+      "web/src/lib/components/workspace/AGENTS.md": "edae8a338efdc4c0f86ff009fd2251f40349f7e1e2c1367e7c1213cd0f5f285b",
+      "web/src/lib/components/workspace/WorkspaceShell.svelte": "9f6d666faed00180112fd6e6f9dbe998d3361f698fc7d8f73bc15b1a16db6ac7",
+      "web/src/lib/mermaid-theme.ts": "568cdf5686a17d279615247ecc3ec5534b4d99de99829f68a0be1a17a71c2bc7",
+      "web/src/lib/server/project-root.ts": "5d5e9adc327c43d870da564918890017e3239ba0b35817762cd47d228b6d0497",
+      "web/src/lib/server/workspace.ts": "927fd0370042b0f173b1b9c5fa01b845b18f3bdb5110205e3f4b6e3cf781e815",
+      "web/src/lib/task-board.ts": "ab96ca63f7b220bac60589a1302739d1bbae44bea764e99c573de6c9c374933e",
+      "web/src/lib/theme.ts": "32b1566473e98bb85f504297a6f3de1db581216ea238bb81a7ed4b10f7666080",
+      "web/src/lib/workspace/AGENTS.md": "a2f713fac6e67119b77aa4110d0a871adba900a38392a3a30379183bae850063",
+      "web/src/lib/workspace/context.svelte.ts": "c738688de1a1ec522d3cfcc8c6e44baff5ca7dd2dfa07df9ed1350374e7e25ca",
+      "web/src/lib/workspace/resource.svelte.ts": "229cefb8c5d118160356df6abcadc764cbf23fcfcfe04004408f70607146a038",
+      "web/src/lib/workspace/resource.ts": "db855bfc329a21f3847a2d22838c385a5acdef5e9ff404b7c22d420de46ebe5e",
+      "web/src/lib/workspace-preferences.ts": "bb0303ef9dac2c8bd037e9726c3bb4cb8ced0ad7b7fa69f18a78945ae016b065",
+      "web/src/routes/+layout.server.ts": "092d0ed541a1669f8998e4afa639342f79678f6de9bfc7ec29e6ee7387304c25",
+      "web/src/routes/+layout.svelte": "563cbcff9a398ff52d41023083ee0d9381b1bc5a2f93e28eb1610f48b376b8ef",
+      "web/src/routes/+layout.ts": "3121c056e42c652ea29dc42c5922ac02f48486a0fa743b0c01114518687feded",
+      "web/src/routes/+page.server.ts": "933be01db1462cac14412a2db97208a5d26243d38d0165118b380b862ee5d7df",
+      "web/src/routes/+page.svelte": "363a0a77a7e3d5121b1f371430497f73e1637e32d5750078fc038b00350ce75d",
+      "web/src/routes/specs/+page.server.ts": "4990de9ea6b030042db05a1b330132421a7eb8c20633450f9e526683e4f97f9c",
+      "web/src/routes/specs/+page.svelte": "efac369516c6790da8b5141213e28d4c87b7c5038eb1d9d3bf2683f009c97e02",
+      "web/src/routes/specs/[specId]/+page.server.ts": "b1d9c8d3b00b1310d71d3f9274894cc07be2b626e8dfe33aa4934679d93f7b99",
+      "web/src/routes/specs/[specId]/+page.svelte": "b21428a4c71fef6f007df2e23a15af1ea12b62052bf11ea094fe044d4ce37f24",
+      "web/src/routes/tasks/+page.server.ts": "3187d1ff913c04df7f5eedf5c07ac67ce2f3f487e91193237f7f1a1ca9815975",
+      "web/src/routes/tasks/+page.svelte": "9024a015a3d8a262a7c87584bd6b0dddfbd7a60d6a74315e42ddfa5d6422e446",
+      "web/src/routes/tasks/[taskId]/+page.server.ts": "1c07b6b0ecff153703153672c9db5b0ae2ece54293d1ecc3bbf033351e408fe3",
+      "web/src/routes/tasks/[taskId]/+page.svelte": "6918a19c1b904379f6798857c4fe51cd9186d51d8d2a9664b907bd3ae6d51f2e",
+      "web/src/routes/timeline/+page.server.ts": "c07b7fd6a2f0757ac20a7a5e5a54276c6f86f6a461efd75edbb6343ddfb4c005",
+      "web/src/routes/timeline/+page.svelte": "ca06660f6be2db20f4653bb7abca6cbdb3b5b28166dee019966f164bc69b0b0f",
+      "web/src/routes/workspace-data/+server.ts": "f3f0d830fb7c733a3382f4bbc9b8eac849133cdb188acec895fb0a54407870e7",
+      "web/src/routes/workspace-options/+server.ts": "9cd336a13962fa5a4848272bb410348a12d3ca2213112e3d91922add8a19e88b",
+      "web/svelte-plugin-options.js": "e88c27ba91bd054c9bb229b5d5776d77b956ed3b1594c5383b37cd71264fd91e",
+      "web/svelte.config.js": "08afd60b799d42c488b6643ebdeaa3baf3416c46b0f2e277cb596736ef55e41b",
+      "web/tsconfig.json": "02c5b4bb85cf0c6ebbf4cdb265d78bc0b2d38492bd097fff46532d97278206a2",
+      "web/vite-paths.ts": "e138bf8e8f27943754852d4c0718a49cead92b70e85a41843c73075f0b09e2f7",
+      "web/vite.config.ts": "58cebfb71d83ecdd0ce49c832d5d7d70024fbffb1eda09c92bc1ae9fc9e43504"
+    }
+  },
+  "origin": "http://127.0.0.1:5290",
+  "fixture": "Owned disposable0/1/200/10000 tasks;2000 specs at10k. Marker-gated writes. Cleared after checks.",
+  "runtime": "Bun 1.3.9",
+  "cases": [
+    {
+      "fixtureTasks": 0,
+      "mode": "default",
+      "totalMatching": 0,
+      "ssrRows": 0,
+      "jsonRows": 0,
+      "htmlBytes": 32230,
+      "jsonBytes": 1392,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 0,
+      "mode": "simple",
+      "totalMatching": 0,
+      "ssrRows": 0,
+      "jsonRows": 0,
+      "htmlBytes": 32476,
+      "jsonBytes": 1391,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 0,
+      "mode": "board",
+      "totalMatching": 0,
+      "ssrRows": 0,
+      "jsonRows": 0,
+      "htmlBytes": 33453,
+      "jsonBytes": 1414,
+      "nativeSSR": false
+    },
+    {
+      "fixtureTasks": 0,
+      "mode": "board-simple",
+      "totalMatching": 0,
+      "ssrRows": 0,
+      "jsonRows": 0,
+      "htmlBytes": 32476,
+      "jsonBytes": 1391,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 1,
+      "mode": "default",
+      "totalMatching": 1,
+      "ssrRows": 1,
+      "jsonRows": 1,
+      "htmlBytes": 35545,
+      "jsonBytes": 1696,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 1,
+      "mode": "simple",
+      "totalMatching": 1,
+      "ssrRows": 1,
+      "jsonRows": 1,
+      "htmlBytes": 35791,
+      "jsonBytes": 1695,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 1,
+      "mode": "board",
+      "totalMatching": 1,
+      "ssrRows": 1,
+      "jsonRows": 1,
+      "htmlBytes": 36320,
+      "jsonBytes": 1718,
+      "nativeSSR": false
+    },
+    {
+      "fixtureTasks": 1,
+      "mode": "board-simple",
+      "totalMatching": 1,
+      "ssrRows": 1,
+      "jsonRows": 1,
+      "htmlBytes": 35791,
+      "jsonBytes": 1695,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 200,
+      "mode": "default",
+      "totalMatching": 200,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 567497,
+      "jsonBytes": 55179,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 200,
+      "mode": "simple",
+      "totalMatching": 200,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 567743,
+      "jsonBytes": 55178,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 200,
+      "mode": "board",
+      "totalMatching": 180,
+      "ssrRows": 180,
+      "jsonRows": 180,
+      "htmlBytes": 429667,
+      "jsonBytes": 49026,
+      "nativeSSR": false
+    },
+    {
+      "fixtureTasks": 200,
+      "mode": "board-simple",
+      "totalMatching": 200,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 567743,
+      "jsonBytes": 55178,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 10000,
+      "mode": "default",
+      "totalMatching": 10000,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 607425,
+      "jsonBytes": 58559,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 10000,
+      "mode": "simple",
+      "totalMatching": 10000,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 607710,
+      "jsonBytes": 58558,
+      "nativeSSR": true
+    },
+    {
+      "fixtureTasks": 10000,
+      "mode": "board",
+      "totalMatching": 9000,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 513514,
+      "jsonBytes": 57678,
+      "nativeSSR": false
+    },
+    {
+      "fixtureTasks": 10000,
+      "mode": "board-simple",
+      "totalMatching": 10000,
+      "ssrRows": 200,
+      "jsonRows": 200,
+      "htmlBytes": 607710,
+      "jsonBytes": 58558,
+      "nativeSSR": true
+    }
+  ],
+  "requests": [
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 32230,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 1392,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 32476,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 1391,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 33453,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 1414,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 32476,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 1391,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 35545,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 1696,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 35791,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 1695,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 36320,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 1718,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 35791,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 1695,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 567497,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 55179,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 567743,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 55178,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 429667,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 49026,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 567743,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 55178,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 607425,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 58559,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 607710,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 58558,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 513514,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc",
+      "status": 200,
+      "bytes": 57678,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 607710,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1",
+      "status": 200,
+      "bytes": 58558,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/tasks?scope=all&pageSize=100&page=2&sort=id.asc&sort=title.desc&simple=1",
+      "status": 200,
+      "bytes": 341234,
+      "cacheControl": null
+    },
+    {
+      "path": "/tasks?sort=id.asc&sort=title.desc&page=3&pageSize=100&scope=all&view=table&simple=1",
+      "status": 200,
+      "bytes": 341265,
+      "cacheControl": null
+    },
+    {
+      "path": "/tasks?sort=id.desc&page=1&pageSize=100&scope=all&view=table&simple=1",
+      "status": 200,
+      "bytes": 341080,
+      "cacheControl": null
+    },
+    {
+      "path": "/tasks?q=&sort=id.asc&sort=title.desc&page=1&pageSize=200&view=table&simple=1&window=&scope=all&priority=",
+      "status": 200,
+      "bytes": 608091,
+      "cacheControl": null
+    },
+    {
+      "path": "/tasks?scope=all&simple=1&view=table&q=Fixture&status=todo&priority=1&spec=SPEC-00001&sort=id.asc&sort=title.desc&option_q=HTTP&option_page=2&option_pageSize=10",
+      "status": 200,
+      "bytes": 49204,
+      "cacheControl": null
+    },
+    {
+      "path": "/tasks?q=Fixture&sort=id.asc&sort=title.desc&page=1&pageSize=100&view=table&simple=1&option_q=HTTP&option_page=2&option_pageSize=10&spec=SPEC-00001&window=&status=todo&scope=all&priority=1",
+      "status": 200,
+      "bytes": 49204,
+      "cacheControl": null
+    },
+    {
+      "path": "/tasks/TASK-00101",
+      "status": 200,
+      "bytes": 21498,
+      "cacheControl": null
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=100&sort=id.asc",
+      "status": 200,
+      "bytes": 31595,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "/workspace-data?route=tasks&scope=all&pageSize=99999&page=99999",
+      "status": 200,
+      "bytes": 31782,
+      "cacheControl": "no-store"
+    }
+  ],
+  "checks": [
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "0/default: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 0,
+        "ssrRows": 0,
+        "jsonRows": 0
+      }
+    },
+    {
+      "name": "0/default: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "0/default: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "0/default: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "0/default: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "0/default: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "0/default: visible empty result",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "0/simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 0,
+        "ssrRows": 0,
+        "jsonRows": 0
+      }
+    },
+    {
+      "name": "0/simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "0/simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "0/simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "0/simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "0/simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "0/simple: visible empty result",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "0/board: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 0,
+        "ssrRows": 0,
+        "jsonRows": 0
+      }
+    },
+    {
+      "name": "0/board: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "0/board: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "0/board: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "0/board: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "0/board-simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 0,
+        "ssrRows": 0,
+        "jsonRows": 0
+      }
+    },
+    {
+      "name": "0/board-simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "0/board-simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "0/board-simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "0/board-simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "0/board-simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "0/board-simple: visible empty result",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "1/default: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 1,
+        "ssrRows": 1,
+        "jsonRows": 1
+      }
+    },
+    {
+      "name": "1/default: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "1/default: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "1/default: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "1/default: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "1/default: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "1/default: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "1/simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 1,
+        "ssrRows": 1,
+        "jsonRows": 1
+      }
+    },
+    {
+      "name": "1/simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "1/simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "1/simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "1/simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "1/simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "1/simple: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "1/board: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 1,
+        "ssrRows": 1,
+        "jsonRows": 1
+      }
+    },
+    {
+      "name": "1/board: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "1/board: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "1/board: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "1/board: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "1/board-simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 1,
+        "ssrRows": 1,
+        "jsonRows": 1
+      }
+    },
+    {
+      "name": "1/board-simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "1/board-simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "1/board-simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "1/board-simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "1/board-simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "1/board-simple: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "200/default: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 200,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "200/default: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "200/default: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "200/default: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "200/default: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "200/default: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "200/default: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "200/simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 200,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "200/simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "200/simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "200/simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "200/simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "200/simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "200/simple: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "200/board: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 180,
+        "ssrRows": 180,
+        "jsonRows": 180
+      }
+    },
+    {
+      "name": "200/board: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "200/board: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "200/board: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "200/board: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "200/board-simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 200,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "200/board-simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "200/board-simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "200/board-simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "200/board-simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "200/board-simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "200/board-simple: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "10000/default: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 10000,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "10000/default: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "10000/default: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "10000/default: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "10000/default: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "10000/default: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "10000/default: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "10000/simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 10000,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "10000/simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "10000/simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "10000/simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "10000/simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "10000/simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "10000/simple: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=archived&pageSize=200&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "10000/board: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 9000,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "10000/board: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "10000/board: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "10000/board: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "10000/board: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&view=board&scope=all&pageSize=200&sort=id.asc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "10000/board-simple: total and <=200 rows",
+      "pass": true,
+      "detail": {
+        "expectedTotal": 10000,
+        "ssrRows": 200,
+        "jsonRows": 200
+      }
+    },
+    {
+      "name": "10000/board-simple: SSR/JSON row IDs agree",
+      "pass": true
+    },
+    {
+      "name": "10000/board-simple: table default/simple and Board scope",
+      "pass": true
+    },
+    {
+      "name": "10000/board-simple: no source bodies or foreign dashboard arrays",
+      "pass": true
+    },
+    {
+      "name": "10000/board-simple: JSON no-store",
+      "pass": true
+    },
+    {
+      "name": "10000/board-simple: native SSR table semantics",
+      "pass": true
+    },
+    {
+      "name": "10000/board-simple: one primary aria-sort",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&pageSize=100&page=2&sort=id.asc&sort=title.desc&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "native list Next link exists",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?sort=id.asc&sort=title.desc&page=3&pageSize=100&scope=all&view=table&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "native Next follows page3 and preserves table/simple/sorts",
+      "pass": true
+    },
+    {
+      "name": "native ID descending sort link exists",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?sort=id.desc&page=1&pageSize=100&scope=all&view=table&simple=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "native sort GET returns descending first row",
+      "pass": true
+    },
+    {
+      "name": "native pager GET form exists",
+      "pass": true
+    },
+    {
+      "name": "native page-size fields preserve simple/view/scope/sorts and reset page",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?q=&sort=id.asc&sort=title.desc&page=1&pageSize=200&view=table&simple=1&window=&scope=all&priority= succeeds",
+      "pass": true
+    },
+    {
+      "name": "native GET page-size request returns200 rows",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks?scope=all&simple=1&view=table&q=Fixture&status=todo&priority=1&spec=SPEC-00001&sort=id.asc&sort=title.desc&option_q=HTTP&option_page=2&option_pageSize=10 succeeds",
+      "pass": true
+    },
+    {
+      "name": "native filter GET with external controls exists",
+      "pass": true
+    },
+    {
+      "name": "native filter controls keep q/status/priority/spec plus view/simple/options",
+      "pass": true,
+      "detail": {
+        "fields": [
+          [
+            "q",
+            "Fixture"
+          ],
+          [
+            "sort",
+            "id.asc"
+          ],
+          [
+            "sort",
+            "title.desc"
+          ],
+          [
+            "page",
+            "1"
+          ],
+          [
+            "pageSize",
+            "100"
+          ],
+          [
+            "view",
+            "table"
+          ],
+          [
+            "simple",
+            "1"
+          ],
+          [
+            "option_q",
+            "HTTP"
+          ],
+          [
+            "option_page",
+            "2"
+          ],
+          [
+            "option_pageSize",
+            "10"
+          ],
+          [
+            "spec",
+            "SPEC-00001"
+          ],
+          [
+            "window",
+            ""
+          ],
+          [
+            "status",
+            "todo"
+          ],
+          [
+            "scope",
+            "all"
+          ],
+          [
+            "priority",
+            "1"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "GET /tasks?q=Fixture&sort=id.asc&sort=title.desc&page=1&pageSize=100&view=table&simple=1&option_q=HTTP&option_page=2&option_pageSize=10&spec=SPEC-00001&window=&status=todo&scope=all&priority=1 succeeds",
+      "pass": true
+    },
+    {
+      "name": "native canonical entity link exists",
+      "pass": true
+    },
+    {
+      "name": "GET /tasks/TASK-00101 succeeds",
+      "pass": true
+    },
+    {
+      "name": "native canonical entity GET shows task detail",
+      "pass": true
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=100&sort=id.asc succeeds",
+      "pass": true
+    },
+    {
+      "name": "100-row JSON payload <=250KiB",
+      "pass": true,
+      "detail": {
+        "bytes": 31595,
+        "budgetBytes": 256000
+      }
+    },
+    {
+      "name": "GET /workspace-data?route=tasks&scope=all&pageSize=99999&page=99999 succeeds",
+      "pass": true
+    },
+    {
+      "name": "unsupported page-size and out-of-range page stay bounded",
+      "pass": true
+    },
+    {
+      "name": "production Tasks initial static imports exclude detail/Mermaid",
+      "pass": true,
+      "detail": {
+        "staticModules": 21,
+        "forbidden": []
+      }
+    }
+  ],
+  "pass": true,
+  "passed": 159,
+  "failed": 0,
+  "postSnapshotDeltas": [
+    {
+      "path": "web/src/lib/components/TaskBoard.svelte",
+      "snapshotSha256": "66bf80c1bc7f1aa021dc9e46248334037b9d3b9022c0e56cc732db3a40f3de13",
+      "observedLaterSha256": "af8189d8e217267e2c41f9d0f7e6bfd47f4bc0d08cb4aa9bd13728205a5c06fc",
+      "scope": "Inspected presentation-only delta; not executed by this HTTP snapshot."
+    },
+    {
+      "path": "web/src/routes/tasks/+page.svelte",
+      "snapshotSha256": "9024a015a3d8a262a7c87584bd6b0dddfbd7a60d6a74315e42ddfa5d6422e446",
+      "observedLaterSha256": "f6fe2c70772060c5e1c22fd72bcb5ee4da837c8eb00fd1b5e3ea9d1136b06aa7",
+      "scope": "Inspected presentation-only delta; not executed by this HTTP snapshot."
+    }
+  ],
+  "postSnapshotDeltaNotes": "TaskBoard font-family and coarse-pointer link min-height; Tasks preset select aria-label. No query/GET/table structure delta observed."
+}
