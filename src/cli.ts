@@ -84,6 +84,7 @@ Usage:
   spm reshape [--home docs] [--dry-run]
   spm doctor [--verbose] [--harness codex|claude] [--json]
   spm agent [brief|snippet] [--harness codex|claude] [--json]
+  spm agent hook-context --harness codex|claude
   spm status [--json]
   spm current show [--json]
   spm current set [--focus "..."] [--summary "..."] [--active-spec-ids SPEC-001,SPEC-002] [--active-task-ids TASK-006,TASK-013] [--blocked-task-ids TASK-003] [--next-action-hints "hint one || hint two"] [--clear-active-spec-ids] [--clear-active-task-ids] [--clear-blocked-task-ids] [--clear-next-action-hints] [--json]
@@ -92,6 +93,9 @@ Usage:
   spm handoff [--title "Checkpoint"] [--note "extra note"]
   spm hooks install [--events commit,merge,ci,release] [--json]
   spm hooks plan [--event commit|merge|ci|release] [--json]
+  spm hooks plan --harness codex|claude [--json]
+  spm hooks install --harness codex|claude [--apply] [--json]
+  spm hooks remove --harness codex|claude [--apply] [--json]
   spm agents check [--json]
   spm memory note create --scope session|org --title "..." [--summary "..."] [--tags a,b] [--expires-at 2026-05-01T12:00:00.000Z] [--body "..."] [--json]
   spm memory note update <NOTE-ID> [--title "..."] [--summary "..."] [--tags a,b] [--expires-at 2026-05-01T12:00:00.000Z | --clear-expires-at] [--body "..."] [--json]

@@ -7,7 +7,7 @@ import { runAgentsCommand } from "./commands/agents.ts";
 import { runCurrentCommand } from "./commands/current.ts";
 import { runDoctorCommand } from "./commands/doctor.ts";
 import { runHandoffCommand } from "./commands/handoff.ts";
-import { runHooksCommand } from "./commands/hooks.ts";
+import { runHooksCommandResult } from "./commands/hooks.ts";
 import { runImportCommand } from "./commands/import.ts";
 import { runInitCommand } from "./commands/init.ts";
 import { runMemoryCommand } from "./commands/memory.ts";
@@ -86,9 +86,11 @@ async function main(): Promise<void> {
     case "handoff":
       output = await runHandoffCommand(rootDir, parsed);
       break;
-    case "hooks":
-      output = await runHooksCommand(rootDir, parsed);
+    case "hooks": {
+      const result = await runHooksCommandResult(rootDir, parsed);
+      output = result.text; process.exitCode = result.exitCode;
       break;
+    }
     case "current":
       output = await runCurrentCommand(rootDir, parsed);
       break;
@@ -130,7 +132,7 @@ async function main(): Promise<void> {
   }
 
   if (output.length > 0) {
-    if (parsed.flags.has("harness") && (parsed.command === "doctor" || parsed.command === "agent")) await writeOutput(output);
+    if (parsed.flags.has("harness") && (parsed.command === "doctor" || parsed.command === "agent" || parsed.command === "hooks")) await writeOutput(output);
     else console.log(output);
   }
 }

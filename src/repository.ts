@@ -391,8 +391,10 @@ async function readGitSnapshot(rootDir: string): Promise<GitSnapshot> {
   };
 }
 
-export async function loadProjectContext(rootDir: string): Promise<ProjectContext> {
-  const config = await readProjectConfig(rootDir);
+export async function loadProjectContext(rootDir: string, options: {
+  config?: ProjectConfig; includeScopedMemory?: boolean;
+} = {}): Promise<ProjectContext> {
+  const config = options.config ?? await readProjectConfig(rootDir);
   const paths = resolveProjectPaths(rootDir, config);
 
   const [currentState, specs, tasks, handoffs, sessionNotes, orgNotes, gitSnapshot] = await Promise.all([
@@ -400,10 +402,10 @@ export async function loadProjectContext(rootDir: string): Promise<ProjectContex
     loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument),
     loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument),
     loadMarkdownCollection<HandoffDocument>(paths.handoffsDir, parseHandoffDocument),
-    config.memoryScopes.session.enabled
+    options.includeScopedMemory !== false && config.memoryScopes.session.enabled
       ? loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
       : Promise.resolve([]),
-    config.memoryScopes.org.enabled
+    options.includeScopedMemory !== false && config.memoryScopes.org.enabled
       ? loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
       : Promise.resolve([]),
     readGitSnapshot(rootDir),

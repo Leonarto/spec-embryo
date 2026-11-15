@@ -8,8 +8,10 @@ import {
 import { buildDoctorReport } from "../services/doctor.ts";
 import { withSchemaVersion } from "../services/contracts.ts";
 import { buildHarnessDiagnostics, HarnessSelectionError, selectHarness } from "../services/harness-diagnostics.ts";
+import { runHookContextCommand } from "./hook-context.ts";
 
 export async function runAgentCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
+  if (parsed.subcommand === "hook-context") return runHookContextCommand(rootDir, parsed);
   const provider = selectHarness(parsed.flags.get("harness"));
   if (parsed.subcommand && parsed.subcommand !== "brief" && parsed.subcommand !== "snippet") {
     if (provider) throw new HarnessSelectionError("Supported harness guidance commands are agent brief and agent snippet.");

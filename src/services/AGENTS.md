@@ -9,8 +9,8 @@ This folder contains reusable deterministic product services.
 - `document-provenance.ts` hashes the Buffer parsed by repository loading. Preserve object identity; no rereads, clone hash transfer, or invented provenance.
 - `harness-process.ts` owns bounded capture/termination; `harness-artifacts.ts` owns per-run reservations and verified cleanup. Unknown trees retain files; no stale-directory sweep.
 - `harness-diagnostics.ts` projects explicit provider queries; `harness-probe.ts` owns allowlisted, bounded processes. Normal doctor and snippets never probe; root instruction inspection never certifies loading.
+- `harness-hooks.ts` plans/applies owned native entries under the repository lock; `harness-paths.ts` checks containment and atomic file writes. `harness-hook-context.ts` uses a terminable read-only worker and emits only bounded reference metadata, never document text.
 - When context-pack detail is offloaded, keep typed `nextInspect` entries and legacy `nextInspectIds` aligned with the highest-value omitted refs.
-- Adoption, doctor, and agent briefs share one guidance contract, including memory, Nexus, refresh, and bounded AGENTS snippets.
-- Nexus services keep Nexus external, dry-run before writes, and preserve `spm` ownership of AGENTS/config.
+- Adoption surfaces share guidance and bounded snippets.
 - UI launch uses packaged assets and the first available local port for concurrent repos.
 - AGENTS budgets use project context policy from `.specpm/config.toml`.

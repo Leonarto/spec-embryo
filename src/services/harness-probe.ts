@@ -16,12 +16,12 @@ export interface HarnessProbeResult {
   exit_code: number | null;
 }
 
-export async function resolveHarnessExecutable(provider: HarnessProvider, rootDir: string,
+export async function resolveExecutableOnPath(command: string, rootDir: string,
   searchPath = process.env.PATH ?? ""): Promise<string | null> {
   const suffixes = process.platform === "win32" ? [".exe", ".cmd", ".bat", ""] : [""];
   for (const directory of searchPath.split(delimiter)) {
     for (const suffix of suffixes) {
-      const candidate = resolve(rootDir, directory || ".", `${provider}${suffix}`);
+      const candidate = resolve(rootDir, directory || ".", `${command}${suffix}`);
       try {
         if (!(await stat(candidate)).isFile()) continue;
         await access(candidate, process.platform === "win32" ? constants.F_OK : constants.X_OK);
@@ -30,6 +30,11 @@ export async function resolveHarnessExecutable(provider: HarnessProvider, rootDi
     }
   }
   return null;
+}
+
+export async function resolveHarnessExecutable(provider: HarnessProvider, rootDir: string,
+  searchPath = process.env.PATH ?? ""): Promise<string | null> {
+  return resolveExecutableOnPath(provider, rootDir, searchPath);
 }
 
 export async function runHarnessProbe(executable: string, args: HarnessProbeArgs, rootDir: string): Promise<HarnessProbeResult> {

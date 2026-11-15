@@ -36,6 +36,8 @@ bun run spm reshape --dry-run
 
 For explicit harness troubleshooting, use `spm doctor --harness codex|claude --json` or `spm agent brief --harness codex|claude --json`. These run bounded local version/help probes; ordinary doctor/brief do not. `spm agent snippet --harness codex|claude` returns shared adoption guidance without probes or writes. Inspect reported root instruction paths and loading conflicts manually; diagnosis never proves effective harness loading or installs a CLAUDE bridge, hooks, or permissions.
 
+Native context hooks are opt-in: preview with `spm hooks plan --harness codex|claude`, then use `hooks install/remove --harness ... --apply` only when requested. Implementation tests install only in temporary fixtures. The handler returns reference metadata, not document text; the harness retains trust/permission decisions. Never replace an ownership conflict with a forced rewrite or delete foreign handlers.
+
 ## Rules
 
 - Use `spm` when it already provides the needed project-memory view.

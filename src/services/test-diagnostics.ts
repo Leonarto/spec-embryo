@@ -32,8 +32,8 @@ export function buildTestDiagnosticsBundle(): TestDiagnosticsBundle {
       {
         id: "subprocess-and-packaged-ui",
         risk: "process",
-        files: ["tests/backends.test.ts", "tests/harness-process.test.ts", "tests/harness-diagnostics.test.ts", "tests/ui.test.ts", "tests/vite-paths.test.ts"],
-        rerunCommand: "bun test tests/backends.test.ts tests/harness-process.test.ts tests/harness-diagnostics.test.ts tests/ui.test.ts tests/vite-paths.test.ts",
+        files: ["tests/backends.test.ts", "tests/harness-process.test.ts", "tests/harness-diagnostics.test.ts", "tests/harness-hooks.test.ts", "tests/hook-context.test.ts", "tests/ui.test.ts", "tests/vite-paths.test.ts"],
+        rerunCommand: "bun test tests/backends.test.ts tests/harness-process.test.ts tests/harness-diagnostics.test.ts tests/harness-hooks.test.ts tests/hook-context.test.ts tests/ui.test.ts tests/vite-paths.test.ts",
         mitigation: "Use temporary local executable fixtures, bounded signal deadlines, and per-run artifacts; never call paid agent APIs.",
       },
     ],
