@@ -4,9 +4,11 @@ This folder contains reusable deterministic product services.
 
 - Keep services reusable, deterministic, and light on side effects.
 - Put cross-command workflow logic here, not in handlers.
-- Dashboard, adoption, doctor, portfolio, profile, import, hooks, release, and test-diagnostic services should project canonical local state through structured data.
+- Product surfaces project canonical local state through structured data.
 - Memory retrieval/link/brief/note services should reuse canonical `ProjectContext`, explicit match reasons, section-aware indexing, normalized tag semantics, and scope write-policy enforcement.
 - Context-pack services should keep compaction explicit; surface truncated detail deterministically instead of making callers infer it.
+- Resume: `resume-window.ts` resolves committed windows; `resume-snapshot.ts` fingerprints selected context; `resume-render.ts` bounds UTF-8 prompts. Reuse shared versioning.
+- `document-provenance.ts` hashes the Buffer parsed by repository loading. Preserve object identity; no rereads, clone hash transfer, or invented provenance.
 - When context-pack detail is offloaded, keep typed `nextInspect` entries and legacy `nextInspectIds` aligned with the highest-value omitted refs.
 - Adoption/doctor/agent-brief guidance should share one contract for adoption, workflow, memory, Nexus, capability-refresh, and bounded AGENTS snippet guidance.
 - Nexus services keep Nexus external, dry-run before writes, and preserve `spm` ownership of AGENTS/config.

@@ -6,6 +6,9 @@ import {
   sliceWithOmittedCount,
 } from "../engine.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
+import { buildPromptBundle, renderPromptBundleText } from "./prompt.ts";
+import { DEFAULT_MAX_CONTEXT_BYTES } from "../services/resume-render.ts";
+import { renderResumeWindowSummary } from "../services/resume-window.ts";
 
 function section(title: string, lines: string[]): string {
   return [title, ...lines.map((line) => `  ${line}`)].join("\n");
@@ -112,7 +115,11 @@ export class DeterministicBackend implements ResumeBackend {
       );
     }
 
-    const text = `${lines.join("\n")}\n\n${sections.join("\n\n")}`;
+    if (context.interruption_window) sections.push(renderResumeWindowSummary(context.interruption_window));
+    if (context.warnings?.length) sections.push(section("Warnings", context.warnings));
+    const fullText = `${lines.join("\n")}\n\n${sections.join("\n\n")}`;
+    const text = Buffer.byteLength(fullText, "utf8") <= (options.maxContextBytes ?? DEFAULT_MAX_CONTEXT_BYTES)
+      ? fullText : renderPromptBundleText(buildPromptBundle(context, options.maxContextBytes));
     return {
       text,
       json: options.json ? context : undefined,

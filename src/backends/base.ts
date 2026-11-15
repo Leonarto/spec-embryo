@@ -5,6 +5,7 @@ export interface BackendRunOptions {
   config: ProjectConfig;
   json?: boolean;
   spawn?: boolean;
+  maxContextBytes?: number;
 }
 
 export interface BackendRunResult {

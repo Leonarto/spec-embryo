@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-123"
 title = "Implement shared resume context and portable contracts"
 summary = "Correct --since delivery, deterministic provenance, bounded prompt assembly and versioned resume output."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-061"]
 depends_on = []
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.333Z"
+completed_at = "2026-11-15T18:41:09.436Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T18:31:37.758Z"
+updated_at = "2026-11-15T18:41:09.436Z"
 +++
 
 # Scope
@@ -29,4 +30,4 @@ Implement P0.1 and P0.2 of SPEC-061, including the contracts, edge cases and acc
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+Implemented and independently reviewed by Astra High. Full Bun suite: 200 passed, 0 failed; 91.84% function and 90.67% line coverage in its measured scope. Independent reviewer: 18 focused tests passed (183 assertions), AGENTS check passed. Window validation, same-read provenance, deterministic snapshots, prefix stability and UTF-8 limits are covered. Process lifecycle and JSON spawn failures remain TASK-124. Evidence: `/private/tmp/spm-harness-slice1-tests.log`; frozen file hashes: `/private/tmp/spm-task123-manifest.json`.

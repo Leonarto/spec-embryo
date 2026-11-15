@@ -9,4 +9,6 @@ This folder contains execution backends.
 - Subprocess backends should share one launch-plan contract instead of each inventing prompt serialization.
 - Prefer explicit prompt tokens over ad hoc inline strings: `{prompt_text_file}` and `{prompt_bundle_file}` are the clearest defaults.
 - Keep legacy token aliases stable when practical so existing backend configs do not break silently.
+- Prompt bundles retain complete structured data; `resume-render.ts` bounds assembled prompt text in UTF-8 bytes. Prefixes contain only invariant instructions; all project data and interruption windows belong in the variable tail.
+- Every backend receives the same optional `ResumeContext.interruption_window`; include it in human output and prompt artifacts without reintroducing it into the stable prefix.
 - If subprocess behavior changes, document spawn assumptions, token replacements, and env vars here.

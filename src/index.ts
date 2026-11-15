@@ -16,7 +16,7 @@ import { runPortfolioCommand } from "./commands/portfolio.ts";
 import { runProfileCommand } from "./commands/profile.ts";
 import { runReleaseCommand } from "./commands/release.ts";
 import { runReshapeCommand } from "./commands/reshape.ts";
-import { runResumeCommand } from "./commands/resume.ts";
+import { ResumeCommandError, runResumeCommand } from "./commands/resume.ts";
 import { runSpecCommand } from "./commands/spec.ts";
 import { runStatusCommand } from "./commands/status.ts";
 import { runTaskCommand } from "./commands/task.ts";
@@ -116,5 +116,5 @@ async function main(): Promise<void> {
 main().catch((error) => {
   const message = error instanceof Error ? error.message : String(error);
   console.error(`spec-embryo error: ${message}`);
-  exit(1);
+  exit(error instanceof ResumeCommandError ? error.exitCode : 1);
 });

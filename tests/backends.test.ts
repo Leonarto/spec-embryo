@@ -46,13 +46,12 @@ describe("prompt backend helpers", () => {
       expect(bundle.context.project_name).toMatch(/^spec-embryo-backends-/);
       expect(bundle.expected_output_format.summary_sections).toContain("where-we-are");
       expect(bundle.cache_assembly.strategy).toBe("stable-prefix-and-tail");
-      expect(bundle.cache_assembly.stable_prefix_sections).toContain("context_pack");
-      expect(bundle.cache_assembly.variable_tail_sections).toContain("volatile_execution_context");
-      expect(bundle.cache_assembly.stable_prefix_text).toContain("Stable repo context:");
-      expect(bundle.cache_assembly.variable_tail_text).toContain("Volatile execution context:");
+      expect(bundle.cache_assembly.stable_prefix_sections).toEqual(["recommended_prompt", "expected_output_format"]);
+      expect(bundle.cache_assembly.variable_tail_sections).toContain("context_pack");
+      expect(bundle.cache_assembly.stable_prefix_text).toContain("Expected output format:");
+      expect(bundle.cache_assembly.variable_tail_text).toContain("Structured context:");
       expect(text).toContain("You are resuming work on this repository.");
-      expect(text).toContain("Stable repo context:");
-      expect(text).toContain("Volatile execution context:");
+      expect(text).toContain("Context pack:");
       expect(text).toContain("Structured context:");
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
@@ -204,8 +203,8 @@ describe("subprocess backends", () => {
       expect(plan.env.SPM_PROMPT_BUNDLE_FILE).toBe(plan.artifactPaths.promptBundleFile);
       expect(plan.env.SPM_PROMPT_STABLE_PREFIX_FILE).toBe(plan.artifactPaths.promptStablePrefixFile);
       expect(plan.env.SPM_PROMPT_VARIABLE_TAIL_FILE).toBe(plan.artifactPaths.promptVariableTailFile);
-      expect(plan.promptStablePrefixText).toContain("Stable repo context:");
-      expect(plan.promptVariableTailText).toContain("Volatile execution context:");
+      expect(plan.promptStablePrefixText).toContain("Expected output format:");
+      expect(plan.promptVariableTailText).toContain("Structured context:");
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }
@@ -244,8 +243,8 @@ describe("subprocess backends", () => {
       expect(payload.artifact_paths.promptStablePrefixFile.endsWith("codex-resume-prompt-prefix.txt")).toBe(true);
       expect(payload.artifact_paths.promptVariableTailFile.endsWith("codex-resume-prompt-tail.txt")).toBe(true);
       expect(payload.prompt_text).toContain("You are resuming work on this repository.");
-      expect(payload.prompt_stable_prefix).toContain("Stable repo context:");
-      expect(payload.prompt_variable_tail).toContain("Volatile execution context:");
+      expect(payload.prompt_stable_prefix).toContain("Expected output format:");
+      expect(payload.prompt_variable_tail).toContain("Structured context:");
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }
@@ -263,6 +262,10 @@ describe("subprocess backends", () => {
       ];
 
       const backend = resolveResumeBackend("codex", fixture.config);
+      fixture.resumeContext.interruption_window = {
+        since: "initial-window-fixture", resolvedSince: "a".repeat(40), available: true,
+        changedFiles: ["committed.md"], commits: ["abc committed change"],
+      };
       const result = await backend.run(fixture.resumeContext, {
         rootDir: fixture.rootDir,
         config: fixture.config,
@@ -272,7 +275,7 @@ describe("subprocess backends", () => {
 
       const payload = JSON.parse(result.text) as {
         mode: string;
-        artifact_paths: { prompt_text_file?: string; prompt_bundle_file?: string; promptTextFile: string; promptBundleFile: string };
+        artifact_paths: { promptTextFile: string; promptBundleFile: string; promptStablePrefixFile: string; promptVariableTailFile: string };
       };
       const capture = await readFile(join(fixture.rootDir, "subprocess-capture.txt"), "utf8");
       const promptText = await readFile(payload.artifact_paths.promptTextFile, "utf8");
@@ -288,10 +291,14 @@ describe("subprocess backends", () => {
       expect(capture).toContain(payload.artifact_paths.promptTextFile);
       expect(capture).toContain(payload.artifact_paths.promptBundleFile);
       expect(promptText).toContain("Expected output format:");
-      expect(promptStablePrefix).toContain("Stable repo context:");
-      expect(promptVariableTail).toContain("Volatile execution context:");
+      expect(promptStablePrefix).toContain("Expected output format:");
+      expect(promptVariableTail).toContain("Structured context:");
       expect(promptBundle.context.project_name).toMatch(/^spec-embryo-backends-/);
       expect(promptBundle.cache_assembly.strategy).toBe("stable-prefix-and-tail");
+      expect(promptText).toContain("initial-window-fixture");
+      expect(promptVariableTail).toContain("initial-window-fixture");
+      expect(promptStablePrefix).not.toContain("initial-window-fixture");
+      expect(JSON.stringify(promptBundle)).toContain("initial-window-fixture");
     } finally {
       await rm(fixture.rootDir, { recursive: true, force: true });
     }

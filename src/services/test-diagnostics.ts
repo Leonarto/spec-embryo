@@ -18,8 +18,8 @@ export function buildTestDiagnosticsBundle(): TestDiagnosticsBundle {
       {
         id: "git-worktree-state",
         risk: "git",
-        files: ["tests/repository.test.ts", "tests/status.test.ts", "tests/resume-window.test.ts"],
-        rerunCommand: "bun test tests/repository.test.ts tests/status.test.ts tests/resume-window.test.ts",
+        files: ["tests/repository.test.ts", "tests/status.test.ts", "tests/resume-window.test.ts", "tests/harness-context.test.ts"],
+        rerunCommand: "bun test tests/repository.test.ts tests/status.test.ts tests/resume-window.test.ts tests/harness-context.test.ts",
         mitigation: "Use per-test temporary repos, explicit git identity, and committed baselines before assertions.",
       },
       {

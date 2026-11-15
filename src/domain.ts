@@ -149,6 +149,7 @@ export interface ProjectConfig {
 
 export interface GitSnapshot {
   available: boolean;
+  head?: string;
   branch?: string;
   shortStatus: string[];
   lastCommit?: string;
@@ -211,6 +212,26 @@ export interface ResumeContext {
   nextActions: string[];
   git: GitSnapshot;
   changedItems: ChangedItemSummary[];
+  interruption_window?: ResumeWindowSummary;
+  context_snapshot?: ResumeContextSnapshot;
+  warnings?: string[];
+}
+
+export interface ResumeWindowSummary {
+  since: string;
+  resolvedSince: string | null;
+  available: boolean;
+  changedFiles: string[];
+  commits: string[];
+  error?: string;
+}
+
+export interface ResumeContextSnapshot {
+  head: string | null;
+  branch: string | null;
+  dirty: boolean;
+  fingerprint: string;
+  sources: Array<{ id: string; path: string; content_hash: string | null }>;
 }
 
 function fail(message: string): never {

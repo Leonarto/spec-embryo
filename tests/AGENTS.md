@@ -8,3 +8,4 @@ Tests should protect deterministic behavior and source-of-truth parsing.
 - New code should normally land with tests in the same change.
 - Keep fixtures minimal and readable.
 - When a test touches git state, locks, subprocesses, or packaged UI paths, keep it isolated and update `spm tests diagnose` if the sensitive area changes.
+- `harness-context.test.ts` protects selected-source byte provenance, canonical resume fingerprints, committed interruption windows, invariant prompt prefixes, and UTF-8 rendering budgets using isolated temporary repos.

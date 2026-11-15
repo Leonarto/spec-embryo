@@ -12,4 +12,5 @@ This folder is the thin CLI command layer.
 - `memory` commands should validate typed filters, note-scope inputs, and inclusion/exclusion flags in the handler, then delegate retrieval, note mutation, ranking, and rendering to reusable services.
 - `nexus`, `portfolio`, `profile`, `import`, `hooks`, `release`, and `tests` commands should stay thin over deterministic services; keep previews read-only unless a flag like `--apply` is explicit.
 - Keep flags and user-facing behavior consistent with `src/cli.ts`.
+- `resume` builds the shared interruption window and selected-source snapshot before invoking any backend. Unavailable `--since` windows remain readable but prevent explicit spawn before artifacts are written.
 - If a command starts needing multiple helpers or subflows, split it instead of growing one large file.

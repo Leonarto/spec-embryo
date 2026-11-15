@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { parse as parseToml } from "smol-toml";
 import type {
@@ -29,6 +30,7 @@ import { ensureDir, listMarkdownFiles, pathExists, readUtf8, withLock, writeUtf8
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
 import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
 import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
+import { registerDocumentSource } from "./services/document-provenance.ts";
 import { getProjectProfile, isProjectProfileName, writeProjectProfileManifest, type ProjectProfileName } from "./services/profiles.ts";
 import {
   createConfigToml,
@@ -131,9 +133,10 @@ async function loadMarkdownDocument<T>(
   filePath: string,
   parser: (filePath: string, attributes: unknown, body: string) => T,
 ): Promise<T> {
-  const raw = await readUtf8(filePath);
+  const bytes = await readFile(filePath);
+  const raw = bytes.toString("utf8");
   const { attributes, body } = parseTomlFrontmatter(raw);
-  return parser(filePath, attributes, body);
+  return registerDocumentSource(parser(filePath, attributes, body), bytes);
 }
 
 async function loadMarkdownCollection<T>(
@@ -380,6 +383,7 @@ async function readGitSnapshot(rootDir: string): Promise<GitSnapshot> {
 
   return {
     available: true,
+    head: git(rootDir, ["rev-parse", "--verify", "HEAD"]) || undefined,
     branch: git(rootDir, ["branch", "--show-current"]) || undefined,
     shortStatus,
     lastCommit: git(rootDir, ["log", "-1", "--pretty=format:%h %s"]) || undefined,

@@ -121,7 +121,7 @@ web/
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.
-- `resume`: build deterministic resume context for a human, or a prompt bundle for an already-running agent, with optional `--since` interruption-window summaries from git history.
+- `resume`: build deterministic resume context for a human or an already-running agent; `--since <commit>` adds a committed-history interruption window, and `--max-context-bytes` bounds rendered prompt text (32768 UTF-8 bytes by default).
 - `handoff`: write a durable handoff Markdown checkpoint from the current state.
 - `hooks install/plan`: configure bounded local repo-event hook guidance and preview deterministic post-event actions.
 - `release plan/notes/recommend`: assemble release readiness, version-bump guidance, and release-note candidates from managed state.
@@ -156,7 +156,13 @@ When a subprocess backend is enabled, Spec Embryo now gives it a stable launch c
 - variable prompt tail file token: `{prompt_variable_tail_file}`
 - env vars: `SPM_BACKEND_NAME`, `SPM_PROJECT_ROOT`, `SPM_PROMPT_FILE`, `SPM_PROMPT_TEXT_FILE`, `SPM_PROMPT_BUNDLE_FILE`, `SPM_PROMPT_STABLE_PREFIX_FILE`, `SPM_PROMPT_VARIABLE_TAIL_FILE`
 
-That keeps prompt-return and subprocess execution aligned instead of making each backend invent its own prompt packaging, while also separating stable prompt prefixes from more volatile execution tails for backends that can benefit from cache-friendly assembly.
+Prompt-return and subprocess adapters share one bundle and renderer. The stable prefix contains invariant instructions and output-format rules; focus, specs, tasks, context packs, Git observations, and interruption windows live in the variable tail. Each rendered block appears once. This separation does not guarantee a provider cache hit.
+
+`spm resume --backend prompt --json` retains the legacy `resume` and optional `interruption_window` fields and adds `schema_version`, `context_snapshot`, `context_pack`, and deterministic `warnings`. The snapshot exposes full Git HEAD/branch references or null, dirty state, a SHA-256 fingerprint of selected context, and source paths with hashes of the exact loaded bytes. It describes selected context, not an atomic filesystem snapshot; changes outside that selection need not invalidate the fingerprint. Missing source provenance is explicit rather than invented. Reading context works outside Git.
+
+`--since` accepts one Git commit revision, resolved to a SHA before inspection. Its window covers commits through HEAD; staged, unstaged, and untracked changes remain separate in `changed_items`. Invalid revisions, options, ranges, or unavailable history produce an unavailable window during reads and previews, and prevent `--spawn` before artifacts are written. Dates and handoff IDs are not separate revision formats.
+
+`--max-context-bytes` accepts integers from 4096 to 1048576. The limit covers the complete assembled prompt, including prefix and tail, measured in UTF-8 bytes rather than tokens. Oversized text keeps identity/focus and blocked state first, then useful references with omission counts and an expansion command. JSON data stays complete; only rendered prompt fields are bounded. Invalid limits fail with usage exit code 2.
 
 ## What is implemented now
 

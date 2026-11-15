@@ -47,7 +47,7 @@ export function buildSubprocessLaunchPlan(
   context: ResumeContext,
   options: BackendRunOptions,
 ): SubprocessLaunchPlan {
-  const promptBundle = buildPromptBundle(context);
+  const promptBundle = buildPromptBundle(context, options.maxContextBytes);
   const promptBundleText = JSON.stringify(promptBundle, null, 2);
   const promptText = renderPromptBundleText(promptBundle);
   const promptStablePrefixText = promptBundle.cache_assembly.stable_prefix_text;
