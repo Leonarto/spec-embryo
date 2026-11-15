@@ -121,3 +121,19 @@ Pendientes deliberados: no evaluación de rendimiento comparativo Astra/Sol; no 
 ## Decisión técnica incidental enviada al implementador
 
 Para provenance de SPEC-061 P0, WeakMap mínimo es aceptable evitando campos enumerable nuevos en BaseDocument, condicionado a obtener hashes desde documentos canónicos antes de clones/proyecciones. Resolver refs con scope+path; ausencia de provenance implica warning y valor ausente/null, jamás reread o hash del parsed object. No trasladar hash a un clone cuyo contenido cambió. Leer Buffer una vez, hashearlo y decodificar esa misma lectura para parse; re-encode de string puede perder identidad de bytes UTF-8 inválidos. Tests: cargas distintas del mismo path, clone sin provenance, mutación externa posterior y JSON legacy intacto. GitSnapshot.head opcional con full SHA de `rev-parse --verify HEAD`; conservar lastCommit humano, null exterior sin Git; no prometer atomicidad entre Git y archivos.
+
+## Observaciones de los slices revisados
+
+Durante esta ejecución del 2026-11-15, la revisión independiente de cambios congelados produjo casos reproducibles para futuras evals. Son observaciones de implementación y revisión, no un benchmark comparativo de modelos o skills; no hubo grupo de control ni medición que atribuya los hallazgos al modelo elegido. Las dos skills anteriores siguen como pilotos propuestos, sin instalar.
+
+| Slice | Fallo observado | Caso de regresión y resultado |
+|---|---|---|
+| TASK-125 | Abortar requests de datos durante `invalidateAll()` provocaba navegación completa, en vez de conservar datos y anunciar error. | Retirar la acción incompleta del shell y trasladar refresh controlado a TASK-126. El retiro quedó verificado; preservación de foco/scroll/datos ante fallo sigue siendo gate de 126. |
+| TASK-124 | Un padre terminaba con exit 0 mientras un nieto del mismo grupo, sin pipes heredados, seguía vivo; cleanup eliminaba el prompt y su lectura tardía fallaba con ENOENT. | Comprobar el grupo al cierre normal: unknown, artifacts retenidos y lectura tardía exitosa. No matar trabajo de fondo para simular cierre. |
+| TASK-132 | Abrir CLAUDE.md antes de comprobar su tipo bloqueaba la inspección si era un FIFO sin escritor. | Rechazo previo de no-regulares, apertura no bloqueante donde se soporta y validación del descriptor. La revisión verificó también sustitución del archivo por FIFO/symlink entre comprobación y apertura. |
+| TASK-126, servicios | El round-trip de una consulta admitida perdía `option_pageSize=100` y cambiaba requestKey. | Serializar el tamaño admitido; reproducción independiente conserva 100 y la identidad normalizada. |
+| TASK-126, servicios | Comparar fechas como strings invertía el orden cronológico con offsets distintos. | Comparar instantes; fechas inválidas/vacías al final. Fixtures de Tasks y Specs verifican ascendente/descendente. |
+
+Para la equivalencia del índice de TASK-126 se usó además el código real del commit base `1b1d47a` como oráculo: 300 grafos y 10 738 resúmenes coincidieron. Esto evita comparar dos rutas de la implementación nueva y confundir ese acuerdo con compatibilidad histórica. Los hashes de archivos delimitan qué versión fue revisada; cambios posteriores requieren revisar el delta.
+
+Estos casos favorecen evals de resultados observables y fallos concretos: proceso que sigue vivo, archivo que aún puede leerse, navegación real, identidad que sobrevive a serialización y orden temporal correcto. No prueban una mejora global de productividad ni ahorro de coste. La aprobación parcial de servicios de TASK-126 tampoco acredita frontend o rendimiento filesystem/HTTP; su medición de payload fue en memoria.
