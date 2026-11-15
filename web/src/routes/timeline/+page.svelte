@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ViewToolbar from "../../lib/components/ViewToolbar.svelte";
   import { page } from "$app/state";
   import {
     Archive,
@@ -57,15 +58,7 @@
   <title>{dashboard.project.name} Timeline</title>
 </svelte:head>
 
-<section class="view-header">
-  <div class="header-copy">
-    <p class="eyebrow">Deterministic sequence</p>
-    <h3>Compact Gantt</h3>
-  </div>
-  <p class="intro">
-    This denser planning surface keeps dependency order and relative effort deterministic, but compresses the scan path so many more rows can fit on screen without turning into generic dashboard clutter.
-  </p>
-</section>
+<ViewToolbar title="Timeline" count={dashboard.timeline.items.length} />
 
 <AnalysisFilters
   {dashboard}
@@ -309,7 +302,6 @@
 </section>
 
 <style>
-  .view-header,
   .mode-shell,
   .planner-head,
   .planner-row,
@@ -322,7 +314,6 @@
     gap: 1rem;
   }
 
-  .header-copy,
   .mode-copy,
   .group-copy,
   .task-copy,
@@ -332,11 +323,6 @@
     gap: 0.35rem;
   }
 
-  .view-header {
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 1rem;
-  }
 
   .eyebrow,
   .group-id {
@@ -347,26 +333,20 @@
     color: var(--muted);
   }
 
-  h3,
   h4,
   p {
     margin: 0;
   }
 
-  h3,
   h4 {
     font-family: var(--display-font);
   }
 
-  h3 {
-    font-size: clamp(1.55rem, 1.8vw, 2rem);
-  }
 
   h4 {
     font-size: 1.16rem;
   }
 
-  .intro,
   .mode-copy p,
   .timeline-empty,
   .row-notes {
@@ -1084,8 +1064,7 @@
   }
 
   @media (max-width: 980px) {
-    .view-header,
-    .mode-shell {
+      .mode-shell {
       flex-direction: column;
       align-items: start;
     }

@@ -322,3 +322,8 @@ Actualizar `web/AGENTS.md`, `web/src/AGENTS.md`, `web/src/lib/AGENTS.md` y local
 Revisión independiente realizada por Astra. Hallazgos resueltos: U1 separa scope de tareas y estado de specs, progreso global/subconjunto y estados raw/effective; U2 define cierre del inspector conservando query actual y verifica historial tras filtrar; U3 registra alcance confirmado por usuario y defaults de diseño sin exigir otra aprobación. U4 añade conservación del borrador de preguntas ante refresh y conflicto. La revisión final de planificación quedó aprobada tras estas correcciones.
 
 Baseline verificada por el revisor: `bun run web:check` PASS, 0 errores/0 warnings; `bun run check:agents` PASS (17 archivos en esa comprobación). No se ejecutó cobertura ni benchmark de volumen: ≥80% y presupuestos de rendimiento son objetivos de implementación, no resultados obtenidos. No se implementó producto ni prototipo funcional en esta planificación.
+
+
+## Ajuste de secuencia durante implementación (Astra, 2026-11-15)
+
+La revisión de TASK-125 reprodujo navegación completa ante un fallo de `invalidateAll`. La acción nueva de refrescar se retira de P1 y se implementa en P2/TASK-126 sobre DTOs compartidos, con conservación de datos/scroll/foco y aviso de reintento ante error. P1 no acredita refresh in-place; no cambia el objetivo final del revamp.

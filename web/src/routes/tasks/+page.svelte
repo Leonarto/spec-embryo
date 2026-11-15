@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ViewToolbar from "../../lib/components/ViewToolbar.svelte";
   import {
     Blocks,
     CircleCheckBig,
@@ -43,15 +44,7 @@
   <title>{dashboard.project.name} Tasks</title>
 </svelte:head>
 
-<section class="view-header">
-  <div class="header-copy">
-    <p class="eyebrow">Derived work flow</p>
-    <h3>Task Kanban</h3>
-  </div>
-  <p class="intro">
-    Effective task state is deterministic here: dependency-blocked `todo` work moves into the blocked lane, and real `review` tasks must clear review before they are marked done.
-  </p>
-</section>
+<ViewToolbar title="Tasks" count={filteredTaskCount} />
 
 <AnalysisFilters
   {dashboard}
@@ -143,47 +136,20 @@
 </section>
 
 <style>
-  .view-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: end;
-    margin-bottom: 1rem;
-  }
 
-  .header-copy {
-    display: grid;
-    gap: 0.18rem;
-  }
 
-  .eyebrow {
-    margin: 0 0 0.35rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.68rem;
-    color: var(--muted);
-  }
 
-  h3,
   h4 {
     margin: 0;
     font-family: var(--display-font);
   }
 
-  h3 {
-    font-size: clamp(1.55rem, 1.8vw, 2rem);
-  }
 
   h4 {
     font-size: 1.14rem;
     line-height: 1.08;
   }
 
-  .intro {
-    max-width: 34rem;
-    color: var(--muted);
-    line-height: 1.45;
-  }
 
   .board {
     display: grid;
@@ -333,9 +299,5 @@
   }
 
   @media (max-width: 900px) {
-    .view-header {
-      flex-direction: column;
-      align-items: start;
-    }
   }
 </style>

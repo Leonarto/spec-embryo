@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-rail="collapsed">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,10 +12,18 @@
           typeof window.matchMedia === "function"
             ? window.matchMedia("(prefers-color-scheme: dark)").matches
             : null;
-        const mode = normalize(window.localStorage.getItem(key));
+        let stored = null;
+        let rail = "collapsed";
+        try {
+          stored = window.localStorage.getItem(key);
+          const preferences = JSON.parse(window.localStorage.getItem("spm-workspace-v1") || "null");
+          if (preferences?.version === 1 && preferences.rail === "expanded") rail = "expanded";
+        } catch { /* Blocked or corrupt storage falls back to session defaults. */ }
+        const mode = normalize(stored);
         const theme = mode === "dark" || mode === "light" ? mode : prefersDark === false ? "light" : "dark";
         document.documentElement.dataset.colorMode = mode;
         document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.rail = rail;
       })();
     </script>
     %sveltekit.head%

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ViewToolbar from "../../lib/components/ViewToolbar.svelte";
   import { page } from "$app/state";
   import { CircleCheckBig, Gauge, NotebookText, Orbit, Pause, RotateCcw, SlidersHorizontal, Sparkles, TimerReset } from "@lucide/svelte";
   import type { DashboardData } from "../../../../src/services/dashboard.ts";
@@ -56,15 +57,7 @@
   <title>{dashboard.project.name} Specs</title>
 </svelte:head>
 
-<section class="view-header">
-  <div class="header-copy">
-    <p class="eyebrow">Source-aligned intent</p>
-    <h3>Specs View</h3>
-  </div>
-  <p class="intro">
-    Specs stay stable and task-linked here. This view is for seeing intent, current execution weight, and completion shape without losing the narrative layer.
-  </p>
-</section>
+<ViewToolbar title="Specs" count={visibleSpecs.length} />
 
 <AnalysisFilters
   {dashboard}
@@ -156,18 +149,7 @@
 </section>
 
 <style>
-  .view-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: end;
-    margin-bottom: 1rem;
-  }
 
-  .header-copy {
-    display: grid;
-    gap: 0.18rem;
-  }
 
   .eyebrow {
     margin: 0 0 0.35rem;
@@ -177,21 +159,16 @@
     color: var(--muted);
   }
 
-  h3,
   h4 {
     margin: 0;
     font-family: var(--display-font);
   }
 
-  h3 {
-    font-size: clamp(1.55rem, 1.8vw, 2rem);
-  }
 
   h4 {
     font-size: 1.24rem;
   }
 
-  .intro,
   .spec-card p,
   .progress-grid {
     color: var(--muted);
@@ -404,10 +381,6 @@
   }
 
   @media (max-width: 900px) {
-    .view-header {
-      flex-direction: column;
-      align-items: start;
-    }
 
     .spec-grid {
       grid-template-columns: 1fr;

@@ -1,0 +1,3179 @@
+{
+  "browser": "157.0.8103.78",
+  "capturedAt": "2026-11-15T18:44:35.842Z",
+  "checks": [
+    {
+      "name": "Compact rail 56px",
+      "pass": true
+    },
+    {
+      "name": "Expanded rail 184px",
+      "pass": true
+    },
+    {
+      "name": "Rail preference survives reload",
+      "pass": true
+    },
+    {
+      "name": "Keyboard chooses light theme",
+      "pass": true
+    },
+    {
+      "name": "Escape closes preferences and restores focus",
+      "pass": true
+    },
+    {
+      "name": "System follows dark OS",
+      "pass": true
+    },
+    {
+      "name": "System follows light OS",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "dark/1440/tasks: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/1440/specs: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/1440/timeline: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "dark/1440/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/1440/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/1280/: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/1280/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "dark/1280/tasks: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/1280/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/1280/specs: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/1280/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/1280/timeline: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/1280/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "dark/1280/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/1280/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/1280/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/1280/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/768/: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/768/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "dark/768/tasks: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/768/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/768/specs: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/768/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/768/timeline: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/768/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "dark/768/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/768/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/768/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/768/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/390/: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "dark/390/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "dark/390/tasks: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "dark/390/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/390/specs: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "dark/390/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "dark/390/timeline: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "dark/390/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "dark/390/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "dark/390/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "dark/390/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "dark/390/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/1440/: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "light/1440/tasks: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/1440/specs: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/1440/timeline: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "light/1440/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/1440/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/1280/: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/1280/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "light/1280/tasks: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/1280/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/1280/specs: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/1280/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/1280/timeline: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/1280/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "light/1280/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/1280/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/1280/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/1280/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/768/: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/768/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "light/768/tasks: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/768/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/768/specs: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/768/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/768/timeline: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/768/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "light/768/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/768/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/768/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/768/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/390/: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/390/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "light/390/tasks: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/390/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/390/specs: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/390/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "light/390/timeline: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/390/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "light/390/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/390/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "light/390/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/390/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/1440/: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1440/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "system/1440/tasks: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1440/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/1440/specs: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1440/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/1440/timeline: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1440/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "system/1440/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1440/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/1440/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1440/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/1280/: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/1280/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "system/1280/tasks: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/1280/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/1280/specs: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/1280/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/1280/timeline: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/1280/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "system/1280/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/1280/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/1280/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/1280/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/768/: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/768/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "system/768/tasks: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/768/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/768/specs: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/768/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/768/timeline: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/768/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "system/768/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/768/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/768/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/768/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/390/: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/390/: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/: one active parent",
+      "pass": true,
+      "detail": [
+        "Overview"
+      ]
+    },
+    {
+      "name": "system/390/tasks: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/390/tasks: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/tasks: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/390/specs: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/390/specs: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/specs: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "system/390/timeline: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/390/timeline: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/timeline: one active parent",
+      "pass": true,
+      "detail": [
+        "Timeline"
+      ]
+    },
+    {
+      "name": "system/390/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/390/tasks/TASK-115: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/tasks/TASK-115: one active parent",
+      "pass": true,
+      "detail": [
+        "Tasks"
+      ]
+    },
+    {
+      "name": "system/390/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/390/specs/SPEC-057: compact topbar",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/specs/SPEC-057: one active parent",
+      "pass": true,
+      "detail": [
+        "Specs"
+      ]
+    },
+    {
+      "name": "Manual refresh announces completion",
+      "pass": true,
+      "superseded": true
+    },
+    {
+      "name": "No-JS navigation and content remain useful",
+      "pass": true
+    },
+    {
+      "name": "Blocked storage keeps preferences operable",
+      "pass": true
+    },
+    {
+      "name": "Reduced motion removes transitions",
+      "pass": true
+    }
+  ],
+  "layouts": [
+    {
+      "mode": "dark",
+      "route": "/",
+      "theme": "dark",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks",
+      "theme": "dark",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs",
+      "theme": "dark",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/timeline",
+      "theme": "dark",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks/TASK-115",
+      "theme": "dark",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs/SPEC-057",
+      "theme": "dark",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/",
+      "theme": "dark",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks",
+      "theme": "dark",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs",
+      "theme": "dark",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/timeline",
+      "theme": "dark",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks/TASK-115",
+      "theme": "dark",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs/SPEC-057",
+      "theme": "dark",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/",
+      "theme": "dark",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks",
+      "theme": "dark",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs",
+      "theme": "dark",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/timeline",
+      "theme": "dark",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks/TASK-115",
+      "theme": "dark",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs/SPEC-057",
+      "theme": "dark",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/",
+      "theme": "dark",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks",
+      "theme": "dark",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs",
+      "theme": "dark",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/timeline",
+      "theme": "dark",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks/TASK-115",
+      "theme": "dark",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs/SPEC-057",
+      "theme": "dark",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 1440,
+      "documentWidth": 1440,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 1280,
+      "documentWidth": 1280,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 768,
+      "documentWidth": 768,
+      "navWidth": 56,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Overview"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/timeline",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Timeline"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/tasks/TASK-115",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Tasks"
+      ]
+    },
+    {
+      "mode": "system",
+      "route": "/specs/SPEC-057",
+      "theme": "light",
+      "width": 390,
+      "documentWidth": 390,
+      "navWidth": 390,
+      "headerHeight": 44,
+      "active": [
+        "Specs"
+      ]
+    }
+  ],
+  "contrast": [
+    {
+      "mode": "dark",
+      "route": "/",
+      "checked": 217,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks",
+      "checked": 1081,
+      "failures": [],
+      "skipped": [
+        "P.eyebrow svelte-121yhyt",
+        "H4.svelte-121yhyt",
+        "P.svelte-121yhyt",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-121yhyt",
+        "SPAN.svelte-121yhyt",
+        "SMALL.svelte-121yhyt",
+        "A.ghost-button svelte-121yhyt"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/specs",
+      "checked": 888,
+      "failures": [],
+      "skipped": [
+        "P.eyebrow svelte-121yhyt",
+        "H4.svelte-121yhyt",
+        "P.svelte-121yhyt",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "LEGEND.svelte-jqookv",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-121yhyt",
+        "SPAN.svelte-121yhyt",
+        "SMALL.svelte-121yhyt",
+        "A.ghost-button svelte-121yhyt"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/timeline",
+      "checked": 104,
+      "failures": [],
+      "skipped": [
+        "P.eyebrow svelte-121yhyt",
+        "H4.svelte-121yhyt",
+        "P.svelte-121yhyt",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-121yhyt",
+        "SPAN.svelte-121yhyt",
+        "SMALL.svelte-121yhyt",
+        "A.ghost-button svelte-121yhyt",
+        "P.group-id svelte-1fjec68",
+        "SPAN.mini-pill neutral svelte-1fjec68",
+        "SPAN.mini-pill status active svelte-1fjec68",
+        "A.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "P.group-id svelte-1fjec68",
+        "SPAN.mini-pill neutral svelte-1fjec68",
+        "SPAN.mini-pill status active svelte-1fjec68",
+        "A.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68"
+      ]
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks/TASK-115",
+      "checked": 50,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "dark",
+      "route": "/specs/SPEC-057",
+      "checked": 95,
+      "failures": [],
+      "skipped": [
+        "BUTTON.primary-button svelte-1ecouy4"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/",
+      "checked": 217,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "light",
+      "route": "/tasks",
+      "checked": 1081,
+      "failures": [],
+      "skipped": [
+        "P.eyebrow svelte-121yhyt",
+        "H4.svelte-121yhyt",
+        "P.svelte-121yhyt",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-121yhyt",
+        "SPAN.svelte-121yhyt",
+        "SMALL.svelte-121yhyt",
+        "A.ghost-button svelte-121yhyt"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/specs",
+      "checked": 888,
+      "failures": [],
+      "skipped": [
+        "P.eyebrow svelte-121yhyt",
+        "H4.svelte-121yhyt",
+        "P.svelte-121yhyt",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "LEGEND.svelte-jqookv",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-121yhyt",
+        "SPAN.svelte-121yhyt",
+        "SMALL.svelte-121yhyt",
+        "A.ghost-button svelte-121yhyt"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/timeline",
+      "checked": 104,
+      "failures": [],
+      "skipped": [
+        "P.eyebrow svelte-121yhyt",
+        "H4.svelte-121yhyt",
+        "P.svelte-121yhyt",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "STRONG.svelte-f5d4t0",
+        "SMALL.svelte-f5d4t0",
+        "LEGEND.svelte-121yhyt",
+        "SPAN.summary-label svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-nmgeyz",
+        "SMALL.svelte-nmgeyz",
+        "STRONG.svelte-121yhyt",
+        "SPAN.svelte-121yhyt",
+        "SMALL.svelte-121yhyt",
+        "A.ghost-button svelte-121yhyt",
+        "P.group-id svelte-1fjec68",
+        "SPAN.mini-pill neutral svelte-1fjec68",
+        "SPAN.mini-pill status active svelte-1fjec68",
+        "A.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "P.group-id svelte-1fjec68",
+        "SPAN.mini-pill neutral svelte-1fjec68",
+        "SPAN.mini-pill status active svelte-1fjec68",
+        "A.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68",
+        "SPAN.svelte-1fjec68"
+      ]
+    },
+    {
+      "mode": "light",
+      "route": "/tasks/TASK-115",
+      "checked": 50,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "light",
+      "route": "/specs/SPEC-057",
+      "checked": 95,
+      "failures": [],
+      "skipped": [
+        "BUTTON.primary-button svelte-1ecouy4"
+      ]
+    }
+  ],
+  "reviewCorrection": {
+    "decision": "Refresh surface deferred to TASK-126 by Astra after network-abort regression; historical successful-refresh assertion is superseded.",
+    "currentEvidence": "p1-refresh-review-regression.json"
+  }
+}

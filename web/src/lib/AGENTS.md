@@ -1,12 +1,10 @@
 # AGENTS
 
-Shared web-ui helpers and components live here.
+Shared UI helpers and components.
 
-- Put reusable view-only pieces here once multiple routes need them.
-- Keep deterministic project-memory parsing in the root product services, not in this folder.
-- Shared analytical controls should stay consistent across Specs, Gantt, and future detail views.
-- Keep shared detail-page presentation helpers here once both spec and task routes need them.
-- Shared dropdown controls should behave like overlays anchored to the trigger, not expand inline and reflow surrounding layout.
-- Diagram renderers belong here too: treat Mermaid as a view-layer enhancement over fenced blocks parsed in root services, and keep non-Mermaid fenced blocks readable as code.
-- If Mermaid theme logic grows, keep the token-to-Mermaid mapping in a helper here so dark/light behavior can be tested without browser-only route code.
-- Theme helpers and color-mode controls should live here too so mode resolution, persistence keys, and shell selectors stay consistent across the workspace.
+- Create reusable presentation here; domain parsing and derivations belong in root services.
+- `theme.ts` resolves color modes; `workspace-preferences.ts` validates versioned rail preferences and parent route matching.
+- `components/IconButton.svelte` requires a label; `ViewToolbar.svelte` aligns route titles/counts.
+- Dropdowns are anchored overlays and must not reflow their surroundings.
+- Detail presentation and analytical controls stay shared across entity types/routes.
+- `DocumentBody` renders root-parsed blocks; Mermaid is a view enhancement with tested token mapping in `mermaid-theme.ts`.
