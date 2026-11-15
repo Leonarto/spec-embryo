@@ -2,12 +2,13 @@ import { fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { answerSpecOpenQuestions, loadProjectContext } from "../../../../../src/repository.ts";
 import { buildSpecAnswerEvaluation } from "../../../../../src/services/spec-answer-evaluation.ts";
-import { buildSpecDetailData } from "../../../../../src/services/details.ts";
+import { buildSpecDetailData, buildSpecDetailFromContext } from "../../../../../src/services/details.ts";
 import { resolveProjectRoot } from "../../../lib/server/project-root.ts";
+import { getWorkspaceRequestSource } from "../../../lib/server/workspace.ts";
 
-export const load: PageServerLoad = async ({ params }) => {
-  const rootDir = resolveProjectRoot();
-  const detail = await buildSpecDetailData(rootDir, params.specId);
+export const load: PageServerLoad = async ({ params, locals }) => {
+  const source = await getWorkspaceRequestSource(locals);
+  const detail = buildSpecDetailFromContext(source.context, params.specId, source.analysis);
 
   return {
     detail,

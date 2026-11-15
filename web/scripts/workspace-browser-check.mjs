@@ -76,7 +76,8 @@ export async function verifyWorkspaceShell(page, { baseURL = 'http://127.0.0.1:5
   }
   await page.setViewportSize({width:1440,height:900});
   await page.goto(baseURL);
-  check('Refresh surface waits for controlled loading in P2', await page.getByRole('button',{name:'Refresh workspace',exact:true}).count() === 0);
+  await page.getByRole('button',{name:'Refresh workspace',exact:true}).waitFor();
+  check('Active Overview registers controlled refresh', await page.getByRole('button',{name:'Refresh workspace',exact:true}).count() === 1);
   const context = await page.context().browser().newContext({ javaScriptEnabled: false, viewport:{width:1280,height:720} });
   const ssr = await context.newPage();
   await ssr.goto(baseURL+'/tasks');

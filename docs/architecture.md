@@ -210,13 +210,20 @@ This boundary keeps Spec Embryo useful across providers while avoiding a fragile
 
 ## Local visual server
 
-The first local visual server lives under `web/` and is launched through `spm ui`.
+The SvelteKit workspace lives under `web/` and is launched through `spm ui`. It renders canonical managed memory through shared services; the spec-question action is its sole file mutation.
 
-- SvelteKit handles the presentation layer and local server lifecycle.
-- The dashboard loads its data from shared deterministic services in `src/services/`.
-- The UI is mostly read-only in v1, with a narrow deterministic mutation path for answering spec open questions.
-- The first mutation flow lives on spec detail pages: users can answer open questions in batch, write those answers back into the spec deterministically, and receive continuation guidance without turning the web app into a second source of truth.
-- The web layer should remain a view over repo memory, not a replacement source of truth.
+- `workspace-query.ts` normalizes URL facets, archive scope, stable sorting and pagination. Specs keep canonical status separate from the task scope used for progress. Lifecycle windows use completion/cancellation timestamps. Legacy analytical links retain archive behavior with an explicit notice.
+- `workspace.ts` projects bounded task/spec pages, searchable spec options, Overview signals, or timeline groups. Lists contain no document bodies, foreign-view arrays, or eager full spec catalog. The existing `buildDashboardData` facade keeps its public defaults; list/detail paths do not invoke its status/critical-path/timeline work.
+- `engine.buildTaskAnalysisIndex` builds canonical ID, unmet-dependency and direct-dependent indexes in O(V+E). Duplicate dependency references count a dependent once; only `done` satisfies a dependency. This does not replace the deferred critical-path/timeline algorithms.
+- `lib/server/workspace.ts` stores a Promise on request locals before awaiting it, so layout and page reuse one canonical context/index. There is no global project cache. Detail builders accept this loaded source while root-directory wrappers remain compatible. Filesystem consistency is best effort, not transactional.
+- Layout sends project/git only. SSR page loads and read-only GET `/workspace-data` call the same discriminated route builder. Its no-store envelope includes schemaVersion 1, route, requestKey, revision, generatedAt, shell and the route DTO. `/workspace-options` returns searched/paged options plus selected IDs, not all titles. An omitted oversized option label carries a visible reason and navigable ID.
+- Request keys describe syntax-normalized URL intention before dataset-dependent ID filtering/page clamping. Revisions fingerprint loaded inputs/projections and exclude wall clock. Effective pagination and unavailable spec IDs are explicit metadata; refresh preserves URL intention, announces clamping/missing filters and accepts records that reappear.
+- The Svelte route resource initializes from SSR, owns cancellation/generation/sequence/deadline, and registers with the shell. Controlled fetch refresh commits shell/data atomically; failures keep the prior snapshot with `Datos anteriores` and Retry. Visible focus refetch is debounced 150 ms after more than 5 s since the last attempt. It never uses SvelteKit invalidation/navigation as a failure-preserving transport.
+- Canonical details do not register refresh before drawer/draft-aware support. Their existing question form still submits to `answerOpenQuestions`, shared repository rewriting and evaluation. No-JS filters, options, pagination, detail links and canonical question POST remain usable.
+
+Legacy canonical missing-detail GET currently preserves HTTP 200 with `found:false` and its existing not-found view. SPEC-062 P4 must introduce coherent full-page HTTP 404 and an inspector-local missing state without dropping the list.
+
+The current list presentation is paginated Board/cards. The spreadsheet table, inspector, draft guards and timeline volume algorithms are subsequent SPEC-062 slices. Measurements and browser evidence live in `web/verification/`.
 
 ## AGENTS budget policy
 

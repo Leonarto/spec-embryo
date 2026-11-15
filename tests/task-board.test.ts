@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { countKanbanTasks, filterKanbanBySpecs, matchesSelectedSpecs } from "../web/src/lib/task-board.ts";
+import { countKanbanTasks, filterKanbanBySpecs, groupTaskPage, matchesSelectedSpecs } from "../web/src/lib/task-board.ts";
 import type { DashboardKanbanColumn, DashboardTaskCard } from "../src/services/dashboard.ts";
 
 function createTask(overrides: Partial<DashboardTaskCard>): DashboardTaskCard {
@@ -20,6 +20,14 @@ function createTask(overrides: Partial<DashboardTaskCard>): DashboardTaskCard {
 }
 
 describe("task board helpers", () => {
+  test("groups only the received page without reordering it and preserves cancelled lane semantics", () => {
+    const page = [createTask({id:"TASK-B",effectiveStatus:"done"}),createTask({id:"TASK-A",effectiveStatus:"cancelled"}),createTask({id:"TASK-C",rawStatus:"todo",effectiveStatus:"blocked"})];
+    const columns = groupTaskPage(page);
+    expect(columns.map(column=>column.id)).toEqual(["blocked","todo","in_progress","review","done"]);
+    expect(columns.find(column=>column.id==="done")?.tasks.map(task=>task.id)).toEqual(["TASK-B","TASK-A"]);
+    expect(columns.find(column=>column.id==="blocked")?.tasks.map(task=>task.id)).toEqual(["TASK-C"]);
+    expect(countKanbanTasks(columns)).toBe(page.length);
+  });
   test("matches any selected spec and all tasks when no filter exists", () => {
     expect(matchesSelectedSpecs(createTask({ specIds: ["SPEC-001", "SPEC-002"] }), [])).toBe(true);
     expect(matchesSelectedSpecs(createTask({ specIds: ["SPEC-001", "SPEC-002"] }), ["SPEC-002"])).toBe(true);

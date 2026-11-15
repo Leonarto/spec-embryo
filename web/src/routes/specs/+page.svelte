@@ -2,15 +2,19 @@
   import ViewToolbar from "../../lib/components/ViewToolbar.svelte";
   import { page } from "$app/state";
   import { CircleCheckBig, Gauge, NotebookText, Orbit, Pause, RotateCcw, SlidersHorizontal, Sparkles, TimerReset } from "@lucide/svelte";
-  import type { DashboardData } from "../../../../src/services/dashboard.ts";
+  import type { WorkspaceEnvelope } from "../../../../src/services/workspace.ts";
+  import ListPager from "../../lib/components/ListPager.svelte";
+  import { useWorkspaceResource } from "../../lib/workspace/resource.svelte.ts";
   import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
   import MultiSelectDropdown from "../../lib/components/MultiSelectDropdown.svelte";
 
   let { data } = $props();
-  const dashboard = $derived(data.dashboard as DashboardData);
-  const selectedSpecIds = $derived(new Set(dashboard.analysis.selectedSpecIds));
-  const currentPath = $derived(page.url.pathname);
-  const currentSearch = $derived(page.url.searchParams);
+  const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'specs'>);
+  const workspace=$derived(resource.snapshot);
+  const dashboard=$derived(workspace.data);
+  const visibleSpecs=$derived(dashboard.result.rows);
+  const selectedSpecIds=$derived(new Set(dashboard.filters.selectedSpecIds));
+  const selectedStatuses=$derived(dashboard.result.normalizedQuery.statuses);
 
   const statusIcons = {
     proposed: Sparkles,
@@ -20,14 +24,6 @@
     archived: NotebookText,
   } as const;
 
-  const specStatusOrder = {
-    active: 0,
-    proposed: 1,
-    paused: 2,
-    done: 3,
-    archived: 4,
-  } as const;
-
   const statusOptions = [
     { value: "active", label: "Active", description: "Live product intent still being extended or executed." },
     { value: "proposed", label: "Proposed", description: "Planned work that is drafted but not yet activated." },
@@ -35,49 +31,25 @@
     { value: "done", label: "Done", description: "Completed slices that remain as durable project history." },
     { value: "archived", label: "Archived", description: "Historical specs that are no longer part of the active product arc." },
   ] as const;
-
-  const selectedStatuses = $derived(
-    Array.from(new Set(currentSearch.getAll("spec_status").map((status) => status.trim()).filter((status) => status in specStatusOrder))),
-  );
-  const selectedStatusSet = $derived(new Set(selectedStatuses));
-  const visibleSpecs = $derived(
-    dashboard.specs
-      .filter((spec) => (dashboard.analysis.selectedSpecIds.length === 0 ? true : selectedSpecIds.has(spec.id)))
-      .filter((spec) => (selectedStatuses.length === 0 ? true : selectedStatusSet.has(spec.status)))
-      .sort(
-        (left, right) =>
-          specStatusOrder[left.status as keyof typeof specStatusOrder] -
-            specStatusOrder[right.status as keyof typeof specStatusOrder] ||
-          left.id.localeCompare(right.id),
-      ),
-  );
 </script>
 
 <svelte:head>
-  <title>{dashboard.project.name} Specs</title>
+  <title>{workspace.shell.project.name} Specs</title>
 </svelte:head>
 
-<ViewToolbar title="Specs" count={visibleSpecs.length} />
+<ViewToolbar title="Specs" count={dashboard.result.totalMatching} />
 
-<AnalysisFilters
-  {dashboard}
-  title="Spec slice filters"
-  detail="Use one or more specs, lifecycle windows, and spec states to narrow the intent surface. Specs stay ordered from active work through historical work."
-  resultCount={visibleSpecs.length}
-  resultLabel="specs in the current view"
-  hasActiveFilters={dashboard.analysis.hasActiveFilters || selectedStatuses.length > 0}
-  inactiveDetail="Without filters, the full spec inventory stays visible in status-first order."
-  activeDetail="Analytical spec and state filters are active."
-  clearHref={currentPath}
->
-  {#snippet extraField()}
+<AnalysisFilters filters={dashboard.filters} route="specs" title="Spec filters" resultCount={dashboard.result.totalMatching} resultLabel="matching specs across all pages">
+  {#snippet extraField(formId, resetKey)}
     <fieldset class="field-card">
       <legend>
         <SlidersHorizontal size={14} strokeWidth={1.9} />
         Spec states
       </legend>
       <MultiSelectDropdown
-        name="spec_status"
+        name="status"
+        form={formId}
+        {resetKey}
         options={statusOptions}
         selectedValues={selectedStatuses}
         buttonLabel="Choose states"
@@ -86,6 +58,7 @@
     </fieldset>
   {/snippet}
 </AnalysisFilters>
+<ListPager result={dashboard.result} route="specs" />
 
 <section class="spec-grid-shell">
   {#if visibleSpecs.length === 0}
@@ -95,9 +68,9 @@
     </div>
   {:else}
     <div class="spec-grid">
-      {#each visibleSpecs as spec}
+      {#each visibleSpecs as spec (spec.id)}
         {@const StatusIcon = statusIcons[spec.status as keyof typeof statusIcons] ?? NotebookText}
-        <article class:selected={selectedSpecIds.has(spec.id)} class="spec-card">
+        <article class:selected={selectedSpecIds.has(spec.id)} class="spec-card" data-entity-id={spec.id}>
           <div class="card-head">
             <div class="card-copy">
               <div class="card-topline">
@@ -120,12 +93,12 @@
             <div class="progress-copy">
               <div class="mini-head">
                 <Gauge size={14} strokeWidth={1.9} />
-                <span>Completion</span>
+                <span>{dashboard.progressIsSubset ? "Completion · subset" : "Global completion"}</span>
               </div>
               <strong>{Math.round(spec.progress.completionRatio * 100)}%</strong>
             </div>
             <div class="progress-strip">
-              <div class="progress-bar" style={`width: ${Math.max(spec.progress.completionRatio * 100, 6)}%`}></div>
+              <div class="progress-bar" style={`width: ${Math.max(spec.progress.completionRatio * 100, 0)}%`}></div>
             </div>
           </div>
 

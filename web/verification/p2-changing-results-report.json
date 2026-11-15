@@ -1,0 +1,54 @@
+{
+  "capturedAt": "2026-11-15T19:55:53.280Z",
+  "scope": "Browser integration with controlled fixture envelopes; no project files mutated.",
+  "checks": [
+    {
+      "name": "Page clamp accepts refreshed data without rewriting URL",
+      "pass": true
+    },
+    {
+      "name": "Removed focused entity restores focus to surviving entity",
+      "pass": true,
+      "detail": {
+        "tag": "A",
+        "id": "TASK-127"
+      }
+    },
+    {
+      "name": "Removal is announced",
+      "pass": true
+    },
+    {
+      "name": "Same page intention also accepts an empty result",
+      "pass": true
+    },
+    {
+      "name": "A reappearing requested page is accepted with the same URL",
+      "pass": true
+    },
+    {
+      "name": "spec=SPEC-057&spec=SPEC-058: missing spec produces visible warning",
+      "pass": true
+    },
+    {
+      "name": "spec=SPEC-057&spec=SPEC-058: refresh preserves requested filters in URL",
+      "pass": true
+    },
+    {
+      "name": "spec=SPEC-057&spec=SPEC-058: reappearing spec reapplies without navigation",
+      "pass": true
+    },
+    {
+      "name": "spec=SPEC-057: missing spec produces visible warning",
+      "pass": true
+    },
+    {
+      "name": "spec=SPEC-057: refresh preserves requested filters in URL",
+      "pass": true
+    },
+    {
+      "name": "spec=SPEC-057: reappearing spec reapplies without navigation",
+      "pass": true
+    }
+  ]
+}

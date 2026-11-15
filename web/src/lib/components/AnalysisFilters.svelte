@@ -1,297 +1,61 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import { Filter, Layers3, RotateCcw, SlidersHorizontal } from "@lucide/svelte";
   import type { Snippet } from "svelte";
-  import type { DashboardData, DashboardTimeWindow } from "../../../../src/services/dashboard.ts";
-  import MultiSelectDropdown from "./MultiSelectDropdown.svelte";
+  import type { WorkspaceFilterData } from "../../../../src/services/workspace.ts";
+  import { normalizeViewQuery,serializeViewQuery,type WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
   import SelectDropdown from "./SelectDropdown.svelte";
-
-  let {
-    dashboard,
-    title = "Analysis filters",
-    detail = "Slice the analytical views by spec set and lifecycle period.",
-    eyebrow = "Analytical slice",
-    showTimeWindow = true,
-    resultCount = dashboard.analysis.filteredTaskCount,
-    resultLabel = "tasks in the current analytical slice",
-    hasActiveFilters = dashboard.analysis.hasActiveFilters,
-    inactiveDetail = "Without analytical filters, archived tasks stay hidden from active-flow views.",
-    activeDetail = "Archived tasks are included while filters are active.",
-    clearHref = "",
-    extraField,
-  } = $props<{
-    dashboard: DashboardData;
-    title?: string;
-    detail?: string;
-    eyebrow?: string;
-    showTimeWindow?: boolean;
-    resultCount?: number;
-    resultLabel?: string;
-    hasActiveFilters?: boolean;
-    inactiveDetail?: string;
-    activeDetail?: string;
-    clearHref?: string;
-    extraField?: Snippet;
-  }>();
-
-  const timeWindows: Array<{ value: DashboardTimeWindow; label: string; description: string }> = [
-    { value: "7d", label: "Last 7 days", description: "Only recently completed or cancelled work." },
-    { value: "30d", label: "Last 30 days", description: "A broader recent delivery slice." },
-    { value: "90d", label: "Last 90 days", description: "A quarterly view of lifecycle history." },
-  ];
-
-  const specOptions = $derived(
-    dashboard.analysis.availableSpecs.map((spec: DashboardData["analysis"]["availableSpecs"][number]) => ({
-      value: spec.id,
-      label: spec.id,
-      description: spec.title,
-    })),
-  );
-
-  const currentPath = $derived(page.url.pathname);
-
-  async function applyFilters(event: Event): Promise<void> {
-    const form = event.currentTarget as HTMLFormElement;
-    const formData = new FormData(form);
-    const searchParams = new URLSearchParams();
-
-    for (const [key, value] of formData.entries()) {
-      if (typeof value !== "string" || value.length === 0) {
-        continue;
-      }
-
-      searchParams.append(key, value);
-    }
-
-    const search = searchParams.toString();
-    await goto(search.length > 0 ? `${currentPath}?${search}` : currentPath, {
-      keepFocus: true,
-      noScroll: true,
-      replaceState: true,
-    });
-  }
+  import SpecOptionsPicker from "./SpecOptionsPicker.svelte";
+  let { filters,route,title='Filters',detail='',showTimeWindow=true,resultCount,resultLabel='matching records',extraField }: {
+    filters:WorkspaceFilterData;route:WorkspaceRoute;title?:string;detail?:string;showTimeWindow?:boolean;resultCount:number;resultLabel?:string;extraField?:Snippet<[string,string]>;
+  }=$props();
+  const formId='workspace-filters';
+  let clearEpoch=$state(0);
+  const resetKey=$derived(JSON.stringify([page.url.href,clearEpoch]));
+  const timeWindows=[{value:'7d',label:'Last 7 days',description:'Completed or cancelled lifecycle timestamp.'},{value:'30d',label:'Last 30 days',description:'Completed or cancelled lifecycle timestamp.'},{value:'90d',label:'Last 90 days',description:'Completed or cancelled lifecycle timestamp.'}];
+  const query=$derived(normalizeViewQuery(route,page.url.searchParams));
+  const preserved=$derived.by(()=>{
+    const params=serializeViewQuery(query);
+    for(const name of ['spec','q'])params.delete(name);
+    if(route==='specs'){params.delete('status');params.delete('spec_status');}
+    if(showTimeWindow)params.delete('window');
+    if(route==='tasks'||route==='specs')params.set('page','1');
+    if(route==='tasks'||route==='timeline')params.set('scope',filters.scope);else if(route==='specs')params.set('taskScope',filters.scope);
+    return [...params.entries()];
+  });
+  const clearHref=$derived.by(()=>{
+    const clean=normalizeViewQuery(route,new URLSearchParams());
+    if(query.inspect){clean.inspect=query.inspect;clean.section=query.section;}
+    clean.simple=query.simple;
+    return `${page.url.pathname}?${serializeViewQuery(clean)}`;
+  });
 </script>
-
-<section class="filters-shell">
-  <div class="filters-copy">
-    <div class="copy-head">
-      <span class="icon-pill">
-        <Filter size={15} strokeWidth={1.9} />
-      </span>
-      <div>
-        <p class="eyebrow">{eyebrow}</p>
-        <h4>{title}</h4>
-      </div>
-    </div>
-    <p>{detail}</p>
-  </div>
-
-  <form class="filters-form" method="GET" action={currentPath} onchange={applyFilters}>
-    <div class="field-grid">
-      <fieldset class="field-card">
-        <legend>
-          <Layers3 size={14} strokeWidth={1.9} />
-          Specs
-        </legend>
-        <MultiSelectDropdown
-          name="spec"
-          options={specOptions}
-          selectedValues={dashboard.analysis.selectedSpecIds}
-          buttonLabel="Choose specs"
-          emptyLabel="All specs"
-        />
-      </fieldset>
-
-      {#if showTimeWindow}
-        <fieldset class="field-card field-card-select">
-          <legend>
-            <SlidersHorizontal size={14} strokeWidth={1.9} />
-            Time window
-          </legend>
-          <SelectDropdown
-            name="window"
-            options={timeWindows}
-            selectedValue={dashboard.analysis.timeWindow ?? ""}
-            buttonLabel="Choose window"
-            emptyLabel="All lifecycle history"
-          />
-        </fieldset>
-      {/if}
-
-      {@render extraField?.()}
-    </div>
-
-    <div class="filters-footer">
-      <div class="result-copy">
-        <strong>{resultCount}</strong>
-        <span>{resultLabel}</span>
-        {#if hasActiveFilters}
-          <small>{activeDetail}</small>
-        {:else}
-          <small>{inactiveDetail}</small>
-        {/if}
-      </div>
-
-      <div class="button-row">
-        <a class="ghost-button" href={clearHref || currentPath}>
-          <RotateCcw size={14} strokeWidth={1.9} />
-          Clear
-        </a>
-      </div>
-    </div>
+<section class="filters-shell" aria-label={title}>
+  <div class="filters-heading"><strong>{title}</strong><span>{resultCount} {resultLabel}</span></div>
+  {#if detail}<p class="filter-detail">{detail}</p>{/if}
+  <form id={formId} method="GET" action={page.url.pathname}>
+    {#each preserved as [name,value]}<input type="hidden" {name} {value} />{/each}
   </form>
+  <div class="field-grid">
+    {#if route==='tasks'||route==='specs'}<label class="search-label">Search{#key resetKey}<input type="search" name="q" form={formId} value={query.list?.q??''} placeholder="ID, title or summary" />{/key}</label>{/if}
+    <SpecOptionsPicker {resetKey} seedQuery={query.options} initial={filters.options} selectedValues={filters.selectedSpecIds} filterForm={formId} {route} />
+    {#if showTimeWindow}<SelectDropdown name="window" form={formId} {resetKey} options={timeWindows} selectedValue={filters.timeWindow??''} buttonLabel="Lifecycle window" emptyLabel="All lifecycle history" />{/if}
+    {@render extraField?.(formId,resetKey)}
+  </div>
+  <div class="filter-actions"><button type="submit" form={formId}>Apply filters</button><a href={clearHref} onclick={()=>{clearEpoch++;}}>Clear filters</a><span>{filters.scope==='unarchived'?'Not archived':filters.scope==='archived'?'Archived tasks':'All tasks, including archive'}</span>{#if filters.timeWindow}<span>Lifecycle: {filters.timeWindow}</span>{/if}{#if filters.legacyArchive}<span class="legacy-chip">Incluye archivo · enlace anterior</span>{/if}</div>
+  {#if filters.unavailableSpecIds.length}<p class="unavailable" role="status">No se pudieron aplicar estos filtros: {filters.unavailableSpecIds.join(', ')}. {filters.selectedSpecIds.length ? 'Se aplican los filtros de spec disponibles.' : 'Se muestran resultados sin filtro de spec.'}</p>{/if}
 </section>
-
 <style>
-  .filters-shell {
-    display: grid;
-    gap: 0.85rem;
-    margin-bottom: 1rem;
-    padding: 0.9rem;
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--line);
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--surface-hero) 96%, transparent),
-      color-mix(in srgb, var(--surface-card-soft) 94%, transparent)
-    );
-    box-shadow: var(--shadow);
-  }
-
-  .filters-copy,
-  .filters-form,
-  .field-grid {
-    display: grid;
-    gap: 0.7rem;
-  }
-
-  .copy-head,
-  .filters-footer,
-  .button-row,
-  legend {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .filters-footer {
-    justify-content: space-between;
-    gap: 0.85rem;
-    flex-wrap: wrap;
-  }
-
-  .copy-head {
-    align-items: start;
-  }
-
-  .icon-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.05rem;
-    height: 2.05rem;
-    border-radius: 0.85rem;
-    border: 1px solid var(--line);
-    background: var(--surface-interactive);
-    color: var(--muted-soft);
-    flex-shrink: 0;
-  }
-
-  .eyebrow {
-    margin: 0 0 0.22rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.68rem;
-    color: var(--muted);
-  }
-
-  h4,
-  p,
-  fieldset,
-  legend {
-    margin: 0;
-  }
-
-  h4 {
-    font-family: var(--display-font);
-    font-size: 1.02rem;
-  }
-
-  p,
-  .result-copy span,
-  .result-copy small {
-    color: var(--muted);
-    line-height: 1.45;
-  }
-
-  .field-grid {
-    grid-template-columns: minmax(0, 1.65fr) repeat(2, minmax(13rem, 0.9fr));
-  }
-
-  .field-grid:has(> :only-child) {
-    grid-template-columns: 1fr;
-  }
-
-  .field-card {
-    display: grid;
-    gap: 0.55rem;
-    min-width: 0;
-    padding: 0.72rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    background: var(--surface-card-soft);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .field-card-select {
-    align-content: start;
-  }
-
-  legend,
-  legend {
-    padding: 0;
-    color: var(--muted-soft);
-    font-size: 0.78rem;
-    font-weight: 600;
-  }
-
-  .ghost-button {
-    border-radius: 999px;
-    border: 1px solid var(--line-strong);
-    background: var(--surface-interactive);
-    color: var(--ink);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .result-copy {
-    display: grid;
-    gap: 0.08rem;
-  }
-
-  .result-copy strong {
-    font-family: var(--display-font);
-    font-size: 1.08rem;
-    line-height: 1;
-  }
-
-  .button-row {
-    flex-wrap: wrap;
-    justify-content: end;
-  }
-
-  .ghost-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.42rem;
-    padding: 0.62rem 0.88rem;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  @media (max-width: 980px) {
-    .field-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+  .filters-shell { margin-bottom:.75rem;padding:.75rem;border:1px solid var(--border-subtle);border-radius:.25rem;background:var(--surface); }
+  .filters-heading { display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.5rem; }
+  .filters-heading>span,.filter-detail { color:var(--text-muted);font-size:.75rem; }
+  .filter-detail { margin:.25rem 0 .5rem; }
+  .field-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.5rem;align-items:end; }
+  .search-label { display:grid;gap:.25rem;color:var(--text-muted);font-size:.75rem; }
+  input[type="search"] { min-height:2rem;padding:.375rem .5rem;border:1px solid var(--border-control);border-radius:.25rem;background:var(--surface);color:var(--text); }
+  .filter-actions { display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .75rem;margin-top:.75rem; }
+  button { min-height:2rem;padding:.375rem .75rem;border:1px solid var(--border-control);border-radius:.25rem;background:var(--surface);color:var(--accent);cursor:pointer; }
+  .filter-actions a { display:inline-flex;align-items:center;min-height:1.5rem;color:var(--accent); }
+  .filter-actions span { color:var(--text-muted);font-size:.75rem; }
+  .legacy-chip { padding:.125rem .375rem;border:1px solid var(--warning);border-radius:.25rem;color:var(--warning) !important; }
+  .unavailable { color:var(--warning);margin:.5rem 0 0;font-size:.75rem; }
 </style>

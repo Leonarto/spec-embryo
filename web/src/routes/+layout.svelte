@@ -1,10 +1,9 @@
 <script lang="ts">
   import "../app.css";
-  import type { DashboardData } from "../../../src/services/dashboard.ts";
   import WorkspaceShell from "../lib/components/workspace/WorkspaceShell.svelte";
+  import { provideWorkspaceRefresh } from "../lib/workspace/context.svelte.ts";
   let { data, children } = $props();
-  const dashboard = $derived(data.dashboard as DashboardData);
+  const resource=provideWorkspaceRefresh();
+  const shell=$derived(resource.active?.state.snapshot.shell??data.shell);
 </script>
-
-<svelte:head><title>{dashboard.project.name} Workspace</title></svelte:head>
-<WorkspaceShell project={dashboard.project} git={dashboard.git}>{@render children()}</WorkspaceShell>
+<WorkspaceShell project={shell.project} git={shell.git} {resource}>{@render children()}</WorkspaceShell>

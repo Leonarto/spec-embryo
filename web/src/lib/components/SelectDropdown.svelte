@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import { Check, ChevronDown, ListFilter } from "@lucide/svelte";
 
   export interface SelectDropdownOption {
@@ -13,19 +14,30 @@
     selectedValue = "",
     buttonLabel = "Choose item",
     emptyLabel = "All items",
+    form,
+    resetKey = "",
   } = $props<{
     name: string;
     options: readonly SelectDropdownOption[];
     selectedValue?: string;
     buttonLabel?: string;
     emptyLabel?: string;
+    form?: string;
+    resetKey?: string;
   }>();
 
-  const selectedOption = $derived(options.find((option: SelectDropdownOption) => option.value === selectedValue));
+  let currentValue=$state(untrack(()=>selectedValue));
+  let sourceKey=untrack(()=>JSON.stringify([selectedValue,resetKey]));
+  $effect(()=>{const next=selectedValue,key=JSON.stringify([next,resetKey]);if(key!==sourceKey){sourceKey=key;currentValue=next;}});
+  const selectedOption = $derived(options.find((option: SelectDropdownOption) => option.value === currentValue));
   const summaryText = $derived(selectedOption?.label ?? emptyLabel);
+  let details: HTMLDetailsElement;
+  function dismiss(event: KeyboardEvent) { if (event.key === "Escape" && !event.defaultPrevented && details?.open && details.contains(document.activeElement)) { event.preventDefault(); details.open = false; details.querySelector("summary")?.focus(); } }
+  function outside(event: PointerEvent) { if (details?.open && event.target instanceof Node && !details.contains(event.target)) details.open = false; }
 </script>
 
-<details class="dropdown-shell">
+<svelte:window onkeydown={dismiss} onpointerdown={outside} />
+<details class="dropdown-shell" bind:this={details}>
   <summary class="dropdown-trigger">
     <div class="summary-copy">
       <span class="summary-label">
@@ -44,8 +56,8 @@
 
   <div class="dropdown-panel">
     <div class="option-list">
-      <label class:selected={selectedValue === ""}>
-        <input type="radio" name={name} value="" checked={selectedValue === ""} />
+      <label class:selected={currentValue === ""}>
+        <input type="radio" name={name} value="" {form} checked={currentValue === ""} onchange={event=>currentValue=event.currentTarget.value} />
         <span class="checkbox-mark">
           <Check size={12} strokeWidth={2.2} />
         </span>
@@ -56,8 +68,8 @@
       </label>
 
       {#each options as option}
-        <label class:selected={selectedValue === option.value}>
-          <input type="radio" name={name} value={option.value} checked={selectedValue === option.value} />
+        <label class:selected={currentValue === option.value}>
+          <input type="radio" name={name} value={option.value} {form} checked={currentValue === option.value} onchange={event=>currentValue=event.currentTarget.value} />
           <span class="checkbox-mark">
             <Check size={12} strokeWidth={2.2} />
           </span>
@@ -207,13 +219,14 @@
     border-color: var(--line-strong);
   }
 
-  .option-list label.selected {
+  .option-list label:has(input:checked) {
     border-color: var(--accent-border);
     background: var(--accent-soft);
     box-shadow:
       0 0 0 1px var(--inset-highlight) inset,
       0 10px 24px rgba(15, 141, 96, 0.08);
   }
+  .option-list label:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
 
   .option-list input {
     position: absolute;
@@ -239,7 +252,7 @@
       box-shadow 120ms ease;
   }
 
-  .option-list label.selected .checkbox-mark {
+  .option-list input:checked + .checkbox-mark {
     border-color: var(--accent-border);
     background: var(--accent-strong-soft);
     color: var(--accent-ink);

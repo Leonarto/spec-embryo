@@ -1,4 +1,4 @@
-import { buildTaskIndex, deriveNextActions, deriveStatusSnapshot, summarizeTaskNode } from "../engine.ts";
+import { buildTaskIndex, deriveNextActions, deriveStatusSnapshot, summarizeTaskNode, type TaskAnalysisIndex } from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "./agents.ts";
 
@@ -202,8 +202,8 @@ function deriveEffort(priority: number, downstreamCount: number): number {
   return Math.min(8, base + Math.min(2, downstreamCount));
 }
 
-function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: ReturnType<typeof buildTaskIndex>): DashboardTaskCard {
-  const summary = summarizeTaskNode(task, index);
+export function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: ReturnType<typeof buildTaskIndex>, analysis?: TaskAnalysisIndex): DashboardTaskCard {
+  const summary = summarizeTaskNode(task, index, analysis);
   const effectiveStatus = deriveEffectiveStatus(task.status, summary.unmetDependencies);
   const effort = deriveEffort(task.priority, summary.downstreamCount);
 
@@ -226,7 +226,7 @@ function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: Return
   };
 }
 
-function buildSpecProgress(taskCards: DashboardTaskCard[]) {
+export function buildSpecProgress(taskCards: DashboardTaskCard[]) {
   const counts = {
     todo: 0,
     inProgress: 0,
@@ -649,6 +649,24 @@ function matchesTimeWindow(
   }
 
   return value >= now - parseTimeWindowMilliseconds(timeWindow);
+}
+
+/** Timeline-only projection over already loaded/filter-selected canonical task cards. */
+export function buildTimelineProjection(
+  taskCards: DashboardTaskCard[],
+  specs: DashboardAnalysisState["availableSpecs"],
+  filters: { selectedSpecIds: string[]; mode: DashboardTimelineMode; selectedTaskId?: string },
+): Omit<DashboardData["timeline"], "items"> & { taskCount: number } {
+  const cards = filters.mode === "all" ? taskCards : taskCards.filter(isTimelineActiveRow);
+  const timeline = buildTimeline(cards);
+  const selection = buildTimelineSelection(cards, filters.selectedTaskId, filters.selectedSpecIds);
+  return {
+    totalUnits: timeline.totalUnits,
+    taskCount: timeline.items.length,
+    groups: buildTimelineGroups(cards, timeline.items, specs, filters.selectedSpecIds, selection),
+    mode: filters.mode,
+    ...(selection ? { selection } : {}),
+  };
 }
 
 export async function buildDashboardData(rootDir: string, filters: DashboardFilterOptions = {}): Promise<DashboardData> {

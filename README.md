@@ -206,9 +206,11 @@ Successful hook output contains at most 8192 UTF-8 bytes of additional context: 
 - Git-aware status and resume summaries, including deterministic changed-item derivation with shared identity/path human summaries plus compact raw status codes for structured consumers
 - Task dependency graph and simple critical path derivation
 - Local SvelteKit workspace launched through `spm ui`
-- Workspace views for overview dashboard, task Kanban, Specs, and a compact grouped Gantt timeline
-- Task Kanban spec filters that narrow the active board without pulling archived work back into the operational flow
-- Multi-spec and lifecycle-window filters for analytical Specs and Gantt slices, including archived work when the goal is slice analysis instead of active-board hygiene
+- Compact responsive workspace with Overview, server-paginated task Board, spec cards, and grouped Timeline; page sizes 50/100/200 keep lists bounded
+- Shared deterministic search, effective-status filters, stable sorting, archive scope, and lifecycle-window metrics; legacy analytical links retain their archive semantics with a visible label
+- Searchable, paginated spec-filter options with selected values preserved across option pages and no-JS GET navigation
+- Controlled manual/focus refresh keeps the last data, URL, scroll, and focus on failure, with Retry; canonical details remain outside background refresh until draft-aware inspection is implemented
+- Tables and the persistent inspector follow these query foundations in subsequent SPEC-062 slices
 - Dedicated spec and task detail routes with deterministic not-found states, linked context, and inline source narrative rendering
 - Spec detail pages that can parse `Open Questions`, answer them in batch from the UI, write those answers back into Markdown deterministically, and surface continuation guidance plus an agent evaluation prompt bundle
 - A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans

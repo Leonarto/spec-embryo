@@ -1,9 +1,12 @@
 <script lang="ts">
   import { ArrowRight, GitBranch, ShieldAlert, ShieldCheck } from "@lucide/svelte";
-  import type { DashboardData } from "../../../src/services/dashboard.ts";
+  import type { WorkspaceEnvelope } from "../../../src/services/workspace.ts";
+  import { useWorkspaceResource } from "../lib/workspace/resource.svelte.ts";
   import ViewToolbar from "../lib/components/ViewToolbar.svelte";
   let { data } = $props();
-  const dashboard = $derived(data.dashboard as DashboardData);
+  const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'overview'>);
+  const workspace=$derived(resource.snapshot);
+  const dashboard=$derived(workspace.data);
   const stats = $derived([
     { label: "Specs", value: dashboard.counts.specs, href: "/specs" },
     { label: "Tasks", value: dashboard.counts.tasks, href: "/tasks" },
@@ -14,7 +17,7 @@
     { label: "Ready", value: dashboard.counts.readyTasks, href: "/tasks" },
   ]);
 </script>
-<svelte:head><title>{dashboard.project.name} Overview</title></svelte:head>
+<svelte:head><title>{workspace.shell.project.name} Overview</title></svelte:head>
 <ViewToolbar title="Overview" />
 
 <section class="focus-panel" aria-labelledby="focus-heading">
@@ -70,8 +73,8 @@
 
   <section class="panel" aria-labelledby="git-heading">
     <h2 id="git-heading">Local repository</h2>
-    {#if dashboard.git.available}<p class="git-line"><GitBranch size={15} /><code>{dashboard.git.branch ?? "unknown"}</code><span class:warning={dashboard.git.dirty}>{dashboard.git.dirty ? "● Local changes" : "✓ Clean"}</span></p>{:else}<p class="muted">Git information unavailable.</p>{/if}
-    <dl><div><dt>Memory home</dt><dd><code>{dashboard.project.memoryDir}</code></dd></div>{#if dashboard.currentState.updatedAt}<div><dt>Current state updated</dt><dd>{dashboard.currentState.updatedAt}</dd></div>{/if}</dl>
+    {#if workspace.shell.git.available}<p class="git-line"><GitBranch size={15} /><code>{workspace.shell.git.branch ?? "unknown"}</code><span class:warning={workspace.shell.git.dirty}>{workspace.shell.git.dirty ? "● Local changes" : "✓ Clean"}</span></p>{:else}<p class="muted">Git information unavailable.</p>{/if}
+    <dl><div><dt>Memory home</dt><dd><code>{workspace.shell.project.memoryDir}</code></dd></div>{#if dashboard.currentState.updatedAt}<div><dt>Current state updated</dt><dd>{dashboard.currentState.updatedAt}</dd></div>{/if}</dl>
     <details><summary>Spec coverage ({dashboard.specs.length})</summary><ul class="entity-list">{#each dashboard.specs as spec}<li><a href={`/specs/${spec.id}`}><code>{spec.id}</code><span>{spec.linkedTaskCount} linked tasks</span></a></li>{/each}</ul></details>
   </section>
 

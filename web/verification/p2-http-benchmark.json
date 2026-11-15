@@ -1,0 +1,198 @@
+{
+  "origin": "http://127.0.0.1:5188",
+  "clientRuntime": "Bun 1.3.9",
+  "server": "Vite development server, Node runtime; source handlers shared with SSR",
+  "os": "darwin 25.2.0",
+  "cpu": "Apple M1 Pro",
+  "warmups": 5,
+  "sampleCount": 20,
+  "scope": "Sequential HTTP headers/body timings; first read is not verified OS-cold disk. No browser render timing included.",
+  "rows": [
+    {
+      "route": "tasks",
+      "totalMatching": 10000,
+      "pageRows": 100,
+      "payloadBytes": 37279,
+      "firstReadMs": 1405.3371249999998,
+      "medianHeadersMs": 468.3871250000002,
+      "p95HeadersMs": 557.4455419999995,
+      "medianTotalMs": 468.4052499999998,
+      "p95TotalMs": 557.4635840000001,
+      "samples": [
+        {
+          "headersMs": 488.002125,
+          "totalMs": 488.0377910000002
+        },
+        {
+          "headersMs": 438.4829169999998,
+          "totalMs": 438.5008750000002
+        },
+        {
+          "headersMs": 752.0829589999994,
+          "totalMs": 752.1016669999999
+        },
+        {
+          "headersMs": 557.4455419999995,
+          "totalMs": 557.4635840000001
+        },
+        {
+          "headersMs": 479.59349999999995,
+          "totalMs": 479.6128749999998
+        },
+        {
+          "headersMs": 468.3871250000002,
+          "totalMs": 468.4052499999998
+        },
+        {
+          "headersMs": 550.386375,
+          "totalMs": 550.4068750000006
+        },
+        {
+          "headersMs": 454.0475000000006,
+          "totalMs": 454.0657090000004
+        },
+        {
+          "headersMs": 474.3372079999999,
+          "totalMs": 474.359375
+        },
+        {
+          "headersMs": 455.002042000001,
+          "totalMs": 455.0216250000003
+        },
+        {
+          "headersMs": 468.737083,
+          "totalMs": 468.77600000000166
+        },
+        {
+          "headersMs": 453.42070799999965,
+          "totalMs": 453.440208
+        },
+        {
+          "headersMs": 446.1206660000007,
+          "totalMs": 446.14966600000116
+        },
+        {
+          "headersMs": 431.19829200000095,
+          "totalMs": 431.21700000000055
+        },
+        {
+          "headersMs": 518.8679590000011,
+          "totalMs": 518.9356669999997
+        },
+        {
+          "headersMs": 513.9827079999995,
+          "totalMs": 514.0319170000002
+        },
+        {
+          "headersMs": 549.0376670000005,
+          "totalMs": 549.0560420000002
+        },
+        {
+          "headersMs": 452.8134579999987,
+          "totalMs": 452.83204099999966
+        },
+        {
+          "headersMs": 439.660249999999,
+          "totalMs": 439.7014999999992
+        },
+        {
+          "headersMs": 440.1939590000002,
+          "totalMs": 440.22383400000035
+        }
+      ]
+    },
+    {
+      "route": "specs",
+      "totalMatching": 2000,
+      "pageRows": 100,
+      "payloadBytes": 35670,
+      "firstReadMs": 444.0088340000002,
+      "medianHeadersMs": 432.6430419999997,
+      "p95HeadersMs": 551.3855829999993,
+      "medianTotalMs": 432.6531670000004,
+      "p95TotalMs": 551.3992499999986,
+      "samples": [
+        {
+          "headersMs": 444.46650000000045,
+          "totalMs": 444.47641699999986
+        },
+        {
+          "headersMs": 428.06775000000016,
+          "totalMs": 428.07758400000057
+        },
+        {
+          "headersMs": 431.6291250000013,
+          "totalMs": 431.6394999999993
+        },
+        {
+          "headersMs": 472.91195900000093,
+          "totalMs": 472.9219170000033
+        },
+        {
+          "headersMs": 582.1749999999993,
+          "totalMs": 582.1851659999993
+        },
+        {
+          "headersMs": 419.33024999999907,
+          "totalMs": 419.3406250000007
+        },
+        {
+          "headersMs": 433.5402920000015,
+          "totalMs": 433.55054200000086
+        },
+        {
+          "headersMs": 432.6430419999997,
+          "totalMs": 432.6531670000004
+        },
+        {
+          "headersMs": 418.21754200000214,
+          "totalMs": 418.2295000000013
+        },
+        {
+          "headersMs": 446.627708,
+          "totalMs": 446.64454099999784
+        },
+        {
+          "headersMs": 551.3855829999993,
+          "totalMs": 551.3992499999986
+        },
+        {
+          "headersMs": 473.5751249999994,
+          "totalMs": 473.5852500000001
+        },
+        {
+          "headersMs": 430.20429199999853,
+          "totalMs": 430.2157499999994
+        },
+        {
+          "headersMs": 430.06012499999997,
+          "totalMs": 430.07174999999916
+        },
+        {
+          "headersMs": 456.9411660000005,
+          "totalMs": 456.95554099999936
+        },
+        {
+          "headersMs": 431.74833299999955,
+          "totalMs": 431.75837500000125
+        },
+        {
+          "headersMs": 437.7880839999998,
+          "totalMs": 437.79866700000275
+        },
+        {
+          "headersMs": 488.11612500000047,
+          "totalMs": 488.12625000000116
+        },
+        {
+          "headersMs": 425.2762920000023,
+          "totalMs": 425.286250000001
+        },
+        {
+          "headersMs": 414.2847920000022,
+          "totalMs": 414.296875
+        }
+      ]
+    }
+  ]
+}

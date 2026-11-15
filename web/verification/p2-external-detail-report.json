@@ -1,0 +1,24 @@
+{
+  "scope": "Isolated 10k/2k temporary fixture only. Modified task/spec files were restored byte-for-byte after verification; no project-memory files were mutated.",
+  "externalFileChecks": [
+    {
+      "name": "Controlled refresh observes a real external fixture file title change",
+      "pass": true
+    },
+    {
+      "name": "External-change refresh preserves URL with zero document navigations",
+      "pass": true
+    }
+  ],
+  "canonicalQuestionChecks": [
+    {
+      "name": "No-JS canonical question POST remains available in isolated fixture",
+      "pass": true
+    },
+    {
+      "name": "Saved answer is rendered as resolved decision",
+      "pass": true
+    }
+  ],
+  "canonicalQuestionURL": "http://127.0.0.1:5188/specs/SPEC-00001?/answerOpenQuestions"
+}

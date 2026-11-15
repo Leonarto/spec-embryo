@@ -10,15 +10,20 @@
     Play,
     SquareDashedKanban,
   } from "@lucide/svelte";
-  import type { DashboardData, DashboardKanbanColumnId } from "../../../../src/services/dashboard.ts";
+  import type { DashboardKanbanColumnId } from "../../../../src/services/dashboard.ts";
   import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
-  import { countKanbanTasks, filterKanbanBySpecs } from "../../lib/task-board.ts";
+  import { groupTaskPage } from "../../lib/task-board.ts";
+  import ListPager from "../../lib/components/ListPager.svelte";
+  import { useWorkspaceResource } from "../../lib/workspace/resource.svelte.ts";
+  import type { WorkspaceEnvelope } from "../../../../src/services/workspace.ts";
 
   let { data } = $props();
-  const dashboard = $derived(data.dashboard as DashboardData);
-  const filteredKanban = $derived(filterKanbanBySpecs(dashboard.kanban, dashboard.analysis.selectedSpecIds));
-  const filteredTaskCount = $derived(countKanbanTasks(filteredKanban));
-  const hasSpecFilters = $derived(dashboard.analysis.selectedSpecIds.length > 0);
+  const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'tasks'>);
+  const workspace=$derived(resource.snapshot);
+  const dashboard=$derived(workspace.data);
+  const filteredKanban=$derived(groupTaskPage(dashboard.result.rows));
+  const filteredTaskCount=$derived(dashboard.result.totalMatching);
+  const hasSpecFilters=$derived(dashboard.filters.selectedSpecIds.length>0);
 
   const laneNotes: Record<DashboardKanbanColumnId, string> = {
     blocked: "Work stopped by declared dependencies or explicit blocked state.",
@@ -41,29 +46,19 @@
 </script>
 
 <svelte:head>
-  <title>{dashboard.project.name} Tasks</title>
+  <title>{workspace.shell.project.name} Tasks</title>
 </svelte:head>
 
 <ViewToolbar title="Tasks" count={filteredTaskCount} />
 
-<AnalysisFilters
-  {dashboard}
-  eyebrow="Operational focus"
-  title="Board spec filters"
-  detail="Use one or more specs to focus the Kanban on the active work slice you want to execute. This stays operational, so archived tasks remain hidden even while a spec filter is active."
-  showTimeWindow={false}
-  resultCount={filteredTaskCount}
-  resultLabel="tasks visible on the current board slice"
-  hasActiveFilters={hasSpecFilters}
-  activeDetail="Archived tasks stay hidden here so the Kanban remains an active-work surface."
-  inactiveDetail="Without a spec filter, the board shows all non-archived work across the workspace."
-/>
+<AnalysisFilters filters={dashboard.filters} route="tasks" title="Board filters" detail="Global filters and order are applied before this page is grouped into lanes. The Board shows unarchived tasks." showTimeWindow={false} resultCount={filteredTaskCount} resultLabel="matching tasks across all pages" />
+<ListPager result={dashboard.result} route="tasks" />
 
 {#if hasSpecFilters}
   <section class="filter-note">
     <div class="note-pill">
       <Filter size={14} strokeWidth={1.9} />
-      <span>Filtered by {dashboard.analysis.selectedSpecIds.join(", ")}</span>
+      <span>Filtered by {dashboard.filters.selectedSpecIds.join(", ")}</span>
     </div>
     <p>
       This board intentionally ignores archived tasks even when a spec filter is active, so the selected slice stays operational instead of becoming historical analysis.
@@ -82,18 +77,18 @@
           </span>
           <div>
             <p class="lane-name">{column.title}</p>
-            <strong>{column.tasks.length}</strong>
+            <strong>{column.tasks.length} on this page</strong>
           </div>
         </div>
         <span class="lane-note">{laneNotes[column.id]}</span>
       </header>
 
       {#if column.tasks.length === 0}
-        <p class="empty">No tasks in this lane.</p>
+        <p class="empty">No tasks in this lane on this page.</p>
       {:else}
         <div class="card-stack">
-          {#each column.tasks as task}
-            <article class="task-card">
+          {#each column.tasks as task (task.id)}
+            <article class="task-card" data-entity-id={task.id}>
               <div class="card-top">
                 <a class="task-id" href={`/tasks/${task.id}`}>
                   <FolderKanban size={13} strokeWidth={1.9} />

@@ -18,53 +18,43 @@
     TimerReset,
     X,
   } from "@lucide/svelte";
-  import type { DashboardData, DashboardTimelineMode } from "../../../../src/services/dashboard.ts";
+  import type { DashboardTimelineMode } from "../../../../src/services/dashboard.ts";
+  import type { WorkspaceEnvelope } from "../../../../src/services/workspace.ts";
+  import { normalizeViewQuery, serializeViewQuery } from "../../../../src/services/workspace-query.ts";
+  import { useWorkspaceResource } from "../../lib/workspace/resource.svelte.ts";
   import AnalysisFilters from "../../lib/components/AnalysisFilters.svelte";
 
   let { data } = $props();
-  const dashboard = $derived(data.dashboard as DashboardData);
+  const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'timeline'>);
+  const workspace=$derived(resource.snapshot);
+  const dashboard=$derived(workspace.data);
 
   const totalUnits = $derived(Math.max(dashboard.timeline.totalUnits, 1));
   const ruler = $derived(Array.from({ length: totalUnits }, (_, index) => index + 1));
   const currentSearch = $derived(page.url.searchParams);
 
   function timelineModeHref(mode: DashboardTimelineMode): string {
-    const params = new URLSearchParams(currentSearch);
-    params.set("timeline_mode", mode);
-    const search = params.toString();
-    return search.length > 0 ? `/timeline?${search}` : "/timeline";
+    const view=normalizeViewQuery('timeline',currentSearch);view.timeline!.mode=mode;
+    return `/timeline?${serializeViewQuery(view)}`;
   }
-
   function timelineSelectionHref(taskId: string): string {
-    const params = new URLSearchParams(currentSearch);
-    if (dashboard.timeline.selection?.taskId === taskId) {
-      params.delete("selected_task");
-    } else {
-      params.set("selected_task", taskId);
-    }
-    const search = params.toString();
-    return search.length > 0 ? `/timeline?${search}` : "/timeline";
+    const view=normalizeViewQuery('timeline',currentSearch);
+    view.timeline!.selectedTaskId=dashboard.timeline.selection?.taskId===taskId?undefined:taskId;
+    return `/timeline?${serializeViewQuery(view)}`;
   }
-
   function clearTimelineSelectionHref(): string {
-    const params = new URLSearchParams(currentSearch);
-    params.delete("selected_task");
-    const search = params.toString();
-    return search.length > 0 ? `/timeline?${search}` : "/timeline";
+    const view=normalizeViewQuery('timeline',currentSearch);view.timeline!.selectedTaskId=undefined;
+    return `/timeline?${serializeViewQuery(view)}`;
   }
 </script>
 
 <svelte:head>
-  <title>{dashboard.project.name} Timeline</title>
+  <title>{workspace.shell.project.name} Timeline</title>
 </svelte:head>
 
-<ViewToolbar title="Timeline" count={dashboard.timeline.items.length} />
+<ViewToolbar title="Timeline" count={dashboard.timeline.taskCount} />
 
-<AnalysisFilters
-  {dashboard}
-  title="Timeline slice filters"
-  detail="Use spec sets and lifecycle windows to shape the planning slice, then switch between active-only and include-completed display modes below."
-/>
+<AnalysisFilters filters={dashboard.filters} route="timeline" title="Timeline filters" resultCount={dashboard.timeline.taskCount} resultLabel="timeline rows" />
 
 <section class="mode-shell">
   <div class="mode-copy">

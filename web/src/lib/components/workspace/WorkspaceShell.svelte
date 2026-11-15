@@ -1,16 +1,19 @@
 <script lang="ts">
   import { onMount, type Snippet } from "svelte";
   import { page } from "$app/state";
-  import { ChartNoAxesGantt, ChevronsLeft, ChevronsRight, FolderKanban, GitBranch, LayoutDashboard, NotebookText, Settings2 } from "@lucide/svelte";
+  import { ChartNoAxesGantt, ChevronsLeft, ChevronsRight, FolderKanban, GitBranch, LayoutDashboard, NotebookText, RefreshCw, Settings2 } from "@lucide/svelte";
+  import type { WorkspaceRefreshContext } from "../../workspace/context.svelte.ts";
+  import { transitionViewQuery, type WorkspaceRoute } from "../../../../../src/services/workspace-query.ts";
   import IconButton from "../IconButton.svelte";
   import ColorModeControl from "../ColorModeControl.svelte";
   import { THEME_STORAGE_KEY, normalizeColorMode, resolveTheme, type ColorMode, type ResolvedTheme } from "../../theme.ts";
   import { WORKSPACE_PREFERENCES_KEY, parseWorkspacePreferences, isWorkspaceRoute, workspaceRouteLabel, type RailMode } from "../../workspace-preferences.ts";
 
-  let { project, git, children }: {
+  let { project, git, children, resource }: {
     project: { name: string; memoryDir: string };
     git: { available: boolean; branch?: string; dirty: boolean };
     children: Snippet;
+    resource?: WorkspaceRefreshContext;
   } = $props();
   const navItems = [
     { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -26,6 +29,13 @@
   let settingsTrigger: HTMLButtonElement;
   let ready = $state(false);
   const routeLabel = $derived(workspaceRouteLabel(page.url.pathname));
+  const activeResource = $derived(resource?.active);
+  function navHref(href: string): string {
+    const route = href === "/" ? "overview" : href.slice(1) as WorkspaceRoute;
+    const query = transitionViewQuery(route, page.url.searchParams).toString();
+    return `${href}${query ? `?${query}` : ""}`;
+  }
+  function formatTime(timestamp: number): string { return new Date(timestamp).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit",second:"2-digit"}); }
 
   function readStored(key: string): string | null { try { return localStorage.getItem(key); } catch { return null; } }
   function store(key: string, value: string) { try { localStorage.setItem(key, value); } catch { /* Session preferences remain usable when storage is unavailable. */ } }
@@ -72,7 +82,7 @@
       {#each navItems as item}
         {@const Icon = item.icon}
         {@const active = isWorkspaceRoute(page.url.pathname, item.href)}
-        <a class:active href={`${item.href}${page.url.search}`} aria-current={active ? "page" : undefined} aria-label={item.label} title={item.label}>
+        <a class:active href={navHref(item.href)} aria-current={active ? "page" : undefined} aria-label={item.label} title={item.label}>
           <Icon size={18} strokeWidth={1.9} /><span class="expanded-label">{item.label}</span>
         </a>
       {/each}
@@ -100,13 +110,21 @@
       <div class="breadcrumb"><strong title={project.name}>{project.name}</strong><span aria-hidden="true">/</span><span>{routeLabel}</span></div>
       <div class="workspace-status">
         {#if git.available}<span class="branch"><GitBranch size={13} />{git.branch ?? "unknown"}</span><span class:dirty={git.dirty} class="git-status">{git.dirty ? "● Local changes" : "✓ Clean"}</span>{/if}
+        {#if activeResource}
+          <span class="refresh-state" class:stale={Boolean(activeResource.state.error)} role="status">{activeResource.state.error ? "Datos anteriores" : activeResource.state.pending ? "Actualizando…" : `Actualizado ${formatTime(activeResource.state.lastSuccessAt)}`}</span>
+          <IconButton label="Refresh workspace" busy={activeResource.state.pending} onclick={() => void activeResource?.refresh()}><RefreshCw size={16} /></IconButton>
+        {/if}
       </div>
     </header>
+    {#if activeResource?.state.error}
+      <div class="refresh-error" role="alert"><span>Datos anteriores · {activeResource.state.error === "timeout" ? "La actualización excedió el tiempo de espera." : "No se pudo actualizar."}</span><button type="button" onclick={() => void activeResource?.refresh()}>Retry</button></div>
+    {/if}
     <main class="view-frame" id="workspace-content" tabindex="-1">
       {@render children()}
     </main>
   </div>
 </div>
+<p class="sr-only" data-workspace-announcement role="status"></p>
 
 <style>
   .workspace-shell { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); height: 100dvh; min-height: 0; overflow: hidden; }
@@ -131,7 +149,7 @@
   .preferences-popover h2 { margin: 0 0 .75rem; font-size: .875rem; }
   .memory-home { display: grid; gap: .25rem; margin: .75rem 0 0; color: var(--text-muted); font-size: .75rem; }
   code { font-family: var(--mono-font); overflow-wrap: anywhere; }
-  .main-column { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; }
+  .main-column { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; }
   .topbar { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: .75rem; min-height: 2.75rem; padding: .3125rem .75rem; border-bottom: 1px solid var(--border-subtle); background: var(--surface); }
   .breadcrumb, .workspace-status, .branch { display: flex; align-items: center; gap: .75rem; min-width: 0; }
   .breadcrumb strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -140,6 +158,10 @@
   .branch { gap: .25rem; font: .75rem var(--mono-font); }
   .git-status { font-size: .75rem; white-space: nowrap; color: var(--text-muted); }
   .git-status.dirty { color: var(--warning); }
+  .refresh-state { color: var(--text-muted); font-size: .75rem; white-space: nowrap; }
+  .refresh-state.stale { color: var(--warning); }
+  .refresh-error { position: absolute; z-index: 25; top: 2.75rem; right: .75rem; max-width: calc(100% - 1.5rem); display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .5rem .75rem; border: 1px solid var(--warning); border-radius: .25rem; background: var(--surface); color: var(--warning); box-shadow: var(--shadow-overlay); }
+  .refresh-error button { min-height: 1.5rem; padding: .125rem .5rem; border: 1px solid var(--border-control); border-radius: .25rem; background: var(--surface); cursor: pointer; }
   .view-frame { flex: 1; min-width: 0; min-height: 0; padding: .75rem; overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
   .skip-link { position: fixed; z-index: 50; top: .5rem; left: 4rem; transform: translateY(-200%); padding: .5rem .75rem; background: var(--surface); border: 1px solid var(--border-control); border-radius: .25rem; }
   .skip-link:focus { transform: none; }

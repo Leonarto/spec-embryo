@@ -1,4 +1,4 @@
-import { buildTaskIndex, summarizeTaskNode } from "../engine.ts";
+import { buildTaskIndex, summarizeTaskNode, type TaskAnalysisIndex } from "../engine.ts";
 import type {
   CurrentStateDocument,
   HandoffDocument,
@@ -133,8 +133,8 @@ function deriveEffort(priority: number, downstreamCount: number): number {
   return Math.min(8, base + Math.min(2, downstreamCount));
 }
 
-function toDetailTaskCard(task: TaskDocument, index: ReturnType<typeof buildTaskIndex>): DetailLinkedTask {
-  const summary = summarizeTaskNode(task, index);
+function toDetailTaskCard(task: TaskDocument, index: ReturnType<typeof buildTaskIndex>, analysis?: TaskAnalysisIndex): DetailLinkedTask {
+  const summary = summarizeTaskNode(task, index, analysis);
   const effectiveStatus = deriveEffectiveStatus(task.status, summary.unmetDependencies);
 
   return {
@@ -393,6 +393,10 @@ function buildLinkedSpecs(context: ProjectContext, task: TaskDocument): DetailLi
 
 export async function buildSpecDetailData(rootDir: string, specId: string): Promise<SpecDetailResult> {
   const context = await loadProjectContext(rootDir);
+  return buildSpecDetailFromContext(context, specId);
+}
+
+export function buildSpecDetailFromContext(context: ProjectContext, specId: string, analysis?: TaskAnalysisIndex): SpecDetailResult {
   const spec = context.specs.find((entry) => entry.id === specId);
 
   if (!spec) {
@@ -404,11 +408,11 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
     };
   }
 
-  const taskIndex = buildTaskIndex(context.tasks);
+  const taskIndex = analysis?.byId ?? buildTaskIndex(context.tasks);
   const linkedTasks = spec.taskIds
     .map((taskId) => taskIndex.get(taskId))
     .filter((task): task is TaskDocument => Boolean(task))
-    .map((task) => toDetailTaskCard(task, taskIndex))
+    .map((task) => toDetailTaskCard(task, taskIndex, analysis))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
   const parsedQuestionSections = parseSpecQuestionSections(spec.body);
   const bodySections = parseDocumentBody(spec.body).filter((section) => {
@@ -441,6 +445,10 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
 
 export async function buildTaskDetailData(rootDir: string, taskId: string): Promise<TaskDetailResult> {
   const context = await loadProjectContext(rootDir);
+  return buildTaskDetailFromContext(context, taskId);
+}
+
+export function buildTaskDetailFromContext(context: ProjectContext, taskId: string, analysis?: TaskAnalysisIndex): TaskDetailResult {
   const task = context.tasks.find((entry) => entry.id === taskId);
 
   if (!task) {
@@ -452,16 +460,16 @@ export async function buildTaskDetailData(rootDir: string, taskId: string): Prom
     };
   }
 
-  const taskIndex = buildTaskIndex(context.tasks);
+  const taskIndex = analysis?.byId ?? buildTaskIndex(context.tasks);
   const dependencyTasks = task.dependsOn
     .map((dependencyId) => taskIndex.get(dependencyId))
     .filter((dependency): dependency is TaskDocument => Boolean(dependency))
-    .map((dependency) => toDetailTaskCard(dependency, taskIndex))
+    .map((dependency) => toDetailTaskCard(dependency, taskIndex, analysis))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
-  const summary = summarizeTaskNode(task, taskIndex);
+  const summary = summarizeTaskNode(task, taskIndex, analysis);
   const blockingTasks = context.tasks
     .filter((entry) => entry.dependsOn.includes(task.id))
-    .map((entry) => toDetailTaskCard(entry, taskIndex))
+    .map((entry) => toDetailTaskCard(entry, taskIndex, analysis))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
 
   return {

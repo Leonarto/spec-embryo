@@ -206,9 +206,39 @@ export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument>
   return new Map(tasks.map((task) => [task.id, task]));
 }
 
-export function summarizeTaskNode(task: TaskDocument, index: Map<string, TaskDocument>): TaskNodeSummary {
-  const unmetDependencies = task.dependsOn.filter((dependencyId) => index.get(dependencyId)?.status !== "done");
-  const downstreamCount = [...index.values()].filter((candidate) => candidate.dependsOn.includes(task.id)).length;
+export interface TaskAnalysisIndex {
+  byId: Map<string, TaskDocument>;
+  directDependents: Map<string, TaskDocument[]>;
+  directDependentCounts: Map<string, number>;
+  unmetDependencies: Map<string, string[]>;
+}
+
+/** Per-snapshot adjacency analysis; repeated dependency IDs count one dependent. */
+export function buildTaskAnalysisIndex(tasks: TaskDocument[]): TaskAnalysisIndex {
+  const byId = buildTaskIndex(tasks);
+  const directDependents = new Map<string, TaskDocument[]>();
+  const directDependentCounts = new Map<string, number>();
+  const unmetDependencies = new Map<string, string[]>();
+  for (const task of byId.values()) {
+    unmetDependencies.set(task.id, task.dependsOn.filter((id) => byId.get(id)?.status !== "done"));
+    for (const id of new Set(task.dependsOn)) {
+      const dependents = directDependents.get(id) ?? [];
+      dependents.push(task);
+      directDependents.set(id, dependents);
+      directDependentCounts.set(id, dependents.length);
+    }
+  }
+  return { byId, directDependents, directDependentCounts, unmetDependencies };
+}
+
+export function summarizeTaskNode(task: TaskDocument, index: Map<string, TaskDocument>, analysis?: TaskAnalysisIndex): TaskNodeSummary {
+  const compatible = analysis?.byId === index;
+  const unmetDependencies = compatible && index.get(task.id) === task
+    ? [...(analysis.unmetDependencies.get(task.id) ?? [])]
+    : task.dependsOn.filter((dependencyId) => index.get(dependencyId)?.status !== "done");
+  const downstreamCount = compatible
+    ? analysis.directDependentCounts.get(task.id) ?? 0
+    : [...index.values()].filter((candidate) => candidate.dependsOn.includes(task.id)).length;
 
   return {
     task,

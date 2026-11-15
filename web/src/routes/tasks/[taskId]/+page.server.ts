@@ -1,10 +1,10 @@
 import type { PageServerLoad } from "./$types";
-import { buildTaskDetailData } from "../../../../../src/services/details.ts";
-import { resolveProjectRoot } from "../../../lib/server/project-root.ts";
+import { buildTaskDetailFromContext } from "../../../../../src/services/details.ts";
+import { getWorkspaceRequestSource } from "../../../lib/server/workspace.ts";
 
-export const load: PageServerLoad = async ({ params }) => {
-  const rootDir = resolveProjectRoot();
-  const detail = await buildTaskDetailData(rootDir, params.taskId);
+export const load: PageServerLoad = async ({ params, locals }) => {
+  const source = await getWorkspaceRequestSource(locals);
+  const detail = buildTaskDetailFromContext(source.context, params.taskId, source.analysis);
 
   return {
     detail,

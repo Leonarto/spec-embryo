@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { untrack, type Snippet } from "svelte";
   import { Check, ChevronDown, ListFilter } from "@lucide/svelte";
 
   export interface MultiSelectOption {
     value: string;
     label: string;
     description?: string;
+    href?: string;
   }
 
   let {
@@ -13,26 +15,50 @@
     selectedValues = [],
     buttonLabel = "Select items",
     emptyLabel = "No filters applied",
+    form,
+    panelHeader,
+    panelFooter,
+    onSelectionChange,
+    resetKey = "",
   } = $props<{
     name: string;
     options: readonly MultiSelectOption[];
     selectedValues?: string[];
     buttonLabel?: string;
     emptyLabel?: string;
+    form?: string;
+    panelHeader?: Snippet;
+    panelFooter?: Snippet;
+    onSelectionChange?: (values: string[]) => void;
+    resetKey?: string;
   }>();
 
-  const selectedSet = $derived(new Set(selectedValues));
+  let currentValues=$state(untrack(()=>[...selectedValues]));
+  let sourceKey=untrack(()=>JSON.stringify([selectedValues,resetKey]));
+  $effect(()=>{const next=selectedValues,key=JSON.stringify([next,resetKey]);if(key!==sourceKey){sourceKey=key;currentValues=[...next];}});
+  const selectedSet = $derived(new Set(currentValues));
   const selectedOptions = $derived(options.filter((option: MultiSelectOption) => selectedSet.has(option.value)));
   const summaryText = $derived(
-    selectedOptions.length === 0
+    currentValues.length === 0
       ? emptyLabel
-      : selectedOptions.length === 1
-        ? selectedOptions[0]?.label ?? emptyLabel
-        : `${selectedOptions.length} selected`,
+      : currentValues.length === 1
+        ? selectedOptions[0]?.label ?? currentValues[0] ?? emptyLabel
+        : `${currentValues.length} selected`,
   );
+  const visibleIds = $derived(new Set(options.map((option: MultiSelectOption) => option.value)));
+  let details: HTMLDetailsElement;
+  function dismiss(event: KeyboardEvent) { if (event.key === "Escape" && !event.defaultPrevented && details?.open && details.contains(document.activeElement)) { event.preventDefault(); details.open = false; details.querySelector("summary")?.focus(); } }
+  function outside(event: PointerEvent) { if (details?.open && event.target instanceof Node && !details.contains(event.target)) details.open = false; }
+  function toggle(value: string, checked: boolean) {
+    const next = new Set(currentValues);
+    if (checked) next.add(value); else next.delete(value);
+    currentValues=[...next];
+    onSelectionChange?.(currentValues);
+  }
 </script>
 
-<details class="dropdown-shell">
+<svelte:window onkeydown={dismiss} onpointerdown={outside} />
+<details class="dropdown-shell" bind:this={details}>
   <summary class="dropdown-trigger">
     <div class="summary-copy">
       <span class="summary-label">
@@ -43,8 +69,8 @@
     </div>
 
     <div class="summary-meta">
-      {#if selectedOptions.length > 0}
-        <span class="count-pill">{selectedOptions.length}</span>
+      {#if currentValues.length > 0}
+        <span class="count-pill">{currentValues.length}</span>
       {/if}
       <span class="chevron">
         <ChevronDown size={16} strokeWidth={1.9} />
@@ -53,10 +79,15 @@
   </summary>
 
   <div class="dropdown-panel">
+    {@render panelHeader?.()}
+    {#each currentValues.filter((value: string) => !visibleIds.has(value)) as value}
+      <input type="hidden" name={name} {value} {form} />
+    {/each}
     <div class="option-list">
       {#each options as option}
+        <div class="option-entry">
         <label class:selected={selectedSet.has(option.value)}>
-          <input type="checkbox" name={name} value={option.value} checked={selectedSet.has(option.value)} />
+          <input type="checkbox" name={name} value={option.value} {form} checked={selectedSet.has(option.value)} onchange={(event) => toggle(option.value, event.currentTarget.checked)} />
           <span class="checkbox-mark">
             <Check size={12} strokeWidth={2.2} />
           </span>
@@ -67,8 +98,11 @@
             {/if}
           </span>
         </label>
+        {#if option.href}<a class="option-link" href={option.href}>Open {option.label}</a>{/if}
+        </div>
       {/each}
     </div>
+    {@render panelFooter?.()}
   </div>
 </details>
 
@@ -222,13 +256,16 @@
     border-color: var(--line-strong);
   }
 
-  .option-list label.selected {
+  .option-list label:has(input:checked) {
     border-color: var(--accent-border);
     background: var(--accent-soft);
     box-shadow:
       0 0 0 1px var(--inset-highlight) inset,
       0 10px 24px rgba(15, 141, 96, 0.08);
   }
+  .option-entry { min-width: 0; }
+  .option-link { display: inline-flex; align-items: center; min-height: 1.5rem; margin: .125rem .5rem; color: var(--accent); font-size: .75rem; }
+  .option-list label:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
 
   .option-list input {
     position: absolute;
@@ -254,7 +291,7 @@
       box-shadow 120ms ease;
   }
 
-  .option-list label.selected .checkbox-mark {
+  .option-list input:checked + .checkbox-mark {
     border-color: var(--accent-border);
     background: var(--accent-strong-soft);
     color: var(--accent-ink);

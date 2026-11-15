@@ -1,17 +1,40 @@
 import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir, platform, release, cpus } from "node:os";
 import { join, resolve } from "node:path";
-import { initializeProject } from "../../src/repository.ts";
+import { initializeProject, loadProjectContext } from "../../src/repository.ts";
 import { buildDashboardData } from "../../src/services/dashboard.ts";
+import { createWorkspaceSource, buildWorkspaceEnvelope } from "../../src/services/workspace.ts";
 
 // Reproducible filesystem fixtures. Every write stays in a disposable temp root.
 const dataset = process.argv[2] ?? "current";
 const sampleCount = Number(process.argv[3] ?? 20);
 const warmups = 5;
+const workspace = process.argv[4] === "workspace";
+const keepFixture = process.argv[5] === "--keep-fixture";
 if (dataset === "--measure") {
   const start = performance.now();
   const data = await buildDashboardData(process.argv[3]!);
   console.log(JSON.stringify({ ms: performance.now() - start, bytes: Buffer.byteLength(JSON.stringify(data)) }));
+  process.exit(0);
+}
+if (dataset === "--measure-workspace") {
+  const start = performance.now();
+  const context = await loadProjectContext(process.argv[3]!);
+  const filesystemMs = performance.now() - start;
+  const measured: Record<string, number> = { filesystemMs };
+  for (const route of ["tasks", "specs"] as const) {
+    const indexStart = performance.now();
+    const source = createWorkspaceSource(context, Date.parse("2026-11-15T12:00:00Z"));
+    const indexMs = performance.now() - indexStart;
+    const projectionStart = performance.now();
+    const envelope = await buildWorkspaceEnvelope(source, route, new URLSearchParams("page=2"));
+    const projectionMs = performance.now() - projectionStart;
+    measured[`${route}IndexMs`] = indexMs;
+    measured[`${route}ProjectionMs`] = projectionMs;
+    measured[`${route}TotalMs`] = filesystemMs + indexMs + projectionMs;
+    measured[`${route}PayloadBytes`] = Buffer.byteLength(JSON.stringify(envelope));
+  }
+  console.log(JSON.stringify({ ...measured, ms: Math.max(measured.tasksTotalMs!, measured.specsTotalMs!), bytes: Math.max(measured.tasksPayloadBytes!, measured.specsPayloadBytes!) }));
   process.exit(0);
 }
 let fixtureRoot: string | undefined;
@@ -46,12 +69,13 @@ try {
     for (let start = 0; start < writes.length; start += 100) await Promise.all(writes.slice(start, start + 100).map(([path, text]) => writeFile(path, text)));
   }
   const samples: number[] = [];
+  const detailedSamples: Record<string, number>[] = [];
   let bytes = 0;
   let cold = 0;
   for (let n = -warmups; n < sampleCount; n++) {
     // Bound every service invocation; pathological graphs must become evidence,
     // rather than a benchmark that keeps a review session busy indefinitely.
-    const child = Bun.spawn([process.execPath, import.meta.path, "--measure", root], { stdout: "pipe", stderr: "pipe" });
+    const child = Bun.spawn([process.execPath, import.meta.path, workspace ? "--measure-workspace" : "--measure", root], { stdout: "pipe", stderr: "pipe" });
     const timer = setTimeout(() => child.kill(), 10_000);
     const [output, error, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
     clearTimeout(timer);
@@ -60,14 +84,14 @@ try {
       process.exitCode = 1;
       break;
     }
-    const measured = JSON.parse(output) as { ms: number; bytes: number };
+    const measured = JSON.parse(output) as Record<string, number> & { ms: number; bytes: number };
     const elapsed = measured.ms;
     if (n === -warmups) cold = elapsed;
-    if (n >= 0) samples.push(elapsed);
+    if (n >= 0) { samples.push(elapsed); if (workspace) detailedSamples.push(measured); }
     bytes = measured.bytes;
   }
   samples.sort((a, b) => a - b);
-  if (!process.exitCode) console.log(JSON.stringify({ dataset, runtime: Bun.version, os: `${platform()} ${release()}`, cpu: cpus()[0]?.model, warmups, sampleCount, processFirstReadMs: cold, medianMs: samples[Math.floor(samples.length / 2)], p95Ms: samples[Math.ceil(samples.length * .95) - 1], payloadBytes: bytes, samplesMs: samples }, null, 2));
+  if (!process.exitCode) console.log(JSON.stringify({ dataset, surface: workspace ? "bounded-workspace" : "legacy-dashboard", runtime: Bun.version, os: `${platform()} ${release()}`, cpu: cpus()[0]?.model, warmups, sampleCount, processFirstReadMs: cold, medianMs: samples[Math.floor(samples.length / 2)], p95Ms: samples[Math.ceil(samples.length * .95) - 1], payloadBytes: bytes, samplesMs: samples, ...(workspace ? { detailedSamples } : {}), ...(keepFixture ? { fixtureRoot: root } : {}) }, null, 2));
 } finally {
-  if (fixtureRoot) await rm(fixtureRoot, { recursive: true, force: true });
+  if (fixtureRoot && !keepFixture) await rm(fixtureRoot, { recursive: true, force: true });
 }

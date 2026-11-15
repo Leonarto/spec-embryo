@@ -1,0 +1,120 @@
+{
+  "routes": {
+    "capturedAt": "2026-11-15T19:51:16.526Z",
+    "checks": [
+      {
+        "name": "overview: exact previous pane remains after failure",
+        "pass": true
+      },
+      {
+        "name": "overview: no router request or document navigation",
+        "pass": true,
+        "detail": {
+          "dataRequests": 0,
+          "navigations": 0
+        }
+      },
+      {
+        "name": "overview: Retry recovers valid projection",
+        "pass": true
+      },
+      {
+        "name": "specs: exact previous pane remains after failure",
+        "pass": true
+      },
+      {
+        "name": "specs: no router request or document navigation",
+        "pass": true,
+        "detail": {
+          "dataRequests": 0,
+          "navigations": 0
+        }
+      },
+      {
+        "name": "specs: Retry recovers valid projection",
+        "pass": true
+      },
+      {
+        "name": "timeline: exact previous pane remains after failure",
+        "pass": true
+      },
+      {
+        "name": "timeline: no router request or document navigation",
+        "pass": true,
+        "detail": {
+          "dataRequests": 0,
+          "navigations": 0
+        }
+      },
+      {
+        "name": "timeline: Retry recovers valid projection",
+        "pass": true
+      }
+    ]
+  },
+  "noScript": {
+    "capturedAt": "2026-11-15T19:51:20.565Z",
+    "checks": [
+      {
+        "name": "No-JS Tasks renders50cards",
+        "pass": true
+      },
+      {
+        "name": "No-JS shell has no unusable Refresh button",
+        "pass": true
+      },
+      {
+        "name": "No-JS page links reach disjoint next50",
+        "pass": true
+      },
+      {
+        "name": "Off-page selected spec survives exactly once in GET form",
+        "pass": true,
+        "detail": [
+          "SPEC-00001"
+        ]
+      },
+      {
+        "name": "No-JS option checkbox operates",
+        "pass": true
+      },
+      {
+        "name": "No-JS native checked state has visible mark",
+        "pass": true,
+        "detail": "rgba(117, 214, 161, 0.333)"
+      },
+      {
+        "name": "No-JS Apply preserves previous and new selected specs",
+        "pass": true,
+        "detail": [
+          "SPEC-00001",
+          "SPEC-00061"
+        ]
+      },
+      {
+        "name": "No-JS spec filtering happens before page rendering",
+        "pass": true
+      },
+      {
+        "name": "No-JS options search can discover later catalog entries",
+        "pass": true
+      },
+      {
+        "name": "Option search retains list filters",
+        "pass": true
+      },
+      {
+        "name": "Selected values stay unique after option search",
+        "pass": true,
+        "detail": [
+          "SPEC-00001",
+          "SPEC-00061"
+        ]
+      },
+      {
+        "name": "No-JS canonical detail remains reachable",
+        "pass": true
+      }
+    ]
+  }
+}
