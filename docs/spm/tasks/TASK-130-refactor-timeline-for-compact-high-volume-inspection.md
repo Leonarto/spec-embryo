@@ -5,7 +5,7 @@ title = "Refactor timeline for compact high-volume inspection"
 summary = "Preserve dependency tracing while bounding rendering and integrating the inspector."
 status = "todo"
 spec_ids = ["SPEC-062"]
-depends_on = ["TASK-128"]
+depends_on = ["TASK-128", "TASK-136"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
@@ -73,3 +73,8 @@ Propose, do not start automatically: after128 and135 commits, SolA owns129 Specs
 Reserve workspace.ts/workspace-query.ts timeline-only additions and resource validator timeline branch to130;129 consumes existing spec row/detail contracts. If129 discovers a necessary shared-file change, serialize that patch through the owner and re-review it—do not let both agents edit the same file opportunistically. Browser remains a single closed-browser handoff lease even with separate fixture servers.
 
 128 is a prerequisite for both.130 implementation and its independent regression checkpoint may run while129 proceeds, but final130 acceptance must also validate integration with129's completed question/inspector behavior; no task is marked done while that required check is pending. Root must update execution dependencies/ledger explicitly if adopting the parallel schedule. TASK131 must wait for BOTH129 and130 to pass their final gates, including combined integration; its AC01–15 matrix, Bun/Svelte coverage scopes, explicit unavailable assistive-technology checks and fresh installed-package runtime remain mandatory. Until root updates the ledger, the existing task chain remains authoritative.
+
+
+# Graph checkpoint split
+
+TASK-136 now owns the contract-preserving graph optimizations described above and must be approved/committed before this task. TASK-130 consumes that result; it still owns additive diagnostics/nonfinite placement handling, Timeline rendering, fallback paging, inspector integration and final performance evidence. This split does not certify any UI acceptance criterion early.

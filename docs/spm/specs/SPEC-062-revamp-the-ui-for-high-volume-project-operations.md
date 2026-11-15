@@ -4,9 +4,9 @@ id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
 summary = "Implement a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
 status = "active"
-task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135"]
+task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136"]
 tags = ["ui", "ux", "accessibility", "performance"]
-updated_at = "2026-11-15T20:18:45.780Z"
+updated_at = "2026-11-15T20:58:20.291Z"
 +++
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta
@@ -332,3 +332,6 @@ La revisión de TASK-125 reprodujo navegación completa ante un fallo de `invali
 ## Secuencia paralela aprobada por Astra
 
 Después de los commits revisados de TASK-127 y TASK-135, TASK-128 integra el inspector. Sus decisiones detalladas de transporte, historial, foco, modalidad y respuestas tardías están en la tarea. Tras el commit de TASK-128, TASK-129 (Specs/preguntas) y TASK-130 (Timeline/grafo) pueden implementarse en paralelo con ownership disjunto descrito en TASK-130. TASK-129 conserva el contrato público del inspector al añadir el guard de preguntas; TASK-130 sólo lo consume. La aprobación final de TASK-130 exige comprobar la integración con TASK-129 terminado. TASK-131 depende de ambos y mantiene todos los gates de aceptación. La dependencia técnica 130→128 habilita trabajo paralelo; no elimina esa comprobación final combinada.
+
+
+TASK-136 adelanta la optimización determinista de engine/dashboard con DTOs idénticos después del commit de TASK-135, aprovechando el ejecutor disponible mientras avanza la tabla. Depende funcionalmente de TASK-126. TASK-130 espera TASK-128 y TASK-136; añade los contratos de diagnóstico y el UI de Timeline después. El oráculo fijado al código anterior debe demostrar equivalencia antes de aprobar la optimización.
