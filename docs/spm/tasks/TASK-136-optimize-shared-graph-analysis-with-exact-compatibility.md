@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-136"
 title = "Optimize shared graph analysis with exact compatibility"
 summary = "Extract the independent graph optimization checkpoint from TASK-130, preserving all public DTOs and legacy results while removing recursion and repeated scans."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-126"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T20:58:20.291Z"
+completed_at = "2026-11-15T21:22:24.687Z"
 tags = ["parallel-implementation", "performance"]
-updated_at = "2026-11-15T21:05:29.593Z"
+updated_at = "2026-11-15T21:22:24.687Z"
 +++
 
 # Deterministic graph checkpoint before TASK-130
@@ -43,4 +44,4 @@ Run10k-chain and10k-task/2k-spec/30k-edge fixtures without stack overflow; measu
 
 # Verification record
 
-Pending implementation. Activate after TASK-135 is reviewed and committed; its dependency remains TASK-126 because resource scheduling is not a functional dependency.
+Implemented and independently approved by Astra, no findings. All 18 frozen hashes matched. Independent differential probe: 1000 graphs / 2000 projections, including duplicate IDs, repeated/missing edges, cycles, order, nonfinite priority inputs and frozen data. Oracle bytes match base cd01b72 exactly; executable adaptation changes only import paths. Astra recomputed coverage counters and raw benchmark statistics. Isolated full suite after SvelteKit sync: 322 pass, 0 fail, 6965 expectations. Instrumented product-only LCOV: 92.89% lines / 92.65% functions; fixture/oracle counters are separate. AGENTS/diff checks pass. Durable evidence: docs/graph-performance-task136.md, its raw JSON, docs/graph-coverage-task136.json. This checkpoint certifies unchanged graph contracts and measured calculation/IO behavior, not Timeline UI or final browser performance gates.

@@ -1,0 +1,19 @@
+{
+  "commit": "cd01b72841f7203f085708d5e08ed9224efa5cd1",
+  "files": [
+    {
+      "source": "src/engine.ts",
+      "sha256": "7e1565a50bdf24aad28dbd6c788a6a4dfd28702ac973705b5d4387ac7b8c9943",
+      "raw": "engine.ts.source",
+      "executable": "engine.ts",
+      "adaptation": "Import paths only; no behavior changes."
+    },
+    {
+      "source": "src/services/dashboard.ts",
+      "sha256": "fa23f3a595289435eef3479229109dd66736c6e82862cb2ddb62a817c5bcd4ee",
+      "raw": "dashboard.ts.source",
+      "executable": "dashboard.ts",
+      "adaptation": "Import paths only; no behavior changes."
+    }
+  ]
+}

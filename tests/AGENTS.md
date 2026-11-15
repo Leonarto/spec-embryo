@@ -7,3 +7,4 @@
 - Harness process/hook suites use temp-only installs and child/tree fixtures for capture, ownership, deadlines and cleanup; never run paid agents.
 - Native/guard/receipt suites protect bounded parsing, exact sessions, NUL paths, dirty-byte conflicts, minimal evidence, leases and canonical handoff. Synthetic fixture provenance lives in `fixtures/harness/`.
 - Workspace tests protect index parity, query/archive/paging, request reuse, payload bounds and refresh ownership. Browser evidence in `web/verification/` uses isolated fixtures.
+- Graph compatibility compares full outputs to the hash-pinned `fixtures/graph-baseline/` oracle (import-only adaptation), with frozen inputs and 10k fixtures.

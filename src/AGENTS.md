@@ -4,7 +4,7 @@ This folder contains the executable product code. Keep layering clear.
 
 - `domain.ts`: shared typed contracts and parsing helpers
 - `frontmatter.ts`, `storage.ts`, `repository.ts`: file-backed source-of-truth access
-- `engine.ts`: deterministic derivation and linking
+- `engine.ts`: deterministic derivation with iterative graphs; preserve source/dependency order, strict longest-path ties and legacy cycle/cache behavior
 - `cli.ts`, `index.ts`, `commands/`: command routing and presentation
 - `services/`: reusable deterministic product services
 - `backends/`: execution adapters behind a shared interface

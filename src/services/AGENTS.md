@@ -15,3 +15,4 @@ Reusable deterministic product services.
 - AGENTS budgets follow `.specpm/config.toml`.
 - `workspace-query.ts`/`workspace.ts`: bounded lists/options, archive/sort/paging and SSR/JSON DTOs; request-local context/index only, no global cache or dashboard facade for lists.
 - Refresh request keys encode URL intention before dataset normalization; report clamped pages and unavailable spec filters. Detail builders accept shared context; public wrappers remain compatible.
+- Dashboard/Timeline reuse projection-local indexes; first-match spec/card lookup differs intentionally from last-ID task lookup.

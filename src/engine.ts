@@ -327,50 +327,58 @@ function deriveActiveSpecIds(specs: SpecDocument[], currentState: CurrentStateDo
 
 function computeCriticalPath(tasks: TaskDocument[], index: Map<string, TaskDocument>): TaskDocument[] {
   const unfinished = tasks.filter((task) => task.status !== "done" && task.status !== "cancelled");
-  const cache = new Map<string, TaskDocument[]>();
+  // Append-only path records avoid copying every prefix of a long chain.
+  interface Path { task: TaskDocument; previous?: Path; length: number }
+  interface Frame { task: TaskDocument; next: number; best: Path }
+  const cache = new Map<string, Path>();
+  const active = new Set<string>();
 
-  function dfs(task: TaskDocument, trail: Set<string>): TaskDocument[] {
-    if (cache.has(task.id)) {
-      return cache.get(task.id)!;
-    }
-
-    if (trail.has(task.id)) {
-      return [task];
-    }
-
-    const nextTrail = new Set(trail);
-    nextTrail.add(task.id);
-
-    let best: TaskDocument[] = [task];
-    for (const dependencyId of task.dependsOn) {
-      const dependency = index.get(dependencyId);
-      if (!dependency || dependency.status === "done" || dependency.status === "cancelled") {
-        continue;
+  function pathFor(task: TaskDocument): Path {
+    const cached = cache.get(task.id);
+    if (cached) return cached;
+    const frames: Frame[] = [{ task, next: 0, best: { task, length: 1 } }];
+    active.add(task.id);
+    while (frames.length > 0) {
+      const frame = frames[frames.length - 1]!;
+      const dependencyId = frame.task.dependsOn[frame.next];
+      if (frame.next < frame.task.dependsOn.length) {
+        const dependency = index.get(dependencyId!);
+        if (!dependency || dependency.status === "done" || dependency.status === "cancelled") {
+          frame.next += 1;
+          continue;
+        }
+        // Cache precedes cycle detection, including duplicate IDs, as in the oracle.
+        const dependencyPath = cache.get(dependency.id) ?? (active.has(dependency.id) ? { task: dependency, length: 1 } : undefined);
+        if (dependencyPath) {
+          const length = dependencyPath.length + 1;
+          if (length > frame.best.length) frame.best = { task: frame.task, previous: dependencyPath, length };
+          frame.next += 1;
+        } else {
+          active.add(dependency.id);
+          frames.push({ task: dependency, next: 0, best: { task: dependency, length: 1 } });
+        }
+      } else {
+        cache.set(frame.task.id, frame.best);
+        active.delete(frame.task.id);
+        frames.pop();
       }
-
-      const candidate = [...dfs(dependency, nextTrail), task];
-      if (candidate.length > best.length) {
-        best = candidate;
-      }
     }
-
-    cache.set(task.id, best);
-    return best;
+    return cache.get(task.id)!;
   }
 
-  let overallBest: TaskDocument[] = [];
+  let overallBest: Path | undefined;
   for (const task of unfinished) {
-    const candidate = dfs(task, new Set());
-    if (candidate.length > overallBest.length) {
-      overallBest = candidate;
-    }
+    const candidate = pathFor(task);
+    if (!overallBest || candidate.length > overallBest.length) overallBest = candidate;
   }
-
-  return overallBest;
+  const result: TaskDocument[] = [];
+  for (let path = overallBest; path; path = path.previous) result.push(path.task);
+  return result.reverse();
 }
 
 export function deriveStatusSnapshot(context: ProjectContext): StatusSnapshot {
-  const taskIndex = buildTaskIndex(context.tasks);
+  const analysis = buildTaskAnalysisIndex(context.tasks);
+  const taskIndex = analysis.byId;
   const activeTaskIds = deriveActiveTaskIds(context.tasks, context.currentState);
   const activeSpecIds = deriveActiveSpecIds(context.specs, context.currentState, activeTaskIds, taskIndex);
   const activeTasks = activeTaskIds.map((taskId) => taskIndex.get(taskId)).filter((task): task is TaskDocument => Boolean(task));
@@ -378,12 +386,12 @@ export function deriveStatusSnapshot(context: ProjectContext): StatusSnapshot {
 
   const blockedTasks = context.tasks
     .filter((task) => task.status === "blocked" || (task.status === "todo" && task.dependsOn.some((dependencyId) => taskIndex.get(dependencyId)?.status !== "done")))
-    .map((task) => summarizeTaskNode(task, taskIndex))
+    .map((task) => summarizeTaskNode(task, taskIndex, analysis))
     .sort((left, right) => byPriority(left.task, right.task));
 
   const reviewTasks = context.tasks
     .filter((task) => task.status === "review")
-    .map((task) => summarizeTaskNode(task, taskIndex))
+    .map((task) => summarizeTaskNode(task, taskIndex, analysis))
     .sort((left, right) => byPriority(left.task, right.task));
 
   const readyTasks = context.tasks
@@ -392,10 +400,10 @@ export function deriveStatusSnapshot(context: ProjectContext): StatusSnapshot {
         return false;
       }
 
-      return summarizeTaskNode(task, taskIndex).unmetDependencies.length === 0;
+      return summarizeTaskNode(task, taskIndex, analysis).unmetDependencies.length === 0;
     })
     .filter((task) => !activeTaskSet.has(task.id))
-    .map((task) => summarizeTaskNode(task, taskIndex))
+    .map((task) => summarizeTaskNode(task, taskIndex, analysis))
     .sort((left, right) => byPriority(left.task, right.task));
 
   return {
