@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "The post-0.3.1 roadmap remains implemented in the working tree. Two proposed plans now evaluate native agent harness interoperability and a compact high-volume UI; implementation will use Sol 6.1 High."
-focus = "Astra High planning and independent review complete for SPEC-061 and SPEC-062; no implementation slice started."
-active_spec_ids = []
-active_task_ids = []
+summary = "Implementation is authorized. Baseline checkpoint fa025f2 preserves the previous roadmap and reviewed plans. Independent Astra research evaluates compact-code, context, review and model-routing practices."
+focus = "Implement SPEC-061 and SPEC-062 in parallel with Sol 6.1 High; Astra High owns technical decisions and UX review."
+active_spec_ids = ["SPEC-061", "SPEC-062"]
+active_task_ids = ["TASK-123", "TASK-125"]
 blocked_task_ids = []
-next_action_hints = ["Select the first implementation slice from the reviewed SPEC-061 and SPEC-062 proposals.", "Preserve existing roadmap changes while establishing the next implementation checkpoint.", "Use Astra High for technical and UX decisions; use Sol 6.1 High when executing the chosen plan."]
+next_action_hints = ["Review and commit each implementation slice before its dependent slice.", "Keep harness and UI file ownership separate; route new technical decisions to Astra High.", "Evaluate research recommendations against existing deterministic services and context budgets."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-15T18:22:55.937Z"
+updated_at = "2026-11-15T18:31:38.109Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -27,7 +27,7 @@ This file is the explicit checkpoint for interrupted work. It should answer:
 
 The post-`0.3.1` roadmap implementation is complete. `SPEC-055` through `SPEC-060` are done, and `TASK-111` through `TASK-122` are done. SpM now has user-local portfolio views, explicit cross-project links, project profiles, deterministic legacy import, `resume --since`, memory ranking controls, bounded hook planning, release planning, schema-versioned JSON outputs, compatibility tests, and self-hosting test diagnostics.
 
-There is no active implementation slice right now. `SPEC-061` and `SPEC-062` are proposed plans for native agent harness interoperability and a compact, high-volume UI. Planning, technical evaluation, and UX decisions use Astra High; execution of a chosen plan will use Sol 6.1 High. The user confirmed that UI scope is inspection, filtering, selection, and copying, preserving the existing spec-question response workflow.
+The user authorized parallel implementation of `SPEC-061` and `SPEC-062`. Sol 6.1 High implements both tracks; Astra High owns technical decisions and UX review. A separate Astra investigates implementation and context practices, including simplicity, code relationships, review and model routing. Baseline commit `fa025f2` preserves the previous roadmap and reviewed plans. UI scope remains inspection, filtering, selection, and copying, preserving the existing spec-question response workflow.
 
 ## Notes
 

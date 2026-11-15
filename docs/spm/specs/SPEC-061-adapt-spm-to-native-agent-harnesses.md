@@ -3,17 +3,17 @@ doc_kind = "spec"
 id = "SPEC-061"
 title = "Adapt SpM to native agent harnesses"
 summary = "Evaluate and plan deterministic interoperability with current Codex and Claude harnesses, preserving native orchestration and durable project memory."
-status = "proposed"
-task_ids = []
+status = "active"
+task_ids = ["TASK-123", "TASK-124"]
 tags = ["agents", "interoperability", "context"]
-updated_at = "2026-11-15T18:12:44.819Z"
+updated_at = "2026-11-15T18:31:37.412Z"
 +++
 
 # Adaptar SpM a los harnesses nativos de agentes
 
 ## Estado de la propuesta
 
-Propuesta estratégica y técnica; no autoriza implementación. El análisis usa el working tree del 15 de noviembre de 2026, incluidos los cambios existentes de SPEC-055–060. No considera esos cambios como funcionalidades pendientes por el hecho de no estar en el último commit. Las decisiones de producto se mantienen propuestas hasta la revisión y selección del siguiente slice.
+Plan estratégico y técnico revisado; el usuario autorizó su implementación el 2026-11-15. El análisis usa el working tree del 15 de noviembre de 2026, incluidos los cambios existentes de SPEC-055–060. No considera esos cambios como funcionalidades pendientes por el hecho de no estar en el último commit. Las decisiones de producto se mantienen propuestas hasta la revisión y selección del siguiente slice.
 
 ## Problema y decisión de producto
 

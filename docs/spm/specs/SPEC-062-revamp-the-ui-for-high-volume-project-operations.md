@@ -3,15 +3,15 @@ doc_kind = "spec"
 id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
 summary = "Plan a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
-status = "proposed"
-task_ids = []
+status = "active"
+task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131"]
 tags = ["ui", "ux", "accessibility", "performance"]
-updated_at = "2026-11-15T18:12:44.923Z"
+updated_at = "2026-11-15T18:31:37.627Z"
 +++
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta
 
-Estado: propuesta técnica y de diseño para iteración; no autoriza implementación. Decisión de alcance confirmada por el usuario: inspección en volumen (filtros, selección, copia) y conservar respuestas a preguntas de specs; sin edición de celdas ni mutaciones masivas. Autor de análisis, diseño y decisiones: Astra High. Ejecutor futuro: Sol 6.1 High, si el usuario encarga posteriormente implementar este plan revisado. Fecha: 2026-11-15.
+Estado: plan técnico y de diseño revisado; implementación autorizada por el usuario el 2026-11-15. Decisión de alcance confirmada por el usuario: inspección en volumen (filtros, selección, copia) y conservar respuestas a preguntas de specs; sin edición de celdas ni mutaciones masivas. Autor de análisis, diseño y decisiones: Astra High. Ejecutor futuro: Sol 6.1 High, si el usuario encarga posteriormente implementar este plan revisado. Fecha: 2026-11-15.
 
 ## Overview
 
