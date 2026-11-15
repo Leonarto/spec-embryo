@@ -134,6 +134,13 @@ Durante esta ejecución del 2026-11-15, la revisión independiente de cambios co
 | TASK-126, servicios | El round-trip de una consulta admitida perdía `option_pageSize=100` y cambiaba requestKey. | Serializar el tamaño admitido; reproducción independiente conserva 100 y la identidad normalizada. |
 | TASK-126, servicios | Comparar fechas como strings invertía el orden cronológico con offsets distintos. | Comparar instantes; fechas inválidas/vacías al final. Fixtures de Tasks y Specs verifican ascendente/descendente. |
 
+Después de esos casos, las revisiones cerraron otros dos grupos de regresiones:
+
+- **TASK-126, UI:** un refresh actualizaba filas pero conservaba títulos/conteos antiguos en el catálogo; Clear dejaba filtros pendientes si el valor aplicado no cambiaba. El fix preserva borradores durante refresh y los reinicia al limpiar. Dieciséis regresiones focalizadas y la reproducción independiente de los dos fallos pasaron antes del commit `0893166`.
+- **TASK-134:** IDs opacos con secuencias `$` cambiaban al sustituir argumentos, UTF-8 inválido en recibos devolvía una categoría de error incorrecta y enums coaccionados aceptaban arrays. La revisión exigió sustitución literal, clasificación de entrada inválida y tipos estrictos. Los repros independientes pasaron; el recheck afectado contó 26 pruebas y 269 expectativas. Los 33 archivos finales coincidieron con sus hashes antes del commit `d164e75`.
+
+Estos casos se añaden como candidatos de eval observable. No prueban que una skill o un modelo haya causado una mejora de productividad, y no activan por sí solos la instalación de las skills propuestas.
+
 Para la equivalencia del índice de TASK-126 se usó además el código real del commit base `1b1d47a` como oráculo: 300 grafos y 10 738 resúmenes coincidieron. Esto evita comparar dos rutas de la implementación nueva y confundir ese acuerdo con compatibilidad histórica. Los hashes de archivos delimitan qué versión fue revisada; cambios posteriores requieren revisar el delta.
 
 Estos casos favorecen evals de resultados observables y fallos concretos: proceso que sigue vivo, archivo que aún puede leerse, navegación real, identidad que sobrevive a serialización y orden temporal correcto. No prueban una mejora global de productividad ni ahorro de coste. La aprobación parcial de servicios de TASK-126 tampoco acredita frontend o rendimiento filesystem/HTTP; su medición de payload fue en memoria.

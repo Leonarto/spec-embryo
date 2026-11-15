@@ -76,3 +76,14 @@ Unit tests for navigation bounds, selection ranges/reconciliation, sorting max2,
 ## Tool artefacts
 
 Approve adding root-scoped `/.playwright-mcp/` to .gitignore in the current UI slice or the next appropriate commit. Local evidence: untracked page-*.yml accessibility snapshots and console-*.log with transient localhost5184/5188 browser failures created during these tests. These are tool-session outputs, not product fixtures or curated evidence. Do not delete them during active work, stage them, or move/ignore `web/verification/` and its durable screenshots/reports. No AGENTS expansion is needed solely for one ignore entry; existing verification documentation can state where durable evidence belongs.
+
+
+# Astra clarifications during implementation
+
+# TASK-127 clarifications
+
+Add `shell.project.key` as a stable opaque preference namespace, computed server-side as full hexadecimal SHA-256 of `spm-workspace-v1\0` followed by the canonical realpath of the project root (the separator is an actual NUL byte in the hash input). Resolve the root in the request/source-loading layer, not a pure projector. The same root through a symlink has the same key; distinct worktrees/roots with identical names have different keys. A moved root starts fresh preferences. Version column/density storage by key and entity kind; do not change existing theme/rail preferences. Never send the root path as this field. Update the shared DTO validator and verify SSR/refresh identity consistency plus equal-name/different-root separation.
+
+Approve two compact toolbar rows: title/count, Table/Board, search, Filters/Columns/Sort/density; then Scope/Preset and applied-filter chips. Full facets use the existing accessible details-popover and GET/Apply behavior, including no-JS support and the126 draft/reset fixes. Responsive wrapping must retain the approved visible-row budget and labeled search. Search keeps its150ms debounce/replace-history contract.
+
+Preset activation changes only scope/status and resets page to1 plus selection; preserve q, spec, priority, window, sort and pageSize. `Not archived` means unarchived with no status filter, including done/cancelled unarchived tasks. `In progress`, `Review`, `Blocked` mean unarchived plus the corresponding effective status. `All` and `Archived` set their respective scope and clear status filters. A nonmatching scope/status combination displays Custom; remaining facets remain visible as chips. All/Archived chosen from Board explicitly switch to Table, with that destination indicated in the option label. Future inspector query parameters remain preserved under128's URL contract.
