@@ -88,3 +88,8 @@ Astra requires the host/controller to centralize its actual open/close/entity/fu
 # Independent design review
 
 A second Astra approved the design after requiring one stable host/detail subtree across docked/modal changes, owned inert/focus cleanup and identity/focus/scroll/Mermaid regression checks. The final Stable mounting clarification supersedes the earlier native-dialog preference. TASK-137 owns the Specs list page in parallel; this task integrates the Tasks row consumer first. This is design approval only; implementation review remains required.
+
+
+# Initial shared-helper reservation
+
+After TASK-127 commits, TASK-137 first fixes AnalysisFilters' conditional taskScope hidden field under a short exclusive reservation. Do not edit that helper until root confirms the tiny patch is independently approved and committed; other inspector files can proceed. Then TASK-128 owns any helper changes needed to exclude inspect/section from draft-reset identity.

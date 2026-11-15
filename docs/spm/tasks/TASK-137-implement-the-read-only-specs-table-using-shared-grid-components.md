@@ -38,3 +38,10 @@ Relevant component reuse tests and Specs-specific projection/sort/archive/subset
 # Verification record
 
 Pending implementation.
+
+
+# Serialized shared-helper prerequisite (Astra)
+
+Preflight found that AnalysisFilters removes controlledNames, then unconditionally re-adds taskScope for Specs. This is not a defect in TASK-127's current consumer. After the TASK-127 commit, allow one minimal exception to this task's ownership: insert taskScope only when route is specs AND controlledNames does not include taskScope. The new Specs selector associates with the same GET form and lists taskScope in controlledNames; do not create a parallel form or duplicate values.
+
+Root will serialize this tiny helper patch and its focused test as the first reviewed/committed checkpoint of TASK-137 before TASK-128 modifies the same helper for inspector reset identity. TASK-128 may work elsewhere during that reservation. After the helper checkpoint, shared ownership returns to TASK-128; TASK-137 continues its own page/descriptor. Final integration must verify FormData.getAll(taskScope) contains exactly one value, all/unarchived/archived transitions reset page1 and preserve other facets, with JavaScript and without it.
