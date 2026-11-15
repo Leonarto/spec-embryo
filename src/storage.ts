@@ -71,6 +71,12 @@ interface LockOwnerRecord {
   heartbeat_at: string;
 }
 
+export interface LockLease {
+  readonly lockPath: string;
+  readonly token: string;
+  readonly pid: number;
+}
+
 function ownerFilePath(lockPath: string): string {
   return join(lockPath, "owner.json");
 }
@@ -169,7 +175,7 @@ async function startLockHeartbeat(lockPath: string, owner: LockOwnerRecord, stal
   };
 }
 
-export async function withLock<T>(lockPath: string, work: () => Promise<T>, options: LockOptions = {}): Promise<T> {
+export async function withLock<T>(lockPath: string, work: (lease: Readonly<LockLease>) => Promise<T>, options: LockOptions = {}): Promise<T> {
   const timeoutMs = options.timeoutMs ?? 10_000;
   const retryDelayMs = options.retryDelayMs ?? 50;
   const staleMs = options.staleMs ?? 30_000;
@@ -213,7 +219,7 @@ export async function withLock<T>(lockPath: string, work: () => Promise<T>, opti
   const stopHeartbeat = await startLockHeartbeat(lockPath, lockOwner, staleMs);
 
   try {
-    return await work();
+    return await work(Object.freeze({ lockPath, token: lockOwner.token, pid: lockOwner.pid }));
   } finally {
     await stopHeartbeat();
     await releaseLock(lockPath, lockOwner.token);

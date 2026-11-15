@@ -35,6 +35,8 @@ export interface HarnessProcessOptions {
   // The override exists for deterministic platform-contract tests, not CLI flags.
   platform?: NodeJS.Platform;
   cancellationSignal?: AbortSignal;
+  onStdoutChunk?: (chunk: Uint8Array) => void;
+  retainStdout?: boolean;
 }
 
 export async function runHarnessProcess(options: HarnessProcessOptions): Promise<HarnessInvocation> {
@@ -143,8 +145,9 @@ export async function runHarnessProcess(options: HarnessProcessOptions): Promise
 
     child.stdout?.on("data", (chunk: Buffer) => {
       received += chunk.length;
+      options.onStdoutChunk?.(chunk);
       const remaining = MAX_HARNESS_STDOUT_BYTES - retained;
-      if (remaining > 0) {
+      if (options.retainStdout !== false && remaining > 0) {
         const kept = Buffer.from(chunk.subarray(0, remaining));
         chunks.push(kept); retained += kept.length;
       }

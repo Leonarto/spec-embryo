@@ -38,6 +38,8 @@ For explicit harness troubleshooting, use `spm doctor --harness codex|claude --j
 
 Native context hooks are opt-in: preview with `spm hooks plan --harness codex|claude`, then use `hooks install/remove --harness ... --apply` only when requested. Implementation tests install only in temporary fixtures. The handler returns reference metadata, not document text; the harness retains trust/permission decisions. Never replace an ownership conflict with a forced rewrite or delete foreign handlers.
 
+Native output parsing requires an explicit matching `resume --protocol`; provider args remain user-configured. `--record` saves minimal local evidence without transcripts or proof of tests. Resume sessions only through an exact `--session-ref` receipt and a configured `{session_id}` argv token. Preview `handoff --from-run <uuid>` before an authorized `--apply`; stale/incomplete guards require new evidence, never force or automatic task completion.
+
 ## Rules
 
 - Use `spm` when it already provides the needed project-memory view.

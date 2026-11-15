@@ -6,9 +6,10 @@ Reusable deterministic product services.
 - Context-pack reports omissions; keep typed `nextInspect` and legacy refs aligned.
 - Resume: `resume-window.ts` resolves committed windows; `resume-snapshot.ts` fingerprints selected context; `resume-render.ts` bounds UTF-8 prompts. Reuse shared versioning.
 - `document-provenance.ts` hashes the Buffer parsed by repository loading. Preserve object identity; no rereads, clone hash transfer, or invented provenance.
-- `harness-process.ts` owns bounded capture/termination; `harness-artifacts.ts` owns per-run reservations and verified cleanup. Unknown trees retain files; no stale-directory sweep.
-- `harness-diagnostics.ts` projects explicit provider queries; `harness-probe.ts` owns allowlisted, bounded processes. Normal doctor and snippets never probe; root instruction inspection never certifies loading.
-- `harness-hooks.ts` plans/applies owned native entries under the repository lock; `harness-paths.ts` checks containment and atomic file writes. `harness-hook-context.ts` uses a terminable read-only worker and emits only bounded reference metadata, never document text.
+- Harness runtime/probes are bounded; artifacts are isolated. Unknown trees retain files; diagnosis is explicit.
+- Hooks preserve owned entries and contained paths; context workers emit references only.
+- `harness-native.ts` never retains transcripts; `harness-receipts.ts` requires opt-in and exact root/session identity.
+- Run handoffs use independent dirty-byte guards and a verified readonly lock lease. Only its exact untracked owner may be excluded; stale/incomplete guards never write. Evidence errors preserve process/native results.
 - Adoption surfaces share guidance and bounded snippets.
 - UI launch: packaged assets and the first available local port.
 - AGENTS budgets follow `.specpm/config.toml`.

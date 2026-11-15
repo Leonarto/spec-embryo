@@ -3,14 +3,12 @@ import { randomUUID } from "node:crypto";
 import { relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Readable } from "node:stream";
-import { parse as parseToml } from "smol-toml";
 import type { HarnessProvider } from "../domain.ts";
-import { parseProjectConfig } from "../domain.ts";
-import { loadProjectContext } from "../repository.ts";
 import { buildResumeContext } from "../engine.ts";
 import { buildResumeContextPack } from "./context-pack.ts";
 import { buildResumeSnapshot } from "./resume-snapshot.ts";
-import { containedHarnessPath, readHarnessText, resolveManagedHookRoot } from "./harness-paths.ts";
+import { containedHarnessPath, resolveManagedHookRoot } from "./harness-paths.ts";
+import { loadRootedHarnessContext } from "./harness-context.ts";
 
 export const HOOK_INPUT_MAX_BYTES = 65536;
 export const HOOK_CONTEXT_MAX_BYTES = 8192;
@@ -67,14 +65,7 @@ export function renderHookReferenceEnvelope(data: HookReferenceData): NativeCont
 }
 
 export async function buildHookReferenceData(rootDir: string): Promise<HookReferenceData> {
-  const raw = await readHarnessText(rootDir, ".specpm/config.toml");
-  if (raw === null) throw new Error("Managed marker unavailable");
-  const config = parseProjectConfig(parseToml(raw));
-  for (const path of [config.memoryDir, config.stateFile, config.specsDir, config.tasksDir, config.handoffsDir]) {
-    await containedHarnessPath(rootDir, path);
-  }
-  // Scoped/org notes do not participate in resume refs and may live outside root.
-  const project = await loadProjectContext(rootDir, { config, includeScopedMemory: false });
+  const project = await loadRootedHarnessContext(rootDir);
   const context = buildResumeContext(project);
   const pack = buildResumeContextPack(context);
   const { snapshot } = buildResumeSnapshot(project, context);

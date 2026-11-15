@@ -18,8 +18,8 @@ export function buildTestDiagnosticsBundle(): TestDiagnosticsBundle {
       {
         id: "git-worktree-state",
         risk: "git",
-        files: ["tests/repository.test.ts", "tests/status.test.ts", "tests/resume-window.test.ts", "tests/harness-context.test.ts"],
-        rerunCommand: "bun test tests/repository.test.ts tests/status.test.ts tests/resume-window.test.ts tests/harness-context.test.ts",
+        files: ["tests/repository.test.ts", "tests/status.test.ts", "tests/resume-window.test.ts", "tests/harness-context.test.ts", "tests/harness-guard.test.ts", "tests/harness-receipts.test.ts"],
+        rerunCommand: "bun test tests/repository.test.ts tests/status.test.ts tests/resume-window.test.ts tests/harness-context.test.ts tests/harness-guard.test.ts tests/harness-receipts.test.ts",
         mitigation: "Use per-test temporary repos, explicit git identity, and committed baselines before assertions.",
       },
       {
@@ -32,8 +32,8 @@ export function buildTestDiagnosticsBundle(): TestDiagnosticsBundle {
       {
         id: "subprocess-and-packaged-ui",
         risk: "process",
-        files: ["tests/backends.test.ts", "tests/harness-process.test.ts", "tests/harness-diagnostics.test.ts", "tests/harness-hooks.test.ts", "tests/hook-context.test.ts", "tests/ui.test.ts", "tests/vite-paths.test.ts"],
-        rerunCommand: "bun test tests/backends.test.ts tests/harness-process.test.ts tests/harness-diagnostics.test.ts tests/harness-hooks.test.ts tests/hook-context.test.ts tests/ui.test.ts tests/vite-paths.test.ts",
+        files: ["tests/backends.test.ts", "tests/harness-process.test.ts", "tests/harness-diagnostics.test.ts", "tests/harness-hooks.test.ts", "tests/hook-context.test.ts", "tests/harness-native.test.ts", "tests/harness-receipts.test.ts", "tests/ui.test.ts", "tests/vite-paths.test.ts"],
+        rerunCommand: "bun test tests/backends.test.ts tests/harness-process.test.ts tests/harness-diagnostics.test.ts tests/harness-hooks.test.ts tests/hook-context.test.ts tests/harness-native.test.ts tests/harness-receipts.test.ts tests/ui.test.ts tests/vite-paths.test.ts",
         mitigation: "Use temporary local executable fixtures, bounded signal deadlines, and per-run artifacts; never call paid agent APIs.",
       },
     ],

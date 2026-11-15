@@ -11,6 +11,18 @@ export type TaskStatus = (typeof TASK_STATUSES)[number];
 export type HandoffKind = (typeof HANDOFF_KINDS)[number];
 export type BackendName = (typeof BACKEND_NAMES)[number];
 export type HarnessProvider = "codex" | "claude";
+export type HarnessProtocol = "codex-jsonl" | "claude-json" | "claude-stream-json";
+
+export interface NativeHarnessResult {
+  provider: HarnessProvider;
+  protocol: HarnessProtocol;
+  session_id: string | null;
+  terminal: "completed" | "failed" | "unknown";
+  final_text: string | null;
+  final_text_truncated: boolean;
+  warnings: string[];
+  warnings_omitted: number;
+}
 export type NexusRootAgentsMode = (typeof NEXUS_ROOT_AGENTS_MODES)[number];
 export type MemoryScopeName = (typeof MEMORY_SCOPE_NAMES)[number];
 export type MemoryScopeWritePolicy = (typeof MEMORY_SCOPE_WRITE_POLICIES)[number];

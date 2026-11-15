@@ -179,6 +179,28 @@ describe("deterministic backend", () => {
 });
 
 describe("subprocess backends", () => {
+  test("replaces all token values literally, including opaque session IDs with dollar sequences", async () => {
+    const fixture = await createResumeFixture();
+    try {
+      for (const value of ["opaque$&suffix", "opaque$$suffix", "opaque$'suffix", "opaque$`suffix"]) {
+        const plan = buildSubprocessLaunchPlan("codex", {
+          enabled: true, command: "codex", args: ["before:{session_id}:after", "{prompt}", "{prompt_text}", "{prompt_bundle}",
+            "{prompt_stable_prefix}", "{prompt_variable_tail}", "{prompt_file}", "{prompt_text_file}", "{prompt_bundle_file}",
+            "{bundle_file}", "{prompt_stable_prefix_file}", "{prompt_variable_tail_file}"],
+        }, { ...fixture.resumeContext, focus: value }, {
+          rootDir: `${fixture.rootDir}/${value}`, config: fixture.config, sessionId: value,
+        });
+        expect(plan.args[0]).toBe(`before:${value}:after`);
+        expect(plan.args[1]).toBe(plan.promptText);
+        expect(plan.args[1]).toContain(value);
+        expect(plan.args.slice(1)).toEqual([plan.promptText, plan.promptText, plan.promptBundleText,
+          plan.promptStablePrefixText, plan.promptVariableTailText, plan.artifactPaths.promptTextFile,
+          plan.artifactPaths.promptTextFile, plan.artifactPaths.promptBundleFile, plan.artifactPaths.promptBundleFile,
+          plan.artifactPaths.promptStablePrefixFile, plan.artifactPaths.promptVariableTailFile]);
+      }
+    } finally { await rm(fixture.rootDir, { recursive: true, force: true }); }
+  });
+
   test("builds a preview launch plan with stable tokens and env vars", async () => {
     const fixture = await createResumeFixture();
 

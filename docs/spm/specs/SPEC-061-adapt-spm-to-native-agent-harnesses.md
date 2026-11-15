@@ -2,18 +2,18 @@
 doc_kind = "spec"
 id = "SPEC-061"
 title = "Adapt SpM to native agent harnesses"
-summary = "Evaluate and plan deterministic interoperability with current Codex and Claude harnesses, preserving native orchestration and durable project memory."
-status = "active"
+summary = "Implement deterministic native-harness interoperability: bounded context/processes, explicit diagnostics/hooks, native output and guarded execution receipts."
+status = "done"
 task_ids = ["TASK-123", "TASK-124", "TASK-132", "TASK-133", "TASK-134"]
 tags = ["agents", "interoperability", "context"]
-updated_at = "2026-11-15T18:47:28.298Z"
+updated_at = "2026-11-15T20:44:06.117Z"
 +++
 
 # Adaptar SpM a los harnesses nativos de agentes
 
-## Estado de la propuesta
+## Estado de implementación
 
-Plan estratégico y técnico revisado; el usuario autorizó su implementación el 2026-11-15. El análisis usa el working tree del 15 de noviembre de 2026, incluidos los cambios existentes de SPEC-055–060. No considera esos cambios como funcionalidades pendientes por el hecho de no estar en el último commit. P0 y P1 están autorizados para implementación por fases revisadas; P2 mantiene sus condiciones de evidencia y no se activa automáticamente.
+P0 y P1 completados mediante TASK-123, TASK-124 y TASK-132–134, con implementación Sol 6.1 High y revisión independiente Astra High. El usuario autorizó su implementación el 2026-11-15. El análisis usa el working tree del 15 de noviembre de 2026, incluidos los cambios existentes de SPEC-055–060. No considera esos cambios como funcionalidades pendientes por el hecho de no estar en el último commit. El estado done cubre P0/P1. P2 queda diferido, no activado, y mantiene sus condiciones de evidencia.
 
 ## Problema y decisión de producto
 
@@ -21,7 +21,7 @@ SpM ya ofrece memoria determinista, contexto compacto, portfolio, perfiles/impor
 
 Decisión recomendada: **harness nativo para ejecutar; SpM para intención, memoria y evidencia del proyecto**. El camino principal será que el agente invoque la CLI de SpM. Los wrappers Codex/Claude seguirán siendo opcionales y explícitos. P0 corrige contratos y defectos actuales; P1 mejora adopción y adaptación; P2 sólo se activa con evidencia de necesidad.
 
-## Evidencia del estado actual
+## Evidencia del baseline anterior a la implementación
 
 | Área | Ya existe | Brecha comprobada |
 | --- | --- | --- |
@@ -109,7 +109,7 @@ Depende de contrato P0 probado; no bloquea una entrega útil de P0.
 4. **Adaptadores estructurados opt-in.** Parser Codex JSONL y parser Claude json/stream-json separados, probados con fixtures versionados. Normalizar sólo estado terminal, referencia nativa y resultado final; ignorar campos desconocidos sin declararlos éxito. Registrar ID exacto recibido, no elegir “última sesión” implícitamente. Un ID de otro proveedor/repo se rechaza antes de ejecutar; ID no disponible obliga a nuevo contexto portable, sin fingir continuidad.
 5. **Evidencia de cierre.** Producir una propuesta de handoff con refs de spec/tarea, cambios y verificaciones observadas, asociable al snapshot inicial. Aplicar mediante workflow existente y comprobación de cambios desde esa base. No copiar transcripciones, razonamiento privado o credenciales; no inventar tests aprobados a partir de exit 0 del agente.
 
-Los detalles de flags nuevos, persistencia de referencias nativas y normalización de eventos requieren un slice propuesto aparte antes de codificar P1. No ampliar silenciosamente esta propuesta para convertirla en un sistema de ejecución completo.
+Los detalles de flags, referencias nativas y eventos se concretaron y revisaron en el contrato P1 incorporado abajo. No convertir esta integración en un sistema de ejecución completo.
 
 ## P2 y antiobjetivos
 
@@ -128,34 +128,35 @@ Fuera de alcance: scheduler propio, agente autónomo permanente, despacho multia
 | 4 | Adaptadores estructurados/evidencia, si pilotos los necesitan | Fixtures oficiales/versionadas + semántica de conflictos definida; no requisito para usar CLI nativa. |
 | 5 | Evaluar P2 | Dos proyectos piloto, evidencia concreta de limitación de P1; nueva decisión de alcance. |
 
-Actualizar docs de contrato/arquitectura, skills de adopción y AGENTS locales al implementar. Correr `bun run check:agents`, checks existentes relevantes y cobertura. Política del repo: al menos 80% global; esta propuesta no afirma haber medido ni alcanzado esa cifra.
+Actualizar docs de contrato/arquitectura, skills de adopción y AGENTS locales al implementar. Correr `bun run check:agents`, checks existentes relevantes y cobertura. Política del repo: al menos 80% global. Medición global previa a los fixes finales de TASK-134: 309 pruebas, 90.89% funciones y 91.65% líneas; recheck independiente afectado: 26 pruebas y 269 expectativas.
 
 ## Criterios de aceptación P0
 
-- [ ] Fixture con dos commits y dirty local: todos los backends reciben la misma ventana válida; bundle/text/tail la contienen; prefix no; changed_items conserva los cambios locales aparte.
-- [ ] Sin `--since`, no aparece ventana; revisión inválida produce unavailable en lectura y no genera spawn ni archivos; HEAD produce ventana vacía válida.
-- [ ] JSON legacy de resume mantiene sus claves; incorpora schema_version; stdout se parsea una sola vez incluso con un hijo que imprime texto arbitrario, falla, excede 1 MiB o recibe cancelación; cada escenario devuelve su exit code definido.
-- [ ] Dos spawns simultáneos del mismo backend leen sus propios prompts sin contaminación; preview no escribe.
-- [ ] Error de lanzamiento, exit no cero, signal, timeout y cancelación tienen resultados distintos comprobados; ninguna ruta marca tareas done.
-- [ ] Prompt dinámico no cambia stable-prefix; texto ensamblado respeta 32768 bytes por defecto y un límite válido de 4096 bytes en fixtures grandes; valores inválidos fallan con exit 2. El texto no repite el contexto completo; toda omisión produce referencias recuperables o comando de expansión y advertencia.
-- [ ] Snapshot cambia cuando cambia contenido seleccionado sin commit; mismas fuentes en dos invocaciones con reloj/run ID distinto producen la misma huella; falta de Git no impide prompt-return.
-- [ ] Artefactos se limpian al finalizar normalmente y no se eliminan los de otra ejecución; fallos preservan diagnóstico sin filtrar variables de entorno completas.
-- [ ] Tests de contratos existentes pasan, revisión sin findings bloqueantes y actualización de documentación/AGENTS completadas antes de cerrar el slice.
+- [x] Fixture con dos commits y dirty local: todos los backends reciben la misma ventana válida; bundle/text/tail la contienen; prefix no; changed_items conserva los cambios locales aparte.
+- [x] Sin `--since`, no aparece ventana; revisión inválida produce unavailable en lectura y no genera spawn ni archivos; HEAD produce ventana vacía válida.
+- [x] JSON legacy de resume mantiene sus claves; incorpora schema_version; stdout se parsea una sola vez incluso con un hijo que imprime texto arbitrario, falla, excede 1 MiB o recibe cancelación; cada escenario devuelve su exit code definido.
+- [x] Dos spawns simultáneos del mismo backend leen sus propios prompts sin contaminación; preview no escribe.
+- [x] Error de lanzamiento, exit no cero, signal, timeout y cancelación tienen resultados distintos comprobados; ninguna ruta marca tareas done.
+- [x] Prompt dinámico no cambia stable-prefix; texto ensamblado respeta 32768 bytes por defecto y un límite válido de 4096 bytes en fixtures grandes; valores inválidos fallan con exit 2. El texto no repite el contexto completo; toda omisión produce referencias recuperables o comando de expansión y advertencia.
+- [x] Snapshot cambia cuando cambia contenido seleccionado sin commit; mismas fuentes en dos invocaciones con reloj/run ID distinto producen la misma huella; falta de Git no impide prompt-return.
+- [x] Artefactos se limpian al finalizar normalmente y no se eliminan los de otra ejecución; fallos preservan diagnóstico sin filtrar variables de entorno completas.
+- [x] Tests de contratos existentes pasan, revisión sin findings bloqueantes y actualización de documentación/AGENTS completadas antes de cerrar el slice.
 
-## Decisiones pendientes antes de implementación
+## Cierre del alcance autorizado
 
-Dirección recomendada: aceptar P0 como próximo slice del área de agentes y mantener P1/P2 fuera del compromiso inicial. Los límites y política de proceso de P0 quedan definidos arriba como decisiones técnicas recomendadas para implementación. No hay estimación de calendario ni promesa de compatibilidad universal.
+P0 y P1 están implementados, revisados y documentados. Los detalles de evidencia y correcciones viven en TASK-123, TASK-124 y TASK-132–134. Los probes explícitos se comprobaron con Codex 0.169.0-alpha.11.1 y Claude 2.1.309 instalados; hooks y ejecución nativa se verificaron con fixtures aislados/sintéticos. No se instalaron hooks reales, no se hicieron llamadas pagadas y no se certifica compatibilidad universal. La suite y la cobertura global final se volverán a registrar al cerrar la integración del UI.
+
+P2 (MCP/App Server/SDK u otro transporte) no se activa por este cierre. Requiere pilotos y una limitación demostrada de P1, seguida de una decisión de alcance independiente. La investigación adicional de skills y routing conserva sus pilotos propuestos; no instala un scheduler ni una política universal de modelos.
 
 ## Revisión de planificación
 
-Revisión independiente con Astra High: **APPROVED como plan**. Se resolvieron H1 (límites de contexto/stdout, timeout, gracia y plataformas), H2 (envelope JSON de fallos y códigos de salida) y H3 (fingerprint determinista independiente del reloj y de IDs de ejecución). P0 tiene decisiones suficientes para preparar su implementación; P1/P2 requieren slices posteriores. La spec permanece `proposed`: esta revisión no implementa ni verifica el producto.
-
+La planificación fue aprobada por Astra High antes de codificar. H1 (límites/contexto/procesos), H2 (envelopes/códigos) y H3 (fingerprint) quedaron resueltos. El contrato P1 posterior se revisó antes de ejecutar sus tres tareas; la aprobación de cada implementación y sus correcciones es independiente de esa aprobación inicial del plan.
 
 # Contrato de ejecución P1 — revisión independiente aprobada
 
 # SPEC-061 P1: diseño ejecutable acotado
 
-Fecha: 2026-11-15. Autor de decisiones: Astra High. Ejecutor: Sol 6.1 High. Este documento concreta P1 bajo la autorización actual de implementar ambos planes; no modifica archivos de producto, specs ni estado. Integrador: incorporar decisiones a SPEC-061 y crear tareas después de revisión del diseño. P0 termina review/fixes/commit antes de iniciar P1.
+Fecha: 2026-11-15. Autor de decisiones: Astra High. Ejecutor: Sol 6.1 High. Este contrato concretó P1 bajo la autorización de implementar ambos planes y se incorporó tras revisión a esta spec. P0 completó revisión, correcciones y commit antes de iniciar P1.
 
 ## Decisiones y alcance
 
@@ -260,3 +261,14 @@ Cada slice termina revisión de diff congelado, tests focalizados, contratos leg
 - [Claude memoria](https://code.claude.com/docs/en/memory#agents-md): condiciones de AGENTS y coexistencia con CLAUDE; inspección estática no acredita carga efectiva.
 
 Las APIs descritas por proveedor son evidencia documental; límites, contratos CLI SpM y políticas de almacenamiento de este documento son decisiones locales de diseño.
+
+
+## Aclaraciones contractuales de P1-C durante implementación
+
+Decisiones aprobadas por Astra High, incorporadas a TASK-134:
+
+- Con `--protocol`, `invocation.output` queda vacío y una advertencia fija explica la omisión; sólo `native_result.final_text` expone texto del modelo. Se conservan conteos de bytes, truncamiento y estado del proceso. El modo genérico P0 no cambia.
+- Un session ID presente inválido (vacío, más de 512 bytes UTF-8, espacios, categorías Unicode Cc/Cf o prefijo `-`) produce ID null, warning sin eco del valor y estado de protocolo unknown fatal persistente. Un ID opcional ausente no es fatal. Cargar un recibo inválido falla con usage2 antes de ejecutar.
+- La comparación bajo lock sólo excluye el owner.json exacto del lease actual verificado por token y PID, sin seguir un symlink. No excluye archivos tracked, preobservados en guards ni otros archivos del directorio. Revalida el lease antes del write; el callback de storage recibe un lease readonly de forma aditiva y compatible.
+- Invocation unknown sin cierre confirmado del árbol produce guard incompleto con `tree-closure-unverified`. Receipt y preview conservan observaciones; apply devuelve usage2 sin escrituras aunque los hashes coincidan más tarde. No hay force ni promoción retrospectiva de ese recibo.
+- Si los bytes capturados de una fuente administrada con symlink no pueden verificarse como archivo regular en el guard, éste queda incompleto con `managed-source-bytes-unverified`, sin seguir otro target implícitamente. Un guard de code symlink certifica los bytes del enlace, no los del target no observado.

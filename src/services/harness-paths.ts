@@ -1,19 +1,19 @@
 import { constants } from "node:fs";
 import { lstat, mkdir, open, realpath, rename, rm, writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
-import { basename, dirname, isAbsolute, join, relative, resolve } from "node:path";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 
 export class HarnessPathError extends Error { readonly exitCode = 2; }
 
 function isInside(root: string, path: string): boolean {
   const local = relative(root, path);
-  return local !== ".." && !local.startsWith("../") && !local.startsWith("..\\") && !isAbsolute(local);
+  return local !== ".." && !local.startsWith(`..${sep}`) && !isAbsolute(local);
 }
 
 export async function containedHarnessPath(rootDir: string, localPath: string): Promise<string> {
   const root = await realpath(rootDir);
   if (isAbsolute(localPath) || !isInside(root, resolve(root, localPath))) throw new HarnessPathError("Path is outside the managed project root.");
-  const parts = relative(root, resolve(root, localPath)).split(/[\\/]/).filter(Boolean);
+  const parts = relative(root, resolve(root, localPath)).split(sep).filter(Boolean);
   let cursor = root;
   for (const [index, part] of parts.entries()) {
     cursor = join(cursor, part);
@@ -32,8 +32,11 @@ export async function containedHarnessPath(rootDir: string, localPath: string): 
   return cursor;
 }
 
-export async function readHarnessText(rootDir: string, localPath: string, maxBytes = 1048576): Promise<string | null> {
-  const path = await containedHarnessPath(rootDir, localPath);
+export async function readHarnessText(rootDir: string, localPath: string, maxBytes = 1048576,
+  options: { allowLeafSymlink?: boolean } = {}): Promise<string | null> {
+  const path = options.allowLeafSymlink === false
+    ? join(await containedHarnessPath(rootDir, dirname(localPath)), basename(localPath))
+    : await containedHarnessPath(rootDir, localPath);
   let handle;
   try {
     if (!(await lstat(path)).isFile()) throw new HarnessPathError("Expected a regular project file.");

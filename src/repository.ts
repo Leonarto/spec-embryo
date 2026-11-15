@@ -1066,8 +1066,9 @@ export async function writeHandoff(
     author: string;
     body: string;
   },
+  options: { config?: ProjectConfig } = {},
 ): Promise<string> {
-  const config = await readProjectConfig(rootDir);
+  const config = options.config ?? await readProjectConfig(rootDir);
   const paths = resolveProjectPaths(rootDir, config);
   const slug = handoff.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const fileName = `${handoff.createdAt.replace(/[:]/g, "-")}--${slug || "handoff"}.md`;

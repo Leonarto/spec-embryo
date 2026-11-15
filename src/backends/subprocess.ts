@@ -8,7 +8,7 @@ import { cleanupHarnessArtifacts, markHarnessArtifacts, reserveHarnessArtifacts,
 function replaceToken(token: string, replacements: Record<string, string>): string {
   let output = token;
   for (const [key, value] of Object.entries(replacements)) {
-    output = output.replaceAll(`{${key}}`, value);
+    output = output.replaceAll(`{${key}}`, () => value);
   }
   return output;
 }
@@ -31,6 +31,7 @@ export interface SubprocessLaunchPlan {
   };
   env: Record<string, string>;
   artifactPathsAreTemplates: boolean;
+  protocol?: BackendRunOptions["protocol"];
 }
 
 function buildArtifactPaths(rootDir: string, backend: BackendName, artifactDirectory?: string): SubprocessLaunchPlan["artifactPaths"] {
@@ -69,6 +70,7 @@ export function buildSubprocessLaunchPlan(
     prompt_stable_prefix_file: artifactPaths.promptStablePrefixFile,
     prompt_variable_tail_file: artifactPaths.promptVariableTailFile,
     bundle_file: artifactPaths.promptBundleFile,
+    ...(options.sessionId !== undefined ? { session_id: options.sessionId } : {}),
   };
 
   const command = backendConfig.command ?? null;
@@ -96,6 +98,7 @@ export function buildSubprocessLaunchPlan(
     artifactPaths,
     env,
     artifactPathsAreTemplates: !artifactDirectory,
+    ...(options.protocol ? { protocol: options.protocol } : {}),
   };
 }
 
@@ -105,6 +108,7 @@ function renderPreviewText(plan: SubprocessLaunchPlan): string {
   return [
     `${plan.backend} backend is configured but not spawned.`,
     "Re-run with --spawn to invoke the subprocess adapter.",
+    ...(plan.protocol ? [`Native protocol: ${plan.protocol}. Configure native output flags explicitly; SpM adds no provider flags.`] : []),
     "",
     "Command preview:",
     commandLine,
@@ -167,6 +171,8 @@ export abstract class SubprocessBackend implements ResumeBackend {
         prompt_text: plan.promptText,
         prompt_stable_prefix: plan.promptStablePrefixText,
         prompt_variable_tail: plan.promptVariableTailText,
+        ...(options.protocol ? { protocol: options.protocol,
+          protocol_requirements: "Configure native output flags explicitly; SpM adds no provider flags." } : {}),
       };
 
       return {
@@ -196,7 +202,9 @@ export abstract class SubprocessBackend implements ResumeBackend {
     }
     if (!invocation) {
       invocation = await runHarnessProcess({ command: plan.command!, args: plan.args, cwd: options.rootDir,
-        env: plan.env, captureStdout: !!options.json, timeoutMs: options.timeoutMs, cancellationSignal: options.cancellationSignal });
+        env: plan.env, captureStdout: !!options.json || !!options.protocol, timeoutMs: options.timeoutMs,
+        cancellationSignal: options.cancellationSignal, onStdoutChunk: options.onStdoutChunk, retainStdout: !options.protocol });
+      if (options.protocol) invocation.warnings.push("Raw stdout omitted for selected native protocol; see native_result.");
     }
     let retained = !!reservation;
     if (reservation && !options.retainArtifacts && invocation.state !== "unknown") {
