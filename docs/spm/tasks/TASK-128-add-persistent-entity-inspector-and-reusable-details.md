@@ -79,6 +79,18 @@ The host implements modal focus containment and Tab/Shift+Tab cycling, Escape th
 
 Gate128 must verify the same DOM node identities, internal focus, reader scroll and rendered Mermaid subtree through dock→overlay→dock.129 later adds the draft-specific case;128 must not implement unused form state to pass its reader case.
 
+## Integration and shared visual refinement
+
+Approve one host/controller in +layout, rendered within WorkspaceShell main; initialize its context before route children. Tasks registers current rows/focus/scroll with cleanup. Layout.server loads optional inspector detail only on exact list routes /tasks, /specs and /timeline, through the same request-local source Promise used by page loaders. Canonical detail routes retain their own thin load. Shallow identity/section transitions must not reseed old SSR results.
+
+TaskDetail/SpecDetail gain presentation=inspector for compact metadata/spacing and persistent section anchors; do not implement destructive tab mounts. Questions in the inspector remain a genuine canonical-page link until129. Common styles must modernize BOTH page and inspector: solid semantic surfaces, body typography for data, thin borders, appropriate focus/control contrast, no decorative gradient/translucent card surfaces or heavy card shadows. Preserve canonical content/order and question action behavior. Canonical question controls may receive the common visual skin now, but draft/revision/write semantics remain129.135 certified extraction parity only; its preserve-styles instruction ends here and the detail AGENT must be updated accordingly. Audit canonical and inspector views in both themes/desktop/mobile;131 validates the combined result, not an undisclosed carryover of legacy visual debt.
+
+### Lazy component bridge for SSR and hydration
+
+Approve +layout.ts universal load resolving the detail component via import() only when +layout.server data contains a valid SSR inspector. Return the component from universal data, never server data or a JSON envelope. Installed SvelteKit supports this separation: types/index.d.ts Load output is Record<string,unknown>, and runtime/server/page/load_data.js207–257 passes server data into universal load then returns its result for rendering. The client universal load independently resolves the same module during hydration; use the server-provided DTO, no second detail fetch.
+
+Closed lists must not execute detail/Mermaid imports or pull them through a static barrel. JS opening waits for module and DTO under the same identity/generation, with skeleton until both resolve. Stale module completion cannot replace a new entity; module errors remain local with Retry/canonical link, including SSR where the list remains available. Code-module import caching is allowed; it is not a global project context cache. Section/docking changes do not reimport or remount. Gate closed-list import/network closure, direct inspector SSR/noJS, no duplicate hydration fetch and delayed/failed module races.
+
 
 # Integration seam for question drafts
 

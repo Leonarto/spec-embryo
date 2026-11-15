@@ -37,7 +37,7 @@ Relevant component reuse tests and Specs-specific projection/sort/archive/subset
 
 # Verification record
 
-Pending implementation.
+Shared-helper prerequisite independently approved and committed as c546f10: 2 focused SSR tests / 38 expectations pass, exact two-file hashes matched, Svelte check 0 errors/warnings. The table consumer and its verification remain in progress; the task is not complete.
 
 
 # Serialized shared-helper prerequisite (Astra)

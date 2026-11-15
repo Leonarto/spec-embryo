@@ -7,9 +7,9 @@ focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation a
 active_spec_ids = ["SPEC-062"]
 active_task_ids = ["TASK-128", "TASK-137"]
 blocked_task_ids = []
-next_action_hints = ["TASK-137 first applies and reviews the minimal shared filter prerequisite; TASK-128 can work elsewhere until that helper is released.", "Implement inspector TASK-128 and read-only Specs table TASK-137 with disjoint ownership; review and commit each before TASK-129 consumes them.", "TASK-129 question guards and TASK-130 Timeline then run in parallel; TASK-131 validates their final integration."]
+next_action_hints = ["Shared filter prerequisite approved and committed as c546f10; inspector and Specs table now implement in disjoint files.", "Independently review and commit TASK-128 and TASK-137 before TASK-129 combines them.", "TASK-129 guarded questions and TASK-130 Timeline then run in parallel; TASK-131 validates final integration."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-15T21:56:01.896Z"
+updated_at = "2026-11-15T22:03:36.310Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
