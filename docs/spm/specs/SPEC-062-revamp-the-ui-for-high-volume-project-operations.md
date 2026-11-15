@@ -2,7 +2,7 @@
 doc_kind = "spec"
 id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
-summary = "Plan a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
+summary = "Implement a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
 status = "active"
 task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135"]
 tags = ["ui", "ux", "accessibility", "performance"]
@@ -11,7 +11,7 @@ updated_at = "2026-11-15T20:18:45.780Z"
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta
 
-Estado: plan técnico y de diseño revisado; implementación autorizada por el usuario el 2026-11-15. Decisión de alcance confirmada por el usuario: inspección en volumen (filtros, selección, copia) y conservar respuestas a preguntas de specs; sin edición de celdas ni mutaciones masivas. Autor de análisis, diseño y decisiones: Astra High. Ejecutor futuro: Sol 6.1 High, si el usuario encarga posteriormente implementar este plan revisado. Fecha: 2026-11-15.
+Estado: plan técnico y de diseño revisado; implementación autorizada por el usuario el 2026-11-15. Decisión de alcance confirmada por el usuario: inspección en volumen (filtros, selección, copia) y conservar respuestas a preguntas de specs; sin edición de celdas ni mutaciones masivas. Autor de análisis, diseño y decisiones: Astra High. Implementación en curso: Sol 6.1 High, con revisión técnica y UX independiente de Astra High. Fecha: 2026-11-15.
 
 ## Overview
 
@@ -21,7 +21,7 @@ La referencia a Excel se concreta en encabezados estables, columnas alineadas, o
 
 Artefacto visual: [concepto estático SVG](assets/SPEC-062-ui-concept.svg) y [preview PNG](assets/SPEC-062-ui-concept.png). Es diseño propuesto con datos ilustrativos, no screenshot del producto implementado.
 
-## Context y auditoría comprobada
+## Context y auditoría del baseline de planificación
 
 Inspección del working tree actual, no sólo de HEAD. `bun run spm status`, `spec list`, `task list`: 60 specs y 122 tareas terminadas; ninguna slice activa. Hay cambios preexistentes, incluidas memorias y servicios: preservarlos y no incluirlos accidentalmente en commits del revamp. Este documento no afirma haber medido el rendimiento ni haber ejecutado auditoría visual en navegador.
 
@@ -271,7 +271,7 @@ Cada fase termina en review real, arreglos, comprobaciones y commit del slice an
 | P6: timeline y volumen | Extraer timeline, ticks acotados, ventana si >500 filas, drawer integrado, diagnóstico grafo | P4+P2; validar P5 | Relaciones/directas/transitivas sin regresión; cadena grande no stack overflow; presupuesto perf |
 | P7: cierre | QA completa, AGENTS/doc/handoff, smoke paquete global, artefactos comparativos | P1–P6 | Todos AC; review resuelta; cobertura y check:agents |
 
-Los nombres de tareas son descomposición propuesta, no tareas marcadas done. No asignar duraciones sin baseline/estimación de ejecución. P2 puede diseñarse mientras se valida P1, pero no iniciar agentes adicionales sin autorización.
+El estado de cada fase se registra en las tareas enlazadas; esta tabla define dependencias y gates, no certifica su finalización. No asignar duraciones sin baseline/estimación de ejecución. El usuario autorizó el trabajo paralelo con los roles de modelos indicados; los gates de dependencias y revisión siguen vigentes.
 
 ## Tests y verificación
 
@@ -311,7 +311,7 @@ Astra define los siguientes defaults de diseño, abiertos a feedback visual del 
 2. Drawer docked cuando cabe, rail colapsado por defecto, fila compacta 32 px y opción cómoda 40 px.
 3. Dirección mineral/verde con claro, oscuro y sistema, reflejada en el SVG propuesto.
 
-No quedan preguntas de alcance bloqueantes para entregar la planificación. El estado proposed indica que el producto no está implementado. Las decisiones técnicas descritas pertenecen a Astra; Sol ejecutará el plan si el usuario lo solicita en el siguiente encargo y elevará decisiones nuevas a Astra.
+No quedan preguntas de alcance bloqueantes. El usuario autorizó implementar el plan y la spec está active: P1/shell y P2/consultas compartidas están aprobados y committed (TASK-125/126); tablas, drawer, preguntas, timeline y verificación final siguen en curso o pendientes. Astra toma las decisiones técnicas y Sol implementa, elevando las decisiones nuevas.
 
 ## Mantenimiento de instrucciones al ejecutar
 
@@ -327,3 +327,8 @@ Baseline verificada por el revisor: `bun run web:check` PASS, 0 errores/0 warnin
 ## Ajuste de secuencia durante implementación (Astra, 2026-11-15)
 
 La revisión de TASK-125 reprodujo navegación completa ante un fallo de `invalidateAll`. La acción nueva de refrescar se retira de P1 y se implementa en P2/TASK-126 sobre DTOs compartidos, con conservación de datos/scroll/foco y aviso de reintento ante error. P1 no acredita refresh in-place; no cambia el objetivo final del revamp.
+
+
+## Secuencia paralela aprobada por Astra
+
+Después de los commits revisados de TASK-127 y TASK-135, TASK-128 integra el inspector. Sus decisiones detalladas de transporte, historial, foco, modalidad y respuestas tardías están en la tarea. Tras el commit de TASK-128, TASK-129 (Specs/preguntas) y TASK-130 (Timeline/grafo) pueden implementarse en paralelo con ownership disjunto descrito en TASK-130. TASK-129 conserva el contrato público del inspector al añadir el guard de preguntas; TASK-130 sólo lo consume. La aprobación final de TASK-130 exige comprobar la integración con TASK-129 terminado. TASK-131 depende de ambos y mantiene todos los gates de aceptación. La dependencia técnica 130→128 habilita trabajo paralelo; no elimina esa comprobación final combinada.

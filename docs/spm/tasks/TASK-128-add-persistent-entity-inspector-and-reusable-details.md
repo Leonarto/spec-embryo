@@ -35,3 +35,38 @@ Pending implementation. No acceptance criterion is claimed complete yet.
 # Missing detail contract
 
 Astra assigns HTTP404 for missing full-page task/spec GET routes and a coherent not-found presentation to this slice. A missing inspector entity shows a local not-found state while preserving the list. TASK-126 deliberately retained the legacy200+found:false GET behavior. Do not alter the existing question POST action as part of this HTTP correction.
+
+
+# Detailed Astra implementation decisions
+
+# TASK-128 — Astra decisions closing implementation branches
+
+Implement after127 and canonical-detail extraction135 are reviewed/committed. No new dependency. Reuse their table, focus coordinates, canonical detail components and existing deterministic DTOs. Questions remain a canonical-page link until129's dirty/conflict guards are ready.
+
+## Transport, URL and SSR
+
+- Add one read-only GET `/workspace-detail?kind=task|spec&id=...`. Validate kind and canonical ID before loading. A shared server helper projects existing detail DTO from the request-local context/index; both SSR page loads and this endpoint use it. Envelope carries schemaVersion1, kind/id identity, revision/generatedAt and detail. HTTP404 + typed found:false for missing entity,500 for read failure; no-store. Never call buildDashboardData. Details cannot change list/archive/trace state.
+- Explicitly choose SvelteKit shallow pushState/replaceState ONLY for inspector open/close/entity/section changes. These APIs are present in installed2.55.0 types (types/index.d.ts3106/3111), so no version assumption/new router is needed. Normal filters/pages/routes still use existing links/goto. Plain identity activation intercepts to inspector; modified/middle clicks keep canonical detail href.
+- The server reconstructs a direct `/tasks?...&inspect=spec:SPEC-ID&section=document` URL: thin list + selected detail use the same request source. With no JS, render readable inline detail and normal Close/canonical links; no dead modal controls. URL, not history.state, determines entity/section. Invalid inspect is omitted; invalid section defaults overview.
+- Separate list request identity from inspector identity. inspect/section must not change the list data key or cause WorkspaceResource to reseed an old SSR envelope on every shallow URL update. Add an explicit URL-retarget path for same-list-intent changes while retaining snapshot/error/pending/selection/scroll. True list-query navigation continues to seed new server data. Likewise filter draft reset keys exclude inspect/section; opening the inspector must not erase unsubmitted filters. selected_task remains part of Timeline data intent and independent of inspect.
+- Opening via JS fetches only detail; section changes do not fetch again. SSR seeds matching identity without a duplicate immediate fetch. New identity aborts prior request, advances generation and shows its own skeleton immediately; never old body under new title. Validate identity/envelope before commit; late success/error cannot overwrite current state. Reuse15s deadline/owned cancellation conventions, Retry only detail. Manual/focus workspace refresh may also refresh an open clean read-only detail; keep old same-identity content on failure with its own stale notice. No background refresh or form mutation of dirty question inputs is introduced before129.
+
+## History and focus
+
+Use a namespaced App.PageState record plus a session-memory entry ledger, preserving unrelated page.state fields. Store verified predecessor entry ID+URL and opener row ID/column key/scroll coordinates when app pushes an inspector entry. Do not infer history ownership from history.length or query presence. On reload/direct entry, absence of the in-memory ledger means predecessor is unverified.
+
+Open pushes once. Previous/next visible entity, relation navigation and section changes replace current inspector entry; relation breadcrumb is local to the inspector. Close uses Back only if the ledger proves the immediate predecessor is exactly current route/query with inspect/section removed. After filter/page/trace navigation, invalidate that shortcut unless exact proof still exists; otherwise replace current URL without inspector, preserving every other current parameter. Test open→filter→close→Back/Forward; it must not rewind filters when closing. Escape follows popup→inspector precedence and leaves selection intact.
+
+Store opener by stable ID/key rather than DOM node. On open, focus the inspector heading (tabindex−1); after successful body load keep that focus unless the user moved it. On close/Back, restore opener cell if visible; otherwise nearest surviving row or table heading, with an announcement. Do not focus body or force a former row back into a changed filter. A delayed response cannot steal focus after the user moved to the list. Opening/docking may reduce available width but preserves both scroll positions.
+
+Use the spec's width rules, based on CSS viewport AND actual workspace width: dock only >=1200 and table region>=560 after a360–640 drawer (initial440); otherwise overlay, full-screen below768. Docked is aside/no trap/no inert. Overlay is a dialog with modal semantics, background inert, cyclic Tab containment and Escape close. Prefer native dialog.showModal for the overlay, inline aside for docked; handle cancel through the same close/history action. Breakpoint changes retain entity and scroll, remove inert on leaving modal, and move focus into the modal if it was outside. Resize separator has min/max/current aria values, arrows16px, Home/End and width menu; no pointer-only behavior. F6/Shift+F6 cycles toolbar/grid/inspector in docked mode, stays within modal when modal.
+
+## Canonical404 and integration surface
+
+Correct canonical task/spec GET status here: use SvelteKit404 with a route error view retaining the root shell and a shared not-found presentation/back link. Do not change the shared detail service's found:false contract or question POST action. Avoid a global error boundary that replaces the workspace. Inspector404 remains local, list operable.
+
+Expose one reusable inspector host/controller and link activation helper to129/130. Host owns transport/history/focus/responsive state; content components own presentation only. Detail fields and links remain read-only in128. No speculative inspector primitives without a consumer; task list and canonical detail pages supply the first consumers.
+
+## Required targeted gate
+
+Direct URL/SSR/no-JS, keyboard open/close, modified clicks, desktop no-trap/mobile trap and resize/reflow; A→B delayed response,404/500/timeout/retry; open→filter→close→Back/Forward; reload with unowned history; outside-filter identity; selected_task unaffected by inspect; filter drafts/table selection/scroll preserved across inspector-only URL changes; no duplicate initial fetch and no list data request on inspector-only JS transitions. Warm detail latency remains measured, not assumed from service timing. Keep later129 dirty-form requirements explicit.
