@@ -1,11 +1,14 @@
 <script lang="ts">
-  import {onMount,untrack} from 'svelte';
+  import {workspaceURL} from '../../lib/workspace/location.svelte.ts';
+  import {onMount,untrack,tick} from 'svelte';
   import {page} from '$app/state';
   import {goto} from '$app/navigation';
   import type {WorkspaceEnvelope,WorkspaceTaskRow} from '../../../../src/services/workspace.ts';
-  import {normalizeViewQuery,serializeViewQuery,type TaskSortKey,type WorkspaceTaskQuery} from '../../../../src/services/workspace-query.ts';
+  import {normalizeViewQuery,serializeViewQuery,workspaceListURL,type TaskSortKey,type WorkspaceTaskQuery} from '../../../../src/services/workspace-query.ts';
   import {TASK_STATUSES} from '../../../../src/domain.ts';
   import {useWorkspaceResource} from '../../lib/workspace/resource.svelte.ts';
+  import {getInspector} from '../../lib/inspector/controller.svelte.ts';
+  import type {InspectorOpener} from '../../lib/inspector/history.ts';
   import AnalysisFilters from '../../lib/components/AnalysisFilters.svelte';
   import MultiSelectDropdown from '../../lib/components/MultiSelectDropdown.svelte';
   import SelectDropdown from '../../lib/components/SelectDropdown.svelte';
@@ -22,22 +25,24 @@
   import {idsToText,rowsToTsv,spreadsheetText} from '../../lib/components/data-table/clipboard.ts';
   import {HEADER_ROW,type FocusedCell,type TableSort} from '../../lib/components/data-table/types.ts';
   let {data}=$props();
+  const inspector=getInspector();
   const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'tasks'>);
   const workspace=$derived(resource.snapshot),dashboard=$derived(workspace.data),rows=$derived(dashboard.result.rows);
   const query=$derived(dashboard.result.normalizedQuery as WorkspaceTaskQuery);
-  const view=$derived(dashboard.view),simple=$derived(normalizeViewQuery('tasks',page.url.searchParams).simple);
+  const view=$derived(dashboard.view),simple=$derived(normalizeViewQuery('tasks',workspaceURL().searchParams).simple);
   let mounted=$state(false),coarse=$state(false),viewport=$state(0),preferences=$state(defaultTablePreferences(taskColumns));
   const columns=$derived(renderedColumns(preferences,taskColumns,viewport).map(column=>column.key==='select'&&coarse?{...column,width:44}:column));
   let selected=$state(new Set<string>()),anchor=$state<string|undefined>(),focused=$state<FocusedCell>(untrack(()=>defaultFocus(rows.map(row=>row.id),columns.map(column=>column.key))));
   let feedback=$state(''),fallback=$state<string|undefined>(),search=$state(untrack(()=>query.q)),table=$state<DataTable<WorkspaceTaskRow>>(),toolbar:HTMLElement,searchInput:HTMLInputElement;
   let searchTimer:ReturnType<typeof setTimeout>|undefined;
-  let sourceURL=untrack(()=>page.url.href),selectionKey=untrack(()=>listIntent());
+  let boardFocusId:string|undefined;
+  let sourceURL=untrack(()=>workspaceListURL(workspaceURL())),selectionKey=untrack(()=>listIntent());
   const statusOptions=TASK_STATUSES.map(value=>({value,label:value.replaceAll('_',' ')}));
   const scopes=[{value:'unarchived',label:'Not archived'},{value:'all',label:'All tasks'},{value:'archived',label:'Archived'}];
   const presetLabels:Record<string,string>={unarchived:'Not archived',all:'All',archived:'Archived',in_progress:'In progress',review:'Review',blocked:'Blocked',custom:'Custom'};
   const preset=$derived(query.statuses.length===0?query.scope:query.scope==='unarchived'&&query.statuses.length===1&&['in_progress','review','blocked'].includes(query.statuses[0]!)?query.statuses[0]:'custom');
-  function listIntent(){const value=normalizeViewQuery('tasks',page.url.searchParams);return JSON.stringify([value.view,value.list]);}
-  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('tasks',page.url.searchParams);value.list={...query};update(value);return `/tasks?${serializeViewQuery(value)}`;}
+  function listIntent(){const value=normalizeViewQuery('tasks',workspaceURL().searchParams);return JSON.stringify([value.view,value.list]);}
+  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('tasks',workspaceURL().searchParams);value.list={...query};update(value);return `/tasks?${serializeViewQuery(value)}`;}
   function navigate(url:string,replaceState=false){return goto(url,{replaceState,keepFocus:true,noScroll:true});}
   function sortChange(sort:TableSort[]){void navigate(href(value=>{value.list={...query,page:1,sort:sort.map(item=>({...item,key:item.key as TaskSortKey}))};}));}
   function sortHref(key:string){return href(value=>{value.list={...query,page:1,sort:toggleTableSort(query.sort,key).map(item=>({...item,key:item.key as TaskSortKey}))};});}
@@ -50,17 +55,31 @@
   function searchChanged(){clearTimeout(searchTimer);searchTimer=setTimeout(()=>{void navigate(href(value=>{value.list={...query,q:search,page:1};}),true);},150);}
   function setPreset(value:string){if(value==='custom')return;void navigate(href(next=>{const scoped=['all','archived','unarchived'].includes(value);next.list={...query,page:1,scope:scoped?value as WorkspaceTaskQuery['scope']:'unarchived',statuses:scoped?[]:[value as WorkspaceTaskQuery['statuses'][number]]};if(['all','archived'].includes(value))next.view='table';}));}
   function apply(event:SubmitEvent){event.preventDefault();clearTimeout(searchTimer);const form=event.currentTarget as HTMLFormElement;const params=new URLSearchParams(new FormData(form) as unknown as URLSearchParams);void navigate(`/tasks?${params}`);}
-  function regionKeys(event:KeyboardEvent){if(event.key!=='F6'||event.ctrlKey||event.metaKey||event.altKey)return;const active=document.activeElement;if(toolbar?.contains(active)){event.preventDefault();table?.focusCurrent();}else if((active as Element)?.closest('[data-table-grid]')){event.preventDefault();searchInput?.focus();}}
-  $effect(()=>{const next=page.url.href;if(next!==sourceURL){sourceURL=next;clearTimeout(searchTimer);search=normalizeViewQuery('tasks',page.url.searchParams).list?.q??'';}});
-  $effect(()=>{const key=listIntent();if(key!==selectionKey){selectionKey=key;untrack(clearSelection);}else{const next=reconcileSelection(rows.map(row=>row.id),untrack(()=>selected),untrack(()=>anchor));if(next.removed){selected=next.selected;anchor=next.anchor;feedback=`${next.removed} selected rows left this page.`;}}});
+  function regionKeys(event:KeyboardEvent){if(inspector.identity)return;if(event.key!=='F6'||event.ctrlKey||event.metaKey||event.altKey)return;const active=document.activeElement;if(toolbar?.contains(active)){event.preventDefault();focusList();}else if(listRegion(active as Element|null)==='grid'){event.preventDefault();searchInput?.focus();}}
+  $effect(()=>{const next=workspaceListURL(workspaceURL());if(next!==sourceURL){sourceURL=next;clearTimeout(searchTimer);search=normalizeViewQuery('tasks',workspaceURL().searchParams).list?.q??'';}});
+  $effect(()=>{const key=listIntent();if(key!==selectionKey){selectionKey=key;untrack(clearSelection);if(inspector.identity)void tick().then(()=>{const pane=document.querySelector<HTMLElement>('[data-table-grid]');if(pane){pane.scrollTop=0;pane.scrollLeft=0;}inspector.focusToolbar();});}else{const next=reconcileSelection(rows.map(row=>row.id),untrack(()=>selected),untrack(()=>anchor));if(next.removed){selected=next.selected;anchor=next.anchor;feedback=`${next.removed} selected rows left this page.`;}}});
   $effect(()=>{const key=workspace.shell.project.key;if(mounted){preferences=parseTablePreferences(localStorageValue(tableStorageKey(key,'task')),taskColumns);}});
   function localStorageValue(key:string){try{return localStorage.getItem(key);}catch{return null;}}
   $effect(()=>{const value=preferences,key=workspace.shell.project.key;if(mounted)try{localStorage.setItem(tableStorageKey(key,'task'),JSON.stringify(value));}catch{/* Ephemeral preferences remain usable. */}});
+  function boardAnchors(){return Array.from(document.querySelectorAll<HTMLAnchorElement>('.board [data-entity-id] .task-id'));}
+  function boardId(anchor:Element){return anchor.closest<HTMLElement>('[data-entity-id]')?.dataset.entityId;}
+  function focusList(){if(view!=='board'){table?.focusCurrent();return;}const targets=boardAnchors(),target=targets.find(anchor=>boardId(anchor)===boardFocusId)??targets[0];if(target){target.focus({preventScroll:true});target.scrollIntoView({block:'nearest',inline:'nearest'});}else searchInput?.focus();}
+  function listRegion(element:Element|null):'toolbar'|'grid'|undefined {if(toolbar?.contains(element))return 'toolbar';if(view==='board'&&element?.closest('.board')){const id=element.closest<HTMLElement>('[data-entity-id]')?.dataset.entityId;if(id)boardFocusId=id;return 'grid';}return element?.closest('[data-table-grid]')?'grid':undefined;}
+  function captureOpener(id:string,columnKey:string):InspectorOpener {const pane=document.querySelector<HTMLElement>(view==='board'?'.board':'[data-table-grid]'),frame=document.querySelector<HTMLElement>('.view-frame');if(view==='board')boardFocusId=id;return {rowId:id,columnKey: view==='board'?'id':columnKey,rowIndex:view==='board'?boardAnchors().findIndex(anchor=>boardId(anchor)===id):rows.findIndex(row=>row.id===id),listKey:workspace.requestKey,tableScroll:{top:pane?.scrollTop??0,left:pane?.scrollLeft??0},viewScroll:{top:frame?.scrollTop??0,left:frame?.scrollLeft??0}};}
+  function restoreScroll(opener:InspectorOpener|undefined){if(opener?.listKey!==workspace.requestKey)return;const pane=document.querySelector<HTMLElement>(view==='board'?'.board':'[data-table-grid]'),frame=document.querySelector<HTMLElement>('.view-frame');if(pane){pane.scrollTop=opener.tableScroll.top;pane.scrollLeft=opener.tableScroll.left;}if(frame){frame.scrollTop=opener.viewScroll.top;frame.scrollLeft=opener.viewScroll.left;}}
+  function restoreOpener(opener:InspectorOpener|undefined){
+    if(view==='board'){void tick().then(()=>{const targets=boardAnchors(),same=targets.find(anchor=>boardId(anchor)===opener?.rowId),target=same??targets[Math.min(Math.max(0,opener?.rowIndex??0),targets.length-1)];restoreScroll(opener);if(target){boardFocusId=boardId(target);target.focus({preventScroll:true});if(!same)target.scrollIntoView({block:'nearest',inline:'nearest'});}else{searchInput?.focus();}if(!same)inspector.announce(target?'The inspected card is no longer visible. Focus moved to the nearest task card.':'No task cards remain. Focus returned to the toolbar.');});return;}
+    const match=rows.find(row=>row.id===opener?.rowId),row=match??rows[Math.min(Math.max(0,opener?.rowIndex??0),rows.length-1)];
+    if(!row){const heading=toolbar?.querySelector('h1');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});inspector.announce('The inspected row is no longer on this page. Focus returned to Tasks.');return;}
+    focused={rowId:row.id,columnKey:columns.some(column=>column.key===opener?.columnKey)?opener!.columnKey:'id'};
+    void tick().then(()=>{restoreScroll(opener);table?.focusCurrent();if(!match)inspector.announce('The inspected row is no longer visible. Focus moved to the nearest task on this page.');});
+  }
+  onMount(()=>inspector.registerList({kind:'task',ids:()=>rows.map(row=>row.id),capture:captureOpener,restore:restoreOpener,focusToolbar:()=>searchInput?.focus(),focusGrid:focusList,regionFor:listRegion}));
   onMount(()=>{mounted=true;const media=matchMedia('(pointer:coarse)'),update=()=>coarse=media.matches;update();media.addEventListener('change',update);return ()=>{clearTimeout(searchTimer);media.removeEventListener('change',update);};});
 </script>
 <svelte:head><title>{workspace.shell.project.name} Tasks</title></svelte:head>
 <svelte:window onkeydown={regionKeys}/>
-<div class="tasks-workspace">
+<div class="tasks-workspace" class:board-enhanced={mounted&&view==='board'} class:inspecting={!!inspector.identity}>
   <header class="tasks-toolbar" bind:this={toolbar}>
     <div class="toolbar-main">
       <h1>Tasks <span>{dashboard.result.totalMatching}</span></h1>
@@ -81,11 +100,15 @@
   </header>
   {#if dashboard.filters.unavailableSpecIds.length}<p class="unavailable" role="status">Could not apply spec filters: {dashboard.filters.unavailableSpecIds.join(', ')}. {dashboard.filters.selectedSpecIds.length?'Available spec filters still apply.':'Showing results without a spec filter.'}</p>{/if}
   {#if view==='table'}
-    <DataTable bind:this={table} {rows} {columns} rowKey={row=>row.id} sort={query.sort} {selected} focusedCell={focused} {simple} density={preferences.density} caption="Tasks" {sortHref} onSort={(key,secondary)=>sortChange(toggleTableSort(query.sort,key,secondary))} onFocus={cell=>focused=cell} onToggle={toggle} onSelectAll={selectAll} onResize={(key,width)=>preferences=resizeColumn(preferences,taskColumns,key,width)} onCopy={copyCell} onEmptyFocus={()=>{searchInput?.focus();feedback='The focused task is no longer on this page.';}} onViewportWidth={width=>viewport=width}/>
+    <DataTable bind:this={table} {rows} {columns} rowKey={row=>row.id} sort={query.sort} {selected} focusedCell={focused} {simple} density={preferences.density} caption="Tasks" {sortHref} onSort={(key,secondary)=>sortChange(toggleTableSort(query.sort,key,secondary))} onFocus={cell=>focused=cell} onToggle={toggle} onSelectAll={selectAll} onResize={(key,width)=>preferences=resizeColumn(preferences,taskColumns,key,width)} onCopy={copyCell} onInspect={(row,event)=>void inspector.open({kind:'task',id:row.id},captureOpener(row.id,(event.currentTarget as HTMLElement)?.dataset.columnKey??focused.columnKey))} onEmptyFocus={()=>{searchInput?.focus();feedback='The focused task is no longer on this page.';}} onViewportWidth={width=>viewport=width}/>
     {#if mounted}<SelectionBar count={selected.size} onCopyRows={copyRows} onCopyIds={()=>void copy(idsToText(rows,row=>row.id,selected))} onClear={clearSelection} {feedback} {fallback}/>{/if}
     <ListPager result={dashboard.result} route="tasks" compact/>
-  {:else}<p class="board-note">Board shows unarchived tasks. Lane counts reflect this page.</p><ListPager result={dashboard.result} route="tasks"/><TaskBoard {rows}/>{/if}
+  {:else}<p class="board-note">Board shows unarchived tasks. Lane counts reflect this page.</p><ListPager result={dashboard.result} route="tasks"/><TaskBoard {rows} onInspect={(event,id)=>inspector.activate(event,{kind:'task',id})}/>{/if}
 </div>
 <style>
+  .tasks-workspace.inspecting .tasks-toolbar{margin-right:0}
   .tasks-workspace{display:flex;flex-direction:column;min-height:0;height:100%;gap:0}.tasks-toolbar{margin:-.75rem -.75rem .5rem;padding:.375rem .75rem;border-bottom:1px solid var(--border-subtle);background:var(--surface);flex-shrink:0}.toolbar-main,.toolbar-secondary{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}.toolbar-main{min-height:2.5rem}h1{font:650 1.125rem/1.3 var(--body-font);margin:0 .25rem 0 0;white-space:nowrap}h1 span{font-size:.8125rem;color:var(--text-muted);font-weight:400;margin-left:.375rem;font-variant-numeric:tabular-nums}.view-switch{display:flex;border:1px solid var(--border-control);border-radius:.25rem;overflow:hidden}.view-switch a{font-size:.75rem;padding:.375rem .5rem;min-height:2rem;text-decoration:none;color:var(--text-muted);display:flex;align-items:center}.view-switch a[aria-current]{background:var(--selection-bg);color:var(--accent)}.search{flex:1;min-width:10rem;max-width:26rem;margin-right:auto}.search input{width:100%;min-height:2rem;padding:.375rem .625rem;border:1px solid var(--border-control);border-radius:.25rem;background:var(--surface);color:var(--text);font: .8125rem var(--body-font)}.density,select,.priority input{min-height:2rem;padding:.25rem .5rem;border:1px solid var(--border-control);border-radius:.25rem;background:var(--surface);color:var(--text);font-size:.75rem}.density{cursor:pointer}.toolbar-secondary{min-height:2.5rem;font-size:.75rem;color:var(--text-muted)}.preset{display:flex;align-items:center;gap:.375rem}.preset select{min-height:1.75rem}.chip{padding:.125rem .375rem;border:1px solid var(--border-subtle);border-radius:.25rem;background:var(--surface-raised);color:var(--text)}.scope{margin-right:.25rem}.simple-link{margin-left:auto;display:inline-flex;min-height:1.5rem;align-items:center;color:var(--text-muted)}.priority{display:grid;font-size:.75rem;gap:.25rem;color:var(--text-muted)}.unavailable{margin:0 0 .5rem;font-size:.75rem;color:var(--warning)}.board-note{font-size:.75rem;color:var(--text-muted);margin:0}.tasks-workspace:has(.board-note){height:auto}@media(max-width:767px){.search{order:2;max-width:none;flex-basis:100%}.tasks-toolbar{margin:0 0 .5rem;padding:.375rem}.tasks-workspace{height:auto;min-height:calc(100dvh - 8rem)}}@media(pointer:coarse){.search input,.view-switch a,.density,select{min-height:2.75rem}}
+  .tasks-workspace.board-enhanced {height:100%;min-height:0;overflow:auto;}
+  .board-enhanced .board-note,.board-enhanced :global(.list-pager) {flex-shrink:0;}
+  .board-enhanced :global(.board) {flex:1 1 auto;min-height:0;min-width:0;overflow:auto;}
 </style>

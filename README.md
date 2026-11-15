@@ -226,8 +226,9 @@ Only the exact own receipt is excluded. During apply, only the verified current 
 - Controlled manual/focus refresh keeps the last data, URL, scroll, and focus on failure, with Retry; canonical details remain outside background refresh until draft-aware inspection is implemented
 - Tasks and Specs tables support keyboard cell navigation, page-local range selection, safe TSV/ID copy, resizable/reorderable columns and per-project preferences; `simple=1` and no-JS GET navigation retain native table access
 - Specs preserves canonical status independently of linked-task scope; progress is global by default and explicitly labeled as a subset when scope/window filters apply
-- Persistent inspection and guarded question drafts follow in subsequent SPEC-062 slices
-- Dedicated spec and task detail routes with deterministic not-found states, linked context, and inline source narrative rendering
+- Tasks opens a persistent read-only inspector with shareable URLs, verified Back/Forward, independent reader scroll and responsive dock/modal behavior; linked task/spec details reuse canonical content
+- Inspector relations mount100 per collection with local paging; question editing remains on the canonical page until the guarded question slice
+- Dedicated spec and task detail routes with HTTP404 not-found states, linked context, and inline source narrative rendering
 - Spec detail pages that can parse `Open Questions`, answer them in batch from the UI, write those answers back into Markdown deterministically, and surface continuation guidance plus an agent evaluation prompt bundle
 - A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
 - Interactive timeline tracing with URL-driven task selection, distinct upstream/downstream highlighting, and related-spec emphasis for cross-spec diagnosis

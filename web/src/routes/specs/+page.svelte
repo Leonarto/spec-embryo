@@ -1,9 +1,9 @@
 <script lang="ts">
   import {onMount,untrack} from 'svelte';
-  import {page} from '$app/state';
+  import {workspaceURL} from '../../lib/workspace/location.svelte.ts';
   import {goto} from '$app/navigation';
   import type {WorkspaceEnvelope,WorkspaceSpecRow} from '../../../../src/services/workspace.ts';
-  import {normalizeViewQuery,serializeViewQuery,type SpecSortKey,type WorkspaceSpecQuery} from '../../../../src/services/workspace-query.ts';
+  import {normalizeViewQuery,serializeViewQuery,workspaceListURL,type SpecSortKey,type WorkspaceSpecQuery} from '../../../../src/services/workspace-query.ts';
   import {SPEC_STATUSES} from '../../../../src/domain.ts';
   import {useWorkspaceResource} from '../../lib/workspace/resource.svelte.ts';
   import AnalysisFilters from '../../lib/components/AnalysisFilters.svelte';
@@ -24,17 +24,17 @@
   const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'specs'>);
   const workspace=$derived(resource.snapshot),dashboard=$derived(workspace.data),rows=$derived(dashboard.result.rows);
   const query=$derived(dashboard.result.normalizedQuery as WorkspaceSpecQuery);
-  const simple=$derived(normalizeViewQuery('specs',page.url.searchParams).simple);
+  const simple=$derived(normalizeViewQuery('specs',workspaceURL().searchParams).simple);
   let mounted=$state(false),coarse=$state(false),viewport=$state(0),preferences=$state(defaultTablePreferences(specColumns));
   const columns=$derived(renderedColumns(preferences,specColumns,viewport).map(column=>column.key==='select'&&coarse?{...column,width:44}:column));
   let selected=$state(new Set<string>()),anchor=$state<string|undefined>(),focused=$state<FocusedCell>(untrack(()=>defaultFocus(rows.map(row=>row.id),columns.map(column=>column.key))));
   let feedback=$state(''),fallback=$state<string|undefined>(),search=$state(untrack(()=>query.q)),table=$state<DataTable<WorkspaceSpecRow>>(),toolbar:HTMLElement,searchInput:HTMLInputElement;
   let searchTimer:ReturnType<typeof setTimeout>|undefined;
-  let sourceURL=untrack(()=>page.url.href),selectionKey=untrack(()=>listIntent());
+  let sourceURL=untrack(()=>workspaceListURL(workspaceURL())),selectionKey=untrack(()=>listIntent());
   const statusOptions=SPEC_STATUSES.map(value=>({value,label:value.replaceAll('_',' ')}));
   const scopes=[{value:'all',label:'All linked tasks'},{value:'unarchived',label:'Not archived'},{value:'archived',label:'Archived'}];
-  function listIntent(){const value=normalizeViewQuery('specs',page.url.searchParams);return JSON.stringify(value.list);}
-  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('specs',page.url.searchParams);value.list={...query};update(value);return `/specs?${serializeViewQuery(value)}`;}
+  function listIntent(){const value=normalizeViewQuery('specs',workspaceURL().searchParams);return JSON.stringify(value.list);}
+  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('specs',workspaceURL().searchParams);value.list={...query};update(value);return `/specs?${serializeViewQuery(value)}`;}
   function navigate(url:string,replaceState=false){return goto(url,{replaceState,keepFocus:true,noScroll:true});}
   function sortChange(sort:TableSort[]){void navigate(href(value=>{value.list={...query,page:1,sort:sort.map(item=>({...item,key:item.key as SpecSortKey}))};}));}
   function sortHref(key:string){return href(value=>{value.list={...query,page:1,sort:toggleTableSort(query.sort,key).map(item=>({...item,key:item.key as SpecSortKey}))};});}
@@ -47,7 +47,7 @@
   function searchChanged(){clearTimeout(searchTimer);searchTimer=setTimeout(()=>{void navigate(href(value=>{value.list={...query,q:search,page:1};}),true);},150);}
   function apply(event:SubmitEvent){event.preventDefault();clearTimeout(searchTimer);const form=event.currentTarget as HTMLFormElement;const params=new URLSearchParams(new FormData(form) as unknown as URLSearchParams);void navigate(`/specs?${params}`);}
   function regionKeys(event:KeyboardEvent){if(event.key!=='F6'||event.ctrlKey||event.metaKey||event.altKey)return;const active=document.activeElement;if(toolbar?.contains(active)){event.preventDefault();table?.focusCurrent();}else if((active as Element)?.closest('[data-table-grid]')){event.preventDefault();searchInput?.focus();}}
-  $effect(()=>{const next=page.url.href;if(next!==sourceURL){sourceURL=next;clearTimeout(searchTimer);search=normalizeViewQuery('specs',page.url.searchParams).list?.q??'';}});
+  $effect(()=>{const next=workspaceListURL(workspaceURL());if(next!==sourceURL){sourceURL=next;clearTimeout(searchTimer);search=normalizeViewQuery('specs',workspaceURL().searchParams).list?.q??'';}});
   $effect(()=>{const key=listIntent();if(key!==selectionKey){selectionKey=key;untrack(clearSelection);}else{const next=reconcileSelection(rows.map(row=>row.id),untrack(()=>selected),untrack(()=>anchor));if(next.removed){selected=next.selected;anchor=next.anchor;feedback=`${next.removed} selected rows left this page.`;}}});
   $effect(()=>{const key=workspace.shell.project.key;if(mounted){preferences=parseTablePreferences(localStorageValue(tableStorageKey(key,'spec')),specColumns);}});
   function localStorageValue(key:string){try{return localStorage.getItem(key);}catch{return null;}}

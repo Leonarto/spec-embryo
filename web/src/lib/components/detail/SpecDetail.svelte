@@ -1,11 +1,15 @@
 <script lang="ts">
   import { ArrowLeft, CircleCheckBig, Gauge, NotebookText, Orbit, Pause, Sparkles, Target } from "@lucide/svelte";
+  import RelationWindow from "./RelationWindow.svelte";
+  import NotFound from "./NotFound.svelte";
   import DocumentBody from "../DocumentBody.svelte";
-  import type { SpecDetailResult } from "../../../../../src/services/details.ts";
+  import type {DetailLinkedTask,DetailRelatedHandoff, SpecDetailResult } from "../../../../../src/services/details.ts";
   import type { SpecDetailActionResult } from "./types.ts";
 
-  let { detail, actionResult } = $props<{ detail: SpecDetailResult; actionResult?: SpecDetailActionResult }>();
+  let { detail, actionResult,presentation="page" } = $props<{ detail: SpecDetailResult; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>();
 
+  type GroupedTask={groupId:string;task:DetailLinkedTask};
+  const groupedTasks=$derived(detail.found?detail.linkedTaskGroups.flatMap((group:{id:string;tasks:DetailLinkedTask[]})=>group.tasks.map((task:DetailLinkedTask)=>({groupId:group.id,task}))):[]);
   const statusIcons = {
     proposed: Sparkles,
     active: Orbit,
@@ -16,24 +20,11 @@
 </script>
 
 {#if !detail.found}
-  <section class="missing-shell">
-    <a class="back-link" href="/specs">
-      <ArrowLeft size={14} strokeWidth={1.9} />
-      Back to Specs
-    </a>
-    <p class="eyebrow">Deterministic fallback</p>
-    <h2>Spec {detail.id} was not found</h2>
-    <p class="intro">The requested spec does not exist in the current managed memory. Pick one of the known IDs below.</p>
-    <div class="chip-row">
-      {#each detail.availableIds as specId}
-        <a class="chip" href={`/specs/${specId}`}>{specId}</a>
-      {/each}
-    </div>
-  </section>
+  <NotFound kind="spec" id={detail.id}/>
 {:else}
   {@const StatusIcon = statusIcons[detail.spec.status as keyof typeof statusIcons] ?? NotebookText}
-  <section class="detail-shell">
-    <div class="detail-header">
+  <section class="detail-shell" class:inspector={presentation==='inspector'}>
+    <div class="detail-header" data-detail-section="overview">
       <div class="header-copy">
         <a class="back-link" href="/specs">
           <ArrowLeft size={14} strokeWidth={1.9} />
@@ -82,7 +73,7 @@
       </div>
     </div>
 
-    <section class="detail-grid">
+    <section class="detail-grid" data-detail-section="relations">
       <article class="panel">
         <div class="panel-head">
           <div class="panel-title">
@@ -105,16 +96,20 @@
         {#if detail.linkedTasks.length === 0}
           <p class="empty">This spec has no linked tasks yet.</p>
         {:else}
-          <div class="group-stack">
+          <RelationWindow items={groupedTasks} identityKey={`spec:${detail.spec.id}:linkedTasks`} name="linkedTasks" label="Linked tasks" fullHref={`/specs/${detail.spec.id}#linkedTasks`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly GroupedTask[])}
+<div class="group-stack">
             {#each detail.linkedTaskGroups as group}
+{@const tasks=visible.filter(entry=>entry.groupId===group.id).map(entry=>entry.task)}
+{#if tasks.length}
               <section class="task-group">
                 <div class="group-head">
                   <p class="linked-id">{group.title}</p>
                   <span class="mini-pill">{group.tasks.length}</span>
                 </div>
                 <div class="linked-list">
-                  {#each group.tasks as task}
-                    <a class="linked-card" href={`/tasks/${task.id}`}>
+                  {#each tasks as task}
+                    <a class="linked-card" data-relation-item href={`/tasks/${task.id}`}>
                       <div class="linked-head">
                         <div>
                           <p class="linked-id">{task.id}</p>
@@ -134,8 +129,11 @@
                   {/each}
                 </div>
               </section>
-            {/each}
+            {/if}
+{/each}
           </div>
+{/snippet}
+</RelationWindow>
         {/if}
       </article>
 
@@ -167,9 +165,11 @@
         {#if detail.relatedHandoffs.length === 0}
           <p class="empty">No related handoffs were found for this spec yet.</p>
         {:else}
-          <div class="handoff-list">
-            {#each detail.relatedHandoffs as handoff}
-              <div class="state-card">
+          <RelationWindow items={detail.relatedHandoffs} identityKey={`spec:${detail.spec.id}:handoffs`} name="handoffs" label="Related handoffs" fullHref={`/specs/${detail.spec.id}#handoffs`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly DetailRelatedHandoff[])}
+<div class="handoff-list">
+            {#each visible as handoff}
+              <div class="state-card" data-relation-item>
                 <p class="linked-id">{handoff.id}</p>
                 <strong>{handoff.title}</strong>
                 <p>{handoff.summary}</p>
@@ -177,6 +177,8 @@
               </div>
             {/each}
           </div>
+{/snippet}
+</RelationWindow>
         {/if}
       </article>
     </section>
@@ -186,11 +188,13 @@
         <div class="panel-head">
           <div class="panel-title">
             <Sparkles size={15} strokeWidth={1.9} />
-            <h3>Answer open questions</h3>
+            <h3 id="open-questions">Answer open questions</h3>
           </div>
         </div>
 
-        {#if detail.openQuestions.length === 0}
+        {#if presentation==='inspector'}
+          <div class="readonly-questions" data-detail-section="questions">{#each detail.openQuestions as question}<p>{question.question}</p>{/each}<a data-inspector-full href={`/specs/${detail.spec.id}#open-questions`}>Answer questions on the canonical page</a></div>
+        {:else if detail.openQuestions.length === 0}
           <p class="empty">This spec does not have open questions right now.</p>
         {:else}
           <form class="question-form" method="POST" action="?/answerOpenQuestions">
@@ -271,7 +275,7 @@
         <div class="panel-head">
           <div class="panel-title">
             <NotebookText size={15} strokeWidth={1.9} />
-            <h3>Resolved decisions</h3>
+            <h3 data-detail-section="decisions">Resolved decisions</h3>
           </div>
           <span class="mini-pill">{detail.resolvedDecisions.length}</span>
         </div>
@@ -294,7 +298,7 @@
       </article>
     </section>
 
-    <article class="panel panel-body">
+    <article class="panel panel-body" data-detail-section="document">
       <div class="panel-head">
         <div class="panel-title">
           <NotebookText size={15} strokeWidth={1.9} />
@@ -327,11 +331,11 @@
   h2,
   h3,
   h4 {
-    font-family: var(--display-font);
+    font-family: var(--body-font);
   }
 
   h2 {
-    font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+    font-size: clamp(1.375rem, 2vw, 1.875rem);
   }
 
   h3 {
@@ -351,7 +355,6 @@
   }
 
   .detail-shell,
-  .missing-shell,
   .detail-grid,
   .meta-panel,
   .linked-list,
@@ -380,6 +383,7 @@
   }
 
   .back-link {
+    min-height:1.5rem;
     display: inline-flex;
     align-items: center;
     gap: 0.42rem;
@@ -411,7 +415,7 @@
     border-radius: var(--radius-xl);
     border: 1px solid var(--line);
     background: var(--panel);
-    box-shadow: var(--shadow);
+    box-shadow:none;
   }
 
   .meta-grid div {
@@ -426,7 +430,7 @@
   }
 
   .meta-grid strong {
-    font-family: var(--display-font);
+    font-family: var(--body-font);
     font-size: 1.3rem;
   }
 
@@ -436,11 +440,11 @@
     display: inline-flex;
     align-items: center;
     gap: 0.32rem;
-    border-radius: 999px;
+    border-radius:.25rem;
     padding: 0.34rem 0.7rem;
     border: 1px solid var(--line);
     background: var(--surface-interactive);
-    box-shadow: var(--shadow-soft);
+    box-shadow:none;
     font-size: 0.77rem;
   }
 
@@ -470,15 +474,15 @@
   .progress-line {
     width: 7rem;
     height: 0.6rem;
-    border-radius: 999px;
+    border-radius:.25rem;
     overflow: hidden;
     background: var(--neutral-soft);
   }
 
   .progress-bar {
     height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 88%, white 12%), var(--accent-soft));
+    border-radius:.25rem;
+    background:var(--accent);
   }
 
   .progress-grid {
@@ -497,7 +501,7 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
     background: var(--surface-card-soft);
-    box-shadow: var(--shadow-soft);
+    box-shadow:none;
   }
 
   .question-form,
@@ -517,7 +521,7 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
     background: var(--surface-card-soft);
-    box-shadow: var(--shadow-soft);
+    box-shadow:none;
   }
 
   .task-group {
@@ -534,7 +538,7 @@
 
   .linked-card:hover {
     border-color: var(--accent-border);
-    transform: translateY(-1px);
+    background:var(--surface-raised);
   }
 
   .state-card span {
@@ -560,13 +564,14 @@
     color: var(--muted);
   }
 
+  .readonly-questions {display:grid;gap:.5rem}.readonly-questions a{display:inline-flex;align-items:center;min-height:1.5rem;color:var(--accent)}
   textarea {
     width: 100%;
     min-height: 7rem;
     resize: vertical;
     box-sizing: border-box;
     padding: 0.85rem 0.95rem;
-    border-radius: 1rem;
+    border-radius:.25rem;
     border: 1px solid var(--line-strong);
     background: var(--surface-overlay-soft);
     color: inherit;
@@ -574,30 +579,30 @@
   }
 
   textarea:focus {
-    outline: 2px solid color-mix(in srgb, var(--accent) 24%, transparent);
+    outline:2px solid var(--focus);
     border-color: var(--accent-border);
   }
 
   .primary-button {
-    border: 0;
-    border-radius: 999px;
+    border:1px solid var(--accent);
+    border-radius:.25rem;
     padding: 0.72rem 1rem;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 86%, black 14%), color-mix(in srgb, var(--accent) 72%, white 18%));
-    color: color-mix(in srgb, var(--panel-strong) 14%, white 86%);
+    background:var(--accent);
+    color:var(--surface);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 14px 28px rgba(15, 141, 96, 0.18);
+    box-shadow:none;
   }
 
   .feedback-error {
     border-color: var(--danger-border);
-    background: color-mix(in srgb, var(--danger-soft) 72%, var(--surface-card));
+    background:var(--danger-soft);
   }
 
   .feedback-success {
     border-color: var(--accent-border);
-    background: color-mix(in srgb, var(--accent-soft) 72%, var(--surface-card));
+    background:var(--selection-bg);
   }
 
   .plain-list {
@@ -612,7 +617,7 @@
     display: grid;
     gap: 0.45rem;
     padding: 0.8rem;
-    border-radius: 1rem;
+    border-radius:.25rem;
     background: var(--surface-card-soft);
     border: 1px solid var(--line);
   }
@@ -644,4 +649,20 @@
       grid-template-columns: 1fr;
     }
   }
+  .detail-shell,.panel,.detail-grid {min-width:0;overflow-wrap:anywhere;}
+  .inspector {gap:.75rem;font-size:.8125rem;}
+  .inspector .detail-header,.inspector .detail-grid {grid-template-columns:minmax(0,1fr);gap:.75rem;margin:0;}
+  .inspector .header-copy {gap:.375rem;}
+  .inspector .header-copy .back-link,.inspector .header-copy .eyebrow,.inspector .header-copy .title-row {display:none;}
+  .inspector .meta-panel {padding:.375rem .5rem;border:0;background:var(--surface-raised);gap:.375rem;}
+  .inspector .meta-grid {gap:.375rem .75rem;}.inspector .meta-grid div {display:flex;align-items:baseline;gap:.375rem;min-width:0;}.inspector .meta-grid strong {font-size:.8125rem;}
+  .inspector .panel {padding:.625rem;gap:.5rem;}.inspector .panel-head {gap:.375rem;}
+  .inspector .state-stack,.inspector .linked-list,.inspector .handoff-list {gap:0;}
+  .inspector .state-card,.inspector .linked-card,.inspector .handoff-card {padding:.5rem 0;gap:.25rem;border:0;border-bottom:1px solid var(--border-subtle);border-radius:0;background:transparent;}
+  .inspector .state-card:last-child,.inspector .linked-card:last-child,.inspector .handoff-card:last-child {border-bottom:0;}
+  .inspector .linked-card:hover {background:var(--surface-raised);}
+  .inspector h3 {font-size:.875rem;}.inspector h4 {font-size:.8125rem;}
+  .inspector .chip {padding:.125rem .375rem;min-height:1.5rem;}
+  a:focus-visible,button:focus-visible {outline:2px solid var(--focus);outline-offset:2px;}
+  @media(pointer:coarse) {a,.back-link,.readonly-questions a,.inspector .chip {min-height:2.75rem;}button {min-height:2.75rem;}}
 </style>

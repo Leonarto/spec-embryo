@@ -62,7 +62,7 @@
   });
   onMount(()=>{mounted=true;const measure=()=>{viewport=port.clientWidth;onViewportWidth(viewport);};measure();const observer=new ResizeObserver(measure);observer.observe(port);return ()=>observer.disconnect();});
 </script>
-<div class="table-scroll" bind:this={port} data-table-grid>
+<div class="table-scroll" bind:this={port} data-table-grid data-sveltekit-preload-data={onInspect?'off':undefined} data-sveltekit-preload-code={onInspect?'off':undefined}>
   <table bind:this={table} use:events role={enhanced?'grid':undefined} aria-label={caption} aria-rowcount={enhanced?rows.length+1:undefined} aria-colcount={enhanced?columns.length:undefined} class:comfortable={density==='comfortable'} style:width={`${width}px`}>
     <caption class="sr-only">{caption}. Read-only.{#if enhanced} Navigation within this page: arrows move cells, Home/End move to row ends, Ctrl+Home/End move to page bounds, Tab leaves the grid.{/if}</caption>
     <colgroup>{#each columns as column (column.key)}<col style:width={`${column.width}px`} />{/each}</colgroup>

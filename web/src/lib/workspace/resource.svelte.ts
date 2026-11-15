@@ -1,7 +1,7 @@
+import {workspaceURL} from './location.svelte.ts';
 import { onMount, untrack, tick } from "svelte";
-import { page } from "$app/state";
 import type { WorkspaceEnvelope } from "../../../../src/services/workspace.ts";
-import type { WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
+import {workspaceRequestKey,type WorkspaceRoute} from "../../../../src/services/workspace-query.ts";
 import { WorkspaceResource, type WorkspaceResourceState } from "./resource.ts";
 import { getWorkspaceRefresh } from "./context.svelte.ts";
 
@@ -9,8 +9,9 @@ export function useWorkspaceResource<Route extends WorkspaceRoute>(seed:()=>Work
   let state=$state.raw<WorkspaceResourceState<WorkspaceEnvelope<Route>>>({snapshot:seed(),pending:false,lastSuccessAt:Date.parse(seed().generatedAt),lastAttemptAt:0});
   let resource:WorkspaceResource<WorkspaceEnvelope<Route>>|undefined;
   let mounted=false;
+  let appliedSeed=untrack(seed);
   const shell=getWorkspaceRefresh();
-  const registration={get state(){return state;},refresh:()=>resource?.refresh()??Promise.resolve()};
+  const registration={get state(){return state;},refresh:async()=>{await Promise.all([resource?.refresh(),shell.refreshInspector()]);}};
   let unregister:(()=>void)|undefined;
   function preserveFocusedEntity(){
     const active=document.activeElement instanceof HTMLElement?document.activeElement:null;
@@ -34,7 +35,7 @@ export function useWorkspaceResource<Route extends WorkspaceRoute>(seed:()=>Work
   }
   onMount(()=>{
     mounted=true;
-    resource=new WorkspaceResource(seed(),page.url.href,{isVisible:()=>document.visibilityState==='visible',onChange:next=>{
+    resource=new WorkspaceResource(seed(),workspaceURL().href,{isVisible:()=>document.visibilityState==='visible',onChange:next=>{
       const changed=next.snapshot!==state.snapshot;
       const restore=changed?preserveFocusedEntity():()=>{};
       const pane=changed?document.querySelector<HTMLElement>('.view-frame'):null;
@@ -50,6 +51,10 @@ export function useWorkspaceResource<Route extends WorkspaceRoute>(seed:()=>Work
     const focus=()=>resource?.focus();window.addEventListener('focus',focus);document.addEventListener('visibilitychange',focus);
     return ()=>{mounted=false;resource?.dispose();unregister?.();window.removeEventListener('focus',focus);document.removeEventListener('visibilitychange',focus);};
   });
-  $effect(()=>{const initial=seed();const url=page.url.href;untrack(()=>{if(resource)resource.seed(initial,url);else state={snapshot:initial,pending:false,lastSuccessAt:Date.parse(initial.generatedAt),lastAttemptAt:0};});});
+  $effect(()=>{const initial=seed(),url=workspaceURL().href;untrack(()=>{
+    const key=workspaceRequestKey(initial.route,new URL(url).searchParams);
+    if(resource){if(initial!==appliedSeed&&initial.requestKey===key){appliedSeed=initial;resource.seed(initial,url);}else if(state.snapshot.requestKey===key)resource.retarget(url);}
+    else {appliedSeed=initial;state={snapshot:initial,pending:false,lastSuccessAt:Date.parse(initial.generatedAt),lastAttemptAt:0};}
+  });});
   return {get snapshot(){return state.snapshot;},get pending(){return state.pending;}};
 }

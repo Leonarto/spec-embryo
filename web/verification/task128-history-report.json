@@ -1,0 +1,79 @@
+{
+  "phase": "history",
+  "capturedAt": "2026-11-15T22:43:58.511Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Plain row activation updates actual URL and host",
+      "pass": true
+    },
+    {
+      "name": "Open focuses inspector heading",
+      "pass": true
+    },
+    {
+      "name": "Selection survives opening",
+      "pass": true
+    },
+    {
+      "name": "Unapplied status draft survives shallow open",
+      "pass": true
+    },
+    {
+      "name": "Section uses actual URL and performs no transport",
+      "pass": true
+    },
+    {
+      "name": "Inspector-only transitions make no list/router data request",
+      "pass": true
+    },
+    {
+      "name": "Verified close returns exact base query",
+      "pass": true
+    },
+    {
+      "name": "Close restores opener and selection",
+      "pass": true
+    },
+    {
+      "name": "Back closes one pushed entry after entity/section replacements",
+      "pass": true
+    },
+    {
+      "name": "Forward reopens latest entity and section",
+      "pass": true
+    },
+    {
+      "name": "Filter retains actual inspected entity outside results",
+      "pass": true
+    },
+    {
+      "name": "Filter resets table scroll and returns toolbar focus",
+      "pass": true
+    },
+    {
+      "name": "Close after filter preserves new filter",
+      "pass": true
+    },
+    {
+      "name": "Back after close returns prior filter/inspector entry",
+      "pass": true
+    },
+    {
+      "name": "Forward preserves filtered closed entry",
+      "pass": true
+    },
+    {
+      "name": "Reload/direct unowned Close replaces URL without rewinding",
+      "pass": true
+    },
+    {
+      "name": "Relation inspection preserves independent timeline trace",
+      "pass": true
+    },
+    {
+      "name": "Close inspector retains timeline trace",
+      "pass": true
+    }
+  ]
+}

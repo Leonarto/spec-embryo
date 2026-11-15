@@ -1,0 +1,19 @@
+{
+  "phase": "seed-regression",
+  "capturedAt": "2026-11-15T23:11:02.194Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "SSR seed can be superseded by controlled detail refresh",
+      "pass": true
+    },
+    {
+      "name": "Close/reopen same identity fetches current data, never consumed SSR seed",
+      "pass": true
+    },
+    {
+      "name": "Reopen failure does not reveal the stale SSR body",
+      "pass": true
+    }
+  ]
+}

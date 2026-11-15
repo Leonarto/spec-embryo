@@ -171,9 +171,15 @@ export function transitionViewQuery(route: WorkspaceRoute, current: URLSearchPar
   return serializeViewQuery(normalizeViewQuery(route,compatible));
 }
 
+/** Inspector-only changes preserve list/trace intention and filter drafts. */
+export function workspaceListURL(value:string|URL):string {
+  const url=new URL(value);url.searchParams.delete('inspect');url.searchParams.delete('section');return url.href;
+}
+
 /** Request identity follows URL intention, never a snapshot's available IDs/page count. */
 export function workspaceRequestKey(route: WorkspaceRoute, params: URLSearchParams): string {
   const intent=normalizeViewQuery(route,params);
+  delete intent.inspect;delete intent.section;
   if(intent.list?.kind==="task"&&intent.view==="board")intent.list.scope="unarchived";
   return normalizeViewQuery(route,serializeViewQuery(intent,true)).requestKey;
 }

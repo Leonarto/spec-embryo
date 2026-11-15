@@ -2,12 +2,12 @@
 import {Blocks,CircleCheckBig,FolderKanban,Hourglass,ListChecks,Play,SquareDashedKanban} from '@lucide/svelte';
 import {groupTaskPage} from '../task-board.ts';
 import type {WorkspaceTaskRow} from '../../../../src/services/workspace.ts';
-let {rows}:{rows:WorkspaceTaskRow[]}=$props();
+let {rows,onInspect}:{rows:WorkspaceTaskRow[];onInspect?:(event:MouseEvent,id:string)=>void}=$props();
 const filteredKanban=$derived(groupTaskPage(rows));
 const laneNotes={blocked:'Work stopped by dependencies or explicit blocked state.',todo:'Ready to be picked up.',in_progress:'Active implementation.',review:'Ready for a real review.',done:'Completed or intentionally cancelled.'};
 const laneIcons={blocked:Blocks,todo:SquareDashedKanban,in_progress:Play,review:ListChecks,done:CircleCheckBig};
 </script>
-<section class="board">
+<section class="board" data-sveltekit-preload-data={onInspect?'off':undefined} data-sveltekit-preload-code={onInspect?'off':undefined}>
   {#each filteredKanban as column}
     {@const LaneIcon = laneIcons[column.id]}
     <article class="lane">
@@ -31,7 +31,7 @@ const laneIcons={blocked:Blocks,todo:SquareDashedKanban,in_progress:Play,review:
           {#each column.tasks as task (task.id)}
             <article class="task-card" data-entity-id={task.id}>
               <div class="card-top">
-                <a class="task-id" href={`/tasks/${task.id}`}>
+                <a class="task-id" href={`/tasks/${task.id}`} onclick={event=>onInspect?.(event,task.id)}>
                   <FolderKanban size={13} strokeWidth={1.9} />
                   {task.id}
                 </a>

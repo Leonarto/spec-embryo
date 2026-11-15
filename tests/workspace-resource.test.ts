@@ -39,6 +39,12 @@ describe('controlled workspace resource',()=>{
   test('focus is debounced, visible-only, after five seconds, and coalesces with an existing request',async()=>{
     let now=Date.parse(initial.generatedAt),visible=true,calls=0;const waiting=deferred<Response>();const resource=new WorkspaceResource(initial,'http://local/tasks',{now:()=>now,isVisible:()=>visible,focusDebounceMs:5,onChange:()=>{},fetcher:()=>{calls++;return waiting.promise;}});resource.focus();await delay(10);expect(calls).toBe(0);now+=6000;visible=false;resource.focus();await delay(10);expect(calls).toBe(0);visible=true;resource.focus();resource.focus();await delay(10);expect(calls).toBe(1);now+=6000;resource.focus();await delay(10);expect(calls).toBe(1);waiting.resolve(response(changed('focus update')));await delay(0);expect(resource.current.snapshot.data.result.rows[0]!.title).toBe('focus update');resource.dispose();
   });
+  test('inspector-only retarget preserves pending/error/snapshot and does not abort or fetch',async()=>{
+    const pending=deferred<Response>();let signal:AbortSignal|undefined,calls=0,requested='';
+    const resource=new WorkspaceResource(initial,'http://local/tasks',{onChange:()=>{},fetcher:async(url,init)=>{calls++;requested=url;signal=init.signal as AbortSignal;return calls===1?pending.promise:response(changed('retarget again'));}});
+    const work=resource.refresh(),before=resource.current;resource.retarget('http://local/tasks?inspect=spec:SPEC-001&section=document');expect(resource.current).toBe(before);expect(signal?.aborted).toBe(false);expect(calls).toBe(1);pending.resolve(response(changed('retarget accepted')));await work;expect(resource.current.snapshot.data.result.rows[0]!.title).toBe('retarget accepted');
+    resource.retarget('http://local/tasks?inspect=task:TASK-002');const work2=resource.refresh();await work2;expect(new URL(requested).searchParams.get('inspect')).toBe('task:TASK-002');expect(resource.current.error).toBeUndefined();resource.dispose();
+  });
   test('validates schema and required displayed fields before accepting an envelope',()=>{
     expect(validateWorkspaceEnvelope(initial,initial)).toBe(true);
     for(const invalid of [null,{}, {...initial,shell:{...initial.shell,project:{...initial.shell.project,key:"not-a-root-key"}}},{...initial,data:{...initial.data,view:"unknown"}}, {...initial,schemaVersion:2},{...initial,generatedAt:'bad'},{...initial,shell:{}},{...initial,data:{...initial.data,result:{...initial.data.result,rows:[{id:'TASK-1'}]}}}])expect(validateWorkspaceEnvelope(invalid,initial)).toBe(false);

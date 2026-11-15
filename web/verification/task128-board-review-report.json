@@ -1,0 +1,58 @@
+{
+  "phase": "board-review",
+  "capturedAt": "2026-11-15T23:38:11.131Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Board desktop deep XY keeps drawer visible, F6/card restoration and native last-card Tab",
+      "pass": true,
+      "detail": {
+        "before": {
+          "board": {
+            "top": 616,
+            "left": 54.5
+          },
+          "frame": {
+            "top": 0,
+            "left": 0
+          }
+        },
+        "after": {
+          "board": {
+            "top": 616,
+            "left": 54.5
+          },
+          "frame": {
+            "top": 0,
+            "left": 0
+          }
+        },
+        "box": {
+          "x": 1052,
+          "y": 56,
+          "width": 376,
+          "height": 832
+        },
+        "tabs": 99,
+        "lastReachable": true
+      }
+    },
+    {
+      "name": "Board desktop Close button restores nearest surviving card after disappearance",
+      "pass": true
+    },
+    {
+      "name": "Board modal Escape preserves same opener, XY/frame scroll and query",
+      "pass": true
+    },
+    {
+      "name": "Board modal Close button returns toolbar when no cards remain and removes inert",
+      "pass": true
+    },
+    {
+      "name": "No-JS Board retains natural height and no clipped last card",
+      "pass": true
+    }
+  ],
+  "scope": "F128-final-2: four targeted enhanced Board flows plus real no-JS natural-height check. Empty-list refresh is a programmatic transport fixture while modal background is inert, not a user activation claim."
+}

@@ -1,0 +1,43 @@
+{
+  "phase": "fanout",
+  "capturedAt": "2026-11-15T23:17:06.536Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "9999-relation inspector mounts exactly first100, preserving source order",
+      "pass": true
+    },
+    {
+      "name": "Large collection exposes complete canonical link",
+      "pass": true
+    },
+    {
+      "name": "Paging replaces window and reaches final9999th relation",
+      "pass": true
+    },
+    {
+      "name": "Last-page focus remains control/collection heading",
+      "pass": true
+    },
+    {
+      "name": "Previous returns one bounded window",
+      "pass": true
+    },
+    {
+      "name": "New inspector visit resets local relation page for identity",
+      "pass": true
+    },
+    {
+      "name": "Spec linked groups share one100-task mount budget",
+      "pass": true
+    },
+    {
+      "name": "Relation page/focus/document/Mermaid persist across mode changes",
+      "pass": true
+    },
+    {
+      "name": "Refresh clamps local window and restores collection focus if controls disappear",
+      "pass": true
+    }
+  ]
+}

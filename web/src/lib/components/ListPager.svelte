@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { page } from "$app/state";
+  import {workspaceURL} from '../workspace/location.svelte.ts';
   import type { WorkspaceListQuery,WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
   import { normalizeViewQuery,serializeViewQuery } from "../../../../src/services/workspace-query.ts";
   let {result,route,compact=false}: {result:{totalMatching:number;page:number;requestedPage:number;pageSize:number;normalizedQuery:WorkspaceListQuery};route:WorkspaceRoute;compact?:boolean}=$props();
   const last=$derived(Math.max(1,Math.ceil(result.totalMatching/result.pageSize)));
-  function params(target:number){const query=normalizeViewQuery(route,page.url.searchParams);query.list={...result.normalizedQuery,page:target};return serializeViewQuery(query);}
-  function href(target:number){return `${page.url.pathname}?${params(target)}`;}
+  function params(target:number){const query=normalizeViewQuery(route,workspaceURL().searchParams);query.list={...result.normalizedQuery,page:target};return serializeViewQuery(query);}
+  function href(target:number){return `${workspaceURL().pathname}?${params(target)}`;}
   const hidden=$derived([...params(1).entries()].filter(([name])=>name!=='pageSize'));
 </script>
 <nav class="list-pager" class:compact aria-label="List pagination">
@@ -16,7 +16,7 @@
     <span>Page {result.page} / {last}</span>
     {#if result.page<last}<a href={href(result.page+1)}>Next</a><a href={href(last)}>Last</a>{:else}<span>Next</span><span>Last</span>{/if}
   </div>
-  <form method="GET" action={page.url.pathname}>
+  <form method="GET" action={workspaceURL().pathname}>
     {#each hidden as [name,value]}<input type="hidden" {name} {value} />{/each}
     <label>Per page<select name="pageSize" value={result.pageSize}>{#each [50,100,200] as size}<option value={size}>{size}</option>{/each}</select></label><button type="submit">Apply</button>
   </form>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { page } from "$app/state";
+  import {workspaceURL} from '../workspace/location.svelte.ts';
   import type { Snippet } from "svelte";
   import type { WorkspaceFilterData } from "../../../../src/services/workspace.ts";
-  import { normalizeViewQuery,serializeViewQuery,type WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
+  import { normalizeViewQuery,serializeViewQuery,workspaceListURL,type WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
   import SelectDropdown from "./SelectDropdown.svelte";
   import SpecOptionsPicker from "./SpecOptionsPicker.svelte";
   let { filters,route,title='Filters',detail='',showTimeWindow=true,resultCount,resultLabel='matching records',extraField,showSearch=true,compact=false,onClear,onApply,controlledNames=[] }: {
@@ -10,9 +10,9 @@
   }=$props();
   const formId='workspace-filters';
   let clearEpoch=$state(0);
-  const resetKey=$derived(JSON.stringify([page.url.href,clearEpoch]));
+  const resetKey=$derived(JSON.stringify([workspaceListURL(workspaceURL()),clearEpoch]));
   const timeWindows=[{value:'7d',label:'Last 7 days',description:'Completed or cancelled lifecycle timestamp.'},{value:'30d',label:'Last 30 days',description:'Completed or cancelled lifecycle timestamp.'},{value:'90d',label:'Last 90 days',description:'Completed or cancelled lifecycle timestamp.'}];
-  const query=$derived(normalizeViewQuery(route,page.url.searchParams));
+  const query=$derived(normalizeViewQuery(route,workspaceURL().searchParams));
   const preserved=$derived.by(()=>{
     const params=serializeViewQuery(query);
     for(const name of ['spec','q',...controlledNames])params.delete(name);
@@ -26,13 +26,13 @@
     const clean=normalizeViewQuery(route,new URLSearchParams());
     if(query.inspect){clean.inspect=query.inspect;clean.section=query.section;}
     clean.simple=query.simple;clean.view=query.view;
-    return `${page.url.pathname}?${serializeViewQuery(clean)}`;
+    return `${workspaceURL().pathname}?${serializeViewQuery(clean)}`;
   });
 </script>
 <section class="filters-shell" class:compact aria-label={title}>
   <div class="filters-heading"><strong>{title}</strong><span>{resultCount} {resultLabel}</span></div>
   {#if detail}<p class="filter-detail">{detail}</p>{/if}
-  <form id={formId} method="GET" action={page.url.pathname} onsubmit={onApply}>
+  <form id={formId} method="GET" action={workspaceURL().pathname} onsubmit={onApply}>
     {#each preserved as [name,value]}<input type="hidden" {name} {value} />{/each}
   </form>
   <div class="field-grid">

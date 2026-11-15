@@ -1,0 +1,87 @@
+{
+  "task": "TASK-128",
+  "status": "partial-core-readonly-for-static-review",
+  "scope": "Core only. Not final gate; presenters/RelationWindow/Mermaid/tests/evidence/docs remain in progress. Browser lease retained by UI agent.",
+  "files": [
+    {
+      "path": "src/services/workspace-detail.ts",
+      "sha256": "5d7b24350c2f4eaa92df12e2d022520f6b93f4c8a8610482ceefe2a7d100c87d"
+    },
+    {
+      "path": "src/services/workspace-query.ts",
+      "sha256": "3b296a19b4f424278809d3e26c053dba56b805fbefcb5d179ef53c0e03c86898"
+    },
+    {
+      "path": "web/src/app.d.ts",
+      "sha256": "71cca446723fdb591f695f7a4b2d8631e3c355e5f0d36ae4b1fd4f98762641d9"
+    },
+    {
+      "path": "web/src/lib/server/detail.ts",
+      "sha256": "8c029928298982822dc18ee91285d473be038f33d579a5e8cb335c4c16e7afaa"
+    },
+    {
+      "path": "web/src/lib/inspector/detail-resource.ts",
+      "sha256": "7f1623dd60799935ca01f1180ddfc3ff2e274916ec04ed1ad32a4fd50b561a24"
+    },
+    {
+      "path": "web/src/lib/inspector/history.ts",
+      "sha256": "e335240ffd5b5bd4be292ab7f32f0a08ee6b3d1bca0fbb451a8b73c01f382959"
+    },
+    {
+      "path": "web/src/lib/inspector/controller.svelte.ts",
+      "sha256": "2a369d0be5606fc9411837c8fc57a22a700001208f98e93f51aeae2fa4003ad4"
+    },
+    {
+      "path": "web/src/lib/inspector/geometry.ts",
+      "sha256": "8a88f8c0e3f16646d4ca6db182b79794e95962af62f18ee81968386fd48587a8"
+    },
+    {
+      "path": "web/src/lib/inspector/modules.ts",
+      "sha256": "e690ac7c97f0ddead7704d03323f4226485b1c4f94f8a4d1305b7d1d80138d77"
+    },
+    {
+      "path": "web/src/lib/workspace/location.svelte.ts",
+      "sha256": "a01009720bd15a66fcd08a0238d6c6d7f50531158c5f18b12716a1f0ee83a1f7"
+    },
+    {
+      "path": "web/src/lib/workspace/resource.ts",
+      "sha256": "3dab4545261f5fdecaba1d9472ab77affca402bca99e85c6e3cb8d1697782430"
+    },
+    {
+      "path": "web/src/lib/workspace/resource.svelte.ts",
+      "sha256": "e81e24b2bfbf8800907ea0480fa7a6b589ec3b15c04cbfe55a4a4a543a1fcc31"
+    },
+    {
+      "path": "web/src/lib/workspace/context.svelte.ts",
+      "sha256": "dd0d171cf16d442564615c37a314b6b1e80881b2c1c07af5158ba759ff2cf2d7"
+    },
+    {
+      "path": "web/src/routes/+layout.server.ts",
+      "sha256": "24d666b8cfe171216a5cfb1aeca9b94bc72b68d67498188d6005fafa4886acc7"
+    },
+    {
+      "path": "web/src/routes/+layout.ts",
+      "sha256": "63d2ceff746a57cf259c31653e387e87e176903173194749eb047fa1ce4b08c0"
+    },
+    {
+      "path": "web/src/routes/+layout.svelte",
+      "sha256": "1d348c68d10dc21cd0a901f1730452d4b63b0dc5ceebcd1da753af20efad0c96"
+    },
+    {
+      "path": "web/src/routes/workspace-detail/+server.ts",
+      "sha256": "2d70c7564a4ca363c4aaa6f7573dfd4c21835b2b90db5decb7cf0aff9c674331"
+    },
+    {
+      "path": "web/src/routes/tasks/[taskId]/+page.server.ts",
+      "sha256": "58ebe767e642466ec5ed2f2beb6a61c7183ead86ef838388e4f2de1f1d95a6a4"
+    },
+    {
+      "path": "web/src/routes/specs/[specId]/+page.server.ts",
+      "sha256": "e8d0c7f6ee81a77df21b656615314109adb5342e045fd5cff9ac664b84b383d3"
+    }
+  ],
+  "reviewFix": "F128-core-1: never reuse previously observed SSR envelope; close/reopen fetches. Three focused browser regressions pass.",
+  "reviewDeltaFiles": [
+    "web/src/lib/inspector/controller.svelte.ts"
+  ]
+}

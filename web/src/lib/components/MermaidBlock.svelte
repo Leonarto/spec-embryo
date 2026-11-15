@@ -8,6 +8,7 @@
 
   let { source } = $props<{ source: string }>();
 
+  let mounted=$state(false);
   let svgMarkup = $state("");
   let error = $state<string | null>(null);
   let isRendering = $state(true);
@@ -64,6 +65,7 @@
   }
 
   onMount(() => {
+    mounted=true;
     activeTheme = document.documentElement.dataset.theme || "dark";
 
     const observer = new MutationObserver(() => {
@@ -91,7 +93,7 @@
       <span class="diagram-kind">Mermaid</span>
     </div>
 
-    <div class="diagram-controls" aria-label="Diagram zoom controls">
+    {#if mounted&&svgMarkup&&!error}<div class="diagram-controls" aria-label="Diagram zoom controls">
       <button type="button" class="control-button" onclick={zoomOut} disabled={zoom <= MIN_ZOOM} aria-label="Zoom out">
         -
       </button>
@@ -101,10 +103,11 @@
       <button type="button" class="control-button" onclick={zoomIn} disabled={zoom >= MAX_ZOOM} aria-label="Zoom in">
         +
       </button>
-    </div>
+    </div>{/if}
   </div>
 
-  {#if error}
+  {#if !mounted}<div class="diagram-fallback"><p>Diagram rendering requires JavaScript.</p><pre>{source}</pre></div>
+  {:else if error}
     <div class="diagram-error">
       <p>{error}</p>
       <pre>{source}</pre>
@@ -127,12 +130,8 @@
     padding: 0.9rem;
     border-radius: calc(var(--radius-lg) - 0.15rem);
     border: 1px solid var(--accent-border);
-    background:
-      linear-gradient(180deg, var(--surface-overlay), var(--surface-card-soft)),
-      radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 10%, transparent), transparent 48%);
-    box-shadow:
-      inset 0 1px 0 var(--inset-highlight),
-      0 18px 40px rgba(34, 28, 20, 0.08);
+    background:var(--surface);
+    box-shadow:none;
   }
 
   .diagram-head {
@@ -163,11 +162,11 @@
 
   .diagram-kind {
     padding: 0.28rem 0.55rem;
-    border-radius: 999px;
+    border-radius:.25rem;
     border: 1px solid var(--accent-border);
     color: var(--accent-ink);
     background: var(--surface-interactive);
-    box-shadow: 0 0 16px rgba(46, 106, 82, 0.12);
+    box-shadow:none;
   }
 
   .diagram-controls {
@@ -179,16 +178,14 @@
     border: 1px solid var(--accent-border);
     background: var(--surface-interactive);
     color: var(--ink);
-    box-shadow:
-      inset 0 1px 0 var(--inset-highlight),
-      0 0 18px rgba(46, 106, 82, 0.08);
+    box-shadow:none;
   }
 
   .control-button {
     width: 1.95rem;
     height: 1.95rem;
     padding: 0;
-    border-radius: 999px;
+    border-radius:.25rem;
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
@@ -196,7 +193,7 @@
 
   .control-readout {
     padding: 0.34rem 0.62rem;
-    border-radius: 999px;
+    border-radius:.25rem;
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -225,7 +222,7 @@
     max-height: 38rem;
     padding: 0.2rem 0.1rem 0.1rem;
     border-radius: 0.9rem;
-    background: linear-gradient(180deg, var(--surface-card-subtle), var(--surface-card-soft));
+    background:var(--surface-raised);
   }
 
   .diagram-canvas {
@@ -246,19 +243,20 @@
     height: auto;
   }
 
-  .diagram-error {
+  .diagram-error,.diagram-fallback {
     display: grid;
     gap: 0.6rem;
   }
 
-  .diagram-error pre {
+  .diagram-error pre,.diagram-fallback pre {
     margin: 0;
     overflow-x: auto;
     padding: 0.9rem;
     border-radius: 0.9rem;
-    background: color-mix(in srgb, var(--panel-strong) 96%, black 4%);
+    background:var(--surface);
     color: var(--code-ink);
     font-size: 0.85rem;
     line-height: 1.55;
   }
+@media(pointer:coarse){.control-button{width:2.75rem;height:2.75rem}.control-readout{min-height:2.75rem}}
 </style>

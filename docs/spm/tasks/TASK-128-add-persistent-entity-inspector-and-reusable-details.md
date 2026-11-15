@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-128"
 title = "Add persistent entity inspector and reusable details"
 summary = "Implement inspect URLs, browser history, responsive drawers, focus restoration and shared detail views."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-127", "TASK-135"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.662Z"
+completed_at = "2026-11-15T23:45:08.013Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T21:56:01.797Z"
+updated_at = "2026-11-15T23:45:08.013Z"
 +++
 
 # Scope
@@ -29,7 +30,7 @@ Implement P4 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+APPROVED by independent Astra review after F128-core-1 stale SSR reuse and F128-final-1/2 presence-label/Board-focus fixes. Exact 87-file manifest SHA256 5e00c177a38f5ab80dc551ec77a9ff3ffda5916150f8853cf9f804059d99a895 verified with zero mismatches. Evidence: web/verification/SPEC-062-P4.md and task128-manifest.json. 128 browser checks plus 5 focused Board checks; independent Astra targeted rechecks; 38 HTTP/SSR checks against the explicitly attributed earlier snapshot. 356 Bun tests pass (91.61% functions, 92.58% lines; excludes Svelte), final affected web check/build and AGENTS pass. TASK-138 remains mandatory for bounded transport/canonical readers and the unmet detail latency gate; this checkpoint claims functional inspector completion only.
 
 
 # Missing detail contract
@@ -125,6 +126,14 @@ TASK-138 must complete shared paginated relation transport and canonical/SSR/no-
 
 Hide zoom controls until mounted and a usable SVG exists; no zoom controls during initial loading or error. Before mount/no-JS show readable source and an explicit JavaScript-required message instead of an indefinitely rendering placeholder. Preserve JS rendering, source fallback, lazy Mermaid import and shared canonical/inspector presentation. This is a128 presentation fix, not a new parser.
 
+## Board close/focus review correction — contained enhanced scrollport
+
+Final review found Board close restoring BODY because Tasks registration only targeted DataTable. Make the existing registration view-aware: Board captures its own scrollport and outer frame, restores the task-id anchor by stable ID (nearest surviving card/toolbar fallback with announcement), supplies list-region focus/F6 and recognizes the Board region. Keep Table behavior and semantic Board roles unchanged.
+
+A deeper author repro then showed frame.scrollTop703 moving the docked drawer header to top−647. Approve minimal CSS containment **only for enhanced Board**: a mounted&&view=board parent class sets height100% and min-height0, overriding the mobile heightauto/min-heightcalc rule as well; Board flex1 1 auto, min-height0, min-width0, overflowauto is the single X/Y card scrollport. Toolbar, note and pager remain outside and nonshrinking. No per-lane scrollers, fixed inspector or layout placeholder. SSR/no-JS remains natural heightauto without that enhanced flag; Table is unchanged. On an exceptionally short viewport prefer reachable outer overflow over clipping controls; do not introduce arbitrary fixed minimum heights.
+
+Focused gate: deep Board X/Y scroll keeps inspector header and toolbar reachable, Close/Escape restore same card ID and scroll in docked/modal modes, missing-card fallback works, F6 cycles toolbar/Board/inspector, last card remains keyboard-reachable, and no-JS content is not clipped. This is necessary to meet128 persistence/focus guarantees, not a new Board feature.
+
 
 # Integration seam for question drafts
 
@@ -149,3 +158,61 @@ TASK-137 finishes against committed shared components without importing the unre
 # Parallel verification ownership
 
 After TASK-137 commit439da07, a second Sol owns only web/scripts/inspector-http-check.ts and web/verification/task128-http-report.{json,md}, with disposable fixtures. It verifies endpoint/SSR/404/closed-list import closure/request-key boundaries without browser ownership or product edits. Snapshot /private/tmp/spm-task128-http-source captured 171 identical before/after/copied source hashes on439da07 plus current128 changes; later deltas must be identified. The primary Sol retains interactive history/focus/races/modules/noJS-browser/theme tests. Merge both evidence sets into the final reviewed manifest.
+
+
+# Independent final review
+
+# TASK-128 independent final review
+
+Verdict: **APPROVED** for the agreed TASK-128 inspector/presentation checkpoint. F128-core-1, F128-final-1 and F128-final-2 are closed. The first-pass findings/evidence below are retained as history; final verification is recorded at the end. TASK-138 remains mandatory for bounded transport/canonical fan-out and the300ms performance gate. Root may commit128 before the next shared-workspace slice.
+
+## Findings
+
+### F128-final-1 — contradictory traversal availability message (closed)
+
+InspectorHost's fallback `else if mounted` showed “Previous/next unavailable in this view” even with a matching registration and a valid index. The final1440 Task capture visibly had enabled Next beside that message. Author applied the minimal condition `mounted && !controller.hasMatchingList` during this review, with root coordination.
+
+Independent real-browser validation on fixture5292 after the patch:
+- matching current-page task: no availability warning, Next exists;
+- same-kind task229 outside first page: Outside this page of results, Next absent;
+- Spec inspector from Tasks: unavailable in this view, Next absent.
+
+All3 states pass. Host's patched hash supplied by author: `0bb4151646fe72286b910af14cb1eb8298be0a1cbc129802dc84cb74fa495140`. Final manifest must capture it. Affected captures should reflect the corrected label.
+
+### F128-final-2 — Board inspector close loses focus (P1, closed after focused recheck)
+
+Reproduced independently at390×844:
+`/tasks?view=board&sort=id.asc&pageSize=50` → click TASK-00001 card's `.task-id` → Escape. Inspector closes and URL is preserved, but `document.activeElement` is BODY, not the originating card link.
+
+Tasks page registers the same inspector adapter for Table and Board, but restoreOpener calls only `table?.focusCurrent()`. Board has no DataTable instance. captureOpener, focusGrid and regionFor also only address `[data-table-grid]`, so Board scrolling and F6 region traversal lack a valid implementation.
+
+Minimum correction: make the existing Tasks registration view-aware. Board captures its actual horizontal scrollport and outer frame; restores the canonical task-id anchor by stable ID, or the nearest surviving task/toolbar with announcement if gone; recognizes Board as the list region and provides a working list-focus target. Keep table behavior and existing semantic Board intact; no new role=grid/navigation model. Handle changing view while detail remains open using the current view's actual target.
+
+Required focused gate: Board open→Close button/Escape in docked and modal modes, stable card focus and scroll/query preservation, F6 through toolbar/Board/inspector, missing-card fallback, and Table restoration nonregression. Root/UI received this finding immediately. Browser was closed explicitly and lease released for the fix.
+
+## Independent review evidence beyond findings
+
+- Real browser5292,1440×900→390×844: identical host, detail and reader DOM nodes; the focused relation link remains the same node; reader scrollTop180 is retained; modal aria-modal=true and7 inert regions; document has no horizontal overflow. Escape closes, removes inspector URL and restores inert count0.
+- Real Spec230-task relation window: first page100 mounted relation items, final page30 (201–230), focus moves to the range when Next becomes disabled, same detail DOM and unchanged inspector URL. This checks the new bounded presentation independently without repeating the author's9999 fixture sweep.
+- Inspected final Task light1440 and Spec dark390 captures: solid surfaces, compact metadata, readable document/relations and persistent anchors. Apart from F1's contradictory banner, no visual redesign requested.
+- Reviewed InspectorHost/Workspace, RelationWindow, detail consumers, Mermaid changes and route/filter/URL adapters. Ordinary canonical links, stable host, local pagination replacing the window, source fallback/no dead Mermaid controls and unchanged canonical question action remain consistent with128 scope.
+- Inspected128 recorded browser assertions (18history,19responsive,12transport,4modules,13SSR,3seed,9fanout,40themes,6Mermaid,4targets), all recorded pass.38HTTP checks retain separate source-snapshot provenance. These are author evidence, not all independently rerun. The only console error observed independently was missing favicon.ico404, not an application exception.
+- The product manifest/report/build were still being consolidated at this pass; no final whole-product hash certification yet. Do not convert the core approval into a whole-task approval.
+
+## Explicit remaining gates outside128
+
+128 contains inspector relation DOM, not its full payload or canonical fan-out. TASK-138 remains mandatory for bounded producer/canonical/SSR-no-JS pagination and the300ms warm-detail budget. RecordedHTTPp95~506/495ms does not meet that budget and is not click-to-hydrated-content measurement. No budget relaxation, new-cache assumption or completed-volume claim is accepted here. TASK-131 retains combined performance/accessibility/package/leak evidence. Question editing/dirty protection remains129;128 introduces no mutation path.
+
+## Final focused recheck and frozen manifest
+
+Final manifest `web/verification/task128-manifest.json` SHA **5e00c177a38f5ab80dc551ec77a9ff3ffda5916150f8853cf9f804059d99a895**: all87 entries independently verified,0 mismatches. Core19 stays unchanged at its approved hashes. Final Tasks source SHA `e3d32201c48c254962c39a8e230acee76655d024d36ad006e76db3232a455f51`; patched Host SHA `0bb4151646fe72286b910af14cb1eb8298be0a1cbc129802dc84cb74fa495140`. Reviewed view-aware Board adapter and enhanced-only X/Y scroll containment; SSR retains natural height and no new grid roles.
+
+Independent live browser5292 focused recheck:
+-1440×900 Board deep scrollTop650/scrollLeft54.5, opening TASK-00025 keeps docked header at y57 with frame.scrollTop0. Shift+F6 returns to the visible same card; Escape closes and restores TASK-00025 with exact650/54.5 scroll and original query.
+-390×844 Board scrollTop400/scrollLeft20, opening TASK-00004 creates modal/inert7. Close button restores TASK-00004 with exact400/20 scroll, original query and inert0. BODY-focus failure is resolved.
+- Inspected author5-check Board report: desktop same/nearest card, modal same/empty toolbar fallback, F6/native Tab reachability and real no-JS natural-height/no-clipping. Programmatic empty-list transport setup is correctly distinguished from a user activating inert background.
+- F1's4 refreshed Task inspector captures assert actual theme colors and zero erroneous availability banners; independently viewed corrected dark1440 capture. Earlier independent3 membership probes remain passing evidence.
+
+Inspected final affected check log:0 errors/0 warnings; production buildPASS5.53s; AGENTS pass. Recorded full suite356 passed/0 failed,7244 assertions with91.61%functions/92.58%lines is explicitly Bun scope and predates the final Board-only Svelte fix. That localized fix has final web-check/build and focused browser evidence; no unnecessary full-suite repetition was requested. The earlier38-check HTTP/import snapshot remains attributed to its historical source hashes, not relabelled as current. Final combined package/AT/latency/leak gates remain131.
+
+No open findings in128's approved scope. Browser explicitly closed with browser_close after recheck; lease is free. No product edits were made by this reviewer.

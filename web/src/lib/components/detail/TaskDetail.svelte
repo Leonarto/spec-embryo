@@ -1,29 +1,18 @@
 <script lang="ts">
   import { AlertTriangle, Archive, ArrowLeft, Blocks, Clock3, FolderKanban, GitBranchPlus, Link2, NotebookText, Target } from "@lucide/svelte";
+  import RelationWindow from "./RelationWindow.svelte";
+  import NotFound from "./NotFound.svelte";
   import DocumentBody from "../DocumentBody.svelte";
-  import type { TaskDetailResult } from "../../../../../src/services/details.ts";
+  import type {DetailLinkedTask,DetailLinkedSpec,DetailRelatedHandoff, TaskDetailResult } from "../../../../../src/services/details.ts";
 
-  let { detail } = $props<{ detail: TaskDetailResult }>();
+  let { detail,presentation="page" } = $props<{ detail: TaskDetailResult;presentation?:"page"|"inspector" }>();
 </script>
 
 {#if !detail.found}
-  <section class="missing-shell">
-    <a class="back-link" href="/tasks">
-      <ArrowLeft size={14} strokeWidth={1.9} />
-      Back to Tasks
-    </a>
-    <p class="eyebrow">Deterministic fallback</p>
-    <h2>Task {detail.id} was not found</h2>
-    <p class="intro">The requested task does not exist in the current managed memory. Pick one of the known IDs below.</p>
-    <div class="chip-row">
-      {#each detail.availableIds as taskId}
-        <a class="chip" href={`/tasks/${taskId}`}>{taskId}</a>
-      {/each}
-    </div>
-  </section>
+  <NotFound kind="task" id={detail.id}/>
 {:else}
-  <section class="detail-shell">
-    <div class="detail-header">
+  <section class="detail-shell" class:inspector={presentation==='inspector'}>
+    <div class="detail-header" data-detail-section="overview">
       <div class="header-copy">
         <a class="back-link" href="/tasks">
           <ArrowLeft size={14} strokeWidth={1.9} />
@@ -75,7 +64,7 @@
       </div>
     </div>
 
-    <section class="detail-grid">
+    <section class="detail-grid" data-detail-section="relations">
       <article class="panel">
         <div class="panel-head">
           <div class="panel-title">
@@ -85,59 +74,71 @@
         </div>
 
         <div class="state-stack">
-          <div class="state-card">
+          <div class="state-card" class:empty-group={detail.dependencies.length === 0}>
             <div class="panel-title">
               <GitBranchPlus size={14} strokeWidth={1.9} />
               <strong>Declared dependencies</strong>
             </div>
             {#if detail.dependencies.length === 0}
-              <p class="empty">This task has no declared dependencies.</p>
+              <p class="empty">{presentation==='inspector'?'None':'This task has no declared dependencies.'}</p>
             {:else}
-              <div class="linked-list">
-                {#each detail.dependencies as dependency}
-                  <a class="linked-card" href={`/tasks/${dependency.id}`}>
+              <RelationWindow items={detail.dependencies} identityKey={`task:${detail.task.id}:dependencies`} name="dependencies" label="Declared dependencies" fullHref={`/tasks/${detail.task.id}#dependencies`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly DetailLinkedTask[])}
+<div class="linked-list">
+                {#each visible as dependency}
+                  <a class="linked-card" data-relation-item href={`/tasks/${dependency.id}`}>
                     <p class="linked-id">{dependency.id}</p>
                     <h4>{dependency.title}</h4>
                     <p>{dependency.summary}</p>
                   </a>
                 {/each}
               </div>
+{/snippet}
+</RelationWindow>
             {/if}
           </div>
 
-          <div class="state-card">
+          <div class="state-card" class:empty-group={detail.unmetDependencyIds.length === 0}>
             <div class="panel-title">
               <AlertTriangle size={14} strokeWidth={1.9} />
               <strong>Unmet dependencies</strong>
             </div>
             {#if detail.unmetDependencyIds.length === 0}
-              <p class="empty">No unmet dependencies right now.</p>
+              <p class="empty">{presentation==='inspector'?'None':'No unmet dependencies right now.'}</p>
             {:else}
-              <div class="chip-row">
-                {#each detail.unmetDependencyIds as dependencyId}
-                  <span class="chip chip-warning">{dependencyId}</span>
+              <RelationWindow items={detail.unmetDependencyIds} identityKey={`task:${detail.task.id}:unmetDependencies`} name="unmetDependencies" label="Unmet dependencies" fullHref={`/tasks/${detail.task.id}#unmetDependencies`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly string[])}
+<div class="chip-row">
+                {#each visible as dependencyId}
+                  <span class="chip chip-warning" data-relation-item>{dependencyId}</span>
                 {/each}
               </div>
+{/snippet}
+</RelationWindow>
             {/if}
           </div>
 
-          <div class="state-card">
+          <div class="state-card" class:empty-group={detail.blockingTasks.length === 0}>
             <div class="panel-title">
               <Blocks size={14} strokeWidth={1.9} />
               <strong>Downstream tasks waiting here</strong>
             </div>
             {#if detail.blockingTasks.length === 0}
-              <p class="empty">No downstream tasks currently depend on this task.</p>
+              <p class="empty">{presentation==='inspector'?'None':'No downstream tasks currently depend on this task.'}</p>
             {:else}
-              <div class="linked-list">
-                {#each detail.blockingTasks as blockingTask}
-                  <a class="linked-card" href={`/tasks/${blockingTask.id}`}>
+              <RelationWindow items={detail.blockingTasks} identityKey={`task:${detail.task.id}:blockingTasks`} name="blockingTasks" label="Downstream tasks" fullHref={`/tasks/${detail.task.id}#blockingTasks`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly DetailLinkedTask[])}
+<div class="linked-list">
+                {#each visible as blockingTask}
+                  <a class="linked-card" data-relation-item href={`/tasks/${blockingTask.id}`}>
                     <p class="linked-id">{blockingTask.id}</p>
                     <h4>{blockingTask.title}</h4>
                     <p>{blockingTask.summary}</p>
                   </a>
                 {/each}
               </div>
+{/snippet}
+</RelationWindow>
             {/if}
           </div>
         </div>
@@ -173,11 +174,15 @@
               <NotebookText size={14} strokeWidth={1.9} />
               <strong>Linked specs</strong>
             </div>
-            <div class="chip-row">
-              {#each detail.linkedSpecs as spec}
-                <a class="chip" href={`/specs/${spec.id}`}>{spec.id}</a>
+            <RelationWindow items={detail.linkedSpecs} identityKey={`task:${detail.task.id}:linkedSpecs`} name="linkedSpecs" label="Linked specs" fullHref={`/tasks/${detail.task.id}#linkedSpecs`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly DetailLinkedSpec[])}
+<div class="chip-row">
+              {#each visible as spec}
+                <a class="chip" data-relation-item href={`/specs/${spec.id}`}>{spec.id}</a>
               {/each}
             </div>
+{/snippet}
+</RelationWindow>
           </div>
 
           <div class="state-card">
@@ -212,9 +217,11 @@
             {#if detail.relatedHandoffs.length === 0}
               <p class="empty">No related handoffs were found for this task yet.</p>
             {:else}
-              <div class="handoff-list">
-                {#each detail.relatedHandoffs as handoff}
-                  <div class="handoff-card">
+              <RelationWindow items={detail.relatedHandoffs} identityKey={`task:${detail.task.id}:handoffs`} name="handoffs" label="Related handoffs" fullHref={`/tasks/${detail.task.id}#handoffs`} limited={presentation==='inspector'}>
+{#snippet children(visible:readonly DetailRelatedHandoff[])}
+<div class="handoff-list">
+                {#each visible as handoff}
+                  <div class="handoff-card" data-relation-item>
                     <p class="linked-id">{handoff.id}</p>
                     <strong>{handoff.title}</strong>
                     <p>{handoff.summary}</p>
@@ -222,13 +229,15 @@
                   </div>
                 {/each}
               </div>
+{/snippet}
+</RelationWindow>
             {/if}
           </div>
         </div>
       </article>
     </section>
 
-    <article class="panel panel-body">
+    <article class="panel panel-body" data-detail-section="document">
       <div class="panel-head">
         <div class="panel-title">
           <NotebookText size={15} strokeWidth={1.9} />
@@ -261,11 +270,11 @@
   h2,
   h3,
   h4 {
-    font-family: var(--display-font);
+    font-family: var(--body-font);
   }
 
   h2 {
-    font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+    font-size: clamp(1.375rem, 2vw, 1.875rem);
   }
 
   h3 {
@@ -286,7 +295,6 @@
   }
 
   .detail-shell,
-  .missing-shell,
   .detail-grid,
   .meta-panel,
   .state-stack,
@@ -316,6 +324,7 @@
   }
 
   .back-link {
+    min-height:1.5rem;
     display: inline-flex;
     align-items: center;
     gap: 0.42rem;
@@ -345,7 +354,7 @@
     border-radius: var(--radius-xl);
     border: 1px solid var(--line);
     background: var(--panel);
-    box-shadow: var(--shadow);
+    box-shadow:none;
   }
 
   .meta-grid div {
@@ -360,7 +369,7 @@
   }
 
   .meta-grid strong {
-    font-family: var(--display-font);
+    font-family: var(--body-font);
     font-size: 1.3rem;
   }
 
@@ -369,11 +378,11 @@
     display: inline-flex;
     align-items: center;
     gap: 0.32rem;
-    border-radius: 999px;
+    border-radius:.25rem;
     padding: 0.34rem 0.7rem;
     border: 1px solid var(--line);
     background: var(--surface-interactive);
-    box-shadow: var(--shadow-soft);
+    box-shadow:none;
     font-size: 0.77rem;
   }
 
@@ -405,12 +414,12 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--line);
     background: var(--surface-card-soft);
-    box-shadow: var(--shadow-soft);
+    box-shadow:none;
   }
 
   .linked-card:hover {
     border-color: var(--accent-border);
-    transform: translateY(-1px);
+    background:var(--surface-raised);
   }
 
   .meta-list {
@@ -423,4 +432,22 @@
       grid-template-columns: 1fr;
     }
   }
+  .detail-shell,.panel,.detail-grid {min-width:0;overflow-wrap:anywhere;}
+  .inspector {gap:.75rem;font-size:.8125rem;}
+  .inspector .detail-header,.inspector .detail-grid {grid-template-columns:minmax(0,1fr);gap:.75rem;margin:0;}
+  .inspector .header-copy {gap:.375rem;}
+  .inspector .header-copy .back-link,.inspector .header-copy .eyebrow,.inspector .header-copy .title-row {display:none;}
+  .inspector .meta-panel {padding:.375rem .5rem;border:0;background:var(--surface-raised);gap:.375rem;}
+  .inspector .meta-grid {gap:.375rem .75rem;}.inspector .meta-grid div {display:flex;align-items:baseline;gap:.375rem;min-width:0;}.inspector .meta-grid strong {font-size:.8125rem;}
+  .inspector .panel {padding:.625rem;gap:.5rem;}.inspector .panel-head {gap:.375rem;}
+  .inspector .state-stack,.inspector .linked-list,.inspector .handoff-list {gap:0;}
+  .inspector .state-card,.inspector .linked-card,.inspector .handoff-card {padding:.5rem 0;gap:.25rem;border:0;border-bottom:1px solid var(--border-subtle);border-radius:0;background:transparent;}
+  .inspector .state-card:last-child,.inspector .linked-card:last-child,.inspector .handoff-card:last-child {border-bottom:0;}
+  .inspector .linked-card:hover {background:var(--surface-raised);}
+  .inspector .empty-group {display:flex;flex-wrap:wrap;align-items:baseline;gap:.375rem;}
+  .inspector .empty-group .empty::before {content:"· ";}
+  .inspector h3 {font-size:.875rem;}.inspector h4 {font-size:.8125rem;}
+  .inspector .chip {padding:.125rem .375rem;min-height:1.5rem;}
+  a:focus-visible {outline:2px solid var(--focus);outline-offset:2px;}
+  @media(pointer:coarse) {a,.back-link,.inspector .chip {min-height:2.75rem;}}
 </style>

@@ -1,14 +1,14 @@
-import { fail } from "@sveltejs/kit";
+import { error, fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { answerSpecOpenQuestions, loadProjectContext } from "../../../../../src/repository.ts";
 import { buildSpecAnswerEvaluation } from "../../../../../src/services/spec-answer-evaluation.ts";
-import { buildSpecDetailData, buildSpecDetailFromContext } from "../../../../../src/services/details.ts";
+import { buildSpecDetailData } from "../../../../../src/services/details.ts";
 import { resolveProjectRoot } from "../../../lib/server/project-root.ts";
-import { getWorkspaceRequestSource } from "../../../lib/server/workspace.ts";
+import { getWorkspaceDetail } from "../../../lib/server/detail.ts";
 
 export const load: PageServerLoad = async ({ params, locals }) => {
-  const source = await getWorkspaceRequestSource(locals);
-  const detail = buildSpecDetailFromContext(source.context, params.specId, source.analysis);
+  const {detail} = await getWorkspaceDetail(locals,{kind:"spec",id:params.specId});
+  if(!detail.found)error(404,`Spec ${params.specId} was not found in the current managed memory.`);
 
   return {
     detail,

@@ -1,0 +1,29 @@
+{
+  "scope": "F128-final-1: supersedes four Task inspector screenshots after banner correction; actual theme and surface asserted. Existing contrast audits remain applicable; no palette change.",
+  "layouts": [
+    {
+      "width": 1440,
+      "theme": "light",
+      "surface": "#ffffff",
+      "absenceBanners": 0
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "surface": "#151b1e",
+      "absenceBanners": 0
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "surface": "#ffffff",
+      "absenceBanners": 0
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "surface": "#151b1e",
+      "absenceBanners": 0
+    }
+  ]
+}

@@ -15,8 +15,8 @@ describe("canonical detail presentation", () => {
   let root: string;
   let cache: string;
   let render: typeof Render;
-  let TaskDetail: Component<{ detail: TaskDetailResult }>;
-  let SpecDetail: Component<{ detail: SpecDetailResult; actionResult?: SpecDetailActionResult }>;
+  let TaskDetail: Component<{ detail: TaskDetailResult;presentation?:"page"|"inspector" }>;
+  let SpecDetail: Component<{ detail: SpecDetailResult; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>;
   let taskDetail: TaskDetailResult;
   let specDetail: SpecDetailResult;
 
@@ -61,9 +61,35 @@ describe("canonical detail presentation", () => {
     expect(html).toContain('method="POST"'); expect(html).toContain('action="?/answerOpenQuestions"');
     expect(html).toContain('name="question"'); expect(html).toContain('name="answer"');
     expect(html).toContain("Which ordinary POST remains canonical?"); expect(html).toContain("Save answered questions");
-    expect(html).toContain("Resolved decisions"); expect(html).toContain("Rendering Mermaid diagram");
+    expect(html).toContain("Resolved decisions"); expect(html).toContain("Diagram rendering requires JavaScript");
     expect(html.indexOf("Answer open questions")).toBeLessThan(html.indexOf("Resolved decisions"));
     expect(html.indexOf("Resolved decisions")).toBeLessThan(html.indexOf("Source narrative"));
+  });
+
+  test("inspector presentation keeps reader anchors/Mermaid but sends questions to canonical page",()=>{
+    const task=render(TaskDetail,{props:{detail:taskDetail,presentation:'inspector'}}).body;
+    for(const section of ['overview','relations','document'])expect(task).toContain(`data-detail-section="${section}"`);
+    const spec=render(SpecDetail,{props:{detail:specDetail,presentation:'inspector'}}).body;
+    for(const section of ['overview','relations','document','questions','decisions'])expect(spec).toContain(`data-detail-section="${section}"`);
+    expect(spec).not.toContain('method="POST"');expect(spec).not.toContain('name="answer"');expect(spec).toContain('data-inspector-full');expect(spec).toContain('/specs/SPEC-002#open-questions');expect(spec).toContain('Diagram rendering requires JavaScript');expect(spec).toContain('Which ordinary POST remains canonical?');
+  });
+
+  test("inspector SSR bounds each relation collection and exposes its complete canonical link",()=>{
+    if(!taskDetail.found)throw new Error('fixture task missing');
+    const base=taskDetail.dependencies[0]!;
+    const cards=Array.from({length:251},(_,i)=>({...base,id:`TASK-REL-${i+1}`,title:`Related task ${i+1}`}));
+    const large={...taskDetail,dependencies:[],linkedSpecs:[],unmetDependencyIds:[],relatedHandoffs:[],blockingTasks:cards};
+    const inspector=render(TaskDetail,{props:{detail:large,presentation:'inspector'}}).body.replace(/<!--.*?-->/g,'');
+    expect(inspector.match(/data-relation-item/g)).toHaveLength(100);expect(inspector).toContain('1–100 of 251');expect(inspector).toContain(`/tasks/${taskDetail.task.id}#blockingTasks`);expect(inspector).not.toContain('<button');
+    const canonical=render(TaskDetail,{props:{detail:large}}).body;expect(canonical.match(/data-relation-item/g)).toHaveLength(251);
+  });
+  test("Spec inspector uses one100-task window across groups while keeping group metrics",()=>{
+    if(!taskDetail.found||!specDetail.found)throw new Error('fixture missing');
+    const base=taskDetail.dependencies[0]!,cards=Array.from({length:251},(_,i)=>({...base,id:`TASK-GROUP-${i+1}`,title:`Grouped task ${i+1}`}));
+    const large={...specDetail,linkedTasks:cards,linkedTaskGroups:[{id:'a',title:'First group',tasks:cards.slice(0,80)},{id:'b',title:'Second group',tasks:cards.slice(80,170)},{id:'c',title:'Third group',tasks:cards.slice(170)}]};
+    const inspector=render(SpecDetail,{props:{detail:large,presentation:'inspector'}}).body.replace(/<!--.*?-->/g,'');
+    expect(inspector.match(/data-relation-item/g)).toHaveLength(100);expect(inspector).toContain('First group');expect(inspector).toContain('Second group');expect(inspector).not.toContain('Third group');expect(inspector).toContain('>90</span>');expect(inspector).not.toContain('<button');
+    const canonical=render(SpecDetail,{props:{detail:large}}).body;expect(canonical.match(/data-relation-item/g)).toHaveLength(251);
   });
 
   test("existing action failures, saved counts and continuation evaluation remain visible", () => {
@@ -78,10 +104,10 @@ describe("canonical detail presentation", () => {
     expect(success).toContain("Ready for a reviewed follow-up."); expect(success).toContain("Use the canonical continuation context.");
   });
 
-  test("both missing-result variants preserve their fallback choices", () => {
+  test("both missing-result variants share coherent not-found and list navigation", () => {
     const task = render(TaskDetail, { props: { detail: { found: false, kind: "task", id: "TASK-MISSING", availableIds: ["TASK-001"] } } }).body;
     const spec = render(SpecDetail, { props: { detail: { found: false, kind: "spec", id: "SPEC-MISSING", availableIds: ["SPEC-001"] } } }).body;
-    expect(task).toContain("Task TASK-MISSING was not found"); expect(task).toContain('href="/tasks/TASK-001"');
-    expect(spec).toContain("Spec SPEC-MISSING was not found"); expect(spec).toContain('href="/specs/SPEC-001"');
+    expect(task).toContain("Task TASK-MISSING was not found"); expect(task).toContain('href="/tasks"');
+    expect(spec).toContain("Spec SPEC-MISSING was not found"); expect(spec).toContain('href="/specs"');
   });
 });

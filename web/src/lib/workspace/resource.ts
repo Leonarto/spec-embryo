@@ -67,6 +67,8 @@ export class WorkspaceResource<Envelope extends WorkspaceEnvelope = WorkspaceEnv
     if(this.focusTimer)clearTimeout(this.focusTimer);
     this.url=url;this.publish({snapshot,pending:false,error:undefined,lastSuccessAt:Date.parse(snapshot.generatedAt),lastAttemptAt:this.clock()});
   }
+  /** Inspector navigation only retargets the controlled endpoint, keeping ownership/state. */
+  retarget(url:string){this.url=url;}
   async refresh(reason:'manual'|'focus'='manual'):Promise<void>{
     if(this.disposed||(reason==='focus'&&this.state.pending))return;
     const generation=this.generation,sequence=++this.sequence;

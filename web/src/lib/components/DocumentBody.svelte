@@ -86,7 +86,7 @@
     width: 1.65rem;
     height: 0.18rem;
     border-radius: 999px;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 92%, white 8%), var(--accent-soft));
+    background:var(--accent);
   }
 
   h3,
@@ -97,7 +97,7 @@
   }
 
   h3 {
-    font-family: var(--display-font);
+    font-family:var(--body-font);
     font-size: 1.08rem;
   }
 
@@ -118,10 +118,10 @@
     display: grid;
     gap: 0.7rem;
     padding: 0.85rem;
-    border-radius: 0.95rem;
+    border-radius:.25rem;
     border: 1px solid var(--code-border);
-    background: var(--code-bg), var(--code-glow);
-    box-shadow: inset 0 1px 0 var(--inset-highlight);
+    background:var(--code-bg);
+    box-shadow:none;
   }
 
   .code-head {
@@ -155,7 +155,7 @@
   }
 
   code {
-    font-family: "IBM Plex Mono", "SFMono-Regular", ui-monospace, monospace;
+    font-family:var(--mono-font);
     color: var(--code-ink);
     font-size: 0.88rem;
     line-height: 1.6;
