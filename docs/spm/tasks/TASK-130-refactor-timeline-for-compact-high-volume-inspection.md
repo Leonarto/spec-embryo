@@ -148,3 +148,46 @@ Tests: exact legacy oracle remains untouched; for valid finite workspace results
 # Independent diagnostic design review
 
 A second Astra approved this design after checking the current producer, types, validator and runtime. Implementation must validate samples.length == min(count,100), exact omissions, sampled invalid IDs and field unions against rows, and all existing numeric metadata (including priority/counts) before serialization. This is design approval only, not implementation or final performance acceptance.
+
+
+# Updated parallel schedule after fan-out discovery
+
+After TASK-128 commits, `ui_implementation` owns this task in parallel with `harness_implementation` on TASK-138. TASK-138 owns all detail transport/readers/canonical loaders/inspector integration; this task owns Timeline components and timeline-only workspace/query/validator branches. Preserve TASK-128 host API. Final integration/freeze waits for committed TASK-138. TASK-129 starts after TASK-138, and TASK-131 waits for all three. This supersedes the earlier conditional 129/130 overlap; graph optimization remains completed in TASK-136.
+
+
+## Preflight addendum — fallback pagination and inspector registry
+
+The following closes current query/registration gaps; it does not change graph projection semantics.
+
+### Fallback query and DTO
+
+Extend `WorkspaceTimelineQuery` with required normalized `page:number` and `pageSize:50|100|200`, defaults1/100. Reuse existing safe-positive integer and page-size normalization. Timeline serializer preserves both, as does shared route allowlisting; fallback links set `simple=1` and retain all applicable scope/spec/window/mode/selected_task/inspect/section values. Changing timeline membership filters (spec/scope/window/mode) or page size sets page1. Trace/inspect/section changes retain page. Switching visual/simple mode retains requested page; visual mode does not page or crop the graph using these fields.
+
+In the workspace Timeline schemaVersion2 DTO already planned for diagnostics, add:
+
+```
+fallbackPage: {
+  rows: Array<{ groupId: string; groupTitle: string; task: WorkspaceTimelineTask }>;
+  requestedPage: number;
+  page: number;
+  pageSize: 50 | 100 | 200;
+  totalMatching: number;
+  totalPages: number;
+}
+```
+
+`WorkspaceTimelineTask` is the same finite-or-null timeline task row type used by the v2 graph, not a second domain model. Flatten final projected groups in output order then their tasks in output order once; slice that sequence. Headers do not count as rows. The fallback ignores client-only group collapse so every task is reachable without JavaScript. `totalMatching` is the number of task occurrences in that sequence, not all repository tasks or mounted rows. Empty=>page1,totalMatching0,totalPages1,rows[]. Clamp effective page; keep requestedPage from syntactically normalized input. Request identity remains intent-based before data-dependent clamp. At most200 fallback task rows; exact range is `(page-1)*pageSize+1..offset+rows.length`, with empty range0. Page counts/totals are safe finite integers, and validator checks range/cardinality and task numeric contracts. Duplicating only this bounded slice in the full timeline DTO is acceptable; never append a second full flat task array.
+
+Server produces the fallbackPage using the same projection once. SSR/no-JS/simple consume it directly, not a web-only recalculation of graph/status/filtering. Tests cover defaults/invalid values/roundtrip, empty/first/last/clamp, filter reset, selected_task/inspect preservation and canonical links. RequestKey regression after deletion mirrors the accepted list contract.
+
+### Inspector traversal uses logical rows, not viewport mounts
+
+Visual Timeline registers ordered IDs of **all task rows in currently expanded groups**, in visual flattening order, including rows outside the virtual viewport. Group headers never enter this task registry; duplicate IDs, if present in projection, contribute their first occurrence only to inspector traversal (projection/rendering stay unchanged). Build this sequence once when projection/collapse changes; scrolling or window recycling must not change it. No registration from DOM queries or mounted-node arrays.
+
+Previous/Next traverses that complete logical expanded sequence and is independent of current virtual window. Opening or advancing inspector need not scroll the background automatically; closing restores the original opener. Restore must locate the opener in logical rows, scroll to materialize it, await the rendered node and only then focus; if now collapsed, use its surviving group toggle, otherwise the existing128 missing-row fallback. Collapsing the inspected task's group keeps detail open but removes it from traversal; re-expansion restores traversal. Trace remains selected_task, not inspect.
+
+Simple/SSR fallback registers only its effective current page (native no-JS has no interactive inspector traversal controls). It must not navigate invisibly to tasks on another page.
+
+The host needs one additive contextual label discriminator on list registration: `navigationScope?: 'page' | 'expanded'`, default `'page'` for unchanged Tasks/Specs. Same-kind missing ID with scope expanded => **“Outside expanded results · Previous/next unavailable”**; page=>the approved **“Outside this page of results · Previous/next unavailable”**. No matching-kind registration=>the existing unavailable-in-view message. This expresses only registered membership, never global filter exclusion.
+
+This small shared host/interface change belongs to a serialized130 integration patch **after138 releases its inspector ownership**, not concurrent edits by both Sols and not a new128 requirement.130 may implement the independent Timeline registry/rendering meanwhile. Final130 gate includes the patch, real Next across the virtual viewport boundary, registry invariance while scrolling, collapse/re-expand, opener materialization/focus and fallback page confinement. Root should reserve this integration handoff explicitly.

@@ -107,6 +107,24 @@ Coordinate route ownership: Specs137 and Timeline builders also read page.url. D
 
 Targeted tests: direct SSR/hydration with no window access on server/no duplicate detail fetch; open/entity/section changes make address bar, inspector, copyLink and generated links agree; real Back/Forward with stale Kit page.url; apply filter/sort/pager after entity/section replacement retains the CURRENT inspect identity; open/close alone retains filter drafts/list selection/scroll and does not refetch list. Revalidate normal navigation/back across list queries with new SSR seeds, so URL observation never incorrectly applies a prior route's data.
 
+## Page membership wording clarification
+
+An ID absent from the registered current page is not proof that it fails the global filter. For a registered, comparable same-kind result set with no matching ID, display **“Outside this page of results · Previous/next unavailable”** and disable both navigation controls. Preserve the inspector entity, URL and detail; do not fetch global membership or duplicate filtering in web. For an unavailable/non-comparable result context (including another entity kind), use **“Previous/next unavailable in this view”**, without asserting absence. Returning to a page containing the ID restores page-relative previous/next normally.
+
+This qualifies earlier outside-filter wording: the supported observation is membership of the loaded page, not global filter membership. Root should reconcile SPEC-062 inspector/QA wording and TASK-128 accordingly; the outside-filter test remains valid as one instance of an entity outside the loaded page. Add the distinct matching-but-other-page case after sort/paging and recovery on returning to its page. No DTO, endpoint, service or query semantics change.
+
+## Fan-out containment and explicit completion checkpoint
+
+Observed Task fan-out (9,999 blocking tasks; about 3.50 MB JSON) is not a latency percentile and must not be presented as meeting the 300 ms warm-detail gate. Related Spec fan-out duplicates linkedTasks and group task arrays (about 7.00 MB for 10k linked tasks). This is a real remaining volume problem.
+
+128 contains inspector DOM now: at most 100 mounted items per relation collection, local JS pagination replacing the window rather than accumulating items; count/range, accessible Previous/Next, original ordering, canonical full-detail link. SSR shows first100 plus that working link, with no inactive pagination controls. Spec linked-task groups share one100-task budget across groups, not100 each. Cover task dependencies, blocking tasks, unmet IDs, linked specs, handoffs and spec linked tasks/handoffs. Preserve original totals/metrics, document/Mermaid subtree and questions/decisions. Pages reset on identity change, clamp on refresh, persist through breakpoint/section changes; retain pager focus or an associated heading if its control disappears. Test9999fan-out first/last windows and bounded DOM. Canonical and transport are deliberately unchanged in128 and remain pending volume work, not a claimed completion.
+
+TASK-138 must complete shared paginated relation transport and canonical/SSR/no-JS bounded readers after128 and before final acceptance. See `/private/tmp/spm-task138-decisions.md`. Root must track this dependency explicitly. Merely recording the issue for QA131 is insufficient.
+
+## Mermaid SSR controls
+
+Hide zoom controls until mounted and a usable SVG exists; no zoom controls during initial loading or error. Before mount/no-JS show readable source and an explicit JavaScript-required message instead of an indefinitely rendering placeholder. Preserve JS rendering, source fallback, lazy Mermaid import and shared canonical/inspector presentation. This is a128 presentation fix, not a new parser.
+
 
 # Integration seam for question drafts
 

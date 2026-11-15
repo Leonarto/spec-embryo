@@ -4,9 +4,9 @@ id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
 summary = "Implement a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
 status = "active"
-task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136", "TASK-137"]
+task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136", "TASK-137", "TASK-138"]
 tags = ["ui", "ux", "accessibility", "performance"]
-updated_at = "2026-11-15T21:33:05.494Z"
+updated_at = "2026-11-15T23:01:11.956Z"
 +++
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta
@@ -172,7 +172,7 @@ Contrato URL propuesto: `/tasks?scope=unarchived&sort=priority.asc&inspect=task:
 
 - Abrir desde lista crea entrada de historial. Back cierra y recupera scroll/celda; Forward reabre. Cierre por botón elimina `inspect` y `section` conservando la query actual completa. Sólo usa Back si la app puede verificar que la entrada inmediatamente previa es exactamente la misma ruta/query actual sin inspector; en cualquier otro caso usa replace de la URL actual. Así abrir → filtrar con drawer → cerrar conserva el nuevo filtro; Back puede volver a la entrada anterior de filtro según el historial normal y reabrir su inspector, sin que el botón cerrar retroceda filtros. En URL directa también usa replace, nunca envía al usuario a un sitio externo. Test obligatorio: abrir → cambiar filtro → cerrar → Back/Forward, comprobando query y entidad en cada entrada.
 - Anterior/siguiente y salto entre relaciones reemplazan la entidad en la entrada actual, evitando 50 entradas al recorrer filas. Mantener un breadcrumb local de relaciones con botón volver al item anterior; esa mini-historia no pretende sobrevivir recarga. Links de nueva pestaña siempre canónicos.
-- Cambiar filtro/orden conserva inspector aunque su entidad ya no pertenezca al resultado; etiqueta «Fuera del filtro actual», navegación siguiente/anterior deshabilitada hasta que vuelva a pertenecer. Scroll de tabla se reinicia al primer resultado, foco vuelve a toolbar, no se oculta drawer arbitrariamente.
+- Cambiar filtro/orden/página conserva inspector. Si la entidad no está en la página cargada del mismo tipo, mostrar «Outside this page of results · Previous/next unavailable» y deshabilitar anterior/siguiente; no inferir que está fuera del filtro global desde una página acotada. Sin contexto de tipo comparable, mostrar «Previous/next unavailable in this view». Recuperar navegación al volver a una página que contiene su ID. Scroll de tabla se reinicia al primer resultado, foco vuelve a toolbar, no se oculta drawer arbitrariamente.
 - `selected_task` timeline sigue siendo trazado de dependencias. `inspect` es inspección: abrir spec desde ese drawer no cambia trazado. Clear tracing no cierra inspector; Close inspector no borra trazado.
 - Estado compartible va en URL; selección/foco/scroll y breadcrumb local en estado de sesión/ruta; tema, densidad, rail, anchos/visibilidad columnas y ancho drawer en localStorage versionado y validado. No guardar borradores sensibles automáticamente en localStorage. URLs y storage con valores inválidos se normalizan a defaults, con pruebas.
 - Decisión técnica de TASK-128 aprobada por Astra: usar shallow push/replace sólo para identidad/sección/cierre del inspector; filtros, páginas y rutas mantienen navegación normal. URL y reconstrucción SSR siguen siendo el contrato. En SvelteKit 2.55.0, `page.url` no cambia con esas operaciones: un único adaptador reactivo usa `location.href` en navegador y `page.url` en SSR, leyendo `page.url`/`page.state` como señales. No duplicar la URL en otro store ni derivar identidad de state. Detalles de ledger, cancelación y adopción serial de consumidores están en TASK-128.
@@ -343,3 +343,8 @@ TASK-131 contiene el protocolo de medición aprobado por Astra: warm ≤800 ms y
 
 
 TASK-137 separa la tabla de Specs de TASK-129 y la implementa tras TASK-127, en paralelo con TASK-128. Reutiliza el grid y los DTOs existentes y mantiene enlaces canónicos; no cambia el host, servicios ni preguntas. TASK-129 espera los commits revisados de TASK-128 y TASK-137 para integrar drawer y respuestas protegidas. Sólo Tasks conserva Board; no se añade una alternativa Cards para Specs.
+
+
+## Mandatory fan-out completion checkpoint
+
+TASK-128 bounds inspector relation DOM as an intermediate checkpoint. TASK-138 must bound shared relation transport and canonical/SSR/no-JS readers for Task and Spec, preserve full relation access and legacy service semantics, and verify the unchanged warm-detail p95 ≤300 ms gate. Observed 9,999-dependent Task (~3.50 MB) and 10k-linked-task Spec (~7.00 MB, duplicated group serialization) are diagnostic samples, not latency distributions or accepted volume behavior. TASK-138 may run alongside Timeline TASK-130 after TASK-128; questions TASK-129 wait for TASK-138. Final TASK-131 depends on all three.
