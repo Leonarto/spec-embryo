@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-114"
 title = "Add deterministic legacy import and normalization flows"
 summary = "Normalize common legacy planning artifacts into canonical SpM docs with explicit mapped, skipped, and review-needed output."
-status = "blocked"
+status = "done"
 spec_ids = ["SPEC-056"]
 depends_on = ["TASK-113"]
 blocked_by = ["TASK-113"]
 priority = 2
 created_at = "2026-05-20T22:19:00Z"
+completed_at = "2026-05-20T17:23:27.743Z"
 tags = []
-updated_at = "2026-05-20T22:19:00Z"
+updated_at = "2026-05-20T17:23:27.743Z"
 +++
 
 # Scope

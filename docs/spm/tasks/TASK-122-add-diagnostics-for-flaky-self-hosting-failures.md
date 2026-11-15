@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-122"
 title = "Add diagnostics for flaky self-hosting failures"
 summary = "Improve failure reporting and targeted rerun paths for the environment-sensitive parts of the SpM self-hosting suite."
-status = "blocked"
+status = "done"
 spec_ids = ["SPEC-060"]
 depends_on = ["TASK-121"]
 blocked_by = ["TASK-121"]
 priority = 2
 created_at = "2026-05-20T22:27:00Z"
+completed_at = "2026-05-20T17:24:02.870Z"
 tags = []
-updated_at = "2026-05-20T22:27:00Z"
+updated_at = "2026-05-20T17:24:02.870Z"
 +++
 
 # Scope

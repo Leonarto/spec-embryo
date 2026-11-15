@@ -6,6 +6,7 @@ import {
   renderAgentWorkflowBrief,
 } from "../services/agent-workflow.ts";
 import { buildDoctorReport } from "../services/doctor.ts";
+import { withSchemaVersion } from "../services/contracts.ts";
 
 export async function runAgentCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
   if (parsed.subcommand && parsed.subcommand !== "brief" && parsed.subcommand !== "snippet") {
@@ -17,7 +18,7 @@ export async function runAgentCommand(rootDir: string, parsed: ParsedArgs): Prom
     const brief = buildAgentWorkflowBrief(report);
 
     if (parsed.flags.has("json")) {
-      return JSON.stringify(brief, null, 2);
+      return JSON.stringify(withSchemaVersion(brief as unknown as Record<string, unknown>), null, 2);
     }
 
     return renderAgentWorkflowBrief(brief);
@@ -27,7 +28,7 @@ export async function runAgentCommand(rootDir: string, parsed: ParsedArgs): Prom
     const snippet = buildAgentSnippet(report);
 
     if (parsed.flags.has("json")) {
-      return JSON.stringify(snippet, null, 2);
+      return JSON.stringify(withSchemaVersion(snippet as unknown as Record<string, unknown>), null, 2);
     }
 
     return renderAgentSnippet(snippet);

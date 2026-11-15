@@ -4,11 +4,11 @@ This folder contains reusable deterministic product services.
 
 - Keep services reusable, deterministic, and light on side effects.
 - Put cross-command workflow logic here, not in handlers.
-- Dashboard, adoption, and doctor services should project canonical repo state.
+- Dashboard, adoption, doctor, portfolio, profile, import, hooks, release, and test-diagnostic services should project canonical local state through structured data.
 - Memory retrieval/link/brief/note services should reuse canonical `ProjectContext`, explicit match reasons, section-aware indexing, normalized tag semantics, and scope write-policy enforcement.
 - Context-pack services should keep compaction explicit; surface truncated detail deterministically instead of making callers infer it.
-- When context-pack detail is offloaded, keep both typed `nextInspect` entries and legacy `nextInspectIds` aligned with the highest-value omitted refs so prompt-return callers get a deterministic expansion trail.
-- Adoption/doctor/agent-brief guidance should share one contract, including scaffold-vs-real-repo framing, source-material hints, tag guidance, partial-adoption checks, workflow-loop commands, doctor-mode commands, memory-workflow commands, direct-agent suggestions, Nexus coexistence guidance, Nexus setup guidance, capability-refresh command suggestions, capability-refresh review checks, adoption artifacts, capability refresh, and the bounded AGENTS snippet.
+- When context-pack detail is offloaded, keep typed `nextInspect` entries and legacy `nextInspectIds` aligned with the highest-value omitted refs.
+- Adoption/doctor/agent-brief guidance should share one contract for adoption, workflow, memory, Nexus, capability-refresh, and bounded AGENTS snippet guidance.
 - Nexus services keep Nexus external, dry-run before writes, and preserve `spm` ownership of AGENTS/config.
 - Doctor human output stays concise by default; long guidance belongs to verbose or JSON reads.
 - UI launch helpers must use packaged web assets and choose the first available local port so multiple repos can run `spm ui` side by side.

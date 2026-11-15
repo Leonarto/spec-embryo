@@ -107,6 +107,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
   const result = await initializeProject(rootDir, {
     force: hasFlag(parsed, "force"),
     memoryDir,
+    profile: flagValue(parsed, "profile"),
   });
   const projectConfig = await readProjectConfig(rootDir);
   const seedScaffoldDetected = await detectSeedScaffoldBestEffort(rootDir, result.memoryDir);
@@ -152,6 +153,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     return JSON.stringify(
       {
         memory_dir: result.memoryDir,
+        profile: result.profile,
         adopted_home: inspection.layoutChoice.adoptedHome,
         adoption_state: inspection.state,
         inspection,
@@ -174,6 +176,7 @@ export async function runInitCommand(rootDir: string, parsed: ParsedArgs): Promi
     "Initialized Spec Embryo project memory.",
     `Adoption state: ${inspection.state}`,
     `Memory home: ${result.memoryDir}`,
+    ...(result.profile ? [`Project profile: ${result.profile}`] : []),
     "",
     "Init sequence:",
     ...result.sequence.map((step, index) => `${index + 1}. ${step}`),

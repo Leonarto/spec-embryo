@@ -19,6 +19,9 @@ bun run spec-embryo init
 bun run spm init
 bun run spm agent brief
 bun run spm agent snippet
+bun run spm portfolio status
+bun run spm profile list
+bun run spm import legacy --source docs --apply
 bun run spm status
 bun run spm current show
 bun run spm current set --focus "Implement current-state maintenance flows" --active-task-ids TASK-006
@@ -33,6 +36,8 @@ bun run spm task list
 bun run spm task create --title "Add spec create command" --summary "Let the CLI create new spec docs deterministically" --spec-ids SPEC-002 --depends-on TASK-004 --priority 1
 bun run spm task set-status TASK-005 in_progress
 bun run spm handoff --title "Checkpoint before refactor"
+bun run spm release plan
+bun run spm tests diagnose
 bun run spm reshape --dry-run
 ```
 
@@ -102,8 +107,11 @@ web/
 - `agent snippet`: return only the bounded external `AGENTS.md` snippet so humans or wrapper agents can retrieve the additive SpM guidance directly in human or JSON form.
 - `agents check`: validate `AGENTS.md` files against the project-level context-ratio budget policy in `.specpm/config.toml`.
 - `nexus setup`: preview or apply the bounded optional Nexus setup across config, AGENTS guidance, local artifact ignore rules, and adoption artifacts.
+- `portfolio register/list/status/search/link`: keep a user-local registry of SpM projects, inspect cross-project state, search project summaries, and model explicit project relationships.
+- `profile list/show` plus `init --profile`: seed deterministic setup conventions for common repo shapes such as libraries, services, frontend apps, and infrastructure repos.
+- `import legacy`: preview or apply deterministic normalization from legacy planning docs into canonical specs and tasks.
 - `memory note`: create, update, archive, restore, and list scoped `memory-note` documents through deterministic CLI flows instead of editing `.specpm/memory/...` files by hand.
-- `memory query`: retrieve managed docs by text, kind, scope, status, tags, IDs, backlinks, and one-hop neighborhoods with compact default output, stable JSON, deterministic match reasons, concept-friendly ranking, and body-text retrieval over managed Markdown.
+- `memory query`: retrieve managed docs by text, kind, scope, status, tags, IDs, backlinks, one-hop neighborhoods, and explicit ranking controls with compact default output, stable JSON, deterministic match reasons, and body-text retrieval over managed Markdown.
 - `memory links`: inspect outgoing links, backlinks, and deterministic one-hop or two-hop neighborhoods for any managed doc.
 - `memory brief`: compress managed memory into compact implementation, review, or migration context for a doc, spec, task, or topic query, including why a center or text match was selected, smaller section-level evidence slices, and explicit inclusion/exclusion of neighbors, current state, handoffs, and memory scopes.
 - `memory pack`: build a first-class compact context pack for implementation, review, or migration work so another human or agent can start from must-read context, inspect top evidence sections early, and expand into supporting or offloaded detail only when needed.
@@ -113,8 +121,10 @@ web/
 - `status`: inspect current repo state, linked work, blockers, git changes, changed managed docs, and critical path.
 - `current show` / `current set`: inspect and deterministically update the explicit current-state checkpoint.
 - `ui`: start the local SvelteKit dashboard that visualizes the managed project memory.
-- `resume`: build deterministic resume context for a human, or a prompt bundle for an already-running agent.
+- `resume`: build deterministic resume context for a human, or a prompt bundle for an already-running agent, with optional `--since` interruption-window summaries from git history.
 - `handoff`: write a durable handoff Markdown checkpoint from the current state.
+- `hooks install/plan`: configure bounded local repo-event hook guidance and preview deterministic post-event actions.
+- `release plan/notes/recommend`: assemble release readiness, version-bump guidance, and release-note candidates from managed state.
 - `spec list`: list specs and their linked tasks.
 - `spec create`: create a new spec doc with a deterministic ID and optional linked tasks.
 - `spec set-status`: update a spec status deterministically in-place.
@@ -124,6 +134,7 @@ web/
 - `task set-status`: update a task status deterministically in-place, including the explicit `review` stage before `done`.
 - `task archive` / `task archive-done` / `task archive-cancelled`: archive closed tasks without deleting their durable docs.
 - `task restore`: clear archival metadata so a task is visible in active-flow views again.
+- `tests diagnose`: list self-hosting test areas that are sensitive to git state, locks, subprocesses, or packaged UI paths with focused rerun commands.
 
 Task docs now support explicit lifecycle metadata such as `created_at`, `completed_at`, and `cancelled_at`, so archival and time-based analysis can build on meaningful state transitions instead of `updated_at`.
 
@@ -181,6 +192,7 @@ That keeps prompt-return and subprocess execution aligned instead of making each
 - `spm memory consolidate` so quick session captures can be reviewed, promoted into durable handoffs, and retired with deterministic duplicate, contradiction, and stale-note checks
 - `spm memory eval` as a runnable eval harness for retrieval, context-pack, consolidation, and injection quality across both the live repo and synthetic fixture scenarios
 - Optional external Nexus guardrails through config, doctor checks, adoption guidance, and `spm nexus setup` so code-graph analysis can complement `spm` without replacing it
+- User-local portfolio, profile, legacy-import, hook, release, JSON-contract, and test-diagnostic foundations for using SpM consistently across many projects
 
 ## Architecture
 

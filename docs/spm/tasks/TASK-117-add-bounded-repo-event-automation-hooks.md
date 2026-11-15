@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-117"
 title = "Add bounded repo-event automation hooks"
 summary = "Introduce opt-in deterministic hooks around selected git, CI, and release lifecycle events to reduce managed-memory drift."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-058"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-05-20T22:22:00Z"
+completed_at = "2026-05-20T17:23:38.987Z"
 tags = []
-updated_at = "2026-05-20T22:22:00Z"
+updated_at = "2026-05-20T17:23:38.987Z"
 +++
 
 # Scope

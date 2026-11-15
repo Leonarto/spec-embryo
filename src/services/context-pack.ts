@@ -142,6 +142,10 @@ function toMemoryHandoffItem(handoff: MemoryBriefBundle["handoffs"][number]): Co
   };
 }
 
+function matchReasonSummary(match: NonNullable<MemoryBriefBundle["matches"]>[number], fallback: string): string {
+  return [...match.matchReasons, ...match.rankingReasons].join(", ") || fallback;
+}
+
 function toEvidenceItem(
   owner: { id: string; scope: MemoryScopeName; title: string },
   evidence: MemoryBriefEvidence,
@@ -190,7 +194,7 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
         scope: match.scope,
         title: `${match.id} ${match.title}`,
         summary: match.summary,
-        reason: match.matchReasons.join(", ") || "Topical retrieval match selected for the compact pack.",
+        reason: matchReasonSummary(match, "Topical retrieval match selected for the compact pack."),
       })),
     );
     const topEvidence = topMatches
@@ -220,7 +224,7 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
         scope: match.scope,
         title: `${match.id} ${match.title}`,
         summary: match.summary,
-        reason: match.matchReasons.join(", ") || "Related match retained as supporting context.",
+        reason: matchReasonSummary(match, "Related match retained as supporting context."),
       })),
     );
   } else if (brief.matches) {
@@ -228,9 +232,10 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
       ...brief.matches.slice(2, 4).map((match) => ({
         kind: "match" as const,
         ref: match.id,
+        scope: match.scope,
         title: `${match.id} ${match.title}`,
         summary: match.summary,
-        reason: match.matchReasons.join(", ") || "Additional topical match retained as supporting context.",
+        reason: matchReasonSummary(match, "Additional topical match retained as supporting context."),
       })),
     );
   }
@@ -247,9 +252,10 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
       ),
     );
   } else if (brief.matches) {
+    const matches = brief.matches;
     supporting.push(
-      ...brief.matches.slice(0, 2).flatMap((match) =>
-        match.evidence.slice(brief.matches[0] === match ? 1 : 0, 2).map((evidence) =>
+      ...matches.slice(0, 2).flatMap((match, index) =>
+        match.evidence.slice(index === 0 ? 1 : 0, 2).map((evidence) =>
           toEvidenceItem(
             { id: match.id, scope: match.scope, title: match.title },
             evidence,
@@ -279,7 +285,7 @@ export function buildMemoryContextPack(context: ProjectContext, request: MemoryB
     ...brief.handoffs.slice(1).map((handoff) => ({
       kind: "inspect-handoff" as const,
       ref: handoff.id,
-      scope: "repo",
+      scope: "repo" as const,
       note: `Recent handoff kept offloaded: ${handoff.title}`,
     })),
   ]);
@@ -367,7 +373,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.activeSpecs.slice(0, 2).map((spec) => ({
       kind: "active-spec" as const,
       ref: spec.id,
-      scope: "repo",
+      scope: "repo" as const,
       title: `${spec.id} ${spec.title}`,
       summary: `Status: ${spec.status}; linked tasks: ${compactList(spec.taskIds, 4)}.`,
       reason: "Active specs define the stable planning surface around the current work.",
@@ -378,7 +384,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.activeTasks.slice(0, 3).map((entry) => ({
       kind: "active-task" as const,
       ref: entry.task.id,
-      scope: "repo",
+      scope: "repo" as const,
       title: `${entry.task.id} ${entry.task.title}`,
       summary: `Status: ${entry.task.status}; unmet dependencies: ${compactList(entry.unmetDependencies, 3)}.`,
       reason: "Active tasks are the narrowest concrete execution anchors for the next slice.",
@@ -389,7 +395,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.blockedTasks.slice(0, 2).map((entry) => ({
       kind: "blocked-task" as const,
       ref: entry.task.id,
-      scope: "repo",
+      scope: "repo" as const,
       title: `${entry.task.id} ${entry.task.title}`,
       summary: `Blocked by: ${compactList(entry.unmetDependencies, 3)}.`,
       reason: "Blocked work changes what is safe to pick up next.",
@@ -400,7 +406,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.readyTasks.slice(0, 2).map((entry) => ({
       kind: "ready-task" as const,
       ref: entry.task.id,
-      scope: "repo",
+      scope: "repo" as const,
       title: `${entry.task.id} ${entry.task.title}`,
       summary: `Priority: p${entry.task.priority}.`,
       reason: "Ready tasks are useful expansion material if the current slice is finished or blocked.",
@@ -418,7 +424,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...changedItemSlice.visibleItems.map((item) => ({
       kind: "changed-item" as const,
       ref: item.path,
-      scope: "repo",
+      scope: "repo" as const,
       title: item.path,
       summary: toChangedItemSummary(item),
       reason: "Recent changed files help localize the working set without pasting large diffs into the pack.",
@@ -429,7 +435,7 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     supporting.push({
       kind: "handoff",
       ref: context.recentHandoff.id,
-      scope: "repo",
+      scope: "repo" as const,
       title: `${context.recentHandoff.id} ${context.recentHandoff.title}`,
       summary: context.recentHandoff.summary,
       reason: "The latest handoff preserves prior intent that may not be obvious from status alone.",
@@ -440,13 +446,13 @@ export function buildResumeContextPack(context: ResumeContext): ContextPackBundl
     ...context.readyTasks.slice(2).map((entry) => ({
       kind: "inspect-task" as const,
       ref: entry.task.id,
-      scope: "repo",
+      scope: "repo" as const,
       note: `Additional ready task kept out of the active pack: ${entry.task.title}`,
     })),
     ...humanChangedItems.slice(changedItemSlice.visibleItems.length).map((item) => ({
       kind: "inspect-change" as const,
       ref: item.path,
-      scope: "repo",
+      scope: "repo" as const,
       note: `Changed file available for deeper inspection: ${toChangedItemSummary(item)}`,
     })),
   ]);

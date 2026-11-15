@@ -7,14 +7,20 @@ import { runAgentsCommand } from "./commands/agents.ts";
 import { runCurrentCommand } from "./commands/current.ts";
 import { runDoctorCommand } from "./commands/doctor.ts";
 import { runHandoffCommand } from "./commands/handoff.ts";
+import { runHooksCommand } from "./commands/hooks.ts";
+import { runImportCommand } from "./commands/import.ts";
 import { runInitCommand } from "./commands/init.ts";
 import { runMemoryCommand } from "./commands/memory.ts";
 import { runNexusCommand } from "./commands/nexus.ts";
+import { runPortfolioCommand } from "./commands/portfolio.ts";
+import { runProfileCommand } from "./commands/profile.ts";
+import { runReleaseCommand } from "./commands/release.ts";
 import { runReshapeCommand } from "./commands/reshape.ts";
 import { runResumeCommand } from "./commands/resume.ts";
 import { runSpecCommand } from "./commands/spec.ts";
 import { runStatusCommand } from "./commands/status.ts";
 import { runTaskCommand } from "./commands/task.ts";
+import { runTestsCommand } from "./commands/tests.ts";
 import { runUiCommand } from "./commands/ui.ts";
 import { readCliVersion } from "./services/version.ts";
 
@@ -38,6 +44,9 @@ async function main(): Promise<void> {
     case "init":
       output = await runInitCommand(rootDir, parsed);
       break;
+    case "import":
+      output = await runImportCommand(rootDir, parsed);
+      break;
     case "status":
       output = await runStatusCommand(rootDir, parsed);
       break;
@@ -56,6 +65,9 @@ async function main(): Promise<void> {
     case "handoff":
       output = await runHandoffCommand(rootDir, parsed);
       break;
+    case "hooks":
+      output = await runHooksCommand(rootDir, parsed);
+      break;
     case "current":
       output = await runCurrentCommand(rootDir, parsed);
       break;
@@ -71,11 +83,23 @@ async function main(): Promise<void> {
     case "nexus":
       output = await runNexusCommand(rootDir, parsed);
       break;
+    case "portfolio":
+      output = await runPortfolioCommand(rootDir, parsed);
+      break;
+    case "profile":
+      output = await runProfileCommand(rootDir, parsed);
+      break;
+    case "release":
+      output = await runReleaseCommand(rootDir, parsed);
+      break;
     case "spec":
       output = await runSpecCommand(rootDir, parsed);
       break;
     case "task":
       output = await runTaskCommand(rootDir, parsed);
+      break;
+    case "tests":
+      output = await runTestsCommand(rootDir, parsed);
       break;
     case "version":
       output = await readCliVersion();

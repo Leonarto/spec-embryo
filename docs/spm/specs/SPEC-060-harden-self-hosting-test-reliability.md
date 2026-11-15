@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-060"
 title = "Harden self-hosting test reliability"
 summary = "Reduce flake-prone behavior so SpM can serve as dependable infrastructure across many repos and repeated publish cycles."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-121", "TASK-122"]
 tags = ["testing", "reliability", "self-hosting", "ci"]
-updated_at = "2026-05-20T22:15:00Z"
+updated_at = "2026-05-20T17:24:25.507Z"
 +++
 
 # Overview

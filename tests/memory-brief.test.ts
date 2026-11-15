@@ -35,11 +35,14 @@ describe("memory brief service", () => {
       await initializeProject(rootDir);
       const context = await loadProjectContext(rootDir);
       const bundle = buildMemoryBriefBundle(context, {
-        text: "real project direction",
+        text: "adoption",
         profile: "migration",
+        rank: "active",
       });
 
-      expect(bundle.matches?.some((item) => item.id === "TASK-001")).toBe(true);
+      expect(bundle.request.rank).toBe("active");
+      expect(bundle.matches?.[0]?.id).toBe("SPEC-001");
+      expect(bundle.matches?.[0]?.rankingReasons).toContain("rank:active");
       expect(bundle.matches?.some((item) => item.matchReasons.length > 0)).toBe(true);
       expect(bundle.matches?.some((item) => item.evidence.length > 0)).toBe(true);
       expect(bundle.neighbors.length).toBeGreaterThan(0);
@@ -99,17 +102,19 @@ describe("memory brief command", () => {
 
       const json = await runMemoryCommand(
         rootDir,
-        parseArgs(["memory", "brief", "--text", "real project direction", "--profile", "migration", "--json"]),
+        parseArgs(["memory", "brief", "--text", "adoption", "--profile", "migration", "--rank", "active", "--json"]),
       );
       const bundle = JSON.parse(json) as {
-        request: { mode: string; profile: string };
-        matches: Array<{ id: string; matchReasons: string[]; evidence: Array<{ text: string }> }>;
+        request: { mode: string; profile: string; rank: string };
+        matches: Array<{ id: string; matchReasons: string[]; rankingReasons: string[]; evidence: Array<{ text: string }> }>;
       };
 
       expect(bundle.request.mode).toBe("text");
       expect(bundle.request.profile).toBe("migration");
-      expect(bundle.matches.some((item) => item.id === "TASK-001")).toBe(true);
+      expect(bundle.request.rank).toBe("active");
+      expect(bundle.matches[0]?.id).toBe("SPEC-001");
       expect(bundle.matches.some((item) => item.matchReasons.length > 0)).toBe(true);
+      expect(bundle.matches[0]?.rankingReasons).toContain("rank:active");
       expect(bundle.matches.some((item) => item.evidence.length > 0)).toBe(true);
 
       const trimmed = await runMemoryCommand(

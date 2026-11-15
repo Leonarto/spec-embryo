@@ -2,6 +2,8 @@
 
 Managed specs live here.
 
+- `assets/` holds referenced design concepts; these illustrate proposed behavior and are not product screenshots or shipped UI.
+
 - One spec should describe a coherent slice of product intent or architecture.
 - Keep linked `task_ids` current.
 - Update specs when goals, non-goals, invariants, or interface contracts shift.

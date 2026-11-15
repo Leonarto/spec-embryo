@@ -8,6 +8,7 @@ import {
 } from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "../services/agents.ts";
+import { withSchemaVersion } from "../services/contracts.ts";
 
 export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
   const [context, agentsReport] = await Promise.all([loadProjectContext(rootDir), buildAgentsHealthReport(rootDir)]);
@@ -16,7 +17,7 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
 
   if (parsed.flags.has("json")) {
     return JSON.stringify(
-      {
+      withSchemaVersion({
         project: context.config.projectName,
         focus: context.currentState.focus,
         summary: context.currentState.summary,
@@ -35,7 +36,7 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
         changed_items: snapshot.changedItems,
         git: context.git,
         agents: agentsReport.summary,
-      },
+      }),
       null,
       2,
     );

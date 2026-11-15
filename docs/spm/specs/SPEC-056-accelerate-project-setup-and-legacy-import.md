@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-056"
 title = "Accelerate project setup and legacy import"
 summary = "Reduce adoption cost across many repos with seeded project profiles and deterministic import flows for existing planning material."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-113", "TASK-114"]
 tags = ["adoption", "profiles", "import", "migration"]
-updated_at = "2026-05-20T22:03:00Z"
+updated_at = "2026-05-20T17:24:12.458Z"
 +++
 
 # Overview

@@ -31,7 +31,11 @@ export interface MemoryQueryFilters {
   linkedTo?: string;
   neighborOf?: string;
   limit?: number;
+  rank?: MemoryQueryRank;
 }
+
+export const MEMORY_QUERY_RANKS = ["default", "recent", "active"] as const;
+export type MemoryQueryRank = (typeof MEMORY_QUERY_RANKS)[number];
 
 export interface MemoryQueryResult {
   id: string;
@@ -44,6 +48,7 @@ export interface MemoryQueryResult {
   filePath: string;
   matchReasons: string[];
   relationHints: string[];
+  rankingReasons: string[];
 }
 
 export interface MemoryQueryBundle {
@@ -57,6 +62,7 @@ export interface MemoryQueryBundle {
     linkedTo?: string;
     neighborOf?: string;
     limit: number;
+    rank: MemoryQueryRank;
   };
   totalMatches: number;
   results: MemoryQueryResult[];
@@ -67,6 +73,7 @@ interface ScoredEntry {
   score: number;
   matchReasons: string[];
   relationHints: string[];
+  rankingReasons: string[];
 }
 
 function normalizeTagValue(value: string): string | undefined {
@@ -185,6 +192,42 @@ function compareResults(left: ScoredEntry, right: ScoredEntry): number {
   return right.score - left.score || left.entry.id.localeCompare(right.entry.id);
 }
 
+function scoreRankingControl(entry: MemoryIndexEntry, context: ProjectContext, rank: MemoryQueryRank): { score: number; reasons: string[] } {
+  if (rank === "default") {
+    return { score: 0, reasons: [] };
+  }
+
+  if (rank === "recent") {
+    const timestamp = entry.updatedAt ? Date.parse(entry.updatedAt) : Number.NaN;
+    if (Number.isFinite(timestamp)) {
+      return {
+        score: Math.floor(timestamp / 86_400_000),
+        reasons: ["rank:recent"],
+      };
+    }
+    return { score: 0, reasons: [] };
+  }
+
+  const activeIds = new Set([
+    "CURRENT",
+    ...context.currentState.activeSpecIds,
+    ...context.currentState.activeTaskIds,
+    ...context.currentState.blockedTaskIds,
+  ]);
+  if (activeIds.has(entry.id)) {
+    return { score: 75, reasons: ["rank:active"] };
+  }
+
+  if (
+    entry.document.docKind === "task" &&
+    entry.document.specIds.some((id) => context.currentState.activeSpecIds.includes(id))
+  ) {
+    return { score: 25, reasons: ["rank:active-neighbor"] };
+  }
+
+  return { score: 0, reasons: [] };
+}
+
 function relationHintLabel(relation: MemoryRelation, perspectiveId: string): string {
   const otherId = relation.fromId === perspectiveId ? relation.toId : relation.fromId;
   return `${relation.relation} -> ${otherId}`;
@@ -234,6 +277,7 @@ function buildFilterReasons(entry: MemoryIndexEntry, filters: MemoryQueryFilters
 
 export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQueryFilters): MemoryQueryBundle {
   const limit = filters.limit && filters.limit > 0 ? filters.limit : 20;
+  const rank = filters.rank ?? "default";
   const requestedText = normalizeRequestedText(filters.text);
   const requestedTags = uniqueSorted(
     (filters.tags ?? [])
@@ -333,13 +377,15 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
         ...buildFilterReasons(entry, filters, requestedTags),
         ...(textScore?.reasons ?? []),
       ]);
+      const ranking = scoreRankingControl(entry, context, rank);
 
       return [
         {
           entry,
-          score: textScore?.score ?? 0,
+          score: (textScore?.score ?? 0) + ranking.score,
           matchReasons,
           relationHints,
+          rankingReasons: ranking.reasons,
         },
       ];
     })
@@ -356,9 +402,10 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
       linkedTo,
       neighborOf,
       limit,
+      rank,
     },
     totalMatches: scored.length,
-    results: scored.slice(0, limit).map(({ entry, matchReasons, relationHints }) => ({
+    results: scored.slice(0, limit).map(({ entry, matchReasons, relationHints, rankingReasons }) => ({
       id: entry.id,
       docKind: entry.docKind,
       scope: entry.scope,
@@ -369,6 +416,7 @@ export function buildMemoryQueryBundle(context: ProjectContext, filters: MemoryQ
       filePath: entry.filePath,
       matchReasons,
       relationHints,
+      rankingReasons,
     })),
   };
 }
@@ -384,8 +432,10 @@ export function renderMemoryQueryBundle(bundle: MemoryQueryBundle): string {
       const reasonLine = result.matchReasons.length > 0 ? `\n  match: ${result.matchReasons.join(", ")}` : "";
       const relationLine =
         result.relationHints.length > 0 ? `\n  relations: ${result.relationHints.join(", ")}` : "";
+      const rankingLine =
+        result.rankingReasons.length > 0 ? `\n  ranking: ${result.rankingReasons.join(", ")}` : "";
       const tagLine = result.tags.length > 0 ? `\n  tags: ${result.tags.join(", ")}` : "";
-      return `${result.id} [${result.docKind}${statusLabel} scope:${result.scope}] ${result.title}\n  ${result.summary}${reasonLine}${relationLine}${tagLine}`;
+      return `${result.id} [${result.docKind}${statusLabel} scope:${result.scope}] ${result.title}\n  ${result.summary}${reasonLine}${relationLine}${rankingLine}${tagLine}`;
     })
     .join("\n\n");
 }

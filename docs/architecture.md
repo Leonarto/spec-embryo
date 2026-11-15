@@ -7,8 +7,8 @@ Spec Embryo is intentionally split into seven layers:
 1. Storage and file layer: filesystem access, TOML frontmatter parsing, config loading, and durable writes.
 2. Domain model: typed documents for specs, tasks, handoffs, current state, and backend config.
 3. Deterministic engine: linking, validation, git inspection, blockers, ready work, critical path, and next-action derivation.
-4. CLI command layer: thin commands for `init`, `doctor`, `agent brief`, `agent snippet`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `memory note`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `memory eval`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
-5. Deterministic product services: source-folder scanning, AGENTS health, dashboard data shaping, memory indexing/querying/briefing/packing/consolidation, section-level evidence extraction, layout normalization, and other reusable logic above the repository layer.
+4. CLI command layer: thin commands for `init`, `doctor`, `agent brief`, `agent snippet`, `status`, `current show`, `current set`, `ui`, `resume`, `handoff`, `portfolio`, `profile`, `import legacy`, `hooks`, `release`, `tests diagnose`, `memory note`, `memory query`, `memory links`, `memory brief`, `memory pack`, `memory scopes`, `memory consolidate`, `memory eval`, `spec list`, `spec set-status`, `task list`, and `task set-status`.
+5. Deterministic product services: source-folder scanning, AGENTS health, portfolio aggregation, profile manifests, legacy import planning, hook/release planning, test diagnostics, dashboard data shaping, memory indexing/querying/briefing/packing/consolidation, section-level evidence extraction, layout normalization, and other reusable logic above the repository layer.
 6. Local visual server: a SvelteKit app that renders managed memory through shared deterministic services rather than a second parser.
 7. Execution backends: deterministic text output, prompt-return output, and optional subprocess adapters.
 
@@ -22,6 +22,8 @@ The repo is the source of truth. V1 uses:
 - `.specpm/config.toml` also holds the project-standard AGENTS context-budget policy
 - `.specpm/config.toml` also records the adopted repo's last written `tool_version` so doctor can surface newer CLI guidance
 - `.specpm/config.toml` also defines optional scoped memory namespaces for session and org-style note collections
+- `.specpm/profile.json` optionally records the selected deterministic project profile
+- `.specpm/hooks.json` optionally records enabled local hook guidance events
 - `docs/spm/` or `spm/` as the managed memory home
 - `<memory-home>/current.md` for explicit current state
 - `<memory-home>/handoffs/*.md` for durable handoff checkpoints
@@ -32,7 +34,9 @@ The repo is the source of truth. V1 uses:
 
 Each document is Markdown with TOML frontmatter so it stays readable to both humans and AI agents while remaining easy to parse deterministically.
 
-When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide, current memory-workflow guidance, a bounded external `AGENTS.md` snippet, and explicit discoverability for both `spm agent brief` and `spm agent snippet` when callers need narrower agent-facing surfaces. The broader adoption outputs now point at those same direct commands too, and the shared guidance model exposes source-material hints, tag guidance, partial-adoption checks, workflow-loop commands, doctor-mode commands, direct-agent command suggestions, Nexus coexistence guidance, Nexus setup flow, Nexus setup command suggestions, Nexus setup review checks, capability-refresh command suggestions, capability-refresh review checks, and scoped-memory workflow commands as structured data so JSON consumers and renderers stay aligned on one contract. `agent brief` exposes a shorter steady-state workflow surface for agents that only need to know how to use SpM in the current repo today, and `agent snippet` exposes just the bounded additive `AGENTS.md` guidance when callers want a narrower surface. All of those command surfaces reuse shared adoption wording instead of inventing separate instruction layers. `doctor` also validates that the generated repo-local adoption artifacts still match the current deterministic renderer, so stale migration guides and agent briefs can be refreshed before another agent relies on them. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
+When existing projects already have a legacy docs/specs folder, `init` now classifies that repo state up front, emits deterministic next-step guidance, writes a repo-local migration guide plus direct-agent-brief file, and `spec import-prompt` provides an agent-ready migration bundle so that formatting work can happen without guessing the target schema. `import legacy` adds a deterministic apply path for simple legacy planning docs by creating canonical specs and tasks from mapped headings and task markers. `doctor` keeps its default human-readable output concise for repeated agent use, while `--verbose` expands into the longer adoption guide, current memory-workflow guidance, a bounded external `AGENTS.md` snippet, and explicit discoverability for both `spm agent brief` and `spm agent snippet` when callers need narrower agent-facing surfaces. The broader adoption outputs now point at those same direct commands too, and the shared guidance model exposes source-material hints, tag guidance, partial-adoption checks, workflow-loop commands, doctor-mode commands, direct-agent command suggestions, Nexus coexistence guidance, Nexus setup flow, Nexus setup command suggestions, Nexus setup review checks, capability-refresh command suggestions, capability-refresh review checks, and scoped-memory workflow commands as structured data so JSON consumers and renderers stay aligned on one contract. `agent brief` exposes a shorter steady-state workflow surface for agents that only need to know how to use SpM in the current repo today, and `agent snippet` exposes just the bounded additive `AGENTS.md` guidance when callers want a narrower surface. All of those command surfaces reuse shared adoption wording instead of inventing separate instruction layers. `doctor` also validates that the generated repo-local adoption artifacts still match the current deterministic renderer, so stale migration guides and agent briefs can be refreshed before another agent relies on them. The same adoption artifacts can now also teach bounded coexistence with optional external code-graph tooling such as Nexus without making that tooling part of Spec Embryo's source of truth.
+
+Portfolio and release-oriented services are intentionally sidecar layers. `portfolio` reads a user-local registry and then projects each registered repo's own managed state; it does not centralize per-repo specs or tasks. `hooks` and `release` expose deterministic plans and readiness data so users can reduce drift and prepare publishes while keeping approval-sensitive actions explicit.
 
 ## Domain model
 
@@ -169,6 +173,7 @@ Deterministic by default:
 - validate document shape
 - link specs to tasks
 - inspect git state
+- inspect registered portfolio projects from a user-local registry
 - derive changed managed docs from git state, including one normalized change hint for shared status-style summaries plus one compact raw status code for structured consumers
 - compute blocker and ready-task sets
 - derive next actions when rules are explicit
@@ -179,6 +184,7 @@ Deterministic by default:
 - render one short agent-workflow brief plus an optional bounded external `AGENTS.md` snippet from the same deterministic adoption guidance data used by doctor and init artifacts
 - validate bounded coexistence with optional external code-graph tooling through config, command-availability, and AGENTS contract checks
 - index managed docs into deterministic retrieval entries and expose query/link/brief traversal by typed filters, backlinks, local neighborhoods, section-level evidence slices, compact context bundles, explicit match reasons, and deterministic concept-friendly ranking
+- render profile, hook, release, schema-contract, and test-diagnostic guidance from explicit local data
 
 Non-deterministic only when genuinely needed:
 

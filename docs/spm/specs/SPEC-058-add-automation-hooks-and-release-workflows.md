@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-058"
 title = "Add automation hooks and release workflows"
 summary = "Reduce drift and release friction with deterministic repo-event hooks and first-class release preparation commands."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-117", "TASK-118"]
 tags = ["automation", "hooks", "release", "workflow"]
-updated_at = "2026-05-20T22:09:00Z"
+updated_at = "2026-05-20T17:24:19.005Z"
 +++
 
 # Overview

@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-112"
 title = "Add explicit cross-project links and shared milestones"
 summary = "Represent repo-to-repo dependencies, related-project links, and rollout groupings on top of the portfolio registry."
-status = "blocked"
+status = "done"
 spec_ids = ["SPEC-055"]
 depends_on = ["TASK-111"]
 blocked_by = ["TASK-111"]
 priority = 2
 created_at = "2026-05-20T22:17:00Z"
+completed_at = "2026-05-20T17:23:18.868Z"
 tags = []
-updated_at = "2026-05-20T22:17:00Z"
+updated_at = "2026-05-20T17:23:18.868Z"
 +++
 
 # Scope

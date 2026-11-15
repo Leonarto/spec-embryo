@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-118"
 title = "Add release planning, versioning, and changelog flows"
 summary = "Turn release prep into a first-class SpM workflow with version recommendations, release notes, and readiness checks."
-status = "blocked"
+status = "done"
 spec_ids = ["SPEC-058"]
 depends_on = ["TASK-117"]
 blocked_by = ["TASK-117"]
 priority = 2
 created_at = "2026-05-20T22:23:00Z"
+completed_at = "2026-05-20T17:23:51.108Z"
 tags = []
-updated_at = "2026-05-20T22:23:00Z"
+updated_at = "2026-05-20T17:23:51.108Z"
 +++
 
 # Scope

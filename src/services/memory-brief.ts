@@ -7,7 +7,7 @@ import {
   type MemoryIndexEntry,
 } from "./memory-index.ts";
 import { buildMemoryNeighborhood, buildMemoryLinkGraph } from "./memory-links.ts";
-import { buildMemoryQueryBundle, type MemoryQueryScope } from "./memory-query.ts";
+import { buildMemoryQueryBundle, type MemoryQueryRank, type MemoryQueryScope } from "./memory-query.ts";
 
 export const MEMORY_BRIEF_PROFILES = ["implementation", "review", "migration"] as const;
 export type MemoryBriefProfile = (typeof MEMORY_BRIEF_PROFILES)[number];
@@ -22,6 +22,7 @@ export interface MemoryBriefRequest {
   includeHandoffs?: boolean;
   profile?: MemoryBriefProfile;
   scope?: MemoryQueryScope;
+  rank?: MemoryQueryRank;
 }
 
 export interface MemoryBriefBundle {
@@ -33,6 +34,7 @@ export interface MemoryBriefBundle {
     includeNeighbors: boolean;
     includeCurrent: boolean;
     includeHandoffs: boolean;
+    rank: MemoryQueryRank;
   };
   center?: {
     id: string;
@@ -53,6 +55,7 @@ export interface MemoryBriefBundle {
     summary: string;
     status?: string;
     matchReasons: string[];
+    rankingReasons: string[];
     evidence: MemoryBriefEvidence[];
   }>;
   current?: {
@@ -230,7 +233,7 @@ function buildDocumentEvidence(entry: MemoryIndexEntry, queryText: string | unde
     }));
 }
 
-function toCenter(entry: MemoryIndexEntry, queryText?: string) {
+function toCenter(entry: MemoryIndexEntry, queryText?: string): NonNullable<MemoryBriefBundle["center"]> {
   return {
     id: entry.id,
     docKind: entry.docKind,
@@ -289,6 +292,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
   const includeCurrent = request.includeCurrent ?? true;
   const includeHandoffs = request.includeHandoffs ?? includeHandoffsByDefault(profile);
   const scope = request.scope;
+  const rank = request.rank ?? "default";
   const index = buildMemoryIndex(context);
   const graph = buildMemoryLinkGraph(context);
 
@@ -297,6 +301,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
       text: value,
       scope,
       limit: profile === "review" ? 5 : 4,
+      rank,
     });
 
     const matches = query.results.map((result) => ({
@@ -307,12 +312,13 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
       summary: result.summary,
       status: result.status,
       matchReasons: result.matchReasons,
+      rankingReasons: result.rankingReasons,
       evidence: buildDocumentEvidence(index.byId.get(result.id)!, value, false),
     }));
     const neighbors = includeNeighbors ? buildNeighborItems(graph, matches.slice(0, 2).map((item) => item.id)) : [];
 
     return {
-      request: { mode, value, profile, scope, includeNeighbors, includeCurrent, includeHandoffs },
+      request: { mode, value, profile, scope, includeNeighbors, includeCurrent, includeHandoffs, rank },
       matches,
       current: includeCurrent
         ? {
@@ -364,7 +370,7 @@ export function buildMemoryBriefBundle(context: ProjectContext, request: MemoryB
         : ["explicit id"];
 
   return {
-    request: { mode, value, profile, scope, includeNeighbors, includeCurrent, includeHandoffs },
+    request: { mode, value, profile, scope, includeNeighbors, includeCurrent, includeHandoffs, rank },
     center,
     current: includeCurrent
       ? {
@@ -422,9 +428,10 @@ export function renderMemoryBriefBundle(bundle: MemoryBriefBundle): string {
                 .map((evidence) => `${evidence.heading ? `${evidence.heading}: ` : ""}${evidence.text}`)
                 .join(" || ")}`
             : "";
+        const rankingSummary = match.rankingReasons.length > 0 ? ` (ranking: ${match.rankingReasons.join(", ")})` : "";
         return `- ${match.id} [${match.docKind}${match.status ? ` ${match.status}` : ""} scope:${match.scope}] ${match.title}: ${match.summary}${
           match.matchReasons.length > 0 ? ` (match: ${match.matchReasons.join(", ")})` : ""
-        }${evidenceSummary}`;
+        }${rankingSummary}${evidenceSummary}`;
       }),
     );
   }

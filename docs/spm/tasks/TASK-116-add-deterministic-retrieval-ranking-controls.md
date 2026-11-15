@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-116"
 title = "Add deterministic retrieval ranking controls"
 summary = "Let memory query, brief, and pack surfaces prioritize explicit relevance signals such as recency, active-work proximity, and tag overlap."
-status = "blocked"
+status = "done"
 spec_ids = ["SPEC-057"]
 depends_on = ["TASK-115"]
 blocked_by = ["TASK-115"]
 priority = 2
 created_at = "2026-05-20T22:21:00Z"
+completed_at = "2026-05-20T17:23:35.921Z"
 tags = []
-updated_at = "2026-05-20T22:21:00Z"
+updated_at = "2026-05-20T17:23:35.921Z"
 +++
 
 # Scope

@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-113"
 title = "Add project profiles and seeded setup conventions"
 summary = "Introduce deterministic project profiles that seed defaults, tags, and bounded guidance for common repository types."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-056"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-05-20T22:18:00Z"
+completed_at = "2026-05-20T17:23:23.617Z"
 tags = []
-updated_at = "2026-05-20T22:18:00Z"
+updated_at = "2026-05-20T17:23:23.617Z"
 +++
 
 # Scope

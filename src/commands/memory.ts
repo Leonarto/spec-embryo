@@ -36,6 +36,7 @@ import { buildMemoryLinkGraph, buildMemoryLinksBundle, renderMemoryLinksBundle }
 import {
   buildMemoryQueryBundle,
   MEMORY_QUERY_DOC_KINDS,
+  MEMORY_QUERY_RANKS,
   MEMORY_QUERY_SCOPES,
   MEMORY_QUERY_STATUSES,
   renderMemoryQueryBundle,
@@ -124,6 +125,18 @@ function parseScope(value: string | undefined): MemoryQueryScope | undefined {
   throw new Error(
     `Invalid memory scope: ${value}. Expected one of ${MEMORY_QUERY_SCOPES.join(", ")}.`,
   );
+}
+
+function parseRank(value: string | undefined): (typeof MEMORY_QUERY_RANKS)[number] | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if ((MEMORY_QUERY_RANKS as readonly string[]).includes(value)) {
+    return value as (typeof MEMORY_QUERY_RANKS)[number];
+  }
+
+  throw new Error(`Invalid memory rank: ${value}. Expected one of ${MEMORY_QUERY_RANKS.join(", ")}.`);
 }
 
 function parseMemoryNoteScope(value: string | undefined): MemoryNoteScope | undefined {
@@ -287,6 +300,7 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       linkedTo: flagValue(parsed, "linked-to"),
       neighborOf: flagValue(parsed, "neighbor-of"),
       limit: parsePositiveInteger(flagValue(parsed, "limit"), "--limit"),
+      rank: parseRank(flagValue(parsed, "rank")),
     });
 
     if (parsed.flags.has("json")) {
@@ -327,6 +341,7 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       includeCurrent: parseOptionalBooleanFlag(parsed, "include-current", "no-current"),
       includeHandoffs: parseOptionalBooleanFlag(parsed, "include-handoffs", "no-handoffs"),
       profile: parseBriefProfile(flagValue(parsed, "profile")),
+      rank: parseRank(flagValue(parsed, "rank")),
     });
 
     if (parsed.flags.has("json")) {
@@ -348,6 +363,7 @@ export async function runMemoryCommand(rootDir: string, parsed: ParsedArgs): Pro
       includeCurrent: parseOptionalBooleanFlag(parsed, "include-current", "no-current"),
       includeHandoffs: parseOptionalBooleanFlag(parsed, "include-handoffs", "no-handoffs"),
       profile: parseBriefProfile(flagValue(parsed, "profile")),
+      rank: parseRank(flagValue(parsed, "rank")),
     });
 
     if (parsed.flags.has("json")) {

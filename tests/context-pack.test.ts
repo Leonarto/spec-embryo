@@ -83,6 +83,22 @@ Use this note for the current local flow.
     }
   });
 
+  test("threads ranking controls into text-oriented memory packs", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-context-pack-"));
+
+    try {
+      await initializeProject(rootDir);
+      const context = await loadProjectContext(rootDir);
+      const pack = buildMemoryContextPack(context, { text: "adoption", rank: "active" });
+
+      expect(pack.mode).toBe("text");
+      expect(pack.mustReadNow[0]?.ref).toBe("SPEC-001");
+      expect(pack.mustReadNow[0]?.reason).toContain("rank:active");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
   test("builds a resume pack that prioritizes focus, next actions, and active work", async () => {
     const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-context-pack-"));
 
@@ -187,7 +203,7 @@ describe("memory pack command", () => {
       expect(human).toContain("Supporting context:");
       expect(human).toContain("Offloaded detail:");
 
-      const json = await runMemoryCommand(rootDir, parseArgs(["memory", "pack", "--task", "TASK-001", "--json"]));
+      const json = await runMemoryCommand(rootDir, parseArgs(["memory", "pack", "--text", "adoption", "--rank", "active", "--json"]));
       const pack = JSON.parse(json) as {
         source: string;
         profile: string;
@@ -196,7 +212,7 @@ describe("memory pack command", () => {
 
       expect(pack.source).toBe("memory");
       expect(pack.profile).toBe("implementation");
-      expect(pack.mustReadNow.some((item) => item.ref === "TASK-001")).toBe(true);
+      expect(pack.mustReadNow[0]?.ref).toBe("SPEC-001");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

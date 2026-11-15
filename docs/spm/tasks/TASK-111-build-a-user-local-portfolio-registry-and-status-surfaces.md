@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-111"
 title = "Build a user-local portfolio registry and status surfaces"
 summary = "Add a deterministic portfolio registry plus list, status, and search surfaces across many SpM repositories."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-055"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-05-20T22:16:00Z"
+completed_at = "2026-05-20T17:23:15.636Z"
 tags = []
-updated_at = "2026-05-20T22:16:00Z"
+updated_at = "2026-05-20T17:23:15.636Z"
 +++
 
 # Scope

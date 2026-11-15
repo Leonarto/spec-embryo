@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-055"
 title = "Add cross-project portfolio views and multi-repo coordination"
 summary = "Let SpM operate across many repositories with a deterministic portfolio view, explicit project relationships, and shared planning signals."
-status = "active"
+status = "done"
 task_ids = ["TASK-111", "TASK-112"]
 tags = ["portfolio", "multi-repo", "planning", "adoption"]
-updated_at = "2026-05-20T22:00:00Z"
+updated_at = "2026-05-20T17:24:06.055Z"
 +++
 
 # Overview

@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { parseArgs } from "../src/cli.ts";
 import { runMemoryCommand } from "../src/commands/memory.ts";
-import { createSpec, loadProjectContext, initializeProject } from "../src/repository.ts";
+import { createSpec, createTask, loadProjectContext, initializeProject } from "../src/repository.ts";
 import { buildMemoryQueryBundle } from "../src/services/memory-query.ts";
 
 async function writeMemoryNote(rootDir: string, scope: "session" | "org", fileName: string, body: string): Promise<void> {
@@ -182,6 +182,53 @@ Prefer stable file references and concise answers.
       const repoBundle = buildMemoryQueryBundle(context, { scope: "repo", tags: ["seed"] });
       expect(repoBundle.results.some((result) => result.id === "SPEC-001")).toBe(true);
       expect(repoBundle.results.some((result) => result.scope !== "repo")).toBe(false);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("supports deterministic active-work ranking controls", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-query-"));
+
+    try {
+      await initializeProject(rootDir);
+      await createSpec(rootDir, {
+        title: "Dormant adoption helper",
+        summary: "Adoption related background material.",
+        tags: ["adoption"],
+      });
+      const context = await loadProjectContext(rootDir);
+      const bundle = buildMemoryQueryBundle(context, {
+        text: "adoption",
+        rank: "active",
+      });
+
+      expect(bundle.filters.rank).toBe("active");
+      expect(bundle.results[0]?.id).toBe("SPEC-001");
+      expect(bundle.results[0]?.rankingReasons).toContain("rank:active");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("boosts tasks linked to active specs without requiring spec id text", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-memory-query-"));
+
+    try {
+      await initializeProject(rootDir);
+      const task = await createTask(rootDir, {
+        title: "Linked roadmap implementation",
+        summary: "Roadmap execution detail that does not name the parent spec id.",
+        specIds: ["SPEC-001"],
+        priority: 2,
+      });
+      const context = await loadProjectContext(rootDir);
+      const bundle = buildMemoryQueryBundle(context, {
+        text: "roadmap",
+        rank: "active",
+      });
+
+      expect(bundle.results.find((result) => result.id === task.id)?.rankingReasons).toContain("rank:active-neighbor");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

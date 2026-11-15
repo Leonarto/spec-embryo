@@ -29,6 +29,7 @@ import { ensureDir, listMarkdownFiles, pathExists, readUtf8, withLock, writeUtf8
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
 import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
 import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
+import { getProjectProfile, isProjectProfileName, writeProjectProfileManifest, type ProjectProfileName } from "./services/profiles.ts";
 import {
   createConfigToml,
   createCurrentStateTemplate,
@@ -421,6 +422,7 @@ export async function loadProjectContext(rootDir: string): Promise<ProjectContex
 
 export interface InitResult {
   memoryDir: string;
+  profile?: ProjectProfileName;
   sequence: string[];
   adoptedHome?: string;
   created: string[];
@@ -442,6 +444,7 @@ export async function initializeProject(
   options?: {
     force?: boolean;
     memoryDir?: string;
+    profile?: string;
   },
 ): Promise<InitResult> {
   const projectName = inferProjectName(rootDir);
@@ -452,6 +455,11 @@ export async function initializeProject(
   const created: string[] = [];
   const refreshed: string[] = [];
   const skipped: string[] = [];
+  const profile = options?.profile && isProjectProfileName(options.profile) ? getProjectProfile(options.profile) : undefined;
+
+  if (options?.profile && !profile) {
+    throw new Error(`Invalid project profile: ${options.profile}. Expected one of library, service, frontend-app, infra.`);
+  }
 
   await Promise.all([
     ensureDir(paths.specpmDir),
@@ -513,8 +521,16 @@ export async function initializeProject(
     }
   }
 
+  if (profile) {
+    const profileFile = join(rootDir, ".specpm", "profile.json");
+    const existed = await pathExists(profileFile);
+    await writeProjectProfileManifest(rootDir, profile);
+    (existed ? refreshed : created).push(profileFile);
+  }
+
   return {
     memoryDir,
+    profile: profile?.name,
     sequence: initSequenceDescription(memoryDir),
     created,
     refreshed,

@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-059"
 title = "Stabilize machine-consumable guidance contracts"
 summary = "Make SpM safer as agent infrastructure by versioning structured outputs and testing compatibility across the main JSON guidance surfaces."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-119", "TASK-120"]
 tags = ["json", "contracts", "agents", "compatibility"]
-updated_at = "2026-05-20T22:12:00Z"
+updated_at = "2026-05-20T17:24:22.274Z"
 +++
 
 # Overview

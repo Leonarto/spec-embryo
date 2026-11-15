@@ -3,14 +3,15 @@ doc_kind = "task"
 id = "TASK-115"
 title = "Add first-class resume and interruption-recovery flows"
 summary = "Build explicit resume workflows that summarize what changed since a prior checkpoint, handoff, commit, or time window."
-status = "todo"
+status = "done"
 spec_ids = ["SPEC-057"]
 depends_on = []
 blocked_by = []
 priority = 2
 created_at = "2026-05-20T22:20:00Z"
+completed_at = "2026-05-20T17:23:32.718Z"
 tags = []
-updated_at = "2026-05-20T22:20:00Z"
+updated_at = "2026-05-20T17:23:32.718Z"
 +++
 
 # Scope

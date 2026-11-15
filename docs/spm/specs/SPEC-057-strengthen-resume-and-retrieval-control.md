@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-057"
 title = "Strengthen resume and retrieval control"
 summary = "Improve interruption recovery and large-repo memory quality with explicit resume flows and configurable retrieval ranking controls."
-status = "proposed"
+status = "done"
 task_ids = ["TASK-115", "TASK-116"]
 tags = ["resume", "retrieval", "memory", "ranking"]
-updated_at = "2026-05-20T22:06:00Z"
+updated_at = "2026-05-20T17:24:15.587Z"
 +++
 
 # Overview
