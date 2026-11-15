@@ -5,7 +5,7 @@ title = "Bound workspace detail relations for high-volume inspection"
 summary = "Paginate shared task and spec detail relations across transport, inspector and canonical views while preserving complete access and legacy services."
 status = "todo"
 spec_ids = ["SPEC-062"]
-depends_on = ["TASK-128"]
+depends_on = ["TASK-128", "TASK-139"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
@@ -126,3 +126,8 @@ Reread the final two sections of `/private/tmp/spm-task138-decisions.md` (Indepe
 - Explicit race gates now verify rows, totals, labels, intent, Retry and focus. The refresh boundary preserves canonical inputs for the later 129 dirty/conflict integration.
 
 No unresolved design findings. Ready for Sol implementation after the reviewed 128 commit, with 129 serialized afterward and 130 restricted to its separate Timeline ownership. This approval does not establish implementation correctness or the end-to-end latency gate. No product/managed-document edits or browser use occurred during this review.
+
+
+# Fresh-read producer prerequisite
+
+TASK-139 now owns the isolated callback-read/per-load concurrency change selected by Astra after measured Node context-loading overhead. TASK-138 starts after TASK-139 is independently reviewed and committed. Both preserve fresh-byte provenance; no cache or detail latency-budget waiver is authorized. TASK-130 may run in parallel with TASK-139/138 under the established separate ownership.
