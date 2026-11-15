@@ -1,0 +1,382 @@
+{
+  "capturedAt": "2026-11-15T18:58:47.440Z",
+  "decision": "Astra moved controlled in-place refresh to TASK-126; TASK-125 exposes no refresh control.",
+  "checks": [
+    {
+      "name": "dark/1440/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/tasks: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/tasks: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/tasks: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/specs: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/specs: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/specs: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/timeline: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/timeline: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/timeline: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/tasks/TASK-115: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/tasks/TASK-115: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1440/specs/SPEC-057: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1440/specs/SPEC-057: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1440/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "dark/1280/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/1280/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/1280/: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "dark/768/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/768/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/768/: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "dark/390/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "dark/390/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "dark/390/: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "light/1440/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1440/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/tasks: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1440/tasks: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/tasks: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/specs: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1440/specs: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/specs: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/timeline: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1440/timeline: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/timeline: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/tasks/TASK-115: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1440/tasks/TASK-115: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/tasks/TASK-115: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1440/specs/SPEC-057: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1440/specs/SPEC-057: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1440/specs/SPEC-057: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "light/1280/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/1280/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/1280/: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "light/768/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/768/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/768/: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "light/390/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "light/390/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "light/390/: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "system/1440/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "system/1440/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1440/: no document overflow",
+      "pass": true,
+      "detail": 1440
+    },
+    {
+      "name": "system/1280/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "system/1280/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/1280/: no document overflow",
+      "pass": true,
+      "detail": 1280
+    },
+    {
+      "name": "system/768/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "system/768/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/768/: no document overflow",
+      "pass": true,
+      "detail": 768
+    },
+    {
+      "name": "system/390/: Refresh is absent",
+      "pass": true
+    },
+    {
+      "name": "system/390/: header remains 44px",
+      "pass": true,
+      "detail": 44
+    },
+    {
+      "name": "system/390/: no document overflow",
+      "pass": true,
+      "detail": 390
+    },
+    {
+      "name": "No obsolete refresh control is offered during network failure",
+      "pass": true
+    },
+    {
+      "name": "Preference interaction does not request SvelteKit data",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "Preference interaction does not trigger full navigation",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "Current URL and view identity survive",
+      "pass": true,
+      "detail": {
+        "before": {
+          "url": "http://127.0.0.1:5184/tasks?spec=SPEC-057",
+          "scroll": 240,
+          "title": "spec-pm Tasks"
+        },
+        "after": {
+          "url": "http://127.0.0.1:5184/tasks?spec=SPEC-057",
+          "scroll": 240,
+          "title": "spec-pm Tasks",
+          "focus": "Workspace preferences"
+        }
+      }
+    },
+    {
+      "name": "Current scroll is preserved",
+      "pass": true,
+      "detail": {
+        "before": 240,
+        "after": 240
+      }
+    },
+    {
+      "name": "Escape restores focus",
+      "pass": true,
+      "detail": "Workspace preferences"
+    }
+  ],
+  "screenshots": [
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1440-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1440-1.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1440-2.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1440-3.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1440-4.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1440-5.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-1280-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-768-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-dark-390-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1440-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1440-1.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1440-2.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1440-3.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1440-4.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1440-5.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-1280-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-768-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-light-390-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-system-1440-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-system-1280-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-system-768-0.png",
+    "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/verification/p1-system-390-0.png"
+  ]
+}
