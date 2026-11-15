@@ -3,6 +3,7 @@
 This folder holds durable project documentation.
 
 - `architecture.md` explains the system shape and boundaries.
+- `agent-workflow-research.md` records evidence and proposed workflow experiments, not installed skills or product guarantees.
 - `spm/` is the living managed memory home for resume, handoff, specs, and tasks.
 
 Rules:
