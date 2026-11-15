@@ -71,7 +71,20 @@ Expose one reusable inspector host/controller and link activation helper to129/1
 
 Direct URL/SSR/no-JS, keyboard open/close, modified clicks, desktop no-trap/mobile trap and resize/reflow; A→B delayed response,404/500/timeout/retry; open→filter→close→Back/Forward; reload with unowned history; outside-filter identity; selected_task unaffected by inspect; filter drafts/table selection/scroll preserved across inspector-only URL changes; no duplicate initial fetch and no list data request on inspector-only JS transitions. Warm detail latency remains measured, not assumed from service timing. Keep later129 dirty-form requirements explicit.
 
+## Stable mounting clarification (supersedes native-dialog preference above)
+
+Choose one persistent host div: role=complementary when docked, role=dialog with aria-modal=true in overlay. Keep the same detail subtree mounted; never key by mode, render separate aside/dialog branches, duplicate hidden content, or move through a mechanism that recreates children. This is required now for reader/focus continuity and later for129's draft state.
+
+The host implements modal focus containment and Tab/Shift+Tab cycling, Escape through the central transition, and inert on sibling background regions (never an ancestor containing the host). Remember and restore the prior inert values changed by this host; cleanup only its own listeners/state. A breakpoint transition changes CSS/role/aria/inert/trap only: preserve an already focused internal node; when entering modal with focus outside, focus its heading. Returning to docked removes trap/inert without invoking Close, changing history, or restoring the original table opener. Actual close/unmount still follows the normal128 contract.
+
+Gate128 must verify the same DOM node identities, internal focus, reader scroll and rendered Mermaid subtree through dock→overlay→dock.129 later adds the draft-specific case;128 must not implement unused form state to pass its reader case.
+
 
 # Integration seam for question drafts
 
 Astra requires the host/controller to centralize its actual open/close/entity/full-page/route transitions with immediate allowance in this read-only slice. TASK-129 adds the dirty/saving guard there without changing the public activation contract consumed by Timeline. Do not add unused question state/props now. Installed SvelteKit shallow popstate bypasses beforeNavigate; TASK-129 must gate accepted editor transitions and use its verified ledger for restore/prompt/replay, not pretend popstate is cancelable. Preserve the ledger and central transition design needed by that real forthcoming consumer.
+
+
+# Independent design review
+
+A second Astra approved the design after requiring one stable host/detail subtree across docked/modal changes, owned inert/focus cleanup and identity/focus/scroll/Mermaid regression checks. The final Stable mounting clarification supersedes the earlier native-dialog preference. TASK-137 owns the Specs list page in parallel; this task integrates the Tasks row consumer first. This is design approval only; implementation review remains required.
