@@ -60,3 +60,7 @@ The warm list p95 <=800 ms is also end-to-end list navigation, not HTTP response
 Use the same registered CPU/hardware, OS, browser version, viewport, power mode and no synthetic throttling as cold. Keep the fixture/commit stable and stop competing benchmark jobs; do not interfere with unrelated processes. Report incidental contention rather than silently deleting outliers. Per route report all20 samples, median and nearest-rank p95 (sample19); each route must meet800 ms. Timeouts/errors fail the gate. Click-triggered filters/refresh and detail measurements retain their own specified start/end and thresholds; they cannot replace this navigation metric.
 
 The TASK-126 HTTP p95 around550 ms is useful server/transport evidence only. It is neither a passing final warm800 ms end-to-end result nor a cold result. TASK-131 must measure final combined assets, browser rendering and hydration; explicitly preserve this distinction in its acceptance matrix.
+
+## Final verification preparation
+
+The independent Astra review in `web/verification/task131-final-plan.md` defines the minimum combined checks, reusable evidence, remaining measurement harnesses and known historical-script limitations. It adds no threshold waiver. Final verification waits reviewed source integration; isolated harness preparation may proceed without claiming acceptance or changing product behavior.
