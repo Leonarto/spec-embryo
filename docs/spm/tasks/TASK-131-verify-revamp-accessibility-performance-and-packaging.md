@@ -100,3 +100,7 @@ The11-file runner/map freeze is independently approved in `web/verification/task
 ## Budget-stopped final acceptance
 
 The user requested conserving tokens for other projects. Final compiled results and cleanup are preserved in `web/verification/task131-final-run/checkpoint.json`: detail/warm and loading FAIL; cold incomplete6/40; remaining supplemental/retention checks NOT RUN. No independent result review or global acceptance is claimed. All owned browser/server resources are closed. Further work waits a later continuation request; preserve all failures and partial samples.
+
+## Resumed deterministic volume check
+
+Sol6.1 orchestration/Terra6.1High implementation and independent review complete the standalone public payload gate on the registered10000-task/2000-spec corpus: Tasks37116bytes, Specs35629bytes, each100rows and below250KiB. Exact orderedIDs/totals and response structure pass; fresh fixture hashes match before/after and ownedserver/processgroupclosed. See `web/verification/task131-volume-payload-review.md` and manifest. This is a two-request deterministic check without a browser or latency series. All old timing failures and remaining checks stay open.

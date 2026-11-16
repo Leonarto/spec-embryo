@@ -3,11 +3,11 @@ doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
 summary = "Harness interoperability, the functional UI revamp and the precompiled UI runtime are reviewed and integrated. Final volume performance and acceptance remain open."
-focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation and Astra High technical/UX review; preserve completed SPEC-061 native-harness interoperability."
+focus = "Complete remaining SPEC-062 acceptance efficiently: Sol 6.1 orchestration, Terra 6.1 High subagents, accounting for the saturated host."
 active_spec_ids = ["SPEC-062"]
 active_task_ids = ["TASK-138"]
 blocked_task_ids = []
-next_action_hints = ["Respect the user budget stop: do not restart verification or optimization without a later continuation request.", "Resume from web/verification/task131-final-run/checkpoint.json; preserve valid failures and incomplete cold evidence.", "Implementation is reviewed and committed; final performance acceptance remains open, with native200% user-deferred."]
+next_action_hints = ["User resumed with Sol6.1 orchestration and Terra6.1High subagents; prefer existing evidence and bounded serial work.", "Review existing final results and source before selecting any material optimization; preserve failures and original thresholds.", "Avoid repeating heavy timing series on the saturated host; keep cold6/40, supplemental and retention status explicit."]
 last_handoff_id = "HANDOFF-20260402T163915"
 updated_at = "2026-11-16T17:36:29.833Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
@@ -52,3 +52,9 @@ TASK-131's reusable component accessibility evidence is reviewed and committed a
 The user asked to conserve remaining tokens for other projects. The current pass stopped after closing the in-flight sample; no further diagnosis, optimization or verification is authorized by this checkpoint. Product implementation is complete through abf426c and harness preparation through3108b5c. The final compiled measurements report detail p95 Task725ms/Spec668.6ms (limit300), warm lists2231.5ms/1592.1ms (limit800), and initial loading150ms FAIL. Cold stopped at6/40 valid samples; no aggregate p95/PASS. Supplemental interactions and100-cycle retention were NOT RUN. These results are recorded but have not received independent result review.
 
 All owned browsers/servers are closed, the active lease is absent and recorded stop/dependency audits pass. Final fixture-after inventory was not run after the budget stop; initial inventories remain. The automatic reviewer rejected starting the next cold sample because it contradicted the stop instruction; no process or measurement resulted. Durable evidence: `web/verification/task131-final-run/checkpoint.json` and adjacent manifest/raw files. TASK138/131 and SPEC062 stay open; no further work should start merely to turn those statuses green.
+
+## Resource-conscious continuation
+
+The user resumed work, replacing earlier Astra/Sol routing with Sol6.1 orchestration and Terra6.1High subagents, and reported a saturated/slow computer. The prior budget stop is historical, no longer an instruction to stop all work. Begin with bounded read-only source/evidence review; avoid concurrent local workloads and repeated benchmark series. Host contention can affect timings but has not been quantified for the historical run, so it neither proves the cause nor converts failed results into passes. Native200% zoom remains deferred; no new permission to disturb unrelated processes.
+
+The resumed read-only triage and independent evidence review are complete. No speculative performance code change was justified. Standalone volume payload acceptance now passes with two actual HTTP responses: Tasks37116bytes/Specs35629bytes for100rows, exact fixture/oracles/build, unchanged documents and clean process closure. Independent review and durable raw responses live under `web/verification/task131-volume-payload-*`. No timing series was repeated on the saturated host; remaining performance, cold, interaction and retention acceptance is open.

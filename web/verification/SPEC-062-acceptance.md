@@ -57,3 +57,26 @@ Record which earlier evidence remains valid and why; rerun affected final flows,
 The final report must retain exact row-count predicates at1440×900/1280×720, visible TSV ordering/formula protection and Tasks/Specs/Timeline inspector entry routes. Packaged smoke may use an isolated prefix/bin arrangement without changing the user's global installation, but must record the actual shipped invocation and packaged assets used.
 
 Latest detail gate: [post-memo browser report](task138-memo-browser-report.md), independently reviewed against its manifest. The single authorized copy-only diagnostic observes attribution and does not count as another acceptance run.
+
+## Resumed evidence review — constrained host
+
+The user resumed with Sol6.1 orchestration and Terra6.1High subagents and reported a saturated computer. The independent [result review](task131-resumed-result-review.md) verifies all48 final-run manifest entries and recomputes the recorded metrics. This updates the earlier pending ledger without replacing historical evidence.
+
+| Gate | Latest recorded status |
+| --- | --- |
+| Warm detail,300ms p95 | FAIL: Task725ms / Spec668.6ms,20 measured each |
+| Warm lists,800ms p95 | FAIL: Tasks2231.5ms / Specs1592.1ms,20 measured each |
+| Initial loading,150ms | FAIL: all40 fresh document responseStart observations exceed150ms |
+| Application/browser cold,2500ms p95 | INCOMPLETE:6/40, no acceptance percentile |
+| Supplemental interactions / skeleton / scroll / stability | NOT RUN at acceptance scale; helpers have separate functional proof |
+|100-cycle retention | NOT RUN |
+| Initial Tasks JS growth | PASS within reviewed build scope:89134−47871=41263 gzip bytes, below61440; Mermaid excluded |
+| Installed compiled package | PASS functional scope per TASK141 independent review; not latency acceptance |
+| Integrated tests / coverage | Reviewed489 tests/10414 assertions; product paths measured by Bun93.64% lines; compiled browser execution separate |
+| Accessibility | Ten reviewed axe states; native200% user-deferred, assistive technology unavailable |
+
+Most observed tail time is in HTTP/TTFB. The artifacts do not quantify host contention or establish its causal contribution, so reported saturation neither invalidates these observations nor establishes performance on an idle host. No speculative code optimization or repeated performance series is justified by the read-only triage alone. The missing final fixture-after inventory remains an explicit limitation.
+
+### Standalone volume payload gate
+
+PASS independently reviewed on compiled build698bfe: actual public pageSize100 Tasks response37116 UTF-8 bytes and Specs35629 bytes, each below256000 (250KiB). Ordered100IDs, totals10000/2000, route/schema/page and bounded structure match frozen oracles. No document body/raw-block/off-route data keys were found in these responses; no optional body-marker proof or universal-content claim. Before/after fixture digest matches the original12001-document corpus, and the owned process group exited cleanly. Evidence: [payload review](task131-volume-payload-review.md), [manifest](task131-volume-payload-manifest.json). This closes only the payload-size/structure row. It does not repair the earlier missing post-run fixture inventory or change any latency result.

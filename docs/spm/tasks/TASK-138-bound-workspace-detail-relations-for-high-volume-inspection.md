@@ -229,3 +229,7 @@ TASK141 implements the separately designed and independently approved precompile
 ## Budget-stopped final acceptance
 
 The user requested conserving tokens for other projects. Final compiled results and cleanup are preserved in `web/verification/task131-final-run/checkpoint.json`: detail/warm and loading FAIL; cold incomplete6/40; remaining supplemental/retention checks NOT RUN. No independent result review or global acceptance is claimed. All owned browser/server resources are closed. Further work waits a later continuation request; preserve all failures and partial samples.
+
+## Resource-conscious resumed triage
+
+The user resumed with Sol6.1 orchestration and Terra6.1High subagents, reporting host saturation. Independent result review confirms the recorded compiled detail FAIL725/668.6ms, warm FAIL2231.5/1592.1ms and cold6/40 incomplete. Response wait dominates observed tails but cannot be causally assigned to hardware, IO, GC or Git. Read-only source review finds request-local sharing intact and no justified cheap performance fix. Avoid speculative source changes and repeated timing series on this host. Separate deterministic volume payload verification may proceed with two reads; it is not latency acceptance.
