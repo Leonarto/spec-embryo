@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-129"
 title = "Implement Specs table and preserve question workflows"
 summary = "Implement spec table and drawer questions with conflict, dirty-form and refresh protection."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128", "TASK-137", "TASK-140"]
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.726Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T18:31:13.726Z"
+updated_at = "2026-11-16T12:51:58.491Z"
 +++
 
 # Scope
@@ -200,4 +200,4 @@ The guarded write preserves the latest canonical fields/body using existing seri
 
 Astra approved consuming the independently reviewed TASK-138 functional transport checkpoint while its task remains in_progress for the unchanged 300 ms gate. Before starting129, root must record that checkpoint's exact commit below, then the reviewed serial TASK-130 host adapter commit. TASK-140 is already committed as `ab9212a`. This replaces only the dependency on138's task status; all v2 transport, snapshot, draft, revision and integration contracts remain.
 
-Functional138 commit: pending; host130 adapter commit: pending. Do not start shared editor/controller changes until both are recorded. TASK131 still depends on138,129,130 and cannot close with a failing performance gate. Read-path optimization may run in separate ownership; any DTO/query/controller change requires a serialized decision and consumer rereview.
+Functional138 commit: `88cb574`; host130 adapter commit: `d4e1b01`. Both prerequisites are reviewed and committed; shared editor/controller ownership now passes to129. TASK131 still depends on138,129,130 and cannot close with a failing performance gate. Read-path optimization may run in separate ownership; any DTO/query/controller change requires a serialized decision and consumer rereview.

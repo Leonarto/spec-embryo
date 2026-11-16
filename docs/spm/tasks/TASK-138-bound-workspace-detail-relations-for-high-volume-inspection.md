@@ -20,7 +20,7 @@ Implementation: Sol 6.1 High (`harness_implementation`). Technical decisions and
 
 # Verification record
 
-Implementation in progress. Independent Astra producer, client and list-carry partial reviews are approved; F1/F2/F2a/F3 are closed. The isolated functional suite passes 393 tests / 8,537 assertions; browser checks cover bounded relations, canonical drafts, focus, JS/no-JS links and list filters. Canonical question actions remain unchanged. End-to-end warm detail still fails the 300 ms gate: Task p95 479.4 ms and Spec p95 532.7 ms. Final acceptance remains pending the reviewed favicon correction and exact-source remeasurement.
+Functional checkpoint independently approved and committed as `88cb574`; all83 staged payload hashes match the reviewed manifest. F1/F2/F2a/F3 are closed. The isolated functional suite passes393 tests/8,537 assertions; browser checks cover bounded relations, canonical drafts, focus, JS/no-JS links and list filters. The favicon correction and corrected exact-source measurement are complete. Warm detail still fails300ms: Task p95359ms and Spec p95326.1ms. TASK138 remains in_progress solely for performance; see `web/verification/task138-verification.md` for the complete evidence and historical results.
 
 # TASK-138 — bounded detail relation transport and readers
 
@@ -197,3 +197,5 @@ A copy-only fresh-worker experiment was rejected: paired context median worsened
 The favicon fix passes real GET/HEAD checks: zero project context loads for favicon and one per detail request, with global context-bearing request concurrency reduced from two to one. A corrected metadata collector preserves the original trusted-click →100 accepted rows →two animation frames protocol; the valid5-warmup/20-sample browser rerun yields Task median293.25 ms/p95359.00 ms and Spec median284.35 ms/p95326.10 ms. Both still fail300 ms. The earlier interrupted collector run is not credited and its discarded partial values are not reconstructed.
 
 Astra authorizes committing the independently reviewed functional scope while TASK138 remains in_progress with performance open. TASK129 may consume that exact functional commit plus140 and the serial130 host adapter, without waiting on138's status. Final131 retains its dependency on138 and all numerical gates. Keep later read-path optimization separate from editor/DTO ownership; a transport or controller change reopens affected consumer review. This changes sequencing, not acceptance or the performance requirement.
+
+The next authorized action is the single copy-only exact-byte parse-reuse experiment in `web/verification/task138-parse-reuse-plan.md`. It still reads every source freshly, bounds retained values, proves equality/freshness/clone isolation before measuring and does not authorize a production cache. A negative result stops that candidate; a positive result requires confirmation and independent design review before product edits.

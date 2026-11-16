@@ -20,6 +20,8 @@ Implement P6 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Execution and review
 
+Serial inspector host adapter committed as `d4e1b01` after independent Astra approval: optional navigation scope defaults to page and labels expanded results truthfully. Focused checks pass31 tests/782 assertions,19 browser checks, Svelte check0/0 and AGENTS. The commit excludes the unfinished Timeline consumer overlay. Shared inspector ownership passes to TASK129; Timeline-only work and final combined129/performance checks remain in130. See `web/verification/task130-host-seam-manifest.json` and its report.
+
 - Implementation: Sol 6.1 High (`ui_implementation`).
 - Technical decisions and UX review: Astra High. Escalate uncovered design decisions before implementing them.
 - Run relevant automated checks and capture evidence required by the spec.
