@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-138"
 title = "Bound workspace detail relations for high-volume inspection"
 summary = "Paginate shared task and spec detail relations across transport, inspector and canonical views while preserving complete access and legacy services."
-status = "todo"
+status = "in_progress"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128", "TASK-139"]
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T23:01:11.956Z"
 tags = ["parallel-implementation", "volume"]
-updated_at = "2026-11-15T23:01:11.956Z"
+updated_at = "2026-11-15T23:59:58.662Z"
 +++
 
 # Execution and review
