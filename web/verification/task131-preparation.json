@@ -2,7 +2,7 @@
   "phase": "TASK131 harness preparation only",
   "acceptanceCredit": false,
   "preparationCommit": "2862f460d16250b6a907627d6208e6ec74180751",
-  "finalSourcePin": "Pending reviewed TASK130 commit; pin command rejects stale runtimes/dependency declaration changes",
+  "finalSourcePin": "Combined9a446a1 tiny smoke verified; final timing pin waits any approved TASK138performance change",
   "contract": "web/verification/task131-runner-decisions.md",
   "runtimeOwnerRecord": "/private/tmp/spm-task131-owner.json",
   "dependencySeed": {
@@ -12,13 +12,13 @@
     "inventorySHA256": "52dcfeb35c6e193a10f7dcf5a7af51482361d7d3bce9bc240c371ae653bd588e",
     "developmentInodesShared": false,
     "regularFilesReadOnly": true,
-    "runtimeCaches": "Independent directories; actual paths inventoried at prepare/stop; real runtime smoke pending"
+    "runtimeCaches": "Distinct initially empty caches; resolved paths captured in combined runtime record before/after"
   },
   "unitSmoke": {
-    "pass": 14,
+    "pass": 17,
     "fail": 0,
-    "assertions": 70,
-    "log": "/private/tmp/spm-task131-unit-fixes.log",
+    "assertions": 97,
+    "log": "/private/tmp/spm-task131-unit-group-probe.log",
     "scope": "Schedules/p95, fixed browser second-frame clock, primary+cleanup error retention and partial-series stop, original dependency inventory comparisons/mutation rejection, own cache/link confinement, synthetic installed bin, stale source/lease rejection and static closure bookkeeping"
   },
   "axe": {
@@ -37,9 +37,7 @@
     "executedInBrowser": false
   },
   "notRun": [
-    "Real shipped spm ui lifecycle startup/stop smoke",
-    "Fresh BrowserType process/version/profile capability + tiny fixture hydrated grid/ArrowDown smoke",
-    "Real prepared-package bin/runtime smoke",
+    "Prepared-package UI styles/hydration/lazy routes smoke",
     "Final combined Bun/check/build/AGENTS",
     "Warm5+20 and cold20-per-route list series",
     "100-cycle retained heap/listeners",
@@ -48,7 +46,7 @@
     "Final combined integration/AC01\u2013AC15 ledger"
   ],
   "limits": [
-    "UI130 owns browser until explicit handoff; no browser call during this preparation",
+    "Browser closed and lease returned after tiny smoke; future series need root quiet window",
     "No product/editor/Timeline or dependency manifest change",
     "No expensive series before final combined-source freeze and root quiet window",
     "Screen readers are separate passed/failed/unavailable entries, never inferred from axe",
@@ -58,6 +56,44 @@
     "F131-1": "Readiness and two rAF complete in browser; endpoint timestamp is fixed before diagnostics/tool return",
     "F131-2": "Primary/cleanup errors and partial samples preserved; unverified process closure stops series with remaining NOT RUN",
     "F131-3": "Original copy-time dependency inventory compared with seed/runtime before start and after cleanup, outside timing; mutation prevents PASS",
-    "runtimeBrowserSmoke": "NOT RUN: browser remains reserved for TASK130; source pin remains pre130"
-  }
+    "runtimeBrowserSmoke": "PASS: tiny combined smoke on9a446a1 with a new Chrome157 process/profile, hydrated Tasks/Specs and ArrowDown; browser/runtime closed and dependency integrity verified. Final performance series and package UI remain NOT RUN."
+  },
+  "sourceBinModeAdaptation": {
+    "scope": "Only in-root copied declared entrypoints, before dependency links; chmod0755, original bytes/shebang preserved",
+    "regression": "Source0644 unchanged; copied bin0755 and directly executable",
+    "approved": "Astra reviewed and real source-layout spm ui smoke confirmed",
+    "firstAttempts": [
+      "/private/tmp/spm-task131-runtime-sandbox-attempt.err",
+      "/private/tmp/spm-task131-runtime-bin-mode-attempt.err"
+    ]
+  },
+  "launcherExecAdaptation": {
+    "scope": "Stable PID/PGID/lstart plus exact argv; only expected env-to-Bun transition may update/persist stamp; shared by readiness and cleanup",
+    "regression": "env\u2192Bun/directBun accepted; reverse/group/start/PID/argv mutations rejected",
+    "priorRuntimeCleanup": "/private/tmp/spm-task131-runtime-mode-stopped.json",
+    "observedGroupProof": "/private/tmp/spm-task131-exec-cleanup.json",
+    "repeatSmoke": "Completed on9a446a1; normalized Bun stamp preserved"
+  },
+  "signalZeroFallback": {
+    "scope": "Only EPERM from kill(-PGID,0): full successful nonempty positive-integer ps PID/PGID inventory; any malformed/query failure remains unknown",
+    "signalPermissions": "TERM/KILL identity rules unchanged",
+    "recording": "Original EPERM, inventory hash/count/matchingmembers persisted in own runtime groupChecks",
+    "repeat": "Existing lease final stop closedtrue and inventory matches; no repeated browser navigation"
+  },
+  "smokeSourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "realSmoke": {
+    "report": "web/verification/task131-smoke.json",
+    "sourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+    "capabilityAndRuntimePass": true,
+    "acceptanceCredit": false,
+    "browserVersion": "157.0.8103.78",
+    "ownedBrowserPID": 71989,
+    "sharedToolPID": 69013,
+    "runtimeClosed": true,
+    "dependencyIntegrity": true,
+    "packageBinCommandsPass": true,
+    "packageUIStarted": false
+  },
+  "currentOwnerRecord": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/owner.json",
+  "sourcePinRecord": "/private/tmp/spm-task131-pin-combined.json"
 }

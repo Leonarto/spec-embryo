@@ -30,7 +30,7 @@ test('dependency copying rejects a symlink escaping development dependency root'
 import {chmod} from 'node:fs/promises';import {execFile} from 'node:child_process';import {promisify} from 'node:util';
 import {preparePackage} from '../web/scripts/acceptance-package.ts';import {prepareRuntime,stopRuntime} from '../web/scripts/acceptance-runtime.ts';
 const execute=promisify(execFile);
-async function tinyOwner(){const root=await mkdtemp(join(tmpdir(),'spm-acceptance-unit-')),dev=join(root,'dev'),seed=join(root,'dependencies'),source=join(root,'source');await mkdir(dev);await writeFile(join(dev,'library.js'),'fixture dependency');await mkdir(source);const baseline=await copyDependencySeed(dev,seed);await writeFile(join(root,'dependencies.json'),JSON.stringify(baseline));const nonce='test-owner';await writeFile(join(root,'owner.json'),JSON.stringify({version:1,nonce,commit:'0'.repeat(40),source,seed}));await mkdir(join(root,'runs'));return {root,nonce};}
+async function tinyOwner(){const root=await mkdtemp(join(tmpdir(),'spm-acceptance-unit-')),dev=join(root,'dev'),seed=join(root,'dependencies'),source=join(root,'source');await mkdir(dev);await writeFile(join(dev,'library.js'),'fixture dependency');await mkdir(source);await mkdir(join(source,'src'));await writeFile(join(source,'package.json'),JSON.stringify({bin:{spm:'src/index.ts','spec-embryo':'src/index.ts'}}));await writeFile(join(source,'src/index.ts'),'#!/usr/bin/env bun\nconsole.log("source fixture bin");\n');await chmod(join(source,'src/index.ts'),0o644);const baseline=await copyDependencySeed(dev,seed);await writeFile(join(root,'dependencies.json'),JSON.stringify(baseline));const nonce='test-owner';await writeFile(join(root,'owner.json'),JSON.stringify({version:1,nonce,commit:'0'.repeat(40),source,seed}));await mkdir(join(root,'runs'));return {root,nonce};}
 test('prepared global-style prefix invokes declared owned bin without a development-source link',async()=>{
  const {root,nonce}=await tinyOwner();try{const staging=join(root,'staging/package');await mkdir(join(staging,'src'),{recursive:true});await writeFile(join(staging,'package.json'),JSON.stringify({name:'@leonarto/spec-embryo',bin:{spm:'src/index.ts','spec-embryo':'src/index.ts'}}));await writeFile(join(staging,'src/index.ts'),'#!/usr/bin/env bun\nconsole.log("owned fixture bin");\n');await chmod(join(staging,'src/index.ts'),0o755);const archive=join(root,'fixture.tgz');await execute('tar',['-czf',archive,'-C',join(root,'staging'),'package']);
   const installed=await preparePackage(root,nonce,archive);expect(installed.preparationOnly).toBe(true);expect(installed.binRealpaths.spm).toStartWith(await realpath(installed.prefix));const run=await execute(installed.runtime.bin!,[],{cwd:installed.external});expect(run.stdout.trim()).toBe('owned fixture bin');expect(await lstat(join(installed.runtime.app,'node_modules/library.js'))).toMatchObject({size:18});
@@ -42,7 +42,7 @@ test('lifecycle refuses traversal before a runtime write and does not clear anot
 });
 
 import {initialTasksClosure,compareClosures} from '../web/scripts/acceptance-closure.ts';import {gzipSync} from 'node:zlib';
-import {startRuntime} from '../web/scripts/acceptance-runtime.ts';
+import {startRuntime,parseStamp,advanceLauncherStamp,probeGroup} from '../web/scripts/acceptance-runtime.ts';
 test('initial Tasks closure counts each emitted static file once and excludes lazy Mermaid',async()=>{
  const root=await mkdtemp(join(tmpdir(),'spm-acceptance-closure-'));try{const client=join(root,'web/.svelte-kit/output/client'),nodes=join(root,'web/.svelte-kit/generated/client/nodes');await mkdir(join(client,'.vite'),{recursive:true});await mkdir(nodes,{recursive:true});await writeFile(join(nodes,'7.js'),'import "/src/routes/tasks/+page.svelte";');
   const manifest:any={};for(const [key,name] of [['app','entry/app'],['start','entry/start'],['layout','nodes/0'],['error','nodes/1'],['tasks','nodes/7'],['shared','shared'],['alias','alias'],['mermaid','mermaid']]){manifest[key!]={name,file:key==='alias'?'shared.js':key+'.js',imports:key==='app'?['shared']:key==='tasks'?['alias']:[],dynamicImports:key==='tasks'?['mermaid']:[]};await writeFile(join(client,manifest[key!].file),'/* '+(key==='alias'?'shared':key)+' */');}
@@ -98,4 +98,29 @@ test('browser predicate captures endpoint inside the second frame with a fixed c
  try{Object.defineProperty(globalThis,'document',{configurable:true,value:{querySelector:(selector:string)=>selector.startsWith('[data-table')?table:selector==='h1'?{textContent:'Tasks 100'}:{}}});Object.defineProperty(globalThis,'performance',{configurable:true,value:{now:()=>clock}});Object.defineProperty(globalThis,'requestAnimationFrame',{configurable:true,value:(callback:()=>void)=>frames.push(callback)});
   const endpoint=listReady({ids:['TASK-1'],total:100,finishWithFrames:true});expect(endpoint).toBeInstanceOf(Promise);clock=50;frames.shift()!();expect(frames).toHaveLength(1);clock=123.5;frames.shift()!();clock=9999;expect(await endpoint).toBe(123.5);
  }finally{names.forEach((name,index)=>{const descriptor=saved[index];if(descriptor)Object.defineProperty(globalThis,name,descriptor);else Reflect.deleteProperty(globalThis,name);});}
+});
+
+test('source layout normalizes only the copied declared bin mode and preserves original bytes/mode',async()=>{
+ const {root,nonce}=await tinyOwner();try{const original=join(root,'source/src/index.ts'),before=await readFile(original),runtime=await prepareRuntime(root,nonce,'bin-mode',root),copied=join(runtime.app,'src/index.ts');
+  expect((await lstat(original)).mode&0o777).toBe(0o644);expect((await lstat(copied)).mode&0o777).toBe(0o755);expect(await readFile(copied)).toEqual(before);expect(await readFile(original)).toEqual(before);expect(runtime.binPreparation).toMatchObject({spm:{originalMode:0o644,preparedMode:0o755,bytesPreserved:true},'spec-embryo':{originalMode:0o644,preparedMode:0o755,bytesPreserved:true}});
+  expect((await execute(join(runtime.app,'bin/spm'),[],{cwd:root})).stdout.trim()).toBe('source fixture bin');
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('launcher identity permits only owned env-to-Bun exec with stable PID/group/start',()=>{
+ const env='/usr/bin/env bun /owned/bin/spm ui --host 127.0.0.1 --port 1234',bun='bun /owned/bin/spm ui --host 127.0.0.1 --port 1234',absolute='/owned/bun /owned/bin/spm ui --host 127.0.0.1 --port 1234',commands={env,bun:[bun,absolute]},initial=parseStamp(42,'42 Mon Nov 16 12:58:19 2026     '+env)!;
+ const transitioned={...initial,command:bun};expect(advanceLauncherStamp(initial,transitioned,commands)).toEqual(transitioned);expect(advanceLauncherStamp(transitioned,transitioned,commands)).toEqual(transitioned);expect(advanceLauncherStamp({...initial,command:absolute},{...initial,command:absolute},commands)?.command).toBe(absolute);
+ expect(advanceLauncherStamp(initial,{...transitioned,pid:43},commands)).toBeUndefined();expect(advanceLauncherStamp(initial,{...transitioned,group:43},commands)).toBeUndefined();expect(advanceLauncherStamp(initial,{...transitioned,started:'Mon Nov 16 12:58:20 2026'},commands)).toBeUndefined();expect(advanceLauncherStamp(initial,{...transitioned,command:bun+' --extra'},commands)).toBeUndefined();expect(advanceLauncherStamp(transitioned,initial,commands)).toBeUndefined();expect(advanceLauncherStamp(transitioned,{...transitioned,command:absolute},commands)).toBeUndefined();
+ // Cleanup uses the same persisted advanced stamp, not the obsolete env command.
+ expect(advanceLauncherStamp(advanceLauncherStamp(initial,transitioned,commands)!,transitioned,commands)).toEqual(transitioned);expect(parseStamp(42,'malformed')).toBeUndefined();
+});
+
+test('EPERM signal-zero fallback requires a complete valid nonempty process inventory',async()=>{
+ const denied=()=>{throw Object.assign(Error('SIGNAL_EPERM'),{code:'EPERM'});};
+ expect(await probeGroup(42,{signal:()=>true,inventory:async()=>{throw Error('must not run');}})).toMatchObject({alive:true,method:'signal-zero'});
+ expect(await probeGroup(42,{signal:()=>{throw Object.assign(Error('gone'),{code:'ESRCH'});},inventory:async()=>{throw Error('must not run');}})).toMatchObject({alive:false,method:'signal-zero-esrch'});
+ expect(await probeGroup(42,{signal:denied,inventory:async()=> '1 1\n 43 42\n'})).toMatchObject({alive:true,method:'process-inventory',members:[43],processCount:2,signalError:'Error: SIGNAL_EPERM'});
+ expect(await probeGroup(42,{signal:denied,inventory:async()=> '1 1\n 43 43\n'})).toMatchObject({alive:false,method:'process-inventory',members:[],processCount:2});
+ for(const output of ['', '1 1\nmalformed\n','0 1\n','1 -1\n','9007199254740992 1\n'])await expect(probeGroup(42,{signal:denied,inventory:async()=> output})).rejects.toThrow('closure unverified');
+ await expect(probeGroup(42,{signal:denied,inventory:async()=>{throw Error('PS_EXIT_NONZERO');}})).rejects.toThrow('PS_EXIT_NONZERO');
 });

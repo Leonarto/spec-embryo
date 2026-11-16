@@ -3,11 +3,11 @@
   "files": [
     {
       "path": "tests/acceptance-harness.test.ts",
-      "sha256": "dc23f6fe54705dbb9e1040f0c50d8e9f8df5036b3f92fa191d8f78b1d2f47979"
+      "sha256": "7d3fbdcec2e0930e2e4695702e82508f8f491bd279aacc0065f9dd53cdf029aa"
     },
     {
       "path": "web/scripts/AGENTS.md",
-      "sha256": "d657c4bd0e738bcba52a468401a60214bd171c3a3f867174fb959b995f82a03f"
+      "sha256": "9b95253f8c558ecad9f299b703b4767a1a4eb5068fbf3a84515781e3404732a4"
     },
     {
       "path": "web/scripts/acceptance-accessibility.mjs",
@@ -35,29 +35,31 @@
     },
     {
       "path": "web/scripts/acceptance-runtime.ts",
-      "sha256": "9d4e83b5b7be28a8aa0c3398d7e381643a67508757e96134b602f31b2b38d860"
+      "sha256": "378b80521a2dc70fea96139942537a9b38268d5bfc28165d590abeb9c580ff6c"
     },
     {
       "path": "web/verification/task131-preparation.json",
-      "sha256": "6ec94152757875d96836732bf208254fcae7ada1060aa391033138b745f46b6a"
+      "sha256": "e43f2c20ee163bcce7f6cb97cda13f8f6cd1d54151cc0138554085efa0e95655"
+    },
+    {
+      "path": "web/verification/task131-smoke.json",
+      "sha256": "62972d75a6c63820d6139d725abe3186e0cec6f273a262b0f9b12c40734f8b74"
     }
   ],
   "contract": "web/verification/task131-runner-decisions.md",
   "reviewDelta": {
-    "findings": [
-      "F131-1",
-      "F131-2",
-      "F131-3"
-    ],
+    "reason": "Completed tiny runtime/browser and installed package-bin smoke; no implementation delta since EPERM approval",
     "changedPaths": [
-      "tests/acceptance-harness.test.ts",
-      "web/scripts/acceptance-files.ts",
-      "web/scripts/acceptance-navigation.mjs",
-      "web/scripts/acceptance-runtime.ts",
-      "web/verification/task131-preparation.json"
+      "web/scripts/AGENTS.md",
+      "web/verification/task131-preparation.json",
+      "web/verification/task131-smoke.json"
     ],
-    "unitLog": "/private/tmp/spm-task131-unit-fixes.log",
-    "unitResult": "14 PASS / 70 assertions; no real browser or series",
-    "previousManifest": "/private/tmp/spm-task131-preparation-manifest.before-f131-fixes.json"
+    "previousManifest": "/private/tmp/spm-task131-preparation-manifest.before-real-smoke.json",
+    "sourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+    "smoke": "web/verification/task131-smoke.json",
+    "agentsLog": "/private/tmp/spm-task131-agents-smoke.log",
+    "unitLog": "/private/tmp/spm-task131-unit-group-probe.log",
+    "review": "/private/tmp/spm-task131-preparation-review.md",
+    "acceptanceCredit": false
   }
 }
