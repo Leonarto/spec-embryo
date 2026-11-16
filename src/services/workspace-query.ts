@@ -32,6 +32,10 @@ export interface WorkspaceSpecQuery extends WorkspaceQueryBase<SpecSortKey> {
 }
 export type WorkspaceListQuery = WorkspaceTaskQuery | WorkspaceSpecQuery;
 export interface WorkspaceTimelineQuery {
+  relatedDirectPage:number;
+  relatedTransitivePage:number;
+  page:number;
+  pageSize:50|100|200;
   specIds: string[];
   window?: WorkspaceWindow;
   scope: WorkspaceScope;
@@ -124,7 +128,8 @@ export function parseWorkspaceTimelineQuery(params: URLSearchParams, knownSpecId
   const ids = specIds(params, knownSpecIds), window = windowValue(params);
   const legacyArchive = !params.has("scope") && (ids.length > 0 || Boolean(window));
   const selected = params.get("selected_task")?.trim();
-  return { specIds: ids, ...(window ? { window } : {}), scope: scope(params.get("scope"), legacyArchive ? "all" : "unarchived"), mode: params.get("timeline_mode") === "all" ? "all" : "active", ...(selected && isWorkspaceEntityId(selected,"task") ? { selectedTaskId: selected } : {}), legacyArchive };
+  const requestedSize=positiveInteger(params.get("pageSize"),100);
+  return { relatedDirectPage:selected&&isWorkspaceEntityId(selected,"task")?positiveInteger(params.get("trace_direct_page"),1):1,relatedTransitivePage:selected&&isWorkspaceEntityId(selected,"task")?positiveInteger(params.get("trace_transitive_page"),1):1,page:positiveInteger(params.get("page"),1),pageSize:(WORKSPACE_PAGE_SIZES.includes(requestedSize as 100)?requestedSize:100) as 50|100|200, specIds: ids, ...(window ? { window } : {}), scope: scope(params.get("scope"), legacyArchive ? "all" : "unarchived"), mode: params.get("timeline_mode") === "all" ? "all" : "active", ...(selected && isWorkspaceEntityId(selected,"task") ? { selectedTaskId: selected } : {}), legacyArchive };
 }
 export function parseWorkspaceOptionsQuery(params: URLSearchParams, selectedIds: string[] = []): WorkspaceOptionsQuery {
   return { q: text(params.get("option_q")), page: positiveInteger(params.get("option_page"), 1), pageSize: Math.min(100, positiveInteger(params.get("option_pageSize"), 50)), selectedIds: [...new Set(selectedIds)].filter(id=>isWorkspaceEntityId(id,"spec")).sort() };
@@ -150,6 +155,8 @@ export function serializeViewQuery(view: WorkspaceViewQuery, preserveLegacy = fa
   const params = view.list ? serializeWorkspaceListQuery(view.list,preserveLegacy) : new URLSearchParams();
   if(view.route==="tasks")params.set("view",view.simple?"table":view.view??"table");
   if(view.timeline) {
+    if(view.timeline.selectedTaskId&&view.timeline.relatedDirectPage>1)params.set("trace_direct_page",String(view.timeline.relatedDirectPage));if(view.timeline.selectedTaskId&&view.timeline.relatedTransitivePage>1)params.set("trace_transitive_page",String(view.timeline.relatedTransitivePage));
+    params.set("page",String(view.timeline.page));params.set("pageSize",String(view.timeline.pageSize));
     for(const id of view.timeline.specIds)params.append("spec",id);
     if(view.timeline.window)params.set("window",view.timeline.window);
     if(!preserveLegacy||!view.timeline.legacyArchive)params.set("scope",view.timeline.scope);

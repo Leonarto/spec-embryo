@@ -1,0 +1,641 @@
+{
+  "phase": "save-history",
+  "capturedAt": "2026-11-16T15:24:25.437Z",
+  "checks": [
+    {
+      "name": "Direct SSR Timeline provides real questions/revision without duplicate initial detail fetch",
+      "pass": true
+    },
+    {
+      "name": "Trace navigation keeps Spec identity, rel page and exact dirty editor DOM",
+      "pass": true
+    },
+    {
+      "name": "Task activation Keep editing retains Spec draft and selected trace",
+      "pass": true
+    },
+    {
+      "name": "In-flight canonical save disables duplicate leave actions without unmounting editor",
+      "pass": true
+    },
+    {
+      "name": "One confirmed canonical POST resumes task while keeping trace and clearing prior rel vector",
+      "pass": true
+    },
+    {
+      "name": "Same-document reopening observes saved decision and only the remaining question",
+      "pass": true
+    },
+    {
+      "name": "Real shallow Back Keep editing restores current Timeline URL and exact draft",
+      "pass": true
+    },
+    {
+      "name": "Back Discard returns to recorded Timeline entry and group opener",
+      "pass": true
+    },
+    {
+      "name": "Forward reopens saved current spec without resurrecting the discarded draft",
+      "pass": true
+    }
+  ],
+  "step": "history",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/timeline?timeline_mode=all&selected_task=TASK-00001&inspect=spec:SPEC-00001&section=questions&rel.linkedTasks=2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/entry.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/private/tmp/spm-task130-final-113ewabs/web/.svelte-kit/generated/client/app.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/client.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/.svelte-kit/generated/client/matchers.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/.svelte-kit/generated/root.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte_legacy.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/.svelte-kit/generated/root.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@vite/client"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/esm-env.js?v=9248fae7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/exports/internal/index.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/url.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/fetcher.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/parse.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/session-storage.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/utils.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/index.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/devalue.js?v=be15be3b"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/constants.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/exports.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/array.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/shared.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/error.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte_store.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/state.svelte.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/pathname.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/telemetry/noop.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/utils.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/legacy-client-Dw80_fsM.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte_internal_disclose-version.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte_internal_client.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/environment/index.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/esm-env-BkfCJ0qC.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/runtime-1PDvqbi_.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/index-client-DDGT3KL2.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/routing.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/exports/internal/remote-functions.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/client.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@id/__x00__virtual:__sveltekit/environment"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/hash.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/events-COTgn8hN.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/warnings-OwyAZql_.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/flags-CjHJiJs-.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte___clsx.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/internal/client.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/.svelte-kit/generated/client/nodes/0.js?t=1794841824784"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/.svelte-kit/generated/client/nodes/1.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/.svelte-kit/generated/client/nodes/9.js?t=1794840566331"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/routes/+layout.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/routes/+layout.svelte?t=1794841824784"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/routes/timeline/+page.svelte?t=1794840566331"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/modules.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/app.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/WorkspaceLayout.svelte?t=1794841824784"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/routes/+layout.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/svelte_internal_flags_legacy.js?v=1e7a7fe8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/index.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/navigation.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/private/tmp/spm-task130-final-113ewabs/src/services/detail-relations.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/private/tmp/spm-task130-final-113ewabs/src/services/workspace-query.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/workspace/location.svelte.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/workspace/resource.svelte.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/controller.svelte.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/history.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineToolbar.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineGrid.svelte?t=1794840566331"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineTable.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineDiagnostics.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineTrace.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/model.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/routes/timeline/+page.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/QuestionLeaveDialog.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/InspectorWorkspace.svelte?t=1794841824784"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/workspace/WorkspaceShell.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/workspace/context.svelte.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/private/tmp/spm-task130-final-113ewabs/src/domain.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/client.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/server.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/spec-seed-adapter.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/question-context.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/relation-url.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/detail-resource.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/Popover.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/AnalysisFilters.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/SelectDropdown.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineToolbar.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/workspace/resource.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineTable.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineDiagnostics.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineTrace.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineRuler.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineGroupRow.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineGrid.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/QuestionLeaveDialog.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/InspectorHost.svelte?t=1794841824784"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/geometry.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/InspectorWorkspace.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/@lucide_svelte.js?v=9480dd72"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/IconButton.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/ColorModeControl.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/theme.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/workspace-preferences.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/workspace/WorkspaceShell.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/spec-outcome-fence.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/detail-validation.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/SelectDropdown.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/Popover.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/SpecOptionsPicker.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/AnalysisFilters.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/private/tmp/spm-task130-final-113ewabs/src/services/workspace-timeline-contract.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineGroupRow.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/timeline/TimelineRuler.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/inspector/InspectorHost.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/ColorModeControl.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/IconButton.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/MultiSelectDropdown.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/SpecOptionsPicker.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/MultiSelectDropdown.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/node_modules/.vite/deps/chunk-CXA2xvMn.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/SpecDetail.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/SpecQuestions.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/RelationWindow.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/NotFound.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/DocumentBody.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/SpecDetail.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/NotFound.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/question-editor.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/SpecQuestions.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/RelationWindow.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/MermaidBlock.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/DocumentBody.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/private/tmp/spm-task130-final-113ewabs/src/services/spec-questions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/mermaid-theme.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/MermaidBlock.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/timeline/__data.json?page=1&pageSize=100&scope=unarchived&timeline_mode=all&selected_task=TASK-00009&inspect=spec%3ASPEC-00001&section=questions&rel.linkedTasks=2&x-sveltekit-invalidated=11"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5312/specs/SPEC-00001?/answerOpenQuestions"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/action-response.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/forms.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/server/app.js?v=8a320597"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/workspace-detail?kind=spec&id=SPEC-00001&rel.linkedTasks=2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/workspace-data?page=1&pageSize=100&scope=unarchived&timeline_mode=all&selected_task=TASK-00009&inspect=spec%3ASPEC-00001&section=questions&rel.linkedTasks=2&route=timeline"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/workspace-detail?kind=task&id=TASK-00001"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/TaskDetail.svelte"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/src/lib/components/detail/TaskDetail.svelte?svelte&type=style&lang.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/workspace-detail?kind=spec&id=SPEC-00001"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5312/workspace-detail?kind=spec&id=SPEC-00001"
+    }
+  ]
+}

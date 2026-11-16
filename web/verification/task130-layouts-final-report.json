@@ -1,0 +1,1028 @@
+{
+  "phase": "layouts",
+  "capturedAt": "2026-11-16T00:50:30.603Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "light/390: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 44,
+        "hit": {
+          "width": 154,
+          "height": 44
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 44
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 44
+        },
+        "rowHeight": 44,
+        "tickAlignment": null,
+        "lastTickLabelRight": 798,
+        "rulerRight": 801
+      }
+    },
+    {
+      "name": "light/390: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 44,
+        "hit": {
+          "width": 154,
+          "height": 44
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 44
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 44
+        },
+        "rowHeight": 44,
+        "tickAlignment": null,
+        "lastTickLabelRight": 798,
+        "rulerRight": 801
+      }
+    },
+    {
+      "name": "light/390: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 44,
+        "hit": {
+          "width": 154,
+          "height": 44
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 44
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 44
+        },
+        "rowHeight": 44,
+        "tickAlignment": null,
+        "lastTickLabelRight": 798,
+        "rulerRight": 801
+      }
+    },
+    {
+      "name": "light/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1219,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/390: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 44,
+        "hit": {
+          "width": 154,
+          "height": 44
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 44
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 44
+        },
+        "rowHeight": 44,
+        "tickAlignment": null,
+        "lastTickLabelRight": 798,
+        "rulerRight": 801
+      }
+    },
+    {
+      "name": "dark/390: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 44,
+        "hit": {
+          "width": 154,
+          "height": 44
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 44
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 44
+        },
+        "rowHeight": 44,
+        "tickAlignment": null,
+        "lastTickLabelRight": 798,
+        "rulerRight": 801
+      }
+    },
+    {
+      "name": "dark/390: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 44,
+        "hit": {
+          "width": 154,
+          "height": 44
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 44
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 44
+        },
+        "rowHeight": 44,
+        "tickAlignment": null,
+        "lastTickLabelRight": 798,
+        "rulerRight": 801
+      }
+    },
+    {
+      "name": "dark/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1219,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light/1280: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    },
+    {
+      "name": "light/1280: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    },
+    {
+      "name": "light/1280: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    },
+    {
+      "name": "light/1280: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1222,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/1280: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    },
+    {
+      "name": "dark/1280: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    },
+    {
+      "name": "dark/1280: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    },
+    {
+      "name": "dark/1280: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1222,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light/1440: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 433,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1412,
+        "rulerRight": 1415
+      }
+    },
+    {
+      "name": "light/1440: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 433,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1412,
+        "rulerRight": 1415
+      }
+    },
+    {
+      "name": "light/1440: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 433,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1412,
+        "rulerRight": 1415
+      }
+    },
+    {
+      "name": "light/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1228,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/1440: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 433,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1412,
+        "rulerRight": 1415
+      }
+    },
+    {
+      "name": "dark/1440: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 433,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1412,
+        "rulerRight": 1415
+      }
+    },
+    {
+      "name": "dark/1440: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 433,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1412,
+        "rulerRight": 1415
+      }
+    },
+    {
+      "name": "dark/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1228,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light/1920: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 673,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1892,
+        "rulerRight": 1895
+      }
+    },
+    {
+      "name": "light/1920: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 673,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1892,
+        "rulerRight": 1895
+      }
+    },
+    {
+      "name": "light/1920: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 673,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1892,
+        "rulerRight": 1895
+      }
+    },
+    {
+      "name": "light/1920: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1228,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/1920: resolved theme and no document overflow",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 673,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1892,
+        "rulerRight": 1895
+      }
+    },
+    {
+      "name": "dark/1920: primary title13px and group/bar targets",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 673,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1892,
+        "rulerRight": 1895
+      }
+    },
+    {
+      "name": "dark/1920: ruler/bar inner plot and final labels align",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 673,
+          "height": 31
+        },
+        "titleTarget": {
+          "width": 85.21875,
+          "height": 24
+        },
+        "idTarget": {
+          "width": 72.78125,
+          "height": 24
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1892,
+        "rulerRight": 1895
+      }
+    },
+    {
+      "name": "dark/1920: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1228,
+        "failures": [],
+        "skipped": []
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "width": 390,
+      "height": 844,
+      "coarse": true,
+      "theme": "light",
+      "surface": "#fff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 44,
+      "hit": {
+        "width": 154,
+        "height": 44
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 44
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 44
+      },
+      "rowHeight": 44,
+      "tickAlignment": null,
+      "lastTickLabelRight": 798,
+      "rulerRight": 801
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "coarse": true,
+      "theme": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 44,
+      "hit": {
+        "width": 154,
+        "height": 44
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 44
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 44
+      },
+      "rowHeight": 44,
+      "tickAlignment": null,
+      "lastTickLabelRight": 798,
+      "rulerRight": 801
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "coarse": false,
+      "theme": "light",
+      "surface": "#fff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 353,
+        "height": 31
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 24
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 24
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1252,
+      "rulerRight": 1255
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "coarse": false,
+      "theme": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 353,
+        "height": 31
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 24
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 24
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1252,
+      "rulerRight": 1255
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "coarse": false,
+      "theme": "light",
+      "surface": "#fff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 433,
+        "height": 31
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 24
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 24
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1412,
+      "rulerRight": 1415
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "coarse": false,
+      "theme": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 433,
+        "height": 31
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 24
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 24
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1412,
+      "rulerRight": 1415
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "coarse": false,
+      "theme": "light",
+      "surface": "#fff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 673,
+        "height": 31
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 24
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 24
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1892,
+      "rulerRight": 1895
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "coarse": false,
+      "theme": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 673,
+        "height": 31
+      },
+      "titleTarget": {
+        "width": 85.21875,
+        "height": 24
+      },
+      "idTarget": {
+        "width": 72.78125,
+        "height": 24
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1892,
+      "rulerRight": 1895
+    }
+  ],
+  "contrast": [
+    {
+      "width": 390,
+      "theme": "light",
+      "checked": 1219,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "checked": 1219,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "checked": 1222,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "checked": 1222,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "checked": 1228,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "checked": 1228,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 1920,
+      "theme": "light",
+      "checked": 1228,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "width": 1920,
+      "theme": "dark",
+      "checked": 1228,
+      "failures": [],
+      "skipped": []
+    }
+  ],
+  "sourceScope": "Isolated Node production final presenter checkpoint, committed128 inspector plus exactly one frozen pure138 relation-intent module. No138 client/controller or129 guard certification."
+}

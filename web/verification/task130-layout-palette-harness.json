@@ -1,0 +1,49 @@
+{
+  "phase": "layouts",
+  "capturedAt": "2026-11-16T00:41:39.763Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "light/1280: resolved theme and no document overflow",
+      "pass": false,
+      "detail": {
+        "theme": "light",
+        "surface": "#fff",
+        "bodyOverflow": false,
+        "titleFont": 13,
+        "groupHeight": 24,
+        "hit": {
+          "width": 353,
+          "height": 31
+        },
+        "rowHeight": 32,
+        "tickAlignment": 0,
+        "lastTickLabelRight": 1252,
+        "rulerRight": 1255
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "height": 720,
+      "coarse": false,
+      "theme": "light",
+      "surface": "#fff",
+      "bodyOverflow": false,
+      "titleFont": 13,
+      "groupHeight": 24,
+      "hit": {
+        "width": 353,
+        "height": 31
+      },
+      "rowHeight": 32,
+      "tickAlignment": 0,
+      "lastTickLabelRight": 1252,
+      "rulerRight": 1255
+    }
+  ],
+  "contrast": [],
+  "error": "Error: light/1280: resolved theme and no document overflow\n    at check (evalmachine.<anonymous>:4:97)\n    at verifyTimeline (evalmachine.<anonymous>:15:11)\n    at async evalmachine.<anonymous>:107:9\n    at async evalmachine.<anonymous>:3:20\n    at async /Users/leonardodiazvidal/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core/lib/coreBundle.js:70172:13\n    at async waitForCompletion (/Users/leonardodiazvidal/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core/lib/coreBundle.js:66323:15)\n    at async _Tab._raceAgainstModalStates (/Users/leonardodiazvidal/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core/lib/coreBundle.js:67487:18)\n    at async _Tab.waitForCompletion (/Users/leonardodiazvidal/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core/lib/coreBundle.js:67494:9)\n    at async Object.handle (/Users/leonardodiazvidal/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core/lib/coreBundle.js:70168:11)\n    at async BrowserBackend.callTool (/Users/leonardodiazvidal/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core/lib/coreBundle.js:68478:11)",
+  "scope": "Superseded harness assertion: production CSS minifies #ffffff to #fff. Actual background checks replace spelling equality; title/group/axis observations are retained."
+}

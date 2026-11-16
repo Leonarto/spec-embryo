@@ -1,0 +1,145 @@
+{
+  "scope": "Production static import closure for closed Timeline only. Lazy Detail/Mermaid chunks may exist but must not enter static initial imports. This is not a runtime browser download assertion.",
+  "source": {
+    "source": "/private/tmp/spm-timeline-130-source-vo8mj38d",
+    "base": "dc3a264fb8c896a779f0a14ae0c2a3838876feda",
+    "files": [
+      {
+        "path": "src/services/workspace.ts",
+        "sha256": "7bd9709a49ca395c6105d2d7ad12aa05c404fb26fc80f3a9967439f14f3c3990",
+        "afterSha256": "7bd9709a49ca395c6105d2d7ad12aa05c404fb26fc80f3a9967439f14f3c3990",
+        "copySha256": "7bd9709a49ca395c6105d2d7ad12aa05c404fb26fc80f3a9967439f14f3c3990"
+      },
+      {
+        "path": "src/services/workspace-query.ts",
+        "sha256": "4de38eac8c27170b86c019896c540866ccc20042d53afdf83f0f94397e504fcf",
+        "afterSha256": "4de38eac8c27170b86c019896c540866ccc20042d53afdf83f0f94397e504fcf",
+        "copySha256": "4de38eac8c27170b86c019896c540866ccc20042d53afdf83f0f94397e504fcf"
+      },
+      {
+        "path": "src/services/workspace-timeline.ts",
+        "sha256": "3cda5b95c196be008edf7c0cb241d1ee0854d714cdad4b76439dd6308b613427",
+        "afterSha256": "3cda5b95c196be008edf7c0cb241d1ee0854d714cdad4b76439dd6308b613427",
+        "copySha256": "3cda5b95c196be008edf7c0cb241d1ee0854d714cdad4b76439dd6308b613427"
+      },
+      {
+        "path": "src/services/workspace-timeline-contract.ts",
+        "sha256": "aa1eb86916ee5e231ab2dbf37ffefce882c2ab7d040dc43c01b41191ed23c879",
+        "afterSha256": "aa1eb86916ee5e231ab2dbf37ffefce882c2ab7d040dc43c01b41191ed23c879",
+        "copySha256": "aa1eb86916ee5e231ab2dbf37ffefce882c2ab7d040dc43c01b41191ed23c879"
+      },
+      {
+        "path": "web/src/lib/workspace/resource.ts",
+        "sha256": "d7e9327aa98ff1622aaa4b7ac0f7356f18694134de562e7296988588323d5136",
+        "afterSha256": "d7e9327aa98ff1622aaa4b7ac0f7356f18694134de562e7296988588323d5136",
+        "copySha256": "d7e9327aa98ff1622aaa4b7ac0f7356f18694134de562e7296988588323d5136"
+      },
+      {
+        "path": "web/src/routes/timeline/+page.svelte",
+        "sha256": "122401b2ea6986f94b174cca833860e8aa56d20dbe5f0205b4eb7ccb0b3a75ab",
+        "afterSha256": "122401b2ea6986f94b174cca833860e8aa56d20dbe5f0205b4eb7ccb0b3a75ab",
+        "copySha256": "122401b2ea6986f94b174cca833860e8aa56d20dbe5f0205b4eb7ccb0b3a75ab"
+      },
+      {
+        "path": "web/src/lib/components/AnalysisFilters.svelte",
+        "sha256": "b95b24b8849519696c15459d2dce0fe69f4e29e1e2e124f98942af16dba74d37",
+        "afterSha256": "b95b24b8849519696c15459d2dce0fe69f4e29e1e2e124f98942af16dba74d37",
+        "copySha256": "b95b24b8849519696c15459d2dce0fe69f4e29e1e2e124f98942af16dba74d37"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineToolbar.svelte",
+        "sha256": "31be834c1852eaa7b8534bf142d77ebce25625e4fa9614ac49d77840ea334caf",
+        "afterSha256": "31be834c1852eaa7b8534bf142d77ebce25625e4fa9614ac49d77840ea334caf",
+        "copySha256": "31be834c1852eaa7b8534bf142d77ebce25625e4fa9614ac49d77840ea334caf"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineRuler.svelte",
+        "sha256": "5e7957357d6b1a5841f0fee996e0d936f69dd210c9bf4db3b8297b0cf3c9469e",
+        "afterSha256": "5e7957357d6b1a5841f0fee996e0d936f69dd210c9bf4db3b8297b0cf3c9469e",
+        "copySha256": "5e7957357d6b1a5841f0fee996e0d936f69dd210c9bf4db3b8297b0cf3c9469e"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineDiagnostics.svelte",
+        "sha256": "3b4d318d9f58d909e9632499bc84503fc09af6eaf5802423c70aa439548462c2",
+        "afterSha256": "3b4d318d9f58d909e9632499bc84503fc09af6eaf5802423c70aa439548462c2",
+        "copySha256": "3b4d318d9f58d909e9632499bc84503fc09af6eaf5802423c70aa439548462c2"
+      },
+      {
+        "path": "web/src/lib/components/timeline/model.ts",
+        "sha256": "36d3b1bc9afd001f50561a0f88b1cefbae3a8703b286cdbdd0bb7db96a755bc2",
+        "afterSha256": "36d3b1bc9afd001f50561a0f88b1cefbae3a8703b286cdbdd0bb7db96a755bc2",
+        "copySha256": "36d3b1bc9afd001f50561a0f88b1cefbae3a8703b286cdbdd0bb7db96a755bc2"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineGroupRow.svelte",
+        "sha256": "0f2643bdf035c1165979318a176cb06e2c0379f2456d3e1e6edd3353aeee6cb2",
+        "afterSha256": "0f2643bdf035c1165979318a176cb06e2c0379f2456d3e1e6edd3353aeee6cb2",
+        "copySha256": "0f2643bdf035c1165979318a176cb06e2c0379f2456d3e1e6edd3353aeee6cb2"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineTable.svelte",
+        "sha256": "7e9883dd766425d5bcefa0bb91d40658c8331955d9855aba373bdc408568fb08",
+        "afterSha256": "7e9883dd766425d5bcefa0bb91d40658c8331955d9855aba373bdc408568fb08",
+        "copySha256": "7e9883dd766425d5bcefa0bb91d40658c8331955d9855aba373bdc408568fb08"
+      },
+      {
+        "path": "web/src/lib/components/timeline/AGENTS.md",
+        "sha256": "a957697e27827c1389dffa5e679661d5445cac3b8559c6ca2f778ddf8a99f6c0",
+        "afterSha256": "a957697e27827c1389dffa5e679661d5445cac3b8559c6ca2f778ddf8a99f6c0",
+        "copySha256": "a957697e27827c1389dffa5e679661d5445cac3b8559c6ca2f778ddf8a99f6c0"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineGrid.svelte",
+        "sha256": "e4bfb9e8a55d3e52bf8d677f5487e2deacdcb63c08fa52bdacdda3c60477e00c",
+        "afterSha256": "e4bfb9e8a55d3e52bf8d677f5487e2deacdcb63c08fa52bdacdda3c60477e00c",
+        "copySha256": "e4bfb9e8a55d3e52bf8d677f5487e2deacdcb63c08fa52bdacdda3c60477e00c"
+      },
+      {
+        "path": "web/src/lib/components/timeline/TimelineTrace.svelte",
+        "sha256": "12fd8f2fdb312b99ce06ca81e00f2b99f75ef7b416d1cfe58ed5e70d6efa4419",
+        "afterSha256": "12fd8f2fdb312b99ce06ca81e00f2b99f75ef7b416d1cfe58ed5e70d6efa4419",
+        "copySha256": "12fd8f2fdb312b99ce06ca81e00f2b99f75ef7b416d1cfe58ed5e70d6efa4419"
+      },
+      {
+        "path": "web/src/routes/timeline/AGENTS.md",
+        "sha256": "4814df41677fcb6fcc67c4645e0889de7b521bd4a5fd376f567e55764eb956e5",
+        "afterSha256": "4814df41677fcb6fcc67c4645e0889de7b521bd4a5fd376f567e55764eb956e5",
+        "copySha256": "4814df41677fcb6fcc67c4645e0889de7b521bd4a5fd376f567e55764eb956e5"
+      },
+      {
+        "path": "web/scripts/timeline-timing.ts",
+        "sha256": "ff4fb93ab9b98b4dde41d9d6626256c71b55d79f3cbcbc4fef6da132251292b1",
+        "afterSha256": "ff4fb93ab9b98b4dde41d9d6626256c71b55d79f3cbcbc4fef6da132251292b1",
+        "copySha256": "ff4fb93ab9b98b4dde41d9d6626256c71b55d79f3cbcbc4fef6da132251292b1"
+      }
+    ],
+    "refreshedAt": "2026-11-16T00:17:55.830947+00:00"
+  },
+  "routeNode": "nodes/9",
+  "modules": [
+    "AnalysisFilters",
+    "Icon",
+    "Popover",
+    "chunk",
+    "client",
+    "context.svelte",
+    "controller.svelte",
+    "disclose-version",
+    "entry/app",
+    "entry/start",
+    "folder-kanban",
+    "git-branch",
+    "index-client",
+    "legacy",
+    "nodes/0",
+    "nodes/1",
+    "nodes/9",
+    "notebook-text",
+    "preload-helper",
+    "resource.svelte",
+    "state"
+  ],
+  "forbidden": [],
+  "detailMarkers": [],
+  "pass": true
+}

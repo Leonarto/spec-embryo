@@ -1,0 +1,63 @@
+{
+  "phase": "anchor",
+  "capturedAt": "2026-11-16T00:53:28.246Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Coarse last-pixel fixture uses44px geometry and nonzero horizontal scroll",
+      "pass": true,
+      "detail": {
+        "key": "task:SPEC-00001:TASK-00001:0",
+        "offset": 43,
+        "left": 60,
+        "top": 87,
+        "coarse": true
+      }
+    },
+    {
+      "name": "Browser pointer change44→32 clamps offset while retaining focused node/ID/scrollX/query",
+      "pass": true,
+      "detail": {
+        "coarse": {
+          "key": "task:SPEC-00001:TASK-00001:0",
+          "offset": 43,
+          "left": 60,
+          "top": 87,
+          "coarse": true
+        },
+        "fine": {
+          "key": "task:SPEC-00001:TASK-00001:0",
+          "offset": 31,
+          "left": 60,
+          "top": 71,
+          "coarse": false
+        }
+      }
+    },
+    {
+      "name": "Native density40→32 retains same occurrence at its lower edge and scrollX",
+      "pass": true,
+      "detail": {
+        "comfortable": {
+          "key": "task:SPEC-00001:TASK-00001:0",
+          "offset": 39,
+          "left": 60,
+          "top": 79,
+          "coarse": false
+        },
+        "compact": {
+          "key": "task:SPEC-00001:TASK-00001:0",
+          "offset": 31,
+          "left": 60,
+          "top": 71,
+          "coarse": false
+        }
+      }
+    },
+    {
+      "name": "Native density Enter retains the actual button focus",
+      "pass": true
+    }
+  ],
+  "sourceScope": "Isolated Node production final presenter checkpoint, committed128 inspector plus exactly one frozen pure138 relation-intent module. No138 client/controller or129 guard certification."
+}

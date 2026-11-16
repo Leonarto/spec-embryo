@@ -1,0 +1,24 @@
+{
+  "phase": "diagnostics",
+  "capturedAt": "2026-11-16T00:31:10.260Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Unavailable unit state suppresses all visual ruler/bars and retains semantic rows",
+      "pass": true
+    },
+    {
+      "name": "Diagnostics distinguish missing/outside references and honest back-edge fallback",
+      "pass": true
+    },
+    {
+      "name": "Missing sample has no fabricated detail link and finite cells remain readable",
+      "pass": true
+    },
+    {
+      "name": "Timeline v1 mismatch retains prior safe table and visible refresh error",
+      "pass": true
+    }
+  ],
+  "scope": "Four UI transport-fixture checks; no inspector/domain-graph semantics claim."
+}

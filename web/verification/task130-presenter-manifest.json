@@ -1,0 +1,63 @@
+{
+  "task": "TASK-130",
+  "status": "partial-frozen-readonly-for-static-review",
+  "scope": "Presenter source only; F130-presenter-1 anchor clamp and F130-presenter-2 primary typography/desktop group target corrected. Theme/coarse/diagnostic UI and combined integration gates remain pending. The production18-source timing snapshot predates these small presenter deltas; no timing recertification for changed bytes. Core7 unchanged. AnalysisFilters now consumes the approved TASK138 relation-intent helper; this generic delta is being checkpointed separately against HEAD and needs its own138 API/source, without the Timeline Clear conditional in that checkpoint. Coarse hit-area43px border regression corrected by explicit min-height:var(--hit-size); browser recheck remains pending. Coarse ID/title inspection anchors also use explicit44px height rather than the43px bordered content box; short-title targets retain44px minimum width.",
+  "files": [
+    {
+      "path": "web/src/lib/components/timeline/AGENTS.md",
+      "sha256": "a957697e27827c1389dffa5e679661d5445cac3b8559c6ca2f778ddf8a99f6c0"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineDiagnostics.svelte",
+      "sha256": "3b4d318d9f58d909e9632499bc84503fc09af6eaf5802423c70aa439548462c2"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineGrid.svelte",
+      "sha256": "d3b76bb9ef74e653275ce757581c3271a82d71dd8b31623795ae0034a946e205"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineGroupRow.svelte",
+      "sha256": "1ebcc3292eb695698880a35c90179495b230012a02fc28503b28e17fb2ac2a51"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineRuler.svelte",
+      "sha256": "5e7957357d6b1a5841f0fee996e0d936f69dd210c9bf4db3b8297b0cf3c9469e"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineTable.svelte",
+      "sha256": "874ad314671344986fb7a48d54d79b617ea7190d5f1861b31313fc446089d780"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineToolbar.svelte",
+      "sha256": "31be834c1852eaa7b8534bf142d77ebce25625e4fa9614ac49d77840ea334caf"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineTrace.svelte",
+      "sha256": "12fd8f2fdb312b99ce06ca81e00f2b99f75ef7b416d1cfe58ed5e70d6efa4419"
+    },
+    {
+      "path": "web/src/lib/components/timeline/model.ts",
+      "sha256": "13e087dcc947b0986a6c438fef5bf391550ed9bdf3fd62feebf84f3243552821"
+    },
+    {
+      "path": "web/src/routes/timeline/+page.svelte",
+      "sha256": "122401b2ea6986f94b174cca833860e8aa56d20dbe5f0205b4eb7ccb0b3a75ab"
+    },
+    {
+      "path": "web/src/routes/timeline/AGENTS.md",
+      "sha256": "4814df41677fcb6fcc67c4645e0889de7b521bd4a5fd376f567e55764eb956e5"
+    },
+    {
+      "path": "web/src/lib/components/AnalysisFilters.svelte",
+      "sha256": "448596a5edba26be77a6260649e3bf7a17d5a3e032a28a37a86b88dd45310171"
+    },
+    {
+      "path": "tests/timeline-view.test.ts",
+      "sha256": "b8523358156069c20993cb777c035239f3e4eec6f2ae4075138e47c4196a6d61"
+    },
+    {
+      "path": "tests/timeline-presentation.test.ts",
+      "sha256": "455c0195df933e63ad66f637a5fb22478034492d8804b269a32fcba39729453f"
+    }
+  ]
+}

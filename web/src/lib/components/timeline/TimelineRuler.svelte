@@ -1,0 +1,9 @@
+<script lang="ts">
+  import {timelineTicks,unitLabel} from './model.ts';
+  let {total,width}:{total:number|null;width:number}=$props();
+  const ticks=$derived(timelineTicks(total,width));
+</script>
+<div class="ruler" aria-label="Relative effort units">
+  {#each ticks as tick}<span class="tick" style:left={`${tick/(total??1)*100}%`}><i class:end={tick/(total??1)>.95}>{unitLabel(Number(tick.toPrecision(12)))}</i></span>{/each}
+</div>
+<style>.ruler{position:relative;height:32px;min-width:0;margin-right:12px;color:var(--text-muted);font-size:.6875rem;font-variant-numeric:tabular-nums}.tick{position:absolute;top:8px;height:16px;border-left:1px solid var(--border-control);width:0}.tick i{position:absolute;left:4px;white-space:nowrap;font-style:normal}.tick i.end{left:auto;right:4px}</style>

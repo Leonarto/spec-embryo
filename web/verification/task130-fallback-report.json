@@ -1,0 +1,55 @@
+{
+  "phase": "fallback",
+  "capturedAt": "2026-11-16T00:11:08.586Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Real no-JS SSR uses one semantic100-row fallback without visual graph DOM",
+      "pass": true
+    },
+    {
+      "name": "Native fallback Next preserves trace/mode and changes effective page",
+      "pass": true
+    },
+    {
+      "name": "Native page-size link resets page1 and mounts<=200rows",
+      "pass": true
+    },
+    {
+      "name": "Related spec disclosure bounds canonical anchors100total with complete counts",
+      "pass": true,
+      "detail": [
+        {
+          "kind": "direct",
+          "range": "1–50 of 1999",
+          "links": 50
+        },
+        {
+          "kind": "transitive",
+          "range": "0–0 of 0",
+          "links": 0
+        }
+      ]
+    },
+    {
+      "name": "Native related-spec Next is real GET and SSR keeps disclosure open",
+      "pass": true
+    },
+    {
+      "name": "No-JS final related-spec GET exposes last49canonical IDs and range",
+      "pass": true
+    },
+    {
+      "name": "No-JS Clear resets membership/page/related but preserves trace/mode/simple/pageSize",
+      "pass": true
+    },
+    {
+      "name": "Out-of-view trace is explicit rather than fabricated selection",
+      "pass": true
+    },
+    {
+      "name": "Clear trace independently removes only trace identity",
+      "pass": true
+    }
+  ]
+}

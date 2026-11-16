@@ -246,7 +246,11 @@ Tasks default to the bounded Table; `view=board` explicitly limits scope to unar
 - Versioned column/density preferences use an opaque SHA-256 namespace from the canonical realpath loaded on the server. Distinct roots with equal names remain separate; symlink aliases share preferences. Title sizing stays automatic until explicit numeric/pointer sizing; only the base width and mode are stored.
 - Toolbar search replaces history after 150 ms; presets preserve independent facets while changing only scope/status/page. Facet Apply and SSR GET links remain explicit navigation. Clipboard denial offers selectable text without reporting success.
 
-Final detail performance acceptance and combined Timeline integration remain open SPEC-062 work. Measurements and browser evidence live in `web/verification/`.
+Timeline's `workspace-timeline.ts` adapts the unchanged legacy graph projection once. `workspace-timeline-contract.ts` shares Timeline-only v2 safe-unit, diagnostic and pagination validation with browser consumers; Overview/Tasks/Specs remain v1. Invalid placement suppresses the visual scale while preserving readable rows and exact diagnostic counts with bounded samples. Request keys retain syntactic page and trace intent before clamping. Fallback task and related-spec pages are bounded independently.
+
+`components/timeline/` owns relative-unit presentation: toolbar, ruler, groups, rows, semantic fallback, diagnostics and related-spec trace. One scrollport aligns labels and bars. Large plans render a logical viewport window while keeping the focused occurrence mounted in order; virtual openers materialize before focus restoration. Collapse is route-session memory; density uses versioned opaque-project storage. The inspector registry contains all expanded logical task IDs in visual mode and only the effective page in simple mode. Trace remains independent from inspection, and same-inspect URL changes retain relation intent.
+
+Timeline/editor integration is reviewed and complete in TASK130. Detail performance and final combined accessibility, packaging and acceptance remain open in TASK138/TASK131. Measurements and browser evidence live in `web/verification/`.
 
 ## AGENTS budget policy
 

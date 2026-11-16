@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-130"
 title = "Refactor timeline for compact high-volume inspection"
 summary = "Preserve dependency tracing while bounding rendering and integrating the inspector."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128", "TASK-136"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.794Z"
+completed_at = "2026-11-16T16:00:11.476Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-15T23:45:30.729Z"
+updated_at = "2026-11-16T16:00:11.476Z"
 +++
 
 # Scope
@@ -31,7 +32,7 @@ Serial inspector host adapter committed as `d4e1b01` after independent Astra app
 
 # Verification record
 
-Implementation in progress. Independent Astra approved the frozen seven-file data/query/validator core (manifest d84698a29df51c578099822525d7f14c7dabcf3c55147f07e36327a0133daedd): zero hash mismatches, 22 focused tests / 925 assertions and independent envelope/diagnostic probes passed. This partial approval excludes UI, browser, performance and final inspector/question integration; no final acceptance criterion is claimed complete by that review alone.
+Complete and independently approved. The final69-payload manifest reconciles all27 selected source/test/script files with the exact d761ccb-plus-Timeline snapshot. Core/presenter reviews, four group-opener regressions plus modal announcement checks, nine editor/history checks and six refresh checks are closed; final desktop/mobile visual review has no findings. Scoped checks pass35 tests/1369 assertions, Svelte0/0 and AGENTS. One supported Vite DEV5+20 series records native Enter p9512.6ms and scroll maximum34 rows/zero long tasks. Timeline navigation p951341.7ms is a separate reported metric, not a Tasks/Specs800ms or detail300ms pass. See `web/verification/SPEC-062-P6.md`, `task130-final-manifest.json` and `task130-final-review.md`. TASK138/TASK131 remain open.
 
 
 # Detailed Astra implementation decisions
@@ -234,3 +235,13 @@ Focused checks: native Tab/Shift+Tab across a virtual-window edge, PageDown scro
 Clear Timeline filters resets only membership facets (spec/scope/window, scope defaultunarchived), fallback task page1, related-spec pages1 and option-search state. Preserve selected_task, timeline_mode, inspect/section, simple and pageSize as trace/view/presentation context. Clear trace remains a distinct action. This conditional change is Timeline-only; existing Tasks/Specs Clear behavior is not revised.
 
 If the retained selected_task has no selection projection in the new results, keep its URL intention and show “Trace unavailable in current results” with an explicit Clear trace link. Do not assert the task is globally missing or fabricate relationship data. Verify real GET/no-JS and enhanced Clear preserve these parameters and reset only the stated facets; the rel.* list-identity helper is a separate independently reviewed checkpoint.
+
+## Final integration checkpoint
+
+TASK129 is reviewed and committed as d761ccb. The final Timeline snapshot overlays23 owned files onto that exact base; web check0/0 and35 focused tests/1369 assertions pass. Combined browser review found a group-Spec opener focus bug and a hidden live-region announcement. Both are fixed and independently approved with directed regressions.
+
+## Integration correction: Spec group opener focus
+
+A group-header Spec activation currently captures a SpecID with the task column default, then Close falls back to TASK-00001 even while the original group link remains connected. Author's real1440×900 repro matches the route/Grid source. Fix only Timeline adapter/Grid: mark group activation with existing columnKey='group'; materialize and focus the canonical link in that same Spec header on restore. A collapsed group still has its header and must not be expanded merely to restore focus. Preserve trace/query/selection and existing scroll intent.
+
+If the group was removed, use a surviving task/toolbar fallback and a truthful announcement. For nearest-task behavior capture the task position at the group's logical location; an unknown/-1 position may fall back to the first available task but must not call it nearest. No shared host/editor or DTO change. Directed regressions cover connected, virtualized, collapsed and removed group headers. Duplicate task-occurrence handling requires its own concrete repro before any additional change.

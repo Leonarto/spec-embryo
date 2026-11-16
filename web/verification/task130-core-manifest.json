@@ -1,0 +1,36 @@
+{
+  "task": "TASK-130",
+  "scope": "Core transport/projection only. No final UI/performance/integration acceptance. Timeline-only workspace branches; legacy engine/dashboard untouched. rel.* list-intent omission is the serialized TASK138 request.",
+  "status": "partial-frozen-readonly-for-review",
+  "capturedAt": "2026-11-16T00:02:26.350739+00:00",
+  "files": [
+    {
+      "path": "src/services/workspace-query.ts",
+      "sha256": "4de38eac8c27170b86c019896c540866ccc20042d53afdf83f0f94397e504fcf"
+    },
+    {
+      "path": "src/services/workspace.ts",
+      "sha256": "7bd9709a49ca395c6105d2d7ad12aa05c404fb26fc80f3a9967439f14f3c3990"
+    },
+    {
+      "path": "src/services/workspace-timeline.ts",
+      "sha256": "3cda5b95c196be008edf7c0cb241d1ee0854d714cdad4b76439dd6308b613427"
+    },
+    {
+      "path": "src/services/workspace-timeline-contract.ts",
+      "sha256": "aa1eb86916ee5e231ab2dbf37ffefce882c2ab7d040dc43c01b41191ed23c879"
+    },
+    {
+      "path": "web/src/lib/workspace/resource.ts",
+      "sha256": "d7e9327aa98ff1622aaa4b7ac0f7356f18694134de562e7296988588323d5136"
+    },
+    {
+      "path": "tests/workspace-timeline.test.ts",
+      "sha256": "e38aa86615e91cf2b4f886e30e420471f035f926f960b67f4b9029672163cd08"
+    },
+    {
+      "path": "tests/workspace-query.test.ts",
+      "sha256": "95dd18c81372a58f417de6090a19caac3cbf58547b361e799d4548dd7b5536a9"
+    }
+  ]
+}

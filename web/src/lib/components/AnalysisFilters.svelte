@@ -28,6 +28,7 @@
     const clean=normalizeViewQuery(route,new URLSearchParams());
     if(query.inspect){clean.inspect=query.inspect;clean.section=query.section;}
     clean.simple=query.simple;clean.view=query.view;
+    if(route==='timeline'&&clean.timeline&&query.timeline){clean.timeline.selectedTaskId=query.timeline.selectedTaskId;clean.timeline.mode=query.timeline.mode;clean.timeline.pageSize=query.timeline.pageSize;}
     const params=serializeViewQuery(clean);
     if(clean.inspect)writeRelationPages(params,clean.inspect.kind,parseRelationPages(clean.inspect.kind,workspaceURL().searchParams));
     return `${workspaceURL().pathname}?${params}`;

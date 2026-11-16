@@ -1,0 +1,45 @@
+{
+  "scope": "Exact combined129/130 consumer; controlled external archive/restore only of owned synthetic Task1, manual Refresh retains draft/spec base and URL intent. No synthetic transport data or production changes.",
+  "steps": [
+    {
+      "step": "prepare",
+      "checks": [
+        {
+          "name": "Dirty Timeline question owner ready for external task metadata change",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "step": "missing",
+      "checks": [
+        {
+          "name": "Refresh announces missing trace without erasing its URL intent",
+          "pass": true
+        },
+        {
+          "name": "Refresh preserves exact dirty input node, spec base token and neutral conflict state",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "step": "restored",
+      "checks": [
+        {
+          "name": "Same URL intent restores trace when source reappears",
+          "pass": true
+        },
+        {
+          "name": "Refresh preserves exact dirty input node, spec base token and neutral conflict state",
+          "pass": true
+        },
+        {
+          "name": "Controlled metadata refresh never bypasses the dirty leave guard",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "harnessLimit": "Playwright VM has no dynamic-import callback, so filesystem edits use exec_command between browser steps. Initial attempted dynamic import failed before any mutation/request."
+}

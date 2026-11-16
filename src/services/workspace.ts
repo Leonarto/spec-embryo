@@ -5,7 +5,9 @@ import { SPEC_STATUSES, TASK_STATUSES } from "../domain.ts";
 import { buildTaskAnalysisIndex, deriveNextActions, deriveStatusSnapshot, type TaskAnalysisIndex } from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "./agents.ts";
-import { buildSpecProgress, buildTimelineProjection, toTaskCard, type DashboardData, type DashboardTaskCard } from "./dashboard.ts";
+import { buildSpecProgress, toTaskCard, type DashboardData, type DashboardTaskCard } from "./dashboard.ts";
+import { buildWorkspaceTimelineProjection } from "./workspace-timeline.ts";
+import type { WorkspaceTimelineProjection } from "./workspace-timeline-contract.ts";
 import { documentSourceHash } from "./document-provenance.ts";
 import { normalizeViewQuery, normalizeWorkspaceSearch, workspaceRequestKey, type WorkspaceListQuery, type WorkspaceOptionsQuery, type WorkspaceRoute, type WorkspaceScope, type WorkspaceSort, type WorkspaceSpecQuery, type WorkspaceTaskQuery, type WorkspaceViewQuery, type WorkspaceWindow } from "./workspace-query.ts";
 
@@ -33,7 +35,7 @@ export interface WorkspaceFilterData {
 }
 export interface WorkspaceTasksData { view:"table"|"board"; result: WorkspaceListResult<WorkspaceTaskRow,WorkspaceTaskQuery>; filters: WorkspaceFilterData }
 export interface WorkspaceSpecsData { result: WorkspaceListResult<WorkspaceSpecRow,WorkspaceSpecQuery>; filters: WorkspaceFilterData; progressIsSubset: boolean }
-export interface WorkspaceTimelineData { timeline: ReturnType<typeof buildTimelineProjection>; filters: WorkspaceFilterData }
+export interface WorkspaceTimelineData extends WorkspaceTimelineProjection { filters: WorkspaceFilterData }
 export interface WorkspaceOverviewData {
   counts: DashboardData["counts"]; currentState: DashboardData["currentState"]; nextActions: string[];
   agents: DashboardData["agents"]; blockedTasks: Array<{id:string;title:string}>;
@@ -43,7 +45,7 @@ export interface WorkspaceOverviewData {
 }
 interface WorkspaceRouteData { overview: WorkspaceOverviewData; tasks: WorkspaceTasksData; specs: WorkspaceSpecsData; timeline: WorkspaceTimelineData }
 export type WorkspaceEnvelope<Route extends WorkspaceRoute = WorkspaceRoute> = Route extends WorkspaceRoute ? {
-  schemaVersion: 1; route: Route; requestKey: string; revision: string; generatedAt: string;
+  schemaVersion: Route extends "timeline" ? 2 : 1; route: Route; requestKey: string; revision: string; generatedAt: string;
   shell: WorkspaceShellData; data: WorkspaceRouteData[Route];
 } : never;
 export interface WorkspaceSource {
@@ -168,7 +170,7 @@ export async function buildWorkspaceEnvelope<Route extends WorkspaceRoute>(sourc
     const query=view.timeline!;
     const selected=new Set(query.specIds);
     const cards=[...source.taskRows().values()].filter(task=>inScope(task,query.scope)&&(!selected.size||task.specIds.some(id=>selected.has(id)))&&inWindow(task,query.window,source.now));
-    data={timeline:buildTimelineProjection(cards,source.context.specs.map(spec=>({id:spec.id,title:spec.title,status:spec.status})),{selectedSpecIds:query.specIds,mode:query.mode,selectedTaskId:query.selectedTaskId}),filters:filters(source,view,requestedSpecIds)};
+    data={...buildWorkspaceTimelineProjection(cards,source.context.specs.map(spec=>({id:spec.id,title:spec.title,status:spec.status})),query,new Set(source.analysis.byId.keys())),filters:filters(source,view,requestedSpecIds)};
   } else data=await buildWorkspaceOverview(source);
-  return {schemaVersion:1,route,requestKey,revision:digest(JSON.stringify([source.revision,requestKey,data],(key,value)=>key==="generatedAt"?undefined:value)),generatedAt:generatedAt(source),shell:buildWorkspaceShell(source),data} as WorkspaceEnvelope<Route>;
+  return {schemaVersion:route==="timeline"?2:1,route,requestKey,revision:digest(JSON.stringify([source.revision,requestKey,data],(key,value)=>key==="generatedAt"?undefined:value)),generatedAt:generatedAt(source),shell:buildWorkspaceShell(source),data} as WorkspaceEnvelope<Route>;
 }

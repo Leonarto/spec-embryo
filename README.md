@@ -231,8 +231,8 @@ Only the exact own receipt is excluded. During apply, only the verified current 
 - Dedicated spec and task detail routes with HTTP404 not-found states, linked context, and inline source narrative rendering
 - Spec questions support exact-file revision checks, explicit review of external changes, preserved unmatched answers, and Save/Discard/Keep navigation guards; confirmed saves survive subsequent read failures. Answers are not stored in the browser, and abrupt-close recovery is not promised
 - The canonical question action writes answers into Markdown deterministically and surfaces continuation guidance plus an agent evaluation prompt bundle
-- A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
-- Interactive timeline tracing with URL-driven task selection, distinct upstream/downstream highlighting, and related-spec emphasis for cross-spec diagnosis
+- Compact grouped Timeline in relative units, with bounded native-table fallback, readable diagnostics and virtual rendering for large plans
+- Independent Timeline Trace and Inspect, with URL-driven upstream/downstream highlighting and bounded related-spec pages; relative units do not imply calendar scheduling
 - Prompt-return backend for agent-safe orchestration
 - Prompt bundle assembly that separates stable prefixes from variable tails while preserving one shared deterministic prompt contract across prompt-return and subprocess adapters
 - A product direction that treats context management as packaging, scoping, consolidation, and evaluation work rather than trying to recreate model-native reasoning inside the tool

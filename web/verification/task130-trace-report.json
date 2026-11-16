@@ -1,0 +1,19 @@
+{
+  "phase": "trace",
+  "capturedAt": "2026-11-16T00:11:25.358Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Trace summary shows exact full related-spec count rather than current slice",
+      "pass": true
+    },
+    {
+      "name": "Enhanced final related page preserves disclosure and moves disappearing Next focus to range",
+      "pass": true
+    },
+    {
+      "name": "Clear trace leaves visual mode and membership intact",
+      "pass": true
+    }
+  ]
+}
