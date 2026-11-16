@@ -1,0 +1,73 @@
+{
+  "scope": "Focused one-attribute Mermaid accessibility regression; no runtime or latency acceptance",
+  "baseProductCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "patch": "/private/tmp/spm-task131-mermaid-role.patch",
+  "blob": "/private/tmp/spm-task131-combined-7deb17f/web/src/lib/components/MermaidBlock.svelte",
+  "svelteCheck": {
+    "command": "bun run web:check",
+    "cwd": "/private/tmp/spm-task131-combined-7deb17f",
+    "errors": 0,
+    "warnings": 0,
+    "log": "/private/tmp/spm-task131-mermaid-copy-check.log"
+  },
+  "previousIncomplete": [
+    {
+      "id": "aria-prohibited-attr",
+      "nodeCount": 1,
+      "nodes": [
+        {
+          "target": [
+            ".diagram-controls"
+          ],
+          "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute.",
+          "ariaHidden": null,
+          "adjacentText": "Diagram Mermaid - 100% +"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "url": "http://127.0.0.1:56012/specs/SPEC-002",
+    "scope": "Rendered diagram zoom group: aria-prohibited-attr and native Tab/button activation",
+    "steps": [
+      {
+        "name": "Tab out to reset",
+        "pass": true
+      },
+      {
+        "name": "Tab reset to in",
+        "pass": true
+      },
+      {
+        "name": "Enter activates zoom in",
+        "value": "120%",
+        "pass": true
+      },
+      {
+        "name": "Space activates reset",
+        "value": "100%",
+        "pass": true
+      },
+      {
+        "name": "Enter activates zoom out",
+        "value": "80%",
+        "pass": true
+      }
+    ],
+    "axe": {
+      "version": "4.11.4",
+      "violations": [],
+      "incomplete": [],
+      "passes": 1
+    },
+    "pass": true
+  },
+  "sourceChanges": "Only role=group on existing labelled div; no toolbar, keyboard handlers or style changes",
+  "test": "web/scripts/acceptance-mermaid-a11y.mjs",
+  "sharedSourceChanged": false,
+  "limits": [
+    "Role test used a fresh own dev process because packaged source did not hot-reload",
+    "No repeated whole-page matrix; unrelated axe incompletes remain tracked separately",
+    "Native200% zoom pending per user decision; Mac locked, no substitute used"
+  ]
+}

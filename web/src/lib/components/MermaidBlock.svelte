@@ -93,7 +93,7 @@
       <span class="diagram-kind">Mermaid</span>
     </div>
 
-    {#if mounted&&svgMarkup&&!error}<div class="diagram-controls" aria-label="Diagram zoom controls">
+    {#if mounted&&svgMarkup&&!error}<div class="diagram-controls" role="group" aria-label="Diagram zoom controls">
       <button type="button" class="control-button" onclick={zoomOut} disabled={zoom <= MIN_ZOOM} aria-label="Zoom out">
         -
       </button>

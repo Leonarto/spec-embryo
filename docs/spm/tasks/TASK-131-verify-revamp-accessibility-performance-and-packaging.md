@@ -70,3 +70,9 @@ Runner preparation follows `web/verification/task131-runner-decisions.md`: exist
 ## Runtime correction for final acceptance
 
 TASK141 replaces the ordinary shipped DEV launcher with reviewed precompiled Node client/SSR assets; its concrete contract is `web/verification/task141-runtime-design.md`. The earlier DEV cold-cache setup is historical after that integration. Build artifacts before the measurement interval, validate them at startup, and use the actual shipped readiness signal with fresh server/browser/profile per cold sample. Startup includes manifest validation and is reported separately; no application HTTP prewarm or document preload. Preserve original20cold/5+20warm, navigationStart, correct rows/hydrated controls/two frames and numerical thresholds. Adapt only runtime preparation/readiness; reuse unaffected component accessibility evidence with explicit source identities. Final code/package review and commit must precede the one final acceptance window.
+
+## Accessibility checkpoint
+
+Axe identified a named generic div around Mermaid zoom buttons. Astra approved a one-attribute correction to role=group, preserving native button keyboard behavior. Independent review verifies the exact patch/blob, named rendered group, zero affected axe violations/incompletes, five Tab/Enter/Space checks and Svelte0/0. Evidence: `web/verification/task131-mermaid-fix.json` and `task131-mermaid-role-review.md`. This is a focused fix, not completion of overall accessibility or performance acceptance.
+
+The user explicitly asked to leave real browser zoom200% pending because macOS is locked and cannot currently be unlocked. No native zoom was changed; CSSzoom/pinch-scale are not substituted. Remaining checks proceed, with this test reported pending rather than passed.

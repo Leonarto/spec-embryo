@@ -1,0 +1,32 @@
+{
+  "scope": "Frozen one-attribute Mermaid fix + focused regression and Svelte evidence",
+  "files": [
+    {
+      "path": "/private/tmp/spm-task131-mermaid-role.patch",
+      "sha256": "eae3dc9aa8310c5695b8fb3c40bdd105515575e240176a991211e6ca2907d48f"
+    },
+    {
+      "path": "/private/tmp/spm-task131-combined-7deb17f/web/src/lib/components/MermaidBlock.svelte",
+      "sha256": "d32d4400d705a9d2e84080a0b869ab1215c1515e6361dcb11e0553aa3b80aac4"
+    },
+    {
+      "path": "web/scripts/acceptance-mermaid-a11y.mjs",
+      "sha256": "c695ac45dcc7f950ceb4ea8a4528dd5f0be0032e25a8d14d259e5254bfa869a6"
+    },
+    {
+      "path": "web/verification/task131-mermaid-fix.json",
+      "sha256": "0984307d57fdb2b9ccf8a83c250fe33424b4564a8f6a284899f4d68499badcd4"
+    },
+    {
+      "path": "/private/tmp/spm-task131-mermaid-copy-check.log",
+      "sha256": "1854226743c80601b0c940362578f851ce710762e52d667cc0835fc85d776e22"
+    }
+  ],
+  "patchMetadata": {
+    "path": "web/src/lib/components/MermaidBlock.svelte",
+    "sourceBeforeSHA256": "5f922ace59583dbb02f877010088fada9e5f8fd309f3c955b511370788e85493",
+    "sourceAfterSHA256": "d32d4400d705a9d2e84080a0b869ab1215c1515e6361dcb11e0553aa3b80aac4",
+    "patchSHA256": "eae3dc9aa8310c5695b8fb3c40bdd105515575e240176a991211e6ca2907d48f",
+    "sharedProductUnchanged": true
+  }
+}
