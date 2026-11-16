@@ -1,0 +1,3424 @@
+{
+  "scope": "Offline correlation by actual response request ID; no timing rerun or additional requests. Diagnostic overhead means not acceptance. NodeGC timestamps use the same Node performance clock as request/context spans. Process CPU/ELU/memory are aggregate, overlapping read sums and inclusive memo phases cannot be added as disjoint wall.",
+  "summary": [
+    {
+      "kind": "task",
+      "n": 10,
+      "clickMedianMs": 268.8000000715256,
+      "contextMedianMs": 209.33514600000126,
+      "maxContextMs": 356.19583299999795,
+      "maxGCOverlapMs": 72.00983309745789
+    },
+    {
+      "kind": "spec",
+      "n": 10,
+      "clickMedianMs": 272.2000000476837,
+      "contextMedianMs": 203.29881199999727,
+      "maxContextMs": 744.7432499999995,
+      "maxGCOverlapMs": 231.50416707992554
+    }
+  ],
+  "rows": [
+    {
+      "kind": "task",
+      "n": -3,
+      "warmup": true,
+      "requestId": 120,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 581.5,
+        "acceptedDOMMs": 563.2000000476837,
+        "afterAccepted2RAFMs": 18.299999952316284,
+        "httpMs": 541.5,
+        "requestToResponseStartMs": 540.5999999046326,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.6000001430511475,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 14257.700000047684,
+          "fetchStart": 14257.700000047684,
+          "requestStart": 14258.300000190735,
+          "responseStart": 14798.900000095367,
+          "responseEnd": 14799.200000047684,
+          "duration": 541.5,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 540.208832999997,
+        "requestStart": 33448.563,
+        "requestEnd": 33988.771833,
+        "contextMs": 414.01550000000134,
+        "contextStart": 33549.267541,
+        "contextEnd": 33963.283041,
+        "requestSyncMs": {
+          "workspace.index": 16.64570800000365,
+          "detail.projection": 7.7670839999991586,
+          "detail.serialize": 0.3401250000024447
+        },
+        "contextSyncMs": {
+          "memo.lookup": 39.657023999723606,
+          "memo.clone": 13.96436200014432,
+          "memo.total": 58.73737099971186,
+          "provenance": 37.8655840000356
+        },
+        "contextAsyncMs": {
+          "config": 1.6821669999990263,
+          "git": 20.627416000002995
+        },
+        "contextCpuMs": {
+          "user": 263.844,
+          "system": 785.554
+        },
+        "contextELU": {
+          "idle": 45.781073999998625,
+          "active": 368.17692594468826,
+          "utilization": 0.8894064760045322
+        },
+        "gcOverlapMs": 12.87833309173584,
+        "memoryStart": {
+          "rss": 350896128,
+          "heapTotal": 668073984,
+          "heapUsed": 496145392,
+          "external": 65279034,
+          "arrayBuffers": 5435459
+        },
+        "memoryEnd": {
+          "rss": 399720448,
+          "heapTotal": 658030592,
+          "heapUsed": 475945440,
+          "external": 66003275,
+          "arrayBuffers": 6159700
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 2395114.920498999,
+          "queueMaxMs": 350.62995900000533,
+          "callbackSumMs": 24650.90464400043,
+          "callbackMaxMs": 40.65191699999559
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": -2,
+      "warmup": true,
+      "requestId": 164,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 396.2000000476837,
+        "acceptedDOMMs": 378.89999985694885,
+        "afterAccepted2RAFMs": 17.300000190734863,
+        "httpMs": 370.5,
+        "requestToResponseStartMs": 369.59999990463257,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.6000001430511475,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 14989,
+          "fetchStart": 14989,
+          "requestStart": 14989.600000143051,
+          "responseStart": 15359.200000047684,
+          "responseEnd": 15359.5,
+          "duration": 370.5,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 369.0504579999979,
+        "requestStart": 34180.104333,
+        "requestEnd": 34549.154791,
+        "contextMs": 343.4801660000012,
+        "contextStart": 34183.265125,
+        "contextEnd": 34526.745291,
+        "requestSyncMs": {
+          "workspace.index": 14.903166999996756,
+          "detail.projection": 6.754957999997714,
+          "detail.serialize": 0.2296660000065458
+        },
+        "contextSyncMs": {
+          "memo.lookup": 29.375138000272273,
+          "memo.clone": 5.095135999974445,
+          "memo.total": 39.54786700027762,
+          "provenance": 28.532771999802208
+        },
+        "contextAsyncMs": {
+          "config": 1.539959000001545,
+          "git": 21.36725000000297
+        },
+        "contextCpuMs": {
+          "user": 233.272,
+          "system": 735.944
+        },
+        "contextELU": {
+          "idle": 48.297037999996974,
+          "active": 295.1625870057251,
+          "utilization": 0.8593807408972967
+        },
+        "gcOverlapMs": 9.277958154678345,
+        "memoryStart": {
+          "rss": 418889728,
+          "heapTotal": 661897216,
+          "heapUsed": 463334816,
+          "external": 65699935,
+          "arrayBuffers": 5856360
+        },
+        "memoryEnd": {
+          "rss": 399949824,
+          "heapTotal": 662749184,
+          "heapUsed": 499218416,
+          "external": 68215073,
+          "arrayBuffers": 8371498
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 2288292.973007998,
+          "queueMaxMs": 294.8560409999991,
+          "callbackSumMs": 20238.09354099988,
+          "callbackMaxMs": 24.313458999997238
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": -1,
+      "warmup": true,
+      "requestId": 167,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 250.60000014305115,
+        "acceptedDOMMs": 234.80000019073486,
+        "afterAccepted2RAFMs": 15.799999952316284,
+        "httpMs": 226.69999980926514,
+        "requestToResponseStartMs": 226.20000004768372,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.19999980926513672,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 15498.300000190735,
+          "fetchStart": 15498.300000190735,
+          "requestStart": 15498.5,
+          "responseStart": 15724.700000047684,
+          "responseEnd": 15725,
+          "duration": 226.69999980926514,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 225.8565000000017,
+        "requestStart": 34688.745291,
+        "requestEnd": 34914.601791,
+        "contextMs": 206.6766659999994,
+        "contextStart": 34690.376375,
+        "contextEnd": 34897.053041,
+        "requestSyncMs": {
+          "workspace.index": 12.350333000002138,
+          "detail.projection": 4.495667000002868,
+          "detail.serialize": 0.20762500000273576
+        },
+        "contextSyncMs": {
+          "memo.lookup": 21.877287999886903,
+          "memo.clone": 4.217111999751069,
+          "memo.total": 29.17342799965263,
+          "provenance": 22.1949640000239
+        },
+        "contextAsyncMs": {
+          "config": 0.20962499999586726,
+          "git": 11.272250000001804
+        },
+        "contextCpuMs": {
+          "user": 198.293,
+          "system": 509.659
+        },
+        "contextELU": {
+          "idle": 7.141829000000143,
+          "active": 199.52904583406053,
+          "utilization": 0.9654434665468251
+        },
+        "gcOverlapMs": 7.308542013168335,
+        "memoryStart": {
+          "rss": 400588800,
+          "heapTotal": 665534464,
+          "heapUsed": 475000632,
+          "external": 68215273,
+          "arrayBuffers": 8371698
+        },
+        "memoryEnd": {
+          "rss": 433111040,
+          "heapTotal": 669106176,
+          "heapUsed": 511303512,
+          "external": 71784771,
+          "arrayBuffers": 11941196
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1088454.8350860013,
+          "queueMaxMs": 175.73416700000234,
+          "callbackSumMs": 12400.122316999907,
+          "callbackMaxMs": 15.084999999999127
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 0,
+      "warmup": false,
+      "requestId": 170,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 273.10000014305115,
+        "acceptedDOMMs": 257.7000000476837,
+        "afterAccepted2RAFMs": 15.400000095367432,
+        "httpMs": 249.40000009536743,
+        "requestToResponseStartMs": 248.70000004768372,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.5,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 15847.900000095367,
+          "fetchStart": 15847.900000095367,
+          "requestStart": 15848.400000095367,
+          "responseStart": 16097.100000143051,
+          "responseEnd": 16097.300000190735,
+          "duration": 249.40000009536743,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 248.1909999999989,
+        "requestStart": 35038.783458,
+        "requestEnd": 35286.974458,
+        "contextMs": 232.09679200000392,
+        "contextStart": 35040.616916,
+        "contextEnd": 35272.713708,
+        "requestSyncMs": {
+          "workspace.index": 9.872333999999682,
+          "detail.projection": 3.612208999998984,
+          "detail.serialize": 0.19662500000413274
+        },
+        "contextSyncMs": {
+          "memo.lookup": 21.46205699928396,
+          "memo.clone": 3.865786999806005,
+          "memo.total": 28.48905599957652,
+          "provenance": 18.431672000187973
+        },
+        "contextAsyncMs": {
+          "config": 0.22720899999694666,
+          "git": 11.513167000004614
+        },
+        "contextCpuMs": {
+          "user": 203.306,
+          "system": 671.243
+        },
+        "contextELU": {
+          "idle": 18.13362699999925,
+          "active": 213.9535819862831,
+          "utilization": 0.9218671848431291
+        },
+        "gcOverlapMs": 15.785000801086426,
+        "memoryStart": {
+          "rss": 435879936,
+          "heapTotal": 671563776,
+          "heapUsed": 525876656,
+          "external": 71844849,
+          "arrayBuffers": 12001274
+        },
+        "memoryEnd": {
+          "rss": 478691328,
+          "heapTotal": 672301056,
+          "heapUsed": 513462344,
+          "external": 75354469,
+          "arrayBuffers": 15510894
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1225577.198867996,
+          "queueMaxMs": 191.9786249999961,
+          "callbackSumMs": 14034.857509000823,
+          "callbackMaxMs": 31.882458000000042
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 1,
+      "warmup": false,
+      "requestId": 173,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 327.30000019073486,
+        "acceptedDOMMs": 316.30000019073486,
+        "afterAccepted2RAFMs": 11.0,
+        "httpMs": 305.30000019073486,
+        "requestToResponseStartMs": 304.2000000476837,
+        "responseBodyMs": 0.40000009536743164,
+        "fetchToRequestMs": 0.7000000476837158,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 16220,
+          "fetchStart": 16220,
+          "requestStart": 16220.700000047684,
+          "responseStart": 16524.900000095367,
+          "responseEnd": 16525.300000190735,
+          "duration": 305.30000019073486,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 303.46712500000285,
+        "requestStart": 35411.35275,
+        "requestEnd": 35714.819875,
+        "contextMs": 277.20850000000064,
+        "contextStart": 35413.452041,
+        "contextEnd": 35690.660541,
+        "requestSyncMs": {
+          "workspace.index": 16.322832999998354,
+          "detail.projection": 6.99345799999719,
+          "detail.serialize": 0.24354200000379933
+        },
+        "contextSyncMs": {
+          "memo.lookup": 26.735017999992124,
+          "memo.clone": 5.082601999863982,
+          "memo.total": 35.41305400025158,
+          "provenance": 24.011416999863286
+        },
+        "contextAsyncMs": {
+          "config": 0.8690000000060536,
+          "git": 16.003333000000566
+        },
+        "contextCpuMs": {
+          "user": 197.247,
+          "system": 527.677
+        },
+        "contextELU": {
+          "idle": 6.903168999997433,
+          "active": 270.2922059656703,
+          "utilization": 0.9750963774166419
+        },
+        "gcOverlapMs": 18.21820902824402,
+        "memoryStart": {
+          "rss": 476299264,
+          "heapTotal": 675020800,
+          "heapUsed": 528130376,
+          "external": 75414547,
+          "arrayBuffers": 15570972
+        },
+        "memoryEnd": {
+          "rss": 453705728,
+          "heapTotal": 673513472,
+          "heapUsed": 561194608,
+          "external": 78924167,
+          "arrayBuffers": 19080592
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1522570.3002210087,
+          "queueMaxMs": 233.36149999999907,
+          "callbackSumMs": 16474.257771000113,
+          "callbackMaxMs": 24.18787500000326
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 2,
+      "warmup": false,
+      "requestId": 176,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 273.40000009536743,
+        "acceptedDOMMs": 259.90000009536743,
+        "afterAccepted2RAFMs": 13.5,
+        "httpMs": 249.80000019073486,
+        "requestToResponseStartMs": 249.29999995231628,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.3000001907348633,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 16652,
+          "fetchStart": 16652,
+          "requestStart": 16652.300000190735,
+          "responseStart": 16901.60000014305,
+          "responseEnd": 16901.800000190735,
+          "duration": 249.80000019073486,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 249.04429099999834,
+        "requestStart": 35842.5015,
+        "requestEnd": 36091.545791,
+        "contextMs": 206.32141700000648,
+        "contextStart": 35844.603541,
+        "contextEnd": 36050.924958,
+        "requestSyncMs": {
+          "workspace.index": 25.2242499999993,
+          "detail.projection": 13.061249999998836,
+          "detail.serialize": 0.9536660000012489
+        },
+        "contextSyncMs": {
+          "memo.lookup": 23.673666000358935,
+          "memo.clone": 4.427401000357349,
+          "memo.total": 31.344601000309922,
+          "provenance": 19.346509999500995
+        },
+        "contextAsyncMs": {
+          "config": 0.24166699999477714,
+          "git": 11.12629200000083
+        },
+        "contextCpuMs": {
+          "user": 185.748,
+          "system": 501.184
+        },
+        "contextELU": {
+          "idle": 2.6382960000009916,
+          "active": 203.69357884741112,
+          "utilization": 0.9872133377261653
+        },
+        "gcOverlapMs": 15.575124979019165,
+        "memoryStart": {
+          "rss": 460013568,
+          "heapTotal": 675250176,
+          "heapUsed": 532407320,
+          "external": 78924367,
+          "arrayBuffers": 19080792
+        },
+        "memoryEnd": {
+          "rss": 486146048,
+          "heapTotal": 676446208,
+          "heapUsed": 567205712,
+          "external": 82493865,
+          "arrayBuffers": 22650290
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1015531.2242280019,
+          "queueMaxMs": 177.12420900000143,
+          "callbackSumMs": 12394.776144000309,
+          "callbackMaxMs": 16.731832999998005
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 3,
+      "warmup": false,
+      "requestId": 179,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 292.59999990463257,
+        "acceptedDOMMs": 280.69999980926514,
+        "afterAccepted2RAFMs": 11.900000095367432,
+        "httpMs": 272.7999999523163,
+        "requestToResponseStartMs": 272.2000000476837,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.2999999523162842,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 17035.400000095367,
+          "fetchStart": 17035.400000095367,
+          "requestStart": 17035.700000047684,
+          "responseStart": 17307.900000095367,
+          "responseEnd": 17308.200000047684,
+          "duration": 272.7999999523163,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 271.976459000005,
+        "requestStart": 36225.852041,
+        "requestEnd": 36497.8285,
+        "contextMs": 256.1798340000023,
+        "contextStart": 36227.970916,
+        "contextEnd": 36484.15075,
+        "requestSyncMs": {
+          "workspace.index": 9.527874999999767,
+          "detail.projection": 3.313833000000159,
+          "detail.serialize": 0.2321250000022701
+        },
+        "contextSyncMs": {
+          "memo.lookup": 27.638073999929475,
+          "memo.clone": 5.809488000442798,
+          "memo.total": 36.747703999863006,
+          "provenance": 38.05677000024298
+        },
+        "contextAsyncMs": {
+          "config": 0.2642919999998412,
+          "git": 11.063416999997571
+        },
+        "contextCpuMs": {
+          "user": 210.645,
+          "system": 511.728
+        },
+        "contextELU": {
+          "idle": 0.9152519999988726,
+          "active": 255.2642898262493,
+          "utilization": 0.9964273025337065
+        },
+        "gcOverlapMs": 21.161458730697632,
+        "memoryStart": {
+          "rss": 441532416,
+          "heapTotal": 678903808,
+          "heapUsed": 582267064,
+          "external": 82553943,
+          "arrayBuffers": 22710368
+        },
+        "memoryEnd": {
+          "rss": 461340672,
+          "heapTotal": 698384384,
+          "heapUsed": 571164992,
+          "external": 86063563,
+          "arrayBuffers": 26219988
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1493863.1485730004,
+          "queueMaxMs": 222.4905409999992,
+          "callbackSumMs": 15589.377121999481,
+          "callbackMaxMs": 26.505334000001312
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 4,
+      "warmup": false,
+      "requestId": 182,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 264.5,
+        "acceptedDOMMs": 251.60000014305115,
+        "afterAccepted2RAFMs": 12.899999856948853,
+        "httpMs": 242.69999980926514,
+        "requestToResponseStartMs": 242.09999990463257,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.2999999523162842,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 17435.300000190735,
+          "fetchStart": 17435.300000190735,
+          "requestStart": 17435.60000014305,
+          "responseStart": 17677.700000047684,
+          "responseEnd": 17678,
+          "duration": 242.69999980926514,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 241.5737919999956,
+        "requestStart": 36625.995791,
+        "requestEnd": 36867.569583,
+        "contextMs": 212.34887499999604,
+        "contextStart": 36627.953,
+        "contextEnd": 36840.301875,
+        "requestSyncMs": {
+          "workspace.index": 15.809290999997756,
+          "detail.projection": 10.427041999995708,
+          "detail.serialize": 0.23387499999807915
+        },
+        "contextSyncMs": {
+          "memo.lookup": 24.090077999593632,
+          "memo.clone": 4.625241000037931,
+          "memo.total": 32.025746999745024,
+          "provenance": 20.227851999763516
+        },
+        "contextAsyncMs": {
+          "config": 0.23212499999499414,
+          "git": 10.91220799999428
+        },
+        "contextCpuMs": {
+          "user": 185.614,
+          "system": 494.758
+        },
+        "contextELU": {
+          "idle": 0.8330020000030345,
+          "active": 211.5111230324219,
+          "utilization": 0.9960771130358523
+        },
+        "gcOverlapMs": 7.507457971572876,
+        "memoryStart": {
+          "rss": 462553088,
+          "heapTotal": 700841984,
+          "heapUsed": 585798464,
+          "external": 86123641,
+          "arrayBuffers": 26280066
+        },
+        "memoryEnd": {
+          "rss": 475987968,
+          "heapTotal": 712065024,
+          "heapUsed": 619563544,
+          "external": 89633261,
+          "arrayBuffers": 29789686
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1120923.305479998,
+          "queueMaxMs": 183.38837500000227,
+          "callbackSumMs": 12787.706217000072,
+          "callbackMaxMs": 11.790999999997439
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 5,
+      "warmup": false,
+      "requestId": 185,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 256.7000000476837,
+        "acceptedDOMMs": 238.5,
+        "afterAccepted2RAFMs": 18.200000047683716,
+        "httpMs": 229.70000004768372,
+        "requestToResponseStartMs": 229.09999990463257,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.3000001907348633,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 17802,
+          "fetchStart": 17802,
+          "requestStart": 17802.300000190735,
+          "responseStart": 18031.400000095367,
+          "responseEnd": 18031.700000047684,
+          "duration": 229.70000004768372,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 228.86641700000473,
+        "requestStart": 36992.467708,
+        "requestEnd": 37221.334125,
+        "contextMs": 206.21312500000204,
+        "contextStart": 36994.254708,
+        "contextEnd": 37200.467833,
+        "requestSyncMs": {
+          "workspace.index": 15.026624999998603,
+          "detail.projection": 5.014416999998502,
+          "detail.serialize": 0.24250000000029104
+        },
+        "contextSyncMs": {
+          "memo.lookup": 23.984665000047244,
+          "memo.clone": 4.3534570003757835,
+          "memo.total": 31.444173000229057,
+          "provenance": 19.142027999900165
+        },
+        "contextAsyncMs": {
+          "config": 0.2140830000062124,
+          "git": 11.045708999998169
+        },
+        "contextCpuMs": {
+          "user": 179.759,
+          "system": 477.176
+        },
+        "contextELU": {
+          "idle": 2.401664000000892,
+          "active": 203.7673361487723,
+          "utilization": 0.9883509936107376
+        },
+        "gcOverlapMs": 9.177958011627197,
+        "memoryStart": {
+          "rss": 468353024,
+          "heapTotal": 718782464,
+          "heapUsed": 590831824,
+          "external": 89633461,
+          "arrayBuffers": 29789886
+        },
+        "memoryEnd": {
+          "rss": 463601664,
+          "heapTotal": 733085696,
+          "heapUsed": 625528856,
+          "external": 93202959,
+          "arrayBuffers": 33359384
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 994059.1142560028,
+          "queueMaxMs": 173.9789579999997,
+          "callbackSumMs": 12386.469410999984,
+          "callbackMaxMs": 15.545290999994904
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 6,
+      "warmup": false,
+      "requestId": 188,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 447.7000000476837,
+        "acceptedDOMMs": 427.5,
+        "afterAccepted2RAFMs": 20.200000047683716,
+        "httpMs": 417.2000000476837,
+        "requestToResponseStartMs": 416.5,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.40000009536743164,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 18187.5,
+          "fetchStart": 18187.5,
+          "requestStart": 18187.900000095367,
+          "responseStart": 18604.400000095367,
+          "responseEnd": 18604.700000047684,
+          "duration": 417.2000000476837,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 415.89570800000365,
+        "requestStart": 37378.347875,
+        "requestEnd": 37794.243583,
+        "contextMs": 356.19583299999795,
+        "contextStart": 37380.621708,
+        "contextEnd": 37736.817541,
+        "requestSyncMs": {
+          "workspace.index": 46.85562500000378,
+          "detail.projection": 7.9597910000011325,
+          "detail.serialize": 0.26437499999883585
+        },
+        "contextSyncMs": {
+          "memo.lookup": 24.652784999743744,
+          "memo.clone": 4.7298020004163845,
+          "memo.total": 32.930672999922535,
+          "provenance": 21.578581999841845
+        },
+        "contextAsyncMs": {
+          "config": 0.46950000000651926,
+          "git": 18.938791000000492
+        },
+        "contextCpuMs": {
+          "user": 286.549,
+          "system": 675.359
+        },
+        "contextELU": {
+          "idle": 2.2134140000016487,
+          "active": 353.99437804368426,
+          "utilization": 0.9937861718652966
+        },
+        "gcOverlapMs": 72.00983309745789,
+        "memoryStart": {
+          "rss": 376766464,
+          "heapTotal": 735543296,
+          "heapUsed": 640158648,
+          "external": 93263037,
+          "arrayBuffers": 33419462
+        },
+        "memoryEnd": {
+          "rss": 607895552,
+          "heapTotal": 752648192,
+          "heapUsed": 626107792,
+          "external": 96802596,
+          "arrayBuffers": 36959021
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1310598.3390239999,
+          "queueMaxMs": 308.2045829999988,
+          "callbackSumMs": 21282.24447599904,
+          "callbackMaxMs": 107.70833299999504
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 7,
+      "warmup": false,
+      "requestId": 191,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 225.0,
+        "acceptedDOMMs": 214.59999990463257,
+        "afterAccepted2RAFMs": 10.400000095367432,
+        "httpMs": 206.19999980926514,
+        "requestToResponseStartMs": 205.70000004768372,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.19999980926513672,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 18752.300000190735,
+          "fetchStart": 18752.300000190735,
+          "requestStart": 18752.5,
+          "responseStart": 18958.200000047684,
+          "responseEnd": 18958.5,
+          "duration": 206.19999980926514,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 205.29762499999924,
+        "requestStart": 37942.763125,
+        "requestEnd": 38148.06075,
+        "contextMs": 180.73741600000358,
+        "contextStart": 37944.51725,
+        "contextEnd": 38125.254666,
+        "requestSyncMs": {
+          "workspace.index": 15.729917000004207,
+          "detail.projection": 6.40770799999882,
+          "detail.serialize": 0.17575000000215368
+        },
+        "contextSyncMs": {
+          "memo.lookup": 22.12461000057374,
+          "memo.clone": 4.076287000250886,
+          "memo.total": 29.40492300027836,
+          "provenance": 22.999585999605188
+        },
+        "contextAsyncMs": {
+          "config": 0.24245800000062445,
+          "git": 12.034333999996306
+        },
+        "contextCpuMs": {
+          "user": 174.879,
+          "system": 452.317
+        },
+        "contextELU": {
+          "idle": 0.4724160000005213,
+          "active": 180.25954191244455,
+          "utilization": 0.9973860959320244
+        },
+        "gcOverlapMs": 4.127874851226807,
+        "memoryStart": {
+          "rss": 749666304,
+          "heapTotal": 669384704,
+          "heapUsed": 371233864,
+          "external": 63650167,
+          "arrayBuffers": 3816628
+        },
+        "memoryEnd": {
+          "rss": 749568000,
+          "heapTotal": 670318592,
+          "heapUsed": 396554664,
+          "external": 67219665,
+          "arrayBuffers": 7386126
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 925031.0227919961,
+          "queueMaxMs": 149.97654200000397,
+          "callbackSumMs": 10363.042659999453,
+          "callbackMaxMs": 14.293917000002693
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 8,
+      "warmup": false,
+      "requestId": 194,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 212.10000014305115,
+        "acceptedDOMMs": 201.30000019073486,
+        "afterAccepted2RAFMs": 10.799999952316284,
+        "httpMs": 193.19999980926514,
+        "requestToResponseStartMs": 192.70000004768372,
+        "responseBodyMs": 0.19999980926513672,
+        "fetchToRequestMs": 0.2999999523162842,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 19076.300000190735,
+          "fetchStart": 19076.300000190735,
+          "requestStart": 19076.60000014305,
+          "responseStart": 19269.300000190735,
+          "responseEnd": 19269.5,
+          "duration": 193.19999980926514,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 192.39029200000368,
+        "requestStart": 38266.800416,
+        "requestEnd": 38459.190708,
+        "contextMs": 166.4215419999964,
+        "contextStart": 38268.501291,
+        "contextEnd": 38434.922833,
+        "requestSyncMs": {
+          "workspace.index": 17.728957999999693,
+          "detail.projection": 5.948624999997264,
+          "detail.serialize": 0.15675000000192085
+        },
+        "contextSyncMs": {
+          "memo.lookup": 20.091541999645415,
+          "memo.clone": 3.856213000319258,
+          "memo.total": 26.933180000371067,
+          "provenance": 16.959947000003012
+        },
+        "contextAsyncMs": {
+          "config": 0.2995840000003227,
+          "git": 13.22991699999693
+        },
+        "contextCpuMs": {
+          "user": 175.429,
+          "system": 419.479
+        },
+        "contextELU": {
+          "idle": 0.49741899999935413,
+          "active": 165.91545593705814,
+          "utilization": 0.9970109343992315
+        },
+        "gcOverlapMs": 8.880084037780762,
+        "memoryStart": {
+          "rss": 752697344,
+          "heapTotal": 672776192,
+          "heapUsed": 412591144,
+          "external": 67279743,
+          "arrayBuffers": 7446204
+        },
+        "memoryEnd": {
+          "rss": 760233984,
+          "heapTotal": 681754624,
+          "heapUsed": 440321152,
+          "external": 70789363,
+          "arrayBuffers": 10955824
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 927051.0475439976,
+          "queueMaxMs": 135.43325000000186,
+          "callbackSumMs": 9689.45706199974,
+          "callbackMaxMs": 22.371375000002445
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "task",
+      "n": 9,
+      "warmup": false,
+      "requestId": 197,
+      "url": "/workspace-detail?kind=task&id=TASK-00001",
+      "browser": {
+        "clickMs": 244.59999990463257,
+        "acceptedDOMMs": 231.90000009536743,
+        "afterAccepted2RAFMs": 12.699999809265137,
+        "httpMs": 223.5,
+        "requestToResponseStartMs": 222.89999985694885,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.3000001907348633,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=task&id=TASK-00001",
+          "startTime": 19385,
+          "fetchStart": 19385,
+          "requestStart": 19385.300000190735,
+          "responseStart": 19608.200000047684,
+          "responseEnd": 19608.5,
+          "duration": 223.5,
+          "transferSize": 30239,
+          "encodedBodySize": 29939,
+          "decodedBodySize": 29939,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 222.66895899999508,
+        "requestStart": 38575.499166,
+        "requestEnd": 38798.168125,
+        "contextMs": 195.51183300000412,
+        "contextStart": 38577.54775,
+        "contextEnd": 38773.059583,
+        "requestSyncMs": {
+          "workspace.index": 18.723791999997047,
+          "detail.projection": 5.525834000000032,
+          "detail.serialize": 0.22741700000187848
+        },
+        "contextSyncMs": {
+          "memo.lookup": 22.52121499961504,
+          "memo.clone": 4.23425400078122,
+          "memo.total": 29.92902499990305,
+          "provenance": 19.115660000221396
+        },
+        "contextAsyncMs": {
+          "config": 0.17954199999803677,
+          "git": 11.532916999996814
+        },
+        "contextCpuMs": {
+          "user": 181.221,
+          "system": 484.886
+        },
+        "contextELU": {
+          "idle": 2.3739190000014787,
+          "active": 193.14291382852025,
+          "utilization": 0.9878582372389209
+        },
+        "gcOverlapMs": 6.661624908447266,
+        "memoryStart": {
+          "rss": 763461632,
+          "heapTotal": 682967040,
+          "heapUsed": 406726920,
+          "external": 70789563,
+          "arrayBuffers": 10956024
+        },
+        "memoryEnd": {
+          "rss": 760807424,
+          "heapTotal": 684163072,
+          "heapUsed": 442705208,
+          "external": 74359061,
+          "arrayBuffers": 14525522
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 953114.9758900051,
+          "queueMaxMs": 160.91779099999985,
+          "callbackSumMs": 11677.731262999987,
+          "callbackMaxMs": 18.722417000004498
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": -3,
+      "warmup": true,
+      "requestId": 202,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 350.2000000476837,
+        "acceptedDOMMs": 335.10000014305115,
+        "afterAccepted2RAFMs": 15.099999904632568,
+        "httpMs": 321.89999985694885,
+        "requestToResponseStartMs": 321.09999990463257,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.5,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 20042.800000190735,
+          "fetchStart": 20042.800000190735,
+          "requestStart": 20043.300000190735,
+          "responseStart": 20364.400000095367,
+          "responseEnd": 20364.700000047684,
+          "duration": 321.89999985694885,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 320.6027909999975,
+        "requestStart": 39233.6675,
+        "requestEnd": 39554.270291,
+        "contextMs": 290.7962090000001,
+        "contextStart": 39236.780541,
+        "contextEnd": 39527.57675,
+        "requestSyncMs": {
+          "workspace.index": 12.212416000002122,
+          "detail.projection": 13.729957999996259,
+          "detail.serialize": 0.26045800000429153
+        },
+        "contextSyncMs": {
+          "memo.lookup": 24.96564499988017,
+          "memo.clone": 4.644093000672001,
+          "memo.total": 33.04137600033573,
+          "provenance": 20.32050499986508
+        },
+        "contextAsyncMs": {
+          "config": 28.310457999999926,
+          "git": 28.29287500000646
+        },
+        "contextCpuMs": {
+          "user": 250.664,
+          "system": 690.075
+        },
+        "contextELU": {
+          "idle": 21.361000000000786,
+          "active": 269.41829210662763,
+          "utilization": 0.9265387853266809
+        },
+        "gcOverlapMs": 9.952250003814697,
+        "memoryStart": {
+          "rss": 762839040,
+          "heapTotal": 689029120,
+          "heapUsed": 460325032,
+          "external": 78026225,
+          "arrayBuffers": 18192686
+        },
+        "memoryEnd": {
+          "rss": 747978752,
+          "heapTotal": 687521792,
+          "heapUsed": 475376000,
+          "external": 81498457,
+          "arrayBuffers": 21664918
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1280921.3777220068,
+          "queueMaxMs": 215.2615420000002,
+          "callbackSumMs": 14535.91391099996,
+          "callbackMaxMs": 11.83654199999728
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": -2,
+      "warmup": true,
+      "requestId": 209,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 263.40000009536743,
+        "acceptedDOMMs": 248.40000009536743,
+        "afterAccepted2RAFMs": 15.0,
+        "httpMs": 236.20000004768372,
+        "requestToResponseStartMs": 235.19999980926514,
+        "responseBodyMs": 0.3000001907348633,
+        "fetchToRequestMs": 0.7000000476837158,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 20802.60000014305,
+          "fetchStart": 20802.60000014305,
+          "requestStart": 20803.300000190735,
+          "responseStart": 21038.5,
+          "responseEnd": 21038.800000190735,
+          "duration": 236.20000004768372,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 234.28125,
+        "requestStart": 39994.066625,
+        "requestEnd": 40228.347875,
+        "contextMs": 206.7125839999935,
+        "contextStart": 39998.926291,
+        "contextEnd": 40205.638875,
+        "requestSyncMs": {
+          "workspace.index": 14.045541999999841,
+          "detail.projection": 7.840666999996756,
+          "detail.serialize": 0.23091700000077253
+        },
+        "contextSyncMs": {
+          "memo.lookup": 22.476453999865043,
+          "memo.clone": 4.301630999507324,
+          "memo.total": 30.286214999949152,
+          "provenance": 19.069123000037507
+        },
+        "contextAsyncMs": {
+          "config": 0.7079579999990528,
+          "git": 17.259500000000116
+        },
+        "contextCpuMs": {
+          "user": 184.826,
+          "system": 486.308
+        },
+        "contextELU": {
+          "idle": 1.3357879999966826,
+          "active": 205.35983706676052,
+          "utilization": 0.993537415223156
+        },
+        "gcOverlapMs": 8.665708065032959,
+        "memoryStart": {
+          "rss": 614301696,
+          "heapTotal": 692387840,
+          "heapUsed": 499721880,
+          "external": 85128233,
+          "arrayBuffers": 25294694
+        },
+        "memoryEnd": {
+          "rss": 446939136,
+          "heapTotal": 690880512,
+          "heapUsed": 533123216,
+          "external": 88637853,
+          "arrayBuffers": 28804314
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1190135.825103001,
+          "queueMaxMs": 167.57429099999717,
+          "callbackSumMs": 11848.048767000517,
+          "callbackMaxMs": 14.538915999997698
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": -1,
+      "warmup": true,
+      "requestId": 214,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 277.0,
+        "acceptedDOMMs": 262.80000019073486,
+        "afterAccepted2RAFMs": 14.199999809265137,
+        "httpMs": 252.89999985694885,
+        "requestToResponseStartMs": 252.39999985694885,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.2999999523162842,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 21491.800000190735,
+          "fetchStart": 21491.800000190735,
+          "requestStart": 21492.10000014305,
+          "responseStart": 21744.5,
+          "responseEnd": 21744.700000047684,
+          "duration": 252.89999985694885,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 252.0694169999988,
+        "requestStart": 40682.315583,
+        "requestEnd": 40934.385,
+        "contextMs": 229.51162499999919,
+        "contextStart": 40683.942125,
+        "contextEnd": 40913.45375,
+        "requestSyncMs": {
+          "workspace.index": 13.21375000000262,
+          "detail.projection": 7.038249999997788,
+          "detail.serialize": 0.24337499999819556
+        },
+        "contextSyncMs": {
+          "memo.lookup": 24.89383399975486,
+          "memo.clone": 4.7085129997867625,
+          "memo.total": 32.98613500013744,
+          "provenance": 20.733390000285
+        },
+        "contextAsyncMs": {
+          "config": 0.28804200000013225,
+          "git": 15.212375000002794
+        },
+        "contextCpuMs": {
+          "user": 209.108,
+          "system": 490.784
+        },
+        "contextELU": {
+          "idle": 0.5276269999994838,
+          "active": 228.9648320587621,
+          "utilization": 0.9977008961333044
+        },
+        "gcOverlapMs": 18.793792009353638,
+        "memoryStart": {
+          "rss": 390070272,
+          "heapTotal": 696270848,
+          "heapUsed": 553686928,
+          "external": 92267629,
+          "arrayBuffers": 32434090
+        },
+        "memoryEnd": {
+          "rss": 407863296,
+          "heapTotal": 701202432,
+          "heapUsed": 539960136,
+          "external": 95777249,
+          "arrayBuffers": 35943710
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1360302.2314530034,
+          "queueMaxMs": 192.0769999999975,
+          "callbackSumMs": 13527.40297900037,
+          "callbackMaxMs": 27.932207999998354
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 0,
+      "warmup": false,
+      "requestId": 219,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 325.7999999523163,
+        "acceptedDOMMs": 312.2999999523163,
+        "afterAccepted2RAFMs": 13.5,
+        "httpMs": 301.69999980926514,
+        "requestToResponseStartMs": 300.60000014305115,
+        "responseBodyMs": 0.39999985694885254,
+        "fetchToRequestMs": 0.6999998092651367,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 22291.300000190735,
+          "fetchStart": 22291.300000190735,
+          "requestStart": 22292,
+          "responseStart": 22592.60000014305,
+          "responseEnd": 22593,
+          "duration": 301.69999980926514,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 300.1445420000018,
+        "requestStart": 41482.319458,
+        "requestEnd": 41782.464,
+        "contextMs": 278.32566699999734,
+        "contextStart": 41483.902083,
+        "contextEnd": 41762.22775,
+        "requestSyncMs": {
+          "workspace.index": 13.30108399999881,
+          "detail.projection": 6.120000000002619,
+          "detail.serialize": 0.2565420000028098
+        },
+        "contextSyncMs": {
+          "memo.lookup": 28.617204000220227,
+          "memo.clone": 5.024758999694313,
+          "memo.total": 37.566671999498794,
+          "provenance": 23.218910999814398
+        },
+        "contextAsyncMs": {
+          "config": 0.2616669999988517,
+          "git": 13.573916999994253
+        },
+        "contextCpuMs": {
+          "user": 194.455,
+          "system": 711.356
+        },
+        "contextELU": {
+          "idle": 11.232190999999148,
+          "active": 267.09330901144494,
+          "utilization": 0.9596436869796792
+        },
+        "gcOverlapMs": 14.816667079925537,
+        "memoryStart": {
+          "rss": 423526400,
+          "heapTotal": 703365120,
+          "heapUsed": 558367872,
+          "external": 99347147,
+          "arrayBuffers": 39513608
+        },
+        "memoryEnd": {
+          "rss": 434372608,
+          "heapTotal": 704561152,
+          "heapUsed": 593852072,
+          "external": 102916645,
+          "arrayBuffers": 43083106
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1592583.1545680012,
+          "queueMaxMs": 240.77904200000194,
+          "callbackSumMs": 16777.457733999734,
+          "callbackMaxMs": 17.83933299999626
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 1,
+      "warmup": false,
+      "requestId": 224,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 297.2999999523163,
+        "acceptedDOMMs": 276.19999980926514,
+        "afterAccepted2RAFMs": 21.100000143051147,
+        "httpMs": 263.5,
+        "requestToResponseStartMs": 262.40000009536743,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.7999999523162842,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 23401.10000014305,
+          "fetchStart": 23401.10000014305,
+          "requestStart": 23401.900000095367,
+          "responseStart": 23664.300000190735,
+          "responseEnd": 23664.60000014305,
+          "duration": 263.5,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 260.9917499999938,
+        "requestStart": 42593.183125,
+        "requestEnd": 42854.174875,
+        "contextMs": 217.32795800000167,
+        "contextStart": 42609.031833,
+        "contextEnd": 42826.359791,
+        "requestSyncMs": {
+          "workspace.index": 17.73687500000233,
+          "detail.projection": 9.302290999999968,
+          "detail.serialize": 0.21854199999506818
+        },
+        "contextSyncMs": {
+          "memo.lookup": 23.84403200030647,
+          "memo.clone": 4.718155999340524,
+          "memo.total": 31.956782999528514,
+          "provenance": 19.86854100009805
+        },
+        "contextAsyncMs": {
+          "config": 2.2403750000012224,
+          "git": 16.201124999999593
+        },
+        "contextCpuMs": {
+          "user": 182.715,
+          "system": 505.647
+        },
+        "contextELU": {
+          "idle": 1.8278339999997115,
+          "active": 215.43566621362334,
+          "utilization": 0.9915870176159248
+        },
+        "gcOverlapMs": 10.986457824707031,
+        "memoryStart": {
+          "rss": 299778048,
+          "heapTotal": 724484096,
+          "heapUsed": 608875736,
+          "external": 106546421,
+          "arrayBuffers": 46712882
+        },
+        "memoryEnd": {
+          "rss": 333856768,
+          "heapTotal": 735707136,
+          "heapUsed": 642952032,
+          "external": 110056041,
+          "arrayBuffers": 50222502
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1164961.7591319978,
+          "queueMaxMs": 171.06516700000066,
+          "callbackSumMs": 12615.959913000319,
+          "callbackMaxMs": 21.52995799999917
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 2,
+      "warmup": false,
+      "requestId": 229,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 225.19999980926514,
+        "acceptedDOMMs": 208.0,
+        "afterAccepted2RAFMs": 17.199999809265137,
+        "httpMs": 198.5,
+        "requestToResponseStartMs": 197.79999995231628,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.5,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 24241.10000014305,
+          "fetchStart": 24241.10000014305,
+          "requestStart": 24241.60000014305,
+          "responseStart": 24439.400000095367,
+          "responseEnd": 24439.60000014305,
+          "duration": 198.5,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 197.54324999999517,
+        "requestStart": 43431.745583,
+        "requestEnd": 43629.288833,
+        "contextMs": 179.10995900000125,
+        "contextStart": 43433.365541,
+        "contextEnd": 43612.4755,
+        "requestSyncMs": {
+          "workspace.index": 11.65520899999683,
+          "detail.projection": 4.401624999998603,
+          "detail.serialize": 0.18220799999835435
+        },
+        "contextSyncMs": {
+          "memo.lookup": 19.385433000039484,
+          "memo.clone": 3.861032000029809,
+          "memo.total": 26.188665000394394,
+          "provenance": 17.424490999888803
+        },
+        "contextAsyncMs": {
+          "config": 0.28341699999873526,
+          "git": 13.27979200000118
+        },
+        "contextCpuMs": {
+          "user": 186.293,
+          "system": 433.169
+        },
+        "contextELU": {
+          "idle": 2.47800400000051,
+          "active": 176.66712091226145,
+          "utilization": 0.986167616890417
+        },
+        "gcOverlapMs": 16.774083137512207,
+        "memoryStart": {
+          "rss": 394641408,
+          "heapTotal": 768901120,
+          "heapUsed": 669873240,
+          "external": 113685817,
+          "arrayBuffers": 53852278
+        },
+        "memoryEnd": {
+          "rss": 421462016,
+          "heapTotal": 786006016,
+          "heapUsed": 656099920,
+          "external": 117195437,
+          "arrayBuffers": 57361898
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 907187.1519260006,
+          "queueMaxMs": 148.02187499999854,
+          "callbackSumMs": 10455.364690999471,
+          "callbackMaxMs": 19.064832999996725
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 3,
+      "warmup": false,
+      "requestId": 234,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 229.0,
+        "acceptedDOMMs": 212.89999985694885,
+        "afterAccepted2RAFMs": 16.100000143051147,
+        "httpMs": 203.40000009536743,
+        "requestToResponseStartMs": 202.70000004768372,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.40000009536743164,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 24833,
+          "fetchStart": 24833,
+          "requestStart": 24833.400000095367,
+          "responseStart": 25036.10000014305,
+          "responseEnd": 25036.400000095367,
+          "duration": 203.40000009536743,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 202.13683300000412,
+        "requestStart": 44023.933708,
+        "requestEnd": 44226.070541,
+        "contextMs": 180.81683400000475,
+        "contextStart": 44025.794291,
+        "contextEnd": 44206.611125,
+        "requestSyncMs": {
+          "workspace.index": 12.30841700000019,
+          "detail.projection": 6.487542000002577,
+          "detail.serialize": 0.1910420000058366
+        },
+        "contextSyncMs": {
+          "memo.lookup": 21.510687000300095,
+          "memo.clone": 4.688198999909218,
+          "memo.total": 29.50014499999088,
+          "provenance": 18.504011999772047
+        },
+        "contextAsyncMs": {
+          "config": 0.3218330000017886,
+          "git": 13.961750000002212
+        },
+        "contextCpuMs": {
+          "user": 171.31,
+          "system": 444.702
+        },
+        "contextELU": {
+          "idle": 0.620625999999902,
+          "active": 180.1904160703889,
+          "utilization": 0.9965675437025672
+        },
+        "gcOverlapMs": 8.369833946228027,
+        "memoryStart": {
+          "rss": 442892288,
+          "heapTotal": 805617664,
+          "heapUsed": 675349944,
+          "external": 120765335,
+          "arrayBuffers": 60931796
+        },
+        "memoryEnd": {
+          "rss": 458391552,
+          "heapTotal": 821084160,
+          "heapUsed": 710491000,
+          "external": 124334833,
+          "arrayBuffers": 64501294
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1011012.2111259998,
+          "queueMaxMs": 150.27504200000112,
+          "callbackSumMs": 10502.530522999827,
+          "callbackMaxMs": 10.622875000000931
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 4,
+      "warmup": false,
+      "requestId": 239,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 719.9000000953674,
+        "acceptedDOMMs": 703.5,
+        "afterAccepted2RAFMs": 16.40000009536743,
+        "httpMs": 676.2000000476837,
+        "requestToResponseStartMs": 667.7000000476837,
+        "responseBodyMs": 8.099999904632568,
+        "fetchToRequestMs": 0.40000009536743164,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 25674.200000047684,
+          "fetchStart": 25674.200000047684,
+          "requestStart": 25674.60000014305,
+          "responseStart": 26342.300000190735,
+          "responseEnd": 26350.400000095367,
+          "duration": 676.2000000476837,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 663.2250419999982,
+        "requestStart": 44864.869958,
+        "requestEnd": 45528.095,
+        "contextMs": 612.0859589999964,
+        "contextStart": 44866.477541,
+        "contextEnd": 45478.5635,
+        "requestSyncMs": {
+          "workspace.index": 26.387749999994412,
+          "detail.projection": 11.972958000005747,
+          "detail.serialize": 0.3776670000006561
+        },
+        "contextSyncMs": {
+          "memo.lookup": 30.776664999721106,
+          "memo.clone": 6.039742000713886,
+          "memo.total": 41.67279500018776,
+          "provenance": 44.52590700022847
+        },
+        "contextAsyncMs": {
+          "config": 0.2172080000018468,
+          "git": 13.087916999997105
+        },
+        "contextCpuMs": {
+          "user": 568.625,
+          "system": 869.169
+        },
+        "contextELU": {
+          "idle": 2.227541000000201,
+          "active": 609.8735840019071,
+          "utilization": 0.9963608284497218
+        },
+        "gcOverlapMs": 231.50416707992554,
+        "memoryStart": {
+          "rss": 376225792,
+          "heapTotal": 843513856,
+          "heapUsed": 726901424,
+          "external": 127964609,
+          "arrayBuffers": 68131070
+        },
+        "memoryEnd": {
+          "rss": 774651904,
+          "heapTotal": 682295296,
+          "heapUsed": 372202824,
+          "external": 131474229,
+          "arrayBuffers": 20110492
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 2141448.5702250064,
+          "queueMaxMs": 580.1590830000059,
+          "callbackSumMs": 38112.199570000164,
+          "callbackMaxMs": 208.83000000000175
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 5,
+      "warmup": false,
+      "requestId": 244,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 247.10000014305115,
+        "acceptedDOMMs": 226.0,
+        "afterAccepted2RAFMs": 21.100000143051147,
+        "httpMs": 216.29999995231628,
+        "requestToResponseStartMs": 215.5,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.5999999046325684,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 26795.300000190735,
+          "fetchStart": 26795.300000190735,
+          "requestStart": 26795.900000095367,
+          "responseStart": 27011.400000095367,
+          "responseEnd": 27011.60000014305,
+          "duration": 216.29999995231628,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 215.28612499999872,
+        "requestStart": 45985.99725,
+        "requestEnd": 46201.283375,
+        "contextMs": 189.26966599999287,
+        "contextStart": 45987.321,
+        "contextEnd": 46176.590666,
+        "requestSyncMs": {
+          "workspace.index": 15.769958000004408,
+          "detail.projection": 8.22229199999856,
+          "detail.serialize": 0.2252500000031432
+        },
+        "contextSyncMs": {
+          "memo.lookup": 22.777269000231172,
+          "memo.clone": 4.3350630000350066,
+          "memo.total": 30.330749999935506,
+          "provenance": 18.674615000141785
+        },
+        "contextAsyncMs": {
+          "config": 0.2220420000012382,
+          "git": 16.251917000001413
+        },
+        "contextCpuMs": {
+          "user": 181.634,
+          "system": 450.435
+        },
+        "contextELU": {
+          "idle": 2.828745999999228,
+          "active": 186.44379504614335,
+          "utilization": 0.985054641395079
+        },
+        "gcOverlapMs": 7.25408411026001,
+        "memoryStart": {
+          "rss": 795656192,
+          "heapTotal": 684457984,
+          "heapUsed": 388243528,
+          "external": 67857937,
+          "arrayBuffers": 8024398
+        },
+        "memoryEnd": {
+          "rss": 795131904,
+          "heapTotal": 685391872,
+          "heapUsed": 422785832,
+          "external": 71427435,
+          "arrayBuffers": 11593896
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 872695.6294780027,
+          "queueMaxMs": 157.77279099999578,
+          "callbackSumMs": 10947.049193000312,
+          "callbackMaxMs": 8.418791000003694
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 6,
+      "warmup": false,
+      "requestId": 249,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 219.89999985694885,
+        "acceptedDOMMs": 206.79999995231628,
+        "afterAccepted2RAFMs": 13.099999904632568,
+        "httpMs": 196.90000009536743,
+        "requestToResponseStartMs": 196.29999995231628,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.40000009536743164,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 27466.200000047684,
+          "fetchStart": 27466.200000047684,
+          "requestStart": 27466.60000014305,
+          "responseStart": 27662.900000095367,
+          "responseEnd": 27663.10000014305,
+          "duration": 196.90000009536743,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 195.9330839999966,
+        "requestStart": 46656.819666,
+        "requestEnd": 46852.75275,
+        "contextMs": 164.02070800000365,
+        "contextStart": 46658.1835,
+        "contextEnd": 46822.204208,
+        "requestSyncMs": {
+          "workspace.index": 18.229207999997016,
+          "detail.projection": 11.685083999997005,
+          "detail.serialize": 0.19237499999871943
+        },
+        "contextSyncMs": {
+          "memo.lookup": 20.644956999705755,
+          "memo.clone": 3.7140370005727164,
+          "memo.total": 27.334803000332613,
+          "provenance": 16.743643999339838
+        },
+        "contextAsyncMs": {
+          "config": 0.27095900000131223,
+          "git": 12.038624999993772
+        },
+        "contextCpuMs": {
+          "user": 180.621,
+          "system": 433.727
+        },
+        "contextELU": {
+          "idle": 1.3513720000009926,
+          "active": 162.66896200535484,
+          "utilization": 0.991760948371457
+        },
+        "gcOverlapMs": 6.266083002090454,
+        "memoryStart": {
+          "rss": 792150016,
+          "heapTotal": 690372608,
+          "heapUsed": 438520168,
+          "external": 75057211,
+          "arrayBuffers": 15223672
+        },
+        "memoryEnd": {
+          "rss": 792182784,
+          "heapTotal": 689799168,
+          "heapUsed": 472721096,
+          "external": 78566831,
+          "arrayBuffers": 18733292
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 930426.2985339977,
+          "queueMaxMs": 136.3077090000006,
+          "callbackSumMs": 9568.722827000427,
+          "callbackMaxMs": 8.900332999997772
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 7,
+      "warmup": false,
+      "requestId": 254,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 316.60000014305115,
+        "acceptedDOMMs": 292.40000009536743,
+        "afterAccepted2RAFMs": 24.200000047683716,
+        "httpMs": 282.7999999523163,
+        "requestToResponseStartMs": 282.0,
+        "responseBodyMs": 0.2999999523162842,
+        "fetchToRequestMs": 0.5,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 28025.800000190735,
+          "fetchStart": 28025.800000190735,
+          "requestStart": 28026.300000190735,
+          "responseStart": 28308.300000190735,
+          "responseEnd": 28308.60000014305,
+          "duration": 282.7999999523163,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 281.0378339999952,
+        "requestStart": 47217.259166,
+        "requestEnd": 47498.297,
+        "contextMs": 255.48300000000017,
+        "contextStart": 47219.694708,
+        "contextEnd": 47475.177708,
+        "requestSyncMs": {
+          "workspace.index": 15.773584000002302,
+          "detail.projection": 6.428083999999217,
+          "detail.serialize": 0.2442499999961001
+        },
+        "contextSyncMs": {
+          "memo.lookup": 24.911662000267825,
+          "memo.clone": 4.593246999960684,
+          "memo.total": 32.887626000003365,
+          "provenance": 20.202720000328554
+        },
+        "contextAsyncMs": {
+          "config": 1.9972909999996773,
+          "git": 22.253208000001905
+        },
+        "contextCpuMs": {
+          "user": 216.754,
+          "system": 513.711
+        },
+        "contextELU": {
+          "idle": 2.185210999999981,
+          "active": 253.28599709555056,
+          "utilization": 0.9914463511708815
+        },
+        "gcOverlapMs": 15.718708992004395,
+        "memoryStart": {
+          "rss": 803684352,
+          "heapTotal": 693469184,
+          "heapUsed": 491476000,
+          "external": 82196607,
+          "arrayBuffers": 22363068
+        },
+        "memoryEnd": {
+          "rss": 745209856,
+          "heapTotal": 692895744,
+          "heapUsed": 478446912,
+          "external": 85706227,
+          "arrayBuffers": 25872688
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 1291272.0041640038,
+          "queueMaxMs": 196.64720900000248,
+          "callbackSumMs": 14576.796580999515,
+          "callbackMaxMs": 33.915540999994846
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 8,
+      "warmup": false,
+      "requestId": 259,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 228.5,
+        "acceptedDOMMs": 215.40000009536743,
+        "afterAccepted2RAFMs": 13.099999904632568,
+        "httpMs": 206.70000004768372,
+        "requestToResponseStartMs": 206.0,
+        "responseBodyMs": 0.20000004768371582,
+        "fetchToRequestMs": 0.5,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 28765.400000095367,
+          "fetchStart": 28765.400000095367,
+          "requestStart": 28765.900000095367,
+          "responseStart": 28971.900000095367,
+          "responseEnd": 28972.10000014305,
+          "duration": 206.70000004768372,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 205.72195799999463,
+        "requestStart": 47956.0725,
+        "requestEnd": 48161.794458,
+        "contextMs": 185.09666700000525,
+        "contextStart": 47957.564791,
+        "contextEnd": 48142.661458,
+        "requestSyncMs": {
+          "workspace.index": 13.139041999995243,
+          "detail.projection": 5.298249999999825,
+          "detail.serialize": 0.2224999999962165
+        },
+        "contextSyncMs": {
+          "memo.lookup": 20.767629999674682,
+          "memo.clone": 4.179911000275752,
+          "memo.total": 27.979211999991094,
+          "provenance": 17.768646000178705
+        },
+        "contextAsyncMs": {
+          "config": 0.24633299999550218,
+          "git": 12.392791999998735
+        },
+        "contextCpuMs": {
+          "user": 176.52,
+          "system": 455.676
+        },
+        "contextELU": {
+          "idle": 2.9530389999999898,
+          "active": 182.14191906694032,
+          "utilization": 0.9840458160997988
+        },
+        "gcOverlapMs": 8.668291091918945,
+        "memoryStart": {
+          "rss": 529661952,
+          "heapTotal": 695730176,
+          "heapUsed": 497664624,
+          "external": 89276125,
+          "arrayBuffers": 29442586
+        },
+        "memoryEnd": {
+          "rss": 515801088,
+          "heapTotal": 695730176,
+          "heapUsed": 532691640,
+          "external": 92845623,
+          "arrayBuffers": 33012084
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 985200.0622980007,
+          "queueMaxMs": 152.8359580000033,
+          "callbackSumMs": 10914.54968100063,
+          "callbackMaxMs": 12.642041999999492
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    },
+    {
+      "kind": "spec",
+      "n": 9,
+      "warmup": false,
+      "requestId": 264,
+      "url": "/workspace-detail?kind=spec&id=SPEC-00001",
+      "browser": {
+        "clickMs": 855.7999999523163,
+        "acceptedDOMMs": 827.7999999523163,
+        "afterAccepted2RAFMs": 28.0,
+        "httpMs": 807.2000000476837,
+        "requestToResponseStartMs": 806.1999998092651,
+        "responseBodyMs": 0.40000009536743164,
+        "fetchToRequestMs": 0.6000001430511475,
+        "resource": {
+          "name": "http://127.0.0.1:5311/workspace-detail?kind=spec&id=SPEC-00001",
+          "startTime": 29402.700000047684,
+          "fetchStart": 29402.700000047684,
+          "requestStart": 29403.300000190735,
+          "responseStart": 30209.5,
+          "responseEnd": 30209.900000095367,
+          "duration": 807.2000000476837,
+          "transferSize": 37179,
+          "encodedBodySize": 36879,
+          "decodedBodySize": 36879,
+          "initiatorType": "fetch",
+          "nextHopProtocol": "http/1.1"
+        }
+      },
+      "server": {
+        "requestMs": 805.0289589999957,
+        "requestStart": 48594.417541,
+        "requestEnd": 49399.4465,
+        "contextMs": 744.7432499999995,
+        "contextStart": 48604.082791,
+        "contextEnd": 49348.826041,
+        "requestSyncMs": {
+          "workspace.index": 31.80633300000045,
+          "detail.projection": 15.09112499999901,
+          "detail.serialize": 2.1886669999948936
+        },
+        "contextSyncMs": {
+          "memo.lookup": 80.00121399957425,
+          "memo.clone": 28.18986900022719,
+          "memo.total": 117.96576700044534,
+          "provenance": 55.59501199993974
+        },
+        "contextAsyncMs": {
+          "config": 2.09870800000499,
+          "git": 16.058499999999185
+        },
+        "contextCpuMs": {
+          "user": 232.261,
+          "system": 563.06
+        },
+        "contextELU": {
+          "idle": 94.98853899999813,
+          "active": 649.7655029101734,
+          "utilization": 0.8724564975084014
+        },
+        "gcOverlapMs": 17.722916841506958,
+        "memoryStart": {
+          "rss": 488390656,
+          "heapTotal": 700334080,
+          "heapUsed": 548912040,
+          "external": 96475399,
+          "arrayBuffers": 36641860
+        },
+        "memoryEnd": {
+          "rss": 336691200,
+          "heapTotal": 698826752,
+          "heapUsed": 581962072,
+          "external": 99985019,
+          "arrayBuffers": 40151480
+        },
+        "reads": {
+          "docs": 12202,
+          "bytes": 3569698,
+          "readCalls": 12202,
+          "readBytes": 3569698,
+          "readErrors": 0,
+          "readActive": 0,
+          "readPeak": 64,
+          "queueSumMs": 3898315.270561022,
+          "queueMaxMs": 696.5093329999945,
+          "callbackSumMs": 46264.973017000535,
+          "callbackMaxMs": 50.4664580000026
+        },
+        "memo": {
+          "1": {
+            "hits": 12202,
+            "misses": 0,
+            "missAbsent": 0,
+            "missChanged": 0,
+            "bypasses": 0,
+            "bypassReasons": {},
+            "evictions": 0,
+            "newParserIdentities": 0
+          }
+        },
+        "memoStart": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ],
+        "memoEnd": [
+          {
+            "id": 1,
+            "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+            "maxEntries": 16384,
+            "maxBytes": 33554432,
+            "entries": 12202,
+            "accountedBytes": 8135433,
+            "parserIdentities": 4
+          }
+        ]
+      }
+    }
+  ],
+  "global": {
+    "requests": 266,
+    "contexts": 40,
+    "details": 39,
+    "requestPeak": 6,
+    "contextPeak": 1,
+    "pendingHTTP": [],
+    "pendingContexts": [],
+    "faviconRequests": 66,
+    "faviconContextCalls": 0,
+    "allPaths": {
+      "/tasks": 1,
+      "/@fs/private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/web/.svelte-kit/generated/client/app.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/entry.js": 1,
+      "/.svelte-kit/generated/client/matchers.js": 1,
+      "/.svelte-kit/generated/root.js": 1,
+      "/.svelte-kit/generated/root.svelte": 1,
+      "/node_modules/.vite/deps/svelte_legacy.js": 1,
+      "/node_modules/.vite/deps/svelte_internal_disclose-version.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/environment/index.js": 1,
+      "/node_modules/.vite/deps/legacy-client-BJmexvrg.js": 1,
+      "/node_modules/.vite/deps/svelte_internal_client.js": 1,
+      "/node_modules/.vite/deps/esm-env.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/client.js": 1,
+      "/node_modules/.vite/deps/esm-env-DeD8RbG4.js": 1,
+      "/@id/__x00__virtual:__sveltekit/environment": 1,
+      "/node_modules/.vite/deps/svelte.js": 1,
+      "/node_modules/.vite/deps/runtime-Bh2GVxBu.js": 1,
+      "/node_modules/.vite/deps/warnings-m1cAHvyg.js": 1,
+      "/node_modules/.vite/deps/flags-DjJ7x8Uz.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/exports/internal/index.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/url.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/fetcher.js": 1,
+      "/node_modules/.vite/deps/events-CA4DO2BX.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/parse.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/session-storage.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/utils.js": 1,
+      "/node_modules/.vite/deps/devalue.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/constants.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/index.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/array.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/shared.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/error.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/exports.js": 1,
+      "/node_modules/.vite/deps/svelte_store.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/state.svelte.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/pathname.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/utils.js": 1,
+      "/node_modules/.vite/deps/index-client-BAduxr8F.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/telemetry/noop.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/hash.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/routing.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/exports/internal/remote-functions.js": 1,
+      "/node_modules/.vite/deps/svelte___clsx.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/client.js": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/internal/client.js": 1,
+      "/favicon.ico": 66,
+      "/@vite/client": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/vite/dist/client/env.mjs": 1,
+      "/.svelte-kit/generated/client/nodes/0.js": 1,
+      "/.svelte-kit/generated/client/nodes/7.js": 1,
+      "/.svelte-kit/generated/client/nodes/1.js": 1,
+      "/src/routes/+layout.ts": 1,
+      "/src/routes/+layout.svelte": 1,
+      "/src/routes/tasks/+page.svelte": 2,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte": 1,
+      "/src/app.css": 1,
+      "/src/lib/workspace/context.svelte.ts": 1,
+      "/src/lib/inspector/modules.ts": 1,
+      "/src/lib/inspector/list-relations.ts": 1,
+      "/src/lib/inspector/controller.svelte.ts": 1,
+      "/src/lib/workspace/location.svelte.ts": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/navigation.js": 1,
+      "/@fs/private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/services/workspace-query.ts": 1,
+      "/src/lib/workspace/resource.svelte.ts": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/index.js": 1,
+      "/@fs/private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/domain.ts": 1,
+      "/src/lib/inspector/InspectorWorkspace.svelte": 2,
+      "/src/lib/components/Popover.svelte": 2,
+      "/src/lib/components/AnalysisFilters.svelte": 2,
+      "/src/lib/components/SelectDropdown.svelte": 2,
+      "/src/lib/components/MultiSelectDropdown.svelte": 2,
+      "/src/lib/components/workspace/WorkspaceShell.svelte": 2,
+      "/src/lib/components/ListPager.svelte": 2,
+      "/src/lib/components/TaskBoard.svelte": 2,
+      "/src/lib/components/data-table/DataTable.svelte": 2,
+      "/src/lib/components/data-table/ColumnsPanel.svelte": 2,
+      "/src/lib/components/data-table/SortPanel.svelte": 2,
+      "/src/lib/components/data-table/task-columns.ts": 1,
+      "/src/lib/components/data-table/preferences.ts": 1,
+      "/src/lib/components/data-table/model.ts": 1,
+      "/src/lib/components/data-table/clipboard.ts": 1,
+      "/src/lib/components/data-table/SelectionBar.svelte": 2,
+      "/node_modules/.vite/deps/svelte_internal_flags_legacy.js": 1,
+      "/src/lib/components/data-table/types.ts": 1,
+      "/@fs/private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/services/detail-relations.ts": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/server.js": 1,
+      "/src/lib/inspector/detail-resource.ts": 1,
+      "/src/lib/workspace/resource.ts": 1,
+      "/src/lib/inspector/history.ts": 1,
+      "/src/lib/inspector/relation-url.ts": 1,
+      "/src/lib/inspector/geometry.ts": 1,
+      "/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/client.js": 1,
+      "/src/lib/theme.ts": 1,
+      "/src/lib/components/IconButton.svelte": 2,
+      "/src/lib/components/ColorModeControl.svelte": 2,
+      "/src/lib/inspector/InspectorHost.svelte": 2,
+      "/src/lib/workspace-preferences.ts": 1,
+      "/src/lib/components/SpecOptionsPicker.svelte": 2,
+      "/src/lib/task-board.ts": 1,
+      "/src/lib/inspector/detail-validation.ts": 1,
+      "/node_modules/.vite/deps/@lucide_svelte.js": 1,
+      "/node_modules/.vite/deps/chunk-CXA2xvMn.js": 1,
+      "/src/lib/components/detail/TaskDetail.svelte": 2,
+      "/src/lib/components/DocumentBody.svelte": 2,
+      "/src/lib/components/detail/NotFound.svelte": 2,
+      "/src/lib/components/detail/RelationWindow.svelte": 2,
+      "/src/lib/components/MermaidBlock.svelte": 2,
+      "/src/lib/mermaid-theme.ts": 1,
+      "/workspace-detail": 39,
+      "/node_modules/.vite/deps/mermaid.js": 1,
+      "/node_modules/.vite/deps/chunk-5PVQY5BW-CXqaSY-o.js": 1,
+      "/node_modules/.vite/deps/chunk-426QAEUC-DfjTcj4B.js": 1,
+      "/node_modules/.vite/deps/chunk-ZZ45TVLE-DiIXd2Kz.js": 1,
+      "/node_modules/.vite/deps/chunk-XPW4576I-y9jE0ia4.js": 1,
+      "/node_modules/.vite/deps/chunk-ICPOFSXX-CqopzdkL.js": 1,
+      "/node_modules/.vite/deps/chunk-BSJP7CBP-BR41Wvwq.js": 1,
+      "/node_modules/.vite/deps/src-BChVpw6O.js": 1,
+      "/node_modules/.vite/deps/chunk-U2HBQHQK-BNJNPTuS.js": 1,
+      "/node_modules/.vite/deps/chunk-X2U36JSP-Cov6oix6.js": 1,
+      "/node_modules/.vite/deps/chunk-5FUZZQ4R-CNjBn-gj.js": 1,
+      "/node_modules/.vite/deps/chunk-ENJZ2VHE-C7XtBaXJ.js": 1,
+      "/node_modules/.vite/deps/chunk-336JU56O-GGGLIcXU.js": 1,
+      "/node_modules/.vite/deps/isEmpty-CtlakF6K.js": 1,
+      "/node_modules/.vite/deps/identity-DIZjXY1a.js": 1,
+      "/node_modules/.vite/deps/dist-D9nA65MN.js": 1,
+      "/node_modules/.vite/deps/line-CiR-qlpq.js": 1,
+      "/node_modules/.vite/deps/rough.esm-C6ScMAi4.js": 1,
+      "/node_modules/.vite/deps/path-CmONI5Oh.js": 1,
+      "/node_modules/.vite/deps/array-CCeX_eWS.js": 1,
+      "/node_modules/.vite/deps/flowDiagram-DWJPFMVM-B9GUJLMw.js": 1,
+      "/node_modules/.vite/deps/channel-Z7gkftgm.js": 1,
+      "/node_modules/.vite/deps/chunk-FMBD7UC4-B95y9gg8.js": 1,
+      "/node_modules/.vite/deps/chunk-YZCP3GAM-CLHBHqZO.js": 1,
+      "/node_modules/.vite/deps/chunk-55IACEB6-B-7AxE4_.js": 1,
+      "/node_modules/.vite/deps/chunk-EDXVE4YY-BekuSxKM.js": 1,
+      "/node_modules/.vite/deps/dagre-KV5264BT-Eu2v4kD9.js": 1,
+      "/node_modules/.vite/deps/reduce-CahD7AGF.js": 1,
+      "/node_modules/.vite/deps/graphlib-DkGeq4bg.js": 1,
+      "/node_modules/.vite/deps/dagre-iJt_i50V.js": 1,
+      "/src/lib/components/detail/SpecDetail.svelte": 2
+    },
+    "memoFactories": [
+      {
+        "event": "memo-factory",
+        "id": 1,
+        "url": "file:///private/tmp/spm-task138-memo-trace-ncl2iis8/instrumented/src/document-parse-memo.ts",
+        "maxEntries": 16384,
+        "maxBytes": 33554432,
+        "entries": 0,
+        "accountedBytes": 0,
+        "parserIdentities": 0,
+        "at": 21081.827125,
+        "pid": 49793
+      }
+    ]
+  },
+  "phaseDefinitions": {
+    "contextMs": "Wall around unchanged loadProjectContext, including diagnostic callbacks; ends before context summary serialization.",
+    "requestSyncMs": "Index/projection/JSON work after context in request ALS scope.",
+    "memo.total": "Inclusive lookup/compare/LRU/parser(ifmiss)/cloning/accounting; contains other memo phase durations.",
+    "callbackSumMs": "Sum of per-read admission\u2192callback elapsed;64concurrent reads overlap and JS/event-loop delays are included. Not disk wall.",
+    "queueSumMs": "Sum enqueue\u2192admission wait; overlapping by design.",
+    "gcOverlapMs": "Interval overlap with globally timestamped GC entries; correlation, not exclusive causal attribution.",
+    "processCpu": "Process-wide user/system aggregate across threads; not request-exclusive if overlap.",
+    "browserRequestToResponseStart": "Browser ResourceTiming responseStart\u2212requestStart, includes network/server wait; no standalone server-only TTFB claim."
+  }
+}
