@@ -131,3 +131,19 @@ No unresolved design findings. Ready for Sol implementation after the reviewed 1
 # Fresh-read producer prerequisite
 
 TASK-139 now owns the isolated callback-read/per-load concurrency change selected by Astra after measured Node context-loading overhead. TASK-138 starts after TASK-139 is independently reviewed and committed. Both preserve fresh-byte provenance; no cache or detail latency-budget waiver is authorized. TASK-130 may run in parallel with TASK-139/138 under the established separate ownership.
+
+
+## Related handoffs — explicit v2 limit exception
+
+Code inspection found that the legacy helper `sortHandoffsDescending` truncates matching handoffs to the newest3 before projecting them. For workspace detail v2, expose **all matching handoffs** through the already planned100-item relation windows; exact total is the full matching collection. Legacy `buildTaskDetail*`/`buildSpecDetail*` remain newest3, byte/field/order compatible. This is an explicit exception to preserving legacy presentation truncation, not a change to which handoffs are related.
+
+Use one shared deterministic selector/order helper in src: task matches `activeTaskIds` containing the task OR `relatedSpecIds` intersecting its declared specIds; spec matches relatedSpecIds containing the spec OR activeTaskIds intersecting its declared taskIds. Retain these predicates exactly, including references that are not resolved to loaded documents. Preserve createdAt descending comparison and stable source order for equal dates; no new ID tie-break, deduplication or unrelated filter. Set membership may replace repeated includes scans with equivalent semantics. Each matching source handoff occurs once under the OR predicate; duplicate reference IDs do not multiply rows. Preserve any repeated source entries as legacy selection would.
+
+Legacy presentation applies.slice(0,3) to the shared ordered matches; v2 paginates the unlimited ordered matches and maps only page entries. Do not build a second web-only matching implementation or claim the truncated3 is the full collection. Other relation omission/order rules are unchanged. UI label is Related handoffs with full count/range, not an implied globally latest3.
+
+Targeted regression:201 matching handoffs plus unrelated entries and equal-date ties; legacy result is identical first3; v2 first100/middle100/final1 with total201 and correct clamping. Cover both task/spec OR branches, stable tie order, no multiplication from repeated references, and source bytes unchanged. The general v2-to-legacy oracle must account specifically for this intentional tail expansion while comparing the legacy3 prefix exactly.
+
+
+# Shared query prerequisite checkpoint
+
+Commit `140f902` independently adds removal of `rel.*` presentation parameters from workspace list URL/reset identity. Its isolated baseline plus standalone regression passes (1 test, 9 assertions); Astra approved the two-file patch before precise partial staging. This avoids a dependency on uncommitted TASK-130 Timeline query changes.

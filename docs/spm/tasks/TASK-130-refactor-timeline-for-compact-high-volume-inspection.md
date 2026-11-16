@@ -29,7 +29,7 @@ Implement P6 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+Implementation in progress. Independent Astra approved the frozen seven-file data/query/validator core (manifest d84698a29df51c578099822525d7f14c7dabcf3c55147f07e36327a0133daedd): zero hash mismatches, 22 focused tests / 925 assertions and independent envelope/diagnostic probes passed. This partial approval excludes UI, browser, performance and final inspector/question integration; no final acceptance criterion is claimed complete by that review alone.
 
 
 # Detailed Astra implementation decisions
@@ -225,3 +225,10 @@ Visual Timeline is a scrollable region containing a **flat native list**, not an
 Make the scroll region keyboard-focusable (normal region focus stop or explicit existing F6 route) and retain native scroll key behavior rather than intercepting Arrow/Page/Home/End unnecessarily. Keep128's toolbar/list/inspector F6 boundary. A focus-pinned virtual item keeps its occurrence key and logical DOM order among the mounted items; do not append an earlier logical focused row after later rows or recycle its node for another identity. Present logical position/range and an obvious simple-table link; do not promise assistive-technology behavior that has not been exercised.
 
 Focused checks: native Tab/Shift+Tab across a virtual-window edge, PageDown scrolling without recycling the focused item, collapse of focused row returning to its group toggle, materialize-before-inspector-close-focus, and density/coarse changes preserving ID+offset anchor. Mounted-row bound remains in effect; no requirement to mount10k tab stops.
+
+
+## Timeline Clear filters semantics
+
+Clear Timeline filters resets only membership facets (spec/scope/window, scope defaultunarchived), fallback task page1, related-spec pages1 and option-search state. Preserve selected_task, timeline_mode, inspect/section, simple and pageSize as trace/view/presentation context. Clear trace remains a distinct action. This conditional change is Timeline-only; existing Tasks/Specs Clear behavior is not revised.
+
+If the retained selected_task has no selection projection in the new results, keep its URL intention and show “Trace unavailable in current results” with an explicit Clear trace link. Do not assert the task is globally missing or fabricate relationship data. Verify real GET/no-JS and enhanced Clear preserve these parameters and reset only the stated facets; the rel.* list-identity helper is a separate independently reviewed checkpoint.
