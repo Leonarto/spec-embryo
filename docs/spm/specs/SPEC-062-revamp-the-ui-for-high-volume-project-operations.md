@@ -4,9 +4,9 @@ id = "SPEC-062"
 title = "Revamp the UI for high-volume project operations"
 summary = "Implement a compact accessible workspace with reusable components, spreadsheet-style tables, persistent detail drawers, and compressed navigation."
 status = "active"
-task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136", "TASK-137", "TASK-138", "TASK-139", "TASK-140"]
+task_ids = ["TASK-125", "TASK-126", "TASK-127", "TASK-128", "TASK-129", "TASK-130", "TASK-131", "TASK-135", "TASK-136", "TASK-137", "TASK-138", "TASK-139", "TASK-140", "TASK-141"]
 tags = ["ui", "ux", "accessibility", "performance"]
-updated_at = "2026-11-16T03:57:12.748Z"
+updated_at = "2026-11-16T16:52:51.165Z"
 +++
 
 # Revamp de UI de Spec Embryo: mesa de operaciones compacta
@@ -348,3 +348,11 @@ TASK-137 separa la tabla de Specs de TASK-129 y la implementa tras TASK-127, en 
 ## Mandatory fan-out completion checkpoint
 
 TASK-128 bounds inspector relation DOM as an intermediate checkpoint. TASK-138 must bound shared relation transport and canonical/SSR/no-JS readers for Task and Spec, preserve full relation access and legacy service semantics, and verify the unchanged warm-detail p95 ≤300 ms gate. Observed 9,999-dependent Task (~3.50 MB) and 10k-linked-task Spec (~7.00 MB, duplicated group serialization) are diagnostic samples, not latency distributions or accepted volume behavior. TASK-138 may run alongside Timeline TASK-130 after TASK-128. Astra approved allowing TASK-129 to consume the reviewed functional138 commit plus the serial130 host adapter while138 remains in_progress for performance; record both exact commits in129 before implementation. Final TASK-131 still depends on all three, with the300 ms requirement unchanged.
+
+## Reviewed runtime correction — TASK141
+
+The final integrated application9a446a1 detail gate remains a valid FAIL: Task p95398.0ms and Spec523.5ms against300ms. Normal `spm ui` currently starts a development compiler. Astra designed and independently approved a cohesive product correction: ship official precompiled Node client/SSR output, retain an explicit `--dev` workflow, and validate complete package artifacts before startup. This removes first-request development compilation without claiming that all warm latency has the same cause or promising acceptance.
+
+The concrete contract and independent review are `web/verification/task141-runtime-design.md` and `task141-runtime-design-review.md`. They define pinned adapter compatibility, Node minimum, build identity and invalidation, release archive closure, strict Host/origin/CSRF, project-root preservation and bounded process lifecycle. Shared fresh-read services, question semantics and UI components remain unchanged. Build artifacts are release assets, not tracked source; no automatic build, document preload or installed-directory writes.
+
+TASK141 consumes completed TASK130 and functional TASK138; independent code and installed-package review plus a commit precede the final TASK138/TASK131 runtime measurements. Existing cold2.5s, warm list800ms, detail300ms and loading150ms contracts remain unchanged, including navigationStart and trusted-event/two-frame endpoints. Record build preparation and startup validation separately. Historical failures remain available; implementation approval is not final acceptance.

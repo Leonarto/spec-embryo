@@ -1,0 +1,2779 @@
+{
+  "startedAt": "2026-11-16T16:34:09.513Z",
+  "finishedAt": "2026-11-16T16:34:50.078Z",
+  "browser": "157.0.8103.78",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "warmups": 5,
+  "sampleCount": 20,
+  "resourceTimingBufferSize": 10000,
+  "requests": [
+    {
+      "url": "http://127.0.0.1:5314/tasks?sort=id.asc&scope=all",
+      "method": "GET",
+      "type": "document",
+      "start": 1794846849533,
+      "status": 200,
+      "end": 1794846860505,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/entry.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860512,
+      "status": 200,
+      "end": 1794846860719,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/private/tmp/spm-task138-final-detail-rldrp6qk/source/web/.svelte-kit/generated/client/app.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860512,
+      "status": 200,
+      "end": 1794846860719,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/client.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860719,
+      "status": 200,
+      "end": 1794846860738,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/.svelte-kit/generated/client/matchers.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860719,
+      "status": 200,
+      "end": 1794846860720,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/.svelte-kit/generated/root.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860719,
+      "status": 200,
+      "end": 1794846860720,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte_legacy.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860720,
+      "status": 200,
+      "end": 1794846860720,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/.svelte-kit/generated/root.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860720,
+      "status": 200,
+      "end": 1794846860722,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/legacy-client-BJmexvrg.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860720,
+      "status": 200,
+      "end": 1794846860737,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@vite/client",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860724,
+      "status": 200,
+      "end": 1794846860753,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte_internal_disclose-version.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860724,
+      "status": 200,
+      "end": 1794846860737,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte_internal_client.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860724,
+      "status": 200,
+      "end": 1794846860752,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860724,
+      "status": 200,
+      "end": 1794846860752,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/environment/index.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860724,
+      "status": 200,
+      "end": 1794846860738,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/esm-env-DeD8RbG4.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860743,
+      "status": 200,
+      "end": 1794846860752,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/runtime-Bh2GVxBu.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860744,
+      "status": 200,
+      "end": 1794846860757,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/warnings-m1cAHvyg.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860744,
+      "status": 200,
+      "end": 1794846860755,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/flags-DjJ7x8Uz.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860744,
+      "status": 200,
+      "end": 1794846860757,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/events-CA4DO2BX.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860744,
+      "status": 200,
+      "end": 1794846860757,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/esm-env.js?v=509020e4",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860755,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/exports/internal/index.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860757,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/url.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/fetcher.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/parse.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860757,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/session-storage.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860757,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/utils.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/index.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/devalue.js?v=e8ecc2d9",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/constants.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/exports.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/array.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/shared.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/error.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte_store.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/client/state.svelte.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/pathname.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/telemetry/noop.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/utils.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@id/__x00__virtual:__sveltekit/environment",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860760,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/index-client-BAduxr8F.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860752,
+      "status": 200,
+      "end": 1794846860764,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/vite/dist/client/env.mjs",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860753,
+      "status": 200,
+      "end": 1794846860770,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/exports/internal/remote-functions.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860757,
+      "status": 200,
+      "end": 1794846860761,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/routing.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860757,
+      "status": 200,
+      "end": 1794846860762,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/utils/hash.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860759,
+      "status": 200,
+      "end": 1794846860762,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/client.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860759,
+      "status": 200,
+      "end": 1794846860770,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte___clsx.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860764,
+      "status": 200,
+      "end": 1794846860770,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/paths/internal/client.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860770,
+      "status": 200,
+      "end": 1794846860775,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/.svelte-kit/generated/client/nodes/0.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860784,
+      "status": 200,
+      "end": 1794846860791,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/.svelte-kit/generated/client/nodes/1.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860785,
+      "status": 200,
+      "end": 1794846860792,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/.svelte-kit/generated/client/nodes/7.js",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860785,
+      "status": 200,
+      "end": 1794846860792,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/routes/+layout.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860791,
+      "status": 200,
+      "end": 1794846860839,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/routes/+layout.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860791,
+      "status": 200,
+      "end": 1794846860842,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/routes/tasks/+page.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860792,
+      "status": 200,
+      "end": 1794846860850,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860792,
+      "status": 200,
+      "end": 1794846860842,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/modules.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860839,
+      "status": 200,
+      "end": 1794846860956,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/app.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860842,
+      "status": 200,
+      "end": 1794846860858,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/WorkspaceLayout.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860842,
+      "status": 200,
+      "end": 1794846860973,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/routes/+layout.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860842,
+      "status": 200,
+      "end": 1794846860849,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/svelte_internal_flags_legacy.js?v=942b51fc",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860842,
+      "status": 200,
+      "end": 1794846860852,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/index.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860842,
+      "status": 200,
+      "end": 1794846860968,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/list-relations.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860956,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/workspace/location.svelte.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860965,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/navigation.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860965,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/private/tmp/spm-task138-final-detail-rldrp6qk/source/src/services/workspace-query.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860968,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/private/tmp/spm-task138-final-detail-rldrp6qk/source/src/domain.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860968,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/workspace/resource.svelte.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860970,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/controller.svelte.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860975,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/AnalysisFilters.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860974,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/MultiSelectDropdown.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860975,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/SelectDropdown.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860975,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/Popover.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860975,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/ListPager.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860977,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/TaskBoard.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860978,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/DataTable.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860982,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/ColumnsPanel.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860982,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/SortPanel.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860982,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/SelectionBar.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860982,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/task-columns.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860982,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/preferences.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860982,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/model.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860985,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/clipboard.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860985,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/types.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860984,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/routes/tasks/+page.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860850,
+      "status": 200,
+      "end": 1794846860985,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/private/tmp/spm-task138-final-detail-rldrp6qk/source/src/services/detail-relations.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860956,
+      "status": 200,
+      "end": 1794846861022,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/client.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860968,
+      "status": 200,
+      "end": 1794846861029,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/node_modules/@sveltejs/kit/src/runtime/app/state/server.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860968,
+      "status": 200,
+      "end": 1794846861025,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/workspace/resource.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860970,
+      "status": 200,
+      "end": 1794846861027,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/workspace/context.svelte.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860970,
+      "status": 200,
+      "end": 1794846861023,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/QuestionLeaveDialog.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860974,
+      "status": 200,
+      "end": 1794846861050,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/InspectorWorkspace.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860974,
+      "status": 200,
+      "end": 1794846861033,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/workspace/WorkspaceShell.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860974,
+      "status": 200,
+      "end": 1794846861054,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/SpecOptionsPicker.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861066,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/AnalysisFilters.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861029,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/spec-seed-adapter.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861031,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/question-context.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861032,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/relation-url.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861050,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/detail-resource.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861063,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/history.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861064,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/@lucide_svelte.js?v=c1e5c623",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861293,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/MultiSelectDropdown.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861078,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/Popover.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861078,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/SelectDropdown.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860975,
+      "status": 200,
+      "end": 1794846861092,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/ListPager.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860977,
+      "status": 200,
+      "end": 1794846861092,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/task-board.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860978,
+      "status": 200,
+      "end": 1794846861092,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/TaskBoard.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860981,
+      "status": 200,
+      "end": 1794846861146,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/SortPanel.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860982,
+      "status": 200,
+      "end": 1794846861146,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/ColumnsPanel.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860982,
+      "status": 200,
+      "end": 1794846861146,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/SelectionBar.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860982,
+      "status": 200,
+      "end": 1794846861146,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/data-table/DataTable.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846860982,
+      "status": 200,
+      "end": 1794846861147,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/private/tmp/spm-task138-final-detail-rldrp6qk/source/src/services/workspace-timeline-contract.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861027,
+      "status": 200,
+      "end": 1794846861216,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/spec-outcome-fence.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861031,
+      "status": 200,
+      "end": 1794846861211,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/InspectorHost.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861033,
+      "status": 200,
+      "end": 1794846861222,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/geometry.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861033,
+      "status": 200,
+      "end": 1794846861211,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/InspectorWorkspace.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861033,
+      "status": 200,
+      "end": 1794846861211,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/QuestionLeaveDialog.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861051,
+      "status": 200,
+      "end": 1794846861213,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/IconButton.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861054,
+      "status": 200,
+      "end": 1794846861217,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/ColorModeControl.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861054,
+      "status": 200,
+      "end": 1794846861218,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/theme.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861054,
+      "status": 200,
+      "end": 1794846861214,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/workspace-preferences.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861054,
+      "status": 200,
+      "end": 1794846861215,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/workspace/WorkspaceShell.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861054,
+      "status": 200,
+      "end": 1794846861217,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/detail-validation.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861064,
+      "status": 200,
+      "end": 1794846861221,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/SpecOptionsPicker.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861066,
+      "status": 200,
+      "end": 1794846861219,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/IconButton.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861217,
+      "status": 200,
+      "end": 1794846861219,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/ColorModeControl.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861218,
+      "status": 200,
+      "end": 1794846861219,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/inspector/InspectorHost.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861222,
+      "status": 200,
+      "end": 1794846861224,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-CXA2xvMn.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861293,
+      "status": 200,
+      "end": 1794846861295,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846861566,
+      "status": 200,
+      "end": 1794846862041,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/TaskDetail.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861566,
+      "status": 200,
+      "end": 1794846861566,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/RelationWindow.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861566,
+      "status": 200,
+      "end": 1794846861567,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/NotFound.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861566,
+      "status": 200,
+      "end": 1794846861567,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/DocumentBody.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861566,
+      "status": 200,
+      "end": 1794846861568,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/TaskDetail.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861566,
+      "status": 200,
+      "end": 1794846861566,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/NotFound.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861567,
+      "status": 200,
+      "end": 1794846861568,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/RelationWindow.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861568,
+      "status": 200,
+      "end": 1794846861568,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/MermaidBlock.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861568,
+      "status": 200,
+      "end": 1794846861574,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/DocumentBody.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861568,
+      "status": 200,
+      "end": 1794846861568,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/mermaid-theme.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861574,
+      "status": 200,
+      "end": 1794846861575,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/MermaidBlock.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846861574,
+      "status": 200,
+      "end": 1794846861575,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/mermaid.js?v=a32c1bcf",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862062,
+      "status": 200,
+      "end": 1794846862068,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/src-BChVpw6O.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862087,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-ICPOFSXX-CqopzdkL.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862095,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-5PVQY5BW-CXqaSY-o.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862094,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-426QAEUC-DfjTcj4B.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862076,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-XPW4576I-y9jE0ia4.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862087,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-BSJP7CBP-BR41Wvwq.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862087,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-ZZ45TVLE-DiIXd2Kz.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862089,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-X2U36JSP-Cov6oix6.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862090,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-U2HBQHQK-BNJNPTuS.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862094,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-5FUZZQ4R-CNjBn-gj.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862069,
+      "status": 200,
+      "end": 1794846862095,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-ENJZ2VHE-C7XtBaXJ.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862070,
+      "status": 200,
+      "end": 1794846862093,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-336JU56O-GGGLIcXU.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862070,
+      "status": 200,
+      "end": 1794846862092,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/isEmpty-CtlakF6K.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862070,
+      "status": 200,
+      "end": 1794846862095,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/line-CiR-qlpq.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862093,
+      "status": 200,
+      "end": 1794846862095,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/rough.esm-C6ScMAi4.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862093,
+      "status": 200,
+      "end": 1794846862096,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/dist-D9nA65MN.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862095,
+      "status": 200,
+      "end": 1794846862096,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/identity-DIZjXY1a.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862095,
+      "status": 200,
+      "end": 1794846862096,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/path-CmONI5Oh.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862095,
+      "status": 200,
+      "end": 1794846862096,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/array-CCeX_eWS.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862095,
+      "status": 200,
+      "end": 1794846862096,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/flowDiagram-DWJPFMVM-B9GUJLMw.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862111,
+      "status": 200,
+      "end": 1794846862120,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/channel-Z7gkftgm.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862120,
+      "status": 200,
+      "end": 1794846862139,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-FMBD7UC4-B95y9gg8.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862120,
+      "status": 200,
+      "end": 1794846862139,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-YZCP3GAM-CLHBHqZO.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862120,
+      "status": 200,
+      "end": 1794846862139,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-55IACEB6-B-7AxE4_.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862120,
+      "status": 200,
+      "end": 1794846862139,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/chunk-EDXVE4YY-BekuSxKM.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862120,
+      "status": 200,
+      "end": 1794846862139,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/dagre-KV5264BT-Eu2v4kD9.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862158,
+      "status": 200,
+      "end": 1794846862163,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/reduce-CahD7AGF.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862163,
+      "status": 200,
+      "end": 1794846862166,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/graphlib-DkGeq4bg.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862163,
+      "status": 200,
+      "end": 1794846862167,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/node_modules/.vite/deps/dagre-iJt_i50V.js?v=cdf86289",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846862163,
+      "status": 200,
+      "end": 1794846862167,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846862209,
+      "status": 200,
+      "end": 1794846862574,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846862712,
+      "status": 200,
+      "end": 1794846862934,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846863061,
+      "status": 200,
+      "end": 1794846863252,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846863380,
+      "status": 200,
+      "end": 1794846863581,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846863712,
+      "status": 200,
+      "end": 1794846863918,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846864052,
+      "status": 200,
+      "end": 1794846864262,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846864391,
+      "status": 200,
+      "end": 1794846864579,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846864709,
+      "status": 200,
+      "end": 1794846865030,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846865187,
+      "status": 200,
+      "end": 1794846865386,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846865525,
+      "status": 200,
+      "end": 1794846865901,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846866020,
+      "status": 200,
+      "end": 1794846866228,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846866355,
+      "status": 200,
+      "end": 1794846866541,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846866669,
+      "status": 200,
+      "end": 1794846866870,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846867018,
+      "status": 200,
+      "end": 1794846867206,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846867324,
+      "status": 200,
+      "end": 1794846867519,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846867648,
+      "status": 200,
+      "end": 1794846867829,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846867962,
+      "status": 200,
+      "end": 1794846868185,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846868306,
+      "status": 200,
+      "end": 1794846868638,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846868796,
+      "status": 200,
+      "end": 1794846869108,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846869268,
+      "status": 200,
+      "end": 1794846869643,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846869789,
+      "status": 200,
+      "end": 1794846869988,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846870151,
+      "status": 200,
+      "end": 1794846870391,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846870545,
+      "status": 200,
+      "end": 1794846870756,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846870887,
+      "status": 200,
+      "end": 1794846871099,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846871208,
+      "status": 200,
+      "end": 1794846871397,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846871480,
+      "status": 200,
+      "end": 1794846872039,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/SpecDetail.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846871480,
+      "status": 200,
+      "end": 1794846871561,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/SpecQuestions.svelte",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846871561,
+      "status": 200,
+      "end": 1794846871659,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/SpecDetail.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846871561,
+      "status": 200,
+      "end": 1794846871605,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/question-editor.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846871660,
+      "status": 200,
+      "end": 1794846871670,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/src/lib/components/detail/SpecQuestions.svelte?svelte&type=style&lang.css",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846871660,
+      "status": 200,
+      "end": 1794846871662,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/@fs/private/tmp/spm-task138-final-detail-rldrp6qk/source/src/services/spec-questions.ts",
+      "method": "GET",
+      "type": "script",
+      "start": 1794846871670,
+      "status": 200,
+      "end": 1794846871681,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846872216,
+      "status": 200,
+      "end": 1794846872458,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846872549,
+      "status": 200,
+      "end": 1794846872759,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846872903,
+      "status": 200,
+      "end": 1794846873313,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846873423,
+      "status": 200,
+      "end": 1794846873709,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846873840,
+      "status": 200,
+      "end": 1794846874101,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846874181,
+      "status": 200,
+      "end": 1794846874368,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846874483,
+      "status": 200,
+      "end": 1794846874654,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846874735,
+      "status": 200,
+      "end": 1794846874943,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846875091,
+      "status": 200,
+      "end": 1794846875515,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846875631,
+      "status": 200,
+      "end": 1794846875857,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846875995,
+      "status": 200,
+      "end": 1794846876197,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846876290,
+      "status": 200,
+      "end": 1794846876465,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846876579,
+      "status": 200,
+      "end": 1794846876746,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846876819,
+      "status": 200,
+      "end": 1794846876986,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846877096,
+      "status": 200,
+      "end": 1794846877272,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846877367,
+      "status": 200,
+      "end": 1794846877581,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846877688,
+      "status": 200,
+      "end": 1794846877891,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846877971,
+      "status": 200,
+      "end": 1794846878149,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846878260,
+      "status": 200,
+      "end": 1794846878434,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846878540,
+      "status": 200,
+      "end": 1794846878811,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846878936,
+      "status": 200,
+      "end": 1794846879145,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846879243,
+      "status": 200,
+      "end": 1794846879781,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846879917,
+      "status": 200,
+      "end": 1794846880201,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846880322,
+      "status": 200,
+      "end": 1794846880661,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846880851,
+      "status": 200,
+      "end": 1794846881396,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846881531,
+      "status": 200,
+      "end": 1794846881999,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846882180,
+      "status": 200,
+      "end": 1794846882552,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846882659,
+      "status": 200,
+      "end": 1794846882830,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846882956,
+      "status": 200,
+      "end": 1794846883195,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846883273,
+      "status": 200,
+      "end": 1794846883442,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846883543,
+      "status": 200,
+      "end": 1794846883715,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846883786,
+      "status": 200,
+      "end": 1794846883952,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846884068,
+      "status": 200,
+      "end": 1794846884326,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846884403,
+      "status": 200,
+      "end": 1794846884627,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846884819,
+      "status": 200,
+      "end": 1794846885171,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846885280,
+      "status": 200,
+      "end": 1794846885532,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846885691,
+      "status": 200,
+      "end": 1794846885903,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846885970,
+      "status": 200,
+      "end": 1794846886153,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846886291,
+      "status": 200,
+      "end": 1794846886465,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846886555,
+      "status": 200,
+      "end": 1794846886713,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846886843,
+      "status": 200,
+      "end": 1794846887326,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846887421,
+      "status": 200,
+      "end": 1794846887642,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846887782,
+      "status": 200,
+      "end": 1794846887978,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846888053,
+      "status": 200,
+      "end": 1794846888272,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846888404,
+      "status": 200,
+      "end": 1794846888756,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846888863,
+      "status": 200,
+      "end": 1794846889106,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=task&id=TASK-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846889246,
+      "status": 200,
+      "end": 1794846889558,
+      "abort": null
+    },
+    {
+      "url": "http://127.0.0.1:5314/workspace-detail?kind=spec&id=SPEC-00001",
+      "method": "GET",
+      "type": "fetch",
+      "start": 1794846889650,
+      "status": 200,
+      "end": 1794846889861,
+      "abort": null
+    }
+  ],
+  "maxAllInFlight": 32,
+  "remaining": 0,
+  "contextCountProof": "Exact-source instrumented functional trace established faviconGET/HEAD/query0contexts and Task/list/Spec1context each; these final uninstrumented network records do not independently count server calls.",
+  "scope": "Trusted click capture in browser through accepted100-row detail DOM and two animation frames. Node/Vite fresh no-store; Task9999downstream/Spec10k linked rows and full narrative/questions. Spec preparation opens Task outside the measured interval for its real related-spec link. Five warmups/twenty serial samples. Only ResourceTiming retention changes; no clocks, waits, transport, product source or threshold changed. Invalid runs retain all available partial samples and are not acceptance evidence. Mermaid may enhance after initial reader acceptance.",
+  "results": [
+    {
+      "kind": "task",
+      "firstObservation": {
+        "renderMs": 578.5,
+        "start": 11962.600000143051,
+        "end": 12541.100000143051,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 544.1000001430511,
+        "transferBytes": 30239,
+        "resourceEntries": 140,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "summary": {
+        "median": 233.29999995231628,
+        "p95": 398
+      },
+      "samples": [
+        {
+          "renderMs": 231.29999995231628,
+          "start": 14177.900000095367,
+          "end": 14409.200000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 208.5,
+          "transferBytes": 30239,
+          "resourceEntries": 184,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 239.60000014305115,
+          "start": 14516.700000047684,
+          "end": 14756.300000190735,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 214.29999995231628,
+          "transferBytes": 30239,
+          "resourceEntries": 187,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 212.29999995231628,
+          "start": 14856.300000190735,
+          "end": 15068.600000143051,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 192,
+          "transferBytes": 30239,
+          "resourceEntries": 190,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 347.2000000476837,
+          "start": 15172.900000095367,
+          "end": 15520.100000143051,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 325.39999985694885,
+          "transferBytes": 30239,
+          "resourceEntries": 193,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 224.39999985694885,
+          "start": 15652.100000143051,
+          "end": 15876.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 202.5,
+          "transferBytes": 30239,
+          "resourceEntries": 196,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 398,
+          "start": 15990.100000143051,
+          "end": 16388.10000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 379.89999985694885,
+          "transferBytes": 30239,
+          "resourceEntries": 199,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 230.79999995231628,
+          "start": 16485.700000047684,
+          "end": 16716.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 211.89999985694885,
+          "transferBytes": 30239,
+          "resourceEntries": 202,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 208,
+          "start": 16821,
+          "end": 17029,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 188.5,
+          "transferBytes": 30239,
+          "resourceEntries": 205,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 225.5,
+          "start": 17133.200000047684,
+          "end": 17358.700000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 205.90000009536743,
+          "transferBytes": 30239,
+          "resourceEntries": 208,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 210.90000009536743,
+          "start": 17483.700000047684,
+          "end": 17694.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 191.89999985694885,
+          "transferBytes": 30239,
+          "resourceEntries": 211,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 221.40000009536743,
+          "start": 17789.700000047684,
+          "end": 18011.10000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 197.70000004768372,
+          "transferBytes": 30239,
+          "resourceEntries": 214,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 208.10000014305115,
+          "start": 18114.200000047684,
+          "end": 18322.300000190735,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 184.90000009536743,
+          "transferBytes": 30239,
+          "resourceEntries": 217,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 247.69999980926514,
+          "start": 18427.300000190735,
+          "end": 18675,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 226.29999995231628,
+          "transferBytes": 30239,
+          "resourceEntries": 220,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 357.39999985694885,
+          "start": 18771.60000014305,
+          "end": 19129,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 335.40000009536743,
+          "transferBytes": 30239,
+          "resourceEntries": 223,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 341.7999999523163,
+          "start": 19260.60000014305,
+          "end": 19602.400000095367,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 315.89999985694885,
+          "transferBytes": 30239,
+          "resourceEntries": 226,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 416.7999999523163,
+          "start": 19722.200000047684,
+          "end": 20139,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 382.60000014305115,
+          "transferBytes": 30239,
+          "resourceEntries": 229,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 226.60000014305115,
+          "start": 20254,
+          "end": 20480.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 201.40000009536743,
+          "transferBytes": 30239,
+          "resourceEntries": 232,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 270.90000009536743,
+          "start": 20617,
+          "end": 20887.900000095367,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 242.60000014305115,
+          "transferBytes": 30239,
+          "resourceEntries": 235,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 239.29999995231628,
+          "start": 21010.200000047684,
+          "end": 21249.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 215.40000009536743,
+          "transferBytes": 30239,
+          "resourceEntries": 238,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 235.29999995231628,
+          "start": 21352.400000095367,
+          "end": 21587.700000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 215.79999995231628,
+          "transferBytes": 30239,
+          "resourceEntries": 241,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        }
+      ],
+      "budgetMs": 300,
+      "budgetPass": false
+    },
+    {
+      "kind": "spec",
+      "firstObservation": {
+        "renderMs": 608.0999999046326,
+        "start": 21942.900000095367,
+        "end": 22551,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 556.3000001907349,
+        "transferBytes": 37261,
+        "resourceEntries": 252,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "summary": {
+        "median": 253.19999992847443,
+        "p95": 523.5
+      },
+      "samples": [
+        {
+          "renderMs": 271.69999980926514,
+          "start": 26085.300000190735,
+          "end": 26357,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 229.5,
+          "transferBytes": 37261,
+          "resourceEntries": 277,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 202.39999985694885,
+          "start": 26755.60000014305,
+          "end": 26958,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 178.40000009536743,
+          "transferBytes": 37261,
+          "resourceEntries": 282,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 194.29999995231628,
+          "start": 27283.60000014305,
+          "end": 27477.900000095367,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 171.29999995231628,
+          "transferBytes": 37261,
+          "resourceEntries": 287,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 256.2000000476837,
+          "start": 27819.400000095367,
+          "end": 28075.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 227.79999995231628,
+          "transferBytes": 37261,
+          "resourceEntries": 292,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 206.60000014305115,
+          "start": 28435,
+          "end": 28641.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 182.20000004768372,
+          "transferBytes": 37261,
+          "resourceEntries": 297,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 303.5,
+          "start": 29001.700000047684,
+          "end": 29305.200000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 276.2000000476837,
+          "transferBytes": 37261,
+          "resourceEntries": 302,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 574.1000001430511,
+          "start": 29703.700000047684,
+          "end": 30277.800000190735,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 542.2000000476837,
+          "transferBytes": 37261,
+          "resourceEntries": 307,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 386.90000009536743,
+          "start": 30778.700000047684,
+          "end": 31165.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 348.89999985694885,
+          "transferBytes": 37261,
+          "resourceEntries": 312,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 523.5,
+          "start": 31987.10000014305,
+          "end": 32510.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 475.89999985694885,
+          "transferBytes": 37261,
+          "resourceEntries": 317,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 199.5,
+          "start": 33123.200000047684,
+          "end": 33322.700000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 175.09999990463257,
+          "transferBytes": 37261,
+          "resourceEntries": 322,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 194.39999985694885,
+          "start": 33738.800000190735,
+          "end": 33933.200000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 171.5,
+          "transferBytes": 37261,
+          "resourceEntries": 327,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 193.69999980926514,
+          "start": 34251.800000190735,
+          "end": 34445.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 168.90000009536743,
+          "transferBytes": 37261,
+          "resourceEntries": 332,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 256,
+          "start": 34868.5,
+          "end": 35124.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 226.90000009536743,
+          "transferBytes": 37261,
+          "resourceEntries": 337,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 300.5,
+          "start": 35728.10000014305,
+          "end": 36028.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 259.7999999523163,
+          "transferBytes": 37261,
+          "resourceEntries": 342,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 216.09999990463257,
+          "start": 36434.90000009537,
+          "end": 36651,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 186.89999985694885,
+          "transferBytes": 37261,
+          "resourceEntries": 347,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 187.69999980926514,
+          "start": 37018.800000190735,
+          "end": 37206.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 162.29999995231628,
+          "transferBytes": 37261,
+          "resourceEntries": 352,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 263.2999999523163,
+          "start": 37884.10000014305,
+          "end": 38147.40000009537,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 225.40000009536743,
+          "transferBytes": 37261,
+          "resourceEntries": 357,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 247.20000004768372,
+          "start": 38518.40000009537,
+          "end": 38765.60000014305,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 222.5,
+          "transferBytes": 37261,
+          "resourceEntries": 362,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 284.2000000476837,
+          "start": 39321,
+          "end": 39605.200000047684,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 249.20000004768372,
+          "transferBytes": 37261,
+          "resourceEntries": 367,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        },
+        {
+          "renderMs": 250.39999985694885,
+          "start": 40114.10000014305,
+          "end": 40364.5,
+          "trusted": true,
+          "rows": 100,
+          "httpMs": 215.19999980926514,
+          "transferBytes": 37261,
+          "resourceEntries": 372,
+          "matchingEntries": 1,
+          "bufferFullEvents": 0
+        }
+      ],
+      "budgetMs": 300,
+      "budgetPass": false
+    }
+  ],
+  "budgetPass": false
+}

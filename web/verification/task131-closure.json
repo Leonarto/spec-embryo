@@ -1,0 +1,345 @@
+{
+  "commit": "7deb17ff4c242396ca4e2fc196894d498cd3fef9",
+  "sourceRoot": "/private/tmp/spm-task131-combined-7deb17f",
+  "algorithm": "Unique static-import JS file closure; gzip level9, lazy imports excluded",
+  "roots": [
+    "entry/app",
+    "entry/start",
+    "nodes/0",
+    "nodes/1",
+    "nodes/7"
+  ],
+  "files": [
+    {
+      "file": "_app/immutable/chunks/0W6DPVxv.js",
+      "bytes": 489,
+      "gzipBytes": 350,
+      "sha256": "9e949aed45215db40e501dee1b7485414c38cef3077885afd5e1f3ab317d23fa"
+    },
+    {
+      "file": "_app/immutable/chunks/B7CrVkHS.js",
+      "bytes": 39,
+      "gzipBytes": 59,
+      "sha256": "7327d2f7c04ea7967288d38de9c712ae4105200ce191c66dbd2b6a286616c8b5"
+    },
+    {
+      "file": "_app/immutable/chunks/Bn6vGo28.js",
+      "bytes": 5439,
+      "gzipBytes": 2061,
+      "sha256": "62c61f843d561b87f96caf94e5fa9ad744071db00865d589084b78b491861da6"
+    },
+    {
+      "file": "_app/immutable/chunks/BnTLxz0k.js",
+      "bytes": 33162,
+      "gzipBytes": 12584,
+      "sha256": "c7432783120d2969e904ba27bd3263fc28d53dc79fb15678e74e4b00726fd618"
+    },
+    {
+      "file": "_app/immutable/chunks/BVua2Jm8.js",
+      "bytes": 54841,
+      "gzipBytes": 20679,
+      "sha256": "5ccac53cc747508e11872d577568563e133d5046564deb930e4c7695e66f8900"
+    },
+    {
+      "file": "_app/immutable/chunks/CbUDssf9.js",
+      "bytes": 1208,
+      "gzipBytes": 688,
+      "sha256": "2f8a57aecfda9c30a9e1e5b32d55c33dc107941c5a3c87a003017d6eccc0847a"
+    },
+    {
+      "file": "_app/immutable/chunks/CH0k-9EC.js",
+      "bytes": 765,
+      "gzipBytes": 333,
+      "sha256": "ac8675fab911f098777db39cabc099203813f26a00bc80222eff1aefba1e86e5"
+    },
+    {
+      "file": "_app/immutable/chunks/CO0zNEc2.js",
+      "bytes": 2478,
+      "gzipBytes": 1066,
+      "sha256": "b5e97b33ca69b66c2651552ad66e51365361854332338a06d66783e162674119"
+    },
+    {
+      "file": "_app/immutable/chunks/CWZSxEqi2.js",
+      "bytes": 24556,
+      "gzipBytes": 8583,
+      "sha256": "4d848185e337ea2814c1e5b8a6e836931d032602bfda6ded011a24936933aded"
+    },
+    {
+      "file": "_app/immutable/chunks/CYHg-7JA.js",
+      "bytes": 467,
+      "gzipBytes": 348,
+      "sha256": "3794a1d3898ff622bdca7114e0269524a7b6d5572bdc1b4477af97a546bd6849"
+    },
+    {
+      "file": "_app/immutable/chunks/D5yjmpzV.js",
+      "bytes": 596,
+      "gzipBytes": 399,
+      "sha256": "65ffb46c0c8192ca8b86738cdac8b71582abad66a61a8845de8a75af038d3c4c"
+    },
+    {
+      "file": "_app/immutable/chunks/D9FQP20W.js",
+      "bytes": 65,
+      "gzipBytes": 80,
+      "sha256": "0214edcff77242079f540507a53803aa22d857b6ad673e60e39748b6c7aa08c1"
+    },
+    {
+      "file": "_app/immutable/chunks/DaSLMH8m.js",
+      "bytes": 16897,
+      "gzipBytes": 5951,
+      "sha256": "b64b4885489241c10ae974d04f3f64adb0ab4712e06f5cbbb575f5b6a164a41b"
+    },
+    {
+      "file": "_app/immutable/chunks/Dene2yxT.js",
+      "bytes": 874,
+      "gzipBytes": 488,
+      "sha256": "57e78af8bc0e1675c7148a1eec16237769dca26663a2e1a2924fa087f123349f"
+    },
+    {
+      "file": "_app/immutable/chunks/DGcQ3nkm.js",
+      "bytes": 22,
+      "gzipBytes": 42,
+      "sha256": "fd149520eb3b845bb458e904daf20a093d5067863f7ed0ccc2ae0716b601664f"
+    },
+    {
+      "file": "_app/immutable/chunks/Dnub1hn5.js",
+      "bytes": 539,
+      "gzipBytes": 381,
+      "sha256": "57a8cf244caebcabb41b8b98ed74d7ffe8379702a62cca8d818e463bc9aeb91e"
+    },
+    {
+      "file": "_app/immutable/chunks/DUqqe1V-.js",
+      "bytes": 607,
+      "gzipBytes": 381,
+      "sha256": "6c4b939ea7d4e00410785347a1986f6ecf24190ed91e108fe02349e6cec4518a"
+    },
+    {
+      "file": "_app/immutable/chunks/DxU900nq.js",
+      "bytes": 12411,
+      "gzipBytes": 3898,
+      "sha256": "0bf1d803dfa7b86a7676fa8596d2ba4ed84aa9de345bbcafb248acbb47dc66d3"
+    },
+    {
+      "file": "_app/immutable/chunks/DXZ39DvC.js",
+      "bytes": 161,
+      "gzipBytes": 157,
+      "sha256": "55fa23d1db700573ab41e99582122f86cde7d6a5f7315514741c8be76452a469"
+    },
+    {
+      "file": "_app/immutable/chunks/Dzsa7V8-.js",
+      "bytes": 495,
+      "gzipBytes": 270,
+      "sha256": "42ca2dc56eb544117ed5a4d037134174f5b231be52acf04287ef7d1ae7571c18"
+    },
+    {
+      "file": "_app/immutable/chunks/m-LxvzkT.js",
+      "bytes": 11539,
+      "gzipBytes": 4795,
+      "sha256": "43265748b49eac86e654e958637e2d7b06efbf2fabc83879c5593389cf1c5934"
+    },
+    {
+      "file": "_app/immutable/chunks/qeQalW4A.js",
+      "bytes": 1369,
+      "gzipBytes": 790,
+      "sha256": "bdd012827599d456f5d00ffe26a41e3db8b9dcb9c1bc0b3dc65cff2982908124"
+    },
+    {
+      "file": "_app/immutable/chunks/vGIAPmg9.js",
+      "bytes": 395,
+      "gzipBytes": 261,
+      "sha256": "c926d14e0f08575dfe5a9e32fa3a7d1e0853f06f150d618eb573141001076bc9"
+    },
+    {
+      "file": "_app/immutable/chunks/wXTzmaOb2.js",
+      "bytes": 12666,
+      "gzipBytes": 4298,
+      "sha256": "ae36069cb51e5ec480597c33cebe3a6f25a2c337d22be862f9e3b545812102cc"
+    },
+    {
+      "file": "_app/immutable/entry/app.CkVzr1oW.js",
+      "bytes": 5023,
+      "gzipBytes": 2013,
+      "sha256": "c7c50094bd229731ca7a12c5aceb708a48645be5299a48effca52825fe11d5df"
+    },
+    {
+      "file": "_app/immutable/entry/start.CxkSJ6C_.js",
+      "bytes": 82,
+      "gzipBytes": 92,
+      "sha256": "78c5d7da763bc9a80c31fbbf6daa7b7406bb4afaa7b1700f2944bbb94a7b4526"
+    },
+    {
+      "file": "_app/immutable/nodes/0.CzIWQ2xc.js",
+      "bytes": 28451,
+      "gzipBytes": 9784,
+      "sha256": "ed525f3175d2aaa6ce38f29e00820378dd919797f4299d82179cbfe4faae931a"
+    },
+    {
+      "file": "_app/immutable/nodes/1.BodyzeWP.js",
+      "bytes": 417,
+      "gzipBytes": 289,
+      "sha256": "c2dd7d7a6841d34ab5f0b3d3c6f3d505b098151a6a1e84f3c3576be326fa4b83"
+    },
+    {
+      "file": "_app/immutable/nodes/7.DZcyhWnE.js",
+      "bytes": 22087,
+      "gzipBytes": 7960,
+      "sha256": "615d41f5472f793822830df6983242e06b6919de7ae072eb7afa0f891e89c401"
+    }
+  ],
+  "totalGzipBytes": 89080,
+  "mermaid": [],
+  "pass": true,
+  "comparison": {
+    "baselineGzipBytes": 47871,
+    "currentGzipBytes": 89080,
+    "deltaBytes": 41209,
+    "budgetBytes": 61440,
+    "pass": true,
+    "calculatedPass": true
+  },
+  "calculatedClosurePass": true,
+  "acceptanceStatus": "PASS for static initial Tasks closure on exact7deb17f versus fa025f2; four serial dependency audits verified original bytes",
+  "baselineReport": "/private/tmp/spm-task131-baseline-closure.json",
+  "dependencyAudit": "/private/tmp/spm-task131-build-dependency-serial-audits.json",
+  "rejectedParallelAudit": "/private/tmp/spm-task131-build-dependency-audits.json",
+  "parallelAuditDiagnosis": {
+    "bunProbe": "/private/tmp/spm-task131-realpath-parallel-probe.json",
+    "nodeProbe": "/private/tmp/spm-task131-realpath-node-probe.json",
+    "bunMismatches": 68,
+    "nodeMismatches": 0,
+    "cases": 100,
+    "serialResolution": "Actual symlink target remains inside baseline web/node_modules; four independent serial processes match original inventories",
+    "scope": "Diagnostic of concurrent Bun realpath in verification; no product/helper/runtime change"
+  },
+  "baseline": {
+    "commit": "fa025f28dfc134f897939e6a47d2bb2cc9cd50ec",
+    "sourceRoot": "/private/tmp/spm-task131-baseline-fa025f2",
+    "algorithm": "Unique static-import JS file closure; gzip level9, lazy imports excluded",
+    "roots": [
+      "entry/app",
+      "entry/start",
+      "nodes/0",
+      "nodes/1",
+      "nodes/5"
+    ],
+    "files": [
+      {
+        "file": "_app/immutable/chunks/3XQMq5D0.js",
+        "bytes": 1365,
+        "gzipBytes": 786,
+        "sha256": "1f5467b92d1213581274ef1b08584840b6701978af7f662b9dfe3f6c0ad48bd4"
+      },
+      {
+        "file": "_app/immutable/chunks/BLghc0ks.js",
+        "bytes": 455,
+        "gzipBytes": 347,
+        "sha256": "1507c08e4e094f7e088b6c8a2657941cf1bda6665b2b654c1049abb81cfa9777"
+      },
+      {
+        "file": "_app/immutable/chunks/BO73DafF.js",
+        "bytes": 874,
+        "gzipBytes": 488,
+        "sha256": "57e78af8bc0e1675c7148a1eec16237769dca26663a2e1a2924fa087f123349f"
+      },
+      {
+        "file": "_app/immutable/chunks/BRQCbsUH.js",
+        "bytes": 10455,
+        "gzipBytes": 3444,
+        "sha256": "e99e29825a65f2333a8c118c652646232beb413450ab41b246b6e975d6f9605a"
+      },
+      {
+        "file": "_app/immutable/chunks/Bu41h4lN.js",
+        "bytes": 527,
+        "gzipBytes": 380,
+        "sha256": "0434b31c06fb9e9f32f804e2ec3fc4769155ad7625c212aa7b965ab3cde2a1a2"
+      },
+      {
+        "file": "_app/immutable/chunks/BWVLo5lk.js",
+        "bytes": 729,
+        "gzipBytes": 438,
+        "sha256": "7ca5b70b88515df05e6e3a05fc70c0883cb5020f8abf62f591fdb171f74a03f3"
+      },
+      {
+        "file": "_app/immutable/chunks/CNWfxWBv.js",
+        "bytes": 765,
+        "gzipBytes": 332,
+        "sha256": "737cfc5ea153e50a823cb403aee49baa5e808f5f15b0c111a94e2f12712cab3f"
+      },
+      {
+        "file": "_app/immutable/chunks/CT0T0Gak.js",
+        "bytes": 65,
+        "gzipBytes": 80,
+        "sha256": "0214edcff77242079f540507a53803aa22d857b6ad673e60e39748b6c7aa08c1"
+      },
+      {
+        "file": "_app/immutable/chunks/DcL7zzOX.js",
+        "bytes": 1344,
+        "gzipBytes": 501,
+        "sha256": "6293b2cd1fd79b5f6552480092b711ee86b8090b24f7809b1b506cf70607d06d"
+      },
+      {
+        "file": "_app/immutable/chunks/Duo-lO0m.js",
+        "bytes": 584,
+        "gzipBytes": 400,
+        "sha256": "b8831e055de0389566ef19cf78e160acbb30287fcb8afc81b713daf47b077549"
+      },
+      {
+        "file": "_app/immutable/chunks/DXb0ZbaM.js",
+        "bytes": 1208,
+        "gzipBytes": 688,
+        "sha256": "2f8a57aecfda9c30a9e1e5b32d55c33dc107941c5a3c87a003017d6eccc0847a"
+      },
+      {
+        "file": "_app/immutable/chunks/EJ0oQjh0.js",
+        "bytes": 30883,
+        "gzipBytes": 11757,
+        "sha256": "cbbd386ebf624c62a5b50c34228d843772199d49c7f84cfab9655e34d9030d20"
+      },
+      {
+        "file": "_app/immutable/chunks/jW-_LUuu.js",
+        "bytes": 52752,
+        "gzipBytes": 19923,
+        "sha256": "fd52ed9b2c60d648b329799d82712d667f87cf9aea60fa1d021682becbce3849"
+      },
+      {
+        "file": "_app/immutable/chunks/kOxbLxOs.js",
+        "bytes": 595,
+        "gzipBytes": 380,
+        "sha256": "6883feb790bbc9e1fd4f74d63544db1983940908c9cab474f0d8af47978e6b0f"
+      },
+      {
+        "file": "_app/immutable/entry/app.DtWK3716.js",
+        "bytes": 4254,
+        "gzipBytes": 1771,
+        "sha256": "56d2b781e513a777e6c7e99d07218b3ea7252a6d2814596d43b0d784ad546d56"
+      },
+      {
+        "file": "_app/immutable/entry/start.BK4Qtwhs.js",
+        "bytes": 82,
+        "gzipBytes": 92,
+        "sha256": "b36f424864d7ae1a1effadf7a4e651c3b60f5276c843736c06fe4a1f2bed6cef"
+      },
+      {
+        "file": "_app/immutable/nodes/0.Bu26DjjQ.js",
+        "bytes": 8473,
+        "gzipBytes": 3030,
+        "sha256": "6292340dd857123463a685636618092e61e461877ad670f32e3104e6713ce1cc"
+      },
+      {
+        "file": "_app/immutable/nodes/1.BLg6JbXI.js",
+        "bytes": 396,
+        "gzipBytes": 280,
+        "sha256": "1083c93bbcb3bdb0816b350dd0b493a8c059b7ba40e8c3fffe3ea49bee5faf30"
+      },
+      {
+        "file": "_app/immutable/nodes/5.BvrKjTKl.js",
+        "bytes": 7209,
+        "gzipBytes": 2754,
+        "sha256": "8032427bf9ddc9578a009468b52e02ff3abaca19d5bacc181fc9036e9d9f0d91"
+      }
+    ],
+    "totalGzipBytes": 47871,
+    "mermaid": [],
+    "pass": true
+  },
+  "durableAudit": "web/verification/task131-audit-diagnostics.json"
+}

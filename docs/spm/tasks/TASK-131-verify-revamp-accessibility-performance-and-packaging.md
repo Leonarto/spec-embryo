@@ -5,7 +5,7 @@ title = "Verify revamp accessibility performance and packaging"
 summary = "Complete browser, performance, coverage and installed-package checks; resolve review findings."
 status = "todo"
 spec_ids = ["SPEC-062"]
-depends_on = ["TASK-129", "TASK-130", "TASK-138"]
+depends_on = ["TASK-129", "TASK-130", "TASK-138", "TASK-141"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
@@ -66,3 +66,7 @@ The TASK-126 HTTP p95 around550 ms is useful server/transport evidence only. It 
 The independent Astra review in `web/verification/task131-final-plan.md` defines the minimum combined checks, reusable evidence, remaining measurement harnesses and known historical-script limitations. It adds no threshold waiver. Final verification waits reviewed source integration; isolated harness preparation may proceed without claiming acceptance or changing product behavior.
 
 Runner preparation follows `web/verification/task131-runner-decisions.md`: existing tool orchestration plus a finite owned-process lifecycle CLI, no HTTP controller or new dependency. Warm/cold samples use ordinary isolated source runtimes; a separate exact-archive prefix/bin smoke verifies the prepared package. First-navigation blank time is recorded honestly and does not waive loading or navigation budgets.
+
+## Runtime correction for final acceptance
+
+TASK141 replaces the ordinary shipped DEV launcher with reviewed precompiled Node client/SSR assets; its concrete contract is `web/verification/task141-runtime-design.md`. The earlier DEV cold-cache setup is historical after that integration. Build artifacts before the measurement interval, validate them at startup, and use the actual shipped readiness signal with fresh server/browser/profile per cold sample. Startup includes manifest validation and is reported separately; no application HTTP prewarm or document preload. Preserve original20cold/5+20warm, navigationStart, correct rows/hydrated controls/two frames and numerical thresholds. Adapt only runtime preparation/readiness; reuse unaffected component accessibility evidence with explicit source identities. Final code/package review and commit must precede the one final acceptance window.

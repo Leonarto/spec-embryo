@@ -1,0 +1,37 @@
+{
+  "state": "Final-source detail valid FAIL; no retry/product change",
+  "files": [
+    {
+      "path": "web/verification/task138-final-detail-report.json",
+      "sha256": "238de261613b14b991a1bd8fc6fb37bde3246f02a032e1afd821799dd775a31f"
+    },
+    {
+      "path": "web/verification/task138-final-detail-resource-timing.json",
+      "sha256": "a3df8021bb9edd3b79414b06ec2060f86b98daa63bc4cf2b5f4b6a335a2aa490"
+    },
+    {
+      "path": "web/verification/task138-final-detail-source.json",
+      "sha256": "90eeaa43d528eece157f77006be36f201b19e80a09b48ddd4dbbce8e8fe725c3"
+    },
+    {
+      "path": "web/verification/task138-final-detail-collector.mjs",
+      "sha256": "3f295995b016a4582861f045025849abb030c0467884d6674aa7b90f213b04e6"
+    },
+    {
+      "path": "web/verification/task138-final-detail-summary.md",
+      "sha256": "3dfb85e7bcecc4d4fc896bbc1c169fa124261511029d65411082e041a6f3e905"
+    },
+    {
+      "path": "web/verification/task138-admission-rejected-artifact.json",
+      "sha256": "36184d7fa155141c3c0af9ee951008914c1521ab349da69bd0a1b450bf34deaf"
+    },
+    {
+      "path": "web/verification/task138-admission-result-review.md",
+      "sha256": "3b7e9a93826b35e6c0c5610f08f74e23fcc7fa8d10c82004981f25d4338958a2"
+    },
+    {
+      "path": "web/verification/task138-admission-report.md",
+      "sha256": "970347710b4aecc346a3b01d4bbe1ce5e0f2935b5428b1eb8da1a190aac2d98b"
+    }
+  ]
+}

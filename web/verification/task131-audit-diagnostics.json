@@ -1,0 +1,375 @@
+{
+  "purpose": "Verify final/baseline dependency byte inventories and explain rejected concurrent Bun realpath audit; no product/runtime modification",
+  "bun": "1.3.9",
+  "initialParallelBatch": [
+    {
+      "name": "combined-root",
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+    },
+    {
+      "name": "baseline-root",
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+    },
+    {
+      "name": "combined-web",
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "seedSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "runtimeSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f"
+    },
+    {
+      "name": "baseline-web",
+      "pass": false,
+      "seedMatches": true,
+      "runtimeMatches": false,
+      "baselineSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "seedSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "error": "Error: Dependency link escapes owned tree: .bin/svelte-kit"
+    }
+  ],
+  "parallelBunProbe": {
+    "cases": 100,
+    "mismatches": [
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/web-check-dependencies/@sveltejs/kit/svelte-kit.js"
+      },
+      {
+        "path": "/private/tmp/spm-task131-combined-7deb17f/web/node_modules",
+        "actual": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js"
+      }
+    ]
+  },
+  "parallelNodeProbe": {
+    "cases": 100,
+    "mismatches": []
+  },
+  "probeProcedure": "100 concurrent fs.promises.realpath(root+/.bin/svelte-kit) over baseline-web, combined-web and owned web seed; compare each result to that requested tree; identical Node probe",
+  "exactSerialTarget": "/private/tmp/spm-task131-baseline-fa025f2/web/node_modules/@sveltejs/kit/svelte-kit.js",
+  "independentPathChecks": "Python os.path.realpath, Node realpath and serial Bun realpath all resolve baseline link to that in-tree target",
+  "serialAudits": [
+    {
+      "name": "combined-root",
+      "exitCode": 0,
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+    },
+    {
+      "name": "baseline-root",
+      "exitCode": 0,
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+    },
+    {
+      "name": "combined-web",
+      "exitCode": 0,
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "seedSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "runtimeSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f"
+    },
+    {
+      "name": "baseline-web",
+      "exitCode": 0,
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "seedSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f",
+      "runtimeSHA256": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f"
+    }
+  ],
+  "serialAuditProcedure": "const root='/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/';\nconst cases=[['combined-root',root+'dependencies','/private/tmp/spm-task131-combined-7deb17f/node_modules',false],['baseline-root',root+'dependencies','/private/tmp/spm-task131-baseline-fa025f2/node_modules',false],['combined-web',root+'web-check-dependencies','/private/tmp/spm-task131-combined-7deb17f/web/node_modules',true],['baseline-web',root+'web-check-dependencies','/private/tmp/spm-task131-baseline-fa025f2/web/node_modules',true]] as const;\nconst results=[];\nfor(const [name,seed,target,web] of cases){const code='import {auditDependencies} from \"/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/scripts/acceptance-files.ts\";const baseline='+(web?'(await Bun.file(\"/private/tmp/spm-task131-web-check-dependencies.json\").json()).inventory':'undefined')+';console.log(JSON.stringify(await auditDependencies('+JSON.stringify(seed)+','+JSON.stringify(target)+',baseline)));';const child=Bun.spawn([process.execPath,'-e',code],{stdout:'pipe',stderr:'pipe'});const [stdout,stderr,exitCode]=await Promise.all([new Response(child.stdout).text(),new Response(child.stderr).text(),child.exited]);results.push({name,exitCode,...(exitCode===0?JSON.parse(stdout):{pass:false,stderr,stdout})});await Bun.write('/private/tmp/spm-task131-build-dependency-serial-audits.json',JSON.stringify(results,null,2)+'\\n');}\nconsole.log(JSON.stringify({results:results.length,pass:results.every(r=>r.pass&&r.exitCode===0)}));\n",
+  "originalReferences": {
+    "rootInventory": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+    "webInventory": "30b63c9a83d27ef50ceaa33159907b56dbb0725298e038718879bf0ae9dfd76f"
+  },
+  "decision": "Astra approved four sequential audits in separate processes; batch preserved as failed diagnostic, never relabelled PASS",
+  "pass": true
+}

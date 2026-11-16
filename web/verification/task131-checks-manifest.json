@@ -1,0 +1,21 @@
+{
+  "scope": "Frozen combined475tests/check/build/agents/coverage + baseline/final static closure and validated dependency audit; not overall TASK131 acceptance",
+  "files": [
+    {
+      "path": "web/verification/task131-combined-checks.json",
+      "sha256": "e76b244f1098af9562ea48f51e945a34becd582c552e98ad387597291cde97b2"
+    },
+    {
+      "path": "web/verification/task131-closure.json",
+      "sha256": "a7b932ba1ea8ec7639f8c303f025ea6856f15d6ad74b3ab77b7de9686b23cb7c"
+    },
+    {
+      "path": "web/verification/task131-audit-diagnostics.json",
+      "sha256": "8710d49e67ce40416c59efb0cf1a1cddbdb3c9bbb182f182ff2686dd64b39093"
+    }
+  ],
+  "productCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "combinedCommit": "7deb17ff4c242396ca4e2fc196894d498cd3fef9",
+  "baselineCommit": "fa025f28dfc134f897939e6a47d2bb2cc9cd50ec",
+  "browserEvidence": "Separate, still in progress"
+}
