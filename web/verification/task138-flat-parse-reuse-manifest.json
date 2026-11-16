@@ -1,0 +1,29 @@
+{
+  "copyOnly": true,
+  "outcome": "promising-await-independent-review",
+  "noSharedProductChanges": true,
+  "baseCommit": "f8c51db82814d9599b8edca9ab417ec440b7da10",
+  "isolatedRoot": "/private/tmp/spm-task138-parse-reuse-zhfk0a5p",
+  "files": [
+    {
+      "path": "web/verification/task138-flat-parse-reuse-correctness.json",
+      "sha256": "9d3cfe6d4142295f97fc93f670d469943f139155a72bfff7783fb88bd037085f"
+    },
+    {
+      "path": "web/verification/task138-flat-parse-reuse-microclone.json",
+      "sha256": "a66fd6777ead99e5c1cbf239fc7f8110b561b02409670be33c79139e57dd53ca"
+    },
+    {
+      "path": "web/verification/task138-flat-parse-reuse-experiment.json",
+      "sha256": "10f11609f21dccbb6aee1e893afb8c8b8a5cece744b9b844ea827a0ca1b10840"
+    },
+    {
+      "path": "web/verification/task138-flat-parse-reuse-source.json",
+      "sha256": "bcc78e6c5724d6135b42a14e52ad9a37986c576ae5df05358f06708abea75f76"
+    },
+    {
+      "path": "web/verification/task138-flat-parse-reuse-report.md",
+      "sha256": "7591024fad22dd6873db4cc41b660f05b0639e1decd86e199f3f7ca7a165774b"
+    }
+  ]
+}

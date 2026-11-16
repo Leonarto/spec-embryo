@@ -1,0 +1,134 @@
+{
+  "scope": "COPY-ONLY microclone cost on12202real canonical documents; eligibility/array keys validated before timing, matching memo insertion policy. Clone only, not context/IO/lookup/accounting/provenance.3warm5serial alternating AB/BA pervariant; not performance acceptance.",
+  "startedAt": "2026-11-16T13:05:31.950Z",
+  "finishedAt": "2026-11-16T13:05:32.320Z",
+  "runtime": "v25.6.0",
+  "execArgv": [
+    "--experimental-transform-types"
+  ],
+  "documents": 12202,
+  "summary": {
+    "structured": {
+      "min": 36.048,
+      "median": 37.84187500000007,
+      "max": 42.100584000000026,
+      "raw": [
+        36.048,
+        36.07820800000002,
+        37.84187500000007,
+        42.100584000000026,
+        38.40237500000012
+      ]
+    },
+    "flat": {
+      "min": 1.847167000000013,
+      "median": 2.0950409999999238,
+      "max": 2.802832999999964,
+      "raw": [
+        1.847167000000013,
+        2.0950409999999238,
+        2.0279160000000047,
+        2.802832999999964,
+        2.178790999999819
+      ]
+    }
+  },
+  "samples": [
+    {
+      "n": -3,
+      "warmup": true,
+      "variant": "structured",
+      "wallMs": 64.27537499999994
+    },
+    {
+      "n": -3,
+      "warmup": true,
+      "variant": "flat",
+      "wallMs": 3.0437910000000556
+    },
+    {
+      "n": -2,
+      "warmup": true,
+      "variant": "flat",
+      "wallMs": 2.618458999999916
+    },
+    {
+      "n": -2,
+      "warmup": true,
+      "variant": "structured",
+      "wallMs": 45.14891699999998
+    },
+    {
+      "n": -1,
+      "warmup": true,
+      "variant": "structured",
+      "wallMs": 36.304291000000035
+    },
+    {
+      "n": -1,
+      "warmup": true,
+      "variant": "flat",
+      "wallMs": 2.2100829999999405
+    },
+    {
+      "n": 0,
+      "warmup": false,
+      "variant": "flat",
+      "wallMs": 1.847167000000013
+    },
+    {
+      "n": 0,
+      "warmup": false,
+      "variant": "structured",
+      "wallMs": 36.048
+    },
+    {
+      "n": 1,
+      "warmup": false,
+      "variant": "structured",
+      "wallMs": 36.07820800000002
+    },
+    {
+      "n": 1,
+      "warmup": false,
+      "variant": "flat",
+      "wallMs": 2.0950409999999238
+    },
+    {
+      "n": 2,
+      "warmup": false,
+      "variant": "flat",
+      "wallMs": 2.0279160000000047
+    },
+    {
+      "n": 2,
+      "warmup": false,
+      "variant": "structured",
+      "wallMs": 37.84187500000007
+    },
+    {
+      "n": 3,
+      "warmup": false,
+      "variant": "structured",
+      "wallMs": 42.100584000000026
+    },
+    {
+      "n": 3,
+      "warmup": false,
+      "variant": "flat",
+      "wallMs": 2.802832999999964
+    },
+    {
+      "n": 4,
+      "warmup": false,
+      "variant": "flat",
+      "wallMs": 2.178790999999819
+    },
+    {
+      "n": 4,
+      "warmup": false,
+      "variant": "structured",
+      "wallMs": 38.40237500000012
+    }
+  ]
+}
