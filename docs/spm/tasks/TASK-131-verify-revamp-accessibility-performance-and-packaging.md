@@ -64,3 +64,5 @@ The TASK-126 HTTP p95 around550 ms is useful server/transport evidence only. It 
 ## Final verification preparation
 
 The independent Astra review in `web/verification/task131-final-plan.md` defines the minimum combined checks, reusable evidence, remaining measurement harnesses and known historical-script limitations. It adds no threshold waiver. Final verification waits reviewed source integration; isolated harness preparation may proceed without claiming acceptance or changing product behavior.
+
+Runner preparation follows `web/verification/task131-runner-decisions.md`: existing tool orchestration plus a finite owned-process lifecycle CLI, no HTTP controller or new dependency. Warm/cold samples use ordinary isolated source runtimes; a separate exact-archive prefix/bin smoke verifies the prepared package. First-navigation blank time is recorded honestly and does not waive loading or navigation budgets.

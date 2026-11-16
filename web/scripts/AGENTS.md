@@ -1,5 +1,6 @@
 # AGENTS
 
+- `acceptance-*` prepares final131 checks: shipped `spm ui`, owned process leases/dependency seed, fresh cold profiles/caches, identical static-closure gzip. Smoke has no acceptance credit; timing windows are serialized.
 - `detail-relations-*` separates functional checks, 5+20 latency gates and copy-only 3+5 diagnostics. Keep instrumentation out of product source; serialize benchmark windows.
 
 - Benchmarks generate documents only in disposable temp roots, never managed repo memory.

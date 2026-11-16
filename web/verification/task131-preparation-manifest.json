@@ -1,0 +1,63 @@
+{
+  "scope": "Frozen preparation scripts for independent review; no final acceptance",
+  "files": [
+    {
+      "path": "tests/acceptance-harness.test.ts",
+      "sha256": "dc23f6fe54705dbb9e1040f0c50d8e9f8df5036b3f92fa191d8f78b1d2f47979"
+    },
+    {
+      "path": "web/scripts/AGENTS.md",
+      "sha256": "d657c4bd0e738bcba52a468401a60214bd171c3a3f867174fb959b995f82a03f"
+    },
+    {
+      "path": "web/scripts/acceptance-accessibility.mjs",
+      "sha256": "e7656072ffac571351f8b39dc3d79806e022049e2ea150345aa05c7a0d9ba107"
+    },
+    {
+      "path": "web/scripts/acceptance-closure.ts",
+      "sha256": "61f6387ef9180558016b085845bd598ee295f7326f549ef18f39dd2073014e22"
+    },
+    {
+      "path": "web/scripts/acceptance-files.ts",
+      "sha256": "79e65d854fd026a2bb489a0e90815e898d42814f457b0291e9ffddf6bdc5528c"
+    },
+    {
+      "path": "web/scripts/acceptance-navigation.mjs",
+      "sha256": "b5a7e674cb58d9799d0180d61d6cb9ce8016d56d722536b1e275ba3d49cb8d2c"
+    },
+    {
+      "path": "web/scripts/acceptance-package.ts",
+      "sha256": "f1ee1284036f99134c1f7679d5df8473bf470081acba8f3c05f83a07de8c51c2"
+    },
+    {
+      "path": "web/scripts/acceptance-retention.mjs",
+      "sha256": "6ded09051a42353b1eed62beadb32969477d92feaeebc77160ab79deceaa6d6d"
+    },
+    {
+      "path": "web/scripts/acceptance-runtime.ts",
+      "sha256": "9d4e83b5b7be28a8aa0c3398d7e381643a67508757e96134b602f31b2b38d860"
+    },
+    {
+      "path": "web/verification/task131-preparation.json",
+      "sha256": "6ec94152757875d96836732bf208254fcae7ada1060aa391033138b745f46b6a"
+    }
+  ],
+  "contract": "web/verification/task131-runner-decisions.md",
+  "reviewDelta": {
+    "findings": [
+      "F131-1",
+      "F131-2",
+      "F131-3"
+    ],
+    "changedPaths": [
+      "tests/acceptance-harness.test.ts",
+      "web/scripts/acceptance-files.ts",
+      "web/scripts/acceptance-navigation.mjs",
+      "web/scripts/acceptance-runtime.ts",
+      "web/verification/task131-preparation.json"
+    ],
+    "unitLog": "/private/tmp/spm-task131-unit-fixes.log",
+    "unitResult": "14 PASS / 70 assertions; no real browser or series",
+    "previousManifest": "/private/tmp/spm-task131-preparation-manifest.before-f131-fixes.json"
+  }
+}
