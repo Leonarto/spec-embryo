@@ -20,7 +20,7 @@ Implementation: Sol 6.1 High (`harness_implementation`). Technical decisions and
 
 # Verification record
 
-Implementation pending. Independent Astra design review APPROVED after closing requested-page versus accepted-window behavior and atomic source-revision acceptance; no performance acceptance is claimed.
+Implementation in progress. Independent Astra design review approved the URL/window and atomic-revision contract. Producer/validator/loader partial review APPROVED: 11 exact hashes, 13 tests / 356 assertions, duplicate-occurrence and invalid-envelope probes; canonical question action remains byte-identical to baseline. Client, presentation, existing POST reader integration and end-to-end performance remain pending; no final acceptance is claimed.
 
 # TASK-138 — bounded detail relation transport and readers
 
@@ -147,3 +147,39 @@ Targeted regression:201 matching handoffs plus unrelated entries and equal-date 
 # Shared query prerequisite checkpoint
 
 Commit `140f902` independently adds removal of `rel.*` presentation parameters from workspace list URL/reset identity. Its isolated baseline plus standalone regression passes (1 test, 9 assertions); Astra approved the two-file patch before precise partial staging. This avoids a dependency on uncommitted TASK-130 Timeline query changes.
+
+
+## Router-ready canonization — installed Kit lifecycle
+
+Verified installed Kit2.55: AfterNavigate inherits complete:Promise<void>; hydrate invokes afterNavigate callbacks before setting internal started=true. Therefore register afterNavigate during component/controller initialization and await navigation.complete before the initial URL replacement. A queueMicrotask from onMount alone does not establish this boundary. Use public APIs only; do not inspect internal started/history keys or add timer retries.
+
+Readiness means the router has initialized and remains true for this mounted reader after the first valid callback continuation. Do not reset it from beforeNavigate: cancellation could otherwise leave an existing reader permanently unready. Each async lifecycle continuation checks a monotonically increasing callback token and disposed/mounted state; handle rejection without URL writes or unhandled promises. Cleanup invalidates continuations and clears pending canonization. Later navigation callbacks may flush pending work, but shallow push/replace must not require another afterNavigate event: once ready, use the same guarded canonization immediately.
+
+A deferred canonization is a patch, not permission to replay an old URL. Capture identity, accepted snapshot/resource generation and requested URL intent for affected relation keys. Before flush verify the reader still displays that snapshot/identity and those keys still carry the captured intent. Close, entity change, superseding full snapshot/refresh or changed relation intent invalidates stale work, including A→B→A. Apply only matching keys to the current URL; preserve current filters/trace/section/hash/unrelated page state and update the verified inspector ledger exactly as normal replacement does. Independent pending collection patches in the same snapshot must not overwrite one another; full-snapshot acceptance supersedes older patches. No-op replacements are skipped. Initial SSR clamping must not trigger a duplicate detail/relation fetch.
+
+Before readiness, ordinary relation links remain usable as native GET links; do not intercept a pager and pretend an enqueued replacement has already updated URL intent. After readiness, existing enhanced paging semantics apply. Canonical and inspector readers use this same lifecycle contract; no producer/load/action changes are needed.
+
+Focused gates: direct SSR inspector and canonical rel.*=999 clamp to the accepted last page after hydration, with identical visible rows and no duplicate fetch/error; already-normalized URLs perform no replacement; two clamped collections retain both patches and unrelated URL/state; same-entity intent change or Close/entity replacement before delayed flush never receives the old clamp; unmount and newer lifecycle callbacks invalidate pending continuations; normal client navigation into a clamped detail and shallow relation paging after readiness both work. Retain ordinary no-JS links and existing ledger Back/Close behavior. Test runtime behavior against installed Kit, not only mocked lifecycle callbacks.
+
+
+## F138-client-2 — minimal canonical draft protection before129
+
+Canonical focus/visibility refresh is newly introduced by138. The current unkeyed question form cannot safely accept externally reordered/deleted questions while an answer is present: hidden question text could change beneath the old textarea answer. Prevent that regression now; do not implement129 conflict/revision/leave workflow early.
+
+Expose a read-only hasAnswerDraft callback/method from SpecDetail using its own bound question form/answer controls. Read actual current values at the decision boundary (for example FormData(form).getAll('answer')); do not query a global form or maintain a second normalized question/draft engine. Any nonempty raw string counts, including whitespace and values supplied by hydration/POST echo. Do not trim, infer cleanliness from action success/error, or assume a submitted answer was acknowledged. A future129 state owner can replace this callback without changing the resource acceptance seam.
+
+Canonical Spec route wires that guard through CanonicalDetailReader to full-refresh authority; Task/readonly inspector default to allowing refresh. Check before starting focus/manual full refresh and again immediately before accepting any full snapshot for the same live entity, including a new loader seed. Typing while a request is pending must block its later application. A blocked operation retains the entire accepted snapshot, sourceRevision, all windows, question/document DOM, answer values, focus and desired URL. Invalidate/cancel superseded full work and release pending; do not publish fresh metadata with old questions. Show a distinct deferred-refresh notice: “Unsaved answers kept. Save answers or clear them before refreshing details.” Retry rechecks the actual values and proceeds only once clear; no automatic discard or automatic retry loop.
+
+Same-revision relation pagination remains usable and does not replace question/document data. Initial SSR adoption that does not replace an existing live snapshot and explicit navigation to a different entity preserve current behavior;129 will add navigation/leave/conflict policy. This guard creates no new write endpoint, action flags, optimistic file revision, dialog or Save-and-continue workflow. Existing POST remains unchanged. Existing no-JS POST-echo deficiencies are not claimed fixed here; any values present in the live form must nevertheless be protected.
+
+Tests: dirty focus refresh starts no request; dirty manual Retry preserves state and announces deferral; response arriving after user types is rejected atomically; same-ID fresh loader seed cannot reorder/delete questions beneath a draft; whitespace and existing/echoed nonempty values block; clearing fields lets explicit Retry refresh; relation pagination retains exact input/document DOM; successful/no-answer/error canonical POST behavior remains compatible. Browser repro must cover reorder and deletion while an answer exists, plus editing during a delayed full request. Resource tests alone cannot certify DOM mapping.
+
+
+# Client review in progress
+
+The first 17-file client review is REVISE for F138-client-1 (stale captured URL after synchronous seed canonization), F138-client-2 (protect canonical answer drafts from full-snapshot replacement) and F138-client-3 (retain focus when a relation collection becomes empty). Productor approval remains separate; fixes and focused regressions must pass before completion. The generic AnalysisFilters relation-carry patch is independently approved against baseline dc3a264, with expected partial-file SHA d8430397eeef141ad5a5dac1f07cc6d0eb907a299ce1859912292e837b0890ed; it excludes ongoing Timeline changes and will join the TASK-138 snapshot/commit.
+
+
+## Client delta rereview
+
+F138-client-1 and F138-client-3 are closed by independent rereview; the DOM-based answer-draft guard is validated. Review remains open for F2a: a blocked same-identity seed can change desired pages while leaving an obsolete relation request permanently pending. The fix must cancel only superseded requests and preserve independent requests. The 18-file rereview verified every hash and passed 23 tests / 180 assertions; it does not replace final browser/performance acceptance.
