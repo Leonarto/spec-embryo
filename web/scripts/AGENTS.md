@@ -1,6 +1,6 @@
 # AGENTS
 
-- `acceptance-*` prepares final131 checks: shipped `spm ui`, owned process leases/dependency seed, fresh cold profiles/caches, identical static-closure gzip. Smoke has no acceptance credit; timing windows are serialized.
+- `acceptance-*` targets reviewed precompiled `spm ui`: stage artifacts outside samples, verify ready build/Node identity, retain startup cost and audit dependencies serially. Cold uses own server/browser/profile; no DEV or preload. Smoke has no acceptance credit.
 - Launcher identity permits only exact env→Bun argv with stable PID/PGID/start; EPERM signal-zero requires a complete valid process inventory. Unknown cleanup stops the series. See [runner contract](../verification/task131-runner-decisions.md).
 - `detail-relations-*` separates functional checks, 5+20 latency gates and copy-only 3+5 diagnostics. Keep instrumentation out of product source; serialize benchmark windows.
 

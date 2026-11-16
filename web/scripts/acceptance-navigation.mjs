@@ -23,9 +23,17 @@ export function listReady(expected){
  // The endpoint is captured in the browser, before any tool round trip or diagnostics.
  return ready&&expected.finishWithFrames?new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(performance.now())))):ready;
 }
+/** Separate loading evidence; navigation's accepted endpoint is never moved. */
+export function loadingEvidence(value){
+ const fresh=value.startedFromBlank===true&&value.priorRequestCount===0&&value.navigationType==='navigate'&&value.pageshowPersisted!==true&&value.activationStart===0&&value.prerendering===false&&value.serviceWorkerController===false;
+ const indicator=Number.isFinite(value.firstLoadingAt)&&value.firstLoadingAt<=150,content=Number.isFinite(value.firstContentfulPaintMs)&&value.firstContentfulPaintMs<=150;
+ const lowerBound=fresh&&Number.isFinite(value.ttfbMs)&&value.ttfbMs>150;
+ if(lowerBound&&(indicator||content))return {blankBeyond150ms:null,loading150:{status:'NOT PROVEN',reason:'Contradictory loading/HTTP clocks',budgetMs:150}};
+ return {blankBeyond150ms:lowerBound?true:indicator||content?false:null,loading150:{status:lowerBound?'FAIL':indicator||content?'PASS':'NOT PROVEN',reason:lowerBound?'Fresh direct document had no response bytes at150ms':indicator?'Visible product indicator observed by150ms':content?'Contentful document paint observed by150ms':'Paint/indicator evidence does not establish loading by150ms',budgetMs:150},freshNavigationVerified:fresh};
+}
 export function installNavigationProbe(){
  performance.setResourceTimingBufferSize(10000);
- const probe=window.__acceptanceNavigation={firstShellAt:null,firstLoadingAt:null};let scheduled=false;
+ const probe=window.__acceptanceNavigation={firstShellAt:null,firstLoadingAt:null,pageshowPersisted:null};let scheduled=false;addEventListener('pageshow',event=>{probe.pageshowPersisted=event.persisted;},{once:true});
  const visible=node=>!!node&&node.getClientRects().length&&getComputedStyle(node).visibility!=='hidden'&&getComputedStyle(node).display!=='none';
  const scan=()=>{if(probe.firstShellAt===null&&visible(document.querySelector('.inspector-layout')))probe.firstShellAt=performance.now();if(probe.firstLoadingAt!==null||scheduled)return;
   const indicator=Array.from(document.querySelectorAll('[role=status],[aria-busy=true]')).find(n=>visible(n)&&n.getBoundingClientRect().width>1&&n.getBoundingClientRect().height>1&&/loading|actualizando|refreshing/i.test(n.textContent??''));
@@ -36,14 +44,16 @@ export function installNavigationProbe(){
 function cleanupError(result,stage,error){(result.cleanupErrors??=[]).push({stage,error:String(error)});}
 function failedSample(value){return value.error||value.cleanupErrors?.length||!value.ready||value.pageClosed===false;}
 export async function measureListNavigation(context,expected,{deadlineMs=30000}={}){
- const result={ready:false,url:expected.url,pageClosed:false};let page;
+ const result={ready:false,url:expected.url,pageClosed:false};let page,navigationStarted=false,priorRequests=0;const noteRequest=()=>{if(!navigationStarted)priorRequests++;};
  const started=Date.now(),remaining=()=>Math.max(1,deadlineMs-(Date.now()-started));
- try{page=await context.newPage();await page.addInitScript(installNavigationProbe);await page.goto(expected.url,{waitUntil:'commit',timeout:remaining()});
+ try{page=await context.newPage();result.startedFromBlank=page.url?.()==='about:blank';page.on?.('request',noteRequest);await page.addInitScript(installNavigationProbe);navigationStarted=true;await page.goto(expected.url,{waitUntil:'commit',timeout:remaining()});
   const endpoint=await page.waitForFunction(listReady,{...expected,finishWithFrames:true},{timeout:remaining()});
   try{result.elapsedMs=await endpoint.jsonValue();result.ready=true;}finally{try{await endpoint.dispose();}catch(error){cleanupError(result,'readiness handle',error);}}
  }catch(error){result.error=String(error);}
- if(page){try{Object.assign(result,await page.evaluate(()=>{const nav=performance.getEntriesByType('navigation')[0],paint=performance.getEntriesByName('first-contentful-paint')[0],probe=window.__acceptanceNavigation;return {navigationURL:nav?.name,ttfbMs:nav?.responseStart,responseEndMs:nav?.responseEnd,firstContentfulPaintMs:paint?.startTime??null,firstShellAt:probe?.firstShellAt??null,firstLoadingAt:probe?.firstLoadingAt??null,blankBeyond150ms:!paint||paint.startTime>150,loadingVisibleWithin150ms:probe?.firstLoadingAt!==null&&probe?.firstLoadingAt<=150};}));}
+ if(page){try{Object.assign(result,await page.evaluate(()=>{const nav=performance.getEntriesByType('navigation')[0],paint=performance.getEntriesByName('first-contentful-paint')[0],probe=window.__acceptanceNavigation;return {diagnosticCapturedAtMs:performance.now(),visibilityState:document.visibilityState,hasFocus:document.hasFocus(),paintEntries:performance.getEntriesByType('paint').map(entry=>({name:entry.name,startTime:entry.startTime})),paintObservation:paint?'observed':'paint-unavailable',navigationType:nav?.type,activationStart:nav?.activationStart??0,prerendering:document.prerendering===true,serviceWorkerController:!!navigator.serviceWorker?.controller,pageshowPersisted:probe?.pageshowPersisted??null,navigationURL:nav?.name,ttfbMs:nav?.responseStart,responseEndMs:nav?.responseEnd,firstContentfulPaintMs:paint?.startTime??null,firstShellAt:probe?.firstShellAt??null,firstLoadingAt:probe?.firstLoadingAt??null,loadingVisibleWithin150ms:probe?.firstLoadingAt!==null&&probe?.firstLoadingAt<=150};}));}
   catch(error){result.error??=String(error);result.ready=false;}
+  result.priorRequestCount=typeof page.on==='function'?priorRequests:null;Object.assign(result,loadingEvidence(result));
+  try{page.off?.('request',noteRequest);}catch(error){cleanupError(result,'request observer',error);}
   try{await page.close();result.pageClosed=true;}catch(error){cleanupError(result,'page.close',error);result.pageClosed=page.isClosed?.()===true;}
  }
  return result;
@@ -91,7 +101,7 @@ export async function coldNavigationSeries(adapters,{routes,expectedVersion,smok
  for(let i=0;i<schedule.length;i++){const item=schedule[i];let runtime,value;
   try{runtime=await adapters.start(`${item.route}-${String(item.index).padStart(2,'0')}`);value={...item,...await adapters.browser({profile:runtime.profile,expectedVersion,expected:{...routes[item.route],url:new URL(routes[item.route].path,runtime.url).href}})};}
   catch(error){value={...item,ready:false,error:String(error),browserClosed:error.browserClosed===true,cleanupErrors:error.cleanupErrors??[]};}
-  if(runtime){try{value.cleanup=await adapters.stop(runtime);if(!value.cleanup.closed||value.cleanup.error)cleanupError(value,'runtime closure',value.cleanup.error??'Runtime closure unverified');if(value.cleanup.integrity?.pass===false)cleanupError(value,'dependencies',value.cleanup.integrity);}
+  if(runtime){value.startup={sourceCommit:runtime.sourceCommit,startupMs:runtime.startupMs,reportedArtifactValidationMs:runtime.reportedArtifactValidationMs,nodeExecutable:runtime.nodeExecutable,nodeVersion:runtime.nodeVersion,buildId:runtime.buildId??runtime.artifact?.buildId};try{value.cleanup=await adapters.stop(runtime);if(!value.cleanup.closed||value.cleanup.error)cleanupError(value,'runtime closure',value.cleanup.error??'Runtime closure unverified');if(value.cleanup.integrity?.pass===false)cleanupError(value,'dependencies',value.cleanup.integrity);}
    catch(error){cleanupError(value,'runtime.stop',error);value.cleanup={closed:false};}}
   if(value.browserClosed!==true)cleanupError(value,'browser closure','Browser closure unverified');
   samples.push(value);try{await adapters.record?.(value);}catch(error){cleanupError(value,'record',error);}

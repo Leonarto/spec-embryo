@@ -1,0 +1,20 @@
+{
+  "scope": "Integrated acceptance harness only; no volume measurements or product changes.",
+  "applicationCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "all196InputHashesMatch": true,
+  "commands": [
+    {
+      "command": "bun test tests/acceptance-harness.test.ts tests/acceptance-interactions.test.ts",
+      "exitCode": 0,
+      "tests": 43,
+      "assertions": 236
+    },
+    {
+      "command": "bun run check:agents",
+      "exitCode": 0,
+      "files": 30
+    }
+  ],
+  "evidence": "Unit source/logs and independent reviews are recorded in the adjacent runner/interactions manifests. Combined command output is retained in the orchestration tool record; no unrecorded browser session."
+}
