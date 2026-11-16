@@ -1,0 +1,37 @@
+{
+  "scope": "Frozen reusable component accessibility evidence, metadata and captures; not final precompiled runtime or performance acceptance",
+  "productBase": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "roleFixes": [
+    "e3e6f3c",
+    "d3a4a4d"
+  ],
+  "files": [
+    {
+      "path": "web/verification/task131-preparation.json",
+      "sha256": "cdd5bf1b6dee9e62b5d4802a00972d4c4696041c193faf11c0c92044064e6695"
+    },
+    {
+      "path": "web/verification/task131-accessibility.json",
+      "sha256": "48e83e3ccab374ff6da915182d703652d8c2f3e5cbdfb39f642937bb0d7e29d8"
+    },
+    {
+      "path": "web/verification/task131-accessibility.md",
+      "sha256": "973f83d85afa93fd237ac4f51286cf35863a1b10b25f0de267be939659edd5a7"
+    },
+    {
+      "path": "web/verification/task131-dialog-light.png",
+      "sha256": "b7c22ac4624c480897117362e0545539552a600b053a9055177698fac368966a"
+    },
+    {
+      "path": "web/verification/task131-forced-colors-390.png",
+      "sha256": "383ae6846ca7809be3340d03f4e38b79d66dfee89945cf39ea8f2652b9cf7e6d"
+    },
+    {
+      "path": "web/verification/task131-timeline-dark.png",
+      "sha256": "a3a6b5d1634eb7f281284c48a786627116533057e777d1436bae40e371d00073"
+    }
+  ],
+  "readers": "No screen-reader session; native200% user-deferred",
+  "browserLease": "Returned; all own servers closed and dependency inventories unchanged",
+  "agentsLog": "/private/tmp/spm-task131-accessibility-agents.log"
+}

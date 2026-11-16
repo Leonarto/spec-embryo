@@ -1,0 +1,3069 @@
+{
+  "scope": "Component accessibility/manual integration evidence on reviewed9a plus explicit group-attribute fixes. Not future precompiled runtime, latency or overall TASK131 acceptance.",
+  "baseProductCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "axe": {
+    "version": "4.11.4",
+    "provenance": "web/verification/task131-preparation.json",
+    "allRules": true,
+    "auditCount": 10,
+    "seriousCriticalViolations": 0,
+    "audits": [
+      {
+        "label": "tasks-table-light",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100",
+        "version": "4.11.4",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": [
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  ".tone-info > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              }
+            ]
+          }
+        ],
+        "passes": 49
+      },
+      {
+        "label": "task-inspector-light",
+        "version": "4.11.4",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=task%3ATASK-004",
+        "theme": "light",
+        "bodyBackground": "rgb(242, 245, 242)",
+        "bodyText": "rgb(24, 37, 29)",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodeCount": 25,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Width\u2304"
+              },
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Columns\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Sort\u2304"
+              },
+              {
+                "target": [
+                  ".tone-info > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfIn progress"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              }
+            ]
+          }
+        ],
+        "passes": 49
+      },
+      {
+        "label": "spec-editor-light",
+        "version": "4.11.4",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+        "theme": "light",
+        "bodyBackground": "rgb(242, 245, 242)",
+        "bodyText": "rgb(24, 37, 29)",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodeCount": 25,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Width\u2304"
+              },
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Columns\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Sort\u2304"
+              },
+              {
+                "target": [
+                  ".tone-info > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfIn progress"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              }
+            ]
+          }
+        ],
+        "passes": 49
+      },
+      {
+        "label": "dirty-leave-dialog-light",
+        "version": "4.11.4",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+        "theme": "light",
+        "bodyBackground": "rgb(242, 245, 242)",
+        "bodyText": "rgb(24, 37, 29)",
+        "violations": [],
+        "incomplete": [],
+        "passes": 17
+      },
+      {
+        "label": "editor-external-conflict",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+        "theme": "light",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodeCount": 1,
+            "nodes": [
+              {
+                "target": [
+                  ".diagram-controls"
+                ],
+                "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute.",
+                "ariaHidden": null,
+                "adjacentText": "Diagram Mermaid - 100% +"
+              }
+            ]
+          },
+          {
+            "id": "color-contrast",
+            "nodeCount": 25,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Width\u2304"
+              },
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Columns\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Sort\u2304"
+              },
+              {
+                "target": [
+                  ".tone-info > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfIn progress"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              }
+            ]
+          }
+        ],
+        "passes": 51
+      },
+      {
+        "label": "editor-recovered-answer",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+        "theme": "light",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodeCount": 1,
+            "nodes": [
+              {
+                "target": [
+                  ".diagram-controls"
+                ],
+                "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute.",
+                "ariaHidden": null,
+                "adjacentText": "Diagram Mermaid - 100% +"
+              }
+            ]
+          },
+          {
+            "id": "color-contrast",
+            "nodeCount": 25,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Width\u2304"
+              },
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Columns\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Sort\u2304"
+              },
+              {
+                "target": [
+                  ".tone-info > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfIn progress"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              }
+            ]
+          }
+        ],
+        "passes": 49
+      },
+      {
+        "label": "editor-save-success",
+        "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+        "theme": "light",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodeCount": 1,
+            "nodes": [
+              {
+                "target": [
+                  ".diagram-controls"
+                ],
+                "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute.",
+                "ariaHidden": null,
+                "adjacentText": "Diagram Mermaid - 100% +"
+              }
+            ]
+          },
+          {
+            "id": "color-contrast",
+            "nodeCount": 25,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Width\u2304"
+              },
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Columns\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Sort\u2304"
+              },
+              {
+                "target": [
+                  ".tone-info > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfIn progress"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              },
+              {
+                "target": [
+                  "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25a1Todo"
+              }
+            ]
+          }
+        ],
+        "passes": 51
+      },
+      {
+        "label": "timeline-visual-dark",
+        "theme": "dark",
+        "background": "rgb(16, 21, 24)",
+        "text": "rgb(230, 235, 232)",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodeCount": 1,
+            "nodes": [
+              {
+                "target": [
+                  ".ruler"
+                ],
+                "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
+              }
+            ]
+          },
+          {
+            "id": "color-contrast",
+            "nodeCount": 3,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "button[data-group-toggle=\"SPEC-001\"] > .svelte-11mvmvy[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              },
+              {
+                "target": [
+                  "button[data-group-toggle=\"SPEC-002\"] > .svelte-11mvmvy[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+              }
+            ]
+          }
+        ],
+        "passes": 40
+      },
+      {
+        "label": "specs-table-dark",
+        "url": "http://127.0.0.1:56012/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100",
+        "theme": "dark",
+        "bodyBackground": "rgb(16, 21, 24)",
+        "bodyText": "rgb(230, 235, 232)",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodeCount": 5,
+            "nodes": [
+              {
+                "target": [
+                  ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(4) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Columns\u2304"
+              },
+              {
+                "target": [
+                  "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Sort\u2304"
+              },
+              {
+                "target": [
+                  "tr[data-entity-id=\"SPEC-001\"] > td[title=\"Active\"][data-column=\"status\"][aria-colindex=\"4\"] > .tone-accent.cell-value.svelte-wcrv9i > .svelte-wcrv9i[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfActive"
+              },
+              {
+                "target": [
+                  "tr[data-entity-id=\"SPEC-002\"] > td[title=\"Active\"][data-column=\"status\"][aria-colindex=\"4\"] > .tone-accent.cell-value.svelte-wcrv9i > .svelte-wcrv9i[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "\u25cfActive"
+              }
+            ]
+          }
+        ],
+        "passes": 48
+      },
+      {
+        "label": "timeline-simple-dark",
+        "url": "http://127.0.0.1:56012/timeline?simple=1",
+        "theme": "dark",
+        "bodyBackground": "rgb(16, 21, 24)",
+        "bodyText": "rgb(230, 235, 232)",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodeCount": 1,
+            "nodes": [
+              {
+                "target": [
+                  ".svelte-okkiwd[aria-hidden=\"true\"]"
+                ],
+                "summary": "Fix any of the following:\n  Element content contains only non-text characters",
+                "ariaHidden": "true",
+                "adjacentText": "Filters\u2304"
+              }
+            ]
+          }
+        ],
+        "passes": 42
+      }
+    ]
+  },
+  "manual": [
+    {
+      "name": "Task related Spec opens editor in existing inspector",
+      "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+      "pass": true
+    },
+    {
+      "name": "Dirty Close prompts with accessible destination",
+      "pass": true,
+      "text": "Keep your unsaved answers?\n\nDestination: Close inspector\n\nSave your answers, discard them, or keep editing before leaving this spec.\n\nSave and continue\nDiscard and continue\nKeep editing",
+      "focus": "Keep editing"
+    },
+    {
+      "name": "Escape keeps editor draft and returns focus",
+      "draft": "Acceptance draft kept while choosing a destination.",
+      "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+      "focus": "BUTTON"
+    },
+    {
+      "name": "Keyboard review keeps unmatched answer as recovery",
+      "recovery": "Recovered answer \u00b7 What should this package smoke save?\nAcceptance draft kept while choosing a destination.\nDiscard this recovered answer",
+      "question": "Which reviewed answer belongs to the updated package fixture?",
+      "answer": ""
+    },
+    {
+      "name": "Keyboard save resolves reviewed question",
+      "transportStatus": 200,
+      "actionType": "success",
+      "actionStatus": 200,
+      "success": "1 question resolved"
+    },
+    {
+      "name": "Clean close after save restores opener",
+      "focus": {
+        "tag": "A",
+        "text": "TASK-004",
+        "row": "TASK-004"
+      }
+    },
+    {
+      "name": "Timeline Enter opens Task; Escape restores materialized opener",
+      "id": "TASK-001",
+      "inspected": "task:TASK-001",
+      "focus": {
+        "text": "TASK-001",
+        "class": "task-id svelte-km6ejv"
+      },
+      "pass": true
+    },
+    {
+      "name": "390px forced-colors/reduced-motion reflow",
+      "forcedColors": true,
+      "reducedMotion": true,
+      "width": 390,
+      "documentWidth": 390,
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyText": "rgb(0, 0, 0)",
+      "mountedTimelineRows": 110,
+      "animations": 47,
+      "pass": true
+    },
+    {
+      "reducedMotion": true,
+      "forcedColors": true,
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "transitions": [
+        {
+          "tag": "inspector-layout svelte-1toryzn enhanced",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "timeline-grid svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        },
+        {
+          "tag": "task-row none svelte-km6ejv",
+          "transition": "1e-05s",
+          "animation": "1e-05s"
+        }
+      ],
+      "runningAnimations": []
+    }
+  ],
+  "resolvedIncompletes": [
+    {
+      "selector": ".diagram-controls",
+      "rule": "aria-prohibited-attr",
+      "fix": "role=group",
+      "commit": "e3e6f3c",
+      "evidence": "web/verification/task131-mermaid-fix.json"
+    },
+    {
+      "selector": ".ruler",
+      "rule": "aria-prohibited-attr",
+      "fix": "role=group",
+      "commit": "d3a4a4d",
+      "evidence": "web/verification/task131-ruler-fix.json"
+    }
+  ],
+  "colorContrastManualReview": {
+    "scope": "Axe cannot evaluate decorative non-text glyphs. Recorded selectors are aria-hidden glyphs with adjacent textual filter/status/group labels; no unique information depends on glyph contrast.",
+    "observations": [
+      {
+        "label": "tasks-table-light",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          ".tone-info > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "tasks-table-light",
+        "target": [
+          "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Width\u2304"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Columns\u2304"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Sort\u2304"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          ".tone-info > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfIn progress"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "task-inspector-light",
+        "target": [
+          "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Width\u2304"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Columns\u2304"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Sort\u2304"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          ".tone-info > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfIn progress"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "spec-editor-light",
+        "target": [
+          "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Width\u2304"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Columns\u2304"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Sort\u2304"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          ".tone-info > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfIn progress"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-external-conflict",
+        "target": [
+          "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Width\u2304"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Columns\u2304"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Sort\u2304"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          ".tone-info > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfIn progress"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-recovered-answer",
+        "target": [
+          "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          ".svelte-777wh8[data-inspector-width=\"\"] > details > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Width\u2304"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Columns\u2304"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "details:nth-child(6) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Sort\u2304"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          ".tone-info > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfIn progress"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-004\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-005\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-006\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-007\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-008\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-009\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-010\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-011\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-012\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-013\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-014\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-015\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-016\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-017\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-018\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-019\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-020\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-021\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-022\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "editor-save-success",
+        "target": [
+          "td[data-row-key=\"TASK-023\"][title=\"Todo\"][data-column=\"status\"] > .tone-neutral.cell-value > span[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25a1Todo"
+      },
+      {
+        "label": "timeline-visual-dark",
+        "target": [
+          ".svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "timeline-visual-dark",
+        "target": [
+          "button[data-group-toggle=\"SPEC-001\"] > .svelte-11mvmvy[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "timeline-visual-dark",
+        "target": [
+          "button[data-group-toggle=\"SPEC-002\"] > .svelte-11mvmvy[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "Selector explicitly includes aria-hidden=true",
+        "adjacentText": "Filter or group label remains visible"
+      },
+      {
+        "label": "specs-table-dark",
+        "target": [
+          ".wide > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      },
+      {
+        "label": "specs-table-dark",
+        "target": [
+          "details:nth-child(4) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Columns\u2304"
+      },
+      {
+        "label": "specs-table-dark",
+        "target": [
+          "details:nth-child(5) > summary > .svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Sort\u2304"
+      },
+      {
+        "label": "specs-table-dark",
+        "target": [
+          "tr[data-entity-id=\"SPEC-001\"] > td[title=\"Active\"][data-column=\"status\"][aria-colindex=\"4\"] > .tone-accent.cell-value.svelte-wcrv9i > .svelte-wcrv9i[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfActive"
+      },
+      {
+        "label": "specs-table-dark",
+        "target": [
+          "tr[data-entity-id=\"SPEC-002\"] > td[title=\"Active\"][data-column=\"status\"][aria-colindex=\"4\"] > .tone-accent.cell-value.svelte-wcrv9i > .svelte-wcrv9i[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "\u25cfActive"
+      },
+      {
+        "label": "timeline-simple-dark",
+        "target": [
+          ".svelte-okkiwd[aria-hidden=\"true\"]"
+        ],
+        "ariaHidden": "true",
+        "adjacentText": "Filters\u2304"
+      }
+    ],
+    "textAndPlaceholderContrastReuse": "web/verification/task129-contrast-browser-report.json; git diff d761ccb..9a is empty for app.css, SpecQuestions.svelte and QuestionLeaveDialog.svelte; these role-only fixes change no styles"
+  },
+  "screenshots": [
+    {
+      "path": "web/verification/task131-dialog-light.png",
+      "pixels": [
+        2400,
+        1794
+      ],
+      "sha256": "b7c22ac4624c480897117362e0545539552a600b053a9055177698fac368966a",
+      "viewportScope": "Original tool viewport; pixel dimensions recorded. Not used to certify the1440x900 reference geometry."
+    },
+    {
+      "path": "web/verification/task131-timeline-dark.png",
+      "pixels": [
+        1440,
+        900
+      ],
+      "sha256": "a3a6b5d1634eb7f281284c48a786627116533057e777d1436bae40e371d00073"
+    },
+    {
+      "path": "web/verification/task131-forced-colors-390.png",
+      "pixels": [
+        390,
+        844
+      ],
+      "sha256": "383ae6846ca7809be3340d03f4e38b79d66dfee89945cf39ea8f2652b9cf7e6d"
+    }
+  ],
+  "fixture": {
+    "provenance": "/private/tmp/spm-task131-package-fixture.json",
+    "tasks": 108,
+    "specs": 2,
+    "linkedTasks": 105,
+    "readOnlyCheck": "/private/tmp/spm-task131-package-readonly-and-edit.json",
+    "readOnlyScope": "110 generated Task/Spec documents checked before intentional external question edit; other fixture metadata was not included in that hash inventory",
+    "intentionalWrite": "Only generated SPEC-002 is intentionally edited then receives one confirmed answer; final diff verified separately",
+    "finalChangedPaths": [
+      "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/external-project/spm/specs/SPEC-002-installed-package-verification.md"
+    ],
+    "confirmedAnswerOnDisk": true,
+    "discardedRecoveryNotWritten": true
+  },
+  "outcomes": {
+    "staleSave": {
+      "status": 200,
+      "url": "http://127.0.0.1:63679/tasks?view=table&scope=all&sort=id.asc&pageSize=100&inspect=spec%3ASPEC-002",
+      "draft": "Acceptance draft kept while choosing a destination.",
+      "text": "Save error \u00b7 Spec changed since these questions were loaded.\n\nThis spec changed externally\n\nYour answers remain attached to the version you edited.\n\nCurrent open questions\n\nWhich reviewed answer belongs to the updated package fixture?\nReview current version\nWhat should this package smoke save?\nEmpty answers are ignored. Exact drafts stay here until saved or discarded.\nSave answered questions\nUnsaved answers"
+    },
+    "confirmedSave": {
+      "name": "Keyboard save resolves reviewed question",
+      "transportStatus": 200,
+      "actionType": "success",
+      "actionStatus": 200,
+      "success": "1 question resolved"
+    },
+    "draftGuard": "Close dialog defaults Keep; Escape retained exact draft and inspector identity"
+  },
+  "layoutAndMotion": {
+    "viewport390Overflow": false,
+    "forcedColors": "Browser emulation, actual Canvas background/Text observed255white/0black; not an OS screen-reader claim",
+    "reducedMotion": "After two rAF, durations0.01ms and zero running animations",
+    "smallTimelineRows": "108 tasks +2headers normal-rendered under documented<=500 rule; this does not certify reference volume mounted-row budget",
+    "volumeReuse": "ReviewedTASK130 retained34rows/10k and independent67functional checks; no performance rerun here"
+  },
+  "unavailable": [
+    {
+      "check": "Native browser200% zoom",
+      "status": "PENDING",
+      "reason": "Mac locked; user explicitly asked to leave this test pending. No CSSzoom/CDP scale substitution; no preference was changed"
+    },
+    {
+      "check": "VoiceOver/Safari",
+      "status": "UNAVAILABLE/NOT RUN",
+      "reason": "Native Mac locked; no actual screen-reader session was exercised"
+    },
+    {
+      "check": "NVDA/Firefox",
+      "status": "UNAVAILABLE/NOT RUN",
+      "reason": "Windows/NVDA environment unavailable on this Mac; axe is not a substitute"
+    }
+  ],
+  "harnessCaveats": [
+    {
+      "error": "One wait used nonexistent data-task-detail selector",
+      "resolution": "Corrected to actual data-detail-section=overview; inspector was already loaded. No product failure or timing credited"
+    },
+    {
+      "error": "Packaged source under node_modules ignored HMR",
+      "resolution": "Stopped owned process and used fresh owned component-only process after each reviewed group delta; generated caches retained, never classified cold"
+    }
+  ],
+  "complete": false,
+  "pending": "Future reviewed precompiled runtime boundary/gates; native200% remains user-deferred. Screen-reader environments not exercised.",
+  "cleanup": {
+    "spm-task131-package-ui-original-stopped": {
+      "closed": true,
+      "integrity": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": true,
+        "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+        "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+        "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+      },
+      "groupChecks": [
+        {
+          "alive": true,
+          "method": "process-inventory",
+          "group": 82157,
+          "members": [
+            82193
+          ],
+          "processCount": 810,
+          "inventorySHA256": "8c2f1926b86b0b4078ba7bf43161386c3d24fa7d7cd1a616df4aaa3c466281aa",
+          "signalError": "SystemError: kill() failed: EPERM: Operation not permitted"
+        }
+      ]
+    },
+    "spm-task131-package-a11y-mermaid-stopped": {
+      "closed": true,
+      "integrity": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": true,
+        "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+        "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+        "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+      },
+      "groupChecks": [
+        {
+          "alive": true,
+          "method": "process-inventory",
+          "group": 87589,
+          "members": [
+            87607
+          ],
+          "processCount": 833,
+          "inventorySHA256": "d3d1b1fe827edec1999d7a07b98e622672bb13bec47067c26b22b73dd65aca46",
+          "signalError": "SystemError: kill() failed: EPERM: Operation not permitted"
+        }
+      ]
+    },
+    "spm-task131-package-ruler-stopped": {
+      "closed": true,
+      "integrity": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": true,
+        "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+        "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+        "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+      },
+      "groupChecks": [
+        {
+          "alive": true,
+          "method": "process-inventory",
+          "group": 91073,
+          "members": [
+            91087
+          ],
+          "processCount": 823,
+          "inventorySHA256": "d916886ff2ac47e423b3d466bb614f7905347d8fe236a20d8501fcb9157e7111",
+          "signalError": "SystemError: kill() failed: EPERM: Operation not permitted"
+        }
+      ]
+    },
+    "browserClosed": true,
+    "activeLeaseExists": false
+  },
+  "componentEvidenceComplete": true,
+  "matrix": [
+    {
+      "check": "Ten whole-page component states: axe serious/critical",
+      "status": "PASS",
+      "detail": "0violations; decorative glyph incompletes reviewed by adjacent text; two named-container incompletes fixed with focused proof"
+    },
+    {
+      "check": "Dirty dialog, recovery/review, keyboard save and opener return",
+      "status": "PASS"
+    },
+    {
+      "check": "Timeline native Enter/Escape + focus restoration",
+      "status": "PASS"
+    },
+    {
+      "check": "390px forced-colors reflow and reduced-motion",
+      "status": "PASS",
+      "detail": "Browser emulation; width390, no horizontal overflow, durations0.01ms and zero running animations after2rAF"
+    },
+    {
+      "check": "Native browser200%",
+      "status": "PENDING",
+      "detail": "User explicitly deferred while Mac is locked"
+    },
+    {
+      "check": "VoiceOver/Safari",
+      "status": "UNAVAILABLE"
+    },
+    {
+      "check": "NVDA/Firefox",
+      "status": "UNAVAILABLE"
+    },
+    {
+      "check": "Future precompiled package/runtime and latency/retention gates",
+      "status": "NOT RUN"
+    }
+  ],
+  "sourceHashes": {
+    "web/src/app.css": "bd75f95aff2887e972f2a6a889dd8c422f80c9d2d98c51d8f8080931b6f6af41",
+    "web/src/lib/components/detail/SpecQuestions.svelte": "e61c327a6b17f1d2687fe494b99496191ada3b23e87430c680859f732a7d92e2",
+    "web/src/lib/inspector/QuestionLeaveDialog.svelte": "4e8d06059a20def231c71a65f8fa3504603a41e3fb8cc18f315b01300177cd00",
+    "web/src/lib/components/MermaidBlock.svelte": "d32d4400d705a9d2e84080a0b869ab1215c1515e6361dcb11e0553aa3b80aac4",
+    "web/src/lib/components/timeline/TimelineRuler.svelte": "72682121f297b16257e36c369597cfc098df908e3416d49c48afaba2473080a4",
+    "web/src/lib/components/timeline/TimelineGrid.svelte": "4083bc29a7d3631af9d4612bd4951092f8477b5b849923a65758aa13885110ee",
+    "web/src/lib/components/data-table/DataTable.svelte": "2638a23d28f3b07f124f20a867cf65d0bc012ac8e76a0ca8b2b1b5d52c8ec8dc"
+  }
+}

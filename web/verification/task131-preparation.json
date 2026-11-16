@@ -2,7 +2,7 @@
   "phase": "TASK131 harness preparation only",
   "acceptanceCredit": false,
   "preparationCommit": "2862f460d16250b6a907627d6208e6ec74180751",
-  "finalSourcePin": "Combined9a446a1 tiny smoke verified; final timing pin waits any approved TASK138performance change",
+  "finalSourcePin": "Source9a components verified; final pin awaits reviewed/committed TASK141 precompiled runtime",
   "contract": "web/verification/task131-runner-decisions.md",
   "runtimeOwnerRecord": "/private/tmp/spm-task131-owner.json",
   "dependencySeed": {
@@ -37,13 +37,11 @@
     "executedInBrowser": false
   },
   "notRun": [
-    "Prepared-package UI styles/hydration/lazy routes smoke",
-    "Final combined Bun/check/build/AGENTS",
-    "Warm5+20 and cold20-per-route list series",
-    "100-cycle retained heap/listeners",
-    "Pinned fa025f2 vs final initial Tasks gzip build comparison",
-    "Final axe/manual keyboard/200% zoom/forced colors/reduced motion",
-    "Final combined integration/AC01\u2013AC15 ledger"
+    "Reviewed precompiled runtime installed-browser boundary (TASK141); current9a package bin/component proof is not future runtime acceptance",
+    "Final exact-source warm5+20/cold20 Task+Spec navigation and detail<=300ms gates",
+    "100-cycle retention on final implementation",
+    "Native200% browser zoom (user-deferred; no substitute)",
+    "VoiceOver/Safari and NVDA/Firefox manual sessions"
   ],
   "limits": [
     "Browser closed and lease returned after tiny smoke; future series need root quiet window",
@@ -56,7 +54,7 @@
     "F131-1": "Readiness and two rAF complete in browser; endpoint timestamp is fixed before diagnostics/tool return",
     "F131-2": "Primary/cleanup errors and partial samples preserved; unverified process closure stops series with remaining NOT RUN",
     "F131-3": "Original copy-time dependency inventory compared with seed/runtime before start and after cleanup, outside timing; mutation prevents PASS",
-    "runtimeBrowserSmoke": "PASS: tiny combined smoke on9a446a1 with a new Chrome157 process/profile, hydrated Tasks/Specs and ArrowDown; browser/runtime closed and dependency integrity verified. Final performance series and package UI remain NOT RUN."
+    "runtimeBrowserSmoke": "Completed tiny smoke on9a446a1; see web/verification/task131-smoke.json. Package UI and full series remain NOT RUN."
   },
   "sourceBinModeAdaptation": {
     "scope": "Only in-root copied declared entrypoints, before dependency links; chmod0755, original bytes/shebang preserved",
@@ -95,5 +93,31 @@
     "packageUIStarted": false
   },
   "currentOwnerRecord": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/owner.json",
-  "sourcePinRecord": "/private/tmp/spm-task131-pin-combined.json"
+  "sourcePinRecord": "/private/tmp/spm-task131-pin-combined.json",
+  "combinedDeterministicEvidence": {
+    "report": "web/verification/task131-combined-checks.json",
+    "source": "7deb17ff4c242396ca4e2fc196894d498cd3fef9",
+    "tests": 475,
+    "assertions": 10290,
+    "svelte": "0errors/0warnings",
+    "build": "PASS",
+    "agents": "PASS",
+    "coverage": "Bun92.51%functions/93.71%lines; weighted LCOV product scope in report"
+  },
+  "initialClosureEvidence": {
+    "report": "web/verification/task131-closure.json",
+    "deltaBytes": 41209,
+    "budgetBytes": 61440,
+    "mermaidInInitialClosure": false,
+    "audit": "Four serial original-inventory checks PASS; rejected concurrent Bun realpath batch retained as diagnostic"
+  },
+  "componentAccessibilityEvidence": {
+    "report": "web/verification/task131-accessibility.json",
+    "states": 10,
+    "seriousCriticalViolations": 0,
+    "mermaidFix": "e3e6f3c",
+    "rulerFix": "d3a4a4d",
+    "native200Zoom": "PENDING: user explicitly deferred; Mac locked",
+    "screenReaders": "UNAVAILABLE, not certified by axe"
+  }
 }

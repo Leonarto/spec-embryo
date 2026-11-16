@@ -29,7 +29,7 @@ Implement P7 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+Runner preparation, combined source checks and reusable component accessibility evidence are reviewed. Final runtime, volume performance and retention gates remain pending; this task is not complete.
 
 
 # Integration acceptance record
@@ -78,3 +78,7 @@ Axe identified a named generic div around Mermaid zoom buttons. Astra approved a
 The user explicitly asked to leave real browser zoom200% pending because macOS is locked and cannot currently be unlocked. No native zoom was changed; CSSzoom/pinch-scale are not substituted. Remaining checks proceed, with this test reported pending rather than passed.
 
 The same narrow semantic review found one remaining labelled generic container in TimelineRuler. Its reviewed role=group correction preserves tick text and native focus behavior; affected axe0/0 and Svelte0/0 pass. An AST sweep of43 Svelte components and58 labelled native elements found no other obvious unroled generic labelled containers. The focused proof is `web/verification/task131-ruler-fix.json`; this does not replace the remaining complete accessibility matrix or runtime tests.
+
+## Reviewed component accessibility matrix
+
+The six-artifact manifest and independent review in `web/verification/task131-accessibility-manifest.json` and `task131-accessibility-review.md` verify ten axe states, exact component/style identities, existing contrast proof and three captures. Keyboard, forced-colors and reduced-motion checks pass within the recorded scope. Native200% remains explicitly user-deferred, screen readers unavailable, and volume bounds retain their separate TASK130 evidence. Owned browser/server resources are closed and dependency inventories unchanged. This reusable checkpoint does not accept the future compiled runtime, performance or retention gates.
