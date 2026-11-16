@@ -1,11 +1,12 @@
+import {clearRelationPages} from '../../../../src/services/detail-relations.ts';
 import type {InspectorIdentity,InspectorSection} from '../../../../src/services/workspace-detail.ts';
 export interface InspectorOpener {rowId:string;columnKey:string;rowIndex:number;listKey:string;tableScroll:{top:number;left:number};viewScroll:{top:number;left:number}}
 export interface InspectorEntry {id:string;url:string;predecessor?:{id:string;url:string};opener?:InspectorOpener}
 export interface InspectorPageMarker {entryId:string}
 /** Normalize URL encoding only; preserve parameter values/order and all non-inspector state. */
 export function historyURL(value:string|URL):string {const url=new URL(value);url.search=url.searchParams.toString();return url.href;}
-export function withoutInspector(value:string|URL):string {const url=new URL(value);url.searchParams.delete('inspect');url.searchParams.delete('section');return url.href;}
-export function inspectorURL(value:string|URL,identity:InspectorIdentity,section:InspectorSection='overview'):string {const url=new URL(value);url.searchParams.set('inspect',`${identity.kind}:${identity.id}`);if(section==='overview')url.searchParams.delete('section');else url.searchParams.set('section',section);return url.href;}
+export function withoutInspector(value:string|URL):string {const url=new URL(value);url.searchParams.delete('inspect');url.searchParams.delete('section');clearRelationPages(url.searchParams);return url.href;}
+export function inspectorURL(value:string|URL,identity:InspectorIdentity,section:InspectorSection='overview'):string {const url=new URL(value);if(url.searchParams.get('inspect')!==`${identity.kind}:${identity.id}`)clearRelationPages(url.searchParams);url.searchParams.set('inspect',`${identity.kind}:${identity.id}`);if(section==='overview')url.searchParams.delete('section');else url.searchParams.set('section',section);return url.href;}
 export function canonicalDetailHref(identity:InspectorIdentity):string {return `/${identity.kind==='task'?'tasks':'specs'}/${encodeURIComponent(identity.id)}`;}
 export function isPlainActivation(event:Pick<MouseEvent,'button'|'ctrlKey'|'metaKey'|'shiftKey'|'altKey'|'defaultPrevented'>):boolean {return !event.defaultPrevented&&event.button===0&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey;}
 /** Proof is session-memory only. Reloaded markers alone never establish ownership. */

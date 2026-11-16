@@ -1,0 +1,112 @@
+{
+  "scope": "Synthetic loaded-document families only; raw byte counts, frontmatter bytes between initial +++ newline and next newline+++. No timing claim.",
+  "runtime": "v25.6.0",
+  "poolHashes": {
+    "task139": "34c05d02b7c3d7196453781e2a4375bf6f26525d231fe7a5a86ad4620b9ade8d",
+    "task138": "34c05d02b7c3d7196453781e2a4375bf6f26525d231fe7a5a86ad4620b9ade8d"
+  },
+  "results": [
+    {
+      "label": "task139",
+      "root": "/private/tmp/spm-task138-profile-fixture-xsLPEH",
+      "documents": {
+        "current": 1,
+        "tasks": 10000,
+        "specs": 2000,
+        "handoffs": 0,
+        "session": 0,
+        "org": 0
+      },
+      "totalBytes": 3709604,
+      "frontmatterBytes": 3264736,
+      "configBytes": 1045,
+      "git": {
+        "status": 128,
+        "stdout": ""
+      },
+      "largestFrontmatter": [
+        {
+          "group": "current",
+          "path": "docs/spm/current.md",
+          "bytes": 1829,
+          "frontmatterBytes": 961
+        },
+        {
+          "group": "tasks",
+          "path": "docs/spm/tasks/TASK-10000.md",
+          "bytes": 326,
+          "frontmatterBytes": 289
+        },
+        {
+          "group": "tasks",
+          "path": "docs/spm/tasks/TASK-01000.md",
+          "bytes": 325,
+          "frontmatterBytes": 288
+        },
+        {
+          "group": "tasks",
+          "path": "docs/spm/tasks/TASK-01001.md",
+          "bytes": 325,
+          "frontmatterBytes": 288
+        },
+        {
+          "group": "tasks",
+          "path": "docs/spm/tasks/TASK-01002.md",
+          "bytes": 325,
+          "frontmatterBytes": 288
+        }
+      ]
+    },
+    {
+      "label": "task138",
+      "root": "/private/tmp/spm-detail-relations-WCXVAv",
+      "documents": {
+        "current": 1,
+        "tasks": 10000,
+        "specs": 2000,
+        "handoffs": 201,
+        "session": 0,
+        "org": 0
+      },
+      "totalBytes": 3569698,
+      "frontmatterBytes": 2972419,
+      "configBytes": 1038,
+      "git": {
+        "status": 128,
+        "stdout": ""
+      },
+      "largestFrontmatter": [
+        {
+          "group": "specs",
+          "path": "docs/spm/specs/SPEC-00001.md",
+          "bytes": 145763,
+          "frontmatterBytes": 140191
+        },
+        {
+          "group": "tasks",
+          "path": "docs/spm/tasks/TASK-00002.md",
+          "bytes": 14079,
+          "frontmatterBytes": 8629
+        },
+        {
+          "group": "tasks",
+          "path": "docs/spm/tasks/TASK-00001.md",
+          "bytes": 9157,
+          "frontmatterBytes": 3707
+        },
+        {
+          "group": "current",
+          "path": "docs/spm/current.md",
+          "bytes": 1822,
+          "frontmatterBytes": 954
+        },
+        {
+          "group": "specs",
+          "path": "docs/spm/specs/SPEC-00002.md",
+          "bytes": 585,
+          "frontmatterBytes": 301
+        }
+      ]
+    }
+  ]
+}

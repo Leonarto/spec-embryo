@@ -1,6 +1,7 @@
 # AGENTS
 
-- One inspector controller owns URL/history, request identity, focus and transitions; content components only render shared detail DTOs.
-- Keep the same host/content DOM across docking changes. Modal mode owns only its inert/trap changes; docked mode never traps.
-- Data intention excludes inspect/section. History proof is memory-only; preserve unrelated PageState fields.
-- Questions remain a canonical link until the guarded question slice; never introduce a second mutation endpoint.
+- Controller owns URL/history/focus; preserve host/content DOM across modes. Only modal owns inert/trap.
+- List keys exclude inspect/section/rel.*; history proof is memory-only. Preserve PageState.
+- V2 snapshots swap atomically. Relations require intent/entity/epoch/revision; failures retain ranges.
+- relation-url.ts awaits public navigation completion, guards queued snapshot/key intent and updates current URL/ledger.
+- Questions remain a canonical link until their guarded slice; no second mutation endpoint.

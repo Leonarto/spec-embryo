@@ -3,9 +3,11 @@
   import RelationWindow from "./RelationWindow.svelte";
   import NotFound from "./NotFound.svelte";
   import DocumentBody from "../DocumentBody.svelte";
-  import type {DetailLinkedTask,DetailLinkedSpec,DetailRelatedHandoff, TaskDetailResult } from "../../../../../src/services/details.ts";
+  import type {DetailRelatedHandoff} from "../../../../../src/services/details.ts";
+  import type {TaskRelationRow,BoundedTaskResult} from "../../../../../src/services/detail-relations.ts";
+  import type {RelationReader} from "../../inspector/relation-reader.ts";
 
-  let { detail,presentation="page" } = $props<{ detail: TaskDetailResult;presentation?:"page"|"inspector" }>();
+  let { detail,presentation="page",relationReader } = $props<{ detail: BoundedTaskResult;relationReader?:RelationReader;presentation?:"page"|"inspector" }>();
 </script>
 
 {#if !detail.found}
@@ -37,7 +39,7 @@
           </div>
           <div>
             <span>Dependencies</span>
-            <strong>{detail.dependencies.length}</strong>
+            <strong>{detail.dependencies.total}</strong>
           </div>
           <div>
             <span>Current state</span>
@@ -74,18 +76,18 @@
         </div>
 
         <div class="state-stack">
-          <div class="state-card" class:empty-group={detail.dependencies.length === 0}>
+          <div class="state-card" class:empty-group={detail.dependencies.total === 0}>
             <div class="panel-title">
               <GitBranchPlus size={14} strokeWidth={1.9} />
               <strong>Declared dependencies</strong>
             </div>
-            {#if detail.dependencies.length === 0}
+            <RelationWindow window={detail.dependencies} name="dependencies" label="Declared dependencies" baseHref={`/tasks/${detail.task.id}`} reader={relationReader}>
+{#snippet children(visible:readonly TaskRelationRow[])}
+{#if visible.length===0}
               <p class="empty">{presentation==='inspector'?'None':'This task has no declared dependencies.'}</p>
             {:else}
-              <RelationWindow items={detail.dependencies} identityKey={`task:${detail.task.id}:dependencies`} name="dependencies" label="Declared dependencies" fullHref={`/tasks/${detail.task.id}#dependencies`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly DetailLinkedTask[])}
 <div class="linked-list">
-                {#each visible as dependency}
+                {#each visible as dependency, occurrence (`${detail.dependencies.page}:${occurrence}:${dependency.id}`)}
                   <a class="linked-card" data-relation-item href={`/tasks/${dependency.id}`}>
                     <p class="linked-id">{dependency.id}</p>
                     <h4>{dependency.title}</h4>
@@ -93,43 +95,43 @@
                   </a>
                 {/each}
               </div>
+{/if}
 {/snippet}
 </RelationWindow>
-            {/if}
           </div>
 
-          <div class="state-card" class:empty-group={detail.unmetDependencyIds.length === 0}>
+          <div class="state-card" class:empty-group={detail.unmetDependencyIds.total === 0}>
             <div class="panel-title">
               <AlertTriangle size={14} strokeWidth={1.9} />
               <strong>Unmet dependencies</strong>
             </div>
-            {#if detail.unmetDependencyIds.length === 0}
+            <RelationWindow window={detail.unmetDependencyIds} name="unmetDependencyIds" label="Unmet dependencies" baseHref={`/tasks/${detail.task.id}`} reader={relationReader}>
+{#snippet children(visible:readonly string[])}
+{#if visible.length===0}
               <p class="empty">{presentation==='inspector'?'None':'No unmet dependencies right now.'}</p>
             {:else}
-              <RelationWindow items={detail.unmetDependencyIds} identityKey={`task:${detail.task.id}:unmetDependencies`} name="unmetDependencies" label="Unmet dependencies" fullHref={`/tasks/${detail.task.id}#unmetDependencies`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly string[])}
 <div class="chip-row">
-                {#each visible as dependencyId}
+                {#each visible as dependencyId, occurrence (`${detail.unmetDependencyIds.page}:${occurrence}:${dependencyId}`)}
                   <span class="chip chip-warning" data-relation-item>{dependencyId}</span>
                 {/each}
               </div>
+{/if}
 {/snippet}
 </RelationWindow>
-            {/if}
           </div>
 
-          <div class="state-card" class:empty-group={detail.blockingTasks.length === 0}>
+          <div class="state-card" class:empty-group={detail.blockingTasks.total === 0}>
             <div class="panel-title">
               <Blocks size={14} strokeWidth={1.9} />
               <strong>Downstream tasks waiting here</strong>
             </div>
-            {#if detail.blockingTasks.length === 0}
+            <RelationWindow window={detail.blockingTasks} name="blockingTasks" label="Downstream tasks" baseHref={`/tasks/${detail.task.id}`} reader={relationReader}>
+{#snippet children(visible:readonly TaskRelationRow[])}
+{#if visible.length===0}
               <p class="empty">{presentation==='inspector'?'None':'No downstream tasks currently depend on this task.'}</p>
             {:else}
-              <RelationWindow items={detail.blockingTasks} identityKey={`task:${detail.task.id}:blockingTasks`} name="blockingTasks" label="Downstream tasks" fullHref={`/tasks/${detail.task.id}#blockingTasks`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly DetailLinkedTask[])}
 <div class="linked-list">
-                {#each visible as blockingTask}
+                {#each visible as blockingTask, occurrence (`${detail.blockingTasks.page}:${occurrence}:${blockingTask.id}`)}
                   <a class="linked-card" data-relation-item href={`/tasks/${blockingTask.id}`}>
                     <p class="linked-id">{blockingTask.id}</p>
                     <h4>{blockingTask.title}</h4>
@@ -137,9 +139,9 @@
                   </a>
                 {/each}
               </div>
+{/if}
 {/snippet}
 </RelationWindow>
-            {/if}
           </div>
         </div>
       </article>
@@ -174,10 +176,10 @@
               <NotebookText size={14} strokeWidth={1.9} />
               <strong>Linked specs</strong>
             </div>
-            <RelationWindow items={detail.linkedSpecs} identityKey={`task:${detail.task.id}:linkedSpecs`} name="linkedSpecs" label="Linked specs" fullHref={`/tasks/${detail.task.id}#linkedSpecs`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly DetailLinkedSpec[])}
+            <RelationWindow window={detail.linkedSpecs} name="linkedSpecs" label="Linked specs" baseHref={`/tasks/${detail.task.id}`} reader={relationReader}>
+{#snippet children(visible:readonly {id:string}[])}
 <div class="chip-row">
-              {#each visible as spec}
+              {#each visible as spec, occurrence (`${detail.linkedSpecs.page}:${occurrence}:${spec.id}`)}
                 <a class="chip" data-relation-item href={`/specs/${spec.id}`}>{spec.id}</a>
               {/each}
             </div>
@@ -214,13 +216,13 @@
               <NotebookText size={14} strokeWidth={1.9} />
               <strong>Related handoffs</strong>
             </div>
-            {#if detail.relatedHandoffs.length === 0}
+            <RelationWindow window={detail.relatedHandoffs} name="relatedHandoffs" label="Related handoffs" baseHref={`/tasks/${detail.task.id}`} reader={relationReader}>
+{#snippet children(visible:readonly DetailRelatedHandoff[])}
+{#if visible.length===0}
               <p class="empty">No related handoffs were found for this task yet.</p>
             {:else}
-              <RelationWindow items={detail.relatedHandoffs} identityKey={`task:${detail.task.id}:handoffs`} name="handoffs" label="Related handoffs" fullHref={`/tasks/${detail.task.id}#handoffs`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly DetailRelatedHandoff[])}
 <div class="handoff-list">
-                {#each visible as handoff}
+                {#each visible as handoff, occurrence (`${detail.relatedHandoffs.page}:${occurrence}:${handoff.id}`)}
                   <div class="handoff-card" data-relation-item>
                     <p class="linked-id">{handoff.id}</p>
                     <strong>{handoff.title}</strong>
@@ -229,9 +231,9 @@
                   </div>
                 {/each}
               </div>
+{/if}
 {/snippet}
 </RelationWindow>
-            {/if}
           </div>
         </div>
       </article>

@@ -1,0 +1,24 @@
+{
+  "scope": "Real GET/HEAD/repeated/query Kit regression plus3warm5global same-origin trace, same approved source and synthetic fixture; no latency acceptance from this exploratory trace.",
+  "httpRequests": 15,
+  "httpFaviconRequests": 12,
+  "httpFaviconStatus": 204,
+  "httpFaviconBytes": 0,
+  "httpFaviconContextCalls": 0,
+  "networkRequests": 185,
+  "networkServerRequestsByPath": {
+    "GET /tasks": 1,
+    "GET /workspace-detail": 24
+  },
+  "networkContextsByPath": {
+    "GET /tasks": 1,
+    "GET /workspace-detail": 24
+  },
+  "globalContextBearingRequestPeak": 1,
+  "allDetailContextCallsOne": true,
+  "allFaviconContextCallsZero": true,
+  "globalServerFaviconRequests": 53,
+  "globalServerFaviconContextCalls": 0,
+  "globalServerDetailRequests": 26,
+  "pageEventVisibility": "Page-level Playwright request events omit browser favicon traffic; raw server JSONL complements the Page event trace. Network serverRequestsByPath above means header-correlated Page events, not every server request."
+}

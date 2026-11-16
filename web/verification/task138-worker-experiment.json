@@ -1,0 +1,497 @@
+{
+  "scope": "ONLY exploratory prototype. Paired serial AB/BA blocks alternate order,3warm+5measured pervariant. Every candidate load starts one fresh worker; sync filesystem IO only there, batches<=64; main parses/hashes exact transferred bytes. Context wall includes startup/IPC/drain/terminate, config/dirs/Git unchanged. Full context/sourceRevision/Task+SpecDTO equality checked outside timed span; no cache/prewarm/runtime flags/tuning. CPU is process-wide multithread aggregate, ELU/mainGC concern main thread only. No p95/acceptance claim.",
+  "startedAt": "2026-11-16T04:18:17.281Z",
+  "finishedAt": "2026-11-16T04:18:24.636Z",
+  "runtime": "v25.6.0",
+  "fixture": "/private/tmp/spm-detail-relations-WCXVAv",
+  "expected": {
+    "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+    "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+    "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+    "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+    "documents": 12202
+  },
+  "codeHashes": {
+    "src/repository.ts": "c9fa3e5d7d727984173ae91a47425fcca1dc554792d744e5ed18366aa9b8070d",
+    "src/fresh-worker-reader.ts": "ded6a3aa2cd01fb2865f6b3773c0fd0dae9a79583a7ce0134d8598cd6ff44967",
+    "src/fresh-read-worker.mjs": "6aaffaae29f0e94a99c6a206bd9d96563b9974f392f15b319160bf930f0def1b"
+  },
+  "summary": {
+    "baseline": {
+      "wallMs": {
+        "median": 256.69329100000004,
+        "min": 242.30412499999966,
+        "max": 277.9322080000002
+      },
+      "cpuMs": {
+        "median": 777.046,
+        "min": 741.836,
+        "max": 806.524
+      },
+      "eluMedian": 0.9914235330838524
+    },
+    "candidate": {
+      "wallMs": {
+        "median": 439.99875000000065,
+        "min": 369.80404200000066,
+        "max": 503.1565830000004
+      },
+      "cpuMs": {
+        "median": 500.068,
+        "min": 427.155,
+        "max": 555.012
+      },
+      "eluMedian": 0.3339361799111762
+    }
+  },
+  "samples": [
+    {
+      "n": -3,
+      "warmup": true,
+      "variant": "candidate",
+      "start": 1277.033042,
+      "end": 1704.465417,
+      "wallMs": 427.43237499999987,
+      "cpu": {
+        "user": 270281,
+        "system": 236165
+      },
+      "elu": {
+        "idle": 282.6315389999999,
+        "active": 144.87341915277102,
+        "utilization": 0.3388812606496129
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 17.857916116714478
+    },
+    {
+      "n": -3,
+      "warmup": true,
+      "variant": "baseline",
+      "start": 1747.575,
+      "end": 2030.255458,
+      "wallMs": 282.68045800000004,
+      "cpu": {
+        "user": 297473,
+        "system": 500491
+      },
+      "elu": {
+        "idle": 2.4797100000000682,
+        "active": 280.2273729868316,
+        "utilization": 0.9912286951787637
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 15.025957822799683
+    },
+    {
+      "n": -2,
+      "warmup": true,
+      "variant": "baseline",
+      "start": 2130.151542,
+      "end": 2402.549708,
+      "wallMs": 272.39816599999995,
+      "cpu": {
+        "user": 325532,
+        "system": 518564
+      },
+      "elu": {
+        "idle": 0.5285860000000184,
+        "active": 271.89324703832995,
+        "utilization": 0.9980596782787022
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 16.617001056671143
+    },
+    {
+      "n": -2,
+      "warmup": true,
+      "variant": "candidate",
+      "start": 2465.60075,
+      "end": 2852.75375,
+      "wallMs": 387.1529999999998,
+      "cpu": {
+        "user": 226824,
+        "system": 222038
+      },
+      "elu": {
+        "idle": 255.839793,
+        "active": 131.33187314532483,
+        "utilization": 0.339208378683448
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 10.052790880203247
+    },
+    {
+      "n": -1,
+      "warmup": true,
+      "variant": "candidate",
+      "start": 2900.298625,
+      "end": 3279.206792,
+      "wallMs": 378.90816700000005,
+      "cpu": {
+        "user": 213588,
+        "system": 220340
+      },
+      "elu": {
+        "idle": 254.38970599999993,
+        "active": 124.5415440953675,
+        "utilization": 0.3286652765218586
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 11.713582992553711
+    },
+    {
+      "n": -1,
+      "warmup": true,
+      "variant": "baseline",
+      "start": 3324.173292,
+      "end": 3578.073917,
+      "wallMs": 253.90062500000022,
+      "cpu": {
+        "user": 269878,
+        "system": 506592
+      },
+      "elu": {
+        "idle": 0.27041699999995217,
+        "active": 253.65808293705754,
+        "utilization": 0.9989350663668435
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 14.517083168029785
+    },
+    {
+      "n": 0,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 3621.037292,
+      "end": 3877.730583,
+      "wallMs": 256.69329100000004,
+      "cpu": {
+        "user": 257704,
+        "system": 496994
+      },
+      "elu": {
+        "idle": 6.673086000000012,
+        "active": 250.04674713560462,
+        "utilization": 0.9740063480156784
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 11.524416208267212
+    },
+    {
+      "n": 0,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 3921.463042,
+      "end": 4424.619625,
+      "wallMs": 503.1565830000004,
+      "cpu": {
+        "user": 233775,
+        "system": 266293
+      },
+      "elu": {
+        "idle": 367.112748,
+        "active": 136.05887689891097,
+        "utilization": 0.2704025230481661
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 12.11233401298523
+    },
+    {
+      "n": 1,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 4478.915625,
+      "end": 4918.914375,
+      "wallMs": 439.99875000000065,
+      "cpu": {
+        "user": 274301,
+        "system": 235840
+      },
+      "elu": {
+        "idle": 280.3692040000001,
+        "active": 159.64283804559273,
+        "utilization": 0.36281470230546775
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 33.48825120925903
+    },
+    {
+      "n": 1,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 4971.519667,
+      "end": 5220.182917,
+      "wallMs": 248.66325000000052,
+      "cpu": {
+        "user": 247235,
+        "system": 494601
+      },
+      "elu": {
+        "idle": 2.1327940000001036,
+        "active": 246.54699697366323,
+        "utilization": 0.9914235330838524
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 9.983083248138428
+    },
+    {
+      "n": 2,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 5265.6615,
+      "end": 5507.965625,
+      "wallMs": 242.30412499999966,
+      "cpu": {
+        "user": 252073,
+        "system": 554451
+      },
+      "elu": {
+        "idle": 5.553694999999834,
+        "active": 236.76934691589395,
+        "utilization": 0.9770814407243723
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 11.210374593734741
+    },
+    {
+      "n": 2,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 5557.00125,
+      "end": 6026.17675,
+      "wallMs": 469.1754999999994,
+      "cpu": {
+        "user": 269580,
+        "system": 285432
+      },
+      "elu": {
+        "idle": 322.0402100000001,
+        "active": 147.1499559965514,
+        "utilization": 0.3136254053492522
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 27.27679133415222
+    },
+    {
+      "n": 3,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 6078.702458,
+      "end": 6448.5065,
+      "wallMs": 369.80404200000066,
+      "cpu": {
+        "user": 212870,
+        "system": 214285
+      },
+      "elu": {
+        "idle": 246.32116899999983,
+        "active": 123.49499811616533,
+        "utilization": 0.3339361799111762
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 10.508625030517578
+    },
+    {
+      "n": 3,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 6484.61225,
+      "end": 6762.544458,
+      "wallMs": 277.9322080000002,
+      "cpu": {
+        "user": 273869,
+        "system": 503177
+      },
+      "elu": {
+        "idle": 1.7852100000000064,
+        "active": 276.1694148912811,
+        "utilization": 0.9935773329884391
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 9.92579197883606
+    },
+    {
+      "n": 4,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 6804.915958,
+      "end": 7067.353667,
+      "wallMs": 262.4377090000007,
+      "cpu": {
+        "user": 284412,
+        "system": 521705
+      },
+      "elu": {
+        "idle": 1.6907930000002125,
+        "active": 260.76328996585016,
+        "utilization": 0.9935577569192543
+      },
+      "worker": null,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 12.46862506866455
+    },
+    {
+      "n": 4,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 7120.624417,
+      "end": 7514.547208,
+      "wallMs": 393.92279099999996,
+      "cpu": {
+        "user": 220930,
+        "system": 227347
+      },
+      "elu": {
+        "idle": 257.467498,
+        "active": 136.470209901001,
+        "utilization": 0.346425861662618
+      },
+      "worker": {
+        "reads": 12202,
+        "bytes": 3569698,
+        "batches": 192,
+        "maxBatch": 64,
+        "started": 1,
+        "closed": 1,
+        "errors": 0
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "documents": 12202,
+      "mainThreadGCOverlapMs": 10.763041019439697
+    }
+  ]
+}

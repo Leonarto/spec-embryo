@@ -1,0 +1,4 @@
+import {writeFile} from 'node:fs/promises';
+const samples=[];
+for(const kind of ['task','spec'])for(let n=-3;n<5;n++){const start=performance.now(),response=await fetch(`http://127.0.0.1:5297/workspace-detail?kind=${kind}&id=${kind==='task'?'TASK-00001':'SPEC-00001'}`,{cache:'no-store'}),text=await response.text(),end=performance.now(),value=JSON.parse(text);if(!response.ok||value.schemaVersion!==2)throw Error('Diagnostic response failed');samples.push({kind,n,warmup:n<0,start,end,elapsed:end-start,bytes:Buffer.byteLength(text),serverRequest:response.headers.get('x-spm-diagnostic-request'),revision:value.revision});}
+await writeFile('/private/tmp/spm-task138-diagnostic-http.json',JSON.stringify({scope:'COPY-only exploratory spans,3warm5serial perkind; instrumentation overhead, no acceptance claim.',runtime:process.version,samples},null,2)+'\n');console.log(JSON.stringify({requests:samples.length}));

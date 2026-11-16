@@ -1,0 +1,837 @@
+{
+  "startedAt": "2026-11-16T12:10:54.334Z",
+  "finishedAt": "2026-11-16T12:11:23.433Z",
+  "runtime": "v25.6.0",
+  "machine": {
+    "cpu": "Apple M1 Pro",
+    "platform": "darwin",
+    "release": "25.2.0",
+    "arch": "arm64"
+  },
+  "fixture": "/private/tmp/spm-detail-relations-WCXVAv",
+  "origin": "http://127.0.0.1:5295",
+  "base": "140f902",
+  "warmups": 5,
+  "sampleCount": 20,
+  "hashes": {
+    "src/repository.ts": "43acf841fe2b0c7d60cefa05c83eb347b62d74af9ecff00360eccf6ba1c43880",
+    "src/document-reader.ts": "34c05d02b7c3d7196453781e2a4375bf6f26525d231fe7a5a86ad4620b9ade8d",
+    "src/services/details.ts": "163edfe2a317b7967b8485abefb4d0929cc2e24008a181b9bfb9b91d3a6f6ac4",
+    "src/services/detail-relations.ts": "253637e79c253b8b5938e21c7fe2e4e5dfa932e1cfd758c2d8a5910cea2b32dc",
+    "src/services/workspace-detail.ts": "2ca6ef8a076bdfa0c298add7810013b2af622431d99a117f090bfa8524b77743",
+    "web/scripts/detail-relations-profile.ts": "1086c154040a537301020dc5277d468bcc0a1236d0a2d2038e051fcefe782cff"
+  },
+  "scope": "Fresh Node production IO/index/projection/JSON and separate Node HTTP+download+JSON. Same12k fixture+201handoffs. Five warmups/twenty serial samples, median mean10th/11th, p95nearest-rank19th. First observation is not OS-cold. No browser/300ms acceptance claim from this report alone.",
+  "results": [
+    {
+      "identity": {
+        "kind": "task",
+        "id": "TASK-00001"
+      },
+      "firstObservation": {
+        "contextMs": 440.85420799999997,
+        "indexMs": 18.71158300000002,
+        "projectionMs": 6.204166999999984,
+        "stringifyMs": 0.0890830000000733,
+        "bytes": 29939,
+        "tasks": 10000,
+        "specs": 2000,
+        "handoffs": 201
+      },
+      "summary": {
+        "contextMs": {
+          "median": 246.4750214999999,
+          "p95": 298.0534170000001
+        },
+        "indexMs": {
+          "median": 12.405541500000254,
+          "p95": 14.399082999999337
+        },
+        "projectionMs": {
+          "median": 4.651770499999657,
+          "p95": 6.214666000000307
+        },
+        "stringifyMs": {
+          "median": 0.08204150000005939,
+          "p95": 0.08741600000030303
+        }
+      },
+      "samples": [
+        {
+          "contextMs": 251.57220800000005,
+          "indexMs": 10.96979199999987,
+          "projectionMs": 3.9650830000000497,
+          "stringifyMs": 0.07837500000005093,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 285.35791599999993,
+          "indexMs": 13.914708999999675,
+          "projectionMs": 6.214666000000307,
+          "stringifyMs": 0.08445899999969697,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 234.5694169999997,
+          "indexMs": 12.833500000000186,
+          "projectionMs": 5.798374999999851,
+          "stringifyMs": 0.08312500000010914,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 248.3733339999999,
+          "indexMs": 10.98891599999979,
+          "projectionMs": 4.4526670000000195,
+          "stringifyMs": 0.08800000000019281,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 253.67762500000026,
+          "indexMs": 11.507791999999881,
+          "projectionMs": 4.262040999999954,
+          "stringifyMs": 0.07700000000022555,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 237.25495899999987,
+          "indexMs": 10.723207999999886,
+          "projectionMs": 3.6933750000002874,
+          "stringifyMs": 0.07924999999977445,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 281.8917499999998,
+          "indexMs": 13.9987500000002,
+          "projectionMs": 5.504249999999956,
+          "stringifyMs": 0.08233299999983501,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 243.07329200000004,
+          "indexMs": 12.166417000000365,
+          "projectionMs": 5.585165999999845,
+          "stringifyMs": 0.0856669999998303,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 244.16529200000014,
+          "indexMs": 10.972332999999708,
+          "projectionMs": 3.947167000000263,
+          "stringifyMs": 0.08741600000030303,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 239.9233749999994,
+          "indexMs": 12.671957999999904,
+          "projectionMs": 4.4829170000002705,
+          "stringifyMs": 0.08412500000031287,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 235.3355419999998,
+          "indexMs": 10.766875000000255,
+          "projectionMs": 3.8229169999995065,
+          "stringifyMs": 0.07862500000010186,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 237.80354199999965,
+          "indexMs": 11.463166999999885,
+          "projectionMs": 4.2905000000000655,
+          "stringifyMs": 0.0810830000000351,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 298.0534170000001,
+          "indexMs": 14.399082999999337,
+          "projectionMs": 4.969292000000678,
+          "stringifyMs": 0.07591599999977916,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 244.57670899999994,
+          "indexMs": 13.495249999999942,
+          "projectionMs": 4.59966600000007,
+          "stringifyMs": 0.08154199999989942,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 267.05966700000045,
+          "indexMs": 12.417083000000275,
+          "projectionMs": 4.703874999999243,
+          "stringifyMs": 0.08300000000053842,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 282.40858300000036,
+          "indexMs": 12.932541999999557,
+          "projectionMs": 4.823916000000281,
+          "stringifyMs": 0.08175000000028376,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 303.85529099999985,
+          "indexMs": 18.078334000000723,
+          "projectionMs": 6.784832999999708,
+          "stringifyMs": 0.08641700000043784,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 281.3775000000005,
+          "indexMs": 13.957333999999719,
+          "projectionMs": 4.98083299999962,
+          "stringifyMs": 0.0736670000005688,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 234.06883300000027,
+          "indexMs": 12.394000000000233,
+          "projectionMs": 4.808124999999563,
+          "stringifyMs": 0.08541700000023411,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 241.2847499999998,
+          "indexMs": 10.832875000000058,
+          "projectionMs": 3.8093330000001515,
+          "stringifyMs": 0.07820799999990413,
+          "bytes": 29939,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        }
+      ],
+      "http": {
+        "firstObservation": {
+          "headersMs": 1142.80825,
+          "downloadMs": 1.5463330000002316,
+          "jsonMs": 0.10770899999988615,
+          "totalMs": 1144.4622920000002,
+          "bytes": 29939
+        },
+        "summary": {
+          "headersMs": {
+            "median": 258.33495800000037,
+            "p95": 337.417958
+          },
+          "downloadMs": {
+            "median": 0.10445849999905477,
+            "p95": 0.15129200000046694
+          },
+          "jsonMs": {
+            "median": 0.10408300000017334,
+            "p95": 0.1270829999994021
+          },
+          "totalMs": {
+            "median": 258.54366649999974,
+            "p95": 337.65279199999895
+          }
+        },
+        "samples": [
+          {
+            "headersMs": 280.29620899999827,
+            "downloadMs": 0.14620800000011513,
+            "jsonMs": 0.09829200000058336,
+            "totalMs": 280.54070899999897,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 261.49675000000025,
+            "downloadMs": 0.15320900000006077,
+            "jsonMs": 0.10083300000042072,
+            "totalMs": 261.75079200000073,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 270.3055829999994,
+            "downloadMs": 0.1297500000000582,
+            "jsonMs": 0.19700000000011642,
+            "totalMs": 270.63233299999956,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 337.417958,
+            "downloadMs": 0.13420899999982794,
+            "jsonMs": 0.10062499999912689,
+            "totalMs": 337.65279199999895,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 278.0323329999992,
+            "downloadMs": 0.15129200000046694,
+            "jsonMs": 0.09924999999930151,
+            "totalMs": 278.28287499999897,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 258.8629579999997,
+            "downloadMs": 0.1077499999992142,
+            "jsonMs": 0.10291700000016135,
+            "totalMs": 259.0736249999991,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 248.54533300000003,
+            "downloadMs": 0.1062499999989086,
+            "jsonMs": 0.10841699999946286,
+            "totalMs": 248.7599999999984,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 297.08799999999974,
+            "downloadMs": 0.10212499999943248,
+            "jsonMs": 0.1110000000007858,
+            "totalMs": 297.30112499999996,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 244.14308299999902,
+            "downloadMs": 0.09270800000012969,
+            "jsonMs": 0.09858399999939138,
+            "totalMs": 244.33437499999854,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 257.80695800000103,
+            "downloadMs": 0.10266699999920093,
+            "jsonMs": 0.10408300000017334,
+            "totalMs": 258.0137080000004,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 243.468667000001,
+            "downloadMs": 0.09470800000053714,
+            "jsonMs": 0.10120800000004238,
+            "totalMs": 243.66458300000158,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 294.96658300000126,
+            "downloadMs": 0.09145799999896553,
+            "jsonMs": 0.10054200000013225,
+            "totalMs": 295.15858300000036,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 246.38316599999962,
+            "downloadMs": 0.1252089999998134,
+            "jsonMs": 0.10408300000017334,
+            "totalMs": 246.6124579999996,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 254.580750000001,
+            "downloadMs": 0.09920799999963492,
+            "jsonMs": 0.10945899999933317,
+            "totalMs": 254.78941699999996,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 243.9683329999989,
+            "downloadMs": 0.0900420000016311,
+            "jsonMs": 0.09899999999834108,
+            "totalMs": 244.15737499999886,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 294.5355839999993,
+            "downloadMs": 0.1419580000001588,
+            "jsonMs": 0.1270829999994021,
+            "totalMs": 294.80462499999885,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 236.61812499999905,
+            "downloadMs": 0.09933400000045367,
+            "jsonMs": 0.1110000000007858,
+            "totalMs": 236.8284590000003,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 244.53454200000124,
+            "downloadMs": 0.10212499999943248,
+            "jsonMs": 0.11120800000026065,
+            "totalMs": 244.74787500000093,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 246.4065840000003,
+            "downloadMs": 0.09308299999975134,
+            "jsonMs": 0.12291700000059791,
+            "totalMs": 246.62258400000064,
+            "bytes": 29939
+          },
+          {
+            "headersMs": 487.6750410000004,
+            "downloadMs": 0.12720900000022084,
+            "jsonMs": 0.12041599999975006,
+            "totalMs": 487.9226660000004,
+            "bytes": 29939
+          }
+        ]
+      }
+    },
+    {
+      "identity": {
+        "kind": "spec",
+        "id": "SPEC-00001"
+      },
+      "firstObservation": {
+        "contextMs": 334.28549999999996,
+        "indexMs": 13.952041000000463,
+        "projectionMs": 9.448083999999653,
+        "stringifyMs": 0.11695800000052259,
+        "bytes": 36879,
+        "tasks": 10000,
+        "specs": 2000,
+        "handoffs": 201
+      },
+      "summary": {
+        "contextMs": {
+          "median": 251.92231299999912,
+          "p95": 311.09791699999914
+        },
+        "indexMs": {
+          "median": 12.370104000001447,
+          "p95": 14.94170899999881
+        },
+        "projectionMs": {
+          "median": 5.011083499999586,
+          "p95": 8.55762500000128
+        },
+        "stringifyMs": {
+          "median": 0.10116650000054506,
+          "p95": 0.1245840000010503
+        }
+      },
+      "samples": [
+        {
+          "contextMs": 344.20687499999985,
+          "indexMs": 15.528666000001976,
+          "projectionMs": 10.529167000000598,
+          "stringifyMs": 0.11129199999777484,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 251.9635419999977,
+          "indexMs": 12.606541000001016,
+          "projectionMs": 8.55762500000128,
+          "stringifyMs": 0.09704199999760021,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 255.54895899999974,
+          "indexMs": 12.127457999999024,
+          "projectionMs": 4.826625000001513,
+          "stringifyMs": 0.09987499999988358,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 251.88108400000056,
+          "indexMs": 13.693999999999505,
+          "projectionMs": 5.136915999999474,
+          "stringifyMs": 0.10350000000107684,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 239.7410830000008,
+          "indexMs": 10.958833000000595,
+          "projectionMs": 4.4635419999976875,
+          "stringifyMs": 0.10058300000309828,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 283.2563330000012,
+          "indexMs": 13.677416999998968,
+          "projectionMs": 6.180416999999579,
+          "stringifyMs": 0.09975000000122236,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 311.09791699999914,
+          "indexMs": 14.129125000003114,
+          "projectionMs": 5.266999999999825,
+          "stringifyMs": 0.10120800000004238,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 249.38933299999917,
+          "indexMs": 11.554124999998749,
+          "projectionMs": 4.747542000000976,
+          "stringifyMs": 0.10112500000104774,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 302.843832999999,
+          "indexMs": 12.799417000001995,
+          "projectionMs": 5.139957999999751,
+          "stringifyMs": 0.1020829999979469,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 239.84100000000035,
+          "indexMs": 11.5034169999999,
+          "projectionMs": 4.439249999999447,
+          "stringifyMs": 0.10825000000113505,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 278.85516700000153,
+          "indexMs": 14.060667000001558,
+          "projectionMs": 7.201832999999169,
+          "stringifyMs": 0.09429199999794946,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 240.33250000000044,
+          "indexMs": 13.188417000001209,
+          "projectionMs": 5.159874999997555,
+          "stringifyMs": 0.1639580000010028,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 235.35229199999958,
+          "indexMs": 11.260666999998648,
+          "projectionMs": 4.30266599999959,
+          "stringifyMs": 0.09591700000237324,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 262.97970799999894,
+          "indexMs": 12.31275000000096,
+          "projectionMs": 4.65087499999936,
+          "stringifyMs": 0.10004200000184937,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 240.6028750000005,
+          "indexMs": 11.140458000001672,
+          "projectionMs": 4.9810839999991,
+          "stringifyMs": 0.09775000000081491,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 262.19254100000035,
+          "indexMs": 11.901709000001574,
+          "projectionMs": 4.743166000000201,
+          "stringifyMs": 0.09979200000088895,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 274.405958000003,
+          "indexMs": 14.94170899999881,
+          "projectionMs": 6.7815410000002885,
+          "stringifyMs": 0.11675000000104774,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 238.99108299999716,
+          "indexMs": 12.427458000001934,
+          "projectionMs": 4.538667000000714,
+          "stringifyMs": 0.1068749999976717,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 245.7666250000002,
+          "indexMs": 12.062167000000045,
+          "projectionMs": 5.0410830000000715,
+          "stringifyMs": 0.1245840000010503,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        },
+        {
+          "contextMs": 244.2173330000005,
+          "indexMs": 11.017833000001701,
+          "projectionMs": 4.481833999998344,
+          "stringifyMs": 0.10399999999935972,
+          "bytes": 36879,
+          "tasks": 10000,
+          "specs": 2000,
+          "handoffs": 201
+        }
+      ],
+      "http": {
+        "firstObservation": {
+          "headersMs": 444.71195799999987,
+          "downloadMs": 0.15779200000179117,
+          "jsonMs": 0.175041999998939,
+          "totalMs": 445.0447920000006,
+          "bytes": 36879
+        },
+        "summary": {
+          "headersMs": {
+            "median": 253.19606300000123,
+            "p95": 295.6301249999997
+          },
+          "downloadMs": {
+            "median": 0.10077150000142865,
+            "p95": 0.15375000000130967
+          },
+          "jsonMs": {
+            "median": 0.13791700000001583,
+            "p95": 0.15574999999807915
+          },
+          "totalMs": {
+            "median": 253.53168749999895,
+            "p95": 295.87495899999703
+          }
+        },
+        "samples": [
+          {
+            "headersMs": 249.31866699999955,
+            "downloadMs": 0.15375000000130967,
+            "jsonMs": 0.13833299999896553,
+            "totalMs": 249.61074999999983,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 248.86829099999886,
+            "downloadMs": 0.0808340000003227,
+            "jsonMs": 0.1331659999996191,
+            "totalMs": 249.0822909999988,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 241.18875000000116,
+            "downloadMs": 0.08191599999918253,
+            "jsonMs": 0.12395900000046822,
+            "totalMs": 241.39462500000081,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 292.0885420000013,
+            "downloadMs": 0.07862499999828287,
+            "jsonMs": 0.12283300000126474,
+            "totalMs": 292.2900000000009,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 244.0091250000005,
+            "downloadMs": 0.07837499999732245,
+            "jsonMs": 0.1263330000001588,
+            "totalMs": 244.21383299999798,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 247.64308300000266,
+            "downloadMs": 0.0807089999980235,
+            "jsonMs": 0.1255830000009155,
+            "totalMs": 247.8493750000016,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 243.841124999999,
+            "downloadMs": 0.11058300000149757,
+            "jsonMs": 0.13383299999986775,
+            "totalMs": 244.08554100000038,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 338.34666599999764,
+            "downloadMs": 0.10233400000288384,
+            "jsonMs": 0.14770799999678275,
+            "totalMs": 338.5967079999973,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 263.8432090000024,
+            "downloadMs": 0.09349999999903957,
+            "jsonMs": 0.1404579999980342,
+            "totalMs": 264.07716699999946,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 247.9678750000021,
+            "downloadMs": 0.09920899999997346,
+            "jsonMs": 0.15574999999807915,
+            "totalMs": 248.22283400000015,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 272.97108300000036,
+            "downloadMs": 0.09824999999909778,
+            "jsonMs": 0.13595899999927497,
+            "totalMs": 273.20529199999874,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 291.01179200000115,
+            "downloadMs": 0.11254100000223843,
+            "jsonMs": 0.13804199999867706,
+            "totalMs": 291.26237500000207,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 251.76633399999992,
+            "downloadMs": 0.238999999997759,
+            "jsonMs": 0.168416000000434,
+            "totalMs": 252.1737499999981,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 278.3498749999999,
+            "downloadMs": 0.09875000000101863,
+            "jsonMs": 0.13508400000137044,
+            "totalMs": 278.5837090000023,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 250.10104199999842,
+            "downloadMs": 0.10737499999959255,
+            "jsonMs": 0.1377920000013546,
+            "totalMs": 250.34620899999936,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 295.6301249999997,
+            "downloadMs": 0.1040419999990263,
+            "jsonMs": 0.1407919999983278,
+            "totalMs": 295.87495899999703,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 245.0267909999966,
+            "downloadMs": 0.10283400000116671,
+            "jsonMs": 0.1451660000020638,
+            "totalMs": 245.27479099999982,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 254.62579200000255,
+            "downloadMs": 0.12258300000030431,
+            "jsonMs": 0.1412499999969441,
+            "totalMs": 254.8896249999998,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 269.64337499999965,
+            "downloadMs": 0.1150420000012673,
+            "jsonMs": 0.14845799999966403,
+            "totalMs": 269.9068750000006,
+            "bytes": 36879
+          },
+          {
+            "headersMs": 291.6850830000003,
+            "downloadMs": 0.09112499999901047,
+            "jsonMs": 0.12600000000020373,
+            "totalMs": 291.9022079999995,
+            "bytes": 36879
+          }
+        ]
+      }
+    }
+  ]
+}

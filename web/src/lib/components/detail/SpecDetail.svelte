@@ -3,13 +3,15 @@
   import RelationWindow from "./RelationWindow.svelte";
   import NotFound from "./NotFound.svelte";
   import DocumentBody from "../DocumentBody.svelte";
-  import type {DetailLinkedTask,DetailRelatedHandoff, SpecDetailResult } from "../../../../../src/services/details.ts";
+  import type {DetailRelatedHandoff} from "../../../../../src/services/details.ts";
+  import type {BoundedSpecResult,SpecTaskRelationRow} from "../../../../../src/services/detail-relations.ts";
+  import type {RelationReader} from "../../inspector/relation-reader.ts";
   import type { SpecDetailActionResult } from "./types.ts";
 
-  let { detail, actionResult,presentation="page" } = $props<{ detail: SpecDetailResult; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>();
+  let { detail, actionResult,presentation="page",relationReader } = $props<{ detail: BoundedSpecResult;relationReader?:RelationReader; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>();
 
-  type GroupedTask={groupId:string;task:DetailLinkedTask};
-  const groupedTasks=$derived(detail.found?detail.linkedTaskGroups.flatMap((group:{id:string;tasks:DetailLinkedTask[]})=>group.tasks.map((task:DetailLinkedTask)=>({groupId:group.id,task}))):[]);
+  let questionForm=$state<HTMLFormElement>();
+  export function hasAnswerDraft():boolean{return !!questionForm&&new FormData(questionForm).getAll('answer').some(value=>typeof value==='string'&&value.length>0);}
   const statusIcons = {
     proposed: Sparkles,
     active: Orbit,
@@ -48,7 +50,7 @@
         <div class="meta-grid">
           <div>
             <span>Linked tasks</span>
-            <strong>{detail.linkedTasks.length}</strong>
+            <strong>{detail.linkedTasks.total}</strong>
           </div>
           <div>
             <span>Completion</span>
@@ -93,22 +95,22 @@
           <span>todo {detail.progress.todo}</span>
         </div>
 
-        {#if detail.linkedTasks.length === 0}
+        <RelationWindow window={detail.linkedTasks} name="linkedTasks" label="Linked tasks" baseHref={`/specs/${detail.spec.id}`} reader={relationReader}>
+{#snippet children(visible:readonly SpecTaskRelationRow[])}
+{#if visible.length===0}
           <p class="empty">This spec has no linked tasks yet.</p>
         {:else}
-          <RelationWindow items={groupedTasks} identityKey={`spec:${detail.spec.id}:linkedTasks`} name="linkedTasks" label="Linked tasks" fullHref={`/specs/${detail.spec.id}#linkedTasks`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly GroupedTask[])}
 <div class="group-stack">
             {#each detail.linkedTaskGroups as group}
-{@const tasks=visible.filter(entry=>entry.groupId===group.id).map(entry=>entry.task)}
+{@const tasks=visible.filter(entry=>entry.groupId===group.id)}
 {#if tasks.length}
               <section class="task-group">
                 <div class="group-head">
                   <p class="linked-id">{group.title}</p>
-                  <span class="mini-pill">{group.tasks.length}</span>
+                  <span class="mini-pill">{group.total}</span>
                 </div>
                 <div class="linked-list">
-                  {#each tasks as task}
+                  {#each tasks as task, occurrence (`${detail.linkedTasks.page}:${occurrence}:${task.id}`)}
                     <a class="linked-card" data-relation-item href={`/tasks/${task.id}`}>
                       <div class="linked-head">
                         <div>
@@ -132,9 +134,9 @@
             {/if}
 {/each}
           </div>
+{/if}
 {/snippet}
 </RelationWindow>
-        {/if}
       </article>
 
       <article class="panel">
@@ -162,13 +164,13 @@
             <h3>Related handoffs</h3>
           </div>
         </div>
-        {#if detail.relatedHandoffs.length === 0}
+        <RelationWindow window={detail.relatedHandoffs} name="relatedHandoffs" label="Related handoffs" baseHref={`/specs/${detail.spec.id}`} reader={relationReader}>
+{#snippet children(visible:readonly DetailRelatedHandoff[])}
+{#if visible.length===0}
           <p class="empty">No related handoffs were found for this spec yet.</p>
         {:else}
-          <RelationWindow items={detail.relatedHandoffs} identityKey={`spec:${detail.spec.id}:handoffs`} name="handoffs" label="Related handoffs" fullHref={`/specs/${detail.spec.id}#handoffs`} limited={presentation==='inspector'}>
-{#snippet children(visible:readonly DetailRelatedHandoff[])}
 <div class="handoff-list">
-            {#each visible as handoff}
+            {#each visible as handoff, occurrence (`${detail.relatedHandoffs.page}:${occurrence}:${handoff.id}`)}
               <div class="state-card" data-relation-item>
                 <p class="linked-id">{handoff.id}</p>
                 <strong>{handoff.title}</strong>
@@ -177,9 +179,9 @@
               </div>
             {/each}
           </div>
+{/if}
 {/snippet}
 </RelationWindow>
-        {/if}
       </article>
     </section>
 
@@ -197,7 +199,7 @@
         {:else if detail.openQuestions.length === 0}
           <p class="empty">This spec does not have open questions right now.</p>
         {:else}
-          <form class="question-form" method="POST" action="?/answerOpenQuestions">
+          <form bind:this={questionForm} class="question-form" method="POST" action="?/answerOpenQuestions">
             <div class="question-list">
               {#each detail.openQuestions as question}
                 <label class="question-card">

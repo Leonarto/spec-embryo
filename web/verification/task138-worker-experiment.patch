@@ -1,0 +1,44 @@
+--- a/src/repository.ts
++++ b/src/repository.ts
+@@ -0,0 +1 @@
++import {createWorkerDocumentReader} from './fresh-worker-reader.ts';
+@@ -403 +404,2 @@
+-  const readDocument = createDocumentReader();
++  const readDocument = createWorkerDocumentReader();
++  try {
+@@ -431,0 +434,2 @@
++
++  } finally { await readDocument.close(); }
+--- /dev/null
++++ b/src/fresh-worker-reader.ts
+@@ -0,0 +1,18 @@
++// EXPERIMENT ONLY. No persistent workers, parsed objects, hashes or cross-load byte state.
++import {Worker} from 'node:worker_threads';
++export const workerRuns:Array<{reads:number;bytes:number;batches:number;maxBatch:number;started:number;closed:number;errors:number}>=[];
++export function createWorkerDocumentReader(){
++ const stats={reads:0,bytes:0,batches:0,maxBatch:0,started:1,closed:0,errors:0};workerRuns.push(stats);
++ const worker=new Worker(new URL('./fresh-read-worker.mjs',import.meta.url),{trackUnmanagedFds:true});
++ type Job={ordinal:number;path:string;resolve:(bytes:Buffer)=>void;reject:(error:unknown)=>void};
++ const queue:Array<Job|undefined>=[],pending=new Map<number,Job>();let cursor=0,ordinal=0,busy=false,scheduled=false,closing=false,closePromise:Promise<void>|undefined;
++ function rejectAll(error:unknown){for(const job of pending.values())job.reject(error);pending.clear();while(cursor<queue.length)queue[cursor++]?.reject(error);queue.length=0;cursor=0;busy=false;}
++ function flush(){scheduled=false;if(closing||busy||cursor===queue.length)return;const jobs=[];while(jobs.length<64&&cursor<queue.length){const job=queue[cursor]!;queue[cursor++]=undefined;pending.set(job.ordinal,job);jobs.push({ordinal:job.ordinal,path:job.path});}if(cursor===queue.length){queue.length=0;cursor=0;}busy=true;stats.batches++;stats.maxBatch=Math.max(stats.maxBatch,jobs.length);worker.postMessage(jobs);}
++ const schedule=()=>{if(!scheduled){scheduled=true;queueMicrotask(flush);}};
++ worker.on('message',(entries:Array<{ordinal:number;bytes?:ArrayBuffer;error?:Record<string,unknown>}>)=>{if(closing)return;for(const entry of entries){const job=pending.get(entry.ordinal);if(!job)continue;pending.delete(entry.ordinal);if(entry.error){stats.errors++;const error=Object.assign(new Error(String(entry.error.message)),entry.error);job.reject(error);}else{const bytes=Buffer.from(entry.bytes!);stats.reads++;stats.bytes+=bytes.length;job.resolve(bytes);}}busy=false;schedule();});
++ worker.on('error',error=>{stats.errors++;rejectAll(error);});
++ worker.on('exit',code=>{if(!closing)rejectAll(new Error(`Fresh IO worker exited ${code}`));});
++ const read=(path:string)=>new Promise<Buffer>((resolve,reject)=>{if(closing){reject(new Error('Fresh IO worker closed'));return;}queue.push({ordinal:ordinal++,path,resolve,reject});schedule();});
++ read.close=()=>closePromise??= (async()=>{closing=true;rejectAll(new Error('Fresh IO worker closed'));await worker.terminate();await new Promise<void>(resolve=>setImmediate(resolve));stats.closed++;})();
++ return read;
++}
+--- /dev/null
++++ b/src/fresh-read-worker.mjs
+@@ -0,0 +1,9 @@
++// Experiment only: synchronous IO executes exclusively on this new worker thread.
++import {parentPort,isMainThread} from 'node:worker_threads';
++import {readFileSync} from 'node:fs';
++if(isMainThread||!parentPort)throw Error('Fresh byte IO worker requires a worker thread');
++parentPort.on('message',jobs=>{
++ const entries=[],transfers=[];
++ for(const {ordinal,path}of jobs){try{const raw=readFileSync(path),owned=Uint8Array.from(raw);entries.push({ordinal,bytes:owned.buffer});transfers.push(owned.buffer);}catch(error){entries.push({ordinal,error:{message:error.message,name:error.name,code:error.code,errno:error.errno,syscall:error.syscall,path:error.path}});}}
++ parentPort.postMessage(entries,transfers);
++});

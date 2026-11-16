@@ -1,3 +1,4 @@
+import {boundTaskDetail,boundSpecDetail,type BoundedTaskResult,type BoundedSpecResult} from '../src/services/detail-relations.ts';
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -15,8 +16,8 @@ describe("canonical detail presentation", () => {
   let root: string;
   let cache: string;
   let render: typeof Render;
-  let TaskDetail: Component<{ detail: TaskDetailResult;presentation?:"page"|"inspector" }>;
-  let SpecDetail: Component<{ detail: SpecDetailResult; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>;
+  let TaskDetail: Component<{ detail: BoundedTaskResult;presentation?:"page"|"inspector" }>;
+  let SpecDetail: Component<{ detail: BoundedSpecResult; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>;
   let taskDetail: TaskDetailResult;
   let specDetail: SpecDetailResult;
 
@@ -46,7 +47,7 @@ describe("canonical detail presentation", () => {
   });
 
   test("task rendering preserves canonical links, section order and existing domain values", () => {
-    const html = render(TaskDetail, { props: { detail: taskDetail } }).body;
+    const html = render(TaskDetail, { props: { detail: boundTaskDetail(taskDetail) } }).body;
     expect(html).toContain("Canonical task specimen"); expect(html).toContain("A shared task detail consumer.");
     expect(html).toContain('href="/tasks/TASK-001"'); expect(html).toContain('href="/tasks"');
     expect(html).toContain('href="/specs/SPEC-002"'); expect(html).toContain("implementer");
@@ -56,7 +57,7 @@ describe("canonical detail presentation", () => {
   });
 
   test("spec rendering preserves ordinary question POST names and source/Mermaid presentation", () => {
-    const html = render(SpecDetail, { props: { detail: specDetail } }).body;
+    const html = render(SpecDetail, { props: { detail: boundSpecDetail(specDetail) } }).body;
     expect(html).toContain("Canonical detail specimen"); expect(html).toContain("Progress and linked tasks");
     expect(html).toContain('method="POST"'); expect(html).toContain('action="?/answerOpenQuestions"');
     expect(html).toContain('name="question"'); expect(html).toContain('name="answer"');
@@ -67,35 +68,47 @@ describe("canonical detail presentation", () => {
   });
 
   test("inspector presentation keeps reader anchors/Mermaid but sends questions to canonical page",()=>{
-    const task=render(TaskDetail,{props:{detail:taskDetail,presentation:'inspector'}}).body;
+    const task=render(TaskDetail,{props:{detail:boundTaskDetail(taskDetail),presentation:'inspector'}}).body;
     for(const section of ['overview','relations','document'])expect(task).toContain(`data-detail-section="${section}"`);
-    const spec=render(SpecDetail,{props:{detail:specDetail,presentation:'inspector'}}).body;
+    const spec=render(SpecDetail,{props:{detail:boundSpecDetail(specDetail),presentation:'inspector'}}).body;
     for(const section of ['overview','relations','document','questions','decisions'])expect(spec).toContain(`data-detail-section="${section}"`);
     expect(spec).not.toContain('method="POST"');expect(spec).not.toContain('name="answer"');expect(spec).toContain('data-inspector-full');expect(spec).toContain('/specs/SPEC-002#open-questions');expect(spec).toContain('Diagram rendering requires JavaScript');expect(spec).toContain('Which ordinary POST remains canonical?');
   });
 
-  test("inspector SSR bounds each relation collection and exposes its complete canonical link",()=>{
+  test("inspector SSR bounds each relation collection and exposes real page links",()=>{
     if(!taskDetail.found)throw new Error('fixture task missing');
     const base=taskDetail.dependencies[0]!;
     const cards=Array.from({length:251},(_,i)=>({...base,id:`TASK-REL-${i+1}`,title:`Related task ${i+1}`}));
     const large={...taskDetail,dependencies:[],linkedSpecs:[],unmetDependencyIds:[],relatedHandoffs:[],blockingTasks:cards};
-    const inspector=render(TaskDetail,{props:{detail:large,presentation:'inspector'}}).body.replace(/<!--.*?-->/g,'');
-    expect(inspector.match(/data-relation-item/g)).toHaveLength(100);expect(inspector).toContain('1–100 of 251');expect(inspector).toContain(`/tasks/${taskDetail.task.id}#blockingTasks`);expect(inspector).not.toContain('<button');
-    const canonical=render(TaskDetail,{props:{detail:large}}).body;expect(canonical.match(/data-relation-item/g)).toHaveLength(251);
+    const inspector=render(TaskDetail,{props:{detail:boundTaskDetail(large),presentation:'inspector'}}).body.replace(/<!--.*?-->/g,'');
+    expect(inspector.match(/data-relation-item/g)).toHaveLength(100);expect(inspector).toContain('1–100 of 251');expect(inspector).toContain(`/tasks/${taskDetail.task.id}?rel.blockingTasks=2`);expect(inspector).not.toContain('<button');
+    const canonical=render(TaskDetail,{props:{detail:boundTaskDetail(large)}}).body;expect(canonical.match(/data-relation-item/g)).toHaveLength(100);
   });
   test("Spec inspector uses one100-task window across groups while keeping group metrics",()=>{
     if(!taskDetail.found||!specDetail.found)throw new Error('fixture missing');
     const base=taskDetail.dependencies[0]!,cards=Array.from({length:251},(_,i)=>({...base,id:`TASK-GROUP-${i+1}`,title:`Grouped task ${i+1}`}));
     const large={...specDetail,linkedTasks:cards,linkedTaskGroups:[{id:'a',title:'First group',tasks:cards.slice(0,80)},{id:'b',title:'Second group',tasks:cards.slice(80,170)},{id:'c',title:'Third group',tasks:cards.slice(170)}]};
-    const inspector=render(SpecDetail,{props:{detail:large,presentation:'inspector'}}).body.replace(/<!--.*?-->/g,'');
+    const inspector=render(SpecDetail,{props:{detail:boundSpecDetail(large),presentation:'inspector'}}).body.replace(/<!--.*?-->/g,'');
     expect(inspector.match(/data-relation-item/g)).toHaveLength(100);expect(inspector).toContain('First group');expect(inspector).toContain('Second group');expect(inspector).not.toContain('Third group');expect(inspector).toContain('>90</span>');expect(inspector).not.toContain('<button');
-    const canonical=render(SpecDetail,{props:{detail:large}}).body;expect(canonical.match(/data-relation-item/g)).toHaveLength(251);
+    const canonical=render(SpecDetail,{props:{detail:boundSpecDetail(large)}}).body;expect(canonical.match(/data-relation-item/g)).toHaveLength(100);
+  });
+
+  test("duplicate IDs retain occurrence identity across every page in both readers",()=>{
+    if(!taskDetail.found||!specDetail.found)throw Error('fixture');
+    const base=taskDetail.dependencies[0]!,cards=Array.from({length:205},()=>({...base,id:'TASK-DUP'}));
+    const task={...taskDetail,dependencies:cards,blockingTasks:[],linkedSpecs:[],relatedHandoffs:[],unmetDependencyIds:[]};
+    const spec={...specDetail,linkedTasks:cards,linkedTaskGroups:[{id:'todo',title:'Todo',tasks:cards}],relatedHandoffs:[]};
+    for(const page of [1,2,3]){
+      const expected=page===3?5:100;
+      const a=render(TaskDetail,{props:{detail:boundTaskDetail(task,{dependencies:page})}}).body,b=render(SpecDetail,{props:{detail:boundSpecDetail(spec,{linkedTasks:page})}}).body;
+      expect(a.match(/data-relation-item/g)).toHaveLength(expected);expect(b.match(/data-relation-item/g)).toHaveLength(expected);expect(a).toContain(`Page ${page} of 3`);expect(b).toContain(`Page ${page} of 3`);
+    }
   });
 
   test("existing action failures, saved counts and continuation evaluation remain visible", () => {
-    const error = render(SpecDetail, { props: { detail: specDetail, actionResult: { action: "answerOpenQuestions", error: "Add at least one answer before saving." } } }).body;
+    const error = render(SpecDetail, { props: { detail: boundSpecDetail(specDetail), actionResult: { action: "answerOpenQuestions", error: "Add at least one answer before saving." } } }).body;
     expect(error).toContain("Add at least one answer before saving."); expect(error).toContain("save error");
-    const success = render(SpecDetail, { props: { detail: specDetail, actionResult: {
+    const success = render(SpecDetail, { props: { detail: boundSpecDetail(specDetail), actionResult: {
       action: "answerOpenQuestions", success: true, savedCount: 1, answeredQuestions: ["Which ordinary POST remains canonical?"],
       evaluation: { status: "ready-for-follow-up", summary: "Ready for a reviewed follow-up.", nextActions: ["Review the recorded decision."],
         bundle: { recommended_prompt: "Use the canonical continuation context.", expected_output_format: { sections: [], propose_new_questions: true, propose_follow_up_tasks: true } } },
@@ -105,8 +118,8 @@ describe("canonical detail presentation", () => {
   });
 
   test("both missing-result variants share coherent not-found and list navigation", () => {
-    const task = render(TaskDetail, { props: { detail: { found: false, kind: "task", id: "TASK-MISSING", availableIds: ["TASK-001"] } } }).body;
-    const spec = render(SpecDetail, { props: { detail: { found: false, kind: "spec", id: "SPEC-MISSING", availableIds: ["SPEC-001"] } } }).body;
+    const task = render(TaskDetail, { props: { detail: { found: false, kind: "task", id: "TASK-MISSING" } } }).body;
+    const spec = render(SpecDetail, { props: { detail: { found: false, kind: "spec", id: "SPEC-MISSING" } } }).body;
     expect(task).toContain("Task TASK-MISSING was not found"); expect(task).toContain('href="/tasks"');
     expect(spec).toContain("Spec SPEC-MISSING was not found"); expect(spec).toContain('href="/specs"');
   });

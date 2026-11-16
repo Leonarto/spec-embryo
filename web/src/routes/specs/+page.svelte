@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {retainListRelationIntent} from "../../lib/inspector/list-relations.ts";
   import {onMount,untrack} from 'svelte';
   import {workspaceURL} from '../../lib/workspace/location.svelte.ts';
   import {goto} from '$app/navigation';
@@ -34,7 +35,7 @@
   const statusOptions=SPEC_STATUSES.map(value=>({value,label:value.replaceAll('_',' ')}));
   const scopes=[{value:'all',label:'All linked tasks'},{value:'unarchived',label:'Not archived'},{value:'archived',label:'Archived'}];
   function listIntent(){const value=normalizeViewQuery('specs',workspaceURL().searchParams);return JSON.stringify(value.list);}
-  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('specs',workspaceURL().searchParams);value.list={...query};update(value);return `/specs?${serializeViewQuery(value)}`;}
+  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('specs',workspaceURL().searchParams);value.list={...query};update(value);return `/specs?${retainListRelationIntent(workspaceURL().searchParams,serializeViewQuery(value))}`;}
   function navigate(url:string,replaceState=false){return goto(url,{replaceState,keepFocus:true,noScroll:true});}
   function sortChange(sort:TableSort[]){void navigate(href(value=>{value.list={...query,page:1,sort:sort.map(item=>({...item,key:item.key as SpecSortKey}))};}));}
   function sortHref(key:string){return href(value=>{value.list={...query,page:1,sort:toggleTableSort(query.sort,key).map(item=>({...item,key:item.key as SpecSortKey}))};});}

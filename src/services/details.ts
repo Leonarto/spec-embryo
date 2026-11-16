@@ -349,11 +349,11 @@ function buildCurrentStateRelevance(currentState: CurrentStateDocument, input: {
   };
 }
 
-function sortHandoffsDescending(handoffs: HandoffDocument[]): DetailRelatedHandoff[] {
+function sortHandoffsDescending(handoffs: HandoffDocument[], limit = 3): DetailRelatedHandoff[] {
   return handoffs
     .slice()
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt))
-    .slice(0, 3)
+    .slice(0, limit)
     .map((handoff) => ({
       id: handoff.id,
       title: handoff.title,
@@ -362,21 +362,21 @@ function sortHandoffsDescending(handoffs: HandoffDocument[]): DetailRelatedHando
     }));
 }
 
-function buildRelatedHandoffsForSpec(context: ProjectContext, spec: SpecDocument): DetailRelatedHandoff[] {
+export function buildRelatedHandoffsForSpec(context: ProjectContext, spec: SpecDocument, limit = 3): DetailRelatedHandoff[] {
   return sortHandoffsDescending(
     context.handoffs.filter(
       (handoff) =>
         handoff.relatedSpecIds.includes(spec.id) ||
         handoff.activeTaskIds.some((taskId) => spec.taskIds.includes(taskId)),
-    ),
+    ), limit,
   );
 }
 
-function buildRelatedHandoffsForTask(context: ProjectContext, task: TaskDocument): DetailRelatedHandoff[] {
+export function buildRelatedHandoffsForTask(context: ProjectContext, task: TaskDocument, limit = 3): DetailRelatedHandoff[] {
   return sortHandoffsDescending(
     context.handoffs.filter(
       (handoff) => handoff.activeTaskIds.includes(task.id) || handoff.relatedSpecIds.some((specId) => task.specIds.includes(specId)),
-    ),
+    ), limit,
   );
 }
 

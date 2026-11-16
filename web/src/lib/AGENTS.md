@@ -9,7 +9,7 @@ Shared UI helpers and components.
 - `components/detail/` shares canonical/inspector rendering; routes retain canonical question actions.
 - `DocumentBody` renders root-parsed blocks; Mermaid is a view enhancement with tested token mapping in `mermaid-theme.ts`.
 - `inspector/` owns persistent host, identity transport and verified history; docking never recreates its content.
-- `workspace/` controls refresh ownership and shell registration; canonical detail pages stay unregistered until draft-aware support. Keep snapshots immutable and commit shell/data atomically.
+- `workspace/` owns shell/list refresh; canonical detail readers own atomic snapshots and draft-aware refresh. Keep accepted data immutable.
 - `AnalysisFilters` accepts narrow filter DTOs. `SpecOptionsPicker` owns separate cancellable option requests; GET forms and page links work without JS.
 - `components/data-table/` owns generic bounded-page grid mechanics; `task-columns`/`spec-columns` supply sort/copy values; Spec status stays independent from progress.
 - `ListPager` links start from effective pagination; refresh preserves requested URL and announces unavailable pages/filters.

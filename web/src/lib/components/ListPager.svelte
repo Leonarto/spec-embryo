@@ -1,10 +1,11 @@
 <script lang="ts">
+  import {retainListRelationIntent} from "../inspector/list-relations.ts";
   import {workspaceURL} from '../workspace/location.svelte.ts';
   import type { WorkspaceListQuery,WorkspaceRoute } from "../../../../src/services/workspace-query.ts";
   import { normalizeViewQuery,serializeViewQuery } from "../../../../src/services/workspace-query.ts";
   let {result,route,compact=false}: {result:{totalMatching:number;page:number;requestedPage:number;pageSize:number;normalizedQuery:WorkspaceListQuery};route:WorkspaceRoute;compact?:boolean}=$props();
   const last=$derived(Math.max(1,Math.ceil(result.totalMatching/result.pageSize)));
-  function params(target:number){const query=normalizeViewQuery(route,workspaceURL().searchParams);query.list={...result.normalizedQuery,page:target};return serializeViewQuery(query);}
+  function params(target:number){const query=normalizeViewQuery(route,workspaceURL().searchParams);query.list={...result.normalizedQuery,page:target};return retainListRelationIntent(workspaceURL().searchParams,serializeViewQuery(query));}
   function href(target:number){return `${workspaceURL().pathname}?${params(target)}`;}
   const hidden=$derived([...params(1).entries()].filter(([name])=>name!=='pageSize'));
 </script>

@@ -1,0 +1,22 @@
+{
+  "phase": "guard",
+  "checks": [
+    {
+      "name": "Whitespace live form draft prevents auto refresh before transport",
+      "pass": true
+    },
+    {
+      "name": "Manual Retry rechecks draft and retains accepted window",
+      "pass": true
+    },
+    {
+      "name": "Typing while pending blocks full acceptance without reassociating answers",
+      "pass": true
+    },
+    {
+      "name": "Clearing answers then Retry explicitly accepts complete new snapshot",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

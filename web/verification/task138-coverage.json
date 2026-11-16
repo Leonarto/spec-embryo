@@ -1,0 +1,29 @@
+{
+  "all_instrumented": {
+    "files": 107,
+    "FNF": 1904,
+    "FNH": 1772,
+    "LF": 13456,
+    "LH": 12402,
+    "function_pct": 93.0672268907563,
+    "line_pct": 92.16706302021403
+  },
+  "product_src_web": {
+    "files": 102,
+    "FNF": 1736,
+    "FNH": 1618,
+    "LF": 12457,
+    "LH": 11625,
+    "function_pct": 93.20276497695852,
+    "line_pct": 93.32102432367344
+  },
+  "test_only": {
+    "files": 3,
+    "FNF": 161,
+    "FNH": 147,
+    "LF": 954,
+    "LH": 733,
+    "function_pct": 91.30434782608695,
+    "line_pct": 76.83438155136268
+  }
+}

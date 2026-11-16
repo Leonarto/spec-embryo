@@ -1,3 +1,4 @@
+import {parseRelationPages} from '../../../../../src/services/detail-relations.ts';
 import { error, fail } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { answerSpecOpenQuestions, loadProjectContext } from "../../../../../src/repository.ts";
@@ -6,12 +7,12 @@ import { buildSpecDetailData } from "../../../../../src/services/details.ts";
 import { resolveProjectRoot } from "../../../lib/server/project-root.ts";
 import { getWorkspaceDetail } from "../../../lib/server/detail.ts";
 
-export const load: PageServerLoad = async ({ params, locals }) => {
-  const {detail} = await getWorkspaceDetail(locals,{kind:"spec",id:params.specId});
+export const load: PageServerLoad = async ({ params, locals, url }) => {
+  const {detail,revision:sourceRevision,pages,generatedAt} = await getWorkspaceDetail(locals,{kind:"spec",id:params.specId},parseRelationPages('spec',url?.searchParams??new URLSearchParams()));
   if(!detail.found)error(404,`Spec ${params.specId} was not found in the current managed memory.`);
 
   return {
-    detail,
+    detail, sourceRevision, pages, generatedAt,
   };
 };
 

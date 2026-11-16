@@ -1,0 +1,182 @@
+{
+  "scope": "COPY-only exploratory spans,3warm5serial perkind; instrumentation overhead, no acceptance claim.",
+  "runtime": "v25.6.0",
+  "samples": [
+    {
+      "kind": "task",
+      "n": -3,
+      "warmup": true,
+      "start": 54.674416,
+      "end": 1190.679916,
+      "elapsed": 1136.0055,
+      "bytes": 29939,
+      "serverRequest": "1",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": -2,
+      "warmup": true,
+      "start": 1190.944666,
+      "end": 1509.517916,
+      "elapsed": 318.5732499999999,
+      "bytes": 29939,
+      "serverRequest": "2",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": -1,
+      "warmup": true,
+      "start": 1509.647458,
+      "end": 1867.01725,
+      "elapsed": 357.3697920000002,
+      "bytes": 29939,
+      "serverRequest": "3",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": 0,
+      "warmup": false,
+      "start": 1867.1405,
+      "end": 2183.011541,
+      "elapsed": 315.8710409999999,
+      "bytes": 29939,
+      "serverRequest": "4",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": 1,
+      "warmup": false,
+      "start": 2183.127625,
+      "end": 2562.562625,
+      "elapsed": 379.43499999999995,
+      "bytes": 29939,
+      "serverRequest": "5",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": 2,
+      "warmup": false,
+      "start": 2562.67725,
+      "end": 2925.91525,
+      "elapsed": 363.23799999999983,
+      "bytes": 29939,
+      "serverRequest": "6",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": 3,
+      "warmup": false,
+      "start": 2926.121708,
+      "end": 3258.293875,
+      "elapsed": 332.1721669999997,
+      "bytes": 29939,
+      "serverRequest": "7",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "task",
+      "n": 4,
+      "warmup": false,
+      "start": 3258.437625,
+      "end": 3604.383666,
+      "elapsed": 345.94604100000015,
+      "bytes": 29939,
+      "serverRequest": "8",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": -3,
+      "warmup": true,
+      "start": 3604.51325,
+      "end": 3971.570375,
+      "elapsed": 367.0571249999998,
+      "bytes": 36879,
+      "serverRequest": "9",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": -2,
+      "warmup": true,
+      "start": 3971.745666,
+      "end": 4301.733666,
+      "elapsed": 329.9880000000003,
+      "bytes": 36879,
+      "serverRequest": "10",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": -1,
+      "warmup": true,
+      "start": 4301.892375,
+      "end": 4651.617541,
+      "elapsed": 349.72516599999926,
+      "bytes": 36879,
+      "serverRequest": "11",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": 0,
+      "warmup": false,
+      "start": 4651.75425,
+      "end": 4948.086458,
+      "elapsed": 296.3322079999998,
+      "bytes": 36879,
+      "serverRequest": "12",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": 1,
+      "warmup": false,
+      "start": 4948.237291,
+      "end": 5313.411125,
+      "elapsed": 365.17383399999926,
+      "bytes": 36879,
+      "serverRequest": "13",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": 2,
+      "warmup": false,
+      "start": 5313.5505,
+      "end": 5637.883291,
+      "elapsed": 324.3327909999998,
+      "bytes": 36879,
+      "serverRequest": "14",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": 3,
+      "warmup": false,
+      "start": 5638.051333,
+      "end": 5972.141041,
+      "elapsed": 334.0897079999995,
+      "bytes": 36879,
+      "serverRequest": "15",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    },
+    {
+      "kind": "spec",
+      "n": 4,
+      "warmup": false,
+      "start": 5972.344833,
+      "end": 6253.186083,
+      "elapsed": 280.8412499999995,
+      "bytes": 36879,
+      "serverRequest": "16",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078"
+    }
+  ]
+}

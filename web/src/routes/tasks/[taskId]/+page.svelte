@@ -1,13 +1,18 @@
 <script lang="ts">
   import TaskDetail from "../../../lib/components/detail/TaskDetail.svelte";
-  import type { TaskDetailResult } from "../../../../../src/services/details.ts";
+  import type { BoundedTaskResult } from "../../../../../src/services/detail-relations.ts";
+  import type { WorkspaceDetailEnvelope } from "../../../../../src/services/workspace-detail.ts";
+  import CanonicalDetailReader from "../../../lib/components/detail/CanonicalDetailReader.svelte";
 
   let { data } = $props();
-  const detail = $derived(data.detail as TaskDetailResult);
+  const detail = $derived(data.detail as BoundedTaskResult);
+  const envelope=$derived({schemaVersion:2,kind:"task",id:detail.found?detail.task.id:detail.id,revision:data.sourceRevision,generatedAt:data.generatedAt,pages:data.pages,detail} as WorkspaceDetailEnvelope);
 </script>
 
-<svelte:head>
-  <title>{detail.found ? `${detail.task.id} · ${detail.task.title}` : `Missing task · ${detail.id}`}</title>
-</svelte:head>
 
-<TaskDetail {detail} />
+<CanonicalDetailReader {envelope}>
+{#snippet children(snapshot,relationReader)}
+{@const accepted=snapshot.detail as BoundedTaskResult}
+<TaskDetail detail={accepted} {relationReader} />
+{/snippet}
+</CanonicalDetailReader>

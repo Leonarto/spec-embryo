@@ -1,0 +1,20 @@
+{
+  "phase": "integration",
+  "checks": [
+    {
+      "name": "Task duplicate IDs have100 separate mounted occurrences",
+      "pass": true
+    },
+    {
+      "name": "Spec duplicate IDs have100 separate grouped mounted occurrences",
+      "pass": true
+    },
+    {
+      "name": "Ready client navigation adopts clamped seed without old-intent refetch",
+      "pass": true,
+      "detail": 0
+    }
+  ],
+  "pass": false,
+  "error": "Error: locator.click: Error: strict mode violation: locator('.filters-shell button[type=submit]') resolved to 2 elements:\n    1) <button type=\"submit\" aria-busy=\"false\" class=\"svelte-1ckowit\">Search</button> aka getByText('Search', { exact: true })\n    2) <button type=\"submit\" class=\"svelte-121yhyt\" form=\"workspace-filters\">Apply filters</button> aka getByRole('button', { name: 'Apply filters' })\n\nCall log:\n  - waiting for locator('.filters-shell button[type=submit]')\n"
+}

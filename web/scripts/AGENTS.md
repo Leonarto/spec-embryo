@@ -1,5 +1,7 @@
 # AGENTS
 
+- `detail-relations-*` separates functional checks, 5+20 latency gates and copy-only 3+5 diagnostics. Keep instrumentation out of product source; serialize benchmark windows.
+
 - Benchmarks generate documents only in disposable temp roots, never managed repo memory.
 - Separate filesystem/service timings, payload bytes, browser render timings, and build assets.
 - Report warmups/sample counts and failures honestly; first process read does not prove OS-cold disk performance.

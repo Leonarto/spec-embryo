@@ -1,0 +1,12 @@
+{
+  "scope": "Metadata retention probe, not latency/product gate; initial setup navigation /@vite/client returned404, so no zero-context claim for that navigation. Subsequent300+1constantfaviconGETs204 use the independently verified no-project-IO handler.",
+  "loaded": 300,
+  "retainedBefore": 250,
+  "latestBeforePresent": false,
+  "bufferFullEvents": 134,
+  "configuredAfter": 10000,
+  "retainedAfter": 251,
+  "latestAfterPresent": true,
+  "resizeFetchStatus": 204,
+  "oldAbortedGate": "Collector threw before returning results; original invalid field and partial numeric samples are not reconstructible and are not credited."
+}

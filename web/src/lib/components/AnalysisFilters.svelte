@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {parseRelationPages,writeRelationPages} from "../../../../src/services/detail-relations.ts";
   import {workspaceURL} from '../workspace/location.svelte.ts';
   import type { Snippet } from "svelte";
   import type { WorkspaceFilterData } from "../../../../src/services/workspace.ts";
@@ -15,6 +16,7 @@
   const query=$derived(normalizeViewQuery(route,workspaceURL().searchParams));
   const preserved=$derived.by(()=>{
     const params=serializeViewQuery(query);
+    if(query.inspect)writeRelationPages(params,query.inspect.kind,parseRelationPages(query.inspect.kind,workspaceURL().searchParams));
     for(const name of ['spec','q',...controlledNames])params.delete(name);
     if(route==='specs'){params.delete('status');params.delete('spec_status');}
     if(showTimeWindow)params.delete('window');
@@ -26,7 +28,9 @@
     const clean=normalizeViewQuery(route,new URLSearchParams());
     if(query.inspect){clean.inspect=query.inspect;clean.section=query.section;}
     clean.simple=query.simple;clean.view=query.view;
-    return `${workspaceURL().pathname}?${serializeViewQuery(clean)}`;
+    const params=serializeViewQuery(clean);
+    if(clean.inspect)writeRelationPages(params,clean.inspect.kind,parseRelationPages(clean.inspect.kind,workspaceURL().searchParams));
+    return `${workspaceURL().pathname}?${params}`;
   });
 </script>
 <section class="filters-shell" class:compact aria-label={title}>

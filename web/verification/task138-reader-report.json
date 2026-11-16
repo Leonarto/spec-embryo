@@ -1,0 +1,61 @@
+{
+  "phase": "reader",
+  "capturedAt": "2026-11-16T00:27:15.689Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "SSR clamp canonizes two collections after router completion",
+      "pass": true
+    },
+    {
+      "name": "Clamped initial seed makes no duplicate detail/relation fetch",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Each mounted relation remains at most100 rows",
+      "pass": true
+    },
+    {
+      "name": "Close removes every relation key and preserves list query",
+      "pass": true
+    },
+    {
+      "name": "Failed page3 retains page2 range and desired URL",
+      "pass": true
+    },
+    {
+      "name": "Failure message and Retry identify requested page3",
+      "pass": true
+    },
+    {
+      "name": "Retry changes only relation transport and retains document DOM",
+      "pass": true,
+      "detail": [
+        "http://127.0.0.1:5295/workspace-relations?kind=task&id=TASK-00001&relation=blockingTasks&page=3",
+        "http://127.0.0.1:5295/workspace-relations?kind=task&id=TASK-00001&relation=blockingTasks&page=3"
+      ]
+    },
+    {
+      "name": "Keyboard pagination preserves focus on activated control",
+      "pass": true
+    },
+    {
+      "name": "Final downstream occurrence is reachable",
+      "pass": true
+    },
+    {
+      "name": "Breakpoint retains accepted page and document subtree",
+      "pass": true
+    },
+    {
+      "name": "Spec10k final task reachable with100 total mounted across groups",
+      "pass": true
+    },
+    {
+      "name": "Full spec questions/source remain present",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

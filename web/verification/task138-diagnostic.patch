@@ -1,0 +1,153 @@
+--- /dev/null
++++ b/src/diagnostic.ts
+@@ -0,0 +1,23 @@
++// COPY-ONLY exploratory instrumentation. Never integrate this module into product.
++import {AsyncLocalStorage} from 'node:async_hooks';
++import {appendFileSync} from 'node:fs';
++import {performance,PerformanceObserver} from 'node:perf_hooks';
++const detailed=process.env.SPM_DETAIL_DIAGNOSTIC_MODE==='spans';
++const output=process.env.SPM_DETAIL_DIAGNOSTIC_LOG??'/private/tmp/spm-task138-diagnostic-events.jsonl';
++interface Sample {event:string;id:number;url:string;start:number;end?:number;mode:string;calls:Record<string,number>;syncMs:Record<string,number>;syncMax:Record<string,{ms:number;path?:string}>;asyncWallMs:Record<string,number>;docs:number;bytes:number;frontmatterBytes:number;readCalls:number;queueWaitMs:number;callbackWallMs:number;active:number;peak:number;collections:Record<string,number>;error?:string}
++const storage=new AsyncLocalStorage<Sample>();let sequence=0;
++const write=(value:unknown)=>appendFileSync(output,JSON.stringify(value)+'\n');
++write({event:'startup',mode:detailed?'spans':'counts',pid:process.pid,runtime:process.version,timeOrigin:performance.timeOrigin});
++if(detailed){const observer=new PerformanceObserver(list=>{for(const entry of list.getEntries())write({event:'gc',pid:process.pid,start:entry.startTime,duration:entry.duration,detail:(entry as unknown as {detail:unknown}).detail});});observer.observe({entryTypes:['gc']});}
++const add=(target:Record<string,number>,name:string,value=1)=>target[name]=(target[name]??0)+value;
++export function diagSync<T>(name:string,work:()=>T,path?:string):T {const sample=storage.getStore();if(!sample||!detailed)return work();const start=performance.now();add(sample.calls,name);try{return work();}finally{const ms=performance.now()-start;add(sample.syncMs,name,ms);if(!sample.syncMax[name]||ms>sample.syncMax[name]!.ms)sample.syncMax[name]={ms,path};}}
++export async function diagAsync<T>(name:string,work:()=>Promise<T>):Promise<T>{const sample=storage.getStore();if(!sample||!detailed&&name!=='context')return work();const start=performance.now();add(sample.calls,name);try{return await work();}finally{add(sample.asyncWallMs,name,performance.now()-start);}}
++export function diagQueued(){return detailed?performance.now():0;}
++export function diagReadStart(queued:number){const sample=storage.getStore();if(!sample||!detailed)return 0;sample.active++;sample.peak=Math.max(sample.peak,sample.active);sample.queueWaitMs+=performance.now()-queued;sample.readCalls++;return performance.now();}
++export function diagReadEnd(start:number,bytes?:Buffer){const sample=storage.getStore();if(!sample||!detailed)return;sample.active--;sample.callbackWallMs+=performance.now()-start;if(bytes)sample.bytes+=bytes.length;}
++export function diagDocument(path:string,bytes:Buffer){const sample=storage.getStore();if(!sample||!detailed)return;sample.docs++;const end=bytes.indexOf('\n+++',4);if(end>=0)sample.frontmatterBytes+=end-4;const group=/\/(tasks|specs|handoffs|session|org)\//.exec(path)?.[1]??'current';add(sample.collections,group);}
++export async function diagnosticRequest(url:string,work:()=>Promise<Response>):Promise<Response>{
++ const sample:Sample={event:'request',id:++sequence,url,start:performance.now(),mode:detailed?'spans':'counts',calls:{},syncMs:{},syncMax:{},asyncWallMs:{},docs:0,bytes:0,frontmatterBytes:0,readCalls:0,queueWaitMs:0,callbackWallMs:0,active:0,peak:0,collections:{}};
++ const cpu=process.cpuUsage(),elu=performance.eventLoopUtilization();
++ return storage.run(sample,async()=>{try{const response=await work();response.headers.set('x-spm-diagnostic-request',String(sample.id));return response;}catch(error){sample.error=String(error);throw error;}finally{sample.end=performance.now();write({...sample,pid:process.pid,elapsedMs:sample.end-sample.start,cpu:process.cpuUsage(cpu),elu:performance.eventLoopUtilization(elu)});}});
++}
+--- a/src/repository.ts
++++ b/src/repository.ts
+@@ -0,0 +1 @@
++import {diagAsync,diagSync,diagDocument} from './diagnostic.ts';
+@@ -119,0 +121,2 @@
++ return diagSync('git-command',()=>{
++
+@@ -129,0 +133,2 @@
++
++ });
+@@ -138,3 +143,5 @@
+-  const raw = bytes.toString("utf8");
+-  const { attributes, body } = parseTomlFrontmatter(raw);
+-  return registerDocumentSource(parser(filePath, attributes, body), bytes);
++  diagDocument(filePath,bytes);
++  const raw = diagSync("decode",()=>bytes.toString("utf8"),filePath);
++  const { attributes, body } = diagSync("frontmatter",()=>parseTomlFrontmatter(raw),filePath);
++  const document=diagSync("domain",()=>parser(filePath, attributes, body),filePath);
++  return diagSync("hash",()=>registerDocumentSource(document, bytes),filePath);
+@@ -341,0 +349,2 @@
++ return diagAsync('config',async ()=>{
++
+@@ -349,0 +359,2 @@
++
++ });
+@@ -375,0 +387,2 @@
++ return diagAsync('git',async ()=>{
++
+@@ -395,0 +409,2 @@
++
++ });
+@@ -400,0 +416,2 @@
++ return diagAsync('context',async ()=>{
++
+@@ -431,0 +449,2 @@
++
++ });
+--- a/src/storage.ts
++++ b/src/storage.ts
+@@ -0,0 +1 @@
++import {diagAsync,diagSync} from './diagnostic.ts';
+@@ -20,0 +22,2 @@
++ return diagAsync('read-utf8',async ()=>{
++
+@@ -21,0 +25,2 @@
++
++ });
+@@ -38,0 +44,2 @@
++ return diagAsync('directory-list',async ()=>{
++
+@@ -58,0 +66,2 @@
++
++ });
+--- a/src/document-reader.ts
++++ b/src/document-reader.ts
+@@ -0,0 +1 @@
++import {diagQueued,diagReadStart,diagReadEnd} from './diagnostic.ts';
+@@ -17 +18 @@
+-  type Job = { filePath: string; resolve: (bytes: Buffer) => void; reject: (error: unknown) => void };
++  type Job = { queued:number;filePath: string; resolve: (bytes: Buffer) => void; reject: (error: unknown) => void };
+@@ -30,0 +32 @@
++        const started=diagReadStart(job.queued);
+@@ -34 +36 @@
+-          settled = true;
++          settled = true;diagReadEnd(started,bytes);
+@@ -52 +54 @@
+-    queue.push({ filePath, resolve, reject });
++    queue.push({ queued:diagQueued(),filePath, resolve, reject });
+--- a/src/services/workspace.ts
++++ b/src/services/workspace.ts
+@@ -0,0 +1 @@
++import {diagAsync,diagSync} from '../diagnostic.ts';
+@@ -58,0 +60,2 @@
++ return diagSync('index',()=>{
++
+@@ -65,0 +69,2 @@
++
++ });
+--- a/src/services/workspace-detail.ts
++++ b/src/services/workspace-detail.ts
+@@ -0,0 +1 @@
++import {diagAsync,diagSync} from '../diagnostic.ts';
+@@ -14,0 +16,2 @@
++ return diagSync('projection',()=>{
++
+@@ -18,0 +22,2 @@
++
++ });
+--- /dev/null
++++ b/web/src/hooks.server.ts
+@@ -0,0 +1,2 @@
++import {diagnosticRequest} from '../../src/diagnostic.ts';
++export const handle=({event,resolve}:any)=>diagnosticRequest(event.request.method+' '+event.url.pathname+event.url.search,()=>resolve(event));
+--- a/web/src/routes/workspace-detail/+server.ts
++++ b/web/src/routes/workspace-detail/+server.ts
+@@ -0,0 +1 @@
++import {diagSync} from '../../../../src/diagnostic.ts';
+@@ -2 +3 @@
+-import {json} from '@sveltejs/kit';
++import {json as kitJSON} from '@sveltejs/kit';
+@@ -9,3 +10,3 @@
+-  if(!identity)return json({error:'Invalid inspector identity.'},{status:400,headers});
+-  try{const envelope=await getWorkspaceDetail(locals,identity,parseRelationPages(identity.kind,url.searchParams));return json(envelope,{status:envelope.detail.found?200:404,headers});}
+-  catch{return json({error:'Detail could not be loaded. Retry after checking the local project files.'},{status:500,headers});}
++  if(!identity)return measuredJSON({error:'Invalid inspector identity.'},{status:400,headers});
++  try{const envelope=await getWorkspaceDetail(locals,identity,parseRelationPages(identity.kind,url.searchParams));return measuredJSON(envelope,{status:envelope.detail.found?200:404,headers});}
++  catch{return measuredJSON({error:'Detail could not be loaded. Retry after checking the local project files.'},{status:500,headers});}
+@@ -12,0 +14,2 @@
++
++function measuredJSON(value:Parameters<typeof kitJSON>[0],options?:Parameters<typeof kitJSON>[1]){return diagSync('serialize',()=>kitJSON(value,options));}
+--- a/web/src/routes/workspace-relations/+server.ts
++++ b/web/src/routes/workspace-relations/+server.ts
+@@ -1 +1,2 @@
+-import {json} from '@sveltejs/kit';
++import {diagSync} from '../../../../src/diagnostic.ts';
++import {json as kitJSON} from '@sveltejs/kit';
+@@ -9 +10 @@
+- if(!identity||!isDetailRelation(identity.kind,relation))return json({error:'Invalid relation identity.'},{status:400,headers});
++ if(!identity||!isDetailRelation(identity.kind,relation))return measuredJSON({error:'Invalid relation identity.'},{status:400,headers});
+@@ -11,2 +12,2 @@
+-  return envelope?json(envelope,{headers}):json({schemaVersion:2,...identity,error:'Entity not found.'},{status:404,headers});
+- }catch{return json({error:'Relations could not be loaded. Retry after checking the local project files.'},{status:500,headers});}
++  return envelope?measuredJSON(envelope,{headers}):measuredJSON({schemaVersion:2,...identity,error:'Entity not found.'},{status:404,headers});
++ }catch{return measuredJSON({error:'Relations could not be loaded. Retry after checking the local project files.'},{status:500,headers});}
+@@ -13,0 +15,2 @@
++
++function measuredJSON(value:Parameters<typeof kitJSON>[0],options?:Parameters<typeof kitJSON>[1]){return diagSync('serialize',()=>kitJSON(value,options));}

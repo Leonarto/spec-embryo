@@ -5,7 +5,7 @@ title = "Implement Specs table and preserve question workflows"
 summary = "Implement spec table and drawer questions with conflict, dirty-form and refresh protection."
 status = "todo"
 spec_ids = ["SPEC-062"]
-depends_on = ["TASK-128", "TASK-137", "TASK-138", "TASK-140"]
+depends_on = ["TASK-128", "TASK-137", "TASK-140"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
@@ -195,3 +195,9 @@ TASK-140 implements the approved guarded-write backend in isolation while TASK-1
 ### Backend140 serializer compatibility clarification
 
 The guarded write preserves the latest canonical fields/body using existing serializeSpecDocument/applySpecAnswers normalization, not arbitrary source formatting or unknown TOML attributes. Unknown-attribute round-trip preservation was not supported by that serializer and is not added by140/129; do not claim it. The constructed returned nextSpec has no inherited source-provenance hash. Its additive committedRevision is the digest of exact written bytes; refreshed detail specRevision still comes from genuine parsed-file provenance. This keeps the backend checkpoint compatible without a generic writer refactor.
+
+## Functional prerequisite instead of performance serialization
+
+Astra approved consuming the independently reviewed TASK-138 functional transport checkpoint while its task remains in_progress for the unchanged 300 ms gate. Before starting129, root must record that checkpoint's exact commit below, then the reviewed serial TASK-130 host adapter commit. TASK-140 is already committed as `ab9212a`. This replaces only the dependency on138's task status; all v2 transport, snapshot, draft, revision and integration contracts remain.
+
+Functional138 commit: pending; host130 adapter commit: pending. Do not start shared editor/controller changes until both are recorded. TASK131 still depends on138,129,130 and cannot close with a failing performance gate. Read-path optimization may run in separate ownership; any DTO/query/controller change requires a serialized decision and consumer rereview.

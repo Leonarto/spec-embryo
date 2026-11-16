@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {retainListRelationIntent} from "../../lib/inspector/list-relations.ts";
   import {workspaceURL} from '../../lib/workspace/location.svelte.ts';
   import {onMount,untrack,tick} from 'svelte';
   import {page} from '$app/state';
@@ -42,7 +43,7 @@
   const presetLabels:Record<string,string>={unarchived:'Not archived',all:'All',archived:'Archived',in_progress:'In progress',review:'Review',blocked:'Blocked',custom:'Custom'};
   const preset=$derived(query.statuses.length===0?query.scope:query.scope==='unarchived'&&query.statuses.length===1&&['in_progress','review','blocked'].includes(query.statuses[0]!)?query.statuses[0]:'custom');
   function listIntent(){const value=normalizeViewQuery('tasks',workspaceURL().searchParams);return JSON.stringify([value.view,value.list]);}
-  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('tasks',workspaceURL().searchParams);value.list={...query};update(value);return `/tasks?${serializeViewQuery(value)}`;}
+  function href(update:(value:ReturnType<typeof normalizeViewQuery>)=>void){const value=normalizeViewQuery('tasks',workspaceURL().searchParams);value.list={...query};update(value);return `/tasks?${retainListRelationIntent(workspaceURL().searchParams,serializeViewQuery(value))}`;}
   function navigate(url:string,replaceState=false){return goto(url,{replaceState,keepFocus:true,noScroll:true});}
   function sortChange(sort:TableSort[]){void navigate(href(value=>{value.list={...query,page:1,sort:sort.map(item=>({...item,key:item.key as TaskSortKey}))};}));}
   function sortHref(key:string){return href(value=>{value.list={...query,page:1,sort:toggleTableSort(query.sort,key).map(item=>({...item,key:item.key as TaskSortKey}))};});}

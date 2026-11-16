@@ -13,6 +13,6 @@ Reusable deterministic product services.
 - Adoption surfaces share guidance and bounded snippets.
 - UI launch: packaged assets and the first available local port.
 - Workspace lists/options are bounded; `workspace-detail.ts` shares request context. No facade/global cache. Keys preserve URL intent; expose clamping/unavailable filters.
-- Source loading canonicalizes roots for opaque project keys; projectors do no identity IO. Detail wrappers stay compatible.
+- Loading owns root IO. `detail-relations.ts` bounds v2 windows; legacy stays full. Global revision differs from spec write tokens.
 - Dashboard/Timeline reuse projection-local indexes; first-match spec/card lookup differs intentionally from last-ID task lookup.
 - `spec-questions.ts`: shared normalization/errors; contradictory nonblank duplicates fail, equal trimmed answers preserve occurrences.
