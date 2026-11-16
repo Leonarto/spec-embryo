@@ -5,7 +5,7 @@ title = "Implement Specs table and preserve question workflows"
 summary = "Implement spec table and drawer questions with conflict, dirty-form and refresh protection."
 status = "todo"
 spec_ids = ["SPEC-062"]
-depends_on = ["TASK-128", "TASK-137", "TASK-138"]
+depends_on = ["TASK-128", "TASK-137", "TASK-138", "TASK-140"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
@@ -20,7 +20,7 @@ Implement P5 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Execution and review
 
-- Implementation: Sol 6.1 High (`ui_implementation`).
+- Implementation: Sol 6.1 High (`harness_implementation` after the serialized Timeline host patch); TASK-140 separately owns the backend write prerequisite.
 - Technical decisions and UX review: Astra High. Escalate uncovered design decisions before implementing them.
 - Run relevant automated checks and capture evidence required by the spec.
 - Move to `review` when implementation and evidence are ready; resolve findings before `done`.
@@ -102,3 +102,96 @@ TASK-137 owns the read-only Specs table consumer after TASK-127, in parallel wit
 # Independent design review
 
 A second Astra approved the final design after resolving recovery fields across separate no-JS POSTs, unverified shallow-history fallback, duplicate-question compatibility and confirmed-write rendering when the subsequent load fails. This approval is for the design only; implementation and browser/repository regressions remain required.
+
+
+## Integration addendum after138 — authoritative editor, latest reads and ownership
+
+This addendum closes concrete integration gaps found in the approved138 code; it does not reopen the existing129 mutation, conflict, recovery or history decisions.137's Specs table and128 activation are already implemented.129 must reuse them, not rebuild the table. Implementation starts only after138 is reviewed and committed.
+
+### Minimal migration of138's canonical draft guard
+
+138 currently protects raw nonempty DOM answers with SpecDetail.hasAnswerDraft and InspectorDetailResource.allowFullRefresh, checked before a full request, before response acceptance and before same-ID loader-seed adoption. Do not simply remove these checks or leave the raw DOM rule permanently blocking129's Review current version.
+
+Extract one persistent SpecQuestions/editor owner. Its independent state is: accepted base specRevision/questions and baseline values; current exact draft/recovery; latest observed question snapshot; frozen submitted snapshot and submission generation; saving/outcome/evaluation. Inputs and hidden submitted-question identity render from the base/draft model, NEVER directly from new detail.openQuestions. The incoming accepted detail is a latest-snapshot input. While dirty/saving/recovery exists, ingestion updates latest only and marks revision change; it cannot rebase, clear or remount the editor. Clean ingestion may adopt the new base. No generic asynchronous resource observer or second parser is required.
+
+Delegate138's guard to that registered model once ready; retain conservative protection before registration and on callback failure. Unlike138's raw form rule,129 uses its approved baseline-relative dirty definition, plus saving/unknown outcome/unresolved recovery. Do not read FormData as the authoritative guard once129 disables controls: disabled answer fields are omitted. Freeze submitted values/FormData BEFORE disabling controls. Error/409/echo values seed unsaved drafts, not a new 'clean' baseline merely because the server rendered them. Whitespace edits and recovery remain protected.
+
+A narrow compatible extension to the existing callback is sufficient: allowFullRefresh(candidate?: WorkspaceDetailEnvelope). Invocation without candidate is the request-start check; invoke with the validated candidate immediately before full acceptance or same-ID seed adoption. Existing zero-argument callbacks remain compatible. For a registered stable editor, a found same-entity candidate may be accepted while dirty/saving because the editor ingests it as latest and preserves its base. Keep the transport's identity/intent/epoch/revision checks and atomic metadata/all-window publication unchanged; never splice old questions into a new detail envelope to bypass the guard.
+
+A candidate that would remove the editor subtree (not-found/deleted spec, incompatible identity) cannot silently discard a protected draft. For same-entity missing while protected, record a latest-missing/recovery condition in the editor, reject replacement and retain the entire old reader snapshot/DOM. Let the user copy/discard or complete the existing guarded transition; do not pretend Save can recreate a deleted spec. Clean missing responses keep ordinary404 behavior. Explicit entity/route transitions remain governed by129's existing host guard. No key by revision, sourceRevision, docking mode or page may remount SpecQuestions. This applies to same-ID loader seeds as well as fetch responses.
+
+Distinct revisions remain mandatory: sourceRevision is the global atomic detail/relation snapshot identity; specRevision is the exact full-file SHA256 from canonical provenance. A global revision change alone does not rebase the form. A changed specRevision requires the approved explicit acknowledgement even if only surrounding text changed. Missing/null provenance may be shown, but cannot enable a guarded save or acknowledgement.
+
+### Save authority and late reads
+
+Before submit, freeze one submission's identity/base revision/exact pairs/recovery. Disable editing and duplicate submits; never make a transport abort stand for 'not written'. A confirmed action outcome belongs only to that editor/submission generation. Existing canonical action is still the sole write path.
+
+Return an additive committedRevision (or equivalently named field) computed from the exact serialized bytes successfully written by the repository operation, alongside existing result fields. Do not derive it from a later reload, global revision or an old WeakMap entry on the pre-write document. This allows a successful outcome to remain authoritative when optional post-write loading fails. Preserve the existing return fields and legacy clients.
+
+At confirmed success, and before the post-outcome reload, invalidate outstanding reader work from before the mutation: increment full/relation acceptance epochs/sequences, abort requests, clear their pending indicators, and retain the displayed snapshot/desired page vector. Provide one small public resource invalidation method and its reader/controller adapter; do not simulate entity clearing/select(undefined), which would unmount the editor, or call invalidateAll. No old full or relation response may become 'latest' after the committed result. Use the same invalidation before an explicit latest-state read following an ambiguous transport outcome. Never rank or order SHA hashes to guess freshness.
+
+On confirmed success, clear only the frozen successfully resolved answers, retain unmatched recovery, and preserve success/evaluation even when all questions disappear. Establish a new clean baseline only from the confirmed written question state/revision or an explicitly accepted subsequent snapshot; do not label arbitrary later reload data as the submitted version. If a fresh read has a different specRevision, it is a subsequent external version and follows the existing acknowledgement policy. A reload failure shows the confirmed result plus stale-data warning; it cannot turn success into failure or silently re-enable duplicate retry. An ambiguous transport failure retains the submitted draft and 'outcome not confirmed', reads latest for review without automatic resubmission, and never infers confirmed success solely from similar text.
+
+No-JS continues the existing request-local action-result contract. A committed action outcome is recorded before optional load/evaluation so page loading cannot erase it with500/404. Error/409 drafts and echo-only recovery must also survive their render; if the current spec is missing, show the submitted text as recovery with the truthful error status rather than fabricating an editable current revision. Native GET failure behavior stays unchanged. No new mutation endpoint or browser persistence.
+
+### Serialized integration and owners
+
+1. Complete and commit138, including its generic Filters/list relation carry. Do not bypass its remaining performance/runtime gates to start129.
+2. UI130 gets a short exclusive window on controller/InspectorHost only to integrate optional navigationScope with default page and the expanded Timeline label/registry contract. Timeline route URL builders reuse138's committed retainListRelationIntent for trace/mode/fallback/related-spec changes retaining the same inspect. Review the small shared-host delta and have root record/commit the agreed checkpoint before handing those files to129. Avoid importing uncommitted Timeline projection code into the generic host; default page behavior remains a live Tasks/Specs consumer.
+3. Transfer exclusive ownership of repository question guard, spec revision/detail validator changes, canonical action/types/load recovery, SpecQuestions/SpecDetail/CanonicalDetailReader, resource acceptance/invalidation and inspector leave guard to H129. UI130 keeps Timeline route/components/query/projector/tests/evidence and does not edit those shared detail/host files. Shared AGENTS and managed docs remain root-owned. Any additional shared fix is explicitly serialized through its owner.
+4. UI130 may finish its own browser/performance work against the reviewed committed host baseline or an exact isolated snapshot while H129 implements. Those measurements must identify their source and do not certify the new129 guard before it is frozen. Final combined129/130 inspector/history/trace/relations checks wait both reviewed commits;131 waits129,130 and138. No final combined claim from parallel mutable sources.
+
+Focused additions to129's already approved gates: dirty/saving metadata refresh updates latest without changing base/input/DOM; file-revision changes (including surrounding text) and global-only changes distinguish correctly; not-found candidate retains recovery while protected; POST/error echo is not accidentally clean; disabled controls cannot bypass protection; old full/relation response after confirmed or ambiguous write is discarded; success followed by refresh failure preserves committedRevision/outcome; later external version requires acknowledgement; same-ID seed and both page/drawer use the same owner. Existing real shallow Back/Forward, noJS409/second conflict, recovery and double-submit gates remain mandatory.
+
+### Independent integration-review closure I129-1 — loader seeds after write outcomes
+
+Resource request epochs alone do not protect props-based loader seeds: select(seed) otherwise creates a new epoch without knowing when that loader started. Use the following conservative policy instead of adding server loader provenance or trying to order hashes/timestamps.
+
+Maintain a browser-document-session seed barrier keyed by opaque projectKey + spec identity. On a confirmed write outcome OR an ambiguous transport outcome, synchronously mark that identity fenced before exposing the outcome or starting its controlled latest-state read, and invalidate pre-outcome resource full/relation work as specified above. The barrier is small client coordination metadata (identity/generation only), never a document/draft cache or persistent storage. Canonical and inspector seed adapters consult the same barrier.
+
+For a fenced identity, every subsequent loader-provided seed is ineligible for snapshot adoption and for the editor's latest/conflict preview, regardless of whether its SHA matches a known value or its generatedAt appears newer. Mark the incoming seed observed so it does not repeatedly trigger the same path; reconcile URL intent from the current URL, but do not invoke select with that seed, publish its metadata/questions/title, or classify it as a later external edit. Initial seeds of unfenced entities keep138's existing behavior.
+
+The fence persists for that entity for the entire browser document session: successful controlled refresh, explicit acknowledgement/rebase, another save, Close, reader unmount or A→B→A does not reopen seed acceptance. A real document reload/new browser document starts fresh. Sharing this identity-only barrier across reader instances prevents reopening the same spec through another presentation from bypassing it. Do not use localStorage or weaken normal138 seed freshness checks for unfenced identities.
+
+A fenced seed notification may request a controlled read for the current live identity and complete desired page vector, subject to129's editor preservation guard. Coalesce notifications into an already active controlled request with identical identity/intent; do not abort/restart it or create a retry loop merely because a stale seed arrived. If no matching request is active, one fresh controlled read may run. Its acceptance uses the resource's own post-barrier generation/epoch and the existing atomic guards. Completion does NOT lift the fence: a still-later loader seed remains ineligible and may only trigger another current read. Errors retain the prior snapshot/outcome and explicit Retry; there is no fallback to the rejected seed.
+
+At the outcome boundary, an editor latest candidate captured before that boundary is no longer an authoritative post-outcome review target. Preserve base/drafts/recovery and confirmed outcome; clear or visibly mark that old candidate stale until the controlled read supplies current data. An action's confirmed writtenRevision/question outcome remains tied to its submission generation and is not a loader seed; do not feed an action payload through an untyped seed bypass to evade this policy. Only controlled post-barrier reads may update the reader/latest external snapshot.
+
+Required deterministic integration tests use real seed-adoption glue, not only fetch mocks: loaderA starts before POST, outcomeB fences, then seedA arrives (a) before the controlled read returns and (b) after it returnedB; neither changes accepted/latest/base/title nor becomes an external-conflict candidate. Repeat for ambiguous outcome, same-ID seed with different rel.* intent, A→B→A and canonical↔inspector remount in the same document. Verify the initial unfenced SSR seed still avoids duplicate fetch, coalescing keeps one matching request, no rejected-seed fallback occurs on read failure, and a real new-document load may use a fresh SSR seed. No heavy tests are requested during138's performance window; these belong to129 implementation/review.
+
+
+# Independent integration design review
+
+# TASK-129 integration addendum review
+
+**Status: APPROVED.** I129-1 resolved; no outstanding design findings.
+
+Reviewed the complete integration addendum and final `Independent integration-review closure I129-1` in `/private/tmp/spm-task129-decisions.md`, against the previously approved 129 decisions and current 138 reader/resource/SpecDetail integration. This is design review only; no source edits, tests, builds, browser sessions or performance work were performed.
+
+## Resolved finding I129-1 — loader seeds bypass request epochs
+
+The original addendum invalidated resource-owned full/relation requests after a write outcome but did not establish provenance for props-based same-ID loader seeds. `CanonicalDetailReader.svelte:27` passes new props to select(seed), and `detail-resource.ts:29` creates a new epoch on adoption. A loader begun at revision A could therefore arrive after confirmed B and be misrepresented as a subsequent external version, even after a controlled refresh.
+
+The final closure resolves this through a shared browser-document-session barrier keyed by projectKey/spec identity. Confirmed or ambiguous outcome fences synchronously; subsequent loader seeds cannot affect snapshot, title, latest/conflict state or base. The barrier survives successful refresh, close, remount and A→B→A, and only a new browser document resets it. Same-intent notifications coalesce with active controlled reads; errors have no rejected-seed fallback. Pre-outcome latest candidates are explicitly stale. The added deterministic gates cover both late-arrival orderings, ambiguous outcomes and page/drawer remounts.
+
+Implementation must apply this existing decision to initialization as well as reactive seed adoption: current CanonicalDetailReader initializes readerState from its prop and renders a prop fallback before/without a snapshot. Fenced remounts must not transiently expose that seed. This is covered by the closure's prohibition on publishing metadata/title and its remount test, not a new scope requirement. The barrier remains browser-only identity metadata, never a server-global or persisted document cache.
+
+## Coherence of the remaining addendum
+
+- Persistent editor ownership separates accepted base, exact drafts/recovery, latest observation and frozen submission. Candidate-aware allowFullRefresh is a narrow compatible extension; found same-ID metadata can refresh without rebasing protected inputs. Missing candidates retain the protected reader/editor and truthful recovery state.
+- Freeze submission before disabling controls; POST error echoes remain unsaved. Separate global sourceRevision and exact specRevision prevent unrelated workspace changes from rebasing the form.
+- committedRevision derives from successfully written serialized bytes, independent of optional reload. Outcome-boundary invalidation retains the displayed snapshot and page intent while rejecting prior full/relation work. Confirmed success, unknown outcome, later external edits and stale reload failures remain distinct.
+- Existing no-JS request-local outcome/recovery handling, legacy tokenless callers and single canonical action remain intact. No new mutation endpoint, parser, generic observer or browser persistence is introduced.
+- Ownership is serialized: committed 138, then a separately reviewed/committed UI130 shared-host patch, then H129 owns the reader/controller/editor/action changes. Timeline-only work may continue on an identified isolated/committed baseline. Combined guard/history/relations/trace verification still waits both reviewed commits.
+
+Ready for implementation after the stated prerequisite commits and gates. Approval does not certify implementation, tests, TASK-130 mutable work or final performance.
+
+
+# Backend prerequisite split
+
+TASK-140 implements the approved guarded-write backend in isolation while TASK-138 completes its performance gate. TASK-129 consumes the reviewed and committed result; it owns source-revision transport, canonical action outcomes, editor/recovery UX and navigation guards. No concurrent edits to the inspector/controller are permitted during the serialized TASK-130 host integration.
+
+
+### Backend140 serializer compatibility clarification
+
+The guarded write preserves the latest canonical fields/body using existing serializeSpecDocument/applySpecAnswers normalization, not arbitrary source formatting or unknown TOML attributes. Unknown-attribute round-trip preservation was not supported by that serializer and is not added by140/129; do not claim it. The constructed returned nextSpec has no inherited source-provenance hash. Its additive committedRevision is the digest of exact written bytes; refreshed detail specRevision still comes from genuine parsed-file provenance. This keeps the backend checkpoint compatible without a generic writer refactor.

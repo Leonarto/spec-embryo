@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "SPEC-061 P0/P1, both UI tables, persistent inspector and measured fresh-read IO are approved and committed. Parallel work now targets Timeline and bounded detail relation transport/readers; guarded questions and final acceptance follow."
+summary = "Harness interoperability, both tables, persistent inspector and fresh-read IO are committed. Timeline has 67 independent browser checks; bounded details are functionally reviewed but miss the 300 ms volume gate. In parallel, TASK-140 prepares the question-write backend in isolation."
 focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation and Astra High technical/UX review; preserve completed SPEC-061 native-harness interoperability."
 active_spec_ids = ["SPEC-062"]
-active_task_ids = ["TASK-130", "TASK-138"]
+active_task_ids = ["TASK-130", "TASK-138", "TASK-140"]
 blocked_task_ids = []
-next_action_hints = ["Implement TASK-138 detail relation pages on committed fresh-read IO f7eee80 while TASK-130 builds Timeline with separate ownership.", "Serialize Timeline host navigationScope integration after TASK-138 releases the inspector; preserve all question-guard contracts for TASK-129.", "Commit TASK-138 before TASK-129; final TASK-131 validates both completed flows and measured end-to-end budgets."]
+next_action_hints = ["Diagnose TASK-138 server latency in an instrumented copy; do not waive its measured 300 ms gate.", "Implement TASK-140 guarded question writes against isolated bf542e1; integrate only after reviewed TASK-138 commits.", "Serialize TASK-130 shared-host integration before TASK-129 editor/guard work; TASK-131 verifies final combined behavior and package runtime."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-15T23:59:58.718Z"
+updated_at = "2026-11-16T03:58:37.289Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
