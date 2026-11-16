@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-140"
 title = "Guard spec question writes against revision conflicts"
 summary = "Implement the isolated backend subset of TASK-129: optional revision preconditions, locked atomic writes and exact committed revision, preserving legacy callers."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-139"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-16T03:57:12.748Z"
+completed_at = "2026-11-16T12:24:52.027Z"
 tags = ["parallel-implementation", "questions"]
-updated_at = "2026-11-16T03:58:37.223Z"
+updated_at = "2026-11-16T12:24:52.027Z"
 +++
 
 # Execution and review
@@ -20,7 +21,7 @@ Implementation: Sol 6.1 High (`ui_implementation`) in an isolated exact bf542e1 
 
 # Verification record
 
-Isolated implementation is in progress against bf542e1. Initial writer/repository target passes 29 tests / 185 assertions; independent review and integration remain pending. This is the approved backend subset of TASK-129, without added product scope.
+Implementation against bf542e1 is independently approved. Final focused suite passes 38 tests / 231 assertions; Svelte check reports zero errors/warnings. Astra independently passes 18 tests / 138 assertions and verifies all 17 payload hashes in `web/verification/task140-manifest.json` (e43a6d0163352bb7df35be440547d0495cf23890f49d27fcf619d9264269056a). The exact reviewed patch integrates without source overlap; all 17 staged payload hashes also match. Compatibility on the combined working tree passes the same 38 tests / 231 assertions and Svelte check 0/0. Scoped helper/question-service coverage is 100%; no whole-repository, browser or performance certification is inferred. See `web/verification/SPEC-062-TASK140.md`.
 
 # TASK-140 — independent guarded answer-write checkpoint
 
@@ -44,7 +45,7 @@ Legacy three-argument call and existing CLI/action tests still pass. Exact curre
 
 ## Integration order
 
-140 has no semantic dependency on138 detail transport: its current production consumers already exist. The isolation requirement is operational ownership and baseline protection. Default integration is after138's reviewed commit, then apply the exact reviewed140 patch to the then-current tree, resolve any repository overlap explicitly, rerun affected backend compatibility checks and commit140 before129 consumes it. If root elects earlier integration, it must first coordinate138's new exact repository/source baseline and repeat affected functional/build/performance gates; previous138 timings cannot certify different bytes. Never merge through a live perf/frozen-source window.
+140 has no semantic dependency on138 detail transport: its current production consumers already exist. Astra approved earlier integration after final140 review: apply its exact patch serially, inspect repository overlap, run affected backend compatibility checks on the combined tree and commit only140 files. Preserve138's isolated server/build/fixture/source snapshot unchanged. Its timings certify that snapshot, not the later combined product. TASK131 remains the final exact-source performance authority; repeat affected functional/build checks after integration, and remeasure earlier only if a read-path change or measured regression justifies it. Never mutate a live performance snapshot.
 
 129 consumes committed138 + committed140 + the reviewed serial130 host adapter checkpoint. It adds detail specRevision, HTTP mappings/noJS recovery and the persistent editor/leave guard on top; none belong in140. UI Sol may author140 while H diagnoses138, then ownership returns to root for review/integration and the previously agreed129 handoff. Root owns task/spec/current-state changes and commit sequencing.
 
@@ -63,3 +64,9 @@ The lease verifier stays local to this operation and checks the exact supplied l
 Reuse the existing serializeSpecDocument and applySpecAnswers behavior exactly. Here 'preserve unrelated content' means applying the answer operation to the latest loaded canonical fields and body, under the existing canonical serialization/Markdown normalization. It is not byte-for-byte formatting preservation or round-trip retention of unknown TOML attributes; the existing serializer drops unsupported attributes, and140 does not introduce a new generic serialization policy. Document this existing limitation rather than implying stronger preservation. Test known canonical fields and unrelated body sections from the latest loaded version against the existing serializer oracle.
 
 Return the newly constructed nextSpec without inheriting the loaded document's WeakMap provenance; documentSourceHash(nextSpec) remains null unless it is actually parsed/registered through the established provenance path. Do not attach the previous hash or invent parsed-source provenance for the constructed clone. committedRevision separately hashes the exact prepared Buffer successfully replaced on disk.129 can use that digest for the confirmed write outcome and actual subsequent parsed provenance for refreshed detail tokens.
+
+## Owned temporary-file verification
+
+Before replacement, verify that the temporary file remains regular, has the exclusively created device/inode, exact prepared size and SHA256, and a stable modification stamp. Open without following links or blocking on special files; bound the verification read to prepared length plus one. Recheck the verified stamp immediately before rename after target/lease checks. A failed temp ownership/byte check is an ordinary write error, with no committed result; cleanup must not remove a foreign replacement. This does not eliminate the documented final-check/rename race with noncooperating writers.
+
+Use a short constant `.spm-answer-<uuid>.tmp` name in the target directory so a valid long target basename cannot overflow the temporary filename. Focused deterministic regressions cover foreign replacement, same-inode mutation, post-verification changes, cleanup ownership and a valid long target name. No generic filesystem policy or additional hardening subsystem is introduced.

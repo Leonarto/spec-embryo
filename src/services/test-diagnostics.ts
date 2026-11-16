@@ -25,8 +25,8 @@ export function buildTestDiagnosticsBundle(): TestDiagnosticsBundle {
       {
         id: "filesystem-locking",
         risk: "filesystem",
-        files: ["tests/storage.test.ts", "tests/repository.test.ts"],
-        rerunCommand: "bun test tests/storage.test.ts tests/repository.test.ts",
+        files: ["tests/storage.test.ts", "tests/repository.test.ts", "tests/spec-answer-write.test.ts"],
+        rerunCommand: "bun test tests/storage.test.ts tests/repository.test.ts tests/spec-answer-write.test.ts",
         mitigation: "Keep lock tests isolated under temporary directories and avoid sharing lock paths between tests.",
       },
       {

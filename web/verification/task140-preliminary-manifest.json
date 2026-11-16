@@ -1,0 +1,30 @@
+{
+  "task": "TASK-140",
+  "status": "preliminary-readonly-for-static-review",
+  "scope": "Four core files frozen after final agreed temp ownership/digest/stamp guard and short same-directory temp name. Final guard/name tests not yet run during H1385+20; prior35/211 does not certify this delta. No further hardening round.",
+  "base": "bf542e101a2b998f0d6a3484f56fed19a86cd3fd",
+  "source": "/private/tmp/spm-task140-1zy1dr67",
+  "pendingTests": [
+    "successful temp writes followed by foreign replacement or same-inode mutation cannot commit different bytes",
+    "temp changes after digest verification are caught by last pre-rename stamp check",
+    "a valid long target basename does not overflow the atomic temp filename"
+  ],
+  "files": [
+    {
+      "path": "src/repository.ts",
+      "sha256": "fb6263c5b8e856dae839532a40e4b4880d6dce03f32f60ad7fbab6edb7ea51ba"
+    },
+    {
+      "path": "src/services/spec-questions.ts",
+      "sha256": "21cc2a432b07c8295b3445e72422c836ecd839a3ca275f21ba58f4854c37a355"
+    },
+    {
+      "path": "src/spec-answer-write.ts",
+      "sha256": "f486017b6df969bf496ec400c92b5ee43b069462ecaa321ea8f510c6a4822fc4"
+    },
+    {
+      "path": "tests/spec-answer-write.test.ts",
+      "sha256": "57b7c89b204fd187883c06f9bb01c49ed6e40c73b31b4652a70039fef28df883"
+    }
+  ]
+}

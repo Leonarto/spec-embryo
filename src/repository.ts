@@ -27,9 +27,10 @@ import { parseTomlFrontmatter, serializeTomlFrontmatter } from "./frontmatter.ts
 import { resolveProjectPaths } from "./paths.ts";
 import { ensureDir, listMarkdownFiles, pathExists, readUtf8, withLock, writeUtf8 } from "./storage.ts";
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
-import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
+import { applySpecAnswers, SpecQuestionWriteError, type SpecAnswerInput } from "./services/spec-questions.ts";
 import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
-import { registerDocumentSource } from "./services/document-provenance.ts";
+import { documentSourceHash, registerDocumentSource } from "./services/document-provenance.ts";
+import { commitSpecAnswers, specAnswerRevision } from "./spec-answer-write.ts";
 import { createDocumentReader, readDocumentBytes, type DocumentReader } from "./document-reader.ts";
 import { getProjectProfile, isProjectProfileName, writeProjectProfileManifest, type ProjectProfileName } from "./services/profiles.ts";
 import {
@@ -332,6 +333,8 @@ export interface AnswerSpecQuestionsResult {
   spec: SpecDocument;
   answeredQuestions: string[];
   remainingQuestions: string[];
+  committedRevision: string;
+  cleanupWarning?: string;
 }
 
 export function createDefaultConfig(rootDir: string): ProjectConfig {
@@ -664,31 +667,37 @@ export async function answerSpecOpenQuestions(
   rootDir: string,
   specId: string,
   answers: SpecAnswerInput[],
+  options: {expectedRevision?: string} = {},
 ): Promise<AnswerSpecQuestionsResult> {
-  const config = await readProjectConfig(rootDir);
-  const paths = resolveProjectPaths(rootDir, config);
-  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
-  const spec = specs.find((entry) => entry.id === specId);
-
-  if (!spec) {
-    throw new Error(`Spec not found: ${specId}`);
+  if (!options || typeof options !== "object" || Array.isArray(options)) {
+    throw new SpecQuestionWriteError("validation", "Expected revision must be a lowercase SHA256 digest.", "expected_revision");
   }
-
-  const applied = applySpecAnswers(spec.body, answers);
-  const updatedAt = new Date().toISOString();
-  const nextSpec: SpecDocument = {
-    ...spec,
-    body: applied.body,
-    updatedAt,
-  };
-
-  await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, updatedAt));
-
-  return {
-    spec: nextSpec,
-    answeredQuestions: applied.answeredQuestions,
-    remainingQuestions: applied.remainingQuestions.map((entry) => entry.question),
-  };
+  const expectedRevision = options.expectedRevision;
+  if (expectedRevision !== undefined && (typeof expectedRevision !== "string" || !/^[a-f0-9]{64}$/.test(expectedRevision))) {
+    throw new SpecQuestionWriteError("validation", "Expected revision must be a lowercase SHA256 digest.", "expected_revision");
+  }
+  const lockPath = join(resolveProjectPaths(rootDir).specpmDir, "locks", "document-create.lock");
+  let committedResult: AnswerSpecQuestionsResult | undefined;
+  try {
+    return await withLock(lockPath, async lease => {
+      const config = await readProjectConfig(rootDir), paths = resolveProjectPaths(rootDir, config);
+      const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+      const spec = specs.find(entry => entry.id === specId);
+      if (!spec) throw new SpecQuestionWriteError("not_found", `Spec not found: ${specId}`);
+      const revision = documentSourceHash(spec);
+      if (!revision) throw new Error("Spec answer source revision is unavailable.");
+      if (expectedRevision !== undefined && expectedRevision !== revision) throw new SpecQuestionWriteError("conflict", "Spec changed since these questions were loaded.", "revision");
+      const applied = applySpecAnswers(spec.body, answers), updatedAt = new Date().toISOString();
+      const nextSpec: SpecDocument = {...spec, body: applied.body, updatedAt};
+      const bytes = Buffer.from(serializeSpecDocument(nextSpec, updatedAt), "utf8");
+      const result: AnswerSpecQuestionsResult = {spec: nextSpec, answeredQuestions: applied.answeredQuestions, remainingQuestions: applied.remainingQuestions.map(entry => entry.question), committedRevision: specAnswerRevision(bytes)};
+      await commitSpecAnswers(spec.filePath, revision, bytes, lockPath, lease, () => { committedResult = result; });
+      return result;
+    });
+  } catch (error) {
+    if (committedResult) return {...committedResult, cleanupWarning: "Spec answers were saved, but lock cleanup failed."};
+    throw error;
+  }
 }
 
 export async function setTaskStatus(rootDir: string, taskId: string, status: TaskStatus): Promise<TaskDocument> {

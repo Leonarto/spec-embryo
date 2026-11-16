@@ -9,6 +9,9 @@ describe("test diagnostics", () => {
 
     expect(bundle.areas.some((area) => area.id === "git-worktree-state" && area.risk === "git")).toBe(true);
     expect(bundle.areas.some((area) => area.rerunCommand.includes("tests/storage.test.ts"))).toBe(true);
+    const locking = bundle.areas.find(area => area.id === "filesystem-locking")!;
+    expect(locking.files).toContain("tests/spec-answer-write.test.ts");
+    expect(locking.rerunCommand).toContain("tests/spec-answer-write.test.ts");
 
     const human = await runTestsCommand(process.cwd(), parseArgs(["tests", "diagnose"]));
     expect(human).toContain("Self-hosting test diagnostics");

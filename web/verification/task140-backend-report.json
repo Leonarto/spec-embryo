@@ -1,0 +1,62 @@
+{
+  "task": "TASK-140",
+  "status": "frozen-awaiting-final-manifest-verdict",
+  "scope": "Isolated backend checkpoint only. No shared source edits, readpool/context changes, detail DTO/action/editor/controller/URL/frontend implementation or generic lock changes. Root may integrate the reviewed write-only checkpoint before138 using serial overlap/compatibility checks;138measurement snapshot stays immutable.129 still waits138+140+serial host checkpoint.",
+  "source": {
+    "base": "bf542e101a2b998f0d6a3484f56fed19a86cd3fd",
+    "source": "/private/tmp/spm-task140-1zy1dr67",
+    "archiveSha256": "ecb33a2f35a4bdb977d10d5a9bb29e049d92c89e9921ec0698e5878a13693397",
+    "dependencies": "linked existing node_modules only; no install"
+  },
+  "baselineTrackedFiles": 675,
+  "tests": {
+    "command": "bun test --coverage tests/spec-answer-write.test.ts tests/repository.test.ts tests/spec-detail-actions.test.ts tests/spec-answer-evaluation.test.ts tests/test-diagnostics.test.ts",
+    "passed": 38,
+    "failed": 0,
+    "assertions": 231,
+    "files": 5,
+    "coverage": {
+      "All files": {
+        "functions": 53.73,
+        "lines": 62.31
+      },
+      "src/services/spec-questions.ts": {
+        "functions": 100.0,
+        "lines": 100.0
+      },
+      "src/spec-answer-write.ts": {
+        "functions": 100.0,
+        "lines": 100.0
+      }
+    },
+    "coverageScope": "Selected tests/imported files only, not overall repository coverage. Unrelated imported code and the frozen oracle are included in All files. No whole-repo80% claim from this selection."
+  },
+  "checks": {
+    "webCheck": "0errors/0warnings",
+    "agents": "PASS; services446/450tokens; tests342/350tokens; oracle61/350tokens",
+    "cliStartup": "bun run spm --help PASS",
+    "faultSync": "Controlled promises/spies, no sleeps as race synchronization",
+    "lockReleaseFailure": "Actual shared storage rm fault after confirmed rename; committed result/warning returned without target reread",
+    "finalTempGuard": "PASS: exclusive inode identity, exact size/digest, bounded length+1 read, stable observation and last pre-rename stamp; replacement/mutation/postverify-change regressions pass.",
+    "longTargetName": "PASS:243-byte target basename and short fixed-prefix UUID temp."
+  },
+  "semantics": {
+    "options": "expectedRevision undefined is optional omission; null/empty/nonstring/non64lowercasehex rejects before lock IO. Validated value is captured before awaits.",
+    "errors": "SpecQuestionWriteError code not_found/conflict/validation; content conflicts reason revision/question/target_changed; lock ownership/IO failures remain ordinary Error.",
+    "duplicateAnswers": "Blank pairs ignored per legacy; equal trimmed nonblank duplicates accepted; contradictory duplicates reject the entire write. Canonical order and repeated question occurrences retained.",
+    "result": "committedRevision hashes exact serialized/written Buffer; returned clone has no inherited provenance; cleanupWarning is additive only after confirmed commit.",
+    "compatibility": "Pinned bf542e1 serializer/question oracle validates current canonical metadata/body. Legacy formatting normalization and unknown-TOML-key omission remain unchanged."
+  },
+  "limits": [
+    "No filesystem compare-and-swap claim: noncooperating writers can race final observation and rename.",
+    "No byte-format/unknown-frontmatter roundtrip preservation guarantee beyond legacy serializer behavior.",
+    "No frontend action mapping/editor/dirty guard or post-save evaluator guarantee; those remain129.",
+    "No context IO/performance/browser claims. No full suite repeated for this isolated backend checkpoint."
+  ],
+  "logs": [
+    "/private/tmp/spm-task140-final-tests.log",
+    "/private/tmp/spm-task140-final-check.log",
+    "/private/tmp/spm-task140-agents.log",
+    "/private/tmp/spm-task140-cli-smoke.log"
+  ]
+}

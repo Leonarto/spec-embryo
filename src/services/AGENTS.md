@@ -12,7 +12,7 @@ Reusable deterministic product services.
 - Run handoffs use independent dirty-byte guards and a verified readonly lock lease. Only its exact untracked owner may be excluded; stale/incomplete guards never write. Evidence errors preserve process/native results.
 - Adoption surfaces share guidance and bounded snippets.
 - UI launch: packaged assets and the first available local port.
-- AGENTS budgets follow `.specpm/config.toml`.
 - Workspace lists/options are bounded; `workspace-detail.ts` shares request context. No facade/global cache. Keys preserve URL intent; expose clamping/unavailable filters.
 - Source loading canonicalizes roots for opaque project keys; projectors do no identity IO. Detail wrappers stay compatible.
 - Dashboard/Timeline reuse projection-local indexes; first-match spec/card lookup differs intentionally from last-ID task lookup.
+- `spec-questions.ts`: shared normalization/errors; contradictory nonblank duplicates fail, equal trimmed answers preserve occurrences.

@@ -2,12 +2,12 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "Harness interoperability, both tables, persistent inspector and fresh-read IO are committed. Timeline has 67 independent browser checks; bounded details are functionally reviewed but miss the 300 ms volume gate. In parallel, TASK-140 prepares the question-write backend in isolation."
+summary = "Harness interoperability, both tables, persistent inspector, fresh-read IO and guarded question-write backend are reviewed. Timeline has 67 independent browser checks; bounded details are functionally reviewed but still require a valid passing 300 ms browser measurement."
 focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation and Astra High technical/UX review; preserve completed SPEC-061 native-harness interoperability."
 active_spec_ids = ["SPEC-062"]
-active_task_ids = ["TASK-130", "TASK-138", "TASK-140"]
+active_task_ids = ["TASK-130", "TASK-138"]
 blocked_task_ids = []
-next_action_hints = ["Verify the reviewed TASK-138 favicon fix removes redundant context reads, then remeasure the unchanged 300 ms detail gate.", "Review TASK-140 guarded question writes against isolated bf542e1; integrate only after reviewed TASK-138 commits.", "Serialize TASK-130 shared-host integration before TASK-129 editor/guard work; TASK-131 verifies final combined behavior and package runtime."]
+next_action_hints = ["Finish the corrected TASK-138 browser measurement; favicon no longer causes redundant context reads and the 300 ms gate remains unchanged.", "Consume reviewed TASK-140 guarded writes in TASK-129 after TASK-138 and the serialized TASK-130 host adapter commit.", "Complete TASK-130 integration and TASK-129 editor/guards; TASK-131 verifies final combined behavior and package runtime."]
 last_handoff_id = "HANDOFF-20260402T163915"
 updated_at = "2026-11-16T03:58:37.289Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]

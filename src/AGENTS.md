@@ -18,7 +18,7 @@ Rules:
 - Put deterministic business logic in `engine.ts` or nearby helpers, not in command handlers.
 - Extend `domain.ts` first when new document types or config shapes appear.
 - Task lifecycle semantics live in the shared task document model; if completion, cancellation, or archival behavior changes, update task parsing and serialization together.
-- Spec/task creation that allocates new IDs or rewrites linked docs must stay serialized through the shared repository lock in `storage.ts`; do not add parallel create paths that bypass it.
+- Spec/task creation and guarded spec answers share storage’s document-create lock. `spec-answer-write.ts` owns answer-only temps, byte/lease checks and atomic rename; generic lock/writer policy stays unchanged.
 - `withLock` supplies a readonly lease; execution guards may exclude only its verified, untracked owner file during that apply, never all locks. Revalidate ownership before writing.
 - Changed-item summaries are shared resume/status context, not command-local text; if git change reporting changes, keep the parsed raw status code, normalized hint, truncation-note helpers, and human-readable summary shape consistent across `engine.ts`, backends, context-pack services, and status output.
 - Add or update nested `AGENTS.md` files if a subarea becomes meaningfully more complex.
