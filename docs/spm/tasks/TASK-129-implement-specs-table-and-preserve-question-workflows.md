@@ -29,7 +29,7 @@ Implement P5 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Verification record
 
-Pending implementation. No acceptance criterion is claimed complete yet.
+Action/provenance, client and UX partial reviews are approved. F129-action-1 and F129-client-1/2/3 are closed, including raw whitespace retention, no-JS controls and observable rapid-history interference. Browser evidence covers save/conflict/recovery, confirmed-write read failure, late seed/remount races, navigation and draft preservation; desktop/mobile/dialog visuals and final contrast changes are reviewed. The final isolated snapshot uses committed f8a7e1d plus this slice, excluding uncommitted Timeline work: 444 tests pass with 8990 assertions; Bun aggregate coverage is 92.50% functions / 93.60% lines, and Svelte check is 0/0. Final build, package checks and manifest review remain pending. This is not whole-task or performance acceptance; earlier failed progress evidence remains historical.
 
 
 # Detailed Astra implementation decisions

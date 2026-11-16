@@ -1,0 +1,1831 @@
+{
+  "scope": "Offline attribution from captured records only; no requests, instrumentation or retiming. All network entries remain in raw profile. First and measured row mappings derive serial same-kind order;4intermediatewarmup rowtimestamps were not serialized.",
+  "capturedRequestCount": 236,
+  "detailRequests": {
+    "task": 50,
+    "spec": 25
+  },
+  "samples": [
+    {
+      "kind": "task",
+      "iteration": -5,
+      "warmup": true,
+      "requestIndex": 118,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837387329,
+        "status": 200,
+        "end": 1794837387765,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 490.5,
+        "start": 10417.200000047684,
+        "end": 10907.700000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 450.89999985694885,
+        "transferBytes": 30239,
+        "resourceEntries": 132,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 450.89999985694885,
+      "clickTo2RAFFromBrowserMs": 490.5,
+      "residualClickMinusHTTPMs": 39.60000014305115
+    },
+    {
+      "kind": "task",
+      "iteration": -4,
+      "warmup": true,
+      "requestIndex": 160,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837387993,
+        "status": 200,
+        "end": 1794837388226,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "task",
+      "iteration": -3,
+      "warmup": true,
+      "requestIndex": 161,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837388367,
+        "status": 200,
+        "end": 1794837388571,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "task",
+      "iteration": -2,
+      "warmup": true,
+      "requestIndex": 162,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837388710,
+        "status": 200,
+        "end": 1794837388929,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "task",
+      "iteration": -1,
+      "warmup": true,
+      "requestIndex": 163,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837389059,
+        "status": 200,
+        "end": 1794837389315,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "task",
+      "iteration": 0,
+      "warmup": false,
+      "requestIndex": 164,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837389452,
+        "status": 200,
+        "end": 1794837389644,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 219.40000009536743,
+        "start": 12557.5,
+        "end": 12776.900000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 196.70000004768372,
+        "transferBytes": 30239,
+        "resourceEntries": 176,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 196.70000004768372,
+      "clickTo2RAFFromBrowserMs": 219.40000009536743,
+      "residualClickMinusHTTPMs": 22.700000047683716
+    },
+    {
+      "kind": "task",
+      "iteration": 1,
+      "warmup": false,
+      "requestIndex": 165,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837389784,
+        "status": 200,
+        "end": 1794837389980,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 221.30000019073486,
+        "start": 12890.099999904633,
+        "end": 13111.400000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 200.09999990463257,
+        "transferBytes": 30239,
+        "resourceEntries": 179,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 200.09999990463257,
+      "clickTo2RAFFromBrowserMs": 221.30000019073486,
+      "residualClickMinusHTTPMs": 21.200000286102295
+    },
+    {
+      "kind": "task",
+      "iteration": 2,
+      "warmup": false,
+      "requestIndex": 166,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837390117,
+        "status": 200,
+        "end": 1794837390313,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 222,
+        "start": 13223.400000095367,
+        "end": 13445.400000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 198.90000009536743,
+        "transferBytes": 30239,
+        "resourceEntries": 182,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 198.90000009536743,
+      "clickTo2RAFFromBrowserMs": 222,
+      "residualClickMinusHTTPMs": 23.09999990463257
+    },
+    {
+      "kind": "task",
+      "iteration": 3,
+      "warmup": false,
+      "requestIndex": 167,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837390442,
+        "status": 200,
+        "end": 1794837390636,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 220.39999985694885,
+        "start": 13548.700000047684,
+        "end": 13769.099999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 197.70000004768372,
+        "transferBytes": 30239,
+        "resourceEntries": 185,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 197.70000004768372,
+      "clickTo2RAFFromBrowserMs": 220.39999985694885,
+      "residualClickMinusHTTPMs": 22.699999809265137
+    },
+    {
+      "kind": "task",
+      "iteration": 4,
+      "warmup": false,
+      "requestIndex": 168,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837390778,
+        "status": 200,
+        "end": 1794837390973,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 222.40000009536743,
+        "start": 13883.5,
+        "end": 14105.900000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 199.10000014305115,
+        "transferBytes": 30239,
+        "resourceEntries": 188,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 199.10000014305115,
+      "clickTo2RAFFromBrowserMs": 222.40000009536743,
+      "residualClickMinusHTTPMs": 23.299999952316284
+    },
+    {
+      "kind": "task",
+      "iteration": 5,
+      "warmup": false,
+      "requestIndex": 169,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837391109,
+        "status": 200,
+        "end": 1794837391293,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 216.29999995231628,
+        "start": 14215.400000095367,
+        "end": 14431.700000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 188.39999985694885,
+        "transferBytes": 30239,
+        "resourceEntries": 191,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 188.39999985694885,
+      "clickTo2RAFFromBrowserMs": 216.29999995231628,
+      "residualClickMinusHTTPMs": 27.90000009536743
+    },
+    {
+      "kind": "task",
+      "iteration": 6,
+      "warmup": false,
+      "requestIndex": 170,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837391426,
+        "status": 200,
+        "end": 1794837391615,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 213.60000014305115,
+        "start": 14532.299999952316,
+        "end": 14745.900000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 192.70000004768372,
+        "transferBytes": 30239,
+        "resourceEntries": 194,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 192.70000004768372,
+      "clickTo2RAFFromBrowserMs": 213.60000014305115,
+      "residualClickMinusHTTPMs": 20.90000009536743
+    },
+    {
+      "kind": "task",
+      "iteration": 7,
+      "warmup": false,
+      "requestIndex": 171,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837391743,
+        "status": 200,
+        "end": 1794837391952,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 239.59999990463257,
+        "start": 14849.200000047684,
+        "end": 15088.799999952316,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 212.59999990463257,
+        "transferBytes": 30239,
+        "resourceEntries": 197,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 212.59999990463257,
+      "clickTo2RAFFromBrowserMs": 239.59999990463257,
+      "residualClickMinusHTTPMs": 27.0
+    },
+    {
+      "kind": "task",
+      "iteration": 8,
+      "warmup": false,
+      "requestIndex": 172,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837392084,
+        "status": 200,
+        "end": 1794837392294,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 240.5,
+        "start": 15190.5,
+        "end": 15431,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 213.29999995231628,
+        "transferBytes": 30239,
+        "resourceEntries": 200,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 213.29999995231628,
+      "clickTo2RAFFromBrowserMs": 240.5,
+      "residualClickMinusHTTPMs": 27.200000047683716
+    },
+    {
+      "kind": "task",
+      "iteration": 9,
+      "warmup": false,
+      "requestIndex": 173,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837392425,
+        "status": 200,
+        "end": 1794837392641,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 248,
+        "start": 15532.099999904633,
+        "end": 15780.099999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 219.70000004768372,
+        "transferBytes": 30239,
+        "resourceEntries": 203,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 219.70000004768372,
+      "clickTo2RAFFromBrowserMs": 248,
+      "residualClickMinusHTTPMs": 28.299999952316284
+    },
+    {
+      "kind": "task",
+      "iteration": 10,
+      "warmup": false,
+      "requestIndex": 174,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837392804,
+        "status": 200,
+        "end": 1794837393027,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 257.2000000476837,
+        "start": 15908.099999904633,
+        "end": 16165.299999952316,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 227.89999985694885,
+        "transferBytes": 30239,
+        "resourceEntries": 206,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 227.89999985694885,
+      "clickTo2RAFFromBrowserMs": 257.2000000476837,
+      "residualClickMinusHTTPMs": 29.300000190734863
+    },
+    {
+      "kind": "task",
+      "iteration": 11,
+      "warmup": false,
+      "requestIndex": 175,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837393183,
+        "status": 200,
+        "end": 1794837393879,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 747.1000001430511,
+        "start": 16283.099999904633,
+        "end": 17030.200000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 703.3999998569489,
+        "transferBytes": 30239,
+        "resourceEntries": 209,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 703.3999998569489,
+      "clickTo2RAFFromBrowserMs": 747.1000001430511,
+      "residualClickMinusHTTPMs": 43.700000286102295
+    },
+    {
+      "kind": "task",
+      "iteration": 12,
+      "warmup": false,
+      "requestIndex": 176,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837394080,
+        "status": 200,
+        "end": 1794837394426,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 384.5,
+        "start": 17183.099999904633,
+        "end": 17567.599999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 350,
+        "transferBytes": 30239,
+        "resourceEntries": 212,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 350,
+      "clickTo2RAFFromBrowserMs": 384.5,
+      "residualClickMinusHTTPMs": 34.5
+    },
+    {
+      "kind": "task",
+      "iteration": 13,
+      "warmup": false,
+      "requestIndex": 177,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837394628,
+        "status": 200,
+        "end": 1794837394912,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 313.2000000476837,
+        "start": 17733.700000047684,
+        "end": 18046.900000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 288.09999990463257,
+        "transferBytes": 30239,
+        "resourceEntries": 215,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 288.09999990463257,
+      "clickTo2RAFFromBrowserMs": 313.2000000476837,
+      "residualClickMinusHTTPMs": 25.100000143051147
+    },
+    {
+      "kind": "task",
+      "iteration": 14,
+      "warmup": false,
+      "requestIndex": 178,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837395094,
+        "status": 200,
+        "end": 1794837395333,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 275.40000009536743,
+        "start": 18199.599999904633,
+        "end": 18475,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 244,
+        "transferBytes": 30239,
+        "resourceEntries": 218,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 244,
+      "clickTo2RAFFromBrowserMs": 275.40000009536743,
+      "residualClickMinusHTTPMs": 31.40000009536743
+    },
+    {
+      "kind": "task",
+      "iteration": 15,
+      "warmup": false,
+      "requestIndex": 179,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837395595,
+        "status": 200,
+        "end": 1794837395931,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 361.7999999523163,
+        "start": 18700.200000047684,
+        "end": 19062,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 338.10000014305115,
+        "transferBytes": 30239,
+        "resourceEntries": 221,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 338.10000014305115,
+      "clickTo2RAFFromBrowserMs": 361.7999999523163,
+      "residualClickMinusHTTPMs": 23.699999809265137
+    },
+    {
+      "kind": "task",
+      "iteration": 16,
+      "warmup": false,
+      "requestIndex": 180,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837396120,
+        "status": 200,
+        "end": 1794837397058,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 979.2000000476837,
+        "start": 19226.599999904633,
+        "end": 20205.799999952316,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 937.7000000476837,
+        "transferBytes": 30239,
+        "resourceEntries": 224,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 937.7000000476837,
+      "clickTo2RAFFromBrowserMs": 979.2000000476837,
+      "residualClickMinusHTTPMs": 41.5
+    },
+    {
+      "kind": "task",
+      "iteration": 17,
+      "warmup": false,
+      "requestIndex": 181,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837397283,
+        "status": 200,
+        "end": 1794837398378,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 1131.3999998569489,
+        "start": 20383.700000047684,
+        "end": 21515.099999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 1082.5999999046326,
+        "transferBytes": 30239,
+        "resourceEntries": 227,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 1082.5999999046326,
+      "clickTo2RAFFromBrowserMs": 1131.3999998569489,
+      "residualClickMinusHTTPMs": 48.799999952316284
+    },
+    {
+      "kind": "task",
+      "iteration": 18,
+      "warmup": false,
+      "requestIndex": 182,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837398656,
+        "status": 200,
+        "end": 1794837399139,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 524,
+        "start": 21759.599999904633,
+        "end": 22283.599999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 488,
+        "transferBytes": 30239,
+        "resourceEntries": 230,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 488,
+      "clickTo2RAFFromBrowserMs": 524,
+      "residualClickMinusHTTPMs": 36
+    },
+    {
+      "kind": "task",
+      "iteration": 19,
+      "warmup": false,
+      "requestIndex": 183,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837399603,
+        "status": 200,
+        "end": 1794837399892,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 336.69999980926514,
+        "start": 22704.400000095367,
+        "end": 23041.099999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 293.89999985694885,
+        "transferBytes": 30239,
+        "resourceEntries": 233,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 293.89999985694885,
+      "clickTo2RAFFromBrowserMs": 336.69999980926514,
+      "residualClickMinusHTTPMs": 42.799999952316284
+    },
+    {
+      "kind": "spec",
+      "iteration": -5,
+      "warmup": true,
+      "requestIndex": 185,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837400570,
+        "status": 200,
+        "end": 1794837401128,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 613,
+        "start": 23668.599999904633,
+        "end": 24281.599999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 565,
+        "transferBytes": 37179,
+        "resourceEntries": 240,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 565,
+      "clickTo2RAFFromBrowserMs": 613,
+      "residualClickMinusHTTPMs": 48
+    },
+    {
+      "kind": "spec",
+      "iteration": -4,
+      "warmup": true,
+      "requestIndex": 189,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837401686,
+        "status": 200,
+        "end": 1794837401896,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "spec",
+      "iteration": -3,
+      "warmup": true,
+      "requestIndex": 191,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837402485,
+        "status": 200,
+        "end": 1794837402792,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "spec",
+      "iteration": -2,
+      "warmup": true,
+      "requestIndex": 193,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837403226,
+        "status": 200,
+        "end": 1794837403409,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "spec",
+      "iteration": -1,
+      "warmup": true,
+      "requestIndex": 195,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837403863,
+        "status": 200,
+        "end": 1794837404137,
+        "abort": null
+      },
+      "row": null,
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": null,
+      "clickTo2RAFFromBrowserMs": null,
+      "residualClickMinusHTTPMs": null
+    },
+    {
+      "kind": "spec",
+      "iteration": 0,
+      "warmup": false,
+      "requestIndex": 197,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837404706,
+        "status": 200,
+        "end": 1794837404939,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 268.89999985694885,
+        "start": 27811.400000095367,
+        "end": 28080.299999952316,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 235.59999990463257,
+        "transferBytes": 37179,
+        "resourceEntries": 265,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 235.59999990463257,
+      "clickTo2RAFFromBrowserMs": 268.89999985694885,
+      "residualClickMinusHTTPMs": 33.299999952316284
+    },
+    {
+      "kind": "spec",
+      "iteration": 1,
+      "warmup": false,
+      "requestIndex": 199,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837405400,
+        "status": 200,
+        "end": 1794837405654,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 285.39999985694885,
+        "start": 28505.200000047684,
+        "end": 28790.599999904633,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 258.69999980926514,
+        "transferBytes": 37179,
+        "resourceEntries": 270,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 258.69999980926514,
+      "clickTo2RAFFromBrowserMs": 285.39999985694885,
+      "residualClickMinusHTTPMs": 26.700000047683716
+    },
+    {
+      "kind": "spec",
+      "iteration": 2,
+      "warmup": false,
+      "requestIndex": 201,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837406122,
+        "status": 200,
+        "end": 1794837406375,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 284.40000009536743,
+        "start": 29229.099999904633,
+        "end": 29513.5,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 256.5,
+        "transferBytes": 37179,
+        "resourceEntries": 275,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 256.5,
+      "clickTo2RAFFromBrowserMs": 284.40000009536743,
+      "residualClickMinusHTTPMs": 27.90000009536743
+    },
+    {
+      "kind": "spec",
+      "iteration": 3,
+      "warmup": false,
+      "requestIndex": 203,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837406885,
+        "status": 200,
+        "end": 1794837407167,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 304.40000009536743,
+        "start": 29989,
+        "end": 30293.400000095367,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 278.40000009536743,
+        "transferBytes": 37179,
+        "resourceEntries": 280,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 278.40000009536743,
+      "clickTo2RAFFromBrowserMs": 304.40000009536743,
+      "residualClickMinusHTTPMs": 26.0
+    },
+    {
+      "kind": "spec",
+      "iteration": 4,
+      "warmup": false,
+      "requestIndex": 205,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837407699,
+        "status": 200,
+        "end": 1794837407949,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 276.5,
+        "start": 30804.5,
+        "end": 31081,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 254.10000014305115,
+        "transferBytes": 37179,
+        "resourceEntries": 285,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 254.10000014305115,
+      "clickTo2RAFFromBrowserMs": 276.5,
+      "residualClickMinusHTTPMs": 22.399999856948853
+    },
+    {
+      "kind": "spec",
+      "iteration": 5,
+      "warmup": false,
+      "requestIndex": 207,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837408331,
+        "status": 200,
+        "end": 1794837408593,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 288.7000000476837,
+        "start": 31437.299999952316,
+        "end": 31726,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 265.5,
+        "transferBytes": 37179,
+        "resourceEntries": 290,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 265.5,
+      "clickTo2RAFFromBrowserMs": 288.7000000476837,
+      "residualClickMinusHTTPMs": 23.200000047683716
+    },
+    {
+      "kind": "spec",
+      "iteration": 6,
+      "warmup": false,
+      "requestIndex": 209,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837409265,
+        "status": 200,
+        "end": 1794837409719,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 504.2999999523163,
+        "start": 32362.900000095367,
+        "end": 32867.200000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 463.40000009536743,
+        "transferBytes": 37179,
+        "resourceEntries": 295,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 463.40000009536743,
+      "clickTo2RAFFromBrowserMs": 504.2999999523163,
+      "residualClickMinusHTTPMs": 40.89999985694885
+    },
+    {
+      "kind": "spec",
+      "iteration": 7,
+      "warmup": false,
+      "requestIndex": 211,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837410711,
+        "status": 200,
+        "end": 1794837411542,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 812.4000000953674,
+        "start": 33805,
+        "end": 34617.40000009537,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 772.2999999523163,
+        "transferBytes": 37179,
+        "resourceEntries": 300,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 772.2999999523163,
+      "clickTo2RAFFromBrowserMs": 812.4000000953674,
+      "residualClickMinusHTTPMs": 40.10000014305115
+    },
+    {
+      "kind": "spec",
+      "iteration": 8,
+      "warmup": false,
+      "requestIndex": 213,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837411998,
+        "status": 200,
+        "end": 1794837412280,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 312.89999985694885,
+        "start": 35103.90000009537,
+        "end": 35416.799999952316,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 276.89999985694885,
+        "transferBytes": 37179,
+        "resourceEntries": 305,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 276.89999985694885,
+      "clickTo2RAFFromBrowserMs": 312.89999985694885,
+      "residualClickMinusHTTPMs": 36.0
+    },
+    {
+      "kind": "spec",
+      "iteration": 9,
+      "warmup": false,
+      "requestIndex": 215,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837412929,
+        "status": 200,
+        "end": 1794837413155,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 253.60000014305115,
+        "start": 36034.09999990463,
+        "end": 36287.700000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 227.60000014305115,
+        "transferBytes": 37179,
+        "resourceEntries": 310,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 227.60000014305115,
+      "clickTo2RAFFromBrowserMs": 253.60000014305115,
+      "residualClickMinusHTTPMs": 26.0
+    },
+    {
+      "kind": "spec",
+      "iteration": 10,
+      "warmup": false,
+      "requestIndex": 217,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837413593,
+        "status": 200,
+        "end": 1794837414054,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 493.69999980926514,
+        "start": 36699.90000009537,
+        "end": 37193.59999990463,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 453.40000009536743,
+        "transferBytes": 37179,
+        "resourceEntries": 315,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 453.40000009536743,
+      "clickTo2RAFFromBrowserMs": 493.69999980926514,
+      "residualClickMinusHTTPMs": 40.299999713897705
+    },
+    {
+      "kind": "spec",
+      "iteration": 11,
+      "warmup": false,
+      "requestIndex": 219,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837414623,
+        "status": 200,
+        "end": 1794837415006,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 413.39999985694885,
+        "start": 37726.700000047684,
+        "end": 38140.09999990463,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 388.2000000476837,
+        "transferBytes": 37179,
+        "resourceEntries": 320,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 388.2000000476837,
+      "clickTo2RAFFromBrowserMs": 413.39999985694885,
+      "residualClickMinusHTTPMs": 25.199999809265137
+    },
+    {
+      "kind": "spec",
+      "iteration": 12,
+      "warmup": false,
+      "requestIndex": 221,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837415467,
+        "status": 200,
+        "end": 1794837415702,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 262.7999999523163,
+        "start": 38574,
+        "end": 38836.799999952316,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 237.79999995231628,
+        "transferBytes": 37179,
+        "resourceEntries": 325,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 237.79999995231628,
+      "clickTo2RAFFromBrowserMs": 262.7999999523163,
+      "residualClickMinusHTTPMs": 25.0
+    },
+    {
+      "kind": "spec",
+      "iteration": 13,
+      "warmup": false,
+      "requestIndex": 223,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837416242,
+        "status": 200,
+        "end": 1794837416500,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 283.19999980926514,
+        "start": 39349.40000009537,
+        "end": 39632.59999990463,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 261.10000014305115,
+        "transferBytes": 37179,
+        "resourceEntries": 330,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 261.10000014305115,
+      "clickTo2RAFFromBrowserMs": 283.19999980926514,
+      "residualClickMinusHTTPMs": 22.09999966621399
+    },
+    {
+      "kind": "spec",
+      "iteration": 14,
+      "warmup": false,
+      "requestIndex": 225,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837417080,
+        "status": 200,
+        "end": 1794837417440,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 391.5,
+        "start": 40184,
+        "end": 40575.5,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 365.2000000476837,
+        "transferBytes": 37179,
+        "resourceEntries": 335,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 365.2000000476837,
+      "clickTo2RAFFromBrowserMs": 391.5,
+      "residualClickMinusHTTPMs": 26.299999952316284
+    },
+    {
+      "kind": "spec",
+      "iteration": 15,
+      "warmup": false,
+      "requestIndex": 227,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837417861,
+        "status": 200,
+        "end": 1794837418086,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 254.29999995231628,
+        "start": 40966.700000047684,
+        "end": 41221,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 228.19999980926514,
+        "transferBytes": 37179,
+        "resourceEntries": 340,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 228.19999980926514,
+      "clickTo2RAFFromBrowserMs": 254.29999995231628,
+      "residualClickMinusHTTPMs": 26.100000143051147
+    },
+    {
+      "kind": "spec",
+      "iteration": 16,
+      "warmup": false,
+      "requestIndex": 229,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837418534,
+        "status": 200,
+        "end": 1794837418737,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 238.5,
+        "start": 41640.700000047684,
+        "end": 41879.200000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 207.10000014305115,
+        "transferBytes": 37179,
+        "resourceEntries": 345,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 207.10000014305115,
+      "clickTo2RAFFromBrowserMs": 238.5,
+      "residualClickMinusHTTPMs": 31.399999856948853
+    },
+    {
+      "kind": "spec",
+      "iteration": 17,
+      "warmup": false,
+      "requestIndex": 231,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837419391,
+        "status": 200,
+        "end": 1794837419709,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 355,
+        "start": 42496.90000009537,
+        "end": 42851.90000009537,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 321.7999999523163,
+        "transferBytes": 37179,
+        "resourceEntries": 350,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 321.7999999523163,
+      "clickTo2RAFFromBrowserMs": 355,
+      "residualClickMinusHTTPMs": 33.200000047683716
+    },
+    {
+      "kind": "spec",
+      "iteration": 18,
+      "warmup": false,
+      "requestIndex": 233,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837420368,
+        "status": 200,
+        "end": 1794837420573,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 245,
+        "start": 43470.90000009537,
+        "end": 43715.90000009537,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 210.5,
+        "transferBytes": 37179,
+        "resourceEntries": 355,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 210.5,
+      "clickTo2RAFFromBrowserMs": 245,
+      "residualClickMinusHTTPMs": 34.5
+    },
+    {
+      "kind": "spec",
+      "iteration": 19,
+      "warmup": false,
+      "requestIndex": 235,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=spec&id=SPEC-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837421109,
+        "status": 200,
+        "end": 1794837421329,
+        "abort": null
+      },
+      "row": {
+        "renderMs": 251.40000009536743,
+        "start": 44212.799999952316,
+        "end": 44464.200000047684,
+        "trusted": true,
+        "rows": 100,
+        "httpMs": 225.79999995231628,
+        "transferBytes": 37179,
+        "resourceEntries": 360,
+        "matchingEntries": 1,
+        "bufferFullEvents": 0
+      },
+      "mappingBasis": "Derived from serial collector execution and kind/order; exact sample\u2192request absolute-clock synchronization was not retained.",
+      "httpDurationFromBrowserMs": 225.79999995231628,
+      "clickTo2RAFFromBrowserMs": 251.40000009536743,
+      "residualClickMinusHTTPMs": 25.600000143051147
+    }
+  ],
+  "specPreparationTaskRequests": [
+    {
+      "iteration": -5,
+      "requestIndex": 184,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837400054,
+        "status": 200,
+        "end": 1794837400424,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": -4,
+      "requestIndex": 188,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837401303,
+        "status": 200,
+        "end": 1794837401595,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": -3,
+      "requestIndex": 190,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837402047,
+        "status": 200,
+        "end": 1794837402395,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": -2,
+      "requestIndex": 192,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837402974,
+        "status": 200,
+        "end": 1794837403160,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": -1,
+      "requestIndex": 194,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837403522,
+        "status": 200,
+        "end": 1794837403770,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 0,
+      "requestIndex": 196,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837404296,
+        "status": 200,
+        "end": 1794837404628,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 1,
+      "requestIndex": 198,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837405071,
+        "status": 200,
+        "end": 1794837405317,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 2,
+      "requestIndex": 200,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837405788,
+        "status": 200,
+        "end": 1794837406033,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 3,
+      "requestIndex": 202,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837406505,
+        "status": 200,
+        "end": 1794837406793,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 4,
+      "requestIndex": 204,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837407336,
+        "status": 200,
+        "end": 1794837407599,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 5,
+      "requestIndex": 206,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837408063,
+        "status": 200,
+        "end": 1794837408247,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 6,
+      "requestIndex": 208,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837408714,
+        "status": 200,
+        "end": 1794837409150,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 7,
+      "requestIndex": 210,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837409884,
+        "status": 200,
+        "end": 1794837410570,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 8,
+      "requestIndex": 212,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837411648,
+        "status": 200,
+        "end": 1794837411903,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 9,
+      "requestIndex": 214,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837412441,
+        "status": 200,
+        "end": 1794837412822,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 10,
+      "requestIndex": 216,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837413266,
+        "status": 200,
+        "end": 1794837413501,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 11,
+      "requestIndex": 218,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837414204,
+        "status": 200,
+        "end": 1794837414511,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 12,
+      "requestIndex": 220,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837415129,
+        "status": 200,
+        "end": 1794837415385,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 13,
+      "requestIndex": 222,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837415896,
+        "status": 200,
+        "end": 1794837416165,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 14,
+      "requestIndex": 224,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837416609,
+        "status": 200,
+        "end": 1794837416988,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 15,
+      "requestIndex": 226,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837417560,
+        "status": 200,
+        "end": 1794837417776,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 16,
+      "requestIndex": 228,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837418226,
+        "status": 200,
+        "end": 1794837418451,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 17,
+      "requestIndex": 230,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837418875,
+        "status": 200,
+        "end": 1794837419287,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 18,
+      "requestIndex": 232,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837419874,
+        "status": 200,
+        "end": 1794837420268,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    },
+    {
+      "iteration": 19,
+      "requestIndex": 234,
+      "request": {
+        "url": "http://127.0.0.1:5310/workspace-detail?kind=task&id=TASK-00001",
+        "method": "GET",
+        "type": "fetch",
+        "start": 1794837420730,
+        "status": 200,
+        "end": 1794837421013,
+        "abort": null
+      },
+      "outsideMeasuredSpecClickInterval": true
+    }
+  ],
+  "limitations": [
+    "No responseStart/TTFB/body-separated timings were retained. Browser httpMs is ResourceTiming.duration.",
+    "No accepted-row timestamp was retained separately from click start and2RAF end.",
+    "Residual click-minusHTTP is not a pure render/CPU phase.",
+    "Page events can omit favicon/browser-generated requests; raw remaining0applies only captured same-origin requests.",
+    "Collector contextCountProof is a preserved prior functional trace statement, not fresh f8a7e1dserver instrumentation."
+  ]
+}

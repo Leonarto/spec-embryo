@@ -16,7 +16,7 @@ Working tracker for TASK-131, not final certification. Earlier reports apply to 
 | AC10 — complete accessible details | Functional TASK138 bounded-window/GET reports | Confirm final reader/editor composition retains all content and relation access | Pending |
 | AC11 — single guarded question mutation | TASK140 backend review and compatibility tests | TASK129 canonical action, JS/no-JS drafts/recovery/conflict/refresh/navigation matrix | Pending |
 | AC12 — Timeline semantics and trace | P6 core parity, diagnostics and 67 browser checks | Combined138/129 integration plus final source delta checks | Pending |
-| AC13 — performance and payload bounds | P2 payload checks; TASK138 exact-source timings | All final warm/cold/interaction/asset/memory budgets on registered10k/2k baseline | **Open FAIL: detail Task359ms / Spec326.1ms p95 exceeds300ms** |
+| AC13 — performance and payload bounds | P2 payload checks; TASK138 exact-source timings | All final warm/cold/interaction/asset/memory budgets on registered10k/2k baseline | **Open FAIL on f8a7e1d: detail Task979.2ms / Spec504.3ms p95 exceeds300ms** |
 | AC14 — tests, coverage and accessibility | TASK138 isolated393-pass suite, scoped coverage; TASK140 compatibility | Final combined suite, global coverage≥80% or explicitly agreed blocking deficit, zero serious/critical a11y violations and recorded manual review; assistive technology separately | Pending |
 | AC15 — packaged runtime and guidance | Prior package checks; TASK138 archive audit; current AGENTS checks | Both workspace launch and prepared-package/global-style binary `spm ui` from a fresh external project; final assets and guidance check | Pending |
 
@@ -35,7 +35,7 @@ All rows below await final combined source/runtime/fixture identification and li
 | Application/browser-cold list | Per-route p95≤2.5s; loading state visible if waiting>150ms; OS cache uncontrolled | Pending |
 | Grid click/key handling | p95≤50ms | Pending |
 | Sustained scroll | No main-thread task>100ms | Pending |
-| Warm detail | Per-kind p95≤300ms; skeleton≤100ms when waiting | Historical exact-source FAIL359/326.1ms; final pending |
+| Warm detail | Per-kind p95≤300ms; skeleton≤100ms when waiting | Latest f8a7e1d FAIL979.2/504.3ms; earlier359/326.1ms retained; final pending |
 | Filter feedback/result | Local feedback≤100ms; server-result p95≤1s plus150ms debounce | Pending |
 | Mounted data rows | Table≤200; virtual Timeline≤80 at reference viewport | Pending |
 | Initial Tasks JavaScript | Revamp delta≤60KiB gzip against recorded baseline; Mermaid outside list chunk | Pending |
@@ -55,3 +55,5 @@ Record which earlier evidence remains valid and why; rerun affected final flows,
 | Empty/single/many rows and pathological text | Table, detail and Timeline browser evidence | Pending |
 
 The final report must retain exact row-count predicates at1440×900/1280×720, visible TSV ordering/formula protection and Tasks/Specs/Timeline inspector entry routes. Packaged smoke may use an isolated prefix/bin arrangement without changing the user's global installation, but must record the actual shipped invocation and packaged assets used.
+
+Latest detail gate: [post-memo browser report](task138-memo-browser-report.md), independently reviewed against its manifest. The single authorized copy-only diagnostic observes attribution and does not count as another acceptance run.
