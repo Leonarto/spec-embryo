@@ -96,3 +96,7 @@ Astra approved the two-file v2 helper and scoped browser proof. Fifteen determin
 ## Reviewed compiled-runtime runner
 
 The11-file runner/map freeze is independently approved in `web/verification/task131-precompiled-runner-final-review.md`. The actual small compiled browser smoke passes; process/dependency cleanup is verified. Twenty-eight focused tests pass154 assertions, including the corrected trusted event timestamp for skeleton latency. The original detail collector is unchanged. Missing paint data, global DOM listener counters, fixture separation and Timeline evidence reuse are explicit in the map. Technical approval covers one fixed detail → warm → cold → supplemental interaction → retention sequence after the orchestrator records final source/build/fixture/oracle identity and reserves exclusive owned resources. No performance result is claimed by preparation.
+
+## Budget-stopped final acceptance
+
+The user requested conserving tokens for other projects. Final compiled results and cleanup are preserved in `web/verification/task131-final-run/checkpoint.json`: detail/warm and loading FAIL; cold incomplete6/40; remaining supplemental/retention checks NOT RUN. No independent result review or global acceptance is claimed. All owned browser/server resources are closed. Further work waits a later continuation request; preserve all failures and partial samples.

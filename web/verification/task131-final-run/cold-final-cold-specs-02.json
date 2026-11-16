@@ -1,0 +1,83 @@
+{
+  "route": "specs",
+  "index": 2,
+  "warmup": false,
+  "ready": true,
+  "url": "http://127.0.0.1:65166/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+  "pageClosed": true,
+  "startedFromBlank": true,
+  "elapsedMs": 905.6000001430511,
+  "diagnosticCapturedAtMs": 909.5,
+  "visibilityState": "visible",
+  "hasFocus": true,
+  "paintEntries": [
+    {
+      "name": "first-paint",
+      "startTime": 768
+    },
+    {
+      "name": "first-contentful-paint",
+      "startTime": 768
+    }
+  ],
+  "paintObservation": "observed",
+  "navigationType": "navigate",
+  "activationStart": 0,
+  "prerendering": false,
+  "serviceWorkerController": false,
+  "pageshowPersisted": false,
+  "navigationURL": "http://127.0.0.1:65166/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+  "ttfbMs": 596.3000001907349,
+  "responseEndMs": 598.3000001907349,
+  "firstContentfulPaintMs": 768,
+  "firstShellAt": 667.8000001907349,
+  "firstLoadingAt": null,
+  "loadingVisibleWithin150ms": false,
+  "priorRequestCount": 0,
+  "blankBeyond150ms": true,
+  "loading150": {
+    "status": "FAIL",
+    "reason": "Fresh direct document had no response bytes at150ms",
+    "budgetMs": 150
+  },
+  "freshNavigationVerified": true,
+  "browser": {
+    "version": "157.0.8103.78",
+    "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/profile",
+    "browserPID": 18367,
+    "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "headless": true
+  },
+  "browserClosed": true,
+  "startup": {
+    "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+    "startupMs": 906.3429159999978,
+    "reportedArtifactValidationMs": 226,
+    "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+    "nodeVersion": "v25.6.0",
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "pid": 18342,
+    "listener": {
+      "pid": 18353,
+      "group": 18342,
+      "started": "Mon Nov 16 15:42:44 2026",
+      "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/web/runtime/server.mjs"
+    },
+    "url": "http://127.0.0.1:65166/"
+  },
+  "cleanup": {
+    "closed": true,
+    "integrity": {
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+      "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+      "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+    }
+  }
+}

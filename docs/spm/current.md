@@ -7,7 +7,7 @@ focus = "Complete SPEC-062 UI revamp with parallel Sol 6.1 High implementation a
 active_spec_ids = ["SPEC-062"]
 active_task_ids = ["TASK-138"]
 blocked_task_ids = []
-next_action_hints = ["Review and commit the compiled-runtime acceptance runner, then freeze the source for final measurements.", "Run final TASK138/TASK131 volume gates on the reviewed precompiled runtime with unchanged thresholds and no preload.", "Keep native200% zoom pending by the user choice and retain all historical performance failures."]
+next_action_hints = ["Respect the user budget stop: do not restart verification or optimization without a later continuation request.", "Resume from web/verification/task131-final-run/checkpoint.json; preserve valid failures and incomplete cold evidence.", "Implementation is reviewed and committed; final performance acceptance remains open, with native200% user-deferred."]
 last_handoff_id = "HANDOFF-20260402T163915"
 updated_at = "2026-11-16T17:36:29.833Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
@@ -46,3 +46,9 @@ TASK-131's reusable component accessibility evidence is reviewed and committed a
 - The completed roadmap was intentionally grouped into a small number of coherent specs instead of ten isolated one-off tasks so future implementation can sequence related work with fewer cross-slice rewrites.
 - Managed document creation now relies on a shared repository lock; future create flows should preserve that invariant instead of adding unsynchronized ID allocation paths.
 - Changed-item reporting now has nine coupled invariants: identity-plus-path human formatting, one normalized `changeHint` for compact summaries, one compact raw `statusCode` for structured consumers, a managed-first presentation order limited to human status-style summaries, an explicit omitted-count signal when human-visible summary slices are truncated, shared helper logic so the truncation note wording stays aligned across status-style outputs, an explicit resume context-pack note when additional changed files were moved into offloaded detail, a matching `nextInspectIds` trail for the highest-value omitted changed files, and typed `nextInspect` entries so callers can distinguish doc refs from changed-file paths.
+
+## User budget checkpoint
+
+The user asked to conserve remaining tokens for other projects. The current pass stopped after closing the in-flight sample; no further diagnosis, optimization or verification is authorized by this checkpoint. Product implementation is complete through abf426c and harness preparation through3108b5c. The final compiled measurements report detail p95 Task725ms/Spec668.6ms (limit300), warm lists2231.5ms/1592.1ms (limit800), and initial loading150ms FAIL. Cold stopped at6/40 valid samples; no aggregate p95/PASS. Supplemental interactions and100-cycle retention were NOT RUN. These results are recorded but have not received independent result review.
+
+All owned browsers/servers are closed, the active lease is absent and recorded stop/dependency audits pass. Final fixture-after inventory was not run after the budget stop; initial inventories remain. The automatic reviewer rejected starting the next cold sample because it contradicted the stop instruction; no process or measurement resulted. Durable evidence: `web/verification/task131-final-run/checkpoint.json` and adjacent manifest/raw files. TASK138/131 and SPEC062 stay open; no further work should start merely to turn those statuses green.

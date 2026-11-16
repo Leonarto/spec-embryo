@@ -225,3 +225,7 @@ The bounded-admission COPY candidate is rejected after its single valid50-load c
 The authorized single9a446a1 gate is complete and independently verified: Task median233.3ms/p95398.0ms; Spec median253.2ms/p95523.5ms. Both fail300ms. All40 measured trusted opens reach100 accepted rows plus two frames;248 requests succeed, complete resource timings and source/fixture identities are preserved. See `web/verification/task138-final-detail-manifest.json`, summary and independent review. Browser/server/listener are closed. No retry on this unchanged runtime is authorized.
 
 TASK141 implements the separately designed and independently approved precompiled runtime. It consumes this task's functional checkpoint, not its performance status. After code/package review and commit, its material runtime change permits the defined final detail gate; the threshold is unchanged and no pass is promised. TASK138 stays in_progress.
+
+## Budget-stopped final acceptance
+
+The user requested conserving tokens for other projects. Final compiled results and cleanup are preserved in `web/verification/task131-final-run/checkpoint.json`: detail/warm and loading FAIL; cold incomplete6/40; remaining supplemental/retention checks NOT RUN. No independent result review or global acceptance is claimed. All owned browser/server resources are closed. Further work waits a later continuation request; preserve all failures and partial samples.

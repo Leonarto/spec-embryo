@@ -1,0 +1,19 @@
+{
+  "pin": {
+    "root": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u",
+    "commit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+    "source": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/source-3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+    "seedReused": true
+  },
+  "stage": {
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "sourceDigest": "7b1f540de1b5c96e5442f48b91c0d8dde509a93bfff4f7ae3cc9ce169747df8d",
+    "lockDigest": "a99d175ce307fe9fd043e2f8e75645dbb1e13c2740136899fe6cfa733d63d425",
+    "packageVersion": "0.3.1",
+    "nodeBuildVersion": "v25.6.0",
+    "manifestSHA256": "c5a9305fa7d9798ef6180ebea58e99937c4b01d91112eb87bfec527c618c18ac",
+    "sourceBuild": "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/build",
+    "stagedBuild": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/source-3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021/web/build",
+    "buildOccurred": false
+  }
+}

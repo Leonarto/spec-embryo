@@ -1,0 +1,245 @@
+{
+  "checkpoint": "/private/tmp/spm-task131-final-run/checkpoint.json",
+  "files": [
+    {
+      "path": "/private/tmp/spm-task131-final-run/checkpoint.json",
+      "bytes": 4094,
+      "sha256": "b7f509cd7428b73a4c8543e8e52d3c80a76d565865bf49bb8797a96f1d153baf"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-01-tool.json",
+      "bytes": 17404,
+      "sha256": "9225b0380fb81d58042a9d900305e1aac676de7a4c421a40fe69eae06617f333"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-01.json",
+      "bytes": 2728,
+      "sha256": "b74c9f0df6fe6ec746c8954c857db1ada818185656afdfaac09622a7026702c8"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-01.mjs",
+      "bytes": 15508,
+      "sha256": "cf5bf535260b1ac5667d317c91d64735a523bff7fec821edfb4a165d523deb82"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-02-tool.json",
+      "bytes": 17384,
+      "sha256": "09df3e066a0d582c04e0224db77217ad4e1b676da85b7c7ce64bd76ba87f5e91"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-02.json",
+      "bytes": 2705,
+      "sha256": "7b57fde385188dcdb2d1854e851bf121fcdd9687e4077a81f3ca4fa8cb97400a"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-02.mjs",
+      "bytes": 15508,
+      "sha256": "698084e10ae88f6b2dcfc77765ce49bc28fbcd7f8c2bdb9230788e0997457766"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-03-tool.json",
+      "bytes": 17392,
+      "sha256": "e55e2f93e6d410e1f1dda6aef7d3deecb1528b95bc636e78012176ac981d5101"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-03.json",
+      "bytes": 2713,
+      "sha256": "41ad7db4823997353b186590e2b5ee30a8dc7cd581a75e582ff0f83129f777d0"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-specs-03.mjs",
+      "bytes": 15508,
+      "sha256": "b5417c6bb28074ce69536021caf0192b1742409d3fd518c20a0895895065a26b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-01-tool.json",
+      "bytes": 17427,
+      "sha256": "1ea631970216b19b4a0e796b2c193d663827658c58d125b70957f0e91efb643e"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-01.json",
+      "bytes": 2736,
+      "sha256": "d23c1c122d395ad0abeeff0d71b787bb26553110e46081b95216b4ea705cef63"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-01.mjs",
+      "bytes": 15523,
+      "sha256": "b933666cf9f41b84378c1178c1a09b1b47b85f74c1dce5d0487f66b26784c5a2"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-02-tool.json",
+      "bytes": 17411,
+      "sha256": "bc0030f6c7ab36a30713ee4994d1c708f5c421c1d451cea6d26d7b7f37b507b5"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-02.json",
+      "bytes": 2720,
+      "sha256": "31623a8c1aaaf8750d80a5c9433e7fc0ac50dfb905f9b7af19918f242fc92cb2"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-02.mjs",
+      "bytes": 15523,
+      "sha256": "c406b35b3b75a8c357e55b270f3821dec7ab8744cb7d207d1995cba0a921c8e1"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-03-tool.json",
+      "bytes": 17430,
+      "sha256": "122d6d557c7d67dfea28918862c4e46ff325b7800f4b858faaeb5fa8678b06ba"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-03.json",
+      "bytes": 2739,
+      "sha256": "b3074e3aaf56c33f4cfaac23ae52877edfc2a9b43fa99e9c51554d116d9ea7b1"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-03.mjs",
+      "bytes": 15523,
+      "sha256": "02a79488f96f6c5f7033b73fd892bd3bd045800e1ca8b9ce8a489c7f9be2372c"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-final-cold-tasks-04.json",
+      "bytes": 861,
+      "sha256": "03d0a72a398303aedbff3261bf23b0d3247fee776dbba87d23e44bfe1de09d7c"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/cold-samples.json",
+      "bytes": 20305,
+      "sha256": "44491c8f09664c0ca98daccbcb38be4101274ecf435c2712eaaa5559c2dd8947"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/detail-final-detail-owned.mjs",
+      "bytes": 20620,
+      "sha256": "305842f1eedb9a4acc139fe6c23022503e3cbf8365ae11aebf0f51f37a248d36"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/detail.json",
+      "bytes": 52462,
+      "sha256": "5ec2c864d2f9827ed2dd8f0c861880a2097a41dee25ed1519ee56cfd484915ea"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/fixture-0-before.json",
+      "bytes": 1824147,
+      "sha256": "b5f339f16ca65d1877506c0d21fadba92a21547b29077cc7e78d5f29abe70ca9"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/fixture-1-before.json",
+      "bytes": 2124558,
+      "sha256": "d57069b0b1fc87ce8c13782c9f07d639cf5bea8f3ab72c07d3b8b35600660821"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/identity-oracles.json",
+      "bytes": 19541,
+      "sha256": "90ff384093fbcc04c0ef2cda22268a718f29f5d2181f8c0b6b8af4b1a8cdb44e"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/lifecycle.ts",
+      "bytes": 996,
+      "sha256": "613632a240f7d1030cddb01b59382099b3847786c1b7394a0260ea5ac0d35f79"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/make-browser.py",
+      "bytes": 4005,
+      "sha256": "dc370dbe2309464551c00f941c3b707e945abb3e48e805475d7770f12efd0611"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/pin-owner.json",
+      "bytes": 1027,
+      "sha256": "cc29b41702b0230b3a018cfe7a4c98faeacaa4a63d75fa3d7b2dc3a73de26f52"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/record.ts",
+      "bytes": 5091,
+      "sha256": "066ed373f8b3b39561e12a91bb7e88d1218a19a27c5505ee2573a0d036d5ad06"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-cold-specs-01.json",
+      "bytes": 4982,
+      "sha256": "1b5d64d1f39f5bba775944495274deaf28754bc4638a62dfd8a0eb25bed20e24"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-cold-specs-02.json",
+      "bytes": 4979,
+      "sha256": "c51a08daeb19f80b7cd33985e90b3638c0a2a9713b0bdf8c1932ec0a81d2985b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-cold-specs-03.json",
+      "bytes": 4979,
+      "sha256": "a55ffbc1e9668c01f8e703e3ce58d1f8a2301e2d7b209386f4f94bc97614d698"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-cold-tasks-01.json",
+      "bytes": 4982,
+      "sha256": "7674891cb8b136b0a68bf97422806364d2c2fe98b5b79ad67bb4ed925f69c0e0"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-cold-tasks-02.json",
+      "bytes": 4982,
+      "sha256": "61615fd2d35772777e7a80cf7f8910e7b56d52ac62027557af8d87a7044c7c8e"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-cold-tasks-03.json",
+      "bytes": 4982,
+      "sha256": "cf6e83af19a0a53d2ce4c29ea63dba8e6dc98653619083211954c0202b7352b7"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-detail-owned.json",
+      "bytes": 4929,
+      "sha256": "856abe30de0d200374f56267b84c1b55d84048ad8a61c005d21c738fed18f4fe"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/start-final-warm.json",
+      "bytes": 4874,
+      "sha256": "361831d90b37495048253df5c4017e3b70fc0d556bc97a7a33f7cd4d937a2b96"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-cold-specs-01.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-cold-specs-02.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-cold-specs-03.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-cold-tasks-01.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-cold-tasks-02.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-cold-tasks-03.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-detail-owned.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/stop-final-warm.json",
+      "bytes": 378,
+      "sha256": "9e322eddc5750e22f9e1b89adfb0f9984c10deff5a295f4c1e243e61a082d14b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/warm-final-warm.mjs",
+      "bytes": 17124,
+      "sha256": "a899feb12c2f4988c1ba661e8ebef2255b6397abf01d74b88faf6d3df014e0d7"
+    },
+    {
+      "path": "/private/tmp/spm-task131-final-run/warm.json",
+      "bytes": 70318,
+      "sha256": "55653e4223e2e1a38fbce4320305b310b178b11fb905ae8143e588e261c8a2b8"
+    }
+  ]
+}
