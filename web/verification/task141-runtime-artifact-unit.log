@@ -1,0 +1,28 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/ui-launch.test.ts:
+(pass) missing and stale package artifacts fail before a Node probe, child or listener [131.51ms]
+
+tests/ui-build.test.ts:
+(pass) an explicit failed build removes the old success manifest before probing Node [98.74ms]
+(pass) a build rejects web/build ancestor aliases without modifying the outside success sentinel [143.94ms]
+
+tests/ui.test.ts:
+(pass) UI launch contract > production defers binding to child, DEV probes only the bounded legal range [1.86ms]
+(pass) UI launch contract > rejects incomplete flags, partial ports and boolean values [1.82ms]
+(pass) UI launch contract > normalizes exactly one advertised authority, including IPv6 [0.30ms]
+(pass) UI launch contract > requires actual supported Node and scrubs binding/proxy inputs [1.71ms]
+
+tests/ui-artifacts.test.ts:
+(pass) UI artifact identities > survives extraction with spaces and ignores docs, AGENTS and clock metadata [23.51ms]
+(pass) UI artifact identities > rejects same-version source and lock mutation, tampered/missing/unlisted output [40.03ms]
+(pass) UI artifact identities > rejects symlinked intermediate web and scripts directories before following leaves [22.64ms]
+(pass) UI artifact identities > rejects schema corruption, traversal, symlinks and a mixed identity [19.11ms]
+
+tests/test-diagnostics.test.ts:
+(pass) test diagnostics > documents sensitive self-hosting test areas and rerun commands [0.76ms]
+
+ 12 pass
+ 0 fail
+ 93 expect() calls
+Ran 12 tests across 5 files. [548.00ms]

@@ -1,0 +1,146 @@
+{
+  "scope": "Reviewed runtime integrated; combined checks and documentation-only archive delta. Not final performance acceptance.",
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "manifestEqualToReviewed": true,
+  "inputCount": 196,
+  "outputCount": 604,
+  "checks": [
+    {
+      "name": "build",
+      "command": [
+        "bun",
+        "run",
+        "web:build"
+      ],
+      "exitCode": 0,
+      "seconds": 12.434788833999999,
+      "log": "/private/tmp/spm-task141-combined-build.log",
+      "sha256": "3e8e70c6887d810e9227e98e4fafc6621dc5f2866f3bd32b0aff25647af04f0b"
+    },
+    {
+      "name": "svelte",
+      "command": [
+        "bun",
+        "run",
+        "web:check"
+      ],
+      "exitCode": 0,
+      "seconds": 8.541269832999998,
+      "log": "/private/tmp/spm-task141-combined-svelte.log",
+      "sha256": "b72515012078ed6ea70847624fbd547029d80902f1f884409c4b688ca08cac41"
+    },
+    {
+      "name": "agents",
+      "command": [
+        "bun",
+        "run",
+        "check:agents"
+      ],
+      "exitCode": 0,
+      "seconds": 0.05897279199999872,
+      "log": "/private/tmp/spm-task141-combined-agents.log",
+      "sha256": "1a26b922b24db32c51dbc536d1aca5aba4529e21cad6acbae0994373d08e0aa0"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "bun",
+        "test",
+        "--coverage",
+        "--coverage-reporter=lcov",
+        "--coverage-dir=/private/tmp/spm-task141-combined-coverage"
+      ],
+      "exitCode": 0,
+      "seconds": 103.344857125,
+      "log": "/private/tmp/spm-task141-combined-tests.log",
+      "sha256": "d9175fa5ddf2785913a54267b10e335ca591a74182feb6100d079801c01461b6"
+    }
+  ],
+  "tests": {
+    "pass": 489,
+    "skip": 2,
+    "fail": 0,
+    "assertions": 10414,
+    "files": 84,
+    "skipScope": "Two actual-package tests require explicit external package root and passed separately2tests121assertions in reviewed package gate."
+  },
+  "coverage": {
+    "aggregate": {
+      "LF": 14465,
+      "LH": 13315,
+      "FNF": 2192,
+      "FNH": 2036,
+      "files": 126,
+      "linePercent": 92.05,
+      "functionPercent": 92.88
+    },
+    "productSourceRecordedByBun": {
+      "LF": 12973,
+      "LH": 12148,
+      "FNF": 1880,
+      "FNH": 1762,
+      "files": 114,
+      "linePercent": 93.64,
+      "functionPercent": 93.72
+    },
+    "limits": "LCOV coverage is Bun-instrumented code only; compiled Svelte/browser flows are separate. Preserve previous isolated heartbeat failure and targeted rerun as historical results."
+  },
+  "archive": {
+    "path": "/private/tmp/spm-task141-integrated.tgz",
+    "sha256": "7b65ea9b9056a9087a5ce0373904c699de61c1cf0851063a6fc93ec1989952ab",
+    "bytes": 3825634,
+    "fileCount": 816,
+    "identicalDuplicateEntries": {
+      "package/src/index.ts": 2
+    },
+    "reviewedArchiveSHA256": "9340f57802a2a09c4cc3458f0ee60587c33cbee6ae64e3e33998cb0a389170f5",
+    "changes": [
+      {
+        "path": "package/README.md",
+        "before": {
+          "bytes": 33330,
+          "mode": 420,
+          "sha256": "cabc61f52b03cf961cc84ed00b30154688264fc788b7c147506f26c51a45b149",
+          "occurrences": 1
+        },
+        "after": {
+          "bytes": 34588,
+          "mode": 420,
+          "sha256": "6f568059000184b7f378894bfce6673f5f4653768d47e44e0c0d076e2d73df62",
+          "occurrences": 1
+        }
+      },
+      {
+        "path": "package/src/commands/AGENTS.md",
+        "before": {
+          "bytes": 1678,
+          "mode": 420,
+          "sha256": "76e0a7cd58994e643be604259ebba478f8196dedf640a58ffb0448354df51d52",
+          "occurrences": 1
+        },
+        "after": {
+          "bytes": 1785,
+          "mode": 420,
+          "sha256": "9816df72120048047b4ded1c1da26cf0971c827128e873027ff8aed4027bd3f1",
+          "occurrences": 1
+        }
+      },
+      {
+        "path": "package/src/services/AGENTS.md",
+        "before": {
+          "bytes": 1795,
+          "mode": 420,
+          "sha256": "818834c8188f0c15eb29a74e3bf3bbc976b0340d4d259b3e05dabbdc02d4d8b0",
+          "occurrences": 1
+        },
+        "after": {
+          "bytes": 1780,
+          "mode": 420,
+          "sha256": "33a19d8f26348164d722b5b8a3d82f538fad3d142661b9644cd6c0abd1cf7657",
+          "occurrences": 1
+        }
+      }
+    ],
+    "functionalEvidenceReuse": "Only three independently reviewed documentation files differ; package/runtime source, all compiled assets and manifest match. No claim of byte-identical tgz."
+  }
+}

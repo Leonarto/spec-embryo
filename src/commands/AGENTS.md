@@ -12,3 +12,5 @@ This folder is the thin CLI command layer.
 - Keep flags and user-facing behavior consistent with `src/cli.ts`.
 - `resume` shares window/snapshot before execution. Its result dispatcher owns versioned JSON failures and normalized exit codes; subprocess services own cancellation/artifacts. Unavailable windows block spawn before writes.
 - Native resume evidence stays in harness services; preserve invocation/native results on later evidence errors. `handoff --from-run` previews by default and applies only after an independent byte guard under the repository lock. Legacy handoff stays unchanged.
+
+- UI verifies artifacts before Node spawn; explicit DEV invokes Vite. Own readiness and bounded shutdown.

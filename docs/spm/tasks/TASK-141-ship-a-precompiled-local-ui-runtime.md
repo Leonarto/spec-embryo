@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-141"
 title = "Ship a precompiled local UI runtime"
 summary = "Build and verify packaged Node SSR assets, preserve explicit DEV workflow and canonical shared services, then independently review installed-runtime behavior."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-130"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-16T16:52:51.165Z"
+completed_at = "2026-11-16T17:36:29.765Z"
 tags = ["ui", "runtime", "packaging"]
-updated_at = "2026-11-16T16:52:51.165Z"
+updated_at = "2026-11-16T17:36:29.765Z"
 +++
 
 # Scope
@@ -33,3 +34,7 @@ Depends on completed TASK130 and consumes the committed functional TASK138 check
 - Host/Origin rejection preserves document bytes; same-origin large recovery bodies, port fallback, IPv6 where available, signal/disconnect/startup cancellation and listener closure are verified.
 - Generated imports and initial Tasks JS dependency closure are inspected; normal startup needs no Vite/compiler/development-source import.
 - Astra independently approves code plus actual installed package evidence; root integrates and commits before final acceptance timing. No publish/global installation, threshold waiver or claimed performance pass belongs to this implementation checkpoint.
+
+# Reviewed integration checkpoint
+
+Astra approved exact v5 code and the actual installed-package evidence; root integrated all22 source hashes and the separately approved documentation. The merged build manifest is identical to the reviewed196-input/604-output artifact. Combined serial checks pass489 tests/10414 assertions,2 explicitly configured package tests separately pass121 assertions, Svelte0/0, build and AGENTS budgets. Bun-recorded product line coverage is93.64%; compiled Svelte/browser coverage is separate. The new archive differs only in three reviewed documentation files. See `web/verification/task141-runtime-report.md` and the integration checks/reviews. Final latency remains outside this implementation checkpoint; old failures and the earlier isolated heartbeat failure remain preserved.

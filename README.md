@@ -25,6 +25,7 @@ bun run spm import legacy --source docs --apply
 bun run spm status
 bun run spm current show
 bun run spm current set --focus "Implement current-state maintenance flows" --active-task-ids TASK-006
+bun run web:build
 bun run spm ui
 bun run spm resume
 bun run spm resume --backend prompt
@@ -40,6 +41,21 @@ bun run spm release plan
 bun run spm tests diagnose
 bun run spm reshape --dry-run
 ```
+
+## Local UI
+
+`spm ui` serves the current project's UI from precompiled assets. The CLI uses Bun; the UI server requires Node 22.12 or later on PATH. Open the ready URL printed by the command. The default is `http://127.0.0.1:4173`; an occupied port advances through the next 25 ports, stopping at 65535. Use `--host` and `--port` to choose the bind address and starting port. Open the advertised address, including its port; other Host authorities are rejected.
+
+For a source checkout:
+
+```bash
+bun run web:build
+bun run ui
+```
+
+For live UI development, use `bun run ui -- --dev`. Normal startup verifies the packaged source, lock and build identity and never starts a compiler. Stop the server and rebuild explicitly after product source, package version or lock changes. Missing, stale or corrupt installed assets require reinstalling a complete matching package. Startup does not switch modes automatically or preload project documents.
+
+Release packages built from this source include the compiled UI. For UI development from GitHub, use a checkout and the explicit build or DEV commands above; a source-only installation does not provide certified release assets. Spec-question answers remain the UI's sole supported write operation.
 
 ## Install
 

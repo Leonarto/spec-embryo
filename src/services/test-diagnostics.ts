@@ -32,9 +32,16 @@ export function buildTestDiagnosticsBundle(): TestDiagnosticsBundle {
       {
         id: "subprocess-and-packaged-ui",
         risk: "process",
-        files: ["tests/backends.test.ts", "tests/harness-process.test.ts", "tests/harness-diagnostics.test.ts", "tests/harness-hooks.test.ts", "tests/hook-context.test.ts", "tests/harness-native.test.ts", "tests/harness-receipts.test.ts", "tests/ui.test.ts", "tests/vite-paths.test.ts"],
-        rerunCommand: "bun test tests/backends.test.ts tests/harness-process.test.ts tests/harness-diagnostics.test.ts tests/harness-hooks.test.ts tests/hook-context.test.ts tests/harness-native.test.ts tests/harness-receipts.test.ts tests/ui.test.ts tests/vite-paths.test.ts",
+        files: ["tests/backends.test.ts", "tests/harness-process.test.ts", "tests/harness-diagnostics.test.ts", "tests/harness-hooks.test.ts", "tests/hook-context.test.ts", "tests/harness-native.test.ts", "tests/harness-receipts.test.ts", "tests/ui.test.ts", "tests/ui-build.test.ts", "tests/ui-launch.test.ts", "tests/ui-runtime.test.ts", "tests/vite-paths.test.ts"],
+        rerunCommand: "bun test tests/backends.test.ts tests/harness-process.test.ts tests/harness-diagnostics.test.ts tests/harness-hooks.test.ts tests/hook-context.test.ts tests/harness-native.test.ts tests/harness-receipts.test.ts tests/ui.test.ts tests/ui-build.test.ts tests/ui-launch.test.ts tests/ui-runtime.test.ts tests/vite-paths.test.ts",
         mitigation: "Use temporary local executable fixtures, bounded signal deadlines, and per-run artifacts; never call paid agent APIs.",
+      },
+      {
+        id: "installed-precompiled-ui",
+        risk: "process",
+        files: ["tests/ui-package.test.ts"],
+        rerunCommand: "SPM_UI_PACKAGE_ROOT=/path/to/readonly-prefix/node_modules/@leonarto/spec-embryo bun test tests/ui-package.test.ts",
+        mitigation: "Build explicitly, pack a fresh archive, install production dependencies into an owned prefix and make its node_modules read-only. Supply that package root explicitly; fixtures stay external. Runtime tests include the real 30-second drain deadline. Never install globally or measure acceptance in this functional gate.",
       },
     ],
   };

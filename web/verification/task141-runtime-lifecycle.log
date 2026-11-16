@@ -1,0 +1,14 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/ui-runtime.test.ts:
+(pass) owned Node UI listener > binds the real bounded fallback, announces exact readiness and rejects duplicate/foreign Hosts [212.44ms]
+(pass) owned Node UI listener > IPC disconnect drains an in-flight response and closes its listener [358.80ms]
+(pass) owned Node UI listener > startup cancellation never announces ready and closes the bound listener [178.95ms]
+(pass) owned Node UI listener > the 30 second drain deadline closes a stalled response and its child [30200.20ms]
+(pass) owned Node UI listener > serves the exact bracketed IPv6 origin when loopback IPv6 is available [208.41ms]
+(pass) owned Node UI listener > handler initialization failure reports nonzero and relinquishes the port [181.92ms]
+
+ 6 pass
+ 0 fail
+ 26 expect() calls
+Ran 6 tests across 1 file. [31.39s]

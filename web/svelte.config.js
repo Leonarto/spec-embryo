@@ -1,11 +1,12 @@
-import adapter from "@sveltejs/adapter-auto";
+import adapter from "@sveltejs/adapter-node";
 import { buildSvelteVitePluginOptions } from "./svelte-plugin-options.js";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   vitePlugin: buildSvelteVitePluginOptions(),
   kit: {
-    adapter: adapter(),
+    version: { name: process.env.SPM_UI_BUILD_IDENTITY ?? "uncertified" },
+    adapter: adapter({ out: "build", precompress: true, envPrefix: "SPM_SERVER_" }),
   },
 };
 

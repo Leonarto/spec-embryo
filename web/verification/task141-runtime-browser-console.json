@@ -1,0 +1,12 @@
+{
+  "capture": "mcp__playwright__browser_console_messages({level:'error',all:false}) after functional smoke",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "### Result\nTotal messages: 0 (Errors: 0, Warnings: 0)\n"
+      }
+    ]
+  },
+  "pageerrorCapture": "No explicit pageerror event listener was recorded. Do not infer a zero pageerror count from console capture."
+}

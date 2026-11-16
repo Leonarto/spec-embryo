@@ -15,6 +15,13 @@ describe("test diagnostics", () => {
     expect(locking.files).toContain("tests/document-parse-memo.test.ts");
     expect(locking.rerunCommand).toContain("tests/document-parse-memo.test.ts");
 
+    const runtime = bundle.areas.find(area => area.id === "subprocess-and-packaged-ui")!;
+    expect(runtime.files).toContain("tests/ui-runtime.test.ts");
+    expect(runtime.rerunCommand).toContain("tests/ui-launch.test.ts");
+    const packed = bundle.areas.find(area => area.id === "installed-precompiled-ui")!;
+    expect(packed.rerunCommand).toContain("SPM_UI_PACKAGE_ROOT=");
+    expect(packed.mitigation).toContain("read-only");
+
     const human = await runTestsCommand(process.cwd(), parseArgs(["tests", "diagnose"]));
     expect(human).toContain("Self-hosting test diagnostics");
     expect(human).toContain("git-worktree-state");

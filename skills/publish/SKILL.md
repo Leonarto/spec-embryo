@@ -33,6 +33,8 @@ At the end of this workflow, the agent should hand the user the exact `bun publi
    - `bun test`
    - `bun run web:check`
    - `bun run check:agents`
+   - `bun run web:build` after the version change
+   - inspect the real release archive and verify its installed UI from an external temporary fixture as described below
    - `bun publish --dry-run --access public`
 6. Commit the release-prep change:
    - at minimum include the version bump
@@ -68,3 +70,11 @@ At the end, after the version bump is committed and the dry run passed, return o
 - `bun publish --access public`
 
 If something is still blocking publish, do not give the final publish command as if it were ready.
+
+## Compiled UI release assets
+
+Build after package version, lock or product-source changes and before the dry run. `prepack` also runs the explicit build/verification pipeline; normal UI startup never compiles. Stop any server using that package before rebuilding.
+
+Inspect the actual archive: include `web/build/spm-manifest.json`, all inventoried output, `web/runtime`, root `bun.lock`, and required source/config helpers. Every remaining bare server import must be declared in root production dependencies and resolve in the installed prefix; dependencies need not be vendored inside the tarball. Exclude `.svelte-kit`, caches, verification artifacts and managed project memory. Build output is packaged but never committed as source.
+
+Extract/install into an owned temporary prefix with production dependencies and run its real `spm ui` bin from an external fixture, with the package tree read-only. Verify readiness, static assets, hydrated lazy detail/diagram/editor and native/enhanced canonical question actions. Record the actual Node runtime and manifest identity; a checkout build or HTML containing SVG is insufficient installed-browser proof. Never use real project documents for mutation checks. This preparation does not authorize a global installation or the final publish.

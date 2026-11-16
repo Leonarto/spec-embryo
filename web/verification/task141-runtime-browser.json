@@ -1,0 +1,34 @@
+{
+  "scope": "Functional installed-runtime browser smoke only; no latency measurement.",
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "archiveSha256": "9340f57802a2a09c4cc3458f0ee60587c33cbee6ae64e3e33998cb0a389170f5",
+  "origin": "http://127.0.0.1:57420",
+  "taskInspector": {
+    "trustedLinkClick": true,
+    "url": "/tasks?inspect=task%3ATASK-004",
+    "headingVisible": true,
+    "inspectorVisible": true
+  },
+  "enhancedQuestion": {
+    "answer": "Confirmed enhanced packed browser answer",
+    "resolved": true,
+    "remainingQuestions": 1,
+    "alerts": []
+  },
+  "native": {
+    "javaScriptEnabled": false,
+    "initialStatus": 200,
+    "fieldsBefore": 1,
+    "diagramFallback": true,
+    "actionStatus": 200,
+    "resolved": true,
+    "fieldsAfter": 0,
+    "alerts": []
+  },
+  "enhancedPage": {
+    "mermaidSVGs": 1,
+    "diagramGroup": 1,
+    "productionJS": 62,
+    "devResources": []
+  }
+}

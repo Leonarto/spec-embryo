@@ -11,7 +11,7 @@ Reusable deterministic product services.
 - `harness-native.ts` never retains transcripts; `harness-receipts.ts` requires opt-in and exact root/session identity.
 - Run handoffs require dirty-byte guards and a readonly lock lease. Exclude only its exact untracked owner; stale/incomplete guards never write. Evidence errors preserve process/native results.
 - Adoption shares bounded guidance.
-- UI: packaged assets and first available local port.
+- UI: verified builds or explicit DEV.
 - Workspace lists/options are bounded; `workspace-detail.ts` shares request context. No cached contexts/DTOs. Keys preserve URL intent; expose clamping/unavailable filters.
 - Loading owns IO. `detail-relations.ts` bounds v2 windows; legacy stays full. sourceRevision differs from exact-file specRevision.
 - Dashboard/Timeline use projection-local indexes; spec/card lookup is first-match, task lookup last-ID. Timeline adapter/contract own safe v2 units, diagnostics and bounded pages; legacy graph APIs unchanged.
