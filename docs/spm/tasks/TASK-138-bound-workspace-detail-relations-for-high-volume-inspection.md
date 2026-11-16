@@ -20,7 +20,7 @@ Implementation: Sol 6.1 High (`harness_implementation`). Technical decisions and
 
 # Verification record
 
-Implementation in progress. Independent Astra design review approved the URL/window and atomic-revision contract. Producer/validator/loader partial review APPROVED: 11 exact hashes, 13 tests / 356 assertions, duplicate-occurrence and invalid-envelope probes; canonical question action remains byte-identical to baseline. Client, presentation, existing POST reader integration and end-to-end performance remain pending; no final acceptance is claimed.
+Implementation in progress. Independent Astra producer, client and list-carry partial reviews are approved; F1/F2/F2a/F3 are closed. The isolated functional suite passes 393 tests / 8,537 assertions; browser checks cover bounded relations, canonical drafts, focus, JS/no-JS links and list filters. Canonical question actions remain unchanged. End-to-end warm detail still fails the 300 ms gate: Task p95 479.4 ms and Spec p95 532.7 ms. Final acceptance remains pending the reviewed favicon correction and exact-source remeasurement.
 
 # TASK-138 — bounded detail relation transport and readers
 
@@ -175,11 +175,19 @@ Same-revision relation pagination remains usable and does not replace question/d
 Tests: dirty focus refresh starts no request; dirty manual Retry preserves state and announces deferral; response arriving after user types is rejected atomically; same-ID fresh loader seed cannot reorder/delete questions beneath a draft; whitespace and existing/echoed nonempty values block; clearing fields lets explicit Retry refresh; relation pagination retains exact input/document DOM; successful/no-answer/error canonical POST behavior remains compatible. Browser repro must cover reorder and deletion while an answer exists, plus editing during a delayed full request. Resource tests alone cannot certify DOM mapping.
 
 
-# Client review in progress
+# Client review history
 
 The first 17-file client review is REVISE for F138-client-1 (stale captured URL after synchronous seed canonization), F138-client-2 (protect canonical answer drafts from full-snapshot replacement) and F138-client-3 (retain focus when a relation collection becomes empty). Productor approval remains separate; fixes and focused regressions must pass before completion. The generic AnalysisFilters relation-carry patch is independently approved against baseline dc3a264, with expected partial-file SHA d8430397eeef141ad5a5dac1f07cc6d0eb907a299ce1859912292e837b0890ed; it excludes ongoing Timeline changes and will join the TASK-138 snapshot/commit.
 
 
 ## Client delta rereview
 
-F138-client-1 and F138-client-3 are closed by independent rereview; the DOM-based answer-draft guard is validated. Review remains open for F2a: a blocked same-identity seed can change desired pages while leaving an obsolete relation request permanently pending. The fix must cancel only superseded requests and preserve independent requests. The 18-file rereview verified every hash and passed 23 tests / 180 assertions; it does not replace final browser/performance acceptance.
+F138-client-1 and F138-client-3 are closed by independent rereview; the DOM-based answer-draft guard is validated. F2a is also closed: a blocked same-identity seed cancels only superseded relation requests while preserving independent requests. The final 18-file client and seven-file list-carry reviews are approved, with focused regressions and actual browser checks. These partial approvals do not replace final performance acceptance.
+
+## Performance diagnosis and favicon correction
+
+The 10,000-task / 2,000-spec / 201-handoff dataset is synthetic and lives outside the real project. The original 5-warmup / 20-sample browser results remain valid failures. The initial API-only concurrency inference is superseded: independent analysis of the global trace found 66 context-bearing requests, including 41 favicon requests, and favicon context reads overlapping all 24 measured detail requests. The missing favicon route fell through the root layout and unnecessarily loaded project context.
+
+Astra approved a minimal `web/src/routes/favicon.ico/+server.ts` GET returning empty 204 with no imports or project IO. Independent two-file source review passes one test / nine assertions; the package already includes `web/src`. Before repeating the unchanged 300 ms gate, verify actual SvelteKit GET/HEAD, repeated/query requests, zero favicon context reads and one normal detail context read in an all-path trace. Freeze source identity for the same-fixture 5+20 measurement.
+
+A copy-only fresh-worker experiment was rejected: paired context median worsened from 256.69 ms to 440 ms despite reduced main-thread utilization. No worker, persistent cache, freshness relaxation or budget waiver was integrated. Evidence and corrected diagnostic conclusions belong in the TASK-138 verification report; neither experiment nor the small endpoint alone establishes final acceptance.
