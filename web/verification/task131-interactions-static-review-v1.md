@@ -1,0 +1,13 @@
+# TASK131 interaction helper v1: independent static review
+
+Verdict: approved for one root-authorized functional smoke under H ownership. This is not approval of the final acceptance window and provides no performance credit.
+
+Verified SHA-256: manifest `7a34bb81f415b01dabccd8e7702bb96f74767a2642494e6aa4419e444600884f`; patch `/private/tmp/spm-task131-interactions-v1.patch` `54fb185316f482aefee88001b5b2bc6ceeb62afc55593e97d136412b2e90ee08`. Both source files, the finite contract and the unit log match the manifest. The alternative patch filename mentioned in the dispatch is not the recorded artifact.
+
+The two-file helper/test slice conforms to the finite contract. Keyboard and checkbox clocks begin at trusted browser events and end at the specified first frame. Search keeps beforeinput-to-visible-feedback and last-input-to-accepted-result separate, including the fixed 150 ms debounce in the 1150 ms result budget. Exact query URL, ordered IDs, count and hydrated controls prevent count-only stale acceptance. Samples, warmups, failures and HTTP/resource diagnostics are retained. No response-delay subtraction, retries, forced GC, private product hooks or process/page ownership were introduced.
+
+Scroll uses real wheel events and observed movement, checks every overlapping long task against the maximum budget and records mounted rows. Payload checks use complete decoded UTF-8 response text and retain its hash/raw text. Stability checks preserve toolbar position and opener visibility, require close to restore the opener, and allow the intentional focus transfer from clicking Refresh. Probe listeners, observers and handles are removed in finally; unverified cleanup aborts the remaining work. Existing component and DTO source supports the selectors and allowed fields.
+
+Reviewed the frozen deterministic test source and its 14-pass / 80-assertion log, including browser-function VM injection without Node globals, trusted-clock rejection, stale identities and cleanup failures. No suite, browser or measurement was run by this reviewer.
+
+The smoke must exercise the actual public browser adapter, trusted beforeinput/input, exact URL readiness, payload and refresh selectors, plus real scroll and cleanup. Its fixture needs enough rows in each route to exceed the viewport: the earlier 5/2-row navigation fixture cannot establish real scroll. Smoke uses one sample per family and 250 ms scroll with credit false; no acceptance thresholds or predicates should be weakened to make setup pass. Preserve the smoke output even on failure, and review any fix as a new explicit freeze before the final window.

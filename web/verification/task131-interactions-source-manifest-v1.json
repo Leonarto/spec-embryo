@@ -1,0 +1,31 @@
+{
+  "baseCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "scope": "Only interaction collector/helper and deterministic unit tests; no browser or runtime run.",
+  "files": [
+    {
+      "path": "web/scripts/acceptance-interactions.mjs",
+      "bytes": 31495,
+      "sha256": "c74987bce30b06cfa1078b15afea7b83cd2c0bdd9a8364db9bedcffee477d2e7"
+    },
+    {
+      "path": "tests/acceptance-interactions.test.ts",
+      "bytes": 14866,
+      "sha256": "bbfdfeff693d47af0f39cef34670c3e0a708634e3472d73ae43c705c83077299"
+    }
+  ],
+  "patch": {
+    "path": "/private/tmp/spm-task131-interactions-v1.patch",
+    "sha256": "54fb185316f482aefee88001b5b2bc6ceeb62afc55593e97d136412b2e90ee08"
+  },
+  "contract": {
+    "path": "/private/tmp/spm-task131-final-interaction-contract.md",
+    "sha256": "07ea5513a46e1910aafd54895daff3f46e6ed58a19a69776a46f336ac674fa3b"
+  },
+  "unitLog": {
+    "path": "/private/tmp/spm-task131-interactions-unit-v1.log",
+    "sha256": "68279cda68a539d600d421edde8b999d7c7c5b603f6275d6212941d70da38abd"
+  },
+  "api": "runAcceptanceInteractions(page,{identity:{fixture,source,runtime},routes:[{route,page100:{url,ids,total,pageSize:100},page200:{url,ids,total,pageSize:200},search:[{q,url,ids,total,pageSize:100},{...}],openerId}],smoke})",
+  "ownership": "Caller owns all page/context/runtime lifecycle. Helper removes only its installed observers/listeners.",
+  "smoke": "smoke:true uses one sample/family and250ms scroll, credit:false; no acceptance series performed."
+}

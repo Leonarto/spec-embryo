@@ -1,0 +1,128 @@
+{
+  "copy": [
+    {
+      "source": "/private/tmp/spm-task131-final-interaction-contract.md",
+      "destination": "web/verification/task131-final-interaction-contract.md",
+      "bytes": 9537,
+      "sha256": "07ea5513a46e1910aafd54895daff3f46e6ed58a19a69776a46f336ac674fa3b"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-manifest-v1.json",
+      "destination": "web/verification/task131-interactions-source-manifest-v1.json",
+      "bytes": 1496,
+      "sha256": "7a34bb81f415b01dabccd8e7702bb96f74767a2642494e6aa4419e444600884f"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-manifest-v2.json",
+      "destination": "web/verification/task131-interactions-source-manifest-v2.json",
+      "bytes": 1795,
+      "sha256": "f43b04b772a18baca3f2f092d3ceed079cb5f4ada0478984b2b50faa0124bd70"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-static-review-v1.md",
+      "destination": "web/verification/task131-interactions-static-review-v1.md",
+      "bytes": 2624,
+      "sha256": "3f847091cfd1289ec9fa91c81f865d89ee932ba6592e2c5325a9d2aa4a640ba1"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-final-review-v2.md",
+      "destination": "web/verification/task131-interactions-final-review-v2.md",
+      "bytes": 2781,
+      "sha256": "35850c92a6eeced964a31007e295cc5aa21afc2c3e43be9d2a6cab4eac2d59af"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-evidence-v2.json",
+      "destination": "web/verification/task131-interactions-evidence.json",
+      "bytes": 8563,
+      "sha256": "2d536dc9f7728c774730be64e354297f1ce1392c6e98d9d31a92feba8b984e27"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-unit-v2.log",
+      "destination": "web/verification/task131-interactions-unit.log",
+      "bytes": 1870,
+      "sha256": "73d55273c55ba39683ac37c008a30def2f8aaabf18af3ebcc0112a0f8b1ba521"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-v1.json",
+      "destination": "web/verification/task131-interactions-smoke-v1.json",
+      "bytes": 41082,
+      "sha256": "51b02ab329a480768b85e5eb5ddc6f2a008d25ee7540d41c8781340ddf728438"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-payload-revalidation-v2.json",
+      "destination": "web/verification/task131-interactions-payload-v2.json",
+      "bytes": 74503,
+      "sha256": "f5cb029f43205be0170fbc88c4be3467dfa4f4f84da133a0490e61a0b9540f5d"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-fixture-guard.json",
+      "destination": "web/verification/task131-interactions-fixture-guard.json",
+      "bytes": 47110,
+      "sha256": "bdb68d4f7cbb6f3ca0c6a263eefa1a8fe507fd04c33aa2a2a2d06bb48d7c9a1d"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-prepare-runtime.json",
+      "destination": "web/verification/task131-interactions-runtime-prepare.json",
+      "bytes": 2452,
+      "sha256": "7bc9a4b974976ad840a18e6f81a3c4402a5e61f6af69b902ca2b066b8593facd"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-start-runtime.json",
+      "destination": "web/verification/task131-interactions-runtime-start.json",
+      "bytes": 4221,
+      "sha256": "63dc26e64e976fc3739f5f1be7ae636afc7394ee4e6a7bfe5d9a078defd3dfd3"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-stop-runtime.json",
+      "destination": "web/verification/task131-interactions-runtime-stop.json",
+      "bytes": 330,
+      "sha256": "b0eaac3588731ee73019d8adb70edc8c0fd5839ab88f3f69fb0e5f95f8c5ca50"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-options.json",
+      "destination": "web/verification/task131-interactions-options.json",
+      "bytes": 12271,
+      "sha256": "ca027fb6768bca92449b93ffe96d0f2ea8d9588baf4649c33d2c272e1db12213"
+    },
+    {
+      "source": "/private/tmp/spm-task131-interactions-smoke-delivery-error.json",
+      "destination": "web/verification/task131-interactions-delivery-error.json",
+      "bytes": 359,
+      "sha256": "2b39f5f6f0a92487d7f2beccce5c9598c839095bfccbfdcf2a9e8e3c504d760d"
+    }
+  ],
+  "externalOnly": [
+    {
+      "path": "/private/tmp/spm-task131-interactions-v1.patch",
+      "sha256": "54fb185316f482aefee88001b5b2bc6ceeb62afc55593e97d136412b2e90ee08",
+      "git": false
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-v2.patch",
+      "sha256": "a8bc0babd94653f85a94610e634359c490ef172b202e1ea95117cc59189a7a57",
+      "git": false
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-v1-to-v2.patch",
+      "sha256": "c08747363b8e66d549944fb9c0f50551503543f5383d2c5f90851b691ac1f9e1",
+      "git": false
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-browser-v1.mjs",
+      "sha256": "d783b12edd1966b3032f25d47da7b6de0e9f5c2ff6160acce5e6d7017a705694",
+      "git": false
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-payload-revalidation-v2.mjs",
+      "sha256": "7e6ca12db48b6901d4b497c98d91cdc173c9b4b7466327c1379fcdefa4d2f75a",
+      "git": false
+    }
+  ],
+  "notes": [
+    "Preserve v1 tiny FAIL and payload-only v2 revalidation separately; no acceptance credit and no full-smoke replay.",
+    "The inherited v2 source-manifest scope sentence saying no browser/runtime run is stale metadata from preparation. Do not rewrite the frozen record; the combined evidence and final review describe the later tiny run correctly.",
+    "Root/H maintain AGENTS and orchestration; only two source files belong to this patch.",
+    "The root maps the identical contract to its existing canonical task131-final-interaction-contract.md path; source bytes remain unchanged."
+  ],
+  "originalMapSHA256": "5e1e55e38d8b48c96f369c3ae18591d99341f0d04def161d0521405209100690"
+}

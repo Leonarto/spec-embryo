@@ -82,3 +82,13 @@ The same narrow semantic review found one remaining labelled generic container i
 ## Reviewed component accessibility matrix
 
 The six-artifact manifest and independent review in `web/verification/task131-accessibility-manifest.json` and `task131-accessibility-review.md` verify ten axe states, exact component/style identities, existing contrast proof and three captures. Keyboard, forced-colors and reduced-motion checks pass within the recorded scope. Native200% remains explicitly user-deferred, screen readers unavailable, and volume bounds retain their separate TASK130 evidence. Owned browser/server resources are closed and dependency inventories unchanged. This reusable checkpoint does not accept the future compiled runtime, performance or retention gates.
+
+## Final finite interaction contract
+
+The missing interaction measurements follow Astra's concrete contract in `web/verification/task131-final-interaction-contract.md`: fixed trusted-event samples, original thresholds, exact query/result oracles, decoded payload bytes, real wheel/long-task observations and a bounded stability sequence. H owns runtime/navigation/detail/retention; a second Sol owns only the interaction helper and pure tests. No product edits or performance series are authorized during preparation. An independent review, tiny functional smoke and harness commit precede the actual window.
+
+Missing PaintTiming is not a passing loading observation or proof of blank time. A verified fresh navigation from about:blank with no prior app/worker/prerender and document responseStart greater than150ms independently proves no app HTML indicator before the budget; report that lower bound without inventing a paint timestamp. Otherwise, absent positive paint/indicator evidence remains NOT PROVEN. Final acceptance retains the original navigationStart clock and all failures.
+
+## Reviewed interaction helper preparation
+
+Astra approved the two-file v2 helper and scoped browser proof. Fifteen deterministic tests pass82 assertions. The single tiny compiled run exercised trusted key/click/input, real wheel, long-task observation and stability on both routes; its original overall FAIL is preserved for a Fetch.status API mistake in the payload reader. After the minimal fix, only two payload GETs were revalidated successfully. No interaction series was replayed and no AC13 latency credit is claimed. Resources/dependency audits pass and242 fixture documents remain unchanged. See `web/verification/task131-interactions-final-review-v2.md` and the evidence map. The frozen manifest's inherited no-browser sentence is stale preparation metadata; its smoke fields and final review describe the actual later run.

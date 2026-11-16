@@ -1,0 +1,1565 @@
+{
+  "phase": "interaction harness smoke",
+  "credit": false,
+  "identity": {
+    "fixture": {
+      "root": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm131-interactions-smoke-ca3SWl",
+      "tasks": 120,
+      "specs": 120
+    },
+    "source": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+    "runtime": {
+      "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+      "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+      "nodeVersion": "v25.6.0",
+      "url": "http://127.0.0.1:50875/"
+    }
+  },
+  "oracles": [
+    {
+      "route": "tasks",
+      "page100": {
+        "ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-003",
+          "TASK-004",
+          "TASK-005",
+          "TASK-006",
+          "TASK-007",
+          "TASK-008",
+          "TASK-009",
+          "TASK-010",
+          "TASK-011",
+          "TASK-012",
+          "TASK-013",
+          "TASK-014",
+          "TASK-015",
+          "TASK-016",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-020",
+          "TASK-021",
+          "TASK-022",
+          "TASK-023",
+          "TASK-024",
+          "TASK-025",
+          "TASK-026",
+          "TASK-027",
+          "TASK-028",
+          "TASK-029",
+          "TASK-030",
+          "TASK-031",
+          "TASK-032",
+          "TASK-033",
+          "TASK-034",
+          "TASK-035",
+          "TASK-036",
+          "TASK-037",
+          "TASK-038",
+          "TASK-039",
+          "TASK-040",
+          "TASK-041",
+          "TASK-042",
+          "TASK-043",
+          "TASK-044",
+          "TASK-045",
+          "TASK-046",
+          "TASK-047",
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054",
+          "TASK-055",
+          "TASK-056",
+          "TASK-057",
+          "TASK-058",
+          "TASK-059",
+          "TASK-060",
+          "TASK-061",
+          "TASK-062",
+          "TASK-063",
+          "TASK-064",
+          "TASK-065",
+          "TASK-066",
+          "TASK-067",
+          "TASK-068",
+          "TASK-069",
+          "TASK-070",
+          "TASK-071",
+          "TASK-072",
+          "TASK-073",
+          "TASK-074",
+          "TASK-075",
+          "TASK-076",
+          "TASK-077",
+          "TASK-078",
+          "TASK-079",
+          "TASK-080",
+          "TASK-081",
+          "TASK-082",
+          "TASK-083",
+          "TASK-084",
+          "TASK-085",
+          "TASK-086",
+          "TASK-087",
+          "TASK-088",
+          "TASK-089",
+          "TASK-090",
+          "TASK-091",
+          "TASK-092",
+          "TASK-093",
+          "TASK-094",
+          "TASK-095",
+          "TASK-096",
+          "TASK-097",
+          "TASK-098",
+          "TASK-099",
+          "TASK-100"
+        ],
+        "total": 120,
+        "pageSize": 100,
+        "url": "http://127.0.0.1:50875/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table"
+      },
+      "page200": {
+        "ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-003",
+          "TASK-004",
+          "TASK-005",
+          "TASK-006",
+          "TASK-007",
+          "TASK-008",
+          "TASK-009",
+          "TASK-010",
+          "TASK-011",
+          "TASK-012",
+          "TASK-013",
+          "TASK-014",
+          "TASK-015",
+          "TASK-016",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-020",
+          "TASK-021",
+          "TASK-022",
+          "TASK-023",
+          "TASK-024",
+          "TASK-025",
+          "TASK-026",
+          "TASK-027",
+          "TASK-028",
+          "TASK-029",
+          "TASK-030",
+          "TASK-031",
+          "TASK-032",
+          "TASK-033",
+          "TASK-034",
+          "TASK-035",
+          "TASK-036",
+          "TASK-037",
+          "TASK-038",
+          "TASK-039",
+          "TASK-040",
+          "TASK-041",
+          "TASK-042",
+          "TASK-043",
+          "TASK-044",
+          "TASK-045",
+          "TASK-046",
+          "TASK-047",
+          "TASK-048",
+          "TASK-049",
+          "TASK-050",
+          "TASK-051",
+          "TASK-052",
+          "TASK-053",
+          "TASK-054",
+          "TASK-055",
+          "TASK-056",
+          "TASK-057",
+          "TASK-058",
+          "TASK-059",
+          "TASK-060",
+          "TASK-061",
+          "TASK-062",
+          "TASK-063",
+          "TASK-064",
+          "TASK-065",
+          "TASK-066",
+          "TASK-067",
+          "TASK-068",
+          "TASK-069",
+          "TASK-070",
+          "TASK-071",
+          "TASK-072",
+          "TASK-073",
+          "TASK-074",
+          "TASK-075",
+          "TASK-076",
+          "TASK-077",
+          "TASK-078",
+          "TASK-079",
+          "TASK-080",
+          "TASK-081",
+          "TASK-082",
+          "TASK-083",
+          "TASK-084",
+          "TASK-085",
+          "TASK-086",
+          "TASK-087",
+          "TASK-088",
+          "TASK-089",
+          "TASK-090",
+          "TASK-091",
+          "TASK-092",
+          "TASK-093",
+          "TASK-094",
+          "TASK-095",
+          "TASK-096",
+          "TASK-097",
+          "TASK-098",
+          "TASK-099",
+          "TASK-100",
+          "TASK-101",
+          "TASK-102",
+          "TASK-103",
+          "TASK-104",
+          "TASK-105",
+          "TASK-106",
+          "TASK-107",
+          "TASK-108",
+          "TASK-109",
+          "TASK-110",
+          "TASK-111",
+          "TASK-112",
+          "TASK-113",
+          "TASK-114",
+          "TASK-115",
+          "TASK-116",
+          "TASK-117",
+          "TASK-118",
+          "TASK-119",
+          "TASK-120"
+        ],
+        "total": 120,
+        "pageSize": 200,
+        "url": "http://127.0.0.1:50875/tasks?sort=id.asc&page=1&pageSize=200&scope=all&view=table"
+      },
+      "search": [
+        {
+          "ids": [
+            "TASK-001"
+          ],
+          "total": 1,
+          "pageSize": 100,
+          "q": "TASK-001",
+          "url": "http://127.0.0.1:50875/tasks?q=TASK-001&sort=id.asc&page=1&pageSize=100&scope=all&view=table"
+        },
+        {
+          "ids": [
+            "TASK-002"
+          ],
+          "total": 1,
+          "pageSize": 100,
+          "q": "TASK-002",
+          "url": "http://127.0.0.1:50875/tasks?q=TASK-002&sort=id.asc&page=1&pageSize=100&scope=all&view=table"
+        }
+      ],
+      "openerId": "TASK-001"
+    },
+    {
+      "route": "specs",
+      "page100": {
+        "ids": [
+          "SPEC-001",
+          "SPEC-002",
+          "SPEC-003",
+          "SPEC-004",
+          "SPEC-005",
+          "SPEC-006",
+          "SPEC-007",
+          "SPEC-008",
+          "SPEC-009",
+          "SPEC-010",
+          "SPEC-011",
+          "SPEC-012",
+          "SPEC-013",
+          "SPEC-014",
+          "SPEC-015",
+          "SPEC-016",
+          "SPEC-017",
+          "SPEC-018",
+          "SPEC-019",
+          "SPEC-020",
+          "SPEC-021",
+          "SPEC-022",
+          "SPEC-023",
+          "SPEC-024",
+          "SPEC-025",
+          "SPEC-026",
+          "SPEC-027",
+          "SPEC-028",
+          "SPEC-029",
+          "SPEC-030",
+          "SPEC-031",
+          "SPEC-032",
+          "SPEC-033",
+          "SPEC-034",
+          "SPEC-035",
+          "SPEC-036",
+          "SPEC-037",
+          "SPEC-038",
+          "SPEC-039",
+          "SPEC-040",
+          "SPEC-041",
+          "SPEC-042",
+          "SPEC-043",
+          "SPEC-044",
+          "SPEC-045",
+          "SPEC-046",
+          "SPEC-047",
+          "SPEC-048",
+          "SPEC-049",
+          "SPEC-050",
+          "SPEC-051",
+          "SPEC-052",
+          "SPEC-053",
+          "SPEC-054",
+          "SPEC-055",
+          "SPEC-056",
+          "SPEC-057",
+          "SPEC-058",
+          "SPEC-059",
+          "SPEC-060",
+          "SPEC-061",
+          "SPEC-062",
+          "SPEC-063",
+          "SPEC-064",
+          "SPEC-065",
+          "SPEC-066",
+          "SPEC-067",
+          "SPEC-068",
+          "SPEC-069",
+          "SPEC-070",
+          "SPEC-071",
+          "SPEC-072",
+          "SPEC-073",
+          "SPEC-074",
+          "SPEC-075",
+          "SPEC-076",
+          "SPEC-077",
+          "SPEC-078",
+          "SPEC-079",
+          "SPEC-080",
+          "SPEC-081",
+          "SPEC-082",
+          "SPEC-083",
+          "SPEC-084",
+          "SPEC-085",
+          "SPEC-086",
+          "SPEC-087",
+          "SPEC-088",
+          "SPEC-089",
+          "SPEC-090",
+          "SPEC-091",
+          "SPEC-092",
+          "SPEC-093",
+          "SPEC-094",
+          "SPEC-095",
+          "SPEC-096",
+          "SPEC-097",
+          "SPEC-098",
+          "SPEC-099",
+          "SPEC-100"
+        ],
+        "total": 120,
+        "pageSize": 100,
+        "url": "http://127.0.0.1:50875/specs?sort=id.asc&page=1&pageSize=100&taskScope=all"
+      },
+      "page200": {
+        "ids": [
+          "SPEC-001",
+          "SPEC-002",
+          "SPEC-003",
+          "SPEC-004",
+          "SPEC-005",
+          "SPEC-006",
+          "SPEC-007",
+          "SPEC-008",
+          "SPEC-009",
+          "SPEC-010",
+          "SPEC-011",
+          "SPEC-012",
+          "SPEC-013",
+          "SPEC-014",
+          "SPEC-015",
+          "SPEC-016",
+          "SPEC-017",
+          "SPEC-018",
+          "SPEC-019",
+          "SPEC-020",
+          "SPEC-021",
+          "SPEC-022",
+          "SPEC-023",
+          "SPEC-024",
+          "SPEC-025",
+          "SPEC-026",
+          "SPEC-027",
+          "SPEC-028",
+          "SPEC-029",
+          "SPEC-030",
+          "SPEC-031",
+          "SPEC-032",
+          "SPEC-033",
+          "SPEC-034",
+          "SPEC-035",
+          "SPEC-036",
+          "SPEC-037",
+          "SPEC-038",
+          "SPEC-039",
+          "SPEC-040",
+          "SPEC-041",
+          "SPEC-042",
+          "SPEC-043",
+          "SPEC-044",
+          "SPEC-045",
+          "SPEC-046",
+          "SPEC-047",
+          "SPEC-048",
+          "SPEC-049",
+          "SPEC-050",
+          "SPEC-051",
+          "SPEC-052",
+          "SPEC-053",
+          "SPEC-054",
+          "SPEC-055",
+          "SPEC-056",
+          "SPEC-057",
+          "SPEC-058",
+          "SPEC-059",
+          "SPEC-060",
+          "SPEC-061",
+          "SPEC-062",
+          "SPEC-063",
+          "SPEC-064",
+          "SPEC-065",
+          "SPEC-066",
+          "SPEC-067",
+          "SPEC-068",
+          "SPEC-069",
+          "SPEC-070",
+          "SPEC-071",
+          "SPEC-072",
+          "SPEC-073",
+          "SPEC-074",
+          "SPEC-075",
+          "SPEC-076",
+          "SPEC-077",
+          "SPEC-078",
+          "SPEC-079",
+          "SPEC-080",
+          "SPEC-081",
+          "SPEC-082",
+          "SPEC-083",
+          "SPEC-084",
+          "SPEC-085",
+          "SPEC-086",
+          "SPEC-087",
+          "SPEC-088",
+          "SPEC-089",
+          "SPEC-090",
+          "SPEC-091",
+          "SPEC-092",
+          "SPEC-093",
+          "SPEC-094",
+          "SPEC-095",
+          "SPEC-096",
+          "SPEC-097",
+          "SPEC-098",
+          "SPEC-099",
+          "SPEC-100",
+          "SPEC-101",
+          "SPEC-102",
+          "SPEC-103",
+          "SPEC-104",
+          "SPEC-105",
+          "SPEC-106",
+          "SPEC-107",
+          "SPEC-108",
+          "SPEC-109",
+          "SPEC-110",
+          "SPEC-111",
+          "SPEC-112",
+          "SPEC-113",
+          "SPEC-114",
+          "SPEC-115",
+          "SPEC-116",
+          "SPEC-117",
+          "SPEC-118",
+          "SPEC-119",
+          "SPEC-120"
+        ],
+        "total": 120,
+        "pageSize": 200,
+        "url": "http://127.0.0.1:50875/specs?sort=id.asc&page=1&pageSize=200&taskScope=all"
+      },
+      "search": [
+        {
+          "ids": [
+            "SPEC-001"
+          ],
+          "total": 1,
+          "pageSize": 100,
+          "q": "SPEC-001",
+          "url": "http://127.0.0.1:50875/specs?q=SPEC-001&sort=id.asc&page=1&pageSize=100&taskScope=all"
+        },
+        {
+          "ids": [
+            "SPEC-002"
+          ],
+          "total": 1,
+          "pageSize": 100,
+          "q": "SPEC-002",
+          "url": "http://127.0.0.1:50875/specs?q=SPEC-002&sort=id.asc&page=1&pageSize=100&taskScope=all"
+        }
+      ],
+      "openerId": "SPEC-001"
+    }
+  ],
+  "routes": [
+    {
+      "route": "tasks",
+      "warmups": {
+        "key": [],
+        "click": [],
+        "search": []
+      },
+      "samples": {
+        "key": [
+          {
+            "index": 1,
+            "warmup": false,
+            "timeOrigin": 1794852829929.8,
+            "kind": "key",
+            "events": [
+              {
+                "type": "keydown",
+                "isTrusted": true,
+                "timeStamp": 359.59999990463257,
+                "capturedAt": 359.89999985694885,
+                "key": "ArrowDown",
+                "inputType": null
+              }
+            ],
+            "requests": [],
+            "maxMountedRows": 100,
+            "startAt": 359.59999990463257,
+            "inputAt": null,
+            "feedbackAt": null,
+            "readyAt": 363.2999999523163,
+            "stateCompletionAt": 361.59999990463257,
+            "done": true,
+            "error": null,
+            "ready": true,
+            "elapsedMs": 3.700000047683716,
+            "httpRequests": []
+          }
+        ],
+        "click": [
+          {
+            "index": 1,
+            "warmup": false,
+            "timeOrigin": 1794852830300.1,
+            "kind": "click",
+            "events": [
+              {
+                "type": "click",
+                "isTrusted": true,
+                "timeStamp": 179.90000009536743,
+                "capturedAt": 182,
+                "key": null,
+                "inputType": null
+              }
+            ],
+            "requests": [],
+            "maxMountedRows": 100,
+            "startAt": 179.90000009536743,
+            "inputAt": null,
+            "feedbackAt": null,
+            "readyAt": 187.70000004768372,
+            "stateCompletionAt": 182.70000004768372,
+            "done": true,
+            "error": null,
+            "ready": true,
+            "elapsedMs": 7.799999952316284,
+            "httpRequests": []
+          }
+        ],
+        "search": [
+          {
+            "index": 1,
+            "warmup": false,
+            "timeOrigin": 1794852830493,
+            "kind": "search",
+            "events": [
+              {
+                "type": "beforeinput",
+                "isTrusted": true,
+                "timeStamp": 155.79999995231628,
+                "capturedAt": 155.79999995231628,
+                "key": null,
+                "inputType": "insertText"
+              },
+              {
+                "type": "input",
+                "isTrusted": true,
+                "timeStamp": 156.39999985694885,
+                "capturedAt": 156.69999980926514,
+                "key": null,
+                "inputType": "insertText"
+              }
+            ],
+            "requests": [
+              {
+                "url": "http://127.0.0.1:50875/tasks/__data.json?q=TASK-001&sort=id.asc&page=1&pageSize=100&scope=all&view=table&x-sveltekit-invalidated=11",
+                "matchesQuery": true,
+                "startTime": 311.09999990463257,
+                "responseStart": 334,
+                "responseEnd": 334.19999980926514,
+                "duration": 23.09999990463257,
+                "transferSize": 6397
+              }
+            ],
+            "maxMountedRows": 100,
+            "startAt": 155.79999995231628,
+            "inputAt": 156.39999985694885,
+            "feedbackAt": 159.89999985694885,
+            "readyAt": 350.69999980926514,
+            "stateCompletionAt": 345.5,
+            "done": true,
+            "error": null,
+            "ready": true,
+            "elapsedMs": 194.29999995231628,
+            "feedbackMs": 4.099999904632568,
+            "feedbackReady": true,
+            "configuredDebounceMs": 150,
+            "requestDelays": [
+              {
+                "url": "http://127.0.0.1:50875/tasks/__data.json?q=TASK-001&sort=id.asc&page=1&pageSize=100&scope=all&view=table&x-sveltekit-invalidated=11",
+                "matchesQuery": true,
+                "startTime": 311.09999990463257,
+                "responseStart": 334,
+                "responseEnd": 334.19999980926514,
+                "duration": 23.09999990463257,
+                "transferSize": 6397,
+                "inputToRequestMs": 154.70000004768372
+              }
+            ],
+            "httpRequests": [
+              {
+                "url": "http://127.0.0.1:50875/tasks/__data.json?q=TASK-001&sort=id.asc&page=1&pageSize=100&scope=all&view=table&x-sveltekit-invalidated=11",
+                "matchesQuery": true,
+                "pending": false,
+                "timing": {
+                  "startTime": 1794852830804.412,
+                  "domainLookupStart": -1,
+                  "domainLookupEnd": -1,
+                  "connectStart": -1,
+                  "secureConnectionStart": -1,
+                  "connectEnd": -1,
+                  "requestStart": 0.197,
+                  "responseStart": 22.623,
+                  "responseEnd": 23.163
+                },
+                "failure": null,
+                "inputToRequestMs": 155.01210951805115
+              }
+            ]
+          }
+        ]
+      },
+      "notRun": [],
+      "maxMountedRows": 120,
+      "summary": {
+        "key": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 3.700000047683716,
+          "p95Ms": 3.700000047683716,
+          "maxMs": 3.700000047683716,
+          "budgetMs": 50,
+          "rule": "nearest-rank p95",
+          "pass": true
+        },
+        "click": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 7.799999952316284,
+          "p95Ms": 7.799999952316284,
+          "maxMs": 7.799999952316284,
+          "budgetMs": 50,
+          "rule": "nearest-rank p95",
+          "pass": true
+        },
+        "feedback": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 4.099999904632568,
+          "p95Ms": 4.099999904632568,
+          "maxMs": 4.099999904632568,
+          "budgetMs": 100,
+          "rule": "every observation",
+          "pass": true
+        },
+        "filter": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 194.29999995231628,
+          "p95Ms": 194.29999995231628,
+          "maxMs": 194.29999995231628,
+          "budgetMs": 1150,
+          "rule": "nearest-rank p95",
+          "pass": true
+        }
+      },
+      "scroll": {
+        "ready": true,
+        "wheelCount": 5,
+        "supported": true,
+        "startAt": 232.10000014305115,
+        "endAt": 529.6000001430511,
+        "entries": [],
+        "positions": [
+          {
+            "at": 232.10000014305115,
+            "source": "mounted-scan",
+            "isTrusted": null,
+            "top": 0,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 246.90000009536743,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 360,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 305.30000019073486,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 720,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 355,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 1080,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 413.10000014305115,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 1440,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 470.5,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 1800,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 529.6000001430511,
+            "source": "mounted-scan",
+            "isTrusted": null,
+            "top": 1800,
+            "left": 0,
+            "maxTop": 3212
+          }
+        ],
+        "wheels": [
+          {
+            "at": 246.5,
+            "timeStamp": 235.80000019073486,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 305,
+            "timeStamp": 296.7000000476837,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 354.80000019073486,
+            "timeStamp": 353.5,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 412.7000000476837,
+            "timeStamp": 411.40000009536743,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 470.10000014305115,
+            "timeStamp": 468.30000019073486,
+            "isTrusted": true,
+            "deltaY": 720
+          }
+        ],
+        "maxMountedRows": 120,
+        "longTasks": {
+          "supported": true,
+          "overlapping": [],
+          "maxDurationMs": 0,
+          "budgetMs": 100,
+          "pass": true
+        },
+        "scrolled": true,
+        "durationMs": 297.5,
+        "rowsValid": true,
+        "pass": true,
+        "status": "PASS"
+      },
+      "payload": {
+        "pass": false,
+        "error": "Error: page.evaluate: TypeError: response.status is not a function\n    at eval (eval at evaluate (:370:30), <anonymous>:1:134)\n    at async <anonymous>:381:23"
+      },
+      "stability": {
+        "ready": true,
+        "snapshots": {
+          "before": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 1428,
+              "bottom": 806.5,
+              "width": 1360,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 1440,
+              "bottom": 137,
+              "width": 1384,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1421,
+              "bottom": 210,
+              "width": 1352,
+              "height": 32,
+              "id": "TASK-001",
+              "visible": true
+            },
+            "focused": {
+              "rowId": "TASK-001",
+              "columnKey": "id",
+              "role": null,
+              "tag": "A"
+            }
+          },
+          "opened": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 980,
+              "bottom": 806.5,
+              "width": 912,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 980,
+              "bottom": 137,
+              "width": 924,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 979,
+              "bottom": 210,
+              "width": 910,
+              "height": 32,
+              "id": "TASK-001",
+              "visible": true
+            },
+            "focused": {
+              "role": null,
+              "tag": "H2"
+            }
+          },
+          "closed": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 1428,
+              "bottom": 806.5,
+              "width": 1360,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 1440,
+              "bottom": 137,
+              "width": 1384,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1421,
+              "bottom": 210,
+              "width": 1352,
+              "height": 32,
+              "id": "TASK-001",
+              "visible": true
+            },
+            "focused": {
+              "rowId": "TASK-001",
+              "columnKey": "id",
+              "role": null,
+              "tag": "A"
+            }
+          },
+          "refreshed": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 1428,
+              "bottom": 806.5,
+              "width": 1360,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 1440,
+              "bottom": 137,
+              "width": 1384,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1421,
+              "bottom": 210,
+              "width": 1352,
+              "height": 32,
+              "id": "TASK-001",
+              "visible": true
+            },
+            "focused": {
+              "role": "Refresh workspace",
+              "tag": "BUTTON"
+            }
+          }
+        },
+        "refresh": {
+          "url": "http://127.0.0.1:50875/workspace-data?sort=id.asc&page=1&pageSize=100&scope=all&view=table&route=tasks",
+          "status": 200
+        },
+        "pass": true,
+        "failures": [],
+        "toleranceCssPx": 1
+      },
+      "pass": false
+    },
+    {
+      "route": "specs",
+      "warmups": {
+        "key": [],
+        "click": [],
+        "search": []
+      },
+      "samples": {
+        "key": [
+          {
+            "index": 1,
+            "warmup": false,
+            "timeOrigin": 1794852831881.3,
+            "kind": "key",
+            "events": [
+              {
+                "type": "keydown",
+                "isTrusted": true,
+                "timeStamp": 147.59999990463257,
+                "capturedAt": 147.79999995231628,
+                "key": "ArrowDown",
+                "inputType": null
+              }
+            ],
+            "requests": [],
+            "maxMountedRows": 100,
+            "startAt": 147.59999990463257,
+            "inputAt": null,
+            "feedbackAt": null,
+            "readyAt": 155.09999990463257,
+            "stateCompletionAt": 149,
+            "done": true,
+            "error": null,
+            "ready": true,
+            "elapsedMs": 7.5,
+            "httpRequests": []
+          }
+        ],
+        "click": [
+          {
+            "index": 1,
+            "warmup": false,
+            "timeOrigin": 1794852832042.5,
+            "kind": "click",
+            "events": [
+              {
+                "type": "click",
+                "isTrusted": true,
+                "timeStamp": 172.79999995231628,
+                "capturedAt": 175.19999980926514,
+                "key": null,
+                "inputType": null
+              }
+            ],
+            "requests": [],
+            "maxMountedRows": 100,
+            "startAt": 172.79999995231628,
+            "inputAt": null,
+            "feedbackAt": null,
+            "readyAt": 177.09999990463257,
+            "stateCompletionAt": 175.69999980926514,
+            "done": true,
+            "error": null,
+            "ready": true,
+            "elapsedMs": 4.299999952316284,
+            "httpRequests": []
+          }
+        ],
+        "search": [
+          {
+            "index": 1,
+            "warmup": false,
+            "timeOrigin": 1794852832226.6,
+            "kind": "search",
+            "events": [
+              {
+                "type": "beforeinput",
+                "isTrusted": true,
+                "timeStamp": 182.60000014305115,
+                "capturedAt": 182.60000014305115,
+                "key": null,
+                "inputType": "insertText"
+              },
+              {
+                "type": "input",
+                "isTrusted": true,
+                "timeStamp": 183.20000004768372,
+                "capturedAt": 183.5,
+                "key": null,
+                "inputType": "insertText"
+              }
+            ],
+            "requests": [
+              {
+                "url": "http://127.0.0.1:50875/specs/__data.json?q=SPEC-001&sort=id.asc&page=1&pageSize=100&taskScope=all&x-sveltekit-invalidated=11",
+                "matchesQuery": true,
+                "startTime": 335.5,
+                "responseStart": 356.40000009536743,
+                "responseEnd": 356.60000014305115,
+                "duration": 21.100000143051147,
+                "transferSize": 6332
+              }
+            ],
+            "maxMountedRows": 100,
+            "startAt": 182.60000014305115,
+            "inputAt": 183.20000004768372,
+            "feedbackAt": 184.30000019073486,
+            "readyAt": 368.10000014305115,
+            "stateCompletionAt": 366.60000014305115,
+            "done": true,
+            "error": null,
+            "ready": true,
+            "elapsedMs": 184.90000009536743,
+            "feedbackMs": 1.7000000476837158,
+            "feedbackReady": true,
+            "configuredDebounceMs": 150,
+            "requestDelays": [
+              {
+                "url": "http://127.0.0.1:50875/specs/__data.json?q=SPEC-001&sort=id.asc&page=1&pageSize=100&taskScope=all&x-sveltekit-invalidated=11",
+                "matchesQuery": true,
+                "startTime": 335.5,
+                "responseStart": 356.40000009536743,
+                "responseEnd": 356.60000014305115,
+                "duration": 21.100000143051147,
+                "transferSize": 6332,
+                "inputToRequestMs": 152.29999995231628
+              }
+            ],
+            "httpRequests": [
+              {
+                "url": "http://127.0.0.1:50875/specs/__data.json?q=SPEC-001&sort=id.asc&page=1&pageSize=100&taskScope=all&x-sveltekit-invalidated=11",
+                "matchesQuery": true,
+                "pending": false,
+                "timing": {
+                  "startTime": 1794852832562.423,
+                  "domainLookupStart": -1,
+                  "domainLookupEnd": -1,
+                  "connectStart": -1,
+                  "secureConnectionStart": -1,
+                  "connectEnd": -1,
+                  "requestStart": 0.135,
+                  "responseStart": 20.667,
+                  "responseEnd": 21.077
+                },
+                "failure": null,
+                "inputToRequestMs": 152.62299799919128
+              }
+            ]
+          }
+        ]
+      },
+      "notRun": [],
+      "maxMountedRows": 120,
+      "summary": {
+        "key": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 7.5,
+          "p95Ms": 7.5,
+          "maxMs": 7.5,
+          "budgetMs": 50,
+          "rule": "nearest-rank p95",
+          "pass": true
+        },
+        "click": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 4.299999952316284,
+          "p95Ms": 4.299999952316284,
+          "maxMs": 4.299999952316284,
+          "budgetMs": 50,
+          "rule": "nearest-rank p95",
+          "pass": true
+        },
+        "feedback": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 1.7000000476837158,
+          "p95Ms": 1.7000000476837158,
+          "maxMs": 1.7000000476837158,
+          "budgetMs": 100,
+          "rule": "every observation",
+          "pass": true
+        },
+        "filter": {
+          "status": "PASS",
+          "count": 1,
+          "expected": 1,
+          "invalid": 0,
+          "medianMs": 184.90000009536743,
+          "p95Ms": 184.90000009536743,
+          "maxMs": 184.90000009536743,
+          "budgetMs": 1150,
+          "rule": "nearest-rank p95",
+          "pass": true
+        }
+      },
+      "scroll": {
+        "ready": true,
+        "wheelCount": 5,
+        "supported": true,
+        "startAt": 258.69999980926514,
+        "endAt": 549.0999999046326,
+        "entries": [],
+        "positions": [
+          {
+            "at": 258.69999980926514,
+            "source": "mounted-scan",
+            "isTrusted": null,
+            "top": 0,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 272.89999985694885,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 360,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 322.69999980926514,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 720,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 389.5,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 1080,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 437.89999985694885,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 1440,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 497.7999999523163,
+            "source": "scroll",
+            "isTrusted": true,
+            "top": 1800,
+            "left": 0,
+            "maxTop": 3212
+          },
+          {
+            "at": 549.0999999046326,
+            "source": "mounted-scan",
+            "isTrusted": null,
+            "top": 1800,
+            "left": 0,
+            "maxTop": 3212
+          }
+        ],
+        "wheels": [
+          {
+            "at": 272.5,
+            "timeStamp": 262.7999999523163,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 322.39999985694885,
+            "timeStamp": 319.89999985694885,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 389.2999999523163,
+            "timeStamp": 376.89999985694885,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 437.59999990463257,
+            "timeStamp": 435.69999980926514,
+            "isTrusted": true,
+            "deltaY": 720
+          },
+          {
+            "at": 497.5,
+            "timeStamp": 492.89999985694885,
+            "isTrusted": true,
+            "deltaY": 720
+          }
+        ],
+        "maxMountedRows": 120,
+        "longTasks": {
+          "supported": true,
+          "overlapping": [],
+          "maxDurationMs": 0,
+          "budgetMs": 100,
+          "pass": true
+        },
+        "scrolled": true,
+        "durationMs": 290.40000009536743,
+        "rowsValid": true,
+        "pass": true,
+        "status": "PASS"
+      },
+      "payload": {
+        "pass": false,
+        "error": "Error: page.evaluate: TypeError: response.status is not a function\n    at eval (eval at evaluate (:370:30), <anonymous>:1:134)\n    at async <anonymous>:381:23"
+      },
+      "stability": {
+        "ready": true,
+        "snapshots": {
+          "before": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 1428,
+              "bottom": 806.5,
+              "width": 1360,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 1440,
+              "bottom": 137,
+              "width": 1384,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1427,
+              "bottom": 210,
+              "width": 1358,
+              "height": 32,
+              "id": "SPEC-001",
+              "visible": true
+            },
+            "focused": {
+              "rowId": "SPEC-001",
+              "columnKey": "id",
+              "role": null,
+              "tag": "A"
+            }
+          },
+          "opened": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 980,
+              "bottom": 806.5,
+              "width": 912,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 980,
+              "bottom": 137,
+              "width": 924,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1013,
+              "bottom": 210,
+              "width": 944,
+              "height": 32,
+              "id": "SPEC-001",
+              "visible": true
+            },
+            "focused": {
+              "role": null,
+              "tag": "H2"
+            }
+          },
+          "closed": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 1428,
+              "bottom": 806.5,
+              "width": 1360,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 1440,
+              "bottom": 137,
+              "width": 1384,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1427,
+              "bottom": 210,
+              "width": 1358,
+              "height": 32,
+              "id": "SPEC-001",
+              "visible": true
+            },
+            "focused": {
+              "rowId": "SPEC-001",
+              "columnKey": "id",
+              "role": null,
+              "tag": "A"
+            }
+          },
+          "refreshed": {
+            "viewport": {
+              "width": 1440,
+              "height": 900
+            },
+            "mountedRows": 100,
+            "scrollport": {
+              "top": 145,
+              "left": 68,
+              "right": 1428,
+              "bottom": 806.5,
+              "width": 1360,
+              "height": 661.5
+            },
+            "scroll": {
+              "top": 0,
+              "left": 0
+            },
+            "toolbar": {
+              "top": 44,
+              "left": 56,
+              "right": 1440,
+              "bottom": 137,
+              "width": 1384,
+              "height": 93,
+              "visible": true
+            },
+            "row": {
+              "top": 178,
+              "left": 69,
+              "right": 1427,
+              "bottom": 210,
+              "width": 1358,
+              "height": 32,
+              "id": "SPEC-001",
+              "visible": true
+            },
+            "focused": {
+              "role": "Refresh workspace",
+              "tag": "BUTTON"
+            }
+          }
+        },
+        "refresh": {
+          "url": "http://127.0.0.1:50875/workspace-data?sort=id.asc&page=1&pageSize=100&taskScope=all&route=specs",
+          "status": 200
+        },
+        "pass": true,
+        "failures": [],
+        "toleranceCssPx": 1
+      },
+      "pass": false
+    }
+  ],
+  "budgets": {
+    "gridP95Ms": 50,
+    "feedbackEveryMs": 100,
+    "filterTotalP95Ms": 1150,
+    "configuredDebounceMs": 150,
+    "longTaskMaxMs": 100,
+    "payloadBytes": 256000,
+    "tableRows": 200
+  },
+  "pass": false,
+  "browser": {
+    "version": "157.0.8103.78",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  "pageErrors": [],
+  "consoleErrors": []
+}
