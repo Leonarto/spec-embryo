@@ -1,0 +1,346 @@
+{
+  "scope": "Cold memo/one-shot CLI impact diagnostic only:3serial pairs percommand, alternating AB/BA, each sample fresh supported Bun CLI/runtime process. Startup+first-context includes cold memo insertion cost. Same read-only actual archived project fixture, normal OS filesystem cache, no prefill/warmup/forcedGC, no CLI acceptance threshold invented. No browser300ms claim.",
+  "baseCommit": "0b12d574ea366c24573df5bac3216ffc498527f7",
+  "runtime": {
+    "bun": "1.3.9",
+    "executable": "/Users/leonardodiazvidal/.bun/bin/bun",
+    "harnessNode": "v25.6.0"
+  },
+  "startedAt": "2026-11-16T13:37:30.683Z",
+  "finishedAt": "2026-11-16T13:37:31.533Z",
+  "fixture": {
+    "sourceCommit": "0b12d574ea366c24573df5bac3216ffc498527f7",
+    "method": "Read-only disposable copy of real archived project managed memory/config/rootAGENTS; no Git repository or enabled scoped-note corpus. No fabricated extra tasks. Not OS-cold.",
+    "fixture": "/private/tmp/spm-task138-parse-memo-production-xwnvkw0_/cold-fixture",
+    "documents": 204,
+    "bytes": 738975,
+    "corpusSHA256": "2efc96f3bdad6e61757ea47064974795522d2a102b2c6b456994defdda6e469e",
+    "inventoryPolicy": "Matches repository.listMarkdownFiles: AGENTS.md excluded; previous206included2instructionfiles and was invalid diagnostic metadata."
+  },
+  "sourceHashes": [
+    {
+      "path": "src/document-parse-memo.ts",
+      "sha256": "c4e3adfabcbe3d62aa9a658d9ad34ee3dad7bd63f7d925e73421d04e6a06b717"
+    },
+    {
+      "path": "src/repository.ts",
+      "sha256": "e78ee2761ef4a75e19eff44ff4698abe5011cae339d5eeeeeb41b2339c6d9aef"
+    },
+    {
+      "path": "tests/document-parse-memo.test.ts",
+      "sha256": "7b8126250dedf63114de5b56312c01c82064aa5ecd521364bcda00d0fdd4e18c"
+    }
+  ],
+  "summary": {
+    "cli-status": {
+      "baseline": {
+        "processWallMs": {
+          "min": 71.57833399999998,
+          "median": 73.93549999999999,
+          "max": 113.56520799999998,
+          "raw": [
+            113.56520799999998,
+            73.93549999999999,
+            71.57833399999998
+          ]
+        }
+      },
+      "candidate": {
+        "processWallMs": {
+          "min": 76.87566700000002,
+          "median": 79.269542,
+          "max": 86.711791,
+          "raw": [
+            86.711791,
+            76.87566700000002,
+            79.269542
+          ]
+        }
+      }
+    },
+    "first-context": {
+      "baseline": {
+        "processWallMs": {
+          "min": 54.87024999999994,
+          "median": 56.00354200000004,
+          "max": 57.156791999999996,
+          "raw": [
+            56.00354200000004,
+            57.156791999999996,
+            54.87024999999994
+          ]
+        },
+        "loadMs": {
+          "min": 23.1415,
+          "median": 23.147584,
+          "max": 23.670416,
+          "raw": [
+            23.670416,
+            23.1415,
+            23.147584
+          ]
+        },
+        "processElapsedMs": {
+          "min": 44.613416,
+          "median": 44.78375,
+          "max": 46.581041,
+          "raw": [
+            46.581041,
+            44.613416,
+            44.78375
+          ]
+        }
+      },
+      "candidate": {
+        "processWallMs": {
+          "min": 58.581042000000025,
+          "median": 59.00645900000006,
+          "max": 59.26479199999994,
+          "raw": [
+            58.581042000000025,
+            59.26479199999994,
+            59.00645900000006
+          ]
+        },
+        "loadMs": {
+          "min": 26.865791,
+          "median": 27.139916999999997,
+          "max": 27.810499999999998,
+          "raw": [
+            27.139916999999997,
+            26.865791,
+            27.810499999999998
+          ]
+        },
+        "processElapsedMs": {
+          "min": 49.32675,
+          "median": 49.460708,
+          "max": 49.538541,
+          "raw": [
+            49.32675,
+            49.538541,
+            49.460708
+          ]
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "kind": "cli-status",
+      "pair": 0,
+      "variant": "baseline",
+      "order": "AB",
+      "processWallMs": 113.56520799999998,
+      "outputHash": "40861c5564e0752fcc213845172a53dca428a245e125152f9e9246508071482b",
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "in_progress": 3,
+        "review": 0,
+        "blocked": 1,
+        "ready": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "cli-status",
+      "pair": 0,
+      "variant": "candidate",
+      "order": "AB",
+      "processWallMs": 86.711791,
+      "outputHash": "40861c5564e0752fcc213845172a53dca428a245e125152f9e9246508071482b",
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "in_progress": 3,
+        "review": 0,
+        "blocked": 1,
+        "ready": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "cli-status",
+      "pair": 1,
+      "variant": "candidate",
+      "order": "BA",
+      "processWallMs": 76.87566700000002,
+      "outputHash": "40861c5564e0752fcc213845172a53dca428a245e125152f9e9246508071482b",
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "in_progress": 3,
+        "review": 0,
+        "blocked": 1,
+        "ready": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "cli-status",
+      "pair": 1,
+      "variant": "baseline",
+      "order": "BA",
+      "processWallMs": 73.93549999999999,
+      "outputHash": "40861c5564e0752fcc213845172a53dca428a245e125152f9e9246508071482b",
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "in_progress": 3,
+        "review": 0,
+        "blocked": 1,
+        "ready": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "cli-status",
+      "pair": 2,
+      "variant": "baseline",
+      "order": "AB",
+      "processWallMs": 71.57833399999998,
+      "outputHash": "40861c5564e0752fcc213845172a53dca428a245e125152f9e9246508071482b",
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "in_progress": 3,
+        "review": 0,
+        "blocked": 1,
+        "ready": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "cli-status",
+      "pair": 2,
+      "variant": "candidate",
+      "order": "AB",
+      "processWallMs": 79.269542,
+      "outputHash": "40861c5564e0752fcc213845172a53dca428a245e125152f9e9246508071482b",
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "in_progress": 3,
+        "review": 0,
+        "blocked": 1,
+        "ready": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "first-context",
+      "pair": 0,
+      "variant": "baseline",
+      "order": "AB",
+      "processWallMs": 56.00354200000004,
+      "loadMs": 23.670416,
+      "processElapsedMs": 46.581041,
+      "contextHash": "944ee6a8b03336f653a1841ce9c720b27ee8b4c6d4c93fcbe19d3523da50f776",
+      "documents": 204,
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "handoffs": 1,
+        "session": 0,
+        "org": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "first-context",
+      "pair": 0,
+      "variant": "candidate",
+      "order": "AB",
+      "processWallMs": 58.581042000000025,
+      "loadMs": 27.139916999999997,
+      "processElapsedMs": 49.32675,
+      "contextHash": "944ee6a8b03336f653a1841ce9c720b27ee8b4c6d4c93fcbe19d3523da50f776",
+      "documents": 204,
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "handoffs": 1,
+        "session": 0,
+        "org": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "first-context",
+      "pair": 1,
+      "variant": "candidate",
+      "order": "BA",
+      "processWallMs": 59.26479199999994,
+      "loadMs": 26.865791,
+      "processElapsedMs": 49.538541,
+      "contextHash": "944ee6a8b03336f653a1841ce9c720b27ee8b4c6d4c93fcbe19d3523da50f776",
+      "documents": 204,
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "handoffs": 1,
+        "session": 0,
+        "org": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "first-context",
+      "pair": 1,
+      "variant": "baseline",
+      "order": "BA",
+      "processWallMs": 57.156791999999996,
+      "loadMs": 23.1415,
+      "processElapsedMs": 44.613416,
+      "contextHash": "944ee6a8b03336f653a1841ce9c720b27ee8b4c6d4c93fcbe19d3523da50f776",
+      "documents": 204,
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "handoffs": 1,
+        "session": 0,
+        "org": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "first-context",
+      "pair": 2,
+      "variant": "baseline",
+      "order": "AB",
+      "processWallMs": 54.87024999999994,
+      "loadMs": 23.147584,
+      "processElapsedMs": 44.78375,
+      "contextHash": "944ee6a8b03336f653a1841ce9c720b27ee8b4c6d4c93fcbe19d3523da50f776",
+      "documents": 204,
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "handoffs": 1,
+        "session": 0,
+        "org": 0
+      },
+      "stderr": ""
+    },
+    {
+      "kind": "first-context",
+      "pair": 2,
+      "variant": "candidate",
+      "order": "AB",
+      "processWallMs": 59.00645900000006,
+      "loadMs": 27.810499999999998,
+      "processElapsedMs": 49.460708,
+      "contextHash": "944ee6a8b03336f653a1841ce9c720b27ee8b4c6d4c93fcbe19d3523da50f776",
+      "documents": 204,
+      "counts": {
+        "specs": 62,
+        "tasks": 140,
+        "handoffs": 1,
+        "session": 0,
+        "org": 0
+      },
+      "stderr": ""
+    }
+  ]
+}

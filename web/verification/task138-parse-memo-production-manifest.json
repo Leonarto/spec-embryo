@@ -1,0 +1,48 @@
+{
+  "baseCommit": "0b12d574ea366c24573df5bac3216ffc498527f7",
+  "isolatedRoot": "/private/tmp/spm-task138-parse-memo-production-xwnvkw0_",
+  "noSharedProductEdits": true,
+  "outcome": "await-independent-code-and-cold-cost-review",
+  "sourceFiles": [
+    {
+      "path": "src/document-parse-memo.ts",
+      "sha256": "c4e3adfabcbe3d62aa9a658d9ad34ee3dad7bd63f7d925e73421d04e6a06b717"
+    },
+    {
+      "path": "src/repository.ts",
+      "sha256": "e78ee2761ef4a75e19eff44ff4698abe5011cae339d5eeeeeb41b2339c6d9aef"
+    },
+    {
+      "path": "tests/document-parse-memo.test.ts",
+      "sha256": "7b8126250dedf63114de5b56312c01c82064aa5ecd521364bcda00d0fdd4e18c"
+    },
+    {
+      "path": "src/services/test-diagnostics.ts",
+      "sha256": "d44bca7e3411c01100ffc48ba4c92cbc7502cc1d9c13fe7358ae0e76827ed066"
+    },
+    {
+      "path": "tests/test-diagnostics.test.ts",
+      "sha256": "6476c83faae3bbb74bda63947d6c45cd9b5ff02b42d825ce1423d870d1062d50"
+    }
+  ],
+  "productPatch": "/private/tmp/spm-task138-parse-memo-production-xwnvkw0_/final-product.patch",
+  "productPatchSHA256": "10b9e5d74d5328feb3fa23d75de3aaf3cd994b6bdbbe26ebea90c501e9d82bb3",
+  "files": [
+    {
+      "path": "web/verification/task138-parse-memo-production-source.json",
+      "sha256": "23b381f582863820441376816f3f15373b4c36a0610d38992a3343d4f7ac89a8"
+    },
+    {
+      "path": "web/verification/task138-parse-memo-production-cold.json",
+      "sha256": "90e0155a4e9631ea3d2b7222a5ad7a4e8c1607f01bb2c744101da8f7a1da3e0e"
+    },
+    {
+      "path": "web/verification/task138-parse-memo-production-equivalence.json",
+      "sha256": "38b96b41c41d0f9e41e1b248442c0e7362f3059d29fb492ab00a51e904598eab"
+    },
+    {
+      "path": "web/verification/task138-parse-memo-production-report.md",
+      "sha256": "dec31cd52ff719c654d7791af2f3dae787e4dcf499515c311c8e691f6b879c1b"
+    }
+  ]
+}

@@ -32,6 +32,8 @@ import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
 import { documentSourceHash, registerDocumentSource } from "./services/document-provenance.ts";
 import { commitSpecAnswers, specAnswerRevision } from "./spec-answer-write.ts";
 import { createDocumentReader, readDocumentBytes, type DocumentReader } from "./document-reader.ts";
+import { createDocumentParseMemo } from "./document-parse-memo.ts";
+
 import { getProjectProfile, isProjectProfileName, writeProjectProfileManifest, type ProjectProfileName } from "./services/profiles.ts";
 import {
   createConfigToml,
@@ -43,6 +45,8 @@ import {
   createTemplateFiles,
   inferProjectName,
 } from "./templates.ts";
+
+const documentParseMemo = createDocumentParseMemo();
 
 function slugify(value: string): string {
   return value
@@ -136,9 +140,7 @@ async function loadMarkdownDocument<T>(
   readDocument: DocumentReader = readDocumentBytes,
 ): Promise<T> {
   const bytes = await readDocument(filePath);
-  const raw = bytes.toString("utf8");
-  const { attributes, body } = parseTomlFrontmatter(raw);
-  return registerDocumentSource(parser(filePath, attributes, body), bytes);
+  return registerDocumentSource(documentParseMemo.parse(filePath, bytes, parser), bytes);
 }
 
 async function loadMarkdownCollection<T>(
