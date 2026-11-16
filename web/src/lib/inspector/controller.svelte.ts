@@ -11,7 +11,7 @@ import {InspectorDetailResource,type InspectorDetailState} from './detail-resour
 import {InspectorHistoryLedger,canonicalDetailHref,inspectorURL,isPlainActivation,withoutInspector,type InspectorOpener} from './history.ts';
 import {loadInspectorComponent,type DetailComponent} from './modules.ts';
 import {getWorkspaceRefresh} from '../workspace/context.svelte.ts';
-export interface InspectorListRegistration {kind:'task'|'spec';ids:()=>string[];capture:(id:string,columnKey:string)=>InspectorOpener;restore:(opener:InspectorOpener|undefined)=>void;focusToolbar:()=>void;focusGrid:()=>void;regionFor:(element:Element|null)=>'toolbar'|'grid'|undefined}
+export interface InspectorListRegistration {navigationScope?:'page'|'expanded';kind:'task'|'spec';ids:()=>string[];capture:(id:string,columnKey:string)=>InspectorOpener;restore:(opener:InspectorOpener|undefined)=>void;focusToolbar:()=>void;focusGrid:()=>void;regionFor:(element:Element|null)=>'toolbar'|'grid'|undefined}
 interface InspectorSeed {envelope:WorkspaceDetailEnvelope|null;component?:DetailComponent;moduleError?:boolean;readError?:boolean}
 export type InspectorTransition={type:'open';identity:InspectorIdentity;opener?:InspectorOpener}|{type:'close'}|{type:'section';section:InspectorSection}|{type:'full-page'|'route'|'history';url:string};
 const contextKey=Symbol('workspace-inspector');
@@ -96,6 +96,7 @@ export function provideInspector(seed:()=>InspectorSeed){
     get identity(){return detail.identity;},get section(){return section;},get state(){return detail;},get component(){return component;},get moduleError(){return moduleError;},get pending(){return detail.pending||modulePending;},get breadcrumb(){return breadcrumb;},get announcement(){return announcement;},
     get relationReader():RelationReader{return {url:workspaceURL().href,state:detail,enhanced:navigationReady,page:pageRelation,retry:name=>void resource?.loadRelation(name)};},
     get hasList(){return !!list;},
+    get navigationScope():'page'|'expanded'{return list?.navigationScope??'page';},
     get hasMatchingList(){return !!list&&list.kind===detail.identity?.kind;},
     get visibleIds(){return list&&list.kind===detail.identity?.kind?list.ids():[];},
     registerList(value:InspectorListRegistration){list=value;return ()=>{if(list===value)list=undefined;};},

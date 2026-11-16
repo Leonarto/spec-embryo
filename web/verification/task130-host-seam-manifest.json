@@ -1,0 +1,39 @@
+{
+  "baseCommit": "88cb574",
+  "commitPaths": [
+    {
+      "path": "web/src/lib/inspector/controller.svelte.ts",
+      "sha256": "cdf3f1878b20fc2a784fa994b4c83dfd49e01dbd35c8f342945061ee7f655a85"
+    },
+    {
+      "path": "web/src/lib/inspector/InspectorHost.svelte",
+      "sha256": "30348e9ae44a978bb011d93a038bbf7b5e8c35fbef826a1f082aec5650d114a9"
+    },
+    {
+      "path": "web/src/lib/inspector/AGENTS.md",
+      "sha256": "1abbd4e8458fb7b1c482fcd1e91b6a663c1dc64384b7800fa8cf706014be6924"
+    },
+    {
+      "path": "web/scripts/inspector-scope-check.mjs",
+      "sha256": "7abaa40d22db42f68baf53b921478b870ddf63601b8d4af12c49af89dd8b8ed5"
+    },
+    {
+      "path": "web/verification/task130-host-seam-report.json",
+      "sha256": "abf1658bd78c4b8c71e42adc5895357c0dfb4ba3497ee368a7fc240696694642"
+    }
+  ],
+  "overlayOnlyNotForSeamCommit": [
+    {
+      "path": "web/src/routes/timeline/+page.svelte",
+      "sha256": "09c3ec192858abb64bb8577bc67f644a8d30e4f483c9df679e4cd6a9610428d8"
+    },
+    {
+      "path": "web/src/routes/timeline/AGENTS.md",
+      "sha256": "cd0a2b16236e7920fbe97e3ebda608a754c2df7c2d2bda96d85c53753651a8d9"
+    },
+    {
+      "path": "tests/workspace-query.test.ts",
+      "sha256": "f0f309185229ac3bf3d4f01d6c319d3bc61f7b249b7ae2bf0d1cd37e0f078644"
+    }
+  ]
+}
