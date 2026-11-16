@@ -173,7 +173,7 @@ export function transitionViewQuery(route: WorkspaceRoute, current: URLSearchPar
 
 /** Inspector-only changes preserve list/trace intention and filter drafts. */
 export function workspaceListURL(value:string|URL):string {
-  const url=new URL(value);url.searchParams.delete('inspect');url.searchParams.delete('section');return url.href;
+  const url=new URL(value);url.searchParams.delete('inspect');url.searchParams.delete('section');for(const name of [...url.searchParams.keys()])if(name.startsWith('rel.'))url.searchParams.delete(name);return url.href;
 }
 
 /** Request identity follows URL intention, never a snapshot's available IDs/page count. */
