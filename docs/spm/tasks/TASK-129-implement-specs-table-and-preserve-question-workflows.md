@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-129"
 title = "Implement Specs table and preserve question workflows"
 summary = "Implement spec table and drawer questions with conflict, dirty-form and refresh protection."
-status = "in_progress"
+status = "done"
 spec_ids = ["SPEC-062"]
 depends_on = ["TASK-128", "TASK-137", "TASK-140"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-15T18:31:13.726Z"
+completed_at = "2026-11-16T14:31:29.631Z"
 tags = ["parallel-implementation"]
-updated_at = "2026-11-16T12:51:58.491Z"
+updated_at = "2026-11-16T14:31:29.631Z"
 +++
 
 # Scope
@@ -29,7 +30,7 @@ Implement P5 of SPEC-062, including the contracts, edge cases and acceptance cri
 
 # Verification record
 
-Action/provenance, client and UX partial reviews are approved. F129-action-1 and F129-client-1/2/3 are closed, including raw whitespace retention, no-JS controls and observable rapid-history interference. Browser evidence covers save/conflict/recovery, confirmed-write read failure, late seed/remount races, navigation and draft preservation; desktop/mobile/dialog visuals and final contrast changes are reviewed. The final isolated snapshot uses committed f8a7e1d plus this slice, excluding uncommitted Timeline work: 444 tests pass with 8990 assertions; Bun aggregate coverage is 92.50% functions / 93.60% lines, and Svelte check is 0/0. Final build, package checks and manifest review remain pending. This is not whole-task or performance acceptance; earlier failed progress evidence remains historical.
+Complete and independently approved. The final 55-file manifest and root documentation were reconciled against the isolated f8a7e1d-plus-TASK129 snapshot, excluding Timeline130. All action/client/UX findings are closed. Validation passes 444 tests / 8990 assertions, Svelte check0/0, build, AGENTS, static lazy-import closure and ten integrated memo/editor browser checks. Bun aggregate coverage is 92.50% functions / 93.60% lines, including fixtures and excluding compiled Svelte coverage claims. Package verification here is inventory only. See `web/verification/task129-verification.md`, `task129-manifest.json` and `task129-final-review.md`. TASK138 performance and TASK131 combined accessibility/runtime acceptance remain open.
 
 
 # Detailed Astra implementation decisions

@@ -8,6 +8,7 @@ import type {
 } from "../domain.ts";
 import { loadProjectContext } from "../repository.ts";
 import { deriveEffectiveStatus, type DashboardTaskCard } from "./dashboard.ts";
+import { documentSourceHash } from "./document-provenance.ts";
 import { parseSpecQuestionSections } from "./spec-questions.ts";
 
 export interface DocumentBodyBlock {
@@ -58,6 +59,7 @@ export interface ResolvedDecisionDetail {
 }
 
 export interface SpecDetailData {
+  specRevision: string | null;
   kind: "spec";
   found: true;
   spec: {
@@ -423,6 +425,7 @@ export function buildSpecDetailFromContext(context: ProjectContext, specId: stri
   return {
     found: true,
     kind: "spec",
+    specRevision: documentSourceHash(spec),
     spec: {
       id: spec.id,
       title: spec.title,

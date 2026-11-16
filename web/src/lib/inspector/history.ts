@@ -12,8 +12,11 @@ export function isPlainActivation(event:Pick<MouseEvent,'button'|'ctrlKey'|'meta
 /** Proof is session-memory only. Reloaded markers alone never establish ownership. */
 export class InspectorHistoryLedger {
   private entries=new Map<string,InspectorEntry>();
+  private positions=new Map<string,{root:string;index:number}>();
+  delta(from:string|undefined,to:string|undefined){const a=from&&this.positions.get(from),b=to&&this.positions.get(to);return a&&b&&a.root===b.root?b.index-a.index:undefined;}
+  invalidateProof(id:string|undefined){if(id){this.positions.delete(id);this.entries.delete(id);}}
   get(id:string|undefined){return id?this.entries.get(id):undefined;}
-  record(entry:InspectorEntry){this.entries.set(entry.id,{...entry,url:historyURL(entry.url),...(entry.predecessor?{predecessor:{...entry.predecessor,url:historyURL(entry.predecessor.url)}}:{})});}
+  record(entry:InspectorEntry){if(!this.positions.has(entry.id)){const prev=entry.predecessor&&this.positions.get(entry.predecessor.id);this.positions.set(entry.id,prev?{root:prev.root,index:prev.index+1}:{root:entry.id,index:0});}this.entries.set(entry.id,{...entry,url:historyURL(entry.url),...(entry.predecessor?{predecessor:{...entry.predecessor,url:historyURL(entry.predecessor.url)}}:{})});}
   replace(id:string,url:string){const entry=this.entries.get(id);if(entry)this.record({...entry,url});}
   verified(id:string|undefined,url:string):InspectorEntry|undefined {const entry=this.get(id);return entry?.url===historyURL(url)?entry:undefined;}
   canBackClose(id:string|undefined,url:string):boolean {

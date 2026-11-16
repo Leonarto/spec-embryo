@@ -1,0 +1,281 @@
+{
+  "task": "TASK-129",
+  "status": "historical-progress-before-final-fixes",
+  "source": "HEAD snapshot plus explicit own paths; excludes mutable Timeline130",
+  "snapshot": "/private/tmp/spm-task129-validation",
+  "fixture": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-inspector-fixture-3yu8gH",
+  "server": {
+    "normal": {
+      "port": 5303,
+      "pid": 34789,
+      "fixtureTitle": "Inspector spec 1"
+    },
+    "fault": {
+      "port": 5304,
+      "pid": 37629,
+      "stopped": true
+    }
+  },
+  "infrastructure": [
+    {
+      "event": "Port5301 attempt failed sandbox EPERM; browser reached unrelated PID31880. No writes/checks credited. Unrelated process untouched."
+    },
+    {
+      "event": "Symlink dependency dev403 prevented hydration; snapshot-only vite fs.allow includes repository dependency root. Functional checks require .inspector-layout.enhanced."
+    },
+    {
+      "event": "Archive base corrected to actual first archive ab6f3ebc; later overlay helper observed newer doc-only HEAD without re-archiving. Per-path hashes remain authoritative; no product bytes changed by correction."
+    }
+  ],
+  "checks": [
+    {
+      "name": "canonical double submit",
+      "pass": true,
+      "posts": 1,
+      "resolvedQuestions": 1,
+      "evaluationRetained": true
+    },
+    {
+      "name": "drawer dirty close Keep/Escape/Discard",
+      "pass": true,
+      "defaultFocus": "Keep editing",
+      "draftExact": true
+    },
+    {
+      "name": "drawer Save and continue",
+      "pass": true,
+      "confirmedBeforeClose": true
+    },
+    {
+      "name": "owned shallow Back/Forward repeated",
+      "pass": true,
+      "draftExact": true,
+      "forwardReopensClean": true
+    },
+    {
+      "name": "dirty external metadata refresh",
+      "pass": true,
+      "sameTextareaIdentity": true,
+      "baseDraftExact": true,
+      "externalReviewExplicit": true
+    },
+    {
+      "name": "reworded question recovery prevents Save and continue",
+      "pass": true,
+      "recoveryExact": true
+    },
+    {
+      "name": "noJS blank POST400",
+      "pass": true,
+      "whitespaceEchoExact": true
+    },
+    {
+      "name": "noJS conflict and reviewed second external edit",
+      "pass": true,
+      "statuses": [
+        409,
+        409
+      ],
+      "exactOldDrafts": true,
+      "exactMatchOnlyRebase": true
+    },
+    {
+      "name": "noJS reviewed save retains unmatched recovery",
+      "pass": true,
+      "status": 200
+    },
+    {
+      "name": "noJS explicit recovery discard",
+      "pass": true,
+      "status": 200,
+      "sourceRevisionUnchanged": true,
+      "successNotClaimed": true
+    },
+    {
+      "name": "noJS persistent post-action read failure",
+      "pass": true,
+      "statuses": [
+        200,
+        400,
+        409,
+        404
+      ],
+      "confirmedWriteShown": true,
+      "exactDraftsRetained": true,
+      "providers": 0,
+      "editableForms": 0,
+      "ordinaryMissingGET": 404,
+      "ordinaryGETRecovery": false,
+      "faultInjection": "task129-fault-injection.patch; test copy only; writer and rendering unchanged"
+    },
+    {
+      "name": "transport outcome unknown after real committed server write",
+      "pass": true,
+      "posts": 1,
+      "responseDroppedAfterRouteFetch": true,
+      "draftExact": true,
+      "automaticRetry": false,
+      "saveDisabledUntilReview": true,
+      "unmatchedRecoveryRetained": true,
+      "expectedConsoleError": "net::ERR_FAILED from explicit response abort"
+    },
+    {
+      "name": "normal rapid Back/Forward/Back burst",
+      "pass": true,
+      "onePrompt": true,
+      "draftExact": true
+    },
+    {
+      "name": "indistinguishable userForward/own restoration target",
+      "pass": true,
+      "decision": "Astra: same accepted URL is indistinguishable using public APIs; keep one prompt, no auto replay; Keep cancels"
+    },
+    {
+      "name": "different observable target during pending restoration",
+      "pass": false,
+      "pendingFix": true,
+      "accepted": "/specs?qaProbe=C&inspect=spec:SPEC-00006",
+      "firstBack": "/specs?qaProbe=C",
+      "secondBack": "/specs?qaProbe=D",
+      "afterRelease": "/specs?qaProbe=C",
+      "afterKeep": "/specs?qaProbe=C",
+      "draftPreserved": true,
+      "control": "Test-only wrapper holds positive history.go restoration; native Back/Forward and public Kit pushState; no private Kit state",
+      "resolvedBy": "task129-history-browser-report.json; F129-client-3 partial review APPROVED"
+    }
+  ],
+  "performanceClaims": null,
+  "workingManifest": {
+    "base": "ab6f3ebc21f89dd2578670e4124086aced84688b",
+    "files": [
+      {
+        "path": "tests/inspector-seed.test.ts",
+        "sha256": "a813eb82a16aa5eea9a3c1cf87d491eb19d47332513767cb40b5f1a330795272"
+      },
+      {
+        "path": "web/src/lib/server/workspace.ts",
+        "sha256": "1f5930b969f63c1c4f2798c691279a3ed7ba67152328739a14843968c91b145e"
+      },
+      {
+        "path": "web/src/routes/+layout.server.ts",
+        "sha256": "917142d290950e4796f6fd1b3b35223cce37ed16464b8219ea02765cf54468b4"
+      },
+      {
+        "path": "web/src/lib/components/WorkspaceLayout.svelte",
+        "sha256": "c9b4890dcbdedfe34ded7062b0be4810d0501198d3b53f6207f0cc13b67e9902"
+      },
+      {
+        "path": "src/services/details.ts",
+        "sha256": "db95b53e99124ede9917f69e4e5f6a5093bfd31e21bad9bc01d3e8cbc8e99dbd"
+      },
+      {
+        "path": "web/src/lib/inspector/detail-validation.ts",
+        "sha256": "e5299752390062fabb0fa8d365ae765e16f4162abdc5b900748202196b8d90ed"
+      },
+      {
+        "path": "web/src/lib/server/spec-answers.ts",
+        "sha256": "4947498eb4d6f190354aa394c9596dfc8cba484874273bb9522662eed9f754fa"
+      },
+      {
+        "path": "web/src/routes/specs/[specId]/+page.server.ts",
+        "sha256": "156948b3981c50d510d4391df6d37668f3559139e2452e109fc91f7731b0f0c2"
+      },
+      {
+        "path": "web/src/lib/components/detail/types.ts",
+        "sha256": "e7d4789b24df39c19a287ef7ddbac165bb23f702c3978d4d84647e2455d86513"
+      },
+      {
+        "path": "web/src/app.d.ts",
+        "sha256": "7c93ea50685db938f0dce08d85212fff0af6cbaff4879cc27832d97ed52532d1"
+      },
+      {
+        "path": "tests/spec-question-action-guard.test.ts",
+        "sha256": "e695346fb22c3339d958fd7046db3a878ead62d818828671fef0daac98b02358"
+      },
+      {
+        "path": "tests/question-editor.test.ts",
+        "sha256": "99028567a7231931590036e95c77d1d65e0b16db5215fd1b8fe5e999eedf1987"
+      },
+      {
+        "path": "tests/spec-outcome-seed.test.ts",
+        "sha256": "10fc4dbbd07fda1543624340bb6d67f315b6b3777739bda860f99bbefc540a52"
+      },
+      {
+        "path": "tests/detail-presentation.test.ts",
+        "sha256": "98ae2a92e2f036efa98e09f749242445bd73850035b98517fccf747390506358"
+      },
+      {
+        "path": "web/src/lib/components/detail/SpecDetail.svelte",
+        "sha256": "c1d92810d6f93186329e69a6104d9c79d15b2113a060728fb85e4bd90c9b727d"
+      },
+      {
+        "path": "web/src/lib/components/detail/SpecQuestions.svelte",
+        "sha256": "a1854197b43eede1343ceb2c89f77fa484d910f1b8ef6fcaa04215952c60e317"
+      },
+      {
+        "path": "web/src/lib/components/detail/question-editor.ts",
+        "sha256": "abf1313e2237eaf97a91e8a5dbd757b875172ac89969334159e3a21cef78f32b"
+      },
+      {
+        "path": "web/src/lib/components/detail/question-context.ts",
+        "sha256": "58999d9aa7002feadae492d31177d7508b81e8b27a2cdb46986372d65465cc52"
+      },
+      {
+        "path": "web/src/lib/components/detail/action-response.ts",
+        "sha256": "28f6498ac25f9cd42664c1c480566624cc2a42c0ba0ce8911e3c52d0b42f809f"
+      },
+      {
+        "path": "web/src/lib/components/detail/CanonicalDetailReader.svelte",
+        "sha256": "fe94b227ef7e44ff971d052d27b5242a2f7a01bebb82dea38eb859701653094b"
+      },
+      {
+        "path": "web/src/lib/inspector/spec-outcome-fence.ts",
+        "sha256": "e2a569b42630d5e272e6df287373d02fe195984559c971d1fedea41b0b6208b6"
+      },
+      {
+        "path": "web/src/lib/inspector/spec-seed-adapter.ts",
+        "sha256": "259b61cd0642a91293b479c28709f303f31f7fa6d9b5002363c5b93bcda0a78e"
+      },
+      {
+        "path": "web/src/lib/inspector/QuestionLeaveDialog.svelte",
+        "sha256": "af3ce77c72b27c1e6e0c523176f9e6d5bd115b05a27091f546ee6fda95c6a8ac"
+      },
+      {
+        "path": "web/src/lib/inspector/controller.svelte.ts",
+        "sha256": "397d45b5ef0c6e2dd01e27d5d744a755ec1326328b6ab71274e429c977577bd7"
+      },
+      {
+        "path": "web/src/lib/inspector/InspectorHost.svelte",
+        "sha256": "f8b4b84dcb1d8de47b5582436191ac51d2703ed2ae37e232e8e4dd08c5e7a633"
+      },
+      {
+        "path": "web/src/lib/inspector/detail-resource.ts",
+        "sha256": "7951dbef75b16787f319c5f68dd39cf8e35a8933821d31054d698120ca2082f2"
+      },
+      {
+        "path": "web/src/lib/inspector/history.ts",
+        "sha256": "05f8d672c99041e1ddd348c59d39e7c7bec2a37a48b13923ae1470846cd7f19f"
+      },
+      {
+        "path": "web/src/routes/+layout.svelte",
+        "sha256": "ec333091d79112af9f21ce03753c372b84f2d97132873fe4c04641ccf4804bd8"
+      },
+      {
+        "path": "web/src/routes/specs/+page.svelte",
+        "sha256": "a3c1352a759075f77c741e294c68293801626389a1fd7e1a506e8ea8cacb8c95"
+      },
+      {
+        "path": "web/src/routes/specs/[specId]/+page.svelte",
+        "sha256": "21964f54f04ae703201cf5f7bd56b59bacd7d928702500f9f7b0899ccdfdf50e"
+      }
+    ],
+    "headObservedAtOverlay": "556ed4f64c280c5057f5d55999a84b0dc9e4fd68"
+  },
+  "supersededBy": "task129-verification.md",
+  "remainingAtCapture": [
+    "Astra history-restoration fix and directed recheck",
+    "late props seeds/controlled requests and old responses in real browser",
+    "unknown-history fallback and remaining transition targets",
+    "final combined checks/coverage/build/package review"
+  ]
+}

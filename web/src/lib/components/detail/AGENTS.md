@@ -1,5 +1,6 @@
 # AGENTS
 
-- TaskDetail/SpecDetail consume shared v2 DTOs in both readers; derivation stays in root services.
-- RelationWindow mounts100 occurrences, exact totals and native GET links. Duplicate IDs need occurrence keys; empty shells survive focus fallback.
-- CanonicalDetailReader retains an atomic snapshot/revision; URLs hold desired pages. SpecDetail reads its live form to guard full refresh before request/acceptance. Preserve drafts/document/Mermaid DOM and canonical POST.
+- TaskDetail/SpecDetail share bounded v2 DTOs; derivation stays in root services.
+- RelationWindow mounts100 occurrences with native GET links; duplicate keys and empty focus shells survive refresh.
+- SpecQuestions owns base/drafts/latest/submission per spec, independent of metadata refresh. specRevision is exact file provenance; sourceRevision owns atomic relation snapshots.
+- CanonicalDetailReader guards candidate acceptance and fenced loader seeds. Canonical POST is the only write path; keep noJS recovery and confirmed outcomes on read failure.

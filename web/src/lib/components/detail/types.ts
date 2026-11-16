@@ -2,6 +2,16 @@
 export interface SpecDetailActionResult {
   action?: string;
   error?: string;
+  submittedDrafts?: QuestionDraft[];
+  recovery?: QuestionDraft[];
+  baseRevision?: string;
+  currentRevision?: string | null;
+  committedRevision?: string;
+  committedQuestions?: Array<{question:string}>;
+  currentQuestions?: Array<{id:string;question:string}>;
+  currentDecisions?: Array<{id:string;question?:string;answer:string}>;
+  refreshWarning?: string;
+  redisplay?: boolean;
   success?: boolean;
   savedCount?: number;
   answeredQuestions?: string[];
@@ -19,3 +29,5 @@ export interface SpecDetailActionResult {
     };
   };
 }
+
+export interface QuestionDraft {question:string;answer:string}

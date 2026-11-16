@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {provideQuestionReader} from '../components/detail/question-context.ts';
   import {workspaceURL} from '../workspace/location.svelte.ts';
   import {onMount,tick,untrack} from 'svelte';
   import type {InspectorSection} from '../../../../src/services/workspace-detail.ts';
@@ -8,6 +9,7 @@
   import {canonicalDetailHref,inspectorURL,isPlainActivation,withoutInspector} from './history.ts';
   import Popover from '../components/Popover.svelte';
   let {controller,mode,width,maxWidth,onWidth}:{controller:InspectorController;mode:InspectorMode;width:number;maxWidth:number;onWidth:(width:number)=>void}=$props();
+  provideQuestionReader({register:editor=>controller.registerQuestionEditor(editor),invalidate:()=>controller.invalidateBeforeOutcome(),refresh:()=>controller.refreshDetails()});
   let mounted=$state(false),host=$state<HTMLDivElement>(null!),heading=$state<HTMLHeadingElement>(null!),reader=$state<HTMLDivElement>(null!),copyNotice=$state(''),copyFallback=$state<string|undefined>();
   const identity=$derived(controller.identity),detailState=$derived(controller.state),Component=$derived(controller.component);
   const modal=$derived(mounted&&!!identity&&mode!=='docked');
@@ -25,7 +27,7 @@
   function widthKey(event:KeyboardEvent){if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();onWidth(stepInspectorWidth(width,event.key,maxWidth));}}
   function focusables(){return Array.from(host.querySelectorAll<HTMLElement>('a[href],button,input,select,textarea,summary,[tabindex]')).filter(node=>node.tabIndex>=0&&!node.hasAttribute('disabled')&&node.getClientRects().length&&!node.closest('[inert]'));}
   function keyboard(event:KeyboardEvent){
-    if(!identity||event.defaultPrevented)return;const active=document.activeElement as HTMLElement|null;
+    if(!identity||event.defaultPrevented||controller.confirmation)return;const active=document.activeElement as HTMLElement|null;
     if(event.key==='Escape'){
       const popup=active?.closest<HTMLDetailsElement>('details[open]');if(popup){if(host.contains(popup)){event.preventDefault();popup.open=false;popup.querySelector('summary')?.focus();}return;}
       if(modal||host.contains(active)||controller.regionFor(active)){event.preventDefault();void controller.close();}return;
@@ -37,7 +39,7 @@
       const regions=['toolbar','grid','inspector'],next=regions[(regions.indexOf(current)+(event.shiftKey?2:1))%3];event.preventDefault();if(next==='toolbar')controller.focusToolbar();else if(next==='grid')controller.focusGrid();else controller.focusHeading();
     }
   }
-  function containment(event:FocusEvent){if(modal&&event.target instanceof Node&&!host.contains(event.target))heading?.focus({preventScroll:true});}
+  function containment(event:FocusEvent){if(modal&&!controller.confirmation&&event.target instanceof Node&&!host.contains(event.target))heading?.focus({preventScroll:true});}
   function relationClicks(node:HTMLDivElement){const handler=(event:MouseEvent)=>{if(!isPlainActivation(event))return;const anchor=(event.target as Element).closest<HTMLAnchorElement>('a[href]');if(!anchor||!node.contains(anchor)||anchor.hasAttribute('download')||anchor.target&&anchor.target!=='_self')return;
     const url=new URL(anchor.href);if(url.origin!==workspaceURL().origin)return;
     if(anchor.hasAttribute('data-inspector-full')){event.preventDefault();void controller.fullPage(anchor.href);return;}
@@ -49,7 +51,7 @@
   $effect(()=>{
     if(!modal||!host)return;
     const previous=new Map<HTMLElement,string|null>();
-    for(let branch:Element=host;branch.parentElement;branch=branch.parentElement){for(const sibling of branch.parentElement.children){if(sibling!==branch&&sibling instanceof HTMLElement&&!['SCRIPT','STYLE'].includes(sibling.tagName)&&!sibling.hasAttribute('data-inspector-backdrop')){previous.set(sibling,sibling.getAttribute('inert'));sibling.inert=true;}}}
+    for(let branch:Element=host;branch.parentElement;branch=branch.parentElement){for(const sibling of branch.parentElement.children){if(sibling!==branch&&sibling instanceof HTMLElement&&!['SCRIPT','STYLE'].includes(sibling.tagName)&&!sibling.hasAttribute('data-inspector-backdrop')&&!sibling.hasAttribute('data-question-confirm')){previous.set(sibling,sibling.getAttribute('inert'));sibling.inert=true;}}}
     if(!host.contains(document.activeElement))heading?.focus({preventScroll:true});
     return ()=>{for(const [element,attribute]of previous){if(attribute===null)element.removeAttribute('inert');else element.setAttribute('inert',attribute);}};
   });
@@ -77,7 +79,7 @@
     </header>
     <div class="inspector-reader" bind:this={reader} use:relationClicks aria-busy={controller.pending}>
       {#if detailState.error||controller.moduleError||detailState.refreshRequired}<div class="detail-error" role="alert"><strong>{snapshot?'Previous detail · ':''}{detailState.refreshRequired?'The source changed. Refresh details to load related rows.':detailState.error==='timeout'?'Detail request timed out.':'Detail could not be loaded.'}</strong>{#if mounted}<button type="button" onclick={()=>controller.retry()}>Retry detail</button>{/if}<a data-inspector-full href={canonicalDetailHref(identity)}>Open canonical page</a></div>{/if}
-      {#if Component&&snapshot}<Component detail={snapshot.detail} presentation="inspector" relationReader={controller.relationReader} />
+      {#if Component&&snapshot}<Component detail={snapshot.detail} presentation="inspector" projectKey={controller.projectKey} relationReader={controller.relationReader} />
       {:else if controller.pending}<div class="skeleton" role="status">Loading {identity.id}…<div></div><div></div><div></div></div>
       {:else if !detailState.error&&!controller.moduleError}<p>Detail unavailable. <a data-inspector-full href={canonicalDetailHref(identity)}>Open canonical page</a></p>{/if}
       {#if copyFallback!==undefined}<label class="copy-fallback">Clipboard unavailable. Select and copy the inspector link<input readonly value={copyFallback}/></label>{/if}

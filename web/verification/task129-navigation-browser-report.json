@@ -1,0 +1,78 @@
+{
+  "phase": "navigation-layout",
+  "pass": true,
+  "checks": [
+    {
+      "name": "Keyboard row activation opens the shared question editor",
+      "pass": true
+    },
+    {
+      "name": "Same-entity list filters retain draft and owner without prompting",
+      "pass": true
+    },
+    {
+      "name": "Section changes retain the editor",
+      "pass": true
+    },
+    {
+      "name": "Modified canonical relation opens a tab without disturbing draft",
+      "pass": true
+    },
+    {
+      "name": "One accessible pending-destination prompt",
+      "pass": true
+    },
+    {
+      "name": "Relation navigation Keep retains identity",
+      "pass": true
+    },
+    {
+      "name": "One accessible pending-destination prompt",
+      "pass": true
+    },
+    {
+      "name": "Next entity Keep retains exact draft",
+      "pass": true
+    },
+    {
+      "name": "One accessible pending-destination prompt",
+      "pass": true
+    },
+    {
+      "name": "Full-page Keep leaves the drawer intact",
+      "pass": true
+    },
+    {
+      "name": "One accessible pending-destination prompt",
+      "pass": true
+    },
+    {
+      "name": "Normal route navigation is guarded",
+      "pass": true
+    },
+    {
+      "name": "Mode change 1440 preserves DOM, input and focus",
+      "pass": true
+    },
+    {
+      "name": "Mode change 1024 preserves DOM, input and focus",
+      "pass": true
+    },
+    {
+      "name": "Mode change 390 preserves DOM, input and focus",
+      "pass": true
+    },
+    {
+      "name": "Answer controls retain native form names",
+      "pass": true
+    },
+    {
+      "name": "Dirty browser reload uses native beforeunload",
+      "pass": true
+    },
+    {
+      "name": "Dismissing browser reload preserves exact draft",
+      "pass": true
+    }
+  ]
+}

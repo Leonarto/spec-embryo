@@ -1,0 +1,49 @@
+{
+  "phase": "smoke",
+  "pass": true,
+  "checks": [
+    {
+      "name": "Keep editing is the confirmation default",
+      "pass": true
+    },
+    {
+      "name": "Escape keeps exact drafts",
+      "pass": true
+    },
+    {
+      "name": "One in-flight POST for double activation",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "Unresolved whitespace stays visible",
+      "pass": true
+    },
+    {
+      "name": "Unresolved whitespace still guards navigation",
+      "pass": true
+    },
+    {
+      "name": "Returning to baseline is clean",
+      "pass": true
+    },
+    {
+      "name": "Reopening fenced identity loads current questions",
+      "pass": true
+    },
+    {
+      "name": "Transport ambiguity keeps draft without retry",
+      "pass": true
+    },
+    {
+      "name": "Review retains unmatched answers as recovery",
+      "pass": true
+    },
+    {
+      "name": "Save and continue cannot abandon recovery",
+      "pass": true
+    }
+  ],
+  "base": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "scope": "Scoped functional smoke on final snapshot with committed parse memo; Node/Vite DEV, no timing claim. First cold dev compilation timed out before checks/writes and is retained separately."
+}

@@ -1,5 +1,7 @@
 <script lang="ts">
+  import {onMount} from "svelte";
   import { ArrowLeft, CircleCheckBig, Gauge, NotebookText, Orbit, Pause, Sparkles, Target } from "@lucide/svelte";
+  import SpecQuestions from "./SpecQuestions.svelte";
   import RelationWindow from "./RelationWindow.svelte";
   import NotFound from "./NotFound.svelte";
   import DocumentBody from "../DocumentBody.svelte";
@@ -8,10 +10,11 @@
   import type {RelationReader} from "../../inspector/relation-reader.ts";
   import type { SpecDetailActionResult } from "./types.ts";
 
-  let { detail, actionResult,presentation="page",relationReader } = $props<{ detail: BoundedSpecResult;relationReader?:RelationReader; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>();
+  let { detail, actionResult,presentation="page",relationReader,projectKey="" } = $props<{ detail: BoundedSpecResult;projectKey?:string;relationReader?:RelationReader; actionResult?: SpecDetailActionResult;presentation?:"page"|"inspector" }>();
 
-  let questionForm=$state<HTMLFormElement>();
-  export function hasAnswerDraft():boolean{return !!questionForm&&new FormData(questionForm).getAll('answer').some(value=>typeof value==='string'&&value.length>0);}
+  let mounted=$state(false);onMount(()=>{mounted=true;});
+  let questions=$state<SpecQuestions>();
+  export function hasAnswerDraft():boolean{return questions?.hasAnswerDraft()??false;}
   const statusIcons = {
     proposed: Sparkles,
     active: Orbit,
@@ -194,83 +197,10 @@
           </div>
         </div>
 
-        {#if presentation==='inspector'}
-          <div class="readonly-questions" data-detail-section="questions">{#each detail.openQuestions as question}<p>{question.question}</p>{/each}<a data-inspector-full href={`/specs/${detail.spec.id}#open-questions`}>Answer questions on the canonical page</a></div>
-        {:else if detail.openQuestions.length === 0}
-          <p class="empty">This spec does not have open questions right now.</p>
-        {:else}
-          <form bind:this={questionForm} class="question-form" method="POST" action="?/answerOpenQuestions">
-            <div class="question-list">
-              {#each detail.openQuestions as question}
-                <label class="question-card">
-                  <input type="hidden" name="question" value={question.question} />
-                  <div class="question-head">
-                    <p class="linked-id">{question.id}</p>
-                    <span class="mini-pill">open</span>
-                  </div>
-                  <strong>{question.question}</strong>
-                  <textarea
-                    name="answer"
-                    rows="4"
-                    placeholder="Add the durable answer that should be written back into the spec."
-                  ></textarea>
-                </label>
-              {/each}
-            </div>
+        {#if presentation==='inspector'&&!mounted}
+        <div data-detail-section="questions">{#each detail.openQuestions as question}<p>{question.question}</p>{/each}<a data-inspector-full href={`/specs/${detail.spec.id}#open-questions`}>Answer questions on the canonical page</a></div>
+        {:else}{#key detail.spec.id}<SpecQuestions bind:this={questions} {detail} {actionResult} {projectKey}/>{/key}{/if}
 
-            <div class="question-actions">
-              <p class="helper-copy">You can answer one or many questions here. Empty answers are ignored on save.</p>
-              <button class="primary-button" type="submit">Save answered questions</button>
-            </div>
-          </form>
-        {/if}
-
-        {#if actionResult?.action === "answerOpenQuestions" && actionResult.error}
-          <div class="feedback-card feedback-error">
-            <p class="linked-id">save error</p>
-            <strong>{actionResult.error}</strong>
-          </div>
-        {/if}
-
-        {#if actionResult?.action === "answerOpenQuestions" && actionResult.success}
-          <div class="feedback-stack">
-            <div class="feedback-card feedback-success">
-              <p class="linked-id">saved</p>
-              <strong>{actionResult.savedCount} answer{actionResult.savedCount === 1 ? "" : "s"} recorded</strong>
-              {#if actionResult.answeredQuestions && actionResult.answeredQuestions.length > 0}
-                <div class="chip-row">
-                  {#each actionResult.answeredQuestions as question}
-                    <span class="chip">{question}</span>
-                  {/each}
-                </div>
-              {/if}
-            </div>
-
-            {#if actionResult.evaluation}
-              <div class="feedback-card">
-                <div class="panel-head">
-                  <div class="panel-title">
-                    <Target size={15} strokeWidth={1.9} />
-                    <h3>Continuation guidance</h3>
-                  </div>
-                  <span class={`mini-pill ${actionResult.evaluation.status === "ready-for-follow-up" ? "mini-pill-success" : "mini-pill-warm"}`}>
-                    {actionResult.evaluation.status === "ready-for-follow-up" ? "ready" : "needs more input"}
-                  </span>
-                </div>
-                <p>{actionResult.evaluation.summary}</p>
-                <ul class="plain-list">
-                  {#each actionResult.evaluation.nextActions as action}
-                    <li>{action}</li>
-                  {/each}
-                </ul>
-                <div class="prompt-block">
-                  <p class="linked-id">agent evaluation prompt</p>
-                  <pre>{actionResult.evaluation.bundle.recommended_prompt}</pre>
-                </div>
-              </div>
-            {/if}
-          </div>
-        {/if}
       </article>
 
       <article class="panel">
@@ -566,24 +496,7 @@
     color: var(--muted);
   }
 
-  .readonly-questions {display:grid;gap:.5rem}.readonly-questions a{display:inline-flex;align-items:center;min-height:1.5rem;color:var(--accent)}
-  textarea {
-    width: 100%;
-    min-height: 7rem;
-    resize: vertical;
-    box-sizing: border-box;
-    padding: 0.85rem 0.95rem;
-    border-radius:.25rem;
-    border: 1px solid var(--line-strong);
-    background: var(--surface-overlay-soft);
-    color: inherit;
-    font: inherit;
-  }
 
-  textarea:focus {
-    outline:2px solid var(--focus);
-    border-color: var(--accent-border);
-  }
 
   .primary-button {
     border:1px solid var(--accent);
@@ -624,14 +537,6 @@
     border: 1px solid var(--line);
   }
 
-  pre {
-    margin: 0;
-    white-space: pre-wrap;
-    word-break: break-word;
-    font-family: var(--mono-font);
-    font-size: 0.8rem;
-    line-height: 1.45;
-  }
 
   .mini-pill-success {
     color: var(--accent-ink);
@@ -665,6 +570,6 @@
   .inspector .linked-card:hover {background:var(--surface-raised);}
   .inspector h3 {font-size:.875rem;}.inspector h4 {font-size:.8125rem;}
   .inspector .chip {padding:.125rem .375rem;min-height:1.5rem;}
-  a:focus-visible,button:focus-visible {outline:2px solid var(--focus);outline-offset:2px;}
-  @media(pointer:coarse) {a,.back-link,.readonly-questions a,.inspector .chip {min-height:2.75rem;}button {min-height:2.75rem;}}
+  a:focus-visible {outline:2px solid var(--focus);outline-offset:2px;}
+  @media(pointer:coarse) {a,.back-link,.inspector .chip {min-height:2.75rem;}}
 </style>

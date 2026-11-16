@@ -1,0 +1,17 @@
+{
+  "base": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "scope": "npm pack --dry-run --ignore-scripts --json in isolated source; no publication or installation",
+  "fileCount": 193,
+  "required": {
+    "web/src/lib/components/detail/SpecQuestions.svelte": true,
+    "web/src/lib/components/detail/question-editor.ts": true,
+    "web/src/lib/components/detail/action-response.ts": true,
+    "web/src/lib/inspector/spec-outcome-fence.ts": true,
+    "web/src/lib/inspector/spec-seed-adapter.ts": true,
+    "web/src/lib/inspector/QuestionLeaveDialog.svelte": true,
+    "web/src/lib/components/WorkspaceLayout.svelte": true,
+    "web/src/lib/server/spec-answers.ts": true
+  },
+  "unexpectedGenerated": [],
+  "pass": true
+}

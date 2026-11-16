@@ -1,0 +1,85 @@
+{
+  "phase": "question-contrast",
+  "pass": true,
+  "checks": [
+    {
+      "name": "light answer placeholder meets4.5:1",
+      "pass": true,
+      "detail": 6.542949962594685
+    },
+    {
+      "name": "dark answer placeholder meets4.5:1",
+      "pass": true,
+      "detail": 8.212297321496603
+    },
+    {
+      "name": "light confirmed success meets4.5:1",
+      "pass": true,
+      "detail": 7.2865962147803325
+    },
+    {
+      "name": "dark confirmed success meets4.5:1",
+      "pass": true,
+      "detail": 9.847263207687488
+    },
+    {
+      "name": "Native dialog uses the existing host backdrop",
+      "pass": true,
+      "detail": "rgba(0, 0, 0, 0.533)"
+    }
+  ],
+  "measurements": [
+    {
+      "theme": "light",
+      "placeholder": {
+        "color": "rgb(82, 97, 88)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "opacity": "1",
+        "ratio": 6.542949962594685
+      }
+    },
+    {
+      "theme": "dark",
+      "placeholder": {
+        "color": "rgb(169, 181, 175)",
+        "background": [
+          21,
+          27,
+          30
+        ],
+        "opacity": "1",
+        "ratio": 8.212297321496603
+      }
+    },
+    {
+      "theme": "light",
+      "success": {
+        "color": "rgb(22, 99, 59)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "opacity": "1",
+        "ratio": 7.2865962147803325
+      }
+    },
+    {
+      "theme": "dark",
+      "success": {
+        "color": "rgb(117, 214, 161)",
+        "background": [
+          21,
+          27,
+          30
+        ],
+        "opacity": "1",
+        "ratio": 9.847263207687488
+      }
+    }
+  ]
+}

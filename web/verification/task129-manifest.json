@@ -1,0 +1,297 @@
+{
+  "task": "TASK-129",
+  "status": "frozen_for_final_review",
+  "base": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "snapshot": "/private/tmp/spm-task129-final-validation",
+  "files": [
+    {
+      "path": "src/services/details.ts",
+      "sha256": "db95b53e99124ede9917f69e4e5f6a5093bfd31e21bad9bc01d3e8cbc8e99dbd",
+      "category": "product"
+    },
+    {
+      "path": "tests/detail-presentation.test.ts",
+      "sha256": "98ae2a92e2f036efa98e09f749242445bd73850035b98517fccf747390506358",
+      "category": "test"
+    },
+    {
+      "path": "tests/inspector-seed.test.ts",
+      "sha256": "2e0f8726d4ec1988d4d5dfdbf4a261e62352e2d94577aa4ada80a6d0789fd9de",
+      "category": "test"
+    },
+    {
+      "path": "tests/question-editor.test.ts",
+      "sha256": "99028567a7231931590036e95c77d1d65e0b16db5215fd1b8fe5e999eedf1987",
+      "category": "test"
+    },
+    {
+      "path": "tests/question-history.test.ts",
+      "sha256": "0b113e1cc8d55ac05c4639b8b7c9abe1e4751bc8f5fcdd7f9190945716c626be",
+      "category": "test"
+    },
+    {
+      "path": "tests/spec-outcome-seed.test.ts",
+      "sha256": "d6ef76f8a562dd2f3d8f123e71a48ee2e245163c90a950609c43d464ef1f0a3f",
+      "category": "test"
+    },
+    {
+      "path": "tests/spec-question-action-guard.test.ts",
+      "sha256": "e695346fb22c3339d958fd7046db3a878ead62d818828671fef0daac98b02358",
+      "category": "test"
+    },
+    {
+      "path": "web/scripts/spec-question-history-check.mjs",
+      "sha256": "b1a163a5741b0899bba04c642eff03a7e71b7dc62721ea45fac71843d9f39f71",
+      "category": "script"
+    },
+    {
+      "path": "web/scripts/spec-question-navigation-check.mjs",
+      "sha256": "a4fc600e1e775f10276a2c563c3cff7712886f40f132cec01a370cc0db2b2d05",
+      "category": "script"
+    },
+    {
+      "path": "web/scripts/spec-question-seed-check.mjs",
+      "sha256": "e5920ea5df2e0c2a0f464aba128591c3b5a2a935ce39619d6e65f61c0efa43f2",
+      "category": "script"
+    },
+    {
+      "path": "web/scripts/spec-questions-check.mjs",
+      "sha256": "8f89b000c3a7fa7880bc6173f6ad1d9c400f9d690cccff0c897ed9daf165f7eb",
+      "category": "script"
+    },
+    {
+      "path": "web/scripts/spec-questions-closure.ts",
+      "sha256": "e9fe848f723eb62c73c575c00140b759183af84b99296368c95772065cd273bb",
+      "category": "script"
+    },
+    {
+      "path": "web/scripts/spec-questions-fixture.ts",
+      "sha256": "06f683f88bf2d8f4ed8973f3285a784a3b758f71479bc499ef7348613170c8db",
+      "category": "script"
+    },
+    {
+      "path": "web/src/app.d.ts",
+      "sha256": "7c93ea50685db938f0dce08d85212fff0af6cbaff4879cc27832d97ed52532d1",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/WorkspaceLayout.svelte",
+      "sha256": "c9b4890dcbdedfe34ded7062b0be4810d0501198d3b53f6207f0cc13b67e9902",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/AGENTS.md",
+      "sha256": "19772e2124b98bc51e5ed79b50ac948ec6d443ee3b025da74eb92827613144f2",
+      "category": "guide"
+    },
+    {
+      "path": "web/src/lib/components/detail/CanonicalDetailReader.svelte",
+      "sha256": "fe94b227ef7e44ff971d052d27b5242a2f7a01bebb82dea38eb859701653094b",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/SpecDetail.svelte",
+      "sha256": "c1d92810d6f93186329e69a6104d9c79d15b2113a060728fb85e4bd90c9b727d",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/SpecQuestions.svelte",
+      "sha256": "e61c327a6b17f1d2687fe494b99496191ada3b23e87430c680859f732a7d92e2",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/action-response.ts",
+      "sha256": "28f6498ac25f9cd42664c1c480566624cc2a42c0ba0ce8911e3c52d0b42f809f",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/question-context.ts",
+      "sha256": "58999d9aa7002feadae492d31177d7508b81e8b27a2cdb46986372d65465cc52",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/question-editor.ts",
+      "sha256": "abf1313e2237eaf97a91e8a5dbd757b875172ac89969334159e3a21cef78f32b",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/components/detail/types.ts",
+      "sha256": "e7d4789b24df39c19a287ef7ddbac165bb23f702c3978d4d84647e2455d86513",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/AGENTS.md",
+      "sha256": "771b95206fbab860693a7fae517bc79fe583f6223de4ca9c589fb4927fd1fc3b",
+      "category": "guide"
+    },
+    {
+      "path": "web/src/lib/inspector/InspectorHost.svelte",
+      "sha256": "f8b4b84dcb1d8de47b5582436191ac51d2703ed2ae37e232e8e4dd08c5e7a633",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/QuestionLeaveDialog.svelte",
+      "sha256": "4e8d06059a20def231c71a65f8fa3504603a41e3fb8cc18f315b01300177cd00",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/controller.svelte.ts",
+      "sha256": "af851a6db8259913d56d9fbb27478ee46aa6b7c517bb972ed072c03f3d8cf623",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/detail-resource.ts",
+      "sha256": "7951dbef75b16787f319c5f68dd39cf8e35a8933821d31054d698120ca2082f2",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/detail-validation.ts",
+      "sha256": "e5299752390062fabb0fa8d365ae765e16f4162abdc5b900748202196b8d90ed",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/history.ts",
+      "sha256": "05f8d672c99041e1ddd348c59d39e7c7bec2a37a48b13923ae1470846cd7f19f",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/spec-outcome-fence.ts",
+      "sha256": "e2a569b42630d5e272e6df287373d02fe195984559c971d1fedea41b0b6208b6",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/inspector/spec-seed-adapter.ts",
+      "sha256": "259b61cd0642a91293b479c28709f303f31f7fa6d9b5002363c5b93bcda0a78e",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/server/spec-answers.ts",
+      "sha256": "4947498eb4d6f190354aa394c9596dfc8cba484874273bb9522662eed9f754fa",
+      "category": "product"
+    },
+    {
+      "path": "web/src/lib/server/workspace.ts",
+      "sha256": "1f5930b969f63c1c4f2798c691279a3ed7ba67152328739a14843968c91b145e",
+      "category": "product"
+    },
+    {
+      "path": "web/src/routes/+layout.server.ts",
+      "sha256": "917142d290950e4796f6fd1b3b35223cce37ed16464b8219ea02765cf54468b4",
+      "category": "product"
+    },
+    {
+      "path": "web/src/routes/+layout.svelte",
+      "sha256": "ec333091d79112af9f21ce03753c372b84f2d97132873fe4c04641ccf4804bd8",
+      "category": "product"
+    },
+    {
+      "path": "web/src/routes/specs/+page.svelte",
+      "sha256": "a3c1352a759075f77c741e294c68293801626389a1fd7e1a506e8ea8cacb8c95",
+      "category": "product"
+    },
+    {
+      "path": "web/src/routes/specs/[specId]/+page.server.ts",
+      "sha256": "156948b3981c50d510d4391df6d37668f3559139e2452e109fc91f7731b0f0c2",
+      "category": "product"
+    },
+    {
+      "path": "web/src/routes/specs/[specId]/+page.svelte",
+      "sha256": "21964f54f04ae703201cf5f7bd56b59bacd7d928702500f9f7b0899ccdfdf50e",
+      "category": "product"
+    },
+    {
+      "path": "web/verification/task129-contrast-browser-report.json",
+      "sha256": "a75487d219a11ad0cf989dbd4ae2efb4fa5b5e404ff4d263994b1a9a05e632a5",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-editor-desktop-light.png",
+      "sha256": "e5fc7627bd88b965d340e0be72533d690d3910b96e399fdeb9e3b1abf77dd3c6",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-editor-mobile-dark.png",
+      "sha256": "3568fcdea38f1d32418f609184bd8e9581346e194be9788617d7a82d64d0b7bf",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-fault-injection.patch",
+      "sha256": "5e5f43e07fd2a54ab345cc652bfecee31773be08dbb3cb30b8a6059a030dce0d",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-history-browser-report.json",
+      "sha256": "78b50d9b1a88a057db094bae4c4c5c3a5b7bed2831e18623cf33a3c30175d952",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-integrated-smoke-report.json",
+      "sha256": "21d1edbdecb7e825d86af0eee3c065272f891b3a8103ee520dbca62eca3dc2df",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-integrated-smoke-setup-failure.json",
+      "sha256": "a1f6b172f352cfda11fda0140cb28017c648c58d82667d15ea0275b301c7c9b2",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-navigation-browser-report.json",
+      "sha256": "ce28a049fed25efc6b72672a5b45707f69b4cbce4057d7afacc229b5faf9396d",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-package-audit.json",
+      "sha256": "a885866bd1170222f2c5dde262676d0ca8da893c81a2074d06ba14efd061b7b5",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-production-closure.json",
+      "sha256": "c8fcf0a1be3c3c28d5d12c8924dddb4eaa7cc65021f15b534cbb42b4d9b99703",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-progress-report.json",
+      "sha256": "22f4015996fb082c5ba5a8cb7c30a2c4af9f85f85b7f288a09df232152754942",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-question-dialog-dark.png",
+      "sha256": "1d9e20dc68736d870fcb1adae2c55921e027de2b65327cf23ae626b55cc083bb",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-seed-browser-report.json",
+      "sha256": "11de9d7ed011922dfd77d7de8198e069b61e3daaebbc4818384438efce88fde2",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-smoke-browser-report.json",
+      "sha256": "24325fec5f2b2d7876e6484f11ef5468c617a555a49ec54db41c602a51d40f1d",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-validation.json",
+      "sha256": "031ea71d2e44b1a48dd4e4ce55974e5ea314e27d89a3a156574f5e7b2208d205",
+      "category": "evidence"
+    },
+    {
+      "path": "web/verification/task129-verification.md",
+      "sha256": "4c370cbdc1dbb45e01faa3cc4696509d11f5b73f36ec3a1076ce0bf2584f2b16",
+      "category": "evidence"
+    }
+  ],
+  "reviewedGroups": {
+    "action": "/private/tmp/spm-task129-action-manifest.json",
+    "client": "/private/tmp/spm-task129-client-manifest.json"
+  },
+  "report": "web/verification/task129-verification.md",
+  "validation": "web/verification/task129-validation.json",
+  "sharedDocsOwnedByRoot": [
+    "README.md",
+    "docs/architecture.md",
+    "src/services/AGENTS.md",
+    "tests/AGENTS.md",
+    "web/src/lib/AGENTS.md"
+  ],
+  "excludes": "Uncommitted Timeline130 source and managed task/current docs; no commits or staging by implementer."
+}

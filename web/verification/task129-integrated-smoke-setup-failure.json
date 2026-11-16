@@ -1,0 +1,9 @@
+{
+  "phase": "smoke",
+  "pass": false,
+  "checks": [],
+  "error": "TimeoutError: page.goto: Timeout 10000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:5305/specs\", waiting until \"load\"\n",
+  "url": "about:blank",
+  "base": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "scope": "Scoped smoke on final snapshot including committed parse memo; source closure validated separately against production build. This is Node/Vite DEV, no timing claim."
+}

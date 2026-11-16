@@ -1,0 +1,21 @@
+--- a/web/src/lib/server/workspace.ts
++++ b/web/src/lib/server/workspace.ts
+@@ -4,6 +4,7 @@
+ export interface WorkspaceRequestState { workspaceSource?: Promise<WorkspaceSource>;specAnswerOutcome?:import("./spec-answers.ts").SpecAnswerOutcome }
+ /** Store the promise before awaiting: concurrent layout/page loaders share one read. */
+ export function getWorkspaceRequestSource(locals: WorkspaceRequestState, rootDir = resolveProjectRoot(), load = loadWorkspaceSource): Promise<WorkspaceSource> {
++  if(locals.specAnswerOutcome)return locals.workspaceSource??=Promise.reject(new Error('TEST ONLY persistent post-action source failure'));
+   const context=locals.specAnswerOutcome?.context;
+   return locals.workspaceSource ??= context?Promise.resolve().then(()=>createWorkspaceSource(context)):load(rootDir);
+ }
+--- a/web/src/lib/server/spec-answers.ts
++++ b/web/src/lib/server/spec-answers.ts
+@@ -12,7 +12,7 @@
+ }
+ export interface SpecAnswerOutcome {status:number;result:SpecDetailActionResult;context?:ProjectContext}
+ /** Exact echoes are separate from the repository's existing saved-value normalization. */
+-export async function submitSpecAnswers(root:string,id:string,form:FormData,record:(outcome:SpecAnswerOutcome)=>void=()=>{},dependencies={load:loadProjectContext,write:answerSpecOpenQuestions}):Promise<SpecAnswerOutcome>{
++export async function submitSpecAnswers(root:string,id:string,form:FormData,record:(outcome:SpecAnswerOutcome)=>void=()=>{},dependencies={load:async()=>{throw new Error('TEST ONLY optional load failure')},write:answerSpecOpenQuestions}):Promise<SpecAnswerOutcome>{
+  let postContext:ProjectContext|undefined;
+  let drafts:SpecAnswerInput[]=[],recovery:SpecAnswerInput[]=[],baseRevision:string|undefined;
+  const finish=(status:number,result:SpecDetailActionResult)=>{const value={status,context:postContext,result:{action:'answerOpenQuestions',submittedDrafts:drafts,recovery,baseRevision,...result}};record(value);return value;};

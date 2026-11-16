@@ -59,7 +59,7 @@ describe("canonical detail presentation", () => {
   test("spec rendering preserves ordinary question POST names and source/Mermaid presentation", () => {
     const html = render(SpecDetail, { props: { detail: boundSpecDetail(specDetail) } }).body;
     expect(html).toContain("Canonical detail specimen"); expect(html).toContain("Progress and linked tasks");
-    expect(html).toContain('method="POST"'); expect(html).toContain('action="?/answerOpenQuestions"');
+    expect(html).toContain('method="POST"'); expect(html).toContain('action="/specs/SPEC-002?/answerOpenQuestions"');
     expect(html).toContain('name="question"'); expect(html).toContain('name="answer"');
     expect(html).toContain("Which ordinary POST remains canonical?"); expect(html).toContain("Save answered questions");
     expect(html).toContain("Resolved decisions"); expect(html).toContain("Diagram rendering requires JavaScript");
@@ -107,14 +107,20 @@ describe("canonical detail presentation", () => {
 
   test("existing action failures, saved counts and continuation evaluation remain visible", () => {
     const error = render(SpecDetail, { props: { detail: boundSpecDetail(specDetail), actionResult: { action: "answerOpenQuestions", error: "Add at least one answer before saving." } } }).body;
-    expect(error).toContain("Add at least one answer before saving."); expect(error).toContain("save error");
+    expect(error).toContain("Add at least one answer before saving."); expect(error).toContain("Save error");
     const success = render(SpecDetail, { props: { detail: boundSpecDetail(specDetail), actionResult: {
       action: "answerOpenQuestions", success: true, savedCount: 1, answeredQuestions: ["Which ordinary POST remains canonical?"],
       evaluation: { status: "ready-for-follow-up", summary: "Ready for a reviewed follow-up.", nextActions: ["Review the recorded decision."],
         bundle: { recommended_prompt: "Use the canonical continuation context.", expected_output_format: { sections: [], propose_new_questions: true, propose_follow_up_tasks: true } } },
     } } }).body.replace(/<!--.*?-->/g, "");
-    expect(success).toContain("1 answer recorded"); expect(success).toContain("Continuation guidance");
+    expect(success).toContain("1 question resolved"); expect(success).toContain("Continuation guidance");
     expect(success).toContain("Ready for a reviewed follow-up."); expect(success).toContain("Use the canonical continuation context.");
+  });
+
+  test("noJS conflict/recovery exposes native acknowledgement and discard without inert JS buttons",()=>{
+    const html=render(SpecDetail,{props:{detail:boundSpecDetail(specDetail),actionResult:{error:'Conflict',baseRevision:'0'.repeat(64),submittedDrafts:[{question:'Removed?',answer:' exact recovery '}],recovery:[{question:'Older?',answer:' keep '}]}}}).body;
+    expect(html).not.toContain('>Review current version</button>');expect(html).not.toContain('>Discard this recovered answer</button>');expect(html).not.toContain('>Retry current details</button>');
+    expect(html).toContain('name="acknowledgedRevision"');expect(html).toContain('name="recoveryAnswer"');expect(html).toContain('value="discardRecovery"');expect(html).toContain(' exact recovery ');
   });
 
   test("both missing-result variants share coherent not-found and list navigation", () => {

@@ -223,13 +223,14 @@ Only the exact own receipt is excluded. During apply, only the verified current 
 - Compact responsive workspace with Overview, spreadsheet-style Tasks and Specs tables, optional Tasks Board, and grouped Timeline; page sizes 50/100/200 keep lists bounded
 - Shared deterministic search, effective-status filters, stable sorting, archive scope, and lifecycle-window metrics; legacy analytical links retain their archive semantics with a visible label
 - Searchable, paginated spec-filter options with selected values preserved across option pages and no-JS GET navigation
-- Controlled manual/focus refresh keeps the last data, URL, scroll, and focus on failure, with Retry; canonical spec details defer full refresh while answer inputs contain a draft
+- Controlled manual/focus refresh keeps the last data, URL, scroll, and focus on failure, with Retry; question drafts retain their accepted baseline while refreshed metadata supplies a separate latest-version preview
 - Tasks and Specs tables support keyboard cell navigation, page-local range selection, safe TSV/ID copy, resizable/reorderable columns and per-project preferences; `simple=1` and no-JS GET navigation retain native table access
 - Specs preserves canonical status independently of linked-task scope; progress is global by default and explicitly labeled as a subset when scope/window filters apply
-- Tasks opens a persistent read-only inspector with shareable URLs, verified Back/Forward, independent reader scroll and responsive dock/modal behavior; linked task/spec details reuse canonical content
-- Canonical and inspector relations load at most100 occurrences per collection with exact totals and ordinary GET pagination; question editing remains on the canonical page until the guarded question slice
+- Tasks and Specs open a persistent inspector with shareable URLs, verified Back/Forward, independent reader scroll and responsive dock/modal behavior; linked task/spec details reuse canonical content
+- Canonical and inspector relations load at most100 occurrences per collection with exact totals and ordinary GET pagination; canonical and drawer question editors share the same guarded POST
 - Dedicated spec and task detail routes with HTTP404 not-found states, linked context, and inline source narrative rendering
-- Spec detail pages that can parse `Open Questions`, answer them in batch from the UI, write those answers back into Markdown deterministically, and surface continuation guidance plus an agent evaluation prompt bundle
+- Spec questions support exact-file revision checks, explicit review of external changes, preserved unmatched answers, and Save/Discard/Keep navigation guards; confirmed saves survive subsequent read failures. Answers are not stored in the browser, and abrupt-close recovery is not promised
+- The canonical question action writes answers into Markdown deterministically and surfaces continuation guidance plus an agent evaluation prompt bundle
 - A denser split-pane timeline with spec grouping and active-vs-completed display modes for broader planning scans
 - Interactive timeline tracing with URL-driven task selection, distinct upstream/downstream highlighting, and related-spec emphasis for cross-spec diagnosis
 - Prompt-return backend for agent-safe orchestration

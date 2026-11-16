@@ -8,14 +8,19 @@
   let specReader=$state<{hasAnswerDraft:()=>boolean}>();
   let { data, form } = $props();
   const detail = $derived(data.detail as BoundedSpecResult);
-  const actionResult = $derived(form as SpecDetailActionResult | undefined);
-  const envelope=$derived({schemaVersion:2,kind:"spec",id:detail.found?detail.spec.id:detail.id,revision:data.sourceRevision,generatedAt:data.generatedAt,pages:data.pages,detail} as WorkspaceDetailEnvelope);
+  const actionResult = $derived((form??data.answerOutcome) as SpecDetailActionResult | undefined);
+  const envelope=$derived(detail?{schemaVersion:2,kind:"spec",id:detail.found?detail.spec.id:detail.id,revision:data.sourceRevision,generatedAt:data.generatedAt,pages:data.pages,detail} as WorkspaceDetailEnvelope:null);
 </script>
 
 
-<CanonicalDetailReader {envelope} allowFullRefresh={()=>!specReader?.hasAnswerDraft()}>
+{#if envelope}
+<CanonicalDetailReader {envelope} projectKey={data.shell.project.key} allowFullRefresh={()=>!specReader?.hasAnswerDraft()}>
 {#snippet children(snapshot,relationReader)}
 {@const accepted=snapshot.detail as BoundedSpecResult}
-<SpecDetail bind:this={specReader} detail={accepted} {relationReader} {actionResult} />
+<SpecDetail bind:this={specReader} detail={accepted} {relationReader} {actionResult} projectKey={data.shell.project.key} />
 {/snippet}
 </CanonicalDetailReader>
+
+{:else}
+<section><h1>Spec answer outcome</h1>{#if actionResult?.success}<p role="status">Answers were saved.</p>{/if}{#if actionResult?.error}<p role="alert">{actionResult.error}</p>{/if}<p>{actionResult?.refreshWarning??'Current details are unavailable. Submitted text is kept below.'}</p>{#each [...(actionResult?.submittedDrafts??[]),...(actionResult?.recovery??[])] as pair}<h2>{pair.question}</h2><pre>{pair.answer}</pre>{/each}<a href={`/specs/${data.specId}`}>Retry loading details</a></section>
+{/if}

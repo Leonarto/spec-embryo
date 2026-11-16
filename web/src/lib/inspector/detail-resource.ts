@@ -4,7 +4,7 @@ import {validateDetailEnvelope,validateRelationEnvelope} from './detail-validati
 export {validateDetailEnvelope,validateRelationEnvelope,validateRelationWindow} from './detail-validation.ts';
 export interface RelationRequestState {pending:boolean;requestedPage:number;error?:'network'|'response'|'timeout'|'revision'}
 export interface InspectorDetailState {identity?:InspectorIdentity;snapshot?:WorkspaceDetailEnvelope;desiredPages:RelationPages;relations:Partial<Record<DetailRelation,RelationRequestState>>;refreshRequired:boolean;blockedRefresh:boolean;pending:boolean;error?:'network'|'response'|'timeout';lastAttemptAt:number;lastSuccessAt:number}
-interface Options {allowFullRefresh?:()=>boolean;onChange:(state:InspectorDetailState)=>void;onCanonize?:(pages:RelationPages)=>void;fetcher?:typeof fetch;now?:()=>number;deadlineMs?:number;focusDebounceMs?:number;isVisible?:()=>boolean}
+interface Options {allowFullRefresh?:(candidate?:WorkspaceDetailEnvelope)=>boolean;onChange:(state:InspectorDetailState)=>void;onCanonize?:(pages:RelationPages)=>void;fetcher?:typeof fetch;now?:()=>number;deadlineMs?:number;focusDebounceMs?:number;isVisible?:()=>boolean}
 const same=(a:InspectorIdentity|undefined,b:InspectorIdentity|undefined)=>a?.kind===b?.kind&&a?.id===b?.id;
 /** Full snapshots are atomic; relation windows can merge only within the accepted epoch/revision. */
 export class InspectorDetailResource {
@@ -14,7 +14,7 @@ export class InspectorDetailResource {
  constructor(private origin:string,private options:Options){}
  get current(){return this.state;}
  get snapshotEpoch(){return this.epoch;}
- private allowed(){try{return !this.state.snapshot||this.options.allowFullRefresh?.()!==false;}catch{return false;}}
+ private allowed(candidate?:WorkspaceDetailEnvelope){try{return !this.state.snapshot||this.options.allowFullRefresh?.(candidate)!==false;}catch{return false;}}
  private blockFull(pages=this.state.desiredPages){
   this.sequence++;this.request?.abort();this.request=undefined;
   const changed=this.state.identity?relationsFor(this.state.identity.kind).filter(name=>normalizeRelationPage(pages[name])!==normalizeRelationPage(this.state.desiredPages[name])):[];
@@ -29,7 +29,8 @@ export class InspectorDetailResource {
  select(identity:InspectorIdentity|undefined,seed?:WorkspaceDetailEnvelope,pages:RelationPages=seed?.pages??{}){
   const changed=!same(identity,this.state.identity);
   if(!changed&&!seed){this.setPages(pages);return;}
-  if(!changed&&seed&&!this.allowed()){this.blockFull(pages);return;}
+  if(!changed&&seed&&!validateDetailEnvelope(seed,identity!,pages)){this.publish({error:'response'});return;}
+  if(!changed&&seed&&validateDetailEnvelope(seed,identity!,pages)&&!this.allowed(seed)){this.blockFull(pages);return;}
   this.generation++;this.epoch++;this.sequence++;this.request?.abort();this.request=undefined;this.abortRelations();if(this.timer)clearTimeout(this.timer);
   const accepted=identity&&seed&&validateDetailEnvelope(seed,identity,pages)?seed:undefined;
   this.publish({identity,snapshot:accepted,desiredPages:pages,relations:{},refreshRequired:false,blockedRefresh:false,pending:!!identity&&!accepted,error:undefined,lastAttemptAt:accepted?(this.options.now?.()??Date.now()):0,lastSuccessAt:accepted?Date.parse(accepted.generatedAt):0});
@@ -73,7 +74,15 @@ export class InspectorDetailResource {
   }catch(error){if(owned())this.publish({relations:{...this.state.relations,[relation]:{pending:false,requestedPage,error:error instanceof Error&&error.message==='timeout'?'timeout':error instanceof Error&&error.message==='response'?'response':'network'}}});}
   finally{if(this.relationRequests.get(relation)===controller)this.relationRequests.delete(relation);}
  }
- async refresh(reason:'manual'|'focus'='manual'){
+ private fullWork?:Promise<void>;private fullKey='';
+ /** Reject all pre-outcome work while retaining the displayed snapshot and URL intent. */
+ invalidateBeforeOutcome(){this.epoch++;this.sequence++;this.request?.abort();this.request=undefined;this.abortRelations();this.fullWork=undefined;this.fullKey='';this.publish({pending:false,relations:{}});}
+ refresh(reason:'manual'|'focus'='manual'):Promise<void>{
+  const key=this.state.identity?JSON.stringify([this.state.identity,relationPagesKey(this.state.identity.kind,this.state.desiredPages)]):'';
+  if(this.fullWork&&this.request&&!this.request.signal.aborted&&key===this.fullKey)return this.fullWork;
+  this.fullKey=key;const work=this.performRefresh(reason);this.fullWork=work;void work.finally(()=>{if(this.fullWork===work){this.fullWork=undefined;this.fullKey='';}});return work;
+ }
+ private async performRefresh(reason:'manual'|'focus'='manual'){
   if(this.disposed||!this.state.identity||reason==='focus'&&this.state.pending)return;
   if(!this.allowed()){this.blockFull();return;}
   const identity=this.state.identity,pages={...this.state.desiredPages},generation=this.generation,epoch=++this.epoch,sequence=++this.sequence;this.request?.abort();this.abortRelations();const controller=new AbortController();this.request=controller;
@@ -84,7 +93,7 @@ export class InspectorDetailResource {
    const {value,status}=await this.read(url,controller) as {value:unknown;status:number};
    if(!owned())return;
    if(!validateDetailEnvelope(value,identity,pages)||status===404&&value.detail.found||status===200&&!value.detail.found)throw new Error('response');
-   if(!this.allowed()){this.blockFull();return;}
+   if(!this.allowed(value)){this.blockFull();return;}
    this.publish({snapshot:value,pending:false,error:undefined,refreshRequired:false,blockedRefresh:false,lastSuccessAt:now()});this.canonize(value);
   }catch(error){if(owned())this.publish({pending:false,error:error instanceof Error&&error.message==='timeout'?'timeout':error instanceof Error&&error.message==='response'?'response':'network'});}
   finally{if(this.request===controller)this.request=undefined;}

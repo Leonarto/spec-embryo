@@ -1,0 +1,101 @@
+{
+  "task": "TASK-129",
+  "status": "ready_for_final_review",
+  "base": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "snapshot": "/private/tmp/spm-task129-final-validation",
+  "excludes": "Uncommitted Timeline130 source; no combined131 claim",
+  "checks": {
+    "webCheck": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "suite": {
+      "pass": 444,
+      "fail": 0,
+      "assertions": 8990,
+      "files": 75,
+      "seconds": 84.95
+    },
+    "coverage": {
+      "aggregateFunctions": 92.5,
+      "aggregateLines": 93.6,
+      "scope": "Bun aggregate includes test-only fixtures/oracles; not an estimate of compiled Svelte/browser branch coverage. Actual browser gates are separate. No gate exclusions changed.",
+      "directModules": {
+        "question-editor.ts": {
+          "functions": 100,
+          "lines": 96.55
+        },
+        "spec-seed-adapter.ts": {
+          "functions": 100,
+          "lines": 100
+        },
+        "spec-answers.ts": {
+          "functions": 100,
+          "lines": 100
+        },
+        "specs/[specId]/+page.server.ts": {
+          "functions": 100,
+          "lines": 100
+        }
+      }
+    },
+    "productionBuild": true,
+    "agents": true,
+    "staticClosure": {
+      "tasksModules": 30,
+      "specsModules": 28,
+      "forbidden": []
+    },
+    "packageDryRun": {
+      "files": 193,
+      "newRuntimeFilesPresent": true,
+      "generatedOrQAArtifacts": false,
+      "installationPerformed": false
+    },
+    "integratedSmoke": {
+      "pass": true,
+      "checks": 10,
+      "runtime": "Node25.6/Vite DEV",
+      "fixture": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-question-workflow-0pAKPL",
+      "serverPID": 49079,
+      "port": 5305,
+      "serverStopped": true,
+      "performanceClaim": false
+    }
+  },
+  "browser": {
+    "initialArchive": "ab6f3ebc21f89dd2578670e4124086aced84688b",
+    "finalOwnClientManifest": "/private/tmp/spm-task129-client-manifest.json",
+    "reports": [
+      "task129-smoke-browser-report.json",
+      "task129-history-browser-report.json",
+      "task129-seed-browser-report.json",
+      "task129-navigation-browser-report.json",
+      "task129-contrast-browser-report.json",
+      "task129-integrated-smoke-report.json"
+    ],
+    "noJS": "Real JavaScript-disabled contexts exercised400/409/second409/200, recovery and discard; persistent post-action read failure200/400/409/404 and ordinary missing GET404. Test-copy-only fault patch retained.",
+    "coarse": {
+      "viewport": [
+        390,
+        844
+      ],
+      "hasTouch": true,
+      "pointerCoarse": true,
+      "saveHeight": 44,
+      "tapSaved": true,
+      "remainingFields": 1
+    },
+    "limitations": [
+      "Warm300ms belongs to TASK138 and remains unaccepted; no waiver.",
+      "Modified-tab collector initially waited popup while Meta opened a noopener context page; corrected to context page event.",
+      "Native beforeunload preempts the tool result; final navigation report was persisted after its dismiss handler and retrieved separately.",
+      "Initial final-snapshot cold dev compilation timed out before any check/write; retained separately and not a latency acceptance claim."
+    ]
+  },
+  "reviewNotes": [
+    "Action11 partial approved including committedQuestions exact-written-state delta.",
+    "Client20 partial approved including F1 whitespace, F2 noJS controls, F3 history interference and CSS-only follow-up.",
+    "Final documentation/manifest review still owned by orchestrator."
+  ]
+}

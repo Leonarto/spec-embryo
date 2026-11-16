@@ -1,6 +1,6 @@
 <script lang="ts">
   import {retainListRelationIntent} from "../../lib/inspector/list-relations.ts";
-  import {onMount,untrack} from 'svelte';
+  import {onMount,untrack,tick} from 'svelte';
   import {workspaceURL} from '../../lib/workspace/location.svelte.ts';
   import {goto} from '$app/navigation';
   import type {WorkspaceEnvelope,WorkspaceSpecRow} from '../../../../src/services/workspace.ts';
@@ -12,6 +12,8 @@
   import SelectDropdown from '../../lib/components/SelectDropdown.svelte';
   import Popover from '../../lib/components/Popover.svelte';
   import ListPager from '../../lib/components/ListPager.svelte';
+  import {getInspector} from '../../lib/inspector/controller.svelte.ts';
+  import type {InspectorOpener} from '../../lib/inspector/history.ts';
   import DataTable from '../../lib/components/data-table/DataTable.svelte';
   import ColumnsPanel from '../../lib/components/data-table/ColumnsPanel.svelte';
   import SortPanel from '../../lib/components/data-table/SortPanel.svelte';
@@ -22,6 +24,7 @@
   import {idsToText,rowsToTsv,spreadsheetText} from '../../lib/components/data-table/clipboard.ts';
   import {HEADER_ROW,type FocusedCell,type TableSort} from '../../lib/components/data-table/types.ts';
   let {data}=$props();
+  const inspector=getInspector();
   const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'specs'>);
   const workspace=$derived(resource.snapshot),dashboard=$derived(workspace.data),rows=$derived(dashboard.result.rows);
   const query=$derived(dashboard.result.normalizedQuery as WorkspaceSpecQuery);
@@ -47,12 +50,15 @@
   function copyCell(cell:FocusedCell){if(selected.size){copyRows();return;}const column=columns.find(column=>column.key===cell.columnKey),row=rows.find(row=>row.id===cell.rowId);if(column&&column.copyable!==false)void copy(spreadsheetText(cell.rowId===HEADER_ROW?column.label:row?column.textValue(row):''));}
   function searchChanged(){clearTimeout(searchTimer);searchTimer=setTimeout(()=>{void navigate(href(value=>{value.list={...query,q:search,page:1};}),true);},150);}
   function apply(event:SubmitEvent){event.preventDefault();clearTimeout(searchTimer);const form=event.currentTarget as HTMLFormElement;const params=new URLSearchParams(new FormData(form) as unknown as URLSearchParams);void navigate(`/specs?${params}`);}
-  function regionKeys(event:KeyboardEvent){if(event.key!=='F6'||event.ctrlKey||event.metaKey||event.altKey)return;const active=document.activeElement;if(toolbar?.contains(active)){event.preventDefault();table?.focusCurrent();}else if((active as Element)?.closest('[data-table-grid]')){event.preventDefault();searchInput?.focus();}}
+  function regionKeys(event:KeyboardEvent){if(inspector.identity)return;if(event.key!=='F6'||event.ctrlKey||event.metaKey||event.altKey)return;const active=document.activeElement;if(toolbar?.contains(active)){event.preventDefault();table?.focusCurrent();}else if((active as Element)?.closest('[data-table-grid]')){event.preventDefault();searchInput?.focus();}}
   $effect(()=>{const next=workspaceListURL(workspaceURL());if(next!==sourceURL){sourceURL=next;clearTimeout(searchTimer);search=normalizeViewQuery('specs',workspaceURL().searchParams).list?.q??'';}});
   $effect(()=>{const key=listIntent();if(key!==selectionKey){selectionKey=key;untrack(clearSelection);}else{const next=reconcileSelection(rows.map(row=>row.id),untrack(()=>selected),untrack(()=>anchor));if(next.removed){selected=next.selected;anchor=next.anchor;feedback=`${next.removed} selected rows left this page.`;}}});
   $effect(()=>{const key=workspace.shell.project.key;if(mounted){preferences=parseTablePreferences(localStorageValue(tableStorageKey(key,'spec')),specColumns);}});
   function localStorageValue(key:string){try{return localStorage.getItem(key);}catch{return null;}}
   $effect(()=>{const value=preferences,key=workspace.shell.project.key;if(mounted)try{localStorage.setItem(tableStorageKey(key,'spec'),JSON.stringify(value));}catch{/* Ephemeral preferences remain usable. */}});
+  function captureOpener(id:string,columnKey:string):InspectorOpener{const pane=document.querySelector<HTMLElement>('[data-table-grid]'),frame=document.querySelector<HTMLElement>('.view-frame');return {rowId:id,columnKey,rowIndex:rows.findIndex(row=>row.id===id),listKey:workspace.requestKey,tableScroll:{top:pane?.scrollTop??0,left:pane?.scrollLeft??0},viewScroll:{top:frame?.scrollTop??0,left:frame?.scrollLeft??0}};}
+  function restoreOpener(opener:InspectorOpener|undefined){const row=rows.find(row=>row.id===opener?.rowId)??rows[Math.min(Math.max(0,opener?.rowIndex??0),rows.length-1)];if(!row){searchInput?.focus();inspector.announce('No specs remain. Focus returned to the toolbar.');return;}focused={rowId:row.id,columnKey:columns.some(column=>column.key===opener?.columnKey)?opener!.columnKey:'id'};void tick().then(()=>{if(opener?.listKey===workspace.requestKey){const pane=document.querySelector<HTMLElement>('[data-table-grid]'),frame=document.querySelector<HTMLElement>('.view-frame');if(pane){pane.scrollTop=opener.tableScroll.top;pane.scrollLeft=opener.tableScroll.left;}if(frame){frame.scrollTop=opener.viewScroll.top;frame.scrollLeft=opener.viewScroll.left;}}table?.focusCurrent();});}
+  onMount(()=>inspector.registerList({kind:'spec',ids:()=>rows.map(row=>row.id),capture:captureOpener,restore:restoreOpener,focusToolbar:()=>searchInput?.focus(),focusGrid:()=>table?.focusCurrent(),regionFor:element=>toolbar?.contains(element)?'toolbar':element?.closest('[data-table-grid]')?'grid':undefined}));
   onMount(()=>{mounted=true;const media=matchMedia('(pointer:coarse)'),update=()=>coarse=media.matches;update();media.addEventListener('change',update);return ()=>{clearTimeout(searchTimer);media.removeEventListener('change',update);};});
 </script>
 
@@ -80,7 +86,7 @@
     </div>
   </header>
   {#if dashboard.filters.unavailableSpecIds.length}<p class="unavailable" role="status">Could not apply spec filters: {dashboard.filters.unavailableSpecIds.join(', ')}. {dashboard.filters.selectedSpecIds.length?'Available spec filters still apply.':'Showing results without a spec filter.'}</p>{/if}
-  <DataTable bind:this={table} {rows} {columns} rowKey={row=>row.id} sort={query.sort} {selected} focusedCell={focused} {simple} density={preferences.density} caption="Specs" {sortHref} onSort={(key,secondary)=>sortChange(toggleTableSort(query.sort,key,secondary))} onFocus={cell=>focused=cell} onToggle={toggle} onSelectAll={selectAll} onResize={(key,width)=>preferences=resizeColumn(preferences,specColumns,key,width)} onCopy={copyCell} onEmptyFocus={()=>{searchInput?.focus();feedback='The focused spec is no longer on this page.';}} onViewportWidth={width=>viewport=width}/>
+  <DataTable bind:this={table} {rows} {columns} rowKey={row=>row.id} sort={query.sort} {selected} focusedCell={focused} {simple} density={preferences.density} caption="Specs" {sortHref} onSort={(key,secondary)=>sortChange(toggleTableSort(query.sort,key,secondary))} onFocus={cell=>focused=cell} onToggle={toggle} onSelectAll={selectAll} onResize={(key,width)=>preferences=resizeColumn(preferences,specColumns,key,width)} onCopy={copyCell} onInspect={(row,event)=>void inspector.open({kind:'spec',id:row.id},captureOpener(row.id,(event.currentTarget as HTMLElement)?.dataset.columnKey??focused.columnKey))} onEmptyFocus={()=>{searchInput?.focus();feedback='The focused spec is no longer on this page.';}} onViewportWidth={width=>viewport=width}/>
   {#if mounted}<SelectionBar count={selected.size} onCopyRows={copyRows} onCopyIds={()=>void copy(idsToText(rows,row=>row.id,selected))} onClear={clearSelection} {feedback} {fallback}/>{/if}
   <ListPager result={dashboard.result} route="specs" compact/>
 </div>
