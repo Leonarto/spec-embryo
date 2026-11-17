@@ -3,7 +3,7 @@ doc_kind = "task"
 id = "TASK-142"
 title = "Resolve registered UI projects per request"
 summary = "Harden shared portfolio registration and add request-scoped roots, identity guards and loopback registration actions."
-status = "in_progress"
+status = "review"
 spec_ids = ["SPEC-063"]
 depends_on = []
 blocked_by = []
@@ -11,7 +11,7 @@ priority = 1
 owner_role = "implementation"
 created_at = "2026-11-17T14:23:07.919Z"
 tags = []
-updated_at = "2026-11-17T14:23:58.422Z"
+updated_at = "2026-11-17T14:37:28.579Z"
 +++
 
 # Scope

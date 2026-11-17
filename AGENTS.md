@@ -30,7 +30,7 @@ Core layers:
 - Prefer updating source-of-truth docs with code: specs, tasks, current state, handoffs, and relevant `AGENTS.md`.
 - When working on the Spec Embryo repo itself, use the repo-local skill at `skills/spm-self-hosting/SKILL.md`.
 - When `spm` already provides the needed project-memory view, use the CLI before falling back to raw file inspection.
-- When touching the local dashboard, keep `web/` as a read-only view over shared deterministic services rather than inventing web-only parsing or state.
+- Keep `web/` over shared deterministic services; project answers and local registry registration are its only writes.
 - When authoring or materially revising a spec, use `skills/spec-writer/SKILL.md`, iterate key decisions, then use `skills/spec-reviewer/SKILL.md` and fix findings before finalizing.
 - For npm releases, use `skills/publish/SKILL.md`; stop before final `bun publish` and hand the command to the user for 2FA.
 - Treat `review` as a real gate. If review finds issues, keep the task in `review` or move it back; use `done` only after fixes.

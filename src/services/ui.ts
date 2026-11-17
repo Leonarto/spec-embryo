@@ -1,14 +1,14 @@
 import { execFile } from "node:child_process";
 import { createServer } from "node:net";
 import { realpath } from "node:fs/promises";
-import { isAbsolute } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import type { ParsedArgs } from "../cli.ts";
 import { pathExists } from "../storage.ts";
 import { normalizeHost } from "../../web/runtime/server.mjs";
 
-export interface UiLaunchConfig { webDir: string; packageRoot: string; projectRoot: string; host: string; port: number; requestedPort: number; dev: boolean }
+export interface UiLaunchConfig { webDir: string; packageRoot: string; projectRoot: string; host: string; port: number; requestedPort: number; dev: boolean; registryFile?: string }
 interface UiLaunchResolutionOptions { portProbe?: (host: string, port: number) => Promise<boolean> }
 const PACKAGED_WEB_DIR = fileURLToPath(new URL("../../web", import.meta.url));
 const execFileAsync = promisify(execFile);
@@ -39,7 +39,9 @@ export async function resolveUiLaunchConfig(rootDir: string, parsed: ParsedArgs,
     for (; port <= Math.min(requestedPort + 25, 65535); port++) if (await probe(host, port)) break;
     if (port > Math.min(requestedPort + 25, 65535)) throw new Error(`Could not find an available port between ${requestedPort} and ${Math.min(requestedPort + 25, 65535)}.`);
   }
-  return { webDir: PACKAGED_WEB_DIR, packageRoot: fileURLToPath(new URL("../../", import.meta.url)), projectRoot: await realpath(rootDir), host, port, requestedPort, dev: devFlag === true };
+  const registry = parsed.flags.get("registry");
+  if (registry !== undefined && (typeof registry !== "string" || !registry)) throw new Error("`ui --registry` requires a value.");
+  return { registryFile: registry === undefined ? undefined : resolve(String(registry)), webDir: PACKAGED_WEB_DIR, packageRoot: fileURLToPath(new URL("../../", import.meta.url)), projectRoot: await realpath(rootDir), host, port, requestedPort, dev: devFlag === true };
 }
 export function supportedNodeVersion(version: string): boolean {
   const match = /^v?(\d+)\.(\d+)\.(\d+)$/.exec(version);

@@ -2,7 +2,7 @@
 
 SvelteKit presentation layer.
 
-- `+layout.server.ts` loads shell only; page loads call root workspace projectors. `lib/server/workspace.ts` shares one in-flight canonical source via request locals, including detail loads.
+- Hooks select registered roots per request. Layout loads shell/registry metadata; `lib/server/workspace.ts` shares canonical source through locals, including details.
 - Routes are Overview, Tasks, Specs, and Timeline; canonical missing details return404, and SSR inspection stays readable without JavaScript.
 - Shell composition lives in `lib/components/workspace/`; route headings use `ViewToolbar`.
 - Overview alone owns cross-cutting focus, counts, AGENTS health, git, handoff, and execution signals.

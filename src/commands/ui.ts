@@ -31,8 +31,9 @@ export async function runUiCommand(rootDir: string, parsed: ParsedArgs): Promise
     await new Promise<void>((resolve, reject) => {
       let ready = false;
       let startupError: string | undefined;
-      const runtimeEnv = launch.dev ? { ...env, SPM_PROJECT_ROOT: launch.projectRoot } : {
+      const runtimeEnv = launch.dev ? { ...env, SPM_PROJECT_ROOT: launch.projectRoot, SPM_UI_BIND_HOST: launch.host, SPM_UI_REGISTRY: launch.registryFile ?? "" } : {
         ...productionUiEnvironment(env, launch.projectRoot),
+        SPM_UI_BIND_HOST: launch.host, SPM_UI_REGISTRY: launch.registryFile ?? "",
         SPM_UI_CONFIG: JSON.stringify({ host: launch.host, port: launch.port, buildId: manifest!.buildId, version: manifest!.package.version }),
       };
       child = spawn(launch.dev ? execPath : node!.executable, launch.dev ? ["run", "dev", "--", "--host", launch.host, "--port", String(launch.port), "--strictPort"] : [join(launch.webDir, "runtime/server.mjs")], {

@@ -10,9 +10,9 @@ function pairs(form:FormData,question:string,answer:string):SpecAnswerInput[]{
  if(qs.length!==as.length||qs.some(v=>typeof v!=='string')||as.some(v=>typeof v!=='string'))throw new SpecQuestionWriteError('validation','Questions and answers must be text pairs.');
  return qs.map((q,i)=>({question:q as string,answer:as[i] as string}));
 }
-export interface SpecAnswerOutcome {status:number;result:SpecDetailActionResult;context?:ProjectContext}
+export interface SpecAnswerOutcome {workspaceMismatch?:boolean;status:number;result:SpecDetailActionResult;context?:ProjectContext}
 /** Exact echoes are separate from the repository's existing saved-value normalization. */
-export async function submitSpecAnswers(root:string,id:string,form:FormData,record:(outcome:SpecAnswerOutcome)=>void=()=>{},dependencies={load:loadProjectContext,write:answerSpecOpenQuestions}):Promise<SpecAnswerOutcome>{
+export async function submitSpecAnswers(root:string,id:string,form:FormData,record:(outcome:SpecAnswerOutcome)=>void=()=>{},dependencies={load:loadProjectContext,write:answerSpecOpenQuestions},workspaceStatus=0):Promise<SpecAnswerOutcome>{
  let postContext:ProjectContext|undefined;
  let drafts:SpecAnswerInput[]=[],recovery:SpecAnswerInput[]=[],baseRevision:string|undefined;
  const finish=(status:number,result:SpecDetailActionResult)=>{const value={status,context:postContext,result:{action:'answerOpenQuestions',submittedDrafts:drafts,recovery,baseRevision,...result}};record(value);return value;};
@@ -21,6 +21,7 @@ export async function submitSpecAnswers(root:string,id:string,form:FormData,reco
   const revs=form.getAll('specRevision'),acks=form.getAll('acknowledgedRevision');
   if(revs.length>1||revs.some(v=>typeof v!=='string'||!revisionPattern.test(v))||acks.length>1||acks.some(v=>typeof v!=='string'||!revisionPattern.test(v)))throw new SpecQuestionWriteError('validation','Invalid or duplicate spec revision.');
   baseRevision=revs[0] as string|undefined;
+  if(workspaceStatus)return finish(workspaceStatus,{workspaceMismatch:true,error:workspaceStatus===409?"The selected project changed. Your answers are preserved; reload and review before saving.":"Workspace identity is required. Your answers are preserved."});
   const expectedRevision=acks[0] as string|undefined??baseRevision;
   if(form.get('intent')==='discardRecovery')return finish(200,{recovery:[],redisplay:true});
   normalizeSpecAnswers(drafts);

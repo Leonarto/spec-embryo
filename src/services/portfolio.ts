@@ -1,6 +1,7 @@
 import { homedir } from "node:os";
-import { dirname, resolve } from "node:path";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve, isAbsolute } from "node:path";
+import { randomUUID } from "node:crypto";
+import { mkdir, readFile, writeFile, realpath, stat, lstat, open, rename, unlink } from "node:fs/promises";
 import { pathExists } from "../storage.ts";
 import { loadProjectContext } from "../repository.ts";
 import { deriveStatusSnapshot } from "../engine.ts";
@@ -99,91 +100,92 @@ function normalizeRecord(record: Partial<PortfolioProjectRecord>): PortfolioProj
   };
 }
 
+const MAX_BYTES = 1024 * 1024, MAX_PROJECTS = 1000, MAX_TEXT = 4096, MAX_ITEMS = 256;
+function boundedText(value: unknown, field: string, optional = false): void {
+  if (optional && value === undefined) return;
+  if (typeof value !== "string" || !value.trim() || value.length > MAX_TEXT || /[\u0000-\u001f\u007f]/.test(value)) throw new Error(`Invalid portfolio ${field}.`);
+}
+async function canonicalPath(path: string): Promise<string> { try { return await realpath(path); } catch { return resolve(path); } }
+export async function validatePortfolioProjectPath(path: string): Promise<string> {
+  const root = await realpath(path);
+  if (!(await stat(root)).isDirectory() || !(await lstat(resolve(root, ".specpm/config.toml"))).isFile()) throw new Error("Project must be an existing directory containing .specpm/config.toml.");
+  return root;
+}
 export async function loadPortfolioRegistry(registryFile?: string): Promise<PortfolioRegistry> {
   const filePath = resolvePortfolioRegistryFile(registryFile);
-  if (!(await pathExists(filePath))) {
-    return { version: 1, projects: [] };
+  let handle;
+  try { handle = await open(filePath, "r"); } catch (error) { if ((error as NodeJS.ErrnoException).code === "ENOENT") return {version:1,projects:[]}; throw error; }
+  let raw: string;
+  try {
+    const info = await handle.stat();
+    if (!info.isFile() || info.size > MAX_BYTES) throw new Error("Portfolio registry is not a bounded regular file.");
+    const bytes = Buffer.alloc(MAX_BYTES + 1); const {bytesRead} = await handle.read(bytes,0,bytes.length,0);
+    if (bytesRead > MAX_BYTES) throw new Error("Portfolio registry exceeds size limit.");
+    raw = bytes.subarray(0,bytesRead).toString("utf8");
+  } finally { await handle.close(); }
+  let parsed: unknown; try { parsed = JSON.parse(raw); } catch { throw new Error("Portfolio registry is invalid JSON."); }
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error("Invalid portfolio registry.");
+  const value = parsed as Record<string,unknown>;
+  if (value.version !== 1 || !Array.isArray(value.projects) || value.projects.length > MAX_PROJECTS) throw new Error("Invalid portfolio registry version or projects.");
+  const ids = new Set<string>(), paths = new Set<string>(); const projects:PortfolioProjectRecord[]=[];
+  for (const entry of value.projects) {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) throw new Error("Invalid portfolio project.");
+    const row=entry as Record<string,unknown>; boundedText(row.id,"id"); boundedText(row.path,"path"); boundedText(row.name,"name",true);
+    if (!isAbsolute(row.path as string) || (row.id as string).trim() !== row.id) throw new Error("Invalid portfolio identity or path.");
+    for (const field of ["tags","dependsOn","relatedProjects","milestones"]) {
+      if (!Array.isArray(row[field]) || (row[field] as unknown[]).length > MAX_ITEMS) throw new Error(`Invalid portfolio ${field}.`);
+      for (const item of row[field] as unknown[]) boundedText(item,field);
+    }
+    const project=normalizeRecord(row as unknown as PortfolioProjectRecord), canonical=await canonicalPath(project.path);
+    if(ids.has(project.id)||paths.has(canonical)) throw new Error("Duplicate portfolio project identity or path.");
+    ids.add(project.id); paths.add(canonical); projects.push(project);
   }
-
-  const raw = await readFile(filePath, "utf8");
-  const parsed = JSON.parse(raw) as Partial<PortfolioRegistry>;
-  const projects = Array.isArray(parsed.projects) ? parsed.projects.map((record) => normalizeRecord(record)) : [];
-  return { version: 1, projects: projects.sort((left, right) => left.id.localeCompare(right.id)) };
+  return {version:1,projects:projects.sort((a,b)=>a.id.localeCompare(b.id))};
 }
-
+async function writeRegistry(registry: PortfolioRegistry, filePath: string): Promise<void> {
+  const content = `${JSON.stringify(registry, null, 2)}\n`;
+  if (Buffer.byteLength(content) > MAX_BYTES || registry.projects.length > MAX_PROJECTS) throw new Error("Portfolio registry exceeds size limit.");
+  const temporary = `${filePath}.${randomUUID()}.tmp`;
+  try { await writeFile(temporary,content,{flag:"wx",mode:0o600}); await loadPortfolioRegistry(temporary); await rename(temporary,filePath); }
+  finally { await unlink(temporary).catch(()=>{}); }
+}
+async function mutateRegistry<T>(registryFile:string|undefined, work:(registry:PortfolioRegistry)=>Promise<T>):Promise<{result:T;filePath:string}> {
+  const filePath=resolvePortfolioRegistryFile(registryFile), lock=`${filePath}.lock`; await mkdir(dirname(filePath),{recursive:true});
+  let handle; const deadline=Date.now()+5000;
+  while (!handle) { try { handle=await open(lock,"wx",0o600); } catch(error) { if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error; if(Date.now()>=deadline) throw new Error("Timed out waiting for portfolio registry lock."); await new Promise(r=>setTimeout(r,25)); } }
+  try {
+    const owned=await handle.stat(), registry=await loadPortfolioRegistry(filePath), result=await work(registry);
+    const current=await stat(lock); if(current.dev!==owned.dev||current.ino!==owned.ino) throw new Error("Portfolio lock ownership was lost.");
+    await writeRegistry(registry,filePath); return {result,filePath};
+  } finally { const owned=await handle.stat(); await handle.close(); try { const current=await stat(lock); if(current.dev===owned.dev&&current.ino===owned.ino) await unlink(lock); } catch {} }
+}
 export async function savePortfolioRegistry(registry: PortfolioRegistry, registryFile?: string): Promise<string> {
-  const filePath = resolvePortfolioRegistryFile(registryFile);
-  await mkdir(dirname(filePath), { recursive: true });
-  const normalized: PortfolioRegistry = {
-    version: 1,
-    projects: registry.projects.map((record) => normalizeRecord(record)).sort((left, right) => left.id.localeCompare(right.id)),
-  };
-  await writeFile(filePath, `${JSON.stringify(normalized, null, 2)}\n`, "utf8");
-  return filePath;
+  const {filePath}=await mutateRegistry(registryFile,async target=>{target.version=registry.version;target.projects=registry.projects;}); return filePath;
 }
-
-export async function registerPortfolioProject(
-  projectPath: string,
-  options: {
-    registryFile?: string;
-    id?: string;
-    name?: string;
-    tags?: string[];
-  } = {},
-): Promise<{ registryFile: string; project: PortfolioProjectRecord; created: boolean }> {
-  const registry = await loadPortfolioRegistry(options.registryFile);
-  const project = normalizeRecord({
-    id: options.id,
-    path: projectPath,
-    name: options.name,
-    tags: options.tags ?? [],
-  });
-  const existingIndex = registry.projects.findIndex((record) => record.id === project.id || record.path === project.path);
-  const created = existingIndex === -1;
-
-  if (created) {
-    registry.projects.push(project);
-  } else {
-    const existing = registry.projects[existingIndex]!;
-    registry.projects[existingIndex] = normalizeRecord({
-      ...existing,
-      ...project,
-      dependsOn: existing.dependsOn,
-      relatedProjects: existing.relatedProjects,
-      milestones: existing.milestones,
-      tags: uniqueStrings([...existing.tags, ...project.tags]),
-    });
-  }
-
-  const registryFile = await savePortfolioRegistry(registry, options.registryFile);
-  return { registryFile, project: registry.projects.find((record) => record.id === project.id || record.path === project.path) ?? project, created };
+export async function registerPortfolioProject(projectPath:string, options:{registryFile?:string;id?:string;name?:string;tags?:string[]}={}):Promise<{registryFile:string;project:PortfolioProjectRecord;created:boolean}> {
+  const path=await validatePortfolioProjectPath(projectPath);
+  boundedText(path,"path"); boundedText(options.id,"id",true); boundedText(options.name,"name",true);
+  if(options.id!==undefined && options.id.trim()!==options.id) throw new Error("Invalid portfolio id.");
+  if ((options.tags?.length??0)>MAX_ITEMS) throw new Error("Too many tags."); for(const tag of options.tags??[]) boundedText(tag,"tag");
+  const {result,filePath}=await mutateRegistry(options.registryFile,async registry=>{
+    const byPath=await Promise.all(registry.projects.map(async row=>(await canonicalPath(row.path))===path));
+    const index=byPath.findIndex(Boolean), id=options.id??(index>=0?registry.projects[index]!.id:slugify(options.name??path.split("/").filter(Boolean).at(-1)??"project")||"project");
+    const idIndex=registry.projects.findIndex(row=>row.id===id);
+    if((index>=0&&idIndex>=0&&index!==idIndex)||(index>=0&&registry.projects[index]!.id!==id)||(idIndex>=0&&index!==idIndex)) throw new Error("Portfolio project ID or path conflicts with an existing project.");
+    const created=index<0; const existing=created?undefined:registry.projects[index]!;
+    const project=normalizeRecord({...existing,id,path,name:options.name??existing?.name,tags:uniqueStrings([...(existing?.tags??[]),...(options.tags??[])]),dependsOn:existing?.dependsOn??[],relatedProjects:existing?.relatedProjects??[],milestones:existing?.milestones??[]});
+    if(project.tags.length>MAX_ITEMS) throw new Error("Too many tags.");
+    if(created) registry.projects.push(project); else registry.projects[index]=project;
+    registry.projects.sort((a,b)=>a.id.localeCompare(b.id)); return {project,created};
+  }); return {registryFile:filePath,...result};
 }
-
-export async function linkPortfolioProject(
-  projectId: string,
-  options: {
-    registryFile?: string;
-    dependsOn?: string[];
-    relatedProjects?: string[];
-    milestones?: string[];
-  },
-): Promise<{ registryFile: string; project: PortfolioProjectRecord }> {
-  const registry = await loadPortfolioRegistry(options.registryFile);
-  const index = registry.projects.findIndex((record) => record.id === projectId);
-  if (index === -1) {
-    throw new Error(`Portfolio project not found: ${projectId}`);
-  }
-
-  const project = registry.projects[index]!;
-  registry.projects[index] = normalizeRecord({
-    ...project,
-    dependsOn: uniqueStrings([...project.dependsOn, ...(options.dependsOn ?? [])]),
-    relatedProjects: uniqueStrings([...project.relatedProjects, ...(options.relatedProjects ?? [])]),
-    milestones: uniqueStrings([...project.milestones, ...(options.milestones ?? [])]),
-  });
-
-  const registryFile = await savePortfolioRegistry(registry, options.registryFile);
-  return { registryFile, project: registry.projects[index]! };
+export async function linkPortfolioProject(projectId:string, options:{registryFile?:string;dependsOn?:string[];relatedProjects?:string[];milestones?:string[]}):Promise<{registryFile:string;project:PortfolioProjectRecord}> {
+  for(const values of [options.dependsOn,options.relatedProjects,options.milestones]) { if((values?.length??0)>MAX_ITEMS) throw new Error("Too many portfolio links."); for(const value of values??[]) boundedText(value,"link"); }
+  const {result:project,filePath}=await mutateRegistry(options.registryFile,async registry=>{
+    const index=registry.projects.findIndex(row=>row.id===projectId); if(index<0) throw new Error(`Portfolio project not found: ${projectId}`);
+    const old=registry.projects[index]!; const next=normalizeRecord({...old,dependsOn:uniqueStrings([...old.dependsOn,...options.dependsOn??[]]),relatedProjects:uniqueStrings([...old.relatedProjects,...options.relatedProjects??[]]),milestones:uniqueStrings([...old.milestones,...options.milestones??[]])});
+    if([next.dependsOn,next.relatedProjects,next.milestones].some(a=>a.length>MAX_ITEMS)) throw new Error("Too many portfolio links."); registry.projects[index]=next; return next;
+  }); return {registryFile:filePath,project};
 }
 
 function relationshipIssues(projects: PortfolioProjectRecord[]): PortfolioRelationshipIssue[] {

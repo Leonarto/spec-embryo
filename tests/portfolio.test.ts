@@ -45,7 +45,10 @@ describe("portfolio command", () => {
     const registryFile = join(rootDir, "portfolio.json");
 
     try {
-      await runPortfolioCommand(rootDir, parseArgs(["portfolio", "register", join(rootDir, "missing"), "--id", "missing", "--registry", registryFile]));
+      const projectDir = join(rootDir, "missing");
+      await initializeProject(projectDir);
+      await runPortfolioCommand(rootDir, parseArgs(["portfolio", "register", projectDir, "--id", "missing", "--registry", registryFile]));
+      await rm(projectDir, { recursive: true, force: true });
 
       const output = await runPortfolioCommand(rootDir, parseArgs(["portfolio", "list", "--registry", registryFile]));
       expect(output).toContain("missing [unavailable: Project path does not exist.]");

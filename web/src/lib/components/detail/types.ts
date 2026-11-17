@@ -1,6 +1,7 @@
 /** Existing canonical question-action response projected by the route. */
 export interface SpecDetailActionResult {
   action?: string;
+  workspaceMismatch?: boolean;
   error?: string;
   submittedDrafts?: QuestionDraft[];
   recovery?: QuestionDraft[];
