@@ -4,6 +4,7 @@ import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {initializeProject,loadProjectContext} from '../src/repository.ts';
 import {createWorkspaceSource} from '../src/services/workspace.ts';
+import {resolveUiProject,type UiProjectSelection} from '../src/services/ui-projects.ts';
 import {buildWorkspaceDetailEnvelope,parseInspectorIdentity,type WorkspaceDetailEnvelope} from '../src/services/workspace-detail.ts';
 import {normalizeViewQuery,workspaceListURL,workspaceRequestKey} from '../src/services/workspace-query.ts';
 import {InspectorHistoryLedger,inspectorURL,isPlainActivation,withoutInspector} from '../web/src/lib/inspector/history.ts';
@@ -13,8 +14,9 @@ import {load as taskLoad} from '../web/src/routes/tasks/[taskId]/+page.server.ts
 import {load as specLoad} from '../web/src/routes/specs/[specId]/+page.server.ts';
 import {load as layoutLoad} from '../web/src/routes/+layout.server.ts';
 import {GET} from '../web/src/routes/workspace-detail/+server.ts';
+let selection:UiProjectSelection;
 let root:string,task:WorkspaceDetailEnvelope,spec:WorkspaceDetailEnvelope,missing:WorkspaceDetailEnvelope,source:ReturnType<typeof createWorkspaceSource>;
-beforeAll(async()=>{root=await mkdtemp(join(tmpdir(),'spm-inspector-tests-'));await initializeProject(root);source=createWorkspaceSource(await loadProjectContext(root),Date.parse('2026-11-15T12:00:00Z'));task=buildWorkspaceDetailEnvelope(source,{kind:'task',id:source.context.tasks[0]!.id});spec=buildWorkspaceDetailEnvelope(source,{kind:'spec',id:source.context.specs[0]!.id});missing=buildWorkspaceDetailEnvelope(source,{kind:'task',id:'TASK-MISSING'});});
+beforeAll(async()=>{root=await mkdtemp(join(tmpdir(),'spm-inspector-tests-'));await initializeProject(root);selection=await resolveUiProject(new URLSearchParams(),root,join(root,'empty-registry.json'));source=createWorkspaceSource(await loadProjectContext(root),Date.parse('2026-11-15T12:00:00Z'));task=buildWorkspaceDetailEnvelope(source,{kind:'task',id:source.context.tasks[0]!.id});spec=buildWorkspaceDetailEnvelope(source,{kind:'spec',id:source.context.specs[0]!.id});missing=buildWorkspaceDetailEnvelope(source,{kind:'task',id:'TASK-MISSING'});});
 afterAll(async()=>{await rm(root,{recursive:true,force:true});});
 const response=(value:unknown,status=200)=>new Response(JSON.stringify(value),{status});
 function deferred<T>(){let resolve!:(value:T)=>void,reject!:(error:Error)=>void;const promise=new Promise<T>((a,b)=>{resolve=a;reject=b});return {promise,resolve,reject};}
@@ -41,9 +43,9 @@ describe('inspector service and URL contracts',()=>{
  test('canonical missing GET throws404 while direct list inspector remains a local DTO',async()=>{
   await expect(taskLoad({params:{taskId:'TASK-MISSING'},locals:{workspaceSource:Promise.resolve(source)}} as never)).rejects.toMatchObject({status:404});
   await expect(specLoad({params:{specId:'SPEC-MISSING'},locals:{workspaceSource:Promise.resolve(source)}} as never)).rejects.toMatchObject({status:404});
-  const result=await layoutLoad({url:new URL('http://local/tasks?inspect=task:TASK-MISSING'),locals:{workspaceSource:Promise.resolve(source)}} as never);
+  const result=await layoutLoad({url:new URL('http://local/tasks?inspect=task:TASK-MISSING'),locals:{projectSelection:selection,workspaceSource:Promise.resolve(source)}} as never);
   expect(result).toMatchObject({inspector:{kind:'task',id:'TASK-MISSING',detail:{found:false}},inspectorReadError:false});
-  const canonical=await layoutLoad({url:new URL(`http://local/tasks/${task.id}?inspect=spec:${spec.id}`),locals:{workspaceSource:Promise.resolve(source)}} as never);expect(canonical).toMatchObject({inspector:null});
+  const canonical=await layoutLoad({url:new URL(`http://local/tasks/${task.id}?inspect=spec:${spec.id}`),locals:{projectSelection:selection,workspaceSource:Promise.resolve(source)}} as never);expect(canonical).toMatchObject({inspector:null});
  });
  test('preserves every unrelated parameter and modified identity activation',()=>{
   const initial='http://local/timeline?selected_task=TASK-2&scope=all&q=x';const open=inspectorURL(initial,{kind:'spec',id:'SPEC-1'},'document');expect(withoutInspector(open)).toBe(initial);expect(new URL(open).searchParams.get('selected_task')).toBe('TASK-2');

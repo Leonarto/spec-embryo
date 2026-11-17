@@ -1,0 +1,823 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/spec-outcome-seed.test.ts:
+(pass) real seed gate + resource glue rejects loader A before/after outcome B, coalesces same intent, retains B on failure [9.00ms]
+(pass) fenced initial/remount seeds never become snapshots; A→B→A and presentation adapters share only identity metadata [0.36ms]
+(pass) outcome invalidation aborts full and relation epochs without clearing accepted snapshot or desired URL pages [0.41ms]
+
+tests/relation-url.test.ts:
+(pass) router-ready relation URL canonization > awaits navigation.complete, combines independent keys and preserves current unrelated URL edits [0.56ms]
+(pass) router-ready relation URL canonization > new intention, Close, identity ABA or new full epoch discard stale patches [0.23ms]
+(pass) router-ready relation URL canonization > full seed queue replaces prior epoch; ready shallow changes do not await another navigation [0.11ms]
+(pass) router-ready relation URL canonization > superseded/rejected lifecycle callbacks and disposal cannot flush late [1.30ms]
+
+tests/vite-paths.test.ts:
+(pass) vite packaged fs allow list > finds the node_modules root for packaged scoped installs [0.08ms]
+(pass) vite packaged fs allow list > returns undefined when the path is not inside node_modules [0.11ms]
+(pass) vite packaged fs allow list > builds an allow list for packaged installs plus the target project root [0.25ms]
+(pass) vite packaged fs allow list > keeps local-repo dev allow lists narrow [0.05ms]
+
+tests/harness-native.test.ts:
+(pass) bounded native output parsers > versioned synthetic fixtures normalize final response and exact IDs across Unicode splits [1.73ms]
+(pass) bounded native output parsers > unknown records do not prove success and unknown fields are ignored [0.47ms]
+(pass) bounded native output parsers > malformed, oversized, invalid UTF-8, conflicting IDs and terminal failures are sticky [14.60ms]
+(pass) bounded native output parsers > session IDs reject invalid identities without echoing them or repairing whitespace [0.41ms]
+(pass) bounded native output parsers > JSONL drains beyond the P0 cap and still observes a later terminal with bounded state [0.74ms]
+(pass) bounded native output parsers > final text is capped safely, warning arrays are bounded, and monolithic overflow is incomplete [26.14ms]
+
+tests/agents.test.ts:
+(pass) agents service > reports healthy AGENTS chains [6.27ms]
+(pass) agents service > flags oversized AGENTS files [1.46ms]
+(pass) agents service > scales budgets from project context policy [1.20ms]
+(pass) agents service > ignores local Nexus and Claude artifact AGENTS files [2.22ms]
+
+tests/adoption.test.ts:
+(pass) adoption guidance > recommends import flow for legacy docs repos [0.94ms]
+(pass) adoption guidance > strongly orients agents away from treating scaffold as literal product work [0.12ms]
+(pass) adoption guidance > includes doctor-driven cleanup guidance for partially adopted repos [0.05ms]
+(pass) adoption guidance > renders migration artifacts for the user-mediated adoption loop [0.99ms]
+(pass) adoption guidance > adds upgrade commands when doctor reports a newer CLI version [0.30ms]
+(pass) init adoption artifacts > writes a migration guide and direct agent brief during init [14.30ms]
+(pass) init adoption artifacts > refreshes config and adoption artifacts on upgraded adopted repos without force [11.30ms]
+(pass) init adoption artifacts > still refreshes adoption artifacts when existing managed docs are malformed [10.24ms]
+
+tests/acceptance-interactions.test.ts:
+(pass) per-family nearest-rank keeps outliers; every feedback observation and missing/error samples fail independently [0.39ms]
+(pass) requires fixed identities, two distinct query/results and exact per-route page-size oracles before actions [1.13ms]
+(pass) payload uses full decoded UTF-8 bytes/hash, permits filter options, and rejects body/off-route/malformed data [5.42ms]
+(pass) scroll uses every overlapping task and maximum, rejects unsupported/malformed entries [0.27ms]
+(pass) stability enforces vertical tolerance/retained row and close focus but accepts intentional inspector/refresh focus
+(pass) trusted key clock and exact first-frame focus/roving state are captured before later tool diagnostics [3.10ms]
+(pass) untrusted and epoch/future event clocks fail rather than inventing a replacement timestamp [2.17ms]
+(pass) click requires both native checked and application aria-selected state before its first frame [0.65ms]
+(pass) search captures beforeinput feedback frame, last-input server clock and exact URL/IDs over two frames [1.53ms]
+(pass) input without trusted beforeinput and observer setup failures remove all installed hooks [0.97ms]
+(pass) public adapter failures preserve partial feedback/server errors and remove page hooks in finally [0.82ms]
+(pass) helper text injects into unsafeBrowserVM without module/Node globals and never owns caller lifecycle [2.04ms]
+(pass) mounted-row and real-scroll bounds never pass on mutation-only snapshots or a zero-scroll fixture
+(pass) key family rejects an unrelated trusted key even when the later DOM happens to match [1.08ms]
+(pass) browser Fetch response extraction reads numeric status property, distinct from Playwright response.status() [0.80ms]
+
+tests/hook-context.test.ts:
+(pass) read-only native hook context > startup/resume/compact inject only escaped references and safe metadata once [927.70ms]
+(pass) read-only native hook context > subfolder resolution stops at unmanaged nested Git boundaries and rejects external markers [273.11ms]
+(pass) read-only native hook context > invalid events/input/UTF-8/oversize data return native fallback and exit zero [610.96ms]
+(pass) read-only native hook context > stdin without EOF returns fallback after the input deadline and closes normally [1069.60ms]
+(pass) read-only native hook context > the parent deadline terminates a worker blocked in synchronous Git and its Git descendant [4069.39ms]
+(pass) read-only native hook context > oversized/invalid worker output is never forwarded and worker flags cannot recurse [39.21ms]
+(pass) read-only native hook context > reference rendering stays within 8192 UTF-8 bytes and drops non-reference fields [1.51ms]
+(pass) read-only native hook context > worker refuses outside managed paths and never reads configured scoped notes [179.49ms]
+
+tests/ui-project-navigation.test.ts:
+(pass) project-aware navigation > preserves opaque IDs through links, normalized queries, hashes, and named actions [0.30ms]
+(pass) project-aware navigation > keeps launch compatibility and does not silently normalize malformed selections [0.08ms]
+
+tests/spec-answer-write.test.ts:
+(pass) legacy three-argument bytes match the pinned serializer/question oracle and return exact committed digest [42.92ms]
+(pass) matching expected revision succeeds, own undefined is optional omission, malformed tokens reject before lock IO [21.95ms]
+(pass) revision checks hash exact CRLF/UTF8 input bytes; committed digest hashes exact serialized UTF8 [8.88ms]
+(pass) the validated revision value cannot be changed by mutating options while waiting for IO [8.90ms]
+(pass) stale digest including changed surrounding text and stale pairs reject the whole batch without writes [17.42ms]
+(pass) blank/equal duplicate answers resolve all normalized occurrences in canonical order; contradictory duplicates do not write [28.93ms]
+(pass) two same-revision saves serialize through the existing lock: exactly one commit and one conflict [63.66ms]
+(pass) controlled external edit between load and final check is detected for tokenless and guarded callers [23.58ms]
+(pass) changed leaf, missing target and lost lease fail before rename, preserving foreign state [46.81ms]
+(pass) same-directory replacement preserves ordinary permissions and leaves no temp [12.06ms]
+(pass) a valid long target basename does not overflow the atomic temp filename [9.47ms]
+(pass) serialization failure and partial temp/write/sync/chmod/close/rename failures preserve original bytes and clean owned temps [68.20ms]
+(pass) failed exclusive creation never removes a preexisting foreign temp [16.51ms]
+(pass) cleanup does not remove a foreign replacement at an owned temp's old path [8.39ms]
+(pass) successful temp writes followed by foreign replacement or same-inode mutation cannot commit different bytes [18.91ms]
+(pass) temp changes after digest verification are caught by the last pre-rename stamp check [19.80ms]
+(pass) post-rename lock-release failure returns committed result/digest plus cleanup warning, with no target reread [10.44ms]
+
+tests/timeline-view.test.ts:
+(pass) virtual windows bound10k rows, pin focus by stable occurrence, logical IDs ignore scrolling [35.83ms]
+(pass) adaptive ticks and bars reject nonfinite arithmetic while preserving relative units [0.69ms]
+(pass) related-spec pure pages preserve original order/independent clamping and all2000 IDs [0.61ms]
+(pass) route-specific v2 rejection retains Timeline snapshot; all other route schemas stay1 [1.23ms]
+(pass) height reduction clamps last-pixel offsets to retain the same visible occurrence [2.76ms]
+
+tests/memory-workflows.test.ts:
+(pass) memory workflow scenarios > multi-spec workflow stays coherent from query to links to brief [60.30ms]
+(pass) memory workflow scenarios > tag-driven workflow uses exact normalized tags across query, links, and brief [61.39ms]
+
+tests/harness-receipts.test.ts:
+(pass) opt-in native execution evidence > protocol output retains only normalized final text, including terminals beyond 1 MiB [323.77ms]
+(pass) opt-in native execution evidence > recorded receipts are minimal, exclusive, private, and distinguish initial/final snapshots [479.59ms]
+(pass) opt-in native execution evidence > record and protocol previews never write and pair validation happens before spawn [445.12ms]
+(pass) opt-in native execution evidence > both Claude protocols use the shared wrapper without adding flags or retaining transcripts [904.48ms]
+(pass) opt-in native execution evidence > native failure/incomplete state never overrides the independent process result [462.85ms]
+(pass) opt-in native execution evidence > post-child snapshot/guard/record failures preserve invocation and native result [1641.12ms]
+(pass) opt-in native execution evidence > exact session references use current context and literal configured argv tokens [482.08ms]
+(pass) opt-in native execution evidence > missing token, provider/root mismatch, invalid IDs and symlinks reject sessions before executing [1390.19ms]
+(pass) opt-in native execution evidence > handoff draft/apply uses the final byte guard, excludes only its own receipt, and preserves task review [641.49ms]
+(pass) opt-in native execution evidence > handoff JSON dispatch preserves preview and legacy writes without importing model claims [725.45ms]
+(pass) opt-in native execution evidence > second edits to dirty bytes, new paths, and foreign .specpm data prevent handoff writes [1496.64ms]
+(pass) opt-in native execution evidence > lock ownership is rechecked after comparison and before the canonical write [566.39ms]
+(pass) opt-in native execution evidence > unknown process closure makes the saved guard incomplete even if byte observations match [479.49ms]
+(pass) opt-in native execution evidence > storage overflow disables apply while preserving bounded minimal execution evidence [457.72ms]
+(pass) opt-in native execution evidence > receipt reads reject oversized, malformed and extra-field data before any child launch [776.24ms]
+(pass) opt-in native execution evidence > invalid receipt UTF-8 is a precondition failure in both CLI dispatchers, while I/O remains exit 1 [836.95ms]
+(pass) opt-in native execution evidence > exact receipt enums reject nested arrays and other non-string JSON values without coercion [625.13ms]
+
+tests/memory-links.test.ts:
+(pass) memory links service > groups outgoing, incoming, and neighborhood relations deterministically [18.30ms]
+(pass) memory links command > renders grouped human output and structured JSON [36.06ms]
+(pass) memory links command > rejects missing or unknown doc ids [24.00ms]
+
+tests/ui-package.test.ts:
+(skip) actual production archive UI > has exact output and explicit production dependency closure, no development imports
+(skip) actual production archive UI > runs the real bin in two external roots with SSR/static/actions/security and shutdown
+
+tests/nexus.test.ts:
+(pass) nexus setup service > plans setup without writing files by default [8.04ms]
+(pass) nexus setup service > applies bounded Nexus setup and can be rerun without duplicates [9.98ms]
+(pass) nexus setup service > refreshes older Nexus AGENTS contracts with setup guidance [6.72ms]
+(pass) nexus setup service > honors anchored gitignore rules without adding duplicates [8.14ms]
+(pass) nexus setup service > can place the coexistence contract in a scoped AGENTS file [6.61ms]
+(pass) nexus setup service > explains missing adoption before applying Nexus setup [0.34ms]
+(pass) nexus setup service > uses the selected Nexus command in follow-up indexing guidance [15.26ms]
+(pass) nexus setup command > renders human and structured setup output [6.24ms]
+
+tests/detail-relations.test.ts:
+(pass) v2 bounded detail projection > 10k fanout and linked tasks preserve full totals/order without serializing nested cards or duplicate group arrays [61.84ms]
+(pass) v2 bounded detail projection > every page across mixed/missing/duplicate references follows legacy presentation order including group splits [3.75ms]
+(pass) v2 bounded detail projection > all high-cardinality task collections, safe/clamped/empty pages and minimal missing are bounded [2.29ms]
+(pass) v2 bounded detail projection > 201 related handoffs include every OR match, stable ties and irrelevant omissions while legacy stays newest3 [1.09ms]
+(pass) v2 bounded detail projection > SSR/native URLs retain unrelated state; close/new identity clears relations and sections retain them [0.57ms]
+(pass) v2 bounded detail projection > relation endpoint validates before IO, no-store statuses and requested intent; canonical retains global revision [2.14ms]
+(pass) v2 bounded detail projection > unknown versions, unsafe counts and legacy nested relation arrays are rejected [0.16ms]
+
+tests/task-board.test.ts:
+(pass) task board helpers > groups only the received page without reordering it and preserves cancelled lane semantics [2.90ms]
+(pass) task board helpers > matches any selected spec and all tasks when no filter exists
+(pass) task board helpers > filters each kanban lane by selected specs
+
+tests/spec-import.test.ts:
+(pass) spec import service > builds a migration bundle from an existing docs folder [3.14ms]
+
+tests/resume-window.test.ts:
+(pass) resume interruption window > summarizes commits and changed files since a commit [434.64ms]
+
+tests/hooks-release.test.ts:
+(pass) hooks and release workflows > installs hook config and renders event plans [25.45ms]
+(pass) hooks and release workflows > builds release recommendations and notes from managed state [34.60ms]
+(pass) hooks and release workflows > uses the latest completion window instead of stale done specs [21.61ms]
+
+tests/ui-launch.test.ts:
+(pass) missing and stale package artifacts fail before a Node probe, child or listener [101.16ms]
+
+tests/data-table.test.ts:
+(pass) data table navigation and selection > clamps keyboard movement to loaded page and includes header bounds [0.07ms]
+(pass) data table navigation and selection > range adds inclusive IDs without dropping outside selection and refresh intersects IDs [0.41ms]
+(pass) data table navigation and selection > focus survives reorder and maps removed IDs/columns to nearest position [0.05ms]
+(pass) data table navigation and selection > native sort intent keeps at most primary/secondary with stable direction toggles [0.16ms]
+(pass) bounded per-project preferences > normalizes corrupt, stale, duplicate and out-of-bounds storage while locking identity [0.27ms]
+(pass) bounded per-project preferences > title auto fills space, explicit resize survives viewport changes, reset restores auto [0.53ms]
+(pass) safe visible-page clipboard > copies only selected visible rows/columns in displayed order with headers [0.24ms]
+(pass) safe visible-page clipboard > neutralizes spreadsheet formula prefixes after whitespace and keeps ordinary Unicode [0.01ms]
+
+tests/spec-table.test.ts:
+(pass) Specs consumer of the shared table > uses existing sort keys and DTO fields with fixed identity and optional metadata [2.35ms]
+(pass) Specs consumer of the shared table > canonical spec status remains independent from linked-task archive/window subset progress [1.05ms]
+(pass) Specs consumer of the shared table > spec preferences are isolated and visible selected-row copy retains formula safeguards [0.24ms]
+(pass) Specs consumer of the shared table > 0/1/200 spec projection inputs stay bounded and include zero-linked specs [2.22ms]
+
+tests/spec-filter-form.test.ts:
+(pass) Specs filter ownership of taskScope > an externally controlled selector submits exactly its one chosen value, resets page and keeps other facets [14.09ms]
+(pass) Specs filter ownership of taskScope > the existing uncontrolled Specs consumer keeps one hidden taskScope [0.86ms]
+
+tests/status.test.ts:
+(pass) status command > shows managed changed item identity together with the change hint and concrete path [214.33ms]
+(pass) status command > includes compact raw git status codes in structured changed-item output [194.60ms]
+(pass) status command > notes when additional changed files were omitted from human output [318.27ms]
+
+tests/question-editor.test.ts:
+(pass) baseline-relative exact drafts survive metadata/reorder; review matches exact occurrences with recovery [0.58ms]
+(pass) echo is dirty, same revision refresh preserves draft, missing remains protected [0.05ms]
+(pass) submission freezes exact values; success preserves recovery and rejects foreign generations [0.17ms]
+(pass) document session fence is identity-only, stable across instances until a real new session
+(pass) initial noJS confirmed outcome bases only on committed revision/questions; later external read needs acknowledgement
+(pass) partial save retains unresolved whitespace dirty in JS completion and initial noJS success
+
+tests/engine.test.ts:
+(pass) engine > derives ready and blocked tasks [0.14ms]
+(pass) engine > builds resume context with next actions [0.11ms]
+(pass) engine > treats review tasks as active unfinished work [0.17ms]
+(pass) engine > derives changed spec, task, and current-state items from git status [0.14ms]
+(pass) engine > accepts tracked lines that already lost the leading status column and decodes quoted rename targets [0.12ms]
+(pass) engine > preserves left-to-right precedence for mixed tracked status columns [0.01ms]
+(pass) engine > shares omitted-count note formatting across truncated summary surfaces [0.07ms]
+(pass) engine > includes changed managed docs in next actions when available [0.08ms]
+
+tests/document-parse-memo.test.ts:
+(pass) private exact-byte canonical parse memo > validates internal limits immediately [0.23ms]
+(pass) private exact-byte canonical parse memo > new equal bytes hit while independent publications and retained proof bytes cannot be poisoned [0.31ms]
+(pass) private exact-byte canonical parse memo > parser identity, exact original alias and roots partition canonical values [0.16ms]
+(pass) private exact-byte canonical parse memo > changed invalid bytes remove old success and every failure parses again [0.16ms]
+(pass) private exact-byte canonical parse memo > unsupported shape/descriptor values bypass with ordinary parser semantics [0.56ms]
+(pass) private exact-byte canonical parse memo > LRU count pressure evicts B after A is touched, and eviction forces a parse [0.15ms]
+(pass) private exact-byte canonical parse memo > accounted-byte pressure, replacement accounting and oversize obey test bounds [0.25ms]
+(pass) private exact-byte canonical parse memo > each load really reads even on a parser hit, and IO failure/recovery cannot publish an entry [4.21ms]
+(pass) private exact-byte canonical parse memo > reverse-completing independent reads publish their own bytes and hashes; failure cannot poison another read [0.41ms]
+(pass) common repository read seam > real IO failure after a warm hit rejects, recovery observes bytes, and missing-current has no invented provenance [101.45ms]
+(pass) common repository read seam > fresh edits, aliases, enumeration and scoped policy preserve context/provenance/revision/DTO behavior [257.05ms]
+
+tests/memory-brief.test.ts:
+(pass) memory brief service > builds a compact task-centered brief with current state and neighbors [31.03ms]
+(pass) memory brief service > builds a text-oriented brief from memory query matches [45.39ms]
+(pass) memory brief service > honors include flags for neighbors, current state, and handoffs [36.00ms]
+(pass) memory brief command > renders compact human output and stable JSON [68.77ms]
+(pass) memory brief command > rejects invalid brief entry modes and profiles [54.78ms]
+
+tests/memory-note-command.test.ts:
+(pass) memory note commands > creates a session memory note through the CLI and makes it queryable [42.95ms]
+(pass) memory note commands > updates an existing session note deterministically [37.87ms]
+(pass) memory note commands > rejects org-scope writes when the scope is read-only [23.71ms]
+(pass) memory note commands > rejects invalid note updates with no fields [7.22ms]
+(pass) memory note commands > archives and restores a session note through the CLI [85.45ms]
+(pass) memory note commands > lists notes with scoped and archived filters [72.00ms]
+
+tests/mermaid-theme.test.ts:
+(pass) mermaid theme helper > builds Mermaid theme variables from shared CSS tokens [0.12ms]
+(pass) mermaid theme helper > falls back to the default light palette when tokens are missing [0.04ms]
+
+tests/backends.test.ts:
+(pass) prompt backend helpers > builds a prompt bundle and renderable text from resume context [24.60ms]
+(pass) deterministic backend > renders changed managed items with a compact hint, identity, and path [196.91ms]
+(pass) deterministic backend > notes omitted changed files when the human summary is truncated [198.92ms]
+(pass) deterministic backend > notes omitted raw git changes when the Git Changes section is truncated [217.61ms]
+(pass) deterministic backend > does not note omitted raw git changes when the Git Changes section is complete [196.39ms]
+(pass) subprocess backends > replaces all token values literally, including opaque session IDs with dollar sequences [21.64ms]
+(pass) subprocess backends > builds a preview launch plan with stable tokens and env vars [26.63ms]
+(pass) subprocess backends > returns a structured preview when a subprocess backend is configured but not spawned [21.79ms]
+(pass) subprocess backends > writes prompt artifacts and spawns the configured subprocess [27.71ms]
+
+tests/context-pack.test.ts:
+(pass) context pack service > builds a compact memory pack around an explicit task target [20.29ms]
+(pass) context pack service > preserves non-repo scope information inside compact packs [19.91ms]
+(pass) context pack service > threads ranking controls into text-oriented memory packs [23.12ms]
+(pass) context pack service > builds a resume pack that prioritizes focus, next actions, and active work [20.19ms]
+(pass) context pack service > includes changed managed item summaries with a compact hint, identity, and path [172.69ms]
+(pass) context pack service > notes when additional changed files were offloaded from the resume context pack [188.28ms]
+(pass) memory pack command > renders compact human output and stable JSON [37.60ms]
+(pass) prompt bundle integration > includes a resume context pack in prompt-return bundles [28.46ms]
+
+tests/ui-runtime.test.ts:
+(pass) owned Node UI listener > binds the real bounded fallback, announces exact readiness and rejects duplicate/foreign Hosts [231.95ms]
+(pass) owned Node UI listener > IPC disconnect drains an in-flight response and closes its listener [385.82ms]
+(pass) owned Node UI listener > startup cancellation never announces ready and closes the bound listener [221.51ms]
+(pass) owned Node UI listener > the 30 second drain deadline closes a stalled response and its child [30253.47ms]
+(pass) owned Node UI listener > serves the exact bracketed IPv6 origin when loopback IPv6 is available [291.47ms]
+(pass) owned Node UI listener > handler initialization failure reports nonzero and relinquishes the port [203.03ms]
+
+tests/memory-evals.test.ts:
+(pass) agent-style memory retrieval evals > adoption queries prefer the strongest current adoption spec anchor [224.89ms]
+(pass) agent-style memory retrieval evals > memory command family queries surface the umbrella spec before narrower tasks [150.48ms]
+(pass) agent-style memory retrieval evals > migration briefs preserve ranked adoption spec matches and explain why they were selected [259.55ms]
+(pass) memory eval harness > builds passing retrieval, pack, consolidation, and injection scenarios [689.37ms]
+(pass) memory eval harness > renders filtered eval suites through the memory command [412.47ms]
+
+tests/favicon-endpoint.test.ts:
+(pass) favicon GET explicitly returns no content without touching project/request state [1.26ms]
+
+tests/workspace.test.ts:
+(pass) bounded workspace projections > uses stable opaque canonical-root identity across aliases and refresh, distinct for same-name roots [92.94ms]
+(pass) bounded workspace projections > Table supports archive scopes while Board remains explicitly unarchived [1.86ms]
+(pass) bounded workspace projections > keeps request intention stable across page removal, empty results, and reappearing pages [8.80ms]
+(pass) bounded workspace projections > reports unavailable spec intentions without silently broadening results or changing request identity [1.30ms]
+(pass) bounded workspace projections > orders timestamp instants with offsets chronologically and invalid timestamps last in either direction [0.50ms]
+(pass) bounded workspace projections > filters effective statuses, OR facets/AND categories, scope, canonical numeric priorities and normalized search [2.53ms]
+(pass) bounded workspace projections > keeps canonical spec relation and status independent of metric taskScope/window [0.37ms]
+(pass) bounded workspace projections > uses stable global ordering, empty values last in either direction, and clamps pages after filtering [0.42ms]
+(pass) bounded workspace projections > keeps input revision deterministic without clocks and updates projections when content changes [1.59ms]
+(pass) bounded workspace projections > does not invoke overview/timeline/facade for Tasks, Specs, options, or details [1.50ms]
+(pass) bounded workspace projections > shares one in-flight load/index per request and separates requests [0.43ms]
+(pass) bounded workspace projections > provides searched/paged options and selected IDs with explicit omitted-label diagnostics [0.86ms]
+(pass) bounded workspace projections > bounds 10k/2k page100 payload including shell and first option page, without foreign arrays/bodies [62.03ms]
+(pass) bounded workspace projections > preserves legacy timeline semantics with groups only and explicit archive override [2.26ms]
+
+tests/workspace-resource.test.ts:
+(pass) controlled workspace resource > uses only controlled endpoint and commits shell/data atomically without router invalidation [1.11ms]
+(pass) controlled workspace resource > registered refresh sends selected project and rendered workspace key [0.25ms]
+(pass) controlled workspace resource > network/HTTP/JSON/shape/identity failures retain the exact snapshot and prior success time; Retry recovers [1.47ms]
+(pass) controlled workspace resource > superseded late success or error cannot replace or clear a newer request [0.67ms]
+(pass) controlled workspace resource > new SSR generation and disposal invalidate old requests even with the same route/key [0.64ms]
+(pass) controlled workspace resource > deadline exits busy, aborts transport, preserves prior data, and ignores late completion [19.49ms]
+(pass) controlled workspace resource > focus is debounced, visible-only, after five seconds, and coalesces with an existing request [47.51ms]
+(pass) controlled workspace resource > inspector-only retarget preserves pending/error/snapshot and does not abort or fetch [0.75ms]
+(pass) controlled workspace resource > validates schema and required displayed fields before accepting an envelope [0.19ms]
+
+tests/harness-context.test.ts:
+(pass) portable harness context > uses the committed window in every backend, separate from local changes [938.11ms]
+(pass) portable harness context > rejects option/range/invalid revisions and never writes spawn artifacts [1274.17ms]
+(pass) portable harness context > returns useful context outside Git and distinguishes an unborn HEAD [122.12ms]
+(pass) portable harness context > hashes the loaded bytes once, retaining provenance by object identity [233.78ms]
+(pass) portable harness context > fingerprints are canonical, independent of rendering metadata, and include dirty state [264.91ms]
+(pass) portable harness context > keeps all dynamic data out of the stable prefix and serializes each block once [22.95ms]
+(pass) portable harness context > bounds UTF-8 prompt bytes while retaining complete JSON data and expansion paths [53.03ms]
+(pass) portable harness context > rejects invalid byte budgets with usage exit code 2 [112.82ms]
+
+tests/workspace-timeline.test.ts:
+(pass) Timeline safe workspace projection > retains exact finite legacy projection across generated graphs/statuses/ties/duplicates [67.66ms]
+(pass) Timeline safe workspace projection > distinguishes missing/outside edges, last-ID graph values and deterministic repeated gray edges [0.27ms]
+(pass) Timeline safe workspace projection > bounds each diagnostic sample independently and completes10k chain/30k edges iteratively [25.10ms]
+(pass) Timeline safe workspace projection > preserves rows and finite fields when effort or derived placement overflows [1.75ms]
+(pass) Timeline safe workspace projection > uses one legacy projection, bounds fallback slice, handles empty/last/clamp and intent identity [1.78ms]
+(pass) Timeline safe workspace projection > rejects inconsistent nullable fields, samples, counts, metadata and fallback rows [0.55ms]
+(pass) Timeline safe workspace projection > related-spec DTO slices full legacy selection with independent clamping and no duplicate full arrays [22.81ms]
+
+tests/ui-build.test.ts:
+(pass) an explicit failed build removes the old success manifest before probing Node [139.39ms]
+(pass) a build rejects web/build ancestor aliases without modifying the outside success sentinel [172.42ms]
+
+tests/spec-question-action-guard.test.ts:
+(pass) exact provenance projects once; clone has null and a later disk edit cannot rewrite initial revision [40.70ms]
+(pass) checked revision, legacy success, recovery and exact drafts retain compatibility [57.54ms]
+(pass) malformed/duplicate revisions are400 before writing; stale409 with exact draft and current snapshot [91.63ms]
+(pass) discard recovery redisplays exact remaining drafts without invoking writer [22.60ms]
+(pass) committed outcome is recorded before optional read failure and stays successful [22.91ms]
+(pass) missing and IO failures remain truthful, preserve recovery, and never claim success [49.61ms]
+(pass) root layout and page preserve confirmed outcome and error drafts when their shared context promise rejects [34.35ms]
+
+tests/spec-answer-evaluation.test.ts:
+(pass) spec answer evaluation > marks specs with remaining questions as needing more input [0.09ms]
+
+tests/memory-query.test.ts:
+(pass) memory query service > retrieves managed docs by typed filters and normalized tags [20.30ms]
+(pass) memory query service > matches tags by exact normalized value and rejects partial tag substrings [47.77ms]
+(pass) memory query service > retrieves matches from managed document bodies, not only summaries [23.89ms]
+(pass) memory query service > supports linked-to and neighborhood-aware retrieval [23.79ms]
+(pass) memory query service > supports scoped note retrieval without changing repo-memory defaults [24.92ms]
+(pass) memory query service > supports deterministic active-work ranking controls [22.69ms]
+(pass) memory query service > boosts tasks linked to active specs without requiring spec id text [25.21ms]
+(pass) memory query command > renders compact human output and structured JSON [82.38ms]
+(pass) memory query command > rejects invalid typed filters [65.03ms]
+
+tests/workspace-preferences.test.ts:
+(pass) workspace preferences > validates versioned storage and defaults corrupt values without throwing [0.18ms]
+(pass) workspace preferences > canonical detail routes activate their parent without matching similar prefixes
+
+tests/profile-import.test.ts:
+(pass) project profiles and legacy import > lists profiles and writes a profile manifest during init [9.91ms]
+(pass) project profiles and legacy import > builds and applies a deterministic legacy import plan [30.60ms]
+(pass) project profiles and legacy import > does not import SpM managed docs when source contains the memory home [9.27ms]
+
+tests/spec-detail-actions.test.ts:
+11 |   if(!detail.found){if(locals.specAnswerOutcome)return {detail:null,answerOutcome:locals.specAnswerOutcome.result,specId:params.specId};error(404,`Spec ${params.specId} was not found in the current managed memory.`);}
+12 |   return {detail,sourceRevision,pages,generatedAt,answerOutcome:locals.specAnswerOutcome?.result};
+13 |  }catch(cause){if(locals.specAnswerOutcome)return {detail:null,answerOutcome:locals.specAnswerOutcome.result,specId:params.specId};throw cause;}
+14 | };
+15 | export const actions:Actions={answerOpenQuestions:async({params,request,locals})=>{
+16 |  const form=await request.formData(), selection=locals.projectSelection!;
+                                                     ^
+TypeError: undefined is not an object (evaluating 'locals.projectSelection')
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/routes/specs/[specId]/+page.server.ts:16:49)
+      at async <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/tests/spec-detail-actions.test.ts:36:34)
+(fail) spec detail actions > answers open questions from the spec detail action [11.23ms]
+
+tests/workspace-list-url.test.ts:
+(pass) detail relationship pages preserve list URL/draft intent [0.79ms]
+
+tests/frontmatter.test.ts:
+(pass) frontmatter > parses TOML frontmatter with arrays and body [1.65ms]
+(pass) frontmatter > serializes and parses back simple frontmatter
+
+tests/version.test.ts:
+(pass) version service > reads the CLI version from package.json [0.46ms]
+(pass) version service > compares semantic-ish CLI versions [0.15ms]
+
+tests/repository.test.ts:
+(pass) repository status updates > updates a spec status and preserves the body [11.23ms]
+(pass) repository status updates > updates a task status and preserves dependency fields [7.64ms]
+(pass) repository status updates > writes lifecycle timestamps when task status changes to done and cancelled [9.00ms]
+(pass) repository status updates > does not rewrite lifecycle timestamps when the status does not actually transition [6.55ms]
+(pass) repository status updates > creates a spec with a deterministic id and back-links linked tasks [9.93ms]
+(pass) repository status updates > creates a task with a deterministic id and back-links linked specs [11.36ms]
+(pass) repository status updates > serializes concurrent task creation so ids stay unique [120.70ms]
+(pass) repository status updates > serializes concurrent spec creation so ids stay unique [116.58ms]
+(pass) repository status updates > creates lifecycle timestamps when a task is created directly in a closed state [8.76ms]
+(pass) repository status updates > initializes seed task files with created_at metadata [4.50ms]
+(pass) repository status updates > writes the current CLI version into the project config during init [15.18ms]
+(pass) repository status updates > does not reseed onboarding specs and tasks into an already adopted repo [11.63ms]
+(pass) repository status updates > preserves leading spaces in git short status output [205.27ms]
+(pass) repository status updates > archives a closed task and preserves its closed status [6.34ms]
+(pass) repository status updates > restores an archived task by clearing archival metadata [8.26ms]
+(pass) repository status updates > archives done and cancelled tasks by explicit lifecycle age [9.68ms]
+(pass) repository status updates > updates current state and preserves the body [16.23ms]
+(pass) repository status updates > answers open questions and rewrites the spec deterministically [8.44ms]
+
+tests/acceptance-harness.test.ts:
+(pass) cold schedule alternates independent routes; warm keeps5+20 per route [0.30ms]
+(pass) nearest-rank p95 preserves outliers and never turns missing/error samples into a pass [0.23ms]
+(pass) cold tool adapter always stops its own runtime and retains browser/cleanup errors [0.65ms]
+(pass) owned dependency seed copies bytes, runtime hardlinks owned files, and caches stay private [7.79ms]
+(pass) dependency copying rejects a symlink escaping development dependency root [2.17ms]
+(pass) prepared global-style prefix invokes declared owned bin without a development-source link [552.03ms]
+(pass) lifecycle refuses traversal before a runtime write and does not clear another active lease [6.51ms]
+(pass) initial Tasks closure counts each emitted static file once and excludes lazy Mermaid [18.08ms]
+(pass) a prepared runtime from an older source pin cannot start or occupy the active lease [5.56ms]
+(pass) readiness endpoint uses fixed browser second-frame timestamp before later diagnostics [0.58ms]
+(pass) page and browser close failures preserve primary errors and partial warm/cold evidence [1.44ms]
+(pass) cold stops after unverified cleanup and retains browser primary plus stop secondary [0.23ms]
+(pass) original dependency inventory detects both runtime additions and hardlinked seed mutations [17.55ms]
+(pass) browser predicate captures endpoint inside the second frame with a fixed clock [0.87ms]
+(pass) source layout normalizes only the copied declared bin mode and preserves original bytes/mode [322.49ms]
+(pass) launcher identity permits only owned env-to-Bun exec with stable PID/group/start [0.24ms]
+(pass) EPERM signal-zero fallback requires a complete valid nonempty process inventory [0.76ms]
+(pass) only compiled ready with exact build and registered Node identifies startup [0.44ms]
+(pass) staging copies reviewed artifacts without building and rejects links or repeat stages [3.81ms]
+(pass) owner stage is blocked by an active lease and records explicit build identity [5.81ms]
+(pass) cold evidence retains startup validation cost separately from unchanged navigation clock [0.15ms]
+(pass) unstaged or changed artifacts fail before a runtime can occupy the active lease [11.37ms]
+(pass) a package from a different staged build fails before dependency preparation [31.37ms]
+(pass) retention uses global DOM listener counts even if sampled target maps are unchanged [0.33ms]
+(pass) retention setup failure preserves primary error and cleanup evidence without a browser run
+(pass) loading150 does not infer blank from missing/late FCP; verified HTTP lower bound remains a failure
+(pass) separate skeleton visibility proof cannot replace detail accepted-row timing [0.90ms]
+(pass) delayed trusted click dispatch is included in skeleton100 and invalid clocks fail closed
+
+tests/storage.test.ts:
+(pass) storage > ignores AGENTS.md when listing markdown collections [1.24ms]
+(pass) storage > keeps an active lock alive past staleMs with heartbeat updates [130.33ms]
+(pass) storage > serializes cross-process task creation through the shared repository lock [167.36ms]
+
+tests/task-analysis-index.test.ts:
+(pass) task analysis index > counts direct dependent tasks once and only done satisfies a dependency [0.08ms]
+(pass) task analysis index > matches legacy summaries for seeded graphs with cycles, missing refs, and duplicate edges [16.31ms]
+(pass) task analysis index > preserves last-ID-wins semantics, array isolation, and fallback for unrelated indexes [0.06ms]
+(pass) task analysis index > builds and summarizes a 10,000-node chain without graph recursion [10.60ms]
+
+tests/workspace-query.test.ts:
+(pass) workspace query contracts > request identity normalizes aliases/syntax independently of dataset availability [2.32ms]
+(pass) workspace query contracts > defaults Tasks to Table, retains archive scope, and simple mode forces Table [0.48ms]
+(pass) workspace query contracts > round trips non-default option page sizes without changing normalized identity [0.13ms]
+(pass) workspace query contracts > normalizes malformed values, duplicate facets, and at most two distinct sort keys [0.24ms]
+(pass) workspace query contracts > round trips every scoped task/spec query and keeps exclusive fields apart [0.24ms]
+(pass) workspace query contracts > preserves legacy archive semantics until new interactions write scope explicitly
+(pass) workspace query contracts > allows only compatible inspector/trace/presentation fields per route [0.54ms]
+
+tests/project-root.test.ts:
+(pass) project root resolution > uses the explicit project root when provided
+(pass) project root resolution > walks up the tree until it finds .specpm/config.toml [1.99ms]
+(pass) project root resolution > fails clearly when no project root can be found [0.34ms]
+
+tests/dashboard.test.ts:
+(pass) dashboard service > builds a serialized dashboard view from the repo files [24.06ms]
+(pass) dashboard service > surfaces review tasks in the dedicated kanban lane [22.04ms]
+(pass) dashboard service > uses effective status labels in grouped timeline rows [20.74ms]
+(pass) dashboard service > uses spec task_ids as the source for spec progress counts [20.05ms]
+(pass) dashboard service > excludes archived tasks from active-flow views by default [21.43ms]
+(pass) dashboard service > includes archived tasks in analytical slices when filtering by spec [28.42ms]
+(pass) dashboard service > matches any selected spec once in analytical slices [22.37ms]
+(pass) dashboard service > uses lifecycle timestamps for time-window analytical filtering [24.16ms]
+(pass) dashboard service > supports active-only and include-completed timeline modes [32.30ms]
+(pass) dashboard service > keeps selected spec groups visible even when active mode has no matching rows [21.52ms]
+(pass) dashboard service > builds deterministic timeline selection states for dependencies and blocked dependents [17.79ms]
+(pass) dashboard service > distinguishes downstream dependents from currently blocked downstream work [20.96ms]
+(pass) dashboard service > marks directly and transitively related spec groups from a selected cross-spec neighborhood [31.42ms]
+
+tests/harness-diagnostics.test.ts:
+(pass) explicit harness diagnostics > normal doctor/brief and explicit snippet execute zero probes and retain legacy keys [18.29ms]
+(pass) explicit harness diagnostics > doctor and brief expose the same optional projection and ignore configured backend commands [777.26ms]
+(pass) explicit harness diagnostics > missing CLI does not change project health and never writes adoption files [10.65ms]
+(pass) explicit harness diagnostics > version/profile observations never become blanket compatibility guarantees [0.32ms]
+(pass) explicit harness diagnostics > inspection is bounded to seven root paths and returns paths/warnings without document contents [15.34ms]
+(pass) explicit harness diagnostics > bounded probes drain combined stdout/stderr and report launch failures [371.17ms]
+(pass) explicit harness diagnostics > root instruction FIFOs are rejected without opening or waiting for a writer [75.11ms]
+(pass) explicit harness diagnostics > hung probes terminate within the fixed deadline despite continuous output [2008.01ms]
+(pass) explicit harness diagnostics > injectable probes are separate from projection and only receive allowlisted arguments [8.39ms]
+(pass) explicit harness diagnostics > invalid selections emit one versioned JSON usage envelope from the dispatcher [251.03ms]
+
+tests/layout.test.ts:
+(pass) layout service > adopts a single docs home automatically [3.99ms]
+(pass) layout service > requires a choice when multiple docs homes exist [4.56ms]
+(pass) layout service > classifies a repo with legacy docs and no config as legacy-docs [1.13ms]
+(pass) layout service > classifies a configured repo with full managed files as adopted [7.83ms]
+(pass) layout service > classifies a repo with partial managed signals as partially-adopted [1.46ms]
+(pass) layout service > builds a reshape plan from the old root layout to docs/spm [2.23ms]
+
+tests/ui.test.ts:
+(pass) UI launch contract > production defers binding to child, DEV probes only the bounded legal range [1.41ms]
+(pass) UI launch contract > rejects incomplete flags, partial ports and boolean values [1.03ms]
+(pass) UI launch contract > normalizes exactly one advertised authority, including IPv6 [0.80ms]
+(pass) UI launch contract > requires actual supported Node and scrubs binding/proxy inputs [1.44ms]
+
+tests/svelte-plugin-options.test.ts:
+(pass) svelte plugin options > detects packaged installs from node_modules paths
+(pass) svelte plugin options > disables Svelte library prebundling for packaged installs only [0.17ms]
+(pass) svelte plugin options > forces Mermaid dependency optimization for packaged installs only
+
+tests/portfolio.test.ts:
+(pass) portfolio command > registers projects and renders cross-project status [29.36ms]
+(pass) portfolio command > reports unavailable projects without failing the whole portfolio [7.51ms]
+(pass) portfolio command > searches portfolio summaries and renders explicit relationship issues [106.62ms]
+
+tests/agent-command.test.ts:
+(pass) agent command > renders a short workflow brief for the current repo [29.82ms]
+(pass) agent command > returns structured partial-adoption checks when cleanup is still needed [16.14ms]
+(pass) agent command > renders the bounded AGENTS snippet directly [8.38ms]
+(pass) agent command > avoids pointing fresh repos at a missing current state file [1.73ms]
+(pass) agent command > treats an unreadable current state file as unavailable [10.62ms]
+(pass) agent command > returns structured upgrade-aware guidance as json [6.34ms]
+(pass) agent command > rejects unsupported subcommands [7.58ms]
+(pass) agent command > rejects unsupported subcommands before unhealthy repo state is loaded [5.17ms]
+
+tests/doctor.test.ts:
+(pass) doctor service > reports missing adoption artifacts on a configured repo without generated guidance [20.36ms]
+(pass) doctor service > reports backlink drift as warnings [9.50ms]
+(pass) doctor service > reports an invalid config as blocking [1.45ms]
+(pass) doctor service > surfaces when the running CLI is newer than the repo tool version [6.50ms]
+(pass) doctor service > warns when generated adoption artifacts are stale [16.72ms]
+(pass) doctor service > treats non-canonical managed statuses as blocking parse errors [26.53ms]
+(pass) doctor service > renders a concise default doctor report and a verbose expanded variant [6.46ms]
+(pass) doctor service > surfaces structured partial-adoption checks when cleanup is still needed [6.04ms]
+(pass) doctor service > warns when Nexus is enabled without a local command or coexistence guidance [10.95ms]
+(pass) doctor service > blocks when Nexus is configured to own root AGENTS guidance [11.75ms]
+(pass) doctor service > reports invalid Nexus AGENTS modes as invalid config [6.13ms]
+(pass) doctor service > accepts a bounded Nexus setup when the command and AGENTS contract are present [6.46ms]
+(pass) doctor service > accepts scoped Nexus guidance from a nested AGENTS file [9.73ms]
+
+tests/project-read-freshness.test.ts:
+(pass) fresh project Buffer loading > one pool covers current/specs/tasks/handoffs and enabled notes with exact same-read hashes and legacy ordering [183.35ms]
+(pass) fresh project Buffer loading > same-length restored-mtime edits, atomic replacement and fresh enumeration never reuse old documents [140.83ms]
+(pass) fresh project Buffer loading > read failures reject the whole load with the same error and later loads still succeed [32.60ms]
+(pass) fresh project Buffer loading > raw invalid UTF8 bytes keep exact provenance and existing symlink inclusion/default-current behavior [31.97ms]
+
+tests/details.test.ts:
+(pass) detail service > builds a spec detail payload with linked tasks and body sections [22.24ms]
+(pass) detail service > builds a task detail payload with dependency and archival context [24.39ms]
+(pass) detail service > returns deterministic not-found results [30.91ms]
+(pass) detail service > extracts open questions and resolved decisions from spec detail data [23.42ms]
+(pass) detail service > preserves fenced mermaid blocks in detail body sections [20.02ms]
+
+tests/harness-guard.test.ts:
+(pass) independent execution evidence guard > a second edit to an already dirty file invalidates hashes even when Git status is identical [216.03ms]
+(pass) independent execution evidence guard > NUL-delimited renames and expanded untracked paths preserve Unicode/spaces/newlines/backslashes [172.29ms]
+(pass) independent execution evidence guard > final symlinks hash their link data without reading outside; outside parents are incomplete [152.60ms]
+(pass) independent execution evidence guard > only this verified untracked lease owner is excluded during comparison [294.21ms]
+(pass) independent execution evidence guard > tracked, previously observed, changed, or symlink lease owners are never hidden [937.11ms]
+(pass) independent execution evidence guard > own receipt exclusion is exact, and other receipts/files remain observed [146.73ms]
+(pass) independent execution evidence guard > regular managed bytes are verified while managed symlinks remain explicitly incomplete [188.70ms]
+(pass) independent execution evidence guard > the 10000-path observation limit is explicit and never enables apply [783.72ms]
+(pass) independent execution evidence guard > unsafe/unsupported paths and unavailable Git leave an incomplete useful observation [173.82ms]
+
+tests/document-reader.test.ts:
+(pass) per-load document read admission > shares a FIFO64 cap across collections and preserves Promise.all source positions [2.43ms]
+(pass) per-load document read admission > independent loads each admit64 instead of sharing a process-global semaphore [0.54ms]
+(pass) per-load document read admission > read errors and synchronous setup throws release slots, preserve errors and drain without unhandled rejections [1.62ms]
+(pass) per-load document read admission > synchronous completions of a long queued tail drain iteratively [4.80ms]
+
+tests/question-history.test.ts:
+(pass) ordinary owned traversal still restores then replays its verified delta after explicit discard [1.44ms]
+(pass) observable different target during restoring abandons relative proof and coalesces late traversal before Keep
+(pass) Keep before restoration completes repairs immediately and does not rely on a delayed go
+(pass) save replays only the latest observable destination once after interference
+(pass) discard replays only the latest observable destination once after interference [1.01ms]
+
+tests/ui-projects.test.ts:
+(pass) registry updates preserve identity and reject collisions; concurrent writers serialize [52.67ms]
+(pass) request selection and stale identity fail closed without exposing paths [27.93ms]
+(pass) stale answer identity retains drafts without calling the writer [0.30ms]
+(pass) remapped selection returns recovery-only action data and never writes either repo [17.04ms]
+(pass) concurrent registration and linking preserve both changes and malformed registries fail closed [52.86ms]
+
+tests/detail-presentation.test.ts:
+2:42:10 PM [vite] (ssr) Error when evaluating SSR module /src/lib/components/detail/TaskDetail.svelte: Cannot find module '$app/state' imported from '/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/lib/workspace/location.svelte.ts'
+      at fetchModule (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:22984:36)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26394:27)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26449:19)
+      at emit (node:events:98:22)
+      at send (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:10753:37)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:598:31)
+      at getModuleInformation (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:1187:28)
+      at processTicksAndRejections (native:7:39)
+2:42:10 PM [vite] (ssr) Error when evaluating SSR module /src/lib/components/detail/SpecDetail.svelte: Cannot find module '$app/state' imported from '/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/lib/workspace/location.svelte.ts'
+      at fetchModule (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:22984:36)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26394:27)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26449:19)
+      at emit (node:events:98:22)
+      at send (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:10753:37)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:598:31)
+      at getModuleInformation (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:1187:28)
+      at processTicksAndRejections (native:7:39)
+22979 | 			root,
+22980 | 			packageCache: environment.config.packageCache,
+22981 | 			builtins: environment.config.resolve.builtins
+22982 | 		});
+22983 | 		if (!resolved) {
+22984 | 			const err = /* @__PURE__ */ new Error(`Cannot find module '${url}' imported from '${importer}'`);
+                                           ^
+error: Cannot find module '$app/state' imported from '/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/lib/workspace/location.svelte.ts'
+       code: "ERR_MODULE_NOT_FOUND"
+
+      at fetchModule (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:22984:36)
+      at /Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26883:20
+      at /Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26938:59
+      at emit (node:events:98:22)
+      at send (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:11076:18)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:603:5)
+      at getModuleInformation (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:1152:33)
+      at processTicksAndRejections (native:7:39)
+
+534 | };
+535 | //#endregion
+536 | //#region src/shared/moduleRunnerTransport.ts
+537 | function reviveInvokeError(e) {
+538 | 	let error = Error(e.message || "Unknown invoke error");
+539 | 	return Object.assign(error, e, { runnerError: /* @__PURE__ */ Error("RunnerError") }), error;
+                                                                     ^
+error: RunnerError
+      at reviveInvokeError (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:539:64)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:612:11)
+(fail) canonical detail presentation > (unnamed) [454.92ms]
+
+tests/theme.test.ts:
+(pass) theme helpers > normalizes unknown values to system [2.18ms]
+(pass) theme helpers > resolves system mode to dark when preference is unavailable [0.07ms]
+(pass) theme helpers > resolves explicit and system themes correctly [0.02ms]
+
+tests/timeline-presentation.test.ts:
+2:42:10 PM [vite] (ssr) Error when evaluating SSR module /src/lib/components/timeline/TimelineTrace.svelte: Cannot find module '$app/state' imported from '/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/lib/workspace/location.svelte.ts'
+      at fetchModule (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:22984:36)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26394:27)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26449:19)
+      at emit (node:events:98:22)
+      at send (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:10753:37)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:598:31)
+      at getModuleInformation (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:1187:28)
+      at processTicksAndRejections (native:7:39)
+2:42:10 PM [vite] (ssr) Error when evaluating SSR module /src/lib/components/timeline/TimelineTable.svelte: Cannot find module '$app/state' imported from '/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/lib/workspace/location.svelte.ts'
+      at fetchModule (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:22984:36)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26394:27)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26449:19)
+      at emit (node:events:98:22)
+      at send (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:10753:37)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:598:31)
+      at getModuleInformation (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:1187:28)
+      at processTicksAndRejections (native:7:39)
+22979 | 			root,
+22980 | 			packageCache: environment.config.packageCache,
+22981 | 			builtins: environment.config.resolve.builtins
+22982 | 		});
+22983 | 		if (!resolved) {
+22984 | 			const err = /* @__PURE__ */ new Error(`Cannot find module '${url}' imported from '${importer}'`);
+                                           ^
+error: Cannot find module '$app/state' imported from '/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/lib/workspace/location.svelte.ts'
+       code: "ERR_MODULE_NOT_FOUND"
+
+      at fetchModule (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:22984:36)
+      at /Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26883:20
+      at /Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:26938:59
+      at emit (node:events:98:22)
+      at send (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/chunks/node.js:11076:18)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:603:5)
+      at getModuleInformation (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:1152:33)
+      at processTicksAndRejections (native:7:39)
+
+534 | };
+535 | //#endregion
+536 | //#region src/shared/moduleRunnerTransport.ts
+537 | function reviveInvokeError(e) {
+538 | 	let error = Error(e.message || "Unknown invoke error");
+539 | 	return Object.assign(error, e, { runnerError: /* @__PURE__ */ Error("RunnerError") }), error;
+                                                                     ^
+error: RunnerError
+      at reviveInvokeError (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:539:64)
+      at invoke (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/node_modules/vite/dist/node/module-runner.js:612:11)
+(fail) (unnamed) [260.40ms]
+
+tests/ui-artifacts.test.ts:
+(pass) UI artifact identities > survives extraction with spaces and ignores docs, AGENTS and clock metadata [17.44ms]
+(pass) UI artifact identities > rejects same-version source and lock mutation, tampered/missing/unlisted output [64.21ms]
+(pass) UI artifact identities > rejects symlinked intermediate web and scripts directories before following leaves [13.92ms]
+(pass) UI artifact identities > rejects schema corruption, traversal, symlinks and a mixed identity [53.98ms]
+
+tests/filter-relation-intent.test.ts:
+(pass) GET and Clear preserve only the current inspected kind relation intent on Tasks/Specs [52.19ms]
+(pass) no inspector cannot carry relation pages into a different context [2.78ms]
+
+tests/graph-compatibility.test.ts:
+(pass) pinned graph compatibility > the legacy oracle is the pinned committed bytes with import-path-only adaptation [14.41ms]
+(pass) pinned graph compatibility > entire status/resume/next-action and Timeline outputs match deterministic DAGs and cycles [420.92ms]
+(pass) pinned graph compatibility > strict ties and cache-before-cycle preserve repeated IDs and ancestor placements [5.18ms]
+(pass) pinned graph compatibility > complete legacy dashboard facade matches duplicates, archives, filters and lifecycle windows [147.52ms]
+(pass) pinned graph compatibility > 10k reverse chain completes status and selected/unselected Timeline without recursive overflow [472.07ms]
+(pass) pinned graph compatibility > 10k tasks/2k specs/30k edges complete shared projections and full facade [694.68ms]
+
+tests/detail-relation-resource.test.ts:
+(pass) revision-owned relation and full-snapshot races > failed page3 retains accepted page2 and URL intent; Retry targets3 and preserves other windows/body identity [36.45ms]
+(pass) revision-owned relation and full-snapshot races > same-identity history supersedes a pending page; late replies cannot relabel retained rows [28.14ms]
+(pass) revision-owned relation and full-snapshot races > clamp is accepted once and canonizes only its collection, never old URL parameters [4.97ms]
+(pass) revision-owned relation and full-snapshot races > independent out-of-order collections merge within one revision; changed revision retains rows/totals and requests explicit full refresh [13.21ms]
+(pass) revision-owned relation and full-snapshot races > full refresh invalidates relation epoch immediately, sends whole page vector and accepts metadata/windows atomically [3.39ms]
+(pass) revision-owned relation and full-snapshot races > external intent during full refresh restarts latest whole-vector request; failure retains entire old snapshot and Retry uses latest intent [4.76ms]
+(pass) revision-owned relation and full-snapshot races > old-revision, malformed-intent and unknown-version replies never alter valid state; new entity clears all work [19.40ms]
+(pass) revision-owned relation and full-snapshot races > SSR requested clamp is canonized without duplicate initial fetch; full refresh still carries independent pages [3.35ms]
+(pass) canonical answer read guard > draft blocks focus/manual refresh and same-identity seed while preserving entire accepted snapshot [2.49ms]
+(pass) canonical answer read guard > typing while full refresh is pending blocks acceptance; relation paging on accepted revision stays permitted [12.50ms]
+(pass) blocked same-entity seed invalidates changed pending intent but preserves independent same-revision requests [17.48ms]
+
+tests/contracts.test.ts:
+(pass) structured output contracts > core JSON surfaces expose a schema version without hiding existing fields [80.76ms]
+
+tests/harness-process.test.ts:
+(pass) harness process contract > captures stdout as data, keeps stderr diagnostic, and cleans owned artifacts [249.19ms]
+(pass) harness process contract > drains output beyond 1 MiB and never cuts a UTF-8 code point [351.60ms]
+(pass) harness process contract > waits for stream close after parent exit [262.23ms]
+(pass) harness process contract > retains prompts when a same-group background descendant outlives closed parent streams [496.46ms]
+(pass) harness process contract > preserves child failure and externally generated signal as failed states [254.81ms]
+(pass) harness process contract > emits versioned JSON for launch, artifact, precondition, usage and context failures [495.18ms]
+(pass) harness process contract > previews use path templates without reserving directories [28.03ms]
+(pass) harness process contract > two concurrent runs receive independent files and preserve diagnostic retention [138.39ms]
+(pass) harness process contract > partial artifact write failure cleans only owned files and never launches the child [22.84ms]
+(pass) harness process contract > ownership verification refuses changed or missing markers [10.42ms]
+(pass) harness process contract > CLI retention is explicit and unknown process trees retain their own artifacts [141.31ms]
+(pass) harness process contract > cancellation during artifact preparation never starts a child [27.03ms]
+(pass) harness process contract > timeout is monotonic despite activity and remains timed_out after graceful exit zero [2450.42ms]
+(pass) harness process contract > managed SIGINT and SIGTERM cancellation stays cancelled even if the child exits zero [323.66ms]
+(pass) harness process contract > macOS/Linux cancellation closes a child and grandchild that ignore termination [4499.77ms]
+(pass) harness process contract > unverified Windows tree cancellation is unknown with an explicit warning [113.42ms]
+(pass) harness process contract > rejects invalid timeout values in an exactly-one JSON envelope [532.63ms]
+
+tests/memory-consolidation.test.ts:
+(pass) memory consolidation service > builds a dry-run consolidation plan with duplicates and contradictions [50.14ms]
+(pass) memory consolidation service > applies consolidation by creating a handoff and retiring the source note [127.89ms]
+(pass) memory consolidation service > surfaces expired notes as stale during dry-run consolidation [79.51ms]
+(pass) memory consolidate command > renders dry-run and apply output for session-note consolidation [70.91ms]
+(pass) memory consolidate command > rejects unsupported targets and non-session notes [33.09ms]
+
+tests/harness-hooks.test.ts:
+(pass) repository harness hook presets > plans/install previews are read-only and use one SessionStart preset per provider [22.59ms]
+(pass) repository harness hook presets > apply is idempotent, preserves foreign keys/handler order, and removes only owned groups [38.57ms]
+(pass) repository harness hook presets > exact preexisting entries require explicit adoption and retain original config bytes [28.05ms]
+(pass) repository harness hook presets > mixed groups or complete-entry differences cannot be adopted, replaced, or duplicated [81.48ms]
+(pass) repository harness hook presets > a modified owned entry is a conflict for both install and removal [19.54ms]
+(pass) repository harness hook presets > invalid JSON/shapes are rejected before writes with one versioned envelope [23.17ms]
+(pass) repository harness hook presets > external parent/leaf symlinks and dangling outside parents are never written [39.46ms]
+(pass) repository harness hook presets > partial manifest failure is recoverable through explicit exact adoption [16.26ms]
+(pass) repository harness hook presets > the shared lock preserves concurrent provider manifests and avoids duplicate groups [127.91ms]
+(pass) repository harness hook presets > a foreign config edit observed before writing is preserved rather than overwritten [13.26ms]
+(pass) repository harness hook presets > native configuration FIFOs are rejected without blocking the CLI [72.25ms]
+(pass) repository harness hook presets > harness and Git event flags cannot be mixed, and invalid CLI selections are usage failures [188.50ms]
+
+tests/inspector.test.ts:
+(pass) inspector service and URL contracts > validates identities and separates inspector from list/trace request intention [0.42ms]
+(pass) inspector service and URL contracts > projects shared detail envelopes and preserves local found:false [0.22ms]
+(pass) inspector service and URL contracts > endpoint validates before IO and returns no-store 200/404/500 without list facade [0.59ms]
+15 |  if(currentId!==null){const record=registry.projects.find(p=>p.id===currentId);if(!record)throw new Error('Registered project not found.');try{root=await validatePortfolioProjectPath(record.path);}catch{throw new Error('Registered project is unavailable or has no project configuration.');}}
+16 |  else root=await realpath(launchRoot);
+17 |  return Object.freeze({root,currentId,workspaceKey:workspaceKeyForRoot(root),projects,...(registryError?{registryError}:{})});
+18 | }
+19 | export function expectedWorkspaceStatus(selection:UiProjectSelection,expected:string|null):number {if(expected===null)return selection.currentId===null?0:400;return expected===selection.workspaceKey?0:409;}
+20 | export function repositoriesData(selection:UiProjectSelection,host:string|undefined):UiRepositoriesData {return {currentId:selection.currentId,workspaceKey:selection.workspaceKey,projects:selection.projects,registrationAllowed:registrationAllowed(host),...(selection.registryError?{registryError:selection.registryError}:{})};}
+                                                                                                                                ^
+TypeError: undefined is not an object (evaluating 'selection.currentId')
+      at repositoriesData (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/src/services/ui-projects.ts:20:124)
+      at <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/src/routes/+layout.server.ts:16:87)
+      at async <anonymous> (/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/tests/inspector.test.ts:44:22)
+(fail) inspector service and URL contracts > canonical missing GET throws404 while direct list inspector remains a local DTO [0.80ms]
+(pass) inspector service and URL contracts > preserves every unrelated parameter and modified identity activation
+(pass) verified session entry ledger > Back closes only a proven immediate same-query predecessor [0.44ms]
+(pass) verified session entry ledger > unverified or forged markers/URLs never authorize Back [0.06ms]
+(pass) responsive inspector geometry > docks only with both viewport and real table minimum, keeping explicit width [0.17ms]
+(pass) owned detail transport > matching SSR seed avoids duplicate fetch and section work [5.50ms]
+(pass) owned detail transport > identity switch removes previous body immediately, aborts and rejects late success/error [5.44ms]
+(pass) owned detail transport > refresh failure retains same-identity detail and Retry accepts404 locally [0.30ms]
+(pass) owned detail transport > malformed/identity/status failures cannot commit, and timeout releases pending [16.39ms]
+(pass) owned detail transport > disposal/close invalidates late completion and focus uses visibility/staleness [23.63ms]
+
+tests/inspector-seed.test.ts:
+(pass) new same-entity clamped SSR seed reconciles current URL, ready or awaiting router completion [4.14ms]
+
+tests/test-diagnostics.test.ts:
+(pass) test diagnostics > documents sensitive self-hosting test areas and rerun commands [0.39ms]
+
+tests/memory-services.test.ts:
+(pass) memory retrieval foundation services > extracts section-aware body search values while skipping fenced-code noise [0.15ms]
+(pass) memory retrieval foundation services > recovers body indexing after an unclosed fenced block [0.51ms]
+(pass) memory retrieval foundation services > builds a deterministic index from managed docs with normalized retrieval terms [21.61ms]
+(pass) memory retrieval foundation services > derives typed incoming and outgoing relations across managed memory [24.10ms]
+(pass) memory retrieval foundation services > builds deterministic local neighborhoods around a managed doc [25.61ms]
+
+tests/list-relation-intent.test.ts:
+(pass) sort, list page/size, tabs and presets retain only same-entity desired relation pages without changing list identity [2.06ms]
+(pass) actual SSR ListPager links and page-size form preserve relation vectors and ordinary list fields [3.98ms]
+
+2 tests skipped:
+(skip) actual production archive UI > has exact output and explicit production dependency closure, no development imports
+(skip) actual production archive UI > runs the real bin in two external roots with SSR/static/actions/security and shutdown
+
+
+4 tests failed:
+(fail) spec detail actions > answers open questions from the spec detail action [11.23ms]
+(fail) canonical detail presentation > (unnamed) [454.92ms]
+(fail) (unnamed) [260.40ms]
+(fail) inspector service and URL contracts > canonical missing GET throws404 while direct list inspector remains a local DTO [0.80ms]
+
+ 510 pass
+ 2 skip
+ 4 fail
+ 10507 expect() calls
+Ran 516 tests across 87 files. [113.81s]

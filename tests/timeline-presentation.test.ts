@@ -1,5 +1,5 @@
 import {beforeAll,afterAll,test,expect} from 'bun:test';
-import {mkdtemp,rm} from 'node:fs/promises';
+import {mkdtemp,rm,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {createServer,type ViteDevServer} from 'vite';
@@ -12,7 +12,8 @@ import type {DashboardTaskCard} from '../src/services/dashboard.ts';
 let server:ViteDevServer,cache:string,render:typeof Render,Table:Component<any>,Trace:Component<any>,Diagnostics:Component<any>;
 beforeAll(async()=>{
   cache=await mkdtemp(join(tmpdir(),'spm-timeline-ssr-'));
-  server=await createServer({configFile:false,root:resolve('web'),cacheDir:cache,plugins:[svelte({configFile:false})],server:{middlewareMode:true,hmr:false,ws:false},ssr:{noExternal:['svelte']},optimizeDeps:{noDiscovery:true},logLevel:'error'});
+  await writeFile(join(cache,'state.ts'),`export const page={url:new URL('http://local/timeline'),state:{}};`);
+  server=await createServer({configFile:false,root:resolve('web'),cacheDir:cache,resolve:{alias:{'$app/state':join(cache,'state.ts')}},plugins:[svelte({configFile:false})],server:{middlewareMode:true,hmr:false,ws:false},ssr:{noExternal:['svelte']},optimizeDeps:{noDiscovery:true},logLevel:'error'});
   const [table,trace,diagnostics,runtime]=await Promise.all(['TimelineTable','TimelineTrace','TimelineDiagnostics'].map(name=>server.ssrLoadModule(`/src/lib/components/timeline/${name}.svelte`)).concat([server.ssrLoadModule('svelte/server')]));Table=table!.default;Trace=trace!.default;Diagnostics=diagnostics!.default;render=runtime!.render;
 });
 afterAll(async()=>{await server?.close();if(cache)await rm(cache,{recursive:true,force:true});});

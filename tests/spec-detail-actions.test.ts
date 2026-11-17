@@ -2,6 +2,7 @@ import { afterEach, describe, expect, test } from "bun:test";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
+import { resolveUiProject } from "../src/services/ui-projects.ts";
 import { createSpec, initializeProject } from "../src/repository.ts";
 import { actions } from "../web/src/routes/specs/[specId]/+page.server.ts";
 
@@ -34,6 +35,7 @@ describe("spec detail actions", () => {
     formData.append("answer", "Yes. The UI should write the answer back into the spec and return continuation guidance.");
 
     const result = await actions.answerOpenQuestions({
+      locals: { projectSelection: await resolveUiProject(new URLSearchParams(), rootDir, join(rootDir, "empty-registry.json")) },
       params: { specId: spec.id },
       request: new Request("http://example.test/specs/action", {
         method: "POST",

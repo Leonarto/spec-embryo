@@ -1,0 +1,21 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/detail-presentation.test.ts:
+(pass) canonical detail presentation > task rendering preserves canonical links, section order and existing domain values [55.11ms]
+(pass) canonical detail presentation > spec rendering preserves ordinary question POST names and source/Mermaid presentation [7.85ms]
+(pass) canonical detail presentation > inspector presentation keeps reader anchors/Mermaid but sends questions to canonical page [2.96ms]
+(pass) canonical detail presentation > inspector SSR bounds each relation collection and exposes real page links [7.09ms]
+(pass) canonical detail presentation > Spec inspector uses one100-task window across groups while keeping group metrics [11.67ms]
+(pass) canonical detail presentation > duplicate IDs retain occurrence identity across every page in both readers [21.56ms]
+(pass) canonical detail presentation > existing action failures, saved counts and continuation evaluation remain visible [1.79ms]
+(pass) canonical detail presentation > noJS conflict/recovery exposes native acknowledgement and discard without inert JS buttons [3.26ms]
+(pass) canonical detail presentation > both missing-result variants share coherent not-found and list navigation [0.73ms]
+
+tests/timeline-presentation.test.ts:
+(pass) SSR unavailable placements preserve rows/finite cells with no nonfinite CSS or fabricated units [16.21ms]
+(pass) SSR related-spec disclosure exposes bounded ordered final-page canonical links and exact full counts [67.38ms]
+
+ 11 pass
+ 0 fail
+ 94 expect() calls
+Ran 11 tests across 2 files. [22.10s]

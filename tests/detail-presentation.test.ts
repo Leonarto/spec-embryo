@@ -30,7 +30,9 @@ describe("canonical detail presentation", () => {
     const task = await createTask(root, { title: "Canonical task specimen", summary: "A shared task detail consumer.", status: "blocked", priority: 1,
       specIds: [spec.id], dependsOn: ["TASK-001"], ownerRole: "implementer", tags: ["detail"] });
     taskDetail = await buildTaskDetailData(root, task.id); specDetail = await buildSpecDetailData(root, spec.id);
+    await writeFile(join(cache,"state.ts"), 'export const page={url:new URL("http://local/specs"),state:{}};');
     server = await createServer({ configFile: false, root: resolve("web"), cacheDir: cache,
+      resolve: { alias: { "$app/state": join(cache,"state.ts") } },
       plugins: [svelte({ configFile: false })], server: { middlewareMode: true, hmr: false, ws: false },
       ssr: { noExternal: ["svelte", "@lucide/svelte"] }, optimizeDeps: { noDiscovery: true }, logLevel: "error" });
     const [taskModule, specModule, runtime] = await Promise.all([
