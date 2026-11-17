@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {projectHref} from "../lib/workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../lib/workspace/location.svelte.ts";
   import { ArrowRight, GitBranch, ShieldAlert, ShieldCheck } from "@lucide/svelte";
   import type { WorkspaceEnvelope } from "../../../src/services/workspace.ts";
   import { useWorkspaceResource } from "../lib/workspace/resource.svelte.ts";
@@ -26,14 +28,14 @@
   <p class="summary">{dashboard.currentState.summary}</p>
   <div class="active-links">
     <span>Active specs</span>
-    {#each dashboard.currentState.activeSpecIds as id}<a href={`/specs/${id}`}>{id}</a>{:else}<span class="muted">None</span>{/each}
+    {#each dashboard.currentState.activeSpecIds as id}<a href={projectHref(`/specs/${id}`,projectSourceURL())}>{id}</a>{:else}<span class="muted">None</span>{/each}
     <span class="active-label">Active tasks</span>
-    {#each dashboard.currentState.activeTaskIds as id}<a href={`/tasks/${id}`}>{id}</a>{:else}<span class="muted">None</span>{/each}
+    {#each dashboard.currentState.activeTaskIds as id}<a href={projectHref(`/tasks/${id}`,projectSourceURL())}>{id}</a>{:else}<span class="muted">None</span>{/each}
   </div>
 </section>
 
 <section class="stats-band" aria-label="Workspace counts">
-  {#each stats as stat}<a href={stat.href}><strong>{stat.value}</strong><span>{stat.label}</span></a>{/each}
+  {#each stats as stat}<a href={projectHref(stat.href,projectSourceURL())}><strong>{stat.value}</strong><span>{stat.label}</span></a>{/each}
 </section>
 
 <div class="overview-grid">
@@ -59,23 +61,23 @@
 
   <section class="panel" aria-labelledby="blocked-heading">
     <h2 id="blocked-heading">Blocked work <span>{dashboard.blockedTasks.length}</span></h2>
-    <ul class="entity-list">{#each dashboard.blockedTasks as task}<li><a href={`/tasks/${task.id}`}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No blocked tasks right now.</li>{/each}</ul>
+    <ul class="entity-list">{#each dashboard.blockedTasks as task}<li><a href={projectHref(`/tasks/${task.id}`,projectSourceURL())}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No blocked tasks right now.</li>{/each}</ul>
     <h3>Dependency issues</h3>
     <ul>{#each dashboard.dependencyIssues as issue}<li>{issue.taskId} references missing {issue.missingTaskId}</li>{:else}<li class="muted">No missing dependencies detected.</li>{/each}</ul>
   </section>
 
   <section class="panel" aria-labelledby="review-heading">
     <h2 id="review-heading">Ready for review <span>{dashboard.reviewTasks.length}</span></h2>
-    <ul class="entity-list">{#each dashboard.reviewTasks as task}<li><a href={`/tasks/${task.id}`}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No tasks waiting for review.</li>{/each}</ul>
+    <ul class="entity-list">{#each dashboard.reviewTasks as task}<li><a href={projectHref(`/tasks/${task.id}`,projectSourceURL())}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No tasks waiting for review.</li>{/each}</ul>
     <h3>Critical path</h3>
-    <ul class="entity-list">{#each dashboard.criticalPath as task}<li><a href={`/tasks/${task.id}`}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No active critical path.</li>{/each}</ul>
+    <ul class="entity-list">{#each dashboard.criticalPath as task}<li><a href={projectHref(`/tasks/${task.id}`,projectSourceURL())}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No active critical path.</li>{/each}</ul>
   </section>
 
   <section class="panel" aria-labelledby="git-heading">
     <h2 id="git-heading">Local repository</h2>
     {#if workspace.shell.git.available}<p class="git-line"><GitBranch size={15} /><code>{workspace.shell.git.branch ?? "unknown"}</code><span class:warning={workspace.shell.git.dirty}>{workspace.shell.git.dirty ? "● Local changes" : "✓ Clean"}</span></p>{:else}<p class="muted">Git information unavailable.</p>{/if}
     <dl><div><dt>Memory home</dt><dd><code>{workspace.shell.project.memoryDir}</code></dd></div>{#if dashboard.currentState.updatedAt}<div><dt>Current state updated</dt><dd>{dashboard.currentState.updatedAt}</dd></div>{/if}</dl>
-    <details><summary>Spec coverage ({dashboard.specs.length})</summary><ul class="entity-list">{#each dashboard.specs as spec}<li><a href={`/specs/${spec.id}`}><code>{spec.id}</code><span>{spec.linkedTaskCount} linked tasks</span></a></li>{/each}</ul></details>
+    <details><summary>Spec coverage ({dashboard.specs.length})</summary><ul class="entity-list">{#each dashboard.specs as spec}<li><a href={projectHref(`/specs/${spec.id}`,projectSourceURL())}><code>{spec.id}</code><span>{spec.linkedTaskCount} linked tasks</span></a></li>{/each}</ul></details>
   </section>
 
   <section class="panel" aria-labelledby="handoff-heading">

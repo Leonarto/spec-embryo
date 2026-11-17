@@ -1,10 +1,11 @@
+import {retainProject,projectHeaders} from '../workspace/project.ts';
 import {acceptedRelationPages,normalizeRelationPage,relationPagesKey,relationsFor,writeRelationPages,type DetailRelation,type RelationPages,type RelationWindow} from '../../../../src/services/detail-relations.ts';
 import type {InspectorIdentity,WorkspaceDetailEnvelope} from '../../../../src/services/workspace-detail.ts';
 import {validateDetailEnvelope,validateRelationEnvelope} from './detail-validation.ts';
 export {validateDetailEnvelope,validateRelationEnvelope,validateRelationWindow} from './detail-validation.ts';
 export interface RelationRequestState {pending:boolean;requestedPage:number;error?:'network'|'response'|'timeout'|'revision'}
 export interface InspectorDetailState {identity?:InspectorIdentity;snapshot?:WorkspaceDetailEnvelope;desiredPages:RelationPages;relations:Partial<Record<DetailRelation,RelationRequestState>>;refreshRequired:boolean;blockedRefresh:boolean;pending:boolean;error?:'network'|'response'|'timeout';lastAttemptAt:number;lastSuccessAt:number}
-interface Options {allowFullRefresh?:(candidate?:WorkspaceDetailEnvelope)=>boolean;onChange:(state:InspectorDetailState)=>void;onCanonize?:(pages:RelationPages)=>void;fetcher?:typeof fetch;now?:()=>number;deadlineMs?:number;focusDebounceMs?:number;isVisible?:()=>boolean}
+interface Options {workspaceURL?:string;projectKey?:string;allowFullRefresh?:(candidate?:WorkspaceDetailEnvelope)=>boolean;onChange:(state:InspectorDetailState)=>void;onCanonize?:(pages:RelationPages)=>void;fetcher?:typeof fetch;now?:()=>number;deadlineMs?:number;focusDebounceMs?:number;isVisible?:()=>boolean}
 const same=(a:InspectorIdentity|undefined,b:InspectorIdentity|undefined)=>a?.kind===b?.kind&&a?.id===b?.id;
 /** Full snapshots are atomic; relation windows can merge only within the accepted epoch/revision. */
 export class InspectorDetailResource {
@@ -52,7 +53,7 @@ export class InspectorDetailResource {
  }
  private async read(url:URL,controller:AbortController):Promise<unknown>{
   let timer:ReturnType<typeof setTimeout>|undefined,abort:()=>void=()=>{};
-  try{return await Promise.race([(async()=>{const response=await(this.options.fetcher??fetch)(url.href,{signal:controller.signal,cache:'no-store',headers:{accept:'application/json'}});if(response.status!==200&&response.status!==404)throw new Error('response');try{return {value:await response.json(),status:response.status};}catch{throw new Error('response');}})(),new Promise<never>((_,reject)=>{abort=()=>reject(controller.signal.reason instanceof Error?controller.signal.reason:new Error('aborted'));controller.signal.addEventListener('abort',abort,{once:true});if(controller.signal.aborted)abort();timer=setTimeout(()=>controller.abort(new Error('timeout')),this.options.deadlineMs??15000);})]);}
+  try{return await Promise.race([(async()=>{const response=await(this.options.fetcher??fetch)(url.href,{signal:controller.signal,cache:'no-store',headers:{accept:'application/json',...projectHeaders(new URL(this.options.workspaceURL??this.origin),this.options.projectKey??'')}});if(response.status!==200&&response.status!==404)throw new Error('response');try{return {value:await response.json(),status:response.status};}catch{throw new Error('response');}})(),new Promise<never>((_,reject)=>{abort=()=>reject(controller.signal.reason instanceof Error?controller.signal.reason:new Error('aborted'));controller.signal.addEventListener('abort',abort,{once:true});if(controller.signal.aborted)abort();timer=setTimeout(()=>controller.abort(new Error('timeout')),this.options.deadlineMs??15000);})]);}
   finally{if(timer)clearTimeout(timer);controller.signal.removeEventListener('abort',abort);}
  }
  async loadRelation(relation:DetailRelation){
@@ -62,7 +63,7 @@ export class InspectorDetailResource {
   const owned=()=>!this.disposed&&generation===this.generation&&epoch===this.epoch&&sequence===this.relationSequences.get(relation)&&same(identity,this.state.identity)&&this.state.snapshot?.revision===revision&&normalizeRelationPage(this.state.desiredPages[relation])===requestedPage;
   this.publish({relations:{...this.state.relations,[relation]:{pending:true,requestedPage}}});
   try{
-   const url=new URL('/workspace-relations',this.origin);url.searchParams.set('kind',identity.kind);url.searchParams.set('id',identity.id);url.searchParams.set('relation',relation);url.searchParams.set('page',String(requestedPage));
+   const url=new URL('/workspace-relations',this.origin);retainProject(new URL(this.options.workspaceURL??this.origin).searchParams,url.searchParams);url.searchParams.set('kind',identity.kind);url.searchParams.set('id',identity.id);url.searchParams.set('relation',relation);url.searchParams.set('page',String(requestedPage));
    const {value,status}=await this.read(url,controller) as {value:unknown;status:number};
    if(!owned())return;
    if(status!==200||!validateRelationEnvelope(value,identity,relation,requestedPage))throw new Error('response');
@@ -89,7 +90,7 @@ export class InspectorDetailResource {
   const owned=()=>!this.disposed&&generation===this.generation&&epoch===this.epoch&&sequence===this.sequence&&same(identity,this.state.identity)&&relationPagesKey(identity.kind,pages)===relationPagesKey(identity.kind,this.state.desiredPages);
   const now=()=>this.options.now?.()??Date.now();this.publish({pending:true,error:undefined,blockedRefresh:false,relations:{},lastAttemptAt:now()});
   try{
-   const url=new URL('/workspace-detail',this.origin);url.searchParams.set('kind',identity.kind);url.searchParams.set('id',identity.id);writeRelationPages(url.searchParams,identity.kind,pages);
+   const url=new URL('/workspace-detail',this.origin);retainProject(new URL(this.options.workspaceURL??this.origin).searchParams,url.searchParams);url.searchParams.set('kind',identity.kind);url.searchParams.set('id',identity.id);writeRelationPages(url.searchParams,identity.kind,pages);
    const {value,status}=await this.read(url,controller) as {value:unknown;status:number};
    if(!owned())return;
    if(!validateDetailEnvelope(value,identity,pages)||status===404&&value.detail.found||status===200&&!value.detail.found)throw new Error('response');

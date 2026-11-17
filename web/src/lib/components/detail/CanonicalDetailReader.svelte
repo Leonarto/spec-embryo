@@ -26,7 +26,7 @@
  const title=$derived.by(()=>{const snapshot=readerState.snapshot;if(!snapshot)return 'Loading details';if(!snapshot.detail.found)return `Missing ${snapshot.kind} · ${snapshot.id}`;return snapshot.kind==='task'?`${snapshot.detail.task.id} · ${snapshot.detail.task.title}`:`${snapshot.detail.spec.id} · ${snapshot.detail.spec.title}`;});
  const reader=$derived<RelationReader>({url:workspaceURL().href,state:readerState,enhanced:navigationReady,page:change,retry:name=>void resource?.loadRelation(name)});
  onMount(()=>{canonizer.mount();navigationReady=canonizer.enhanced;
-  resource=new InspectorDetailResource(workspaceURL().origin,{allowFullRefresh:candidate=>editor?editor.accept(candidate):allowFullRefresh(candidate),onChange:next=>readerState=next,onCanonize:pages=>canonizer.enqueue(pages),isVisible:()=>document.visibilityState==='visible'});
+  resource=new InspectorDetailResource(workspaceURL().origin,{workspaceURL:workspaceURL().href,projectKey,allowFullRefresh:candidate=>editor?editor.accept(candidate):allowFullRefresh(candidate),onChange:next=>readerState=next,onCanonize:pages=>canonizer.enqueue(pages),isVisible:()=>document.visibilityState==='visible'});
   resource.select({kind:initial.kind,id:initial.id},initialSeed,parseRelationPages(initial.kind,workspaceURL().searchParams));
   const focus=()=>resource?.focus();window.addEventListener('focus',focus);document.addEventListener('visibilitychange',focus);
   return()=>{canonizer.dispose();resource?.dispose();window.removeEventListener('focus',focus);document.removeEventListener('visibilitychange',focus);};

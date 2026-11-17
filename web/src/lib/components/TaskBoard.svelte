@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {projectHref} from "../workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../workspace/location.svelte.ts";
 import {Blocks,CircleCheckBig,FolderKanban,Hourglass,ListChecks,Play,SquareDashedKanban} from '@lucide/svelte';
 import {groupTaskPage} from '../task-board.ts';
 import type {WorkspaceTaskRow} from '../../../../src/services/workspace.ts';
@@ -31,7 +33,7 @@ const laneIcons={blocked:Blocks,todo:SquareDashedKanban,in_progress:Play,review:
           {#each column.tasks as task (task.id)}
             <article class="task-card" data-entity-id={task.id}>
               <div class="card-top">
-                <a class="task-id" href={`/tasks/${task.id}`} onclick={event=>onInspect?.(event,task.id)}>
+                <a class="task-id" href={projectHref(`/tasks/${task.id}`,projectSourceURL())} onclick={event=>onInspect?.(event,task.id)}>
                   <FolderKanban size={13} strokeWidth={1.9} />
                   {task.id}
                 </a>
@@ -47,7 +49,7 @@ const laneIcons={blocked:Blocks,todo:SquareDashedKanban,in_progress:Play,review:
 
               <div class="chip-row">
                 {#each task.specIds as specId}
-                  <a class="chip" href={`/specs/${specId}`}>{specId}</a>
+                  <a class="chip" href={projectHref(`/specs/${specId}`,projectSourceURL())}>{specId}</a>
                 {/each}
               </div>
 
@@ -59,7 +61,7 @@ const laneIcons={blocked:Blocks,todo:SquareDashedKanban,in_progress:Play,review:
               {#if task.unmetDependencies.length > 0}
                 <div class="chip-row">
                   {#each task.unmetDependencies as dependencyId}
-                    <a class="chip chip-danger" href={`/tasks/${dependencyId}`}>waits for {dependencyId}</a>
+                    <a class="chip chip-danger" href={projectHref(`/tasks/${dependencyId}`,projectSourceURL())}>waits for {dependencyId}</a>
                   {/each}
                 </div>
               {/if}

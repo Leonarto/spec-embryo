@@ -88,7 +88,7 @@ Usage:
   spm status [--json]
   spm current show [--json]
   spm current set [--focus "..."] [--summary "..."] [--active-spec-ids SPEC-001,SPEC-002] [--active-task-ids TASK-006,TASK-013] [--blocked-task-ids TASK-003] [--next-action-hints "hint one || hint two"] [--clear-active-spec-ids] [--clear-active-task-ids] [--clear-blocked-task-ids] [--clear-next-action-hints] [--json]
-  spm ui [--host 127.0.0.1] [--port 4173] [--dev]
+  spm ui [--host 127.0.0.1] [--port 4173] [--registry path] [--dev]
   spm resume [--backend deterministic|prompt|codex|claude] [--since commit] [--max-context-bytes 32768] [--json] [--spawn] [--timeout-ms milliseconds] [--retain-artifacts] [--protocol codex-jsonl|claude-json|claude-stream-json] [--record] [--session-ref receipt-uuid]
   spm handoff [--title "Checkpoint"] [--note "extra note"]
   spm handoff --from-run receipt-uuid [--apply] [--note "observed checks"] [--json]

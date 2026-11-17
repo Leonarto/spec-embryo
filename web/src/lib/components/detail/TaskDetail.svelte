@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {projectHref} from "../../workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../../workspace/location.svelte.ts";
   import { AlertTriangle, Archive, ArrowLeft, Blocks, Clock3, FolderKanban, GitBranchPlus, Link2, NotebookText, Target } from "@lucide/svelte";
   import RelationWindow from "./RelationWindow.svelte";
   import NotFound from "./NotFound.svelte";
@@ -16,7 +18,7 @@
   <section class="detail-shell" class:inspector={presentation==='inspector'}>
     <div class="detail-header" data-detail-section="overview">
       <div class="header-copy">
-        <a class="back-link" href="/tasks">
+        <a class="back-link" href={projectHref("/tasks",projectSourceURL())}>
           <ArrowLeft size={14} strokeWidth={1.9} />
           Back to Tasks
         </a>
@@ -88,7 +90,7 @@
             {:else}
 <div class="linked-list">
                 {#each visible as dependency, occurrence (`${detail.dependencies.page}:${occurrence}:${dependency.id}`)}
-                  <a class="linked-card" data-relation-item href={`/tasks/${dependency.id}`}>
+                  <a class="linked-card" data-relation-item href={projectHref(`/tasks/${dependency.id}`,projectSourceURL())}>
                     <p class="linked-id">{dependency.id}</p>
                     <h4>{dependency.title}</h4>
                     <p>{dependency.summary}</p>
@@ -132,7 +134,7 @@
             {:else}
 <div class="linked-list">
                 {#each visible as blockingTask, occurrence (`${detail.blockingTasks.page}:${occurrence}:${blockingTask.id}`)}
-                  <a class="linked-card" data-relation-item href={`/tasks/${blockingTask.id}`}>
+                  <a class="linked-card" data-relation-item href={projectHref(`/tasks/${blockingTask.id}`,projectSourceURL())}>
                     <p class="linked-id">{blockingTask.id}</p>
                     <h4>{blockingTask.title}</h4>
                     <p>{blockingTask.summary}</p>
@@ -180,7 +182,7 @@
 {#snippet children(visible:readonly {id:string}[])}
 <div class="chip-row">
               {#each visible as spec, occurrence (`${detail.linkedSpecs.page}:${occurrence}:${spec.id}`)}
-                <a class="chip" data-relation-item href={`/specs/${spec.id}`}>{spec.id}</a>
+                <a class="chip" data-relation-item href={projectHref(`/specs/${spec.id}`,projectSourceURL())}>{spec.id}</a>
               {/each}
             </div>
 {/snippet}

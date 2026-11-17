@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {projectHref,retainProject,repositoryTasksHref} from "../../workspace/project.ts";
   import { onMount, type Snippet } from "svelte";
   import { page } from "$app/state";
   import { ChartNoAxesGantt, ChevronsLeft, ChevronsRight, FolderKanban, GitBranch, LayoutDashboard, NotebookText, RefreshCw, Settings2 } from "@lucide/svelte";
@@ -9,8 +10,10 @@
   import { THEME_STORAGE_KEY, normalizeColorMode, resolveTheme, type ColorMode, type ResolvedTheme } from "../../theme.ts";
   import { WORKSPACE_PREFERENCES_KEY, parseWorkspacePreferences, isWorkspaceRoute, workspaceRouteLabel, type RailMode } from "../../workspace-preferences.ts";
 
-  let { project, git, children, resource }: {
+  let { project, git, children, resource, repositories, onSwitch }: {
     project: { name: string; memoryDir: string };
+    repositories: {currentId:string|null;workspaceKey:string;projects:Array<{id:string;name:string}>;registrationAllowed:boolean;registryError?:string};
+    onSwitch:(url:string)=>void;
     git: { available: boolean; branch?: string; dirty: boolean };
     children: Snippet;
     resource?: WorkspaceRefreshContext;
@@ -32,7 +35,7 @@
   const activeResource = $derived(resource?.active);
   function navHref(href: string): string {
     const route = href === "/" ? "overview" : href.slice(1) as WorkspaceRoute;
-    const query = transitionViewQuery(route, page.url.searchParams).toString();
+    const query = retainProject(page.url.searchParams,transitionViewQuery(route, page.url.searchParams)).toString();
     return `${href}${query ? `?${query}` : ""}`;
   }
   function formatTime(timestamp: number): string { return new Date(timestamp).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit",second:"2-digit"}); }
@@ -49,7 +52,7 @@
   function toggleRail() {
     rail = rail === "collapsed" ? "expanded" : "collapsed";
     document.documentElement.dataset.rail = rail;
-    store(WORKSPACE_PREFERENCES_KEY, JSON.stringify({ version: 1, rail }));
+    store(`${WORKSPACE_PREFERENCES_KEY}:${repositories.workspaceKey}`, JSON.stringify({ version: 1, rail }));
   }
   function closeSettings(restoreFocus = false) {
     settingsOpen = false;
@@ -62,7 +65,7 @@
     if (settingsOpen && event.target instanceof Node && !settingsElement?.contains(event.target)) closeSettings();
   }
   onMount(() => {
-    rail = parseWorkspacePreferences(readStored(WORKSPACE_PREFERENCES_KEY)).rail;
+    rail = parseWorkspacePreferences(readStored(`${WORKSPACE_PREFERENCES_KEY}:${repositories.workspaceKey}`)).rail;
     document.documentElement.dataset.rail = rail;
     applyTheme(normalizeColorMode(readStored(THEME_STORAGE_KEY)));
     ready = true;
@@ -77,7 +80,7 @@
 <a class="skip-link" href="#workspace-content">Skip to content</a>
 <div class="workspace-shell">
   <aside class="sidebar" aria-label="Workspace navigation">
-    <a class="brand" href="/" aria-label="Spec Embryo overview"><span>spm</span><span class="expanded-label brand-label">spec embryo</span></a>
+    <a class="brand" href={projectHref("/",page.url)} aria-label="Spec Embryo overview"><span>spm</span><span class="expanded-label brand-label">spec embryo</span></a>
     <nav class="nav-stack" aria-label="Workspace views">
       {#each navItems as item}
         {@const Icon = item.icon}
@@ -107,7 +110,7 @@
   </aside>
   <div class="main-column">
     <header class="topbar">
-      <div class="breadcrumb"><strong title={project.name}>{project.name}</strong><span aria-hidden="true">/</span><span>{routeLabel}</span></div>
+      <div class="breadcrumb"><form class="repository-selector" method="GET" action="/tasks" onsubmit={event=>{event.preventDefault();const value=new FormData(event.currentTarget).get('project') as string;onSwitch(repositoryTasksHref(value||null));}}><label class="sr-only" for="project-selector">Repository</label><select id="project-selector" name="project" aria-label="Repository" value={repositories.currentId??''} onchange={event=>{const form=event.currentTarget.form;if(form)form.requestSubmit();}}><option value="">Launch repository</option>{#each repositories.projects as item}<option value={item.id}>{item.name} · {item.id}</option>{/each}</select></form><noscript><style>.repository-selector { display: none; }</style><nav aria-label="Choose repository"><a href={repositoryTasksHref(null)}>Launch repository</a>{#each repositories.projects as item} · <a href={repositoryTasksHref(item.id)}>{item.name}</a>{/each}</nav></noscript><a class="repositories-link" href={projectHref('/repositories',page.url)}>Manage</a><span aria-hidden="true">/</span><span>{routeLabel}</span></div>
       <div class="workspace-status">
         {#if git.available}<span class="branch"><GitBranch size={13} />{git.branch ?? "unknown"}</span><span class:dirty={git.dirty} class="git-status">{git.dirty ? "● Local changes" : "✓ Clean"}</span>{/if}
         {#if activeResource}
@@ -152,7 +155,8 @@
   .main-column { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; }
   .topbar { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: .75rem; min-height: 2.75rem; padding: .3125rem .75rem; border-bottom: 1px solid var(--border-subtle); background: var(--surface); }
   .breadcrumb, .workspace-status, .branch { display: flex; align-items: center; gap: .75rem; min-width: 0; }
-  .breadcrumb strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .breadcrumb select {max-width:15rem;min-height:2rem;color:var(--text);background:var(--surface);border:1px solid var(--border-control);border-radius:.25rem;padding:.2rem .35rem;}
+  .repositories-link {color:var(--accent);font-size:.75rem;}
   .breadcrumb > span { white-space: nowrap; }
   .breadcrumb > span:first-of-type, .branch { color: var(--text-muted); }
   .branch { gap: .25rem; font: .75rem var(--mono-font); }
@@ -186,7 +190,8 @@
     .branch, .git-status { display: none; }
     .topbar { gap: .5rem; }
     .breadcrumb { gap: .5rem; }
-    .breadcrumb strong { max-width: 9rem; }
+    .breadcrumb select {max-width:15rem;min-height:2rem;color:var(--text);background:var(--surface);border:1px solid var(--border-control);border-radius:.25rem;padding:.2rem .35rem;}
+  .repositories-link {color:var(--accent);font-size:.75rem;}
     .view-frame { padding: .75rem; }
   }
 </style>

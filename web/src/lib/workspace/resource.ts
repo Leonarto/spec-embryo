@@ -1,3 +1,4 @@
+import {projectHeaders} from './project.ts';
 import { isWorkspaceTimelineProjection } from "../../../../src/services/workspace-timeline-contract.ts";
 import { SPEC_STATUSES, TASK_STATUSES } from "../../../../src/domain.ts";
 import type { WorkspaceEnvelope } from "../../../../src/services/workspace.ts";
@@ -81,7 +82,7 @@ export class WorkspaceResource<Envelope extends WorkspaceEnvelope = WorkspaceEnv
     let timeout=false;
     try{
       const response=(async()=>{
-        const response=await (this.options.fetcher??fetch)(endpoint.href,{signal:controller.signal,cache:'no-store',headers:{accept:'application/json'}});
+        const response=await (this.options.fetcher??fetch)(endpoint.href,{signal:controller.signal,cache:'no-store',headers:{accept:'application/json',...projectHeaders(new URL(this.url),this.state.snapshot.shell.project.key)}});
         if(!response.ok)throw new Error('response');
         let value:unknown;try{value=await response.json();}catch{throw new Error('response');}
         if(!validateWorkspaceEnvelope(value,expected))throw new Error('response');

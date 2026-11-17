@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {projectHref} from "../../../lib/workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../../../lib/workspace/location.svelte.ts";
   import SpecDetail from "../../../lib/components/detail/SpecDetail.svelte";
   import type { BoundedSpecResult } from "../../../../../src/services/detail-relations.ts";
   import type { WorkspaceDetailEnvelope } from "../../../../../src/services/workspace-detail.ts";
@@ -22,5 +24,5 @@
 </CanonicalDetailReader>
 
 {:else}
-<section><h1>Spec answer outcome</h1>{#if actionResult?.success}<p role="status">Answers were saved.</p>{/if}{#if actionResult?.error}<p role="alert">{actionResult.error}</p>{/if}<p>{actionResult?.refreshWarning??'Current details are unavailable. Submitted text is kept below.'}</p>{#each [...(actionResult?.submittedDrafts??[]),...(actionResult?.recovery??[])] as pair}<h2>{pair.question}</h2><pre>{pair.answer}</pre>{/each}<a href={`/specs/${data.specId}`}>Retry loading details</a></section>
+<section><h1>Spec answer outcome</h1>{#if actionResult?.success}<p role="status">Answers were saved.</p>{/if}{#if actionResult?.error}<p role="alert">{actionResult.error}</p>{/if}<p>{actionResult?.refreshWarning??'Current details are unavailable. Submitted text is kept below.'}</p>{#each [...(actionResult?.submittedDrafts??[]),...(actionResult?.recovery??[])] as pair}<h2>{pair.question}</h2><pre>{pair.answer}</pre>{/each}<a href={projectHref(`/specs/${data.specId}`,projectSourceURL())}>Retry loading details</a></section>
 {/if}

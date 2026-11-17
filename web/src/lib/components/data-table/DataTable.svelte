@@ -1,4 +1,6 @@
 <script lang="ts" generics="Row">
+  import {projectHref} from "../../workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../../workspace/location.svelte.ts";
   import { onMount, tick, untrack } from 'svelte';
   import { HEADER_ROW,type FocusedCell,type RenderedColumn,type TableSort } from './types.ts';
   import { moveGridFocus,reconcileFocus } from './model.ts';
@@ -89,7 +91,7 @@
               {#if column.kind==='selection'}
                 {#if mounted}<input type="checkbox" aria-label={`Select ${id}`} checked={selected.has(id)} data-grid-target data-row-key={id} data-column-key={column.key} tabindex={tab(id,column.key)} onclick={event=>onToggle(id,event.shiftKey)} />{/if}
               {:else if column.kind==='identity'}
-                <a class="identity" href={column.href?.(row)} data-grid-target data-row-key={id} data-column-key={column.key} tabindex={tab(id,column.key)} onclick={event=>{if(onInspect&&event.button===0&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey){event.preventDefault();onInspect(row,event);}}}>{#if column.cell}{@render column.cell(row)}{:else}{column.textValue(row)}{/if}</a>
+                <a class="identity" href={projectHref(column.href?.(row)??"",projectSourceURL())} data-grid-target data-row-key={id} data-column-key={column.key} tabindex={tab(id,column.key)} onclick={event=>{if(onInspect&&event.button===0&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey){event.preventDefault();onInspect(row,event);}}}>{#if column.cell}{@render column.cell(row)}{:else}{column.textValue(row)}{/if}</a>
               {:else}
                 <span class={`cell-value tone-${column.tone?.(row)??'neutral'}`}>{#if column.symbol}<span aria-hidden="true">{column.symbol(row)}</span>{/if}{#if column.cell}{@render column.cell(row)}{:else}<span class="value-text">{column.textValue(row)}</span>{/if}</span>
               {/if}

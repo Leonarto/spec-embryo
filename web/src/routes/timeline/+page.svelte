@@ -3,6 +3,7 @@
   import {goto} from '$app/navigation';
   import type {WorkspaceEnvelope} from '../../../../src/services/workspace.ts';
   import {parseRelationPages,writeRelationPages} from '../../../../src/services/detail-relations.ts';
+  import {retainProject} from '../../lib/workspace/project.ts';
   import {normalizeViewQuery,serializeViewQuery,type WorkspaceTimelineQuery} from '../../../../src/services/workspace-query.ts';
   import {workspaceURL} from '../../lib/workspace/location.svelte.ts';
   import {useWorkspaceResource} from '../../lib/workspace/resource.svelte.ts';
@@ -24,7 +25,7 @@
   let activeId:string|undefined;
   $effect(()=>{const key=workspace.shell.project.key;if(mounted)untrack(()=>{try{density=parseTimelineDensity(localStorage.getItem(`spm-timeline-v1:${key}`));}catch{density='compact';}});});
   $effect(()=>{const key=workspace.shell.project.key,value=density;if(mounted)try{localStorage.setItem(`spm-timeline-v1:${key}`,JSON.stringify({version:1,density:value}));}catch{/* Keep the preference usable in memory. */}});
-  function href(update:(query:WorkspaceTimelineQuery,view:ReturnType<typeof normalizeViewQuery>)=>void){const source=workspaceURL(),current=normalizeViewQuery('timeline',source.searchParams),identity=current.inspect?`${current.inspect.kind}:${current.inspect.id}`:undefined;update(current.timeline!,current);const params=serializeViewQuery(current);if(current.inspect&&`${current.inspect.kind}:${current.inspect.id}`===identity)writeRelationPages(params,current.inspect.kind,parseRelationPages(current.inspect.kind,source.searchParams));return `/timeline?${params}`;}
+  function href(update:(query:WorkspaceTimelineQuery,view:ReturnType<typeof normalizeViewQuery>)=>void){const source=workspaceURL(),current=normalizeViewQuery('timeline',source.searchParams),identity=current.inspect?`${current.inspect.kind}:${current.inspect.id}`:undefined;update(current.timeline!,current);const params=retainProject(source.searchParams,serializeViewQuery(current));if(current.inspect&&`${current.inspect.kind}:${current.inspect.id}`===identity)writeRelationPages(params,current.inspect.kind,parseRelationPages(current.inspect.kind,source.searchParams));return `/timeline?${params}`;}
   function navigate(event:MouseEvent){if(!isPlainActivation(event))return;event.preventDefault();void goto((event.currentTarget as HTMLAnchorElement).href,{keepFocus:true,noScroll:true});}
   function resetRelated(value:WorkspaceTimelineQuery){value.relatedDirectPage=1;value.relatedTransitivePage=1;}
   function traceHref(id:string){return href(value=>{value.selectedTaskId=timeline.selection?.taskId===id?undefined:id;resetRelated(value);});}
@@ -38,7 +39,7 @@
   function focusToolbar(){toolbar()?.focus({preventScroll:true});}
   function capture(id:string,columnKey:string):InspectorOpener {const position=simple?{top:tablePane()?.scrollTop??0,left:tablePane()?.scrollLeft??0}:grid?.scrollPosition()??{top:0,left:0};activeId=id;return {rowId:id,columnKey,rowIndex:ids.indexOf(id),listKey:workspace.requestKey,tableScroll:position,viewScroll:{top:frame()?.scrollTop??0,left:frame()?.scrollLeft??0}};}
   async function focusTask(id:string|undefined){if(!id)return false;if(!simple)return grid?.focusTask(id)??false;const anchor=tableAnchor(id);anchor?.focus({preventScroll:true});return !!anchor;}
-  async function focusGroup(id:string){if(!simple)return grid?.focusGroup(id)??false;const node=root?.querySelector<HTMLAnchorElement>(`.table-scroll a[href="/specs/${CSS.escape(id)}"]`);node?.focus({preventScroll:true});return !!node;}
+  async function focusGroup(id:string){if(!simple)return grid?.focusGroup(id)??false;const node=root?.querySelector<HTMLAnchorElement>(`.table-scroll a[href^="/specs/${CSS.escape(id)}"]`);node?.focus({preventScroll:true});return !!node;}
   async function restore(opener:InspectorOpener|undefined){
     await tick();if(opener?.listKey===workspace.requestKey){if(simple){const pane=tablePane();if(pane){pane.scrollTop=opener.tableScroll.top;pane.scrollLeft=opener.tableScroll.left;}}else grid?.restoreScroll(opener.tableScroll);const outer=frame();if(outer){outer.scrollTop=opener.viewScroll.top;outer.scrollLeft=opener.viewScroll.left;}}
     if(opener?.columnKey==='group'&&await focusGroup(opener.rowId))return;

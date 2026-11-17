@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {retainProject,projectHref,projectHeaders} from '../workspace/project.ts';
   import { onDestroy, untrack } from "svelte";
   import { page } from "$app/state";
   import type { WorkspaceOptionsResult } from "../../../../src/services/workspace.ts";
@@ -53,10 +54,10 @@
   const controls = $derived(options.options.map(option => ({
     value: option.id, label: option.id,
     description: option.labelOmitted ? "Título omitido por tamaño; abrir la spec para leerlo." : option.title,
-    href: option.labelOmitted ? `/specs/${encodeURIComponent(option.id)}` : undefined,
+    href: option.labelOmitted ? projectHref(`/specs/${encodeURIComponent(option.id)}`,page.url) : undefined,
   })));
   const preserved = $derived.by(() => {
-    const params = serializeViewQuery(normalizeViewQuery(route, page.url.searchParams));
+    const params = retainProject(page.url.searchParams,serializeViewQuery(normalizeViewQuery(route, page.url.searchParams)));
     for (const key of ["option_q", "option_page", "option_pageSize"]) params.delete(key);
     return [...params.entries()];
   });
@@ -80,6 +81,7 @@
     const normalized = parseWorkspaceOptionsQuery(input, selected);
     submitted = { q: normalized.q, page: normalized.page, pageSize: normalized.pageSize };
     const url = new URL("/workspace-options", page.url.origin);
+    retainProject(page.url.searchParams,url.searchParams);
     url.searchParams.set("q", normalized.q);
     url.searchParams.set("page", String(normalized.page));
     url.searchParams.set("pageSize", String(normalized.pageSize));
@@ -87,7 +89,7 @@
     const owned = controller;
     const deadline = setTimeout(() => owned.abort(), 15_000);
     try {
-      const response = await fetch(url, { signal: owned.signal, cache: "no-store" });
+      const response = await fetch(url, { signal: owned.signal, cache: "no-store", headers: projectHeaders(page.url,page.data.repositories?.workspaceKey ?? "") });
       if (!response.ok) throw new Error();
       const value = await response.json() as WorkspaceOptionsResult;
       if (!Array.isArray(value.options) || value.options.length > 100 || !Array.isArray(value.selected)

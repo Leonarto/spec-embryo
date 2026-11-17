@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {projectHref} from "../../workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../../workspace/location.svelte.ts";
   import {onMount} from "svelte";
   import { ArrowLeft, CircleCheckBig, Gauge, NotebookText, Orbit, Pause, Sparkles, Target } from "@lucide/svelte";
   import SpecQuestions from "./SpecQuestions.svelte";
@@ -31,7 +33,7 @@
   <section class="detail-shell" class:inspector={presentation==='inspector'}>
     <div class="detail-header" data-detail-section="overview">
       <div class="header-copy">
-        <a class="back-link" href="/specs">
+        <a class="back-link" href={projectHref("/specs",projectSourceURL())}>
           <ArrowLeft size={14} strokeWidth={1.9} />
           Back to Specs
         </a>
@@ -114,7 +116,7 @@
                 </div>
                 <div class="linked-list">
                   {#each tasks as task, occurrence (`${detail.linkedTasks.page}:${occurrence}:${task.id}`)}
-                    <a class="linked-card" data-relation-item href={`/tasks/${task.id}`}>
+                    <a class="linked-card" data-relation-item href={projectHref(`/tasks/${task.id}`,projectSourceURL())}>
                       <div class="linked-head">
                         <div>
                           <p class="linked-id">{task.id}</p>
@@ -198,7 +200,7 @@
         </div>
 
         {#if presentation==='inspector'&&!mounted}
-        <div data-detail-section="questions">{#each detail.openQuestions as question}<p>{question.question}</p>{/each}<a data-inspector-full href={`/specs/${detail.spec.id}#open-questions`}>Answer questions on the canonical page</a></div>
+        <div data-detail-section="questions">{#each detail.openQuestions as question}<p>{question.question}</p>{/each}<a data-inspector-full href={projectHref(`/specs/${detail.spec.id}#open-questions`,projectSourceURL())}>Answer questions on the canonical page</a></div>
         {:else}{#key detail.spec.id}<SpecQuestions bind:this={questions} {detail} {actionResult} {projectKey}/>{/key}{/if}
 
       </article>

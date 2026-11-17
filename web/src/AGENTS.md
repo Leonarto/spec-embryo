@@ -3,7 +3,7 @@
 SvelteKit presentation layer.
 
 - Hooks select registered roots per request. Layout loads shell/registry metadata; `lib/server/workspace.ts` shares canonical source through locals, including details.
-- Routes are Overview, Tasks, Specs, and Timeline; canonical missing details return404, and SSR inspection stays readable without JavaScript.
+- Routes include Overview, Tasks, Specs, Timeline and Repositories. Canonical missing details return404; native forms/links preserve project identity.
 - Shell composition lives in `lib/components/workspace/`; route headings use `ViewToolbar`.
 - Overview alone owns cross-cutting focus, counts, AGENTS health, git, handoff, and execution signals.
 - Keep independent navigation/content scrolling on desktop and local horizontal scrolling for wide data surfaces.

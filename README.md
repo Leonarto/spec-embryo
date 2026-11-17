@@ -55,7 +55,23 @@ bun run ui
 
 For live UI development, use `bun run ui -- --dev`. Normal startup verifies the packaged source, lock and build identity and never starts a compiler. Stop the server and rebuild explicitly after product source, package version or lock changes. Missing, stale or corrupt installed assets require reinstalling a complete matching package. Startup does not switch modes automatically or preload project documents.
 
-Release packages built from this source include the compiled UI. For UI development from GitHub, use a checkout and the explicit build or DEV commands above; a source-only installation does not provide certified release assets. Spec-question answers remain the UI's sole supported write operation.
+Release packages built from this source include the compiled UI. For UI development from GitHub, use a checkout and the explicit build or DEV commands above; a source-only installation does not provide certified release assets. Spec-question answers write to project memory; repository registration writes only to the local portfolio registry.
+
+## One server for several repositories
+
+Register existing SPM projects by name and local directory:
+
+```bash
+spm portfolio register /absolute/path/repo-a --name "Repo A"
+spm portfolio register /absolute/path/repo-b --name "Repo B"
+spm ui
+```
+
+Use the repository selector to open each project's Tasks without starting another server. You can also register a project from the Repositories screen. The directory must already contain `.specpm/config.toml`; registration does not initialize or modify the repository. The default registry is `~/.spec-embryo/portfolio.json`; `spm ui --registry /absolute/path/portfolio.json` selects a separate registry.
+
+The selected repository is identified by `?project=<registered-id>`, so tabs can review different repositories independently. URLs without that parameter retain the server's launch repository. Changing repositories opens a fresh Tasks view after resolving unsaved answers through Save, Discard or Keep. Background reads and answer submissions verify the real workspace identity; unavailable or remapped repositories do not silently fall back to another project.
+
+Browser registration is enabled for literal loopback binds (`127.0.0.0/8` or `::1`) and same-origin submissions. `--host localhost` is conservatively denied for registration because its DNS result is not established by this policy. For a server bound to a network interface, register projects through the CLI; the browser can still select existing records. Name/path conflicts and malformed registries produce errors rather than replacing a different record. Repeat registration preserves existing IDs and links; omitted names remain unchanged.
 
 ## Install
 

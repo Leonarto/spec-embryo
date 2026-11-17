@@ -1,3 +1,4 @@
+import {projectHref} from '../workspace/project.ts';
 import {SpecSeedAdapter} from './spec-seed-adapter.ts';
 import {provideQuestionNavigation,type QuestionRegistration} from '../components/detail/question-context.ts';
 import {RelationURLCanonizer} from './relation-url.ts';
@@ -52,6 +53,7 @@ export function provideInspector(seed:()=>InspectorSeed){
     if(intent.type==='open')return detail.identity?.kind!==intent.identity.kind||detail.identity.id!==intent.identity.id;
     if(intent.type==='close'||intent.type==='full-page')return true;
     const next=new URL(intent.url,workspaceURL());
+    if(next.searchParams.get('project')!==new URL(lastURL).searchParams.get('project'))return true;
     if(next.pathname===new URL(lastURL).pathname){const old=identityAt(new URL(lastURL)).identity,current=identityAt(next).identity;if(keyOf(old)===keyOf(current))return false;}
     return true;
   }
@@ -130,10 +132,10 @@ export function provideInspector(seed:()=>InspectorSeed){
   }
   beforeNavigate(navigation=>{const url=navigation.to?.url.href;if(!url)return;if(!allowTransition({type:'route',url})){navigation.cancel();queueTransition(()=>goto(url),undefined,url);}});
   onMount(()=>{
-    mounted=true;canonizer.mount();navigationReady=canonizer.enhanced;resource=new InspectorDetailResource(workspaceURL().origin,{allowFullRefresh:candidate=>questionEditor?.accept(candidate)??true,onChange:next=>detail=next,onCanonize:pages=>canonizer.enqueue(pages),isVisible:()=>document.visibilityState==='visible'});
+    mounted=true;canonizer.mount();navigationReady=canonizer.enhanced;resource=new InspectorDetailResource(workspaceURL().origin,{workspaceURL:workspaceURL().href,projectKey:seed().projectKey,allowFullRefresh:candidate=>questionEditor?.accept(candidate)??true,onChange:next=>detail=next,onCanonize:pages=>canonizer.enqueue(pages),isVisible:()=>document.visibilityState==='visible'});
     if(parsed.identity){resource.select(parsed.identity,initial.envelope??undefined,parseRelationPages(parsed.identity.kind,initialURL.searchParams));void loadComponent(parsed.identity,initial.component,!!initial.moduleError);void tick().then(()=>{if(mounted&&document.activeElement===document.body)heading?.focus({preventScroll:true});});}
     acceptedMarker=marker();acceptedPageState={...page.state};
-    const unload=(event:BeforeUnloadEvent)=>{if(questionEditor?.protected()){event.preventDefault();event.returnValue='';}};window.addEventListener('beforeunload',unload);
+    const unload=(event:BeforeUnloadEvent)=>{if(!bypass&&questionEditor?.protected()){event.preventDefault();event.returnValue='';}};window.addEventListener('beforeunload',unload);
     const focus=()=>resource?.focus();window.addEventListener('focus',focus);document.addEventListener('visibilitychange',focus);
     const unregister=refreshContext.registerInspectorRefresh(()=>resource?.refresh()??Promise.resolve());
     return ()=>{window.removeEventListener('beforeunload',unload);mounted=false;canonizer.dispose();moduleGeneration++;resource?.dispose();unregister();window.removeEventListener('focus',focus);document.removeEventListener('visibilitychange',focus);};
@@ -153,8 +155,9 @@ export function provideInspector(seed:()=>InspectorSeed){
     get visibleIds(){return list&&list.kind===detail.identity?.kind?list.ids():[];},
     registerList(value:InspectorListRegistration){list=value;return ()=>{if(list===value)list=undefined;};},
     bindElements(nextHeading:HTMLElement|undefined,nextReader:HTMLElement|undefined){heading=nextHeading;reader=nextReader;},
+    switchProject:(url:string)=>{if(!allowTransition({type:'route',url})){queueTransition(()=>{window.location.href=url;},undefined,url);return;}window.location.href=url;},
     transition,open:(identity:InspectorIdentity,nextOpener?:InspectorOpener)=>transition({type:'open',identity,opener:nextOpener}),close:()=>transition({type:'close'}),setSection:(next:InspectorSection)=>transition({type:'section',section:next}),
-    fullPage:(href?:string)=>detail.identity?transition({type:'full-page',url:href??canonicalDetailHref(detail.identity)}):Promise.resolve(),
+    fullPage:(href?:string)=>detail.identity?transition({type:'full-page',url:href??projectHref(canonicalDetailHref(detail.identity),workspaceURL())}):Promise.resolve(),
     activate(event:MouseEvent,identity:InspectorIdentity,columnKey='id'){if(!isPlainActivation(event))return;event.preventDefault();void transition({type:'open',identity,opener:list?.capture(identity.id,columnKey)});},
     retry(){if(detail.identity){if(moduleError)void loadComponent(detail.identity);void resource?.refresh();}},
     regionFor(element:Element|null){return list?.regionFor(element);},

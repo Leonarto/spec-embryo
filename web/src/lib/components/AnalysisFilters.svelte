@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {retainProject} from '../workspace/project.ts';
   import {parseRelationPages,writeRelationPages} from "../../../../src/services/detail-relations.ts";
   import {workspaceURL} from '../workspace/location.svelte.ts';
   import type { Snippet } from "svelte";
@@ -15,7 +16,7 @@
   const timeWindows=[{value:'7d',label:'Last 7 days',description:'Completed or cancelled lifecycle timestamp.'},{value:'30d',label:'Last 30 days',description:'Completed or cancelled lifecycle timestamp.'},{value:'90d',label:'Last 90 days',description:'Completed or cancelled lifecycle timestamp.'}];
   const query=$derived(normalizeViewQuery(route,workspaceURL().searchParams));
   const preserved=$derived.by(()=>{
-    const params=serializeViewQuery(query);
+    const params=retainProject(workspaceURL().searchParams,serializeViewQuery(query));
     if(query.inspect)writeRelationPages(params,query.inspect.kind,parseRelationPages(query.inspect.kind,workspaceURL().searchParams));
     for(const name of ['spec','q',...controlledNames])params.delete(name);
     if(route==='specs'){params.delete('status');params.delete('spec_status');}
@@ -29,7 +30,7 @@
     if(query.inspect){clean.inspect=query.inspect;clean.section=query.section;}
     clean.simple=query.simple;clean.view=query.view;
     if(route==='timeline'&&clean.timeline&&query.timeline){clean.timeline.selectedTaskId=query.timeline.selectedTaskId;clean.timeline.mode=query.timeline.mode;clean.timeline.pageSize=query.timeline.pageSize;}
-    const params=serializeViewQuery(clean);
+    const params=retainProject(workspaceURL().searchParams,serializeViewQuery(clean));
     if(clean.inspect)writeRelationPages(params,clean.inspect.kind,parseRelationPages(clean.inspect.kind,workspaceURL().searchParams));
     return `${workspaceURL().pathname}?${params}`;
   });

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {projectHref} from "../workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../workspace/location.svelte.ts";
   import {provideQuestionReader} from '../components/detail/question-context.ts';
   import {workspaceURL} from '../workspace/location.svelte.ts';
   import {onMount,tick,untrack} from 'svelte';
@@ -70,7 +72,7 @@
       <div class="inspector-actions">
         {#if index>0}<a aria-label="Previous visible entity" href={inspectorURL(workspaceURL(),{kind:identity.kind,id:visibleIds[index-1]!})} onclick={event=>{if(isPlainActivation(event)){event.preventDefault();void controller.open({kind:identity.kind,id:visibleIds[index-1]!});}}}>↑ Previous</a>{:else}<span aria-disabled="true">↑ Previous</span>{/if}
         {#if index>=0&&index<visibleIds.length-1}<a aria-label="Next visible entity" href={inspectorURL(workspaceURL(),{kind:identity.kind,id:visibleIds[index+1]!})} onclick={event=>{if(isPlainActivation(event)){event.preventDefault();void controller.open({kind:identity.kind,id:visibleIds[index+1]!});}}}>↓ Next</a>{:else}<span aria-disabled="true">↓ Next</span>{/if}
-        <a href={canonicalDetailHref(identity)} onclick={event=>{if(isPlainActivation(event)){event.preventDefault();void controller.fullPage();}}}>Open page ↗</a>
+        <a href={projectHref(canonicalDetailHref(identity),projectSourceURL())} onclick={event=>{if(isPlainActivation(event)){event.preventDefault();void controller.fullPage();}}}>Open page ↗</a>
         {#if mounted}<button type="button" onclick={copyLink}>Copy link</button>{#if mode==='docked'}<span data-inspector-width><Popover label="Width">{#each [360,440,520,640] as option}<button type="button" disabled={option>maxWidth} aria-pressed={width===option} onclick={()=>onWidth(option)}>{option}px</button>{/each}</Popover></span>{/if}{/if}
       </div>
       {#if mounted&&controller.hasMatchingList&&index<0}<p class="outside">{controller.navigationScope==='expanded'?'Outside expanded results':'Outside this page of results'} · Previous/next unavailable</p>{:else if mounted&&!controller.hasMatchingList}<p class="outside">Previous/next unavailable in this view</p>{/if}
@@ -78,10 +80,10 @@
       <nav class="section-links" aria-label="Inspector sections">{#each sections as section}<a aria-current={controller.section===section?'location':undefined} href={inspectorURL(workspaceURL(),identity,section)} onclick={event=>{if(isPlainActivation(event)){event.preventDefault();void controller.setSection(section);}}}>{section[0]!.toUpperCase()+section.slice(1)}</a>{/each}</nav>
     </header>
     <div class="inspector-reader" bind:this={reader} use:relationClicks aria-busy={controller.pending}>
-      {#if detailState.error||controller.moduleError||detailState.refreshRequired}<div class="detail-error" role="alert"><strong>{snapshot?'Previous detail · ':''}{detailState.refreshRequired?'The source changed. Refresh details to load related rows.':detailState.error==='timeout'?'Detail request timed out.':'Detail could not be loaded.'}</strong>{#if mounted}<button type="button" onclick={()=>controller.retry()}>Retry detail</button>{/if}<a data-inspector-full href={canonicalDetailHref(identity)}>Open canonical page</a></div>{/if}
+      {#if detailState.error||controller.moduleError||detailState.refreshRequired}<div class="detail-error" role="alert"><strong>{snapshot?'Previous detail · ':''}{detailState.refreshRequired?'The source changed. Refresh details to load related rows.':detailState.error==='timeout'?'Detail request timed out.':'Detail could not be loaded.'}</strong>{#if mounted}<button type="button" onclick={()=>controller.retry()}>Retry detail</button>{/if}<a data-inspector-full href={projectHref(canonicalDetailHref(identity),projectSourceURL())}>Open canonical page</a></div>{/if}
       {#if Component&&snapshot}<Component detail={snapshot.detail} presentation="inspector" projectKey={controller.projectKey} relationReader={controller.relationReader} />
       {:else if controller.pending}<div class="skeleton" role="status">Loading {identity.id}…<div></div><div></div><div></div></div>
-      {:else if !detailState.error&&!controller.moduleError}<p>Detail unavailable. <a data-inspector-full href={canonicalDetailHref(identity)}>Open canonical page</a></p>{/if}
+      {:else if !detailState.error&&!controller.moduleError}<p>Detail unavailable. <a data-inspector-full href={projectHref(canonicalDetailHref(identity),projectSourceURL())}>Open canonical page</a></p>{/if}
       {#if copyFallback!==undefined}<label class="copy-fallback">Clipboard unavailable. Select and copy the inspector link<input readonly value={copyFallback}/></label>{/if}
     </div>
     <p class="sr-only" role="status">{copyNotice}</p>

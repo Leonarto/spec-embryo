@@ -210,7 +210,7 @@ This boundary keeps Spec Embryo useful across providers while avoiding a fragile
 
 ## Local visual server
 
-The SvelteKit workspace lives under `web/` and is launched through `spm ui`. It renders canonical managed memory through shared services; the spec-question action is its sole file mutation.
+The SvelteKit workspace lives under `web/` and is launched through `spm ui`. It renders canonical managed memory through shared services; spec-question actions mutate project memory, while repository registration mutates only the local portfolio registry.
 
 Normal startup serves official adapter-node 5.5.8 client/SSR output through `web/runtime/server.mjs`, using actual Node 22.12 or later resolved from PATH. `--dev` explicitly retains the Vite contributor workflow. `scripts/build-ui.ts` runs the explicit Node build, uses source identity for Kit's version name, and emits `web/build/spm-manifest.json` only after successful input/output verification. Root `prepack` invokes this pipeline. The package ships compiled output, the wrapper, source/config helpers and root lock; generated `.svelte-kit` and tool caches stay excluded.
 
@@ -362,3 +362,11 @@ The v1 structure is meant to grow cleanly into:
 The common repository read helper owns one private `document-parse-memo.ts` instance per process. Its key includes resolved path, exact original path argument and parser function identity; every lookup follows a new successful read and compares all bytes. It retains only successful plain canonical records containing supported scalars/string arrays, copies retained Buffer bytes and publishes independent record/array clones with fresh provenance. Unsupported values, oversized records and parse errors use ordinary semantics; failed reads never return retained data. Scoped-note closure identities remain distinct. The LRU limits are16384 entries and32MiB accounted raw-plus-serialized-value bytes, not an exact heap bound. No contexts, DTOs, configuration or Git results are cached, and no cache-control API or launch flag is exposed. Guarded writes still recheck bytes and ownership independently.
 
 This reuse benefits repeated loads but adds first-load work. A small matched fresh-process diagnostic measured approximately5.33ms extra CLI time and3.99ms extra first-context time on204 documents; it is neither an OS-cold measurement nor a new CLI budget. Production evidence and remaining browser gates are recorded in `web/verification/task138-parse-memo-production-report.md` and TASK138.
+
+## Multi-repository UI
+
+The existing portfolio registry supplies names and registered roots. `services/ui-projects.ts` resolves the URL's opaque project ID from a fresh registry snapshot into request locals; missing selection retains the immutable launch root. Shared context reads and canonical question writes use that same selected root, without process-global selection or cookies. Layout exposes only IDs/names plus workspace identity and registration availability, not registered paths or full project scans.
+
+Background workspace requests carry an expected real-root key, and registered question forms carry the same expected identity. A changed registry mapping cannot serve data or write answers into a different root under an old page's identity. Native document navigation establishes fresh identity; project switches perform guarded full-document navigation to reset draft/resource/history state. Existing revision checks remain independent.
+
+Portfolio mutations validate collision/update branches and serialize atomic replacement under an owned bounded lock. Browser registration uses `/repositories`, requires an initialized directory and is enabled only by trusted loopback launch configuration plus same-origin form validation. Remote-bound UI remains a viewer/selector of CLI-configured entries. CLI and UI share services, custom registry selection and error behavior.

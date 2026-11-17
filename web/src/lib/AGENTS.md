@@ -5,7 +5,7 @@ Shared UI helpers and components.
 - Create reusable presentation here; domain parsing and derivations belong in root services.
 - `theme.ts` resolves color modes; `workspace-preferences.ts` validates versioned rail preferences and parent route matching.
 - IconButton requires a label; ViewToolbar aligns titles/counts. Dropdown overlays never reflow content.
-- `components/detail/` owns shared readers and persistent SpecQuestions; routes retain the sole canonical POST.
+- `components/detail/` owns shared readers and SpecQuestions; canonical answer POST is separate from registry registration.
 - `DocumentBody` renders root-parsed blocks; Mermaid is a view enhancement with tested token mapping in `mermaid-theme.ts`.
 - `inspector/` owns host, leave guard, verified history and session seed fence; docking preserves content.
 - `workspace/` owns shell/list refresh; canonical detail readers own atomic snapshots and draft-aware refresh. Keep accepted data immutable.

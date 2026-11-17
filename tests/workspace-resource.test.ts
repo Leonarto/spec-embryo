@@ -22,6 +22,14 @@ describe('controlled workspace resource',()=>{
     for(const state of states)expect(state.snapshot===initial||state.snapshot.data.result.rows[0]!.title==='external change'&&state.snapshot.shell.git.dirty!==initial.shell.git.dirty).toBe(true);
     resource.dispose();
   });
+  test('registered refresh sends selected project and rendered workspace key',async()=>{
+    let requested='',headers:HeadersInit|undefined;
+    const resource=new WorkspaceResource(initial,'http://local/tasks?project=team%2Fone',{onChange:()=>{},fetcher:async(url,init)=>{requested=url;headers=init.headers;return response(initial);}});
+    await resource.refresh();
+    expect(new URL(requested).searchParams.get('project')).toBe('team/one');
+    expect(new Headers(headers).get('x-spm-workspace-key')).toBe(initial.shell.project.key);
+    resource.dispose();
+  });
   test('network/HTTP/JSON/shape/identity failures retain the exact snapshot and prior success time; Retry recovers',async()=>{
     const failures=[async()=>{throw new DOMException('Network aborted','AbortError');},async()=>response({error:'unavailable'},503),async()=>new Response('{broken'),async()=>response({...initial,data:{}}),async()=>response({...initial,route:'specs'}),async()=>response({...initial,requestKey:'different'})];
     for(const fail of failures){let failing=true;const resource=new WorkspaceResource(initial,'http://local/tasks',{onChange:()=>{},fetcher:()=>failing?fail():Promise.resolve(response(changed('recovered')))});const success=resource.current.lastSuccessAt;await resource.refresh();expect(resource.current.snapshot).toBe(initial);expect(resource.current.lastSuccessAt).toBe(success);expect(resource.current.error).toBeDefined();expect(resource.current.pending).toBe(false);failing=false;await resource.refresh();expect(resource.current.snapshot.data.result.rows[0]!.title).toBe('recovered');expect(resource.current.error).toBeUndefined();resource.dispose();}
