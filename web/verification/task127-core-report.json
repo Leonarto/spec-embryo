@@ -1,0 +1,99 @@
+{
+  "phase": "core",
+  "capturedAt": "2026-11-15T21:21:43.339Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "10k fixture renders at most 200 rows",
+      "pass": true
+    },
+    {
+      "name": "Grid has exactly one tab target",
+      "pass": true
+    },
+    {
+      "name": "Right moves to title without selecting",
+      "pass": true
+    },
+    {
+      "name": "Space on identity does not select",
+      "pass": true
+    },
+    {
+      "name": "Native checkbox toggles once",
+      "pass": true
+    },
+    {
+      "name": "Shift+Space selects inclusive visible range",
+      "pass": true
+    },
+    {
+      "name": "Arrow focus leaves selection unchanged",
+      "pass": true
+    },
+    {
+      "name": "Ctrl+Home reaches first header",
+      "pass": true
+    },
+    {
+      "name": "Header exposes mixed page selection",
+      "pass": true
+    },
+    {
+      "name": "Header select-all affects this page once",
+      "pass": true
+    },
+    {
+      "name": "Header clears page once",
+      "pass": true
+    },
+    {
+      "name": "Ctrl+End stays on loaded page",
+      "pass": true
+    },
+    {
+      "name": "End focus is revealed within scrollport",
+      "pass": true
+    },
+    {
+      "name": "PageUp moves within current server page",
+      "pass": true
+    },
+    {
+      "name": "Tab exits grid",
+      "pass": true
+    },
+    {
+      "name": "Shift+Tab exits grid",
+      "pass": true
+    },
+    {
+      "name": "F6 enters grid",
+      "pass": true
+    },
+    {
+      "name": "Shift+F6 returns to toolbar",
+      "pass": true
+    },
+    {
+      "name": "Enter sort toggles once and retains header focus",
+      "pass": true
+    },
+    {
+      "name": "Shift activation adds secondary sort",
+      "pass": true
+    },
+    {
+      "name": "Zero rows retains one header tab target",
+      "pass": true
+    },
+    {
+      "name": "One row retains one target",
+      "pass": true
+    },
+    {
+      "name": "Enter follows canonical identity href",
+      "pass": true
+    }
+  ]
+}

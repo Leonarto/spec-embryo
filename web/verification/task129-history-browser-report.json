@@ -1,0 +1,152 @@
+{
+  "task": "TASK-129",
+  "scope": "F129-client-3 directed browser regression; actual native traversal plus controlled restoration delay",
+  "runs": [
+    {
+      "phase": "changed-restoration-target",
+      "pass": true,
+      "checks": [
+        {
+          "name": "Owned restoration was held without changing browser Back",
+          "pass": true
+        },
+        {
+          "name": "Second different target is observable",
+          "pass": true,
+          "detail": {
+            "events": [
+              "http://127.0.0.1:5303/specs?qaProbe=C",
+              "http://127.0.0.1:5303/specs?qaProbe=D",
+              "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+            ],
+            "repairedURL": "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+          }
+        },
+        {
+          "name": "Confirmation names its latest destination accessibly",
+          "pass": true,
+          "detail": "Destination: /specs?qaProbe=C"
+        },
+        {
+          "name": "Draft remains exact before resolving the coalesced transition",
+          "pass": true
+        },
+        {
+          "name": "Keep editing restores accepted URL after a changed pending target",
+          "pass": true,
+          "detail": {
+            "accepted": "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012",
+            "actual": "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+          }
+        },
+        {
+          "name": "History preserves exact draft",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "phase": "changed-restoration-target",
+      "choice": "save",
+      "pass": true,
+      "checks": [
+        {
+          "name": "Owned restoration was held without changing browser Back",
+          "pass": true
+        },
+        {
+          "name": "Second different target is observable",
+          "pass": true,
+          "detail": {
+            "events": [
+              "http://127.0.0.1:5303/specs?qaProbe=C",
+              "http://127.0.0.1:5303/specs?qaProbe=D",
+              "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+            ],
+            "repairedURL": "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+          }
+        },
+        {
+          "name": "Confirmation names its latest destination accessibly",
+          "pass": true,
+          "detail": "Destination: /specs?qaProbe=C"
+        },
+        {
+          "name": "Draft remains exact before resolving the coalesced transition",
+          "pass": true
+        },
+        {
+          "name": "Only the latest observed destination replays",
+          "pass": true,
+          "detail": {
+            "target": "http://127.0.0.1:5303/specs?qaProbe=C",
+            "actual": "http://127.0.0.1:5303/specs?qaProbe=C"
+          }
+        }
+      ]
+    },
+    {
+      "phase": "changed-restoration-target",
+      "choice": "discard",
+      "pass": true,
+      "checks": [
+        {
+          "name": "Owned restoration was held without changing browser Back",
+          "pass": true
+        },
+        {
+          "name": "Second different target is observable",
+          "pass": true,
+          "detail": {
+            "events": [
+              "http://127.0.0.1:5303/specs?qaProbe=C",
+              "http://127.0.0.1:5303/specs?qaProbe=D",
+              "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+            ],
+            "repairedURL": "http://127.0.0.1:5303/specs?qaProbe=C&inspect=spec%3ASPEC-00012"
+          }
+        },
+        {
+          "name": "Confirmation names its latest destination accessibly",
+          "pass": true,
+          "detail": "Destination: /specs?qaProbe=C"
+        },
+        {
+          "name": "Draft remains exact before resolving the coalesced transition",
+          "pass": true
+        },
+        {
+          "name": "Only the latest observed destination replays",
+          "pass": true,
+          "detail": {
+            "target": "http://127.0.0.1:5303/specs?qaProbe=C",
+            "actual": "http://127.0.0.1:5303/specs?qaProbe=C"
+          }
+        }
+      ]
+    },
+    {
+      "phase": "native-history",
+      "pass": true,
+      "checks": [
+        {
+          "name": "Owned Back restores URL before the choice",
+          "pass": true
+        },
+        {
+          "name": "Rapid burst coalesces to one confirmation",
+          "pass": true
+        },
+        {
+          "name": "History preserves exact draft",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "A same accepted-URL arrival cannot identify user intent versus internal restoration with public APIs; one prompt remains and never auto replays.",
+    "Initial harness URL-only observation missed synchronous repair before popstate listener. Corrected collector observes public replaceState origin as well; those invalid attempts are not product failures."
+  ],
+  "noPerformanceClaim": true
+}

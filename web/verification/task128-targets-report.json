@@ -1,0 +1,35 @@
+{
+  "phase": "targets",
+  "capturedAt": "2026-11-15T23:24:10.465Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Canonical task back link meets24px target",
+      "pass": true,
+      "detail": {
+        "height": 24
+      }
+    },
+    {
+      "name": "Canonical spec back link meets24px target",
+      "pass": true,
+      "detail": {
+        "height": 24
+      }
+    },
+    {
+      "name": "Touch breadcrumb meets44px target",
+      "pass": true,
+      "detail": {
+        "height": 44
+      }
+    },
+    {
+      "name": "Touch canonical-question link meets44px target",
+      "pass": true,
+      "detail": {
+        "height": 44
+      }
+    }
+  ]
+}

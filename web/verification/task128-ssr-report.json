@@ -1,0 +1,59 @@
+{
+  "phase": "ssr",
+  "capturedAt": "2026-11-15T23:04:01.714Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Direct SSR hydrates matching detail with no duplicate detail fetch",
+      "pass": true
+    },
+    {
+      "name": "SSR inspector questions remain a canonical link, never a form",
+      "pass": true
+    },
+    {
+      "name": "Section preserves reader/SVG and Copy link uses actual shallow URL",
+      "pass": true
+    },
+    {
+      "name": "Sort preserves actual inspected entity after shallow relation change",
+      "pass": true
+    },
+    {
+      "name": "Pager preserves current inspect, not stale SSR identity",
+      "pass": true
+    },
+    {
+      "name": "Search preserves current inspected entity",
+      "pass": true
+    },
+    {
+      "name": "Specs adapter preserves current inspector in sort URL",
+      "pass": true
+    },
+    {
+      "name": "No-JS direct inspection is readable inline with native table",
+      "pass": true
+    },
+    {
+      "name": "No-JS inspector exposes real Close/page links and no dead modal controls",
+      "pass": true
+    },
+    {
+      "name": "No-JS Close preserves current list query",
+      "pass": true
+    },
+    {
+      "name": "No-JS questions link opens sole canonical POST form",
+      "pass": true
+    },
+    {
+      "name": "Canonical empty question POST retains ordinary400 feedback",
+      "pass": true
+    },
+    {
+      "name": "Modified/middle table identity remains canonical new tab",
+      "pass": true
+    }
+  ]
+}

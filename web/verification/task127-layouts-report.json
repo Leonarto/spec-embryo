@@ -1,0 +1,366 @@
+{
+  "phase": "layouts",
+  "capturedAt": "2026-11-15T21:51:50.653Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "light/1440: resolved theme and surface",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "light/1440: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "rows": 19,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "light: Table solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1441,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light: Table axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 29,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 7
+          }
+        ]
+      }
+    },
+    {
+      "name": "light/1280: resolved theme and surface",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "light/1280: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "height": 720,
+        "overflow": false,
+        "rows": 14,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "dark/1440: resolved theme and surface",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)"
+      }
+    },
+    {
+      "name": "dark/1440: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "rows": 19,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "dark: Table solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1441,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark: Table axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 29,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 7
+          }
+        ]
+      }
+    },
+    {
+      "name": "dark/1280: resolved theme and surface",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)"
+      }
+    },
+    {
+      "name": "dark/1280: visible rows and primary text",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "height": 720,
+        "overflow": false,
+        "rows": 14,
+        "rowHeight": 32,
+        "primaryFont": 13,
+        "states": [
+          "□Todo",
+          "!Blocked",
+          "✓Done"
+        ]
+      }
+    },
+    {
+      "name": "light: Board resolved theme and surface",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "light: Board solid-surface contrast",
+      "pass": true,
+      "detail": {
+        "checked": 577,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light: Board axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 24,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "dark: Board resolved theme and surface",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)"
+      }
+    },
+    {
+      "name": "dark: Board solid-surface contrast",
+      "pass": true,
+      "detail": {
+        "checked": 577,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark: Board axe WCAG",
+      "pass": true,
+      "detail": {
+        "passes": 24,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 0
+          }
+        ]
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "rows": 19,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "overflow": false,
+      "rows": 14,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "rows": 19,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 1280,
+      "height": 720,
+      "overflow": false,
+      "rows": 14,
+      "rowHeight": 32,
+      "primaryFont": 13,
+      "states": [
+        "□Todo",
+        "!Blocked",
+        "✓Done"
+      ]
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "view": "table",
+      "checked": 1441,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "view": "table",
+      "checked": 1441,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "light",
+      "view": "board",
+      "checked": 577,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "view": "board",
+      "checked": 577,
+      "failures": [],
+      "skipped": []
+    }
+  ],
+  "axe": [
+    {
+      "theme": "light",
+      "view": "table",
+      "passes": 29,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "view": "table",
+      "passes": 29,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 7
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "view": "board",
+      "passes": 24,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 0
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "view": "board",
+      "passes": 24,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 0
+        }
+      ]
+    }
+  ],
+  "supersedes": "superseded-task127-layouts-report.json and superseded theme captures: requested dark was previously mislabeled light; closed-details content was incorrectly counted. Corrected run uses real theme controls in an isolated context and checks actual theme/colorMode/surface/background before every capture."
+}

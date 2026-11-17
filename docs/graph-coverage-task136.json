@@ -1,0 +1,53 @@
+{
+  "baseCommit": "cd01b72841f7203f085708d5e08ed9224efa5cd1",
+  "method": "Aggregate LCOV hit/found counters, weighted by instrumented lines/functions. Product includes every src/ and web/ record; only tests/fixtures/ is separated. No product source is excluded. Bun text aggregate uses a different presentation and is reported independently.",
+  "bunTextAllFiles": {
+    "functionPercent": 91.11,
+    "linePercent": 91.43
+  },
+  "tests": {
+    "pass": 322,
+    "fail": 0,
+    "assertions": 6965,
+    "files": 55,
+    "seconds": 49.48
+  },
+  "lcovAggregates": {
+    "all": {
+      "LF": 13080,
+      "LH": 11997,
+      "FNF": 1712,
+      "FNH": 1584,
+      "files": 88,
+      "linePercent": 91.72018348623853,
+      "functionPercent": 92.5233644859813
+    },
+    "product": {
+      "LF": 12126,
+      "LH": 11264,
+      "FNF": 1551,
+      "FNH": 1437,
+      "files": 85,
+      "linePercent": 92.89130793336632,
+      "functionPercent": 92.64990328820116
+    },
+    "testFixtures": {
+      "LF": 954,
+      "LH": 733,
+      "FNF": 161,
+      "FNH": 147,
+      "files": 3,
+      "linePercent": 76.83438155136268,
+      "functionPercent": 91.30434782608695
+    },
+    "other": {
+      "LF": 0,
+      "LH": 0,
+      "FNF": 0,
+      "FNH": 0,
+      "files": 0,
+      "linePercent": null,
+      "functionPercent": null
+    }
+  }
+}

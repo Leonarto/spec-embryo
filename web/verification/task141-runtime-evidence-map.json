@@ -1,0 +1,144 @@
+{
+  "copy": [
+    {
+      "source": "/private/tmp/spm-ui-runtime-source-manifest-v5.json",
+      "destination": "web/verification/task141-runtime-source-manifest.json",
+      "bytes": 4972,
+      "sha256": "a2b214f6e0fd63603b4ef464eb21bcb3fd3a9169efbc38722533225a4d8d9153"
+    },
+    {
+      "source": "/private/tmp/spm-task141-runtime-static-review.md",
+      "destination": "web/verification/task141-runtime-static-review.md",
+      "bytes": 4174,
+      "sha256": "89987b73107e56a2d3eaec4719c34002911b6d802f9408deb461ca011f807edc"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-evidence-manifest-v2.json",
+      "destination": "web/verification/task141-runtime-evidence-manifest.json",
+      "bytes": 15917,
+      "sha256": "c191fff48abde474bbfe0353619b8849f18cdc464685ff1008a0fc7b0ace9190"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-sol/web/build/spm-manifest.json",
+      "destination": "web/verification/task141-runtime-build-manifest.json",
+      "bytes": 148041,
+      "sha256": "c5a9305fa7d9798ef6180ebea58e99937c4b01d91112eb87bfec527c618c18ac"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-combined-build.log",
+      "destination": "web/verification/task141-runtime-build.log",
+      "bytes": 27342,
+      "sha256": "3f12c39891d755c2574a2100b53622d14eb6cd1e49f78842ed80a25d406c8552"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-package.log",
+      "destination": "web/verification/task141-runtime-package.log",
+      "bytes": 941,
+      "sha256": "34ee594ee138774a78238609c84b86a3dd9fe45fa32e37053fcbe7f61156753b"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-browser.json",
+      "destination": "web/verification/task141-runtime-browser.json",
+      "bytes": 941,
+      "sha256": "4672cea3885bf05386c623ee8d6e07a7be88d3816de208037cc4a04231bc83b8"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-browser-console.json",
+      "destination": "web/verification/task141-runtime-browser-console.json",
+      "bytes": 402,
+      "sha256": "3c7648f60f600b266ec16b7d0f4564df0c6efb97b4b1c510bc8c26a46cc3e6ce"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-provenance.json",
+      "destination": "web/verification/task141-runtime-provenance.json",
+      "bytes": 2887,
+      "sha256": "3dc37e72b4f6510953defa8114716b995db3973c1781f3d5ed7765545d7c49ed"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-cleanup.json",
+      "destination": "web/verification/task141-runtime-cleanup.json",
+      "bytes": 190,
+      "sha256": "c9b4d630bf6171e677d284809b457cf7e38a28e052c3a92f03f8456ba886fb55"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-lifecycle.log",
+      "destination": "web/verification/task141-runtime-lifecycle.log",
+      "bytes": 835,
+      "sha256": "4e6dc107051fbc3be6987f19edc6478cd679622cc3c19d66c1b831475d063dc7"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-unit-v5.log",
+      "destination": "web/verification/task141-runtime-host-unit.log",
+      "bytes": 526,
+      "sha256": "eb3186df65c5b07d929fbd68e1a7bdb2f2b0c3491d26e10265523e6864808ea4"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-unit-review-fixes.log",
+      "destination": "web/verification/task141-runtime-artifact-unit.log",
+      "bytes": 1516,
+      "sha256": "9307e90bc4cf462069fb4882f4e269e0d32f2b1400bb55e46bfb6153181cabd9"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-tests.log",
+      "destination": "web/verification/task141-runtime-coverage.log",
+      "bytes": 71030,
+      "sha256": "74564ee2f6625dfe6ab1dccb0fedba20e2bbaae25e6b7f5ca09aa2f05e1b3d7a"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-storage-rerun.log",
+      "destination": "web/verification/task141-runtime-storage-rerun.log",
+      "bytes": 395,
+      "sha256": "05133ef657f910347ab4b5790f1dbea5c98576e56b487af25f392084b1eafde0"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-static-closure.json",
+      "destination": "web/verification/task141-runtime-static-closure.json",
+      "bytes": 5936,
+      "sha256": "d09c58dcd8d01b5c9b1e88528c856abb43fdc8c2eba0267020ab2e34bb9c0b3b"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-web-check.log",
+      "destination": "web/verification/task141-runtime-web-check.log",
+      "bytes": 232,
+      "sha256": "3413fae21c3da6148aee3b26ededd3593c2f6dc9d421b2c3d4d358fccd81026d"
+    },
+    {
+      "source": "/private/tmp/spm-ui-runtime-final-agents.log",
+      "destination": "web/verification/task141-runtime-agents.log",
+      "bytes": 5133,
+      "sha256": "bbfd31ffdd6625fae49cf70d3a0521169d0cc691db533c8eede97ca58e8bac16"
+    },
+    {
+      "source": "/private/tmp/spm-task141-runtime-final-review.md",
+      "destination": "web/verification/task141-runtime-final-review.md",
+      "bytes": 6354,
+      "sha256": "91b821fdcc2c145e1bcc39a7d12ed53a7905605e006f3c240a5a6c6ad5f1fb2f"
+    }
+  ],
+  "externalOnly": [
+    {
+      "path": "/private/tmp/spm-ui-runtime-implementation-v5.patch",
+      "bytes": 110293,
+      "sha256": "f0a945c650575bdc7244ede6595f370068c6127e65390a9ac6a729ba440ff700",
+      "git": false
+    },
+    {
+      "path": "/private/tmp/spm-ui-runtime-final-reviewed.tgz",
+      "bytes": 3825130,
+      "sha256": "9340f57802a2a09c4cc3458f0ee60587c33cbee6ae64e3e33998cb0a389170f5",
+      "git": false
+    },
+    {
+      "path": "/private/tmp/spm-ui-runtime-sol/web/build",
+      "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+      "git": false
+    }
+  ],
+  "notes": [
+    "Copy raw evidence without rewriting embedded external paths/hashes; add a short index mapping durable filenames to original provenance.",
+    "source-manifest-v5 records22ownedfiles; combined evidence/build manifests include both separately reviewed component blobs.",
+    "Coverage log is483pass2skip1existingheartbeatfailure, with separate3/3storage rerun. Do not call the full suite PASS.",
+    "README/shippedAGENTS in archive predate root docs, which do not affect source/build identity.",
+    "Consolecapture observed0errors/warnings; explicit pageerrorlistener was not recorded."
+  ]
+}

@@ -1,0 +1,363 @@
+{
+  "state": "frozen for final independent TASK130 review",
+  "mainReport": "web/verification/SPEC-062-P6.md",
+  "sourceSnapshot": "/private/tmp/spm-task130-final-113ewabs",
+  "baseCommit": "d761ccb",
+  "browserClosed": true,
+  "parentOwnedExcluded": [
+    "README.md",
+    "docs/architecture.md",
+    "src/services/AGENTS.md",
+    "tests/AGENTS.md",
+    "web/src/lib/AGENTS.md",
+    "docs/spm/tasks/TASK-130-refactor-timeline-for-compact-high-volume-inspection.md"
+  ],
+  "evidenceLimits": "Current Timeline native navigation p951341.7ms is its own metric, not Tasks/Specs800ms or detail300ms acceptance. Historical timings retained with original source/runtime scopes. No final P7 claim.",
+  "files": [
+    {
+      "path": "src/services/workspace-query.ts",
+      "sha256": "4de38eac8c27170b86c019896c540866ccc20042d53afdf83f0f94397e504fcf",
+      "changedFromHead": true
+    },
+    {
+      "path": "src/services/workspace-timeline-contract.ts",
+      "sha256": "aa1eb86916ee5e231ab2dbf37ffefce882c2ab7d040dc43c01b41191ed23c879",
+      "changedFromHead": true
+    },
+    {
+      "path": "src/services/workspace-timeline.ts",
+      "sha256": "3cda5b95c196be008edf7c0cb241d1ee0854d714cdad4b76439dd6308b613427",
+      "changedFromHead": true
+    },
+    {
+      "path": "src/services/workspace.ts",
+      "sha256": "7bd9709a49ca395c6105d2d7ad12aa05c404fb26fc80f3a9967439f14f3c3990",
+      "changedFromHead": true
+    },
+    {
+      "path": "tests/timeline-presentation.test.ts",
+      "sha256": "455c0195df933e63ad66f637a5fb22478034492d8804b269a32fcba39729453f",
+      "changedFromHead": true
+    },
+    {
+      "path": "tests/timeline-view.test.ts",
+      "sha256": "b8523358156069c20993cb777c035239f3e4eec6f2ae4075138e47c4196a6d61",
+      "changedFromHead": true
+    },
+    {
+      "path": "tests/workspace-query.test.ts",
+      "sha256": "f0f309185229ac3bf3d4f01d6c319d3bc61f7b249b7ae2bf0d1cd37e0f078644",
+      "changedFromHead": false
+    },
+    {
+      "path": "tests/workspace-timeline.test.ts",
+      "sha256": "e38aa86615e91cf2b4f886e30e420471f035f926f960b67f4b9029672163cd08",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/scripts/timeline-check.mjs",
+      "sha256": "1336f5ab0f243b84695f1d45b61ca790c32a19c2cbbe9365a096ce680b5fca13",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/scripts/timeline-editor-integration-check.mjs",
+      "sha256": "04d1c70eb9bcb2eccc54693c790bb188a1f5c30984c241ae865d4f6594f5e7fc",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/scripts/timeline-integration-check.mjs",
+      "sha256": "b9c0a2dfa287a0d1d24eddf9d33bf4b1830b8760ac4a69dcf03d25b3f1445359",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/scripts/timeline-render-profile.mjs",
+      "sha256": "df97058db1b9c33d965f6070a4c32e09230b804c7a6c1aa3aef1099616c73c73",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/scripts/timeline-timing.ts",
+      "sha256": "ff4fb93ab9b98b4dde41d9d6626256c71b55d79f3cbcbc4fef6da132251292b1",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/AnalysisFilters.svelte",
+      "sha256": "448596a5edba26be77a6260649e3bf7a17d5a3e032a28a37a86b88dd45310171",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/AGENTS.md",
+      "sha256": "e95af62d80297bea10a5811b844780c77457240a5683fba3935e0f35d7da7d5a",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineDiagnostics.svelte",
+      "sha256": "3b4d318d9f58d909e9632499bc84503fc09af6eaf5802423c70aa439548462c2",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineGrid.svelte",
+      "sha256": "4083bc29a7d3631af9d4612bd4951092f8477b5b849923a65758aa13885110ee",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineGroupRow.svelte",
+      "sha256": "1ebcc3292eb695698880a35c90179495b230012a02fc28503b28e17fb2ac2a51",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineRuler.svelte",
+      "sha256": "5e7957357d6b1a5841f0fee996e0d936f69dd210c9bf4db3b8297b0cf3c9469e",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineTable.svelte",
+      "sha256": "874ad314671344986fb7a48d54d79b617ea7190d5f1861b31313fc446089d780",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineToolbar.svelte",
+      "sha256": "31be834c1852eaa7b8534bf142d77ebce25625e4fa9614ac49d77840ea334caf",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineTrace.svelte",
+      "sha256": "12fd8f2fdb312b99ce06ca81e00f2b99f75ef7b416d1cfe58ed5e70d6efa4419",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/components/timeline/model.ts",
+      "sha256": "13e087dcc947b0986a6c438fef5bf391550ed9bdf3fd62feebf84f3243552821",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/inspector/InspectorHost.svelte",
+      "sha256": "216fe1437953f847d763884efac194d21b344a47a65ac6c78578a1e664c0ac2f",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/lib/workspace/resource.ts",
+      "sha256": "d7e9327aa98ff1622aaa4b7ac0f7356f18694134de562e7296988588323d5136",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/routes/timeline/+page.svelte",
+      "sha256": "64de4aa3637a41d1f2fbc56ce3ad80fe9318eec0f9991bcdef5d560e63dd006b",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/src/routes/timeline/AGENTS.md",
+      "sha256": "cd0a2b16236e7920fbe97e3ebda608a754c2df7c2d2bda96d85c53753651a8d9",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/SPEC-062-P6.md",
+      "sha256": "91e4ac6afde15cef17cb2883ac2cff07291d7ff902f83509479d181c7c1fa083",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-10k-first.png",
+      "sha256": "68c5bbcb8a609c9b01acc78a7548948a34d3b7afeca7ab0d5fefe7fb7a3c7348",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-anchor-report.json",
+      "sha256": "2e3dd3310c721cbb68bdd88d564298351cc25d3c1fdc73ddc696f1b6d2d62180",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-browser-timing.json",
+      "sha256": "fb7fe68e0f497b086c7144edecba75141e095ff94209e7b75d72b3cfacf74896",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-checkpoint-manifest.json",
+      "sha256": "03dac423e08fe3a40271a40548418c0e10c1189250c1795b3f84c0a795dc0487",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-coarse-target-before-fix.json",
+      "sha256": "d01bab8fc7389ba065cabd85639859c322344fb7daaaf38df447ceae91db402a",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-core-manifest.json",
+      "sha256": "d84698a29df51c578099822525d7f14c7dabcf3c55147f07e36327a0133daedd",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-dark-1280.png",
+      "sha256": "43e91b57785cb841382445dca30acfad87d9fc5c51cac6ad0ab62f6bbfabeb33",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-dark-1440.png",
+      "sha256": "320f57163554c5497feca49ec5bf0768209353db10636050e842bba8a1024a60",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-dark-1920.png",
+      "sha256": "301eea2cffd1268e923c43cca9ba76d677fe19ad8337aa4a97c0861cb1e79a4b",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-dark-390.png",
+      "sha256": "b4d191040bd1014f99677e5c2eb8c2deb22ba83f4c3ef244552a4bcc6f22f4eb",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-diagnostics-report.json",
+      "sha256": "a940deacae0c947cd870b53210fb842b0352f1c6da83cb15d31fe18ccc3c8f27",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-docs-delta.md",
+      "sha256": "6b7d4c3b02ebebe59b83e8183264cbb3165ecc746a1c7efa6ab93dd2f6f7b8cb",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-editor-harness-first.json",
+      "sha256": "8e3f99aa2e2bbc9d338a5cebe5ca94dd59d334d906a16ee06cfd6990f15d52fc",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-editor-integration-report.json",
+      "sha256": "ba58aa6c9906412f043bd4ddaedfeba5444b098fb30859016927c87e6311cee9",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-fallback-report.json",
+      "sha256": "4daa4817da0ac6d1c1b6064cf1c6ad4249fb42de658f1b4fcf01011e4b8cd739",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-final-checks.json",
+      "sha256": "17f31a0e790d41fb140ea702b097dfe46f63d8063a3a507b6d25bfd359b6067c",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-final-production-closure.json",
+      "sha256": "4e7e6cab5a48150d31728ec044ff9c32264b61b694837016c7e5910ce5f1a523",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-final-render-report.json",
+      "sha256": "028d368db355583fbf9a86e0ba6b19a21b2ab893e131dce1f1826abda56fd7cd",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-final-source.json",
+      "sha256": "3328ea1f7456248ae2f43d5f73ca6c98ed0435ac2eb809fd4d880a2f15e03193",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-first-timeline.png",
+      "sha256": "96d965665dda33e6d834da8caab1d90a7d5fbac89a7c22110121410472149a0e",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-group-focus-manifest.json",
+      "sha256": "ff0a83a9e1444f9f9d04033684c31253d78ac3b37ffe1484764e09b08af8bae1",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-group-focus-report.json",
+      "sha256": "6b3f63c2ffd29056ac0af7febaac72843c44d41015f73f3a716116e6b61ec88f",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-host-seam-manifest.json",
+      "sha256": "ede1aa3bec783837cda61e5dd494ae30127c978ac55b8dc95b2b65523d785e0b",
+      "changedFromHead": false
+    },
+    {
+      "path": "web/verification/task130-host-seam-report.json",
+      "sha256": "abf1658bd78c4b8c71e42adc5895357c0dfb4ba3497ee368a7fc240696694642",
+      "changedFromHead": false
+    },
+    {
+      "path": "web/verification/task130-inspector-baseline-report.json",
+      "sha256": "44734ef32b9d46f8d011dee12dab8b8704ec10dd3da6b46ebb5e1aba123405a0",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-integrated-dark-390.png",
+      "sha256": "f999ed20ec67c722cb325a16c3b26d68291ce71e4722bbd1a8429a52a9181eb3",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-integrated-light-1440.png",
+      "sha256": "2fcfe3ccc1aaa9127fa6495371084ca262aaaa15ac399c276a651f60b2a5f9e6",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-layer-timing.json",
+      "sha256": "8ef2224e8f4270dd34357e1d731afca7e37d2b53417acfb167d6dfc206fa2fd1",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-layout-invalid-run.json",
+      "sha256": "00026177a718f76f8d91e8419f3a930f872223703ccbb6d2d7174709286e1cb6",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-layout-palette-harness.json",
+      "sha256": "28794a5ffbf84b5f173d6e1840b3f73af3048de8ed96f580a6d2c4f83b773780",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-layouts-final-report.json",
+      "sha256": "5cfe61893182efda1829d358df8d9ec8a6346938d8a99d37e66d40eef5679696",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-light-1280.png",
+      "sha256": "a466e0b035d28eb3fa8a4d12415c426b410b8de1126fe919d91a166f933584f2",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-light-1440.png",
+      "sha256": "7959eaeb2c6bfeb5081d04c92cb3af55c9b0758430a25c804bcce1d9bb7c1df4",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-light-1920.png",
+      "sha256": "1858223d2df302dfad74d837be837571c83073f109039f0251f443b09454ed00",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-light-390.png",
+      "sha256": "d472e76e7108ff69b88dc6d7489ca88f7b599d55b710130502397f8e25657cfc",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-presenter-manifest.json",
+      "sha256": "5575fef1eaa557ddbba9d74f085d68d60611c418857a8f6c5de36dd0c39b1fad",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-production-closure.json",
+      "sha256": "f040a7ab1558f80f05c7a95689e5ea307e339b64cc16edbd52070c158513822a",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-refresh-integration-report.json",
+      "sha256": "3253e52a11fdd887cc689286eb236ad721084b8fc68c87e27ef99c8e5b60458e",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-trace-report.json",
+      "sha256": "eb37ec3e910706da8b4896c3cf2f876df5ae9e523294717791c6fd0bd6b10914",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-virtual-harness-first.json",
+      "sha256": "2a565f87230ef37855cb5f83da5f24c183215d37812d94b233a6133dcd70e2f1",
+      "changedFromHead": true
+    },
+    {
+      "path": "web/verification/task130-virtual-report.json",
+      "sha256": "0f0987ba6b6aa48c60584f9f25b4d0156f39bedb9f4cc6742774a5ad887e51ad",
+      "changedFromHead": true
+    }
+  ]
+}

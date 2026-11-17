@@ -1,0 +1,23 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/acceptance-interactions.test.ts:
+(pass) per-family nearest-rank keeps outliers; every feedback observation and missing/error samples fail independently [2.14ms]
+(pass) requires fixed identities, two distinct query/results and exact per-route page-size oracles before actions [2.40ms]
+(pass) payload uses full decoded UTF-8 bytes/hash, permits filter options, and rejects body/off-route/malformed data [4.67ms]
+(pass) scroll uses every overlapping task and maximum, rejects unsupported/malformed entries [0.13ms]
+(pass) stability enforces vertical tolerance/retained row and close focus but accepts intentional inspector/refresh focus [0.03ms]
+(pass) trusted key clock and exact first-frame focus/roving state are captured before later tool diagnostics [4.04ms]
+(pass) untrusted and epoch/future event clocks fail rather than inventing a replacement timestamp [3.52ms]
+(pass) click requires both native checked and application aria-selected state before its first frame [0.69ms]
+(pass) search captures beforeinput feedback frame, last-input server clock and exact URL/IDs over two frames [2.97ms]
+(pass) input without trusted beforeinput and observer setup failures remove all installed hooks [1.31ms]
+(pass) public adapter failures preserve partial feedback/server errors and remove page hooks in finally [1.25ms]
+(pass) helper text injects into unsafeBrowserVM without module/Node globals and never owns caller lifecycle [2.00ms]
+(pass) mounted-row and real-scroll bounds never pass on mutation-only snapshots or a zero-scroll fixture
+(pass) key family rejects an unrelated trusted key even when the later DOM happens to match [1.25ms]
+(pass) browser Fetch response extraction reads numeric status property, distinct from Playwright response.status() [3.88ms]
+
+ 15 pass
+ 0 fail
+ 82 expect() calls
+Ran 15 tests across 1 file. [62.00ms]

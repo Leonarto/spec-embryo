@@ -1,0 +1,68 @@
+$ bun run scripts/check-agents.ts
+AGENTS.md budget report
+
+Context policy | context_window=400000 | root_target<=900 | root_hard_cap<=1200 | chain_target<=1800 | chain_hard_cap<=2200
+
+OK .specpm/AGENTS.md | est_tokens=95 | target<=300 | hard_cap<=400
+OK AGENTS.md | est_tokens=1198 | target<=900 | hard_cap<=1200
+OK docs/AGENTS.md | est_tokens=141 | target<=300 | hard_cap<=500
+OK docs/spm/AGENTS.md | est_tokens=155 | target<=280 | hard_cap<=450
+OK docs/spm/skills/AGENTS.md | est_tokens=88 | target<=220 | hard_cap<=450
+OK docs/spm/specs/AGENTS.md | est_tokens=189 | target<=220 | hard_cap<=450
+OK docs/spm/tasks/AGENTS.md | est_tokens=211 | target<=220 | hard_cap<=450
+OK scripts/AGENTS.md | est_tokens=166 | target<=220 | hard_cap<=350
+OK skills/AGENTS.md | est_tokens=177 | target<=300 | hard_cap<=500
+OK src/AGENTS.md | est_tokens=546 | target<=350 | hard_cap<=600
+OK src/backends/AGENTS.md | est_tokens=449 | target<=240 | hard_cap<=450
+OK src/commands/AGENTS.md | est_tokens=447 | target<=220 | hard_cap<=450
+OK src/services/AGENTS.md | est_tokens=445 | target<=220 | hard_cap<=450
+OK tests/AGENTS.md | est_tokens=346 | target<=180 | hard_cap<=350
+OK tests/fixtures/graph-baseline/AGENTS.md | est_tokens=88 | target<=180 | hard_cap<=350
+OK tests/fixtures/harness/AGENTS.md | est_tokens=99 | target<=180 | hard_cap<=350
+OK tests/fixtures/spec-answer-baseline/AGENTS.md | est_tokens=61 | target<=180 | hard_cap<=350
+OK web/AGENTS.md | est_tokens=188 | target<=900 | hard_cap<=1200
+OK web/runtime/AGENTS.md | est_tokens=98 | target<=900 | hard_cap<=1200
+OK web/scripts/AGENTS.md | est_tokens=271 | target<=900 | hard_cap<=1200
+OK web/src/AGENTS.md | est_tokens=222 | target<=900 | hard_cap<=1200
+OK web/src/lib/AGENTS.md | est_tokens=387 | target<=900 | hard_cap<=1200
+OK web/src/lib/components/data-table/AGENTS.md | est_tokens=149 | target<=900 | hard_cap<=1200
+OK web/src/lib/components/detail/AGENTS.md | est_tokens=141 | target<=900 | hard_cap<=1200
+OK web/src/lib/components/timeline/AGENTS.md | est_tokens=131 | target<=900 | hard_cap<=1200
+OK web/src/lib/components/workspace/AGENTS.md | est_tokens=136 | target<=900 | hard_cap<=1200
+OK web/src/lib/inspector/AGENTS.md | est_tokens=191 | target<=900 | hard_cap<=1200
+OK web/src/lib/workspace/AGENTS.md | est_tokens=174 | target<=900 | hard_cap<=1200
+OK web/src/routes/timeline/AGENTS.md | est_tokens=103 | target<=900 | hard_cap<=1200
+OK web/verification/AGENTS.md | est_tokens=128 | target<=900 | hard_cap<=1200
+
+Chain report
+
+OK .specpm/AGENTS.md | active_chain_tokens=1293 | target<=1800 | hard_cap<=2200
+OK AGENTS.md | active_chain_tokens=1198 | target<=1800 | hard_cap<=2200
+OK docs/AGENTS.md | active_chain_tokens=1339 | target<=1800 | hard_cap<=2200
+OK docs/spm/AGENTS.md | active_chain_tokens=1494 | target<=1800 | hard_cap<=2200
+OK docs/spm/skills/AGENTS.md | active_chain_tokens=1582 | target<=1800 | hard_cap<=2200
+OK docs/spm/specs/AGENTS.md | active_chain_tokens=1683 | target<=1800 | hard_cap<=2200
+OK docs/spm/tasks/AGENTS.md | active_chain_tokens=1705 | target<=1800 | hard_cap<=2200
+OK scripts/AGENTS.md | active_chain_tokens=1364 | target<=1800 | hard_cap<=2200
+OK skills/AGENTS.md | active_chain_tokens=1375 | target<=1800 | hard_cap<=2200
+OK src/AGENTS.md | active_chain_tokens=1744 | target<=1800 | hard_cap<=2200
+OK src/backends/AGENTS.md | active_chain_tokens=2193 | target<=1800 | hard_cap<=2200
+OK src/commands/AGENTS.md | active_chain_tokens=2191 | target<=1800 | hard_cap<=2200
+OK src/services/AGENTS.md | active_chain_tokens=2189 | target<=1800 | hard_cap<=2200
+OK tests/AGENTS.md | active_chain_tokens=1544 | target<=1800 | hard_cap<=2200
+OK tests/fixtures/graph-baseline/AGENTS.md | active_chain_tokens=1632 | target<=1800 | hard_cap<=2200
+OK tests/fixtures/harness/AGENTS.md | active_chain_tokens=1643 | target<=1800 | hard_cap<=2200
+OK tests/fixtures/spec-answer-baseline/AGENTS.md | active_chain_tokens=1605 | target<=1800 | hard_cap<=2200
+OK web/AGENTS.md | active_chain_tokens=1386 | target<=1800 | hard_cap<=2200
+OK web/runtime/AGENTS.md | active_chain_tokens=1484 | target<=1800 | hard_cap<=2200
+OK web/scripts/AGENTS.md | active_chain_tokens=1657 | target<=1800 | hard_cap<=2200
+OK web/src/AGENTS.md | active_chain_tokens=1608 | target<=1800 | hard_cap<=2200
+OK web/src/lib/AGENTS.md | active_chain_tokens=1995 | target<=1800 | hard_cap<=2200
+OK web/src/lib/components/data-table/AGENTS.md | active_chain_tokens=2144 | target<=1800 | hard_cap<=2200
+OK web/src/lib/components/detail/AGENTS.md | active_chain_tokens=2136 | target<=1800 | hard_cap<=2200
+OK web/src/lib/components/timeline/AGENTS.md | active_chain_tokens=2126 | target<=1800 | hard_cap<=2200
+OK web/src/lib/components/workspace/AGENTS.md | active_chain_tokens=2131 | target<=1800 | hard_cap<=2200
+OK web/src/lib/inspector/AGENTS.md | active_chain_tokens=2186 | target<=1800 | hard_cap<=2200
+OK web/src/lib/workspace/AGENTS.md | active_chain_tokens=2169 | target<=1800 | hard_cap<=2200
+OK web/src/routes/timeline/AGENTS.md | active_chain_tokens=1711 | target<=1800 | hard_cap<=2200
+OK web/verification/AGENTS.md | active_chain_tokens=1514 | target<=1800 | hard_cap<=2200

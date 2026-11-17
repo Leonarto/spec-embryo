@@ -1,0 +1,314 @@
+{
+  "phase": "layouts",
+  "capturedAt": "2026-11-15T22:16:09.782Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "light/1280: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "height": 720,
+        "overflow": false,
+        "visibleRows": 14,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "light/1280: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light/1440: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "visibleRows": 19,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "light/1440: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light/1920: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "visibleRows": 25,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "light/1920: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "light/390: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 390,
+        "height": 844,
+        "overflow": false,
+        "visibleRows": 16,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "light/390: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/1280: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "height": 720,
+        "overflow": false,
+        "visibleRows": 14,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "dark/1280: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/1440: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "visibleRows": 19,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "dark/1440: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/1920: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 1920,
+        "height": 1080,
+        "overflow": false,
+        "visibleRows": 25,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "dark/1920: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "dark/390: bounded Specs layout",
+      "pass": true,
+      "detail": {
+        "width": 390,
+        "height": 844,
+        "overflow": false,
+        "visibleRows": 16,
+        "rowHeight": 32,
+        "role": "grid"
+      }
+    },
+    {
+      "name": "dark/390: solid-surface text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1640,
+        "failures": [],
+        "skipped": []
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "overflow": false,
+      "visibleRows": 14,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "visibleRows": 19,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "overflow": false,
+      "visibleRows": 25,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visibleRows": 16,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "dark",
+      "width": 1280,
+      "height": 720,
+      "overflow": false,
+      "visibleRows": 14,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "visibleRows": 19,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "overflow": false,
+      "visibleRows": 25,
+      "rowHeight": 32,
+      "role": "grid"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "visibleRows": 16,
+      "rowHeight": 32,
+      "role": "grid"
+    }
+  ],
+  "contrast": [
+    {
+      "theme": "light",
+      "width": 1280,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "width": 1280,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "checked": 1640,
+      "failures": [],
+      "skipped": []
+    }
+  ],
+  "pass": true,
+  "baseCommit": "c546f106d775e8e104ee7d801aba2a125fcb6e2d",
+  "sourceHashes": {
+    "web/src/routes/specs/+page.svelte": "ddf6db3d336b80522b1f0c6b47277dcd73bc963279820c9b46d90124bb2bd858",
+    "web/src/lib/components/data-table/spec-columns.ts": "6b38574d57af26a2f18890fc4870f17ef2f328c811bf52c9843a89e9d2e2d658"
+  },
+  "scope": "Specs consumer source unchanged from this checkpoint; later shared dropdown fix is event-only and separately verified. No inspector128 source consumed."
+}

@@ -1,57 +1,18 @@
-import type { LayoutServerLoad } from "./$types";
-import { buildDashboardData, type DashboardTimeWindow, type DashboardTimelineMode } from "../../../src/services/dashboard.ts";
-import { resolveProjectRoot } from "../lib/server/project-root.ts";
-
-const timeWindows = new Set<DashboardTimeWindow>(["7d", "30d", "90d"]);
-const timelineModes = new Set<DashboardTimelineMode>(["active", "all"]);
-
-function parseSelectedSpecIds(searchParams: URLSearchParams): string[] {
-  const fromRepeated = searchParams.getAll("spec");
-  if (fromRepeated.length > 0) {
-    return fromRepeated.flatMap((value) => value.split(",")).map((value) => value.trim()).filter(Boolean);
-  }
-
-  const fromSingle = searchParams.get("spec");
-  if (!fromSingle) {
-    return [];
-  }
-
-  return fromSingle.split(",").map((value) => value.trim()).filter(Boolean);
-}
-
-function parseTimeWindow(searchParams: URLSearchParams): DashboardTimeWindow | undefined {
-  const value = searchParams.get("window");
-  if (!value || !timeWindows.has(value as DashboardTimeWindow)) {
-    return undefined;
-  }
-
-  return value as DashboardTimeWindow;
-}
-
-function parseTimelineMode(searchParams: URLSearchParams): DashboardTimelineMode | undefined {
-  const value = searchParams.get("timeline_mode");
-  if (!value || !timelineModes.has(value as DashboardTimelineMode)) {
-    return undefined;
-  }
-
-  return value as DashboardTimelineMode;
-}
-
-function parseSelectedTimelineTaskId(searchParams: URLSearchParams): string | undefined {
-  const value = searchParams.get("selected_task");
-  return value?.trim() || undefined;
-}
-
-export const load: LayoutServerLoad = async ({ url }) => {
-  const rootDir = resolveProjectRoot();
-  const dashboard = await buildDashboardData(rootDir, {
-    selectedSpecIds: parseSelectedSpecIds(url.searchParams),
-    timeWindow: parseTimeWindow(url.searchParams),
-    timelineMode: parseTimelineMode(url.searchParams),
-    selectedTimelineTaskId: parseSelectedTimelineTaskId(url.searchParams),
-  });
-
-  return {
-    dashboard,
-  };
+import {parseRelationPages} from '../../../src/services/detail-relations.ts';
+import type {LayoutServerLoad} from './$types';
+import {buildWorkspaceShell} from '../../../src/services/workspace.ts';
+import {normalizeViewQuery,type WorkspaceRoute} from '../../../src/services/workspace-query.ts';
+import {getWorkspaceRequestSource} from '../lib/server/workspace.ts';
+import {repositoriesData} from '../../../src/services/ui-projects.ts';
+import {getWorkspaceDetail} from '../lib/server/detail.ts';
+export const load:LayoutServerLoad=async({locals,url})=>{
+  if(locals.specAnswerOutcome?.workspaceMismatch)return {postAnswerRecovery:true,shell:null,inspector:null,inspectorReadError:false};
+  try{
+  const source=await getWorkspaceRequestSource(locals);
+  const route=['/tasks','/specs','/timeline'].includes(url.pathname)?url.pathname.slice(1) as WorkspaceRoute:undefined;
+  const identity=route?normalizeViewQuery(route,url.searchParams).inspect:undefined;
+  let inspector=null,inspectorReadError=false;
+  if(identity)try{inspector=await getWorkspaceDetail(locals,identity,parseRelationPages(identity.kind,url.searchParams));}catch{inspectorReadError=true;}
+  return {shell:buildWorkspaceShell(source),inspector,inspectorReadError,repositories:repositoriesData(locals.projectSelection!,process.env.SPM_UI_BIND_HOST)};
+  }catch(cause){if(locals.specAnswerOutcome)return {postAnswerRecovery:true,shell:null,inspector:null,inspectorReadError:false};throw cause;}
 };

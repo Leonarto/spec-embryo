@@ -1,0 +1,22 @@
+{
+  "commit": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "outcome": "valid-FAIL300-no-repeat",
+  "files": [
+    {
+      "path": "web/verification/task138-memo-browser-profile.json",
+      "sha256": "de1c9ab28c2dc821b85825f31f890f79c26cf922f6aea38128e2eb0426d12185"
+    },
+    {
+      "path": "web/verification/task138-memo-browser-request-map.json",
+      "sha256": "d160625b7b757402eacb4384a995c2a4f0b0eb638c604f5d7f0a34f1dae4b2a6"
+    },
+    {
+      "path": "web/verification/task138-memo-browser-provenance.json",
+      "sha256": "0553b2c818b7a1ef8197a9ab7af464f8b175caf75fe1448bf645c77a3296a91f"
+    },
+    {
+      "path": "web/verification/task138-memo-browser-report.md",
+      "sha256": "1c5441b69b2f305ef813587beeac0ee1ceb6854733792565ad7dce2185a430d1"
+    }
+  ]
+}

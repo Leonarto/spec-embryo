@@ -1,0 +1,23 @@
+{
+  "fixture_version": 1,
+  "verified_at": "2026-11-15",
+  "synthetic": true,
+  "codex": {
+    "source_url": "https://learn.chatgpt.com/docs/non-interactive-mode",
+    "cli_version": null,
+    "events": [
+      { "type": "thread.started", "thread_id": "session-codex-fixture" },
+      { "type": "turn.started" },
+      { "type": "item.completed", "item": { "id": "item-1", "type": "agent_message", "text": "Observed final response 🌍" } },
+      { "type": "turn.completed", "usage": { "input_tokens": 1, "output_tokens": 1 } }
+    ]
+  },
+  "claude": {
+    "source_url": "https://code.claude.com/docs/en/headless",
+    "cli_version": null,
+    "events": [
+      { "type": "system", "subtype": "init", "session_id": "session-claude-fixture" },
+      { "type": "result", "subtype": "success", "is_error": false, "session_id": "session-claude-fixture", "result": "Observed final response 🌍" }
+    ]
+  }
+}

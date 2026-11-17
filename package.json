@@ -1,6 +1,6 @@
 {
   "name": "@leonarto/spec-embryo",
-  "version": "0.1.2",
+  "version": "0.4.0",
   "description": "Spec Embryo: local-first, spec-first, CLI-first project memory and orchestration for AI-assisted software work.",
   "module": "src/index.ts",
   "type": "module",
@@ -21,6 +21,22 @@
     "agent"
   ],
   "license": "MIT",
+  "files": [
+    "README.md",
+    "src",
+    "web/package.json",
+    "web/src",
+    "web/svelte-plugin-options.js",
+    "web/svelte.config.js",
+    "web/tsconfig.json",
+    "web/vite-paths.ts",
+    "web/vite.config.ts",
+    "tsconfig.json",
+    "bun.lock",
+    "web/build",
+    "web/runtime",
+    "scripts/build-ui.ts"
+  ],
   "bin": {
     "spec-embryo": "src/index.ts",
     "spm": "src/index.ts"
@@ -32,11 +48,12 @@
     "start": "bun run src/index.ts",
     "test": "bun test",
     "check:agents": "bun run scripts/check-agents.ts",
-    "web:check": "bun run --cwd web check"
+    "web:check": "bun run --cwd web check",
+    "web:build": "bun run scripts/build-ui.ts",
+    "prepack": "bun run web:build"
   },
   "dependencies": {
     "@lucide/svelte": "^1.7.0",
-    "@sveltejs/adapter-auto": "7.0.1",
     "@sveltejs/kit": "2.55.0",
     "@sveltejs/vite-plugin-svelte": "7.0.0",
     "@types/node": "25.5.0",
@@ -45,6 +62,7 @@
     "svelte": "5.55.1",
     "type-fest": "^4.41.0",
     "typescript": "6.0.2",
-    "vite": "8.0.3"
+    "vite": "8.0.3",
+    "@sveltejs/adapter-node": "5.5.8"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "phase": "modules",
+  "capturedAt": "2026-11-15T22:50:15.326Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Closed list does not download/evaluate Detail or Mermaid modules",
+      "pass": true
+    },
+    {
+      "name": "Module load failure stays local with Retry and canonical href",
+      "pass": true
+    },
+    {
+      "name": "Retry recovers a failed module load without navigation",
+      "pass": true
+    },
+    {
+      "name": "Slow code module plus A→B commits only current DTO",
+      "pass": true
+    }
+  ]
+}

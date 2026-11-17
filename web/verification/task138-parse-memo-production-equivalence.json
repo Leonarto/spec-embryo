@@ -1,0 +1,28 @@
+{
+  "scope": "Production candidate common read seam vs exact0b12d57baseline; fixed clock0, full canonical context/revision/Task+SpecboundedDTO equivalence plus actual new-byte provenance for every candidate document; official fixture immutable. Not a performance measurement.",
+  "runtime": "v25.6.0",
+  "execArgv": [
+    "--experimental-transform-types"
+  ],
+  "fixture": "/private/tmp/spm-detail-relations-WCXVAv",
+  "checks": [
+    {
+      "label": "first-candidate-load",
+      "documents": 12202,
+      "bytes": 3569698,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7"
+    },
+    {
+      "label": "warm-candidate-load",
+      "documents": 12202,
+      "bytes": 3569698,
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "taskHash": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "specHash": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7"
+    }
+  ]
+}

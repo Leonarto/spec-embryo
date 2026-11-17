@@ -1,0 +1,36 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/acceptance-harness.test.ts:
+(pass) cold schedule alternates independent routes; warm keeps5+20 per route [6.45ms]
+(pass) nearest-rank p95 preserves outliers and never turns missing/error samples into a pass [0.88ms]
+(pass) cold tool adapter always stops its own runtime and retains browser/cleanup errors [1.23ms]
+(pass) owned dependency seed copies bytes, runtime hardlinks owned files, and caches stay private [25.47ms]
+(pass) dependency copying rejects a symlink escaping development dependency root [2.89ms]
+(pass) prepared global-style prefix invokes declared owned bin without a development-source link [735.15ms]
+(pass) lifecycle refuses traversal before a runtime write and does not clear another active lease [6.26ms]
+(pass) initial Tasks closure counts each emitted static file once and excludes lazy Mermaid [16.39ms]
+(pass) a prepared runtime from an older source pin cannot start or occupy the active lease [5.87ms]
+(pass) readiness endpoint uses fixed browser second-frame timestamp before later diagnostics [0.54ms]
+(pass) page and browser close failures preserve primary errors and partial warm/cold evidence [1.08ms]
+(pass) cold stops after unverified cleanup and retains browser primary plus stop secondary
+(pass) original dependency inventory detects both runtime additions and hardlinked seed mutations [11.64ms]
+(pass) browser predicate captures endpoint inside the second frame with a fixed clock [0.75ms]
+(pass) source layout normalizes only the copied declared bin mode and preserves original bytes/mode [410.46ms]
+(pass) launcher identity permits only owned env-to-Bun exec with stable PID/group/start [0.54ms]
+(pass) EPERM signal-zero fallback requires a complete valid nonempty process inventory [0.78ms]
+(pass) only compiled ready with exact build and registered Node identifies startup [0.56ms]
+(pass) staging copies reviewed artifacts without building and rejects links or repeat stages [4.66ms]
+(pass) owner stage is blocked by an active lease and records explicit build identity [6.35ms]
+(pass) cold evidence retains startup validation cost separately from unchanged navigation clock [0.17ms]
+(pass) unstaged or changed artifacts fail before a runtime can occupy the active lease [15.54ms]
+(pass) a package from a different staged build fails before dependency preparation [62.22ms]
+(pass) retention uses global DOM listener counts even if sampled target maps are unchanged [2.33ms]
+(pass) retention setup failure preserves primary error and cleanup evidence without a browser run [0.26ms]
+(pass) loading150 does not infer blank from missing/late FCP; verified HTTP lower bound remains a failure [0.58ms]
+(pass) separate skeleton visibility proof cannot replace detail accepted-row timing [0.15ms]
+(pass) delayed trusted click dispatch is included in skeleton100 and invalid clocks fail closed
+
+ 28 pass
+ 0 fail
+ 154 expect() calls
+Ran 28 tests across 1 file. [1.55s]

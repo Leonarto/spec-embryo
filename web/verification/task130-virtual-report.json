@@ -1,0 +1,136 @@
+{
+  "phase": "virtual",
+  "capturedAt": "2026-11-16T00:09:12.406Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "10k expanded timeline mounts<=80tasks and<=64ticks with finite CSS",
+      "pass": true,
+      "detail": {
+        "rows": 25,
+        "bytes": 3413627,
+        "ticks": 10,
+        "nonfinite": false,
+        "positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "totalLogicalRows": 10000
+      }
+    },
+    {
+      "name": "Native PageDown scroll keeps the exact focused row node and ID",
+      "pass": true
+    },
+    {
+      "name": "Deep virtual scroll pins focused occurrence in logical DOM order",
+      "pass": true,
+      "detail": {
+        "rows": 33,
+        "ticks": 10,
+        "nonfinite": false,
+        "positions": [
+          2,
+          5994,
+          5995,
+          5996,
+          5997,
+          5998,
+          5999,
+          6000,
+          6001,
+          6002,
+          6003,
+          6004,
+          6005,
+          6006,
+          6007,
+          6008,
+          6009,
+          6010,
+          6011,
+          6012,
+          6013,
+          6014,
+          6015,
+          6016,
+          6017,
+          6018,
+          6019,
+          6020,
+          6021,
+          6022,
+          6023,
+          6024,
+          6025,
+          6026,
+          6027,
+          6028,
+          6029,
+          6030,
+          6031,
+          6032
+        ]
+      }
+    },
+    {
+      "name": "Tab reaches title of same virtual row once",
+      "pass": true
+    },
+    {
+      "name": "ShiftTab returns its ID without recycling focused node",
+      "pass": true
+    },
+    {
+      "name": "Density change retains stable-ID plus offset scroll anchor",
+      "pass": true,
+      "detail": {
+        "before": {
+          "key": "group:SPEC-00501",
+          "offset": 0
+        },
+        "after": {
+          "key": "group:SPEC-00501",
+          "offset": 0
+        }
+      }
+    },
+    {
+      "name": "Collapse removes only that group tasks",
+      "pass": true
+    },
+    {
+      "name": "Collapse survives simple/visual view switching in this route session",
+      "pass": true
+    }
+  ]
+}

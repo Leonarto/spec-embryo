@@ -1,530 +1,131 @@
 <script lang="ts">
-  import {
-    ArrowRight,
-    Blocks,
-    ChartNoAxesGantt,
-    Clock3,
-    FolderKanban,
-    GitBranch,
-    NotebookText,
-    ShieldAlert,
-    ShieldCheck,
-    Sparkles,
-    Target,
-  } from "@lucide/svelte";
-  import type { DashboardData } from "../../../src/services/dashboard.ts";
-
+  import {projectHref} from "../lib/workspace/project.ts";
+  import {workspaceURL as projectSourceURL} from "../lib/workspace/location.svelte.ts";
+  import { ArrowRight, GitBranch, ShieldAlert, ShieldCheck } from "@lucide/svelte";
+  import type { WorkspaceEnvelope } from "../../../src/services/workspace.ts";
+  import { useWorkspaceResource } from "../lib/workspace/resource.svelte.ts";
+  import ViewToolbar from "../lib/components/ViewToolbar.svelte";
   let { data } = $props();
-  const dashboard = $derived(data.dashboard as DashboardData);
+  const resource=useWorkspaceResource(()=>data.workspace as WorkspaceEnvelope<'overview'>);
+  const workspace=$derived(resource.snapshot);
+  const dashboard=$derived(workspace.data);
+  const stats = $derived([
+    { label: "Specs", value: dashboard.counts.specs, href: "/specs" },
+    { label: "Tasks", value: dashboard.counts.tasks, href: "/tasks" },
+    { label: "Active specs", value: dashboard.counts.activeSpecs, href: "/specs?spec_status=active" },
+    { label: "In progress", value: dashboard.counts.inProgressTasks, href: "/tasks" },
+    { label: "Review", value: dashboard.counts.reviewTasks, href: "/tasks" },
+    { label: "Blocked", value: dashboard.counts.blockedTasks, href: "/tasks" },
+    { label: "Ready", value: dashboard.counts.readyTasks, href: "/tasks" },
+  ]);
 </script>
+<svelte:head><title>{workspace.shell.project.name} Overview</title></svelte:head>
+<ViewToolbar title="Overview" />
 
-<svelte:head>
-  <title>{dashboard.project.name} Dash</title>
-</svelte:head>
-
-<section class="hero-grid">
-  <article class="hero-card">
-    <div class="hero-head">
-      <div>
-        <p class="eyebrow">Workspace overview</p>
-        <h3>Dash</h3>
-      </div>
-      <span class="icon-seal">
-        <Sparkles size={18} strokeWidth={1.9} />
-      </span>
-    </div>
-
-    <p class="hero-copy">{dashboard.currentState.summary}</p>
-
-    <div class="chip-row">
-      <span class="chip chip-accent">
-        <NotebookText size={13} strokeWidth={1.9} />
-        {dashboard.project.memoryDir}
-      </span>
-      {#if dashboard.git.available}
-        <span class="chip">
-          <GitBranch size={13} strokeWidth={1.9} />
-          {dashboard.git.branch ?? "unknown"} · {dashboard.git.dirty ? "dirty" : "clean"}
-        </span>
-      {/if}
-      <span class="chip">
-        <NotebookText size={13} strokeWidth={1.9} />
-        {dashboard.counts.specs} specs
-      </span>
-      <span class="chip">
-        <FolderKanban size={13} strokeWidth={1.9} />
-        {dashboard.counts.tasks} tasks
-      </span>
-    </div>
-  </article>
-
-  <article class="stats-card">
-    <div class="stats-grid">
-      <div>
-        <span>Active specs</span>
-        <strong>{dashboard.counts.activeSpecs}</strong>
-      </div>
-      <div>
-        <span>In progress</span>
-        <strong>{dashboard.counts.inProgressTasks}</strong>
-      </div>
-      <div>
-        <span>Blocked</span>
-        <strong>{dashboard.counts.blockedTasks}</strong>
-      </div>
-      <div>
-        <span>Review</span>
-        <strong>{dashboard.counts.reviewTasks}</strong>
-      </div>
-      <div>
-        <span>Ready</span>
-        <strong>{dashboard.counts.readyTasks}</strong>
-      </div>
-    </div>
-  </article>
+<section class="focus-panel" aria-labelledby="focus-heading">
+  <p class="eyebrow">Current focus</p>
+  <h2 id="focus-heading">{dashboard.currentState.focus}</h2>
+  <p class="summary">{dashboard.currentState.summary}</p>
+  <div class="active-links">
+    <span>Active specs</span>
+    {#each dashboard.currentState.activeSpecIds as id}<a href={projectHref(`/specs/${id}`,projectSourceURL())}>{id}</a>{:else}<span class="muted">None</span>{/each}
+    <span class="active-label">Active tasks</span>
+    {#each dashboard.currentState.activeTaskIds as id}<a href={projectHref(`/tasks/${id}`,projectSourceURL())}>{id}</a>{:else}<span class="muted">None</span>{/each}
+  </div>
 </section>
 
-<section class="dashboard-grid">
-  <article class="panel panel-wide">
-    <div class="panel-head">
-      <div class="panel-title">
-        <span class="icon-seal icon-soft">
-          <Target size={16} strokeWidth={1.9} />
-        </span>
-        <div>
-          <p class="eyebrow">Current state</p>
-          <h3>Focus and next actions</h3>
-        </div>
-      </div>
-    </div>
+<section class="stats-band" aria-label="Workspace counts">
+  {#each stats as stat}<a href={projectHref(stat.href,projectSourceURL())}><strong>{stat.value}</strong><span>{stat.label}</span></a>{/each}
+</section>
 
-    <div class="focus-grid">
-      <div class="focus-card">
-        <div class="mini-head">
-          <Target size={14} strokeWidth={1.9} />
-          <h4>Focus</h4>
-        </div>
-        <p>{dashboard.currentState.focus}</p>
-      </div>
-      <div class="focus-card">
-        <div class="mini-head">
-          <NotebookText size={14} strokeWidth={1.9} />
-          <h4>Active specs</h4>
-        </div>
-        <div class="chip-row">
-          {#each dashboard.currentState.activeSpecIds as specId}
-            <a class="chip" href={`/specs/${specId}`}>{specId}</a>
-          {/each}
-        </div>
-      </div>
-      <div class="focus-card">
-        <div class="mini-head">
-          <FolderKanban size={14} strokeWidth={1.9} />
-          <h4>Active tasks</h4>
-        </div>
-        <div class="chip-row">
-          {#each dashboard.currentState.activeTaskIds as taskId}
-            <a class="chip" href={`/tasks/${taskId}`}>{taskId}</a>
-          {/each}
-        </div>
-      </div>
-    </div>
-
-    <ol class="action-list">
-      {#each dashboard.nextActions as action}
-        <li>
-          <ArrowRight size={14} strokeWidth={2} />
-          <span>{action}</span>
-        </li>
-      {/each}
+<div class="overview-grid">
+  <section class="panel" aria-labelledby="actions-heading">
+    <h2 id="actions-heading">Next actions</h2>
+    <ol class="actions">
+      {#each dashboard.nextActions as action}<li><ArrowRight size={14} /><span>{action}</span></li>{:else}<li>No next action suggested.</li>{/each}
     </ol>
-  </article>
+    {#if dashboard.currentState.nextActionHints.length}
+      <details><summary>Current-state hints ({dashboard.currentState.nextActionHints.length})</summary><ul>{#each dashboard.currentState.nextActionHints as hint}<li>{hint}</li>{/each}</ul></details>
+    {/if}
+  </section>
 
-  <article class="panel">
-    <div class="panel-head">
-      <div class="panel-title">
-        <span class="icon-seal icon-soft">
-          {#if dashboard.agents.ok}
-            <ShieldCheck size={16} strokeWidth={1.9} />
-          {:else}
-            <ShieldAlert size={16} strokeWidth={1.9} />
-          {/if}
-        </span>
-        <div>
-          <p class="eyebrow">Agents</p>
-          <h3>AGENTS health</h3>
-        </div>
-      </div>
-    </div>
-    <div class="health-card {dashboard.agents.ok ? 'ok' : 'warn'}">
+  <section class="panel" aria-labelledby="health-heading">
+    <h2 id="health-heading">AGENTS health</h2>
+    <p class="health" class:warning={!dashboard.agents.ok}>
+      {#if dashboard.agents.ok}<ShieldCheck size={17} />{:else}<ShieldAlert size={17} />{/if}
       <strong>{dashboard.agents.ok ? "Healthy" : "Needs attention"}</strong>
-      <p>max file {dashboard.agents.maxFileTokens} · max chain {dashboard.agents.maxChainTokens}</p>
-    </div>
-    {#if dashboard.agents.failures.length > 0}
-      <ul class="notes-list">
-        {#each dashboard.agents.failures as failure}
-          <li>{failure}</li>
-        {/each}
-      </ul>
-    {/if}
-  </article>
+    </p>
+    <dl><div><dt>Maximum file</dt><dd>{dashboard.agents.maxFileTokens} tokens</dd></div><div><dt>Maximum chain</dt><dd>{dashboard.agents.maxChainTokens} tokens</dd></div></dl>
+    {#if dashboard.agents.failures.length}<ul>{#each dashboard.agents.failures as failure}<li>{failure}</li>{/each}</ul>{/if}
+  </section>
 
-  <article class="panel">
-    <div class="panel-head">
-      <div class="panel-title">
-        <span class="icon-seal icon-soft">
-          <Clock3 size={16} strokeWidth={1.9} />
-        </span>
-        <div>
-          <p class="eyebrow">Resume</p>
-          <h3>Recent handoff</h3>
-        </div>
-      </div>
-    </div>
-    {#if dashboard.recentHandoff}
-      <div class="focus-card">
-        <div class="mini-head">
-          <Clock3 size={14} strokeWidth={1.9} />
-          <h4>{dashboard.recentHandoff.id}</h4>
-        </div>
-        <p>{dashboard.recentHandoff.title}</p>
-        <small>{dashboard.recentHandoff.createdAt}</small>
-      </div>
-    {:else}
-      <p class="empty">No handoff exists yet.</p>
-    {/if}
-  </article>
+  <section class="panel" aria-labelledby="blocked-heading">
+    <h2 id="blocked-heading">Blocked work <span>{dashboard.blockedTasks.length}</span></h2>
+    <ul class="entity-list">{#each dashboard.blockedTasks as task}<li><a href={projectHref(`/tasks/${task.id}`,projectSourceURL())}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No blocked tasks right now.</li>{/each}</ul>
+    <h3>Dependency issues</h3>
+    <ul>{#each dashboard.dependencyIssues as issue}<li>{issue.taskId} references missing {issue.missingTaskId}</li>{:else}<li class="muted">No missing dependencies detected.</li>{/each}</ul>
+  </section>
 
-  <article class="panel">
-    <div class="panel-head">
-      <div class="panel-title">
-        <span class="icon-seal icon-soft">
-          <Blocks size={16} strokeWidth={1.9} />
-        </span>
-        <div>
-          <p class="eyebrow">Execution</p>
-          <h3>Blocked work</h3>
-        </div>
-      </div>
-    </div>
-    {#if dashboard.blockedTasks.length === 0}
-      <p class="empty">No blocked tasks right now.</p>
-    {:else}
-      <ul class="notes-list">
-        {#each dashboard.blockedTasks as task}
-          <li><a href={`/tasks/${task.id}`}>{task.id} · {task.title}</a></li>
-        {/each}
-      </ul>
-    {/if}
-  </article>
+  <section class="panel" aria-labelledby="review-heading">
+    <h2 id="review-heading">Ready for review <span>{dashboard.reviewTasks.length}</span></h2>
+    <ul class="entity-list">{#each dashboard.reviewTasks as task}<li><a href={projectHref(`/tasks/${task.id}`,projectSourceURL())}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No tasks waiting for review.</li>{/each}</ul>
+    <h3>Critical path</h3>
+    <ul class="entity-list">{#each dashboard.criticalPath as task}<li><a href={projectHref(`/tasks/${task.id}`,projectSourceURL())}><code>{task.id}</code><span>{task.title}</span></a></li>{:else}<li class="muted">No active critical path.</li>{/each}</ul>
+  </section>
 
-  <article class="panel">
-    <div class="panel-head">
-      <div class="panel-title">
-        <span class="icon-seal icon-soft">
-          <ChartNoAxesGantt size={16} strokeWidth={1.9} />
-        </span>
-        <div>
-          <p class="eyebrow">Execution</p>
-          <h3>Critical path</h3>
-        </div>
-      </div>
-    </div>
-    <ul class="notes-list">
-      {#each dashboard.criticalPath as task}
-        <li><a href={`/tasks/${task.id}`}>{task.id} · {task.title}</a></li>
-      {/each}
-    </ul>
-  </article>
+  <section class="panel" aria-labelledby="git-heading">
+    <h2 id="git-heading">Local repository</h2>
+    {#if workspace.shell.git.available}<p class="git-line"><GitBranch size={15} /><code>{workspace.shell.git.branch ?? "unknown"}</code><span class:warning={workspace.shell.git.dirty}>{workspace.shell.git.dirty ? "● Local changes" : "✓ Clean"}</span></p>{:else}<p class="muted">Git information unavailable.</p>{/if}
+    <dl><div><dt>Memory home</dt><dd><code>{workspace.shell.project.memoryDir}</code></dd></div>{#if dashboard.currentState.updatedAt}<div><dt>Current state updated</dt><dd>{dashboard.currentState.updatedAt}</dd></div>{/if}</dl>
+    <details><summary>Spec coverage ({dashboard.specs.length})</summary><ul class="entity-list">{#each dashboard.specs as spec}<li><a href={projectHref(`/specs/${spec.id}`,projectSourceURL())}><code>{spec.id}</code><span>{spec.linkedTaskCount} linked tasks</span></a></li>{/each}</ul></details>
+  </section>
 
-  <article class="panel panel-wide">
-    <div class="panel-head">
-      <div class="panel-title">
-        <span class="icon-seal icon-soft">
-          <Sparkles size={16} strokeWidth={1.9} />
-        </span>
-        <div>
-          <p class="eyebrow">What does not fit elsewhere</p>
-          <h3>Signals and notes</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="signal-grid">
-      <div class="focus-card">
-        <div class="mini-head">
-          <ArrowRight size={14} strokeWidth={2} />
-          <h4>Current-state hints</h4>
-        </div>
-        <ul class="notes-list">
-          {#each dashboard.currentState.nextActionHints as hint}
-            <li>{hint}</li>
-          {/each}
-        </ul>
-      </div>
-
-      <div class="focus-card">
-        <div class="mini-head">
-          <Blocks size={14} strokeWidth={1.9} />
-          <h4>Dependency issues</h4>
-        </div>
-        {#if dashboard.dependencyIssues.length === 0}
-          <p>No missing dependencies detected.</p>
-        {:else}
-          <ul class="notes-list">
-            {#each dashboard.dependencyIssues as issue}
-              <li>{issue.taskId} references missing {issue.missingTaskId}</li>
-            {/each}
-          </ul>
-        {/if}
-      </div>
-
-      <div class="focus-card">
-        <div class="mini-head">
-          <NotebookText size={14} strokeWidth={1.9} />
-          <h4>Spec coverage snapshot</h4>
-        </div>
-        <ul class="notes-list">
-          {#each dashboard.specs as spec}
-            <li><a href={`/specs/${spec.id}`}>{spec.id} · {spec.linkedTaskCount} linked tasks</a></li>
-          {/each}
-        </ul>
-      </div>
-    </div>
-  </article>
-</section>
+  <section class="panel" aria-labelledby="handoff-heading">
+    <h2 id="handoff-heading">Recent handoff</h2>
+    {#if dashboard.recentHandoff}<code>{dashboard.recentHandoff.id}</code><p>{dashboard.recentHandoff.title}</p><p class="muted">{dashboard.recentHandoff.summary}</p><time>{dashboard.recentHandoff.createdAt}</time>{:else}<p class="muted">No handoff exists yet.</p>{/if}
+  </section>
+</div>
 
 <style>
-  .eyebrow {
-    margin: 0 0 0.35rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.68rem;
-    color: var(--muted);
-  }
-
-  h3,
-  h4 {
-    margin: 0;
-    font-family: var(--display-font);
-  }
-
-  h3 {
-    font-size: clamp(1.55rem, 1.8vw, 2rem);
-  }
-
-  h4 {
-    font-size: 1.02rem;
-  }
-
-  .hero-grid,
-  .dashboard-grid,
-  .focus-grid,
-  .signal-grid,
-  .stats-grid,
-  .chip-row {
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .hero-grid {
-    grid-template-columns: 1.45fr 1fr;
-    margin-bottom: 1rem;
-  }
-
-  .hero-card,
-  .stats-card,
-  .panel,
-  .focus-card {
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--line);
-    background: var(--panel);
-    box-shadow: var(--shadow);
-  }
-
-  .hero-card,
-  .stats-card,
-  .panel {
-    padding: 1rem;
-  }
-
-  .hero-head,
-  .panel-head,
-  .panel-title,
-  .mini-head {
-    display: flex;
-    align-items: center;
-  }
-
-  .hero-head,
-  .panel-head {
-    justify-content: space-between;
-    gap: 0.8rem;
-  }
-
-  .panel-title,
-  .mini-head {
-    gap: 0.55rem;
-  }
-
-  .icon-seal {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: 0.95rem;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.84);
-    color: var(--muted-soft);
-    flex-shrink: 0;
-  }
-
-  .icon-soft {
-    width: 2rem;
-    height: 2rem;
-    background: rgba(255, 255, 255, 0.72);
-  }
-
-  .hero-copy,
-  .focus-card p,
-  .empty,
-  .notes-list,
-  .action-list,
-  .health-card p,
-  .focus-card small,
-  .stats-card span {
-    color: var(--muted);
-    line-height: 1.45;
-  }
-
-  .chip-row {
-    grid-template-columns: repeat(auto-fit, minmax(8rem, max-content));
-    align-items: start;
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border-radius: 999px;
-    padding: 0.34rem 0.65rem;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.9);
-    font-size: 0.75rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .chip-accent {
-    background: var(--accent-soft);
-  }
-
-  .stats-card {
-    background: linear-gradient(180deg, var(--panel-strong), rgba(248, 242, 233, 0.92));
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-  }
-
-  .stats-grid div {
-    padding: 0.8rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.78);
-  }
-
-  .stats-grid strong {
-    display: block;
-    margin-top: 0.2rem;
-    font-family: var(--display-font);
-    font-size: 1.55rem;
-  }
-
-  .dashboard-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .panel-wide {
-    grid-column: span 2;
-  }
-
-  .focus-grid,
-  .signal-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .focus-card {
-    display: grid;
-    gap: 0.75rem;
-    padding: 0.9rem;
-    background: rgba(255, 255, 255, 0.58);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .action-list,
-  .notes-list {
-    margin: 0;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .action-list {
-    display: grid;
-    gap: 0.7rem;
-    margin-top: 0.95rem;
-  }
-
-  .action-list li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.55rem;
-    align-items: start;
-    padding: 0.75rem 0.8rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.62);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .notes-list {
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .notes-list li {
-    padding: 0.7rem 0.78rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(24, 22, 18, 0.08);
-    background: rgba(255, 255, 255, 0.52);
-  }
-
-  .health-card {
-    padding: 0.9rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.76);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .health-card.ok {
-    background: var(--accent-soft);
-  }
-
-  .health-card.warn {
-    background: var(--warning-soft);
-  }
-
-  @media (max-width: 1040px) {
-    .hero-grid,
-    .dashboard-grid,
-    .focus-grid,
-    .signal-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .panel-wide {
-      grid-column: span 1;
-    }
-  }
+  .focus-panel { padding: 1rem; background: var(--surface); border: 1px solid var(--border-subtle); border-radius: .25rem .25rem 0 0; }
+  .eyebrow { margin: 0 0 .25rem; color: var(--text-muted); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+  .focus-panel h2 { max-width: 64rem; margin: 0; font: 600 1.5rem/1.25 var(--display-font); overflow-wrap: anywhere; }
+  .summary { max-width: 78rem; margin: .5rem 0 .75rem; color: var(--text-muted); }
+  .active-links { display: flex; align-items: center; flex-wrap: wrap; gap: .25rem .5rem; font-size: .75rem; }
+  .active-links a { color: var(--accent); font-family: var(--mono-font); min-height: 1.5rem; display: inline-flex; align-items: center; }
+  .active-label { margin-left: .5rem; }
+  .muted, time { color: var(--text-muted); }
+  .stats-band { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); border: 1px solid var(--border-subtle); border-top: 0; background: var(--surface); margin-bottom: .75rem; }
+  .stats-band a { display: flex; gap: .5rem; align-items: baseline; flex-wrap: wrap; padding: .625rem .75rem; text-decoration: none; border-right: 1px solid var(--border-subtle); }
+  .stats-band a:last-child { border-right: 0; }
+  .stats-band a:hover { background: var(--surface-raised); }
+  .stats-band strong { font-size: 1.25rem; font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .stats-band span { color: var(--text-muted); font-size: .75rem; }
+  .overview-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem; align-items: start; }
+  .panel { min-width: 0; padding: .75rem 1rem; background: var(--surface); border: 1px solid var(--border-subtle); border-radius: .25rem; overflow-wrap: anywhere; }
+  .panel h2 { display: flex; align-items: baseline; gap: .5rem; margin: 0 0 .625rem; font-size: .875rem; font-weight: 650; }
+  .panel h2 span { color: var(--text-muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+  h3 { margin: .875rem 0 .5rem; font-size: .8125rem; }
+  ul, ol { list-style: none; padding: 0; margin: 0; }
+  li + li { border-top: 1px solid var(--border-subtle); }
+  li { padding: .375rem 0; }
+  .actions li { display: flex; align-items: start; gap: .5rem; }
+  .actions :global(svg) { flex-shrink: 0; margin-top: .1875rem; color: var(--accent); }
+  .entity-list a { display: flex; align-items: start; gap: .75rem; text-decoration: none; min-height: 1.5rem; }
+  .entity-list a:hover { color: var(--accent); }
+  .entity-list code { flex-shrink: 0; color: var(--accent); }
+  code { font: .75rem/1.5 var(--mono-font); }
+  dl { margin: .5rem 0; }
+  dl div { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: space-between; gap: .25rem .75rem; padding: .25rem 0; }
+  dt { color: var(--text-muted); }
+  dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .health, .git-line { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin: .5rem 0; }
+  .health { color: var(--accent); }
+  .warning { color: var(--warning); }
+  details { margin-top: .75rem; border-top: 1px solid var(--border-subtle); padding-top: .5rem; }
+  summary { color: var(--text-muted); cursor: pointer; min-height: 1.5rem; }
+  summary:hover { color: var(--text); }
+  time { font-size: .75rem; }
+  @media (max-width: 1199px) { .stats-band a { display: grid; gap: .25rem; } }
+  @media (max-width: 767px) { .overview-grid { grid-template-columns: minmax(0,1fr); } .stats-band { grid-template-columns: repeat(4,minmax(0,1fr)); } .stats-band a { border-bottom: 1px solid var(--border-subtle); padding: .5rem; } .focus-panel h2 { font-size: 1.25rem; } .panel { padding: .75rem; } }
 </style>

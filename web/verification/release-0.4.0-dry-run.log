@@ -1,0 +1,1125 @@
+bun publish v1.3.9 (cf6cdbbb)
+$ bun run web:build
+$ bun run scripts/build-ui.ts
+vite v8.0.3 building ssr environment for production...
+[2Ktransforming...✓ 3941 modules transformed.
+rendering chunks...
+vite v8.0.3 building client environment for production...
+[2Ktransforming...✓ 7614 modules transformed.
+rendering chunks...
+computing gzip size...
+.svelte-kit/output/client/_app/version.json                                           0.07 kB │ gzip:   0.08 kB
+.svelte-kit/output/client/.vite/manifest.json                                        46.85 kB │ gzip:   5.45 kB
+.svelte-kit/output/client/_app/immutable/assets/CanonicalDetailReader.DPrgmtIZ.css    0.42 kB │ gzip:   0.25 kB
+.svelte-kit/output/client/_app/immutable/assets/NotFound.Bm-6FK7c.css                 0.48 kB │ gzip:   0.28 kB
+.svelte-kit/output/client/_app/immutable/assets/5.B0GU-oq3.css                        1.14 kB │ gzip:   0.47 kB
+.svelte-kit/output/client/_app/immutable/assets/Popover.CbkP4Jr3.css                  1.17 kB │ gzip:   0.52 kB
+.svelte-kit/output/client/_app/immutable/assets/6.B62-_ILF.css                        2.02 kB │ gzip:   0.67 kB
+.svelte-kit/output/client/_app/immutable/assets/4.BHBoAc5j.css                        4.87 kB │ gzip:   1.15 kB
+.svelte-kit/output/client/_app/immutable/assets/DocumentBody.CsrG5M8-.css             4.95 kB │ gzip:   1.29 kB
+.svelte-kit/output/client/_app/immutable/assets/8.DeSFm_VM.css                        5.47 kB │ gzip:   1.42 kB
+.svelte-kit/output/client/_app/immutable/assets/TaskDetail.Cf-RtEJI.css               5.91 kB │ gzip:   1.27 kB
+.svelte-kit/output/client/_app/immutable/assets/clipboard.DlOKRyUC.css                7.83 kB │ gzip:   1.78 kB
+.svelte-kit/output/client/_app/immutable/assets/SpecDetail.Csz8Vdhg.css               9.44 kB │ gzip:   1.92 kB
+.svelte-kit/output/client/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css         11.13 kB │ gzip:   1.96 kB
+.svelte-kit/output/client/_app/immutable/assets/10.CRRViwSI.css                      11.78 kB │ gzip:   2.33 kB
+.svelte-kit/output/client/_app/immutable/assets/0.BobR7juS.css                       17.70 kB │ gzip:   3.89 kB
+.svelte-kit/output/client/_app/immutable/chunks/Czq3A1Br.js                           0.02 kB │ gzip:   0.04 kB
+.svelte-kit/output/client/_app/immutable/chunks/CrP-1Ken.js                           0.03 kB │ gzip:   0.05 kB
+.svelte-kit/output/client/_app/immutable/chunks/C-GPuh-R2.js                          0.05 kB │ gzip:   0.07 kB
+.svelte-kit/output/client/_app/immutable/chunks/CAu0sHqS2.js                          0.05 kB │ gzip:   0.07 kB
+.svelte-kit/output/client/_app/immutable/chunks/I8rQr1kY.js                           0.06 kB │ gzip:   0.08 kB
+.svelte-kit/output/client/_app/immutable/entry/start.D_KPR2z5.js                      0.08 kB │ gzip:   0.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/DlE_MOIh.js                           0.08 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/BXUFfzzM2.js                          0.08 kB │ gzip:   0.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/DvtYg6_42.js                          0.09 kB │ gzip:   0.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/Gwx4Nnv-2.js                          0.09 kB │ gzip:   0.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/BXflPZ6O.js                           0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/BvsLTm6o.js                           0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/bpC3z4hM2.js                          0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/Cy_M4HLC.js                           0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/C2QRBU_42.js                          0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/CQEtJWY72.js                          0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/DCpFvSdt.js                           0.09 kB │ gzip:   0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/CZq7y03d.js                           0.10 kB │ gzip:   0.11 kB
+.svelte-kit/output/client/_app/immutable/chunks/9wvpgT5P.js                           0.14 kB │ gzip:   0.12 kB
+.svelte-kit/output/client/_app/immutable/chunks/DHQPpBX_.js                           0.16 kB │ gzip:   0.15 kB
+.svelte-kit/output/client/_app/immutable/chunks/BEfOvqNz2.js                          0.17 kB │ gzip:   0.15 kB
+.svelte-kit/output/client/_app/immutable/chunks/CWXbMxSx.js                           0.20 kB │ gzip:   0.15 kB
+.svelte-kit/output/client/_app/immutable/chunks/CtLvoQOY.js                           0.21 kB │ gzip:   0.19 kB
+.svelte-kit/output/client/_app/immutable/chunks/PdXKG_76.js                           0.26 kB │ gzip:   0.21 kB
+.svelte-kit/output/client/_app/immutable/chunks/px_3nk3X.js                           0.34 kB │ gzip:   0.25 kB
+.svelte-kit/output/client/_app/immutable/chunks/DfyjFTk8.js                           0.39 kB │ gzip:   0.26 kB
+.svelte-kit/output/client/_app/immutable/nodes/1.lPNJKSVc.js                          0.41 kB │ gzip:   0.28 kB
+.svelte-kit/output/client/_app/immutable/chunks/CYvZr2l42.js                          0.43 kB │ gzip:   0.29 kB
+.svelte-kit/output/client/_app/immutable/chunks/DT93R_A32.js                          0.44 kB │ gzip:   0.30 kB
+.svelte-kit/output/client/_app/immutable/chunks/B1U2RHOk2.js                          0.44 kB │ gzip:   0.30 kB
+.svelte-kit/output/client/_app/immutable/chunks/BY55pox_2.js                          0.44 kB │ gzip:   0.29 kB
+.svelte-kit/output/client/_app/immutable/chunks/B_H-k1BJ.js                           0.45 kB │ gzip:   0.34 kB
+.svelte-kit/output/client/_app/immutable/chunks/PqPpRhrM.js                           0.47 kB │ gzip:   0.34 kB
+.svelte-kit/output/client/_app/immutable/chunks/1BkzNeLj.js                           0.48 kB │ gzip:   0.33 kB
+.svelte-kit/output/client/_app/immutable/chunks/DqLG3M6k.js                           0.49 kB │ gzip:   0.30 kB
+.svelte-kit/output/client/_app/immutable/chunks/C_MzhVxT.js                           0.49 kB │ gzip:   0.27 kB
+.svelte-kit/output/client/_app/immutable/chunks/CO1YZcBN.js                           0.51 kB │ gzip:   0.36 kB
+.svelte-kit/output/client/_app/immutable/chunks/-acyJOWA.js                           0.52 kB │ gzip:   0.37 kB
+.svelte-kit/output/client/_app/immutable/chunks/D4GDxuzX2.js                          0.53 kB │ gzip:   0.31 kB
+.svelte-kit/output/client/_app/immutable/chunks/nVONgd5P2.js                          0.53 kB │ gzip:   0.31 kB
+.svelte-kit/output/client/_app/immutable/nodes/3.DC-S8osv.js                          0.56 kB │ gzip:   0.34 kB
+.svelte-kit/output/client/_app/immutable/chunks/BE7MGo282.js                          0.56 kB │ gzip:   0.37 kB
+.svelte-kit/output/client/_app/immutable/chunks/CQn0g0cK2.js                          0.56 kB │ gzip:   0.34 kB
+.svelte-kit/output/client/_app/immutable/nodes/2.CySL6Y8o.js                          0.56 kB │ gzip:   0.34 kB
+.svelte-kit/output/client/_app/immutable/chunks/B3hblkxS.js                           0.58 kB │ gzip:   0.39 kB
+.svelte-kit/output/client/_app/immutable/chunks/B6pl8o7U2.js                          0.58 kB │ gzip:   0.37 kB
+.svelte-kit/output/client/_app/immutable/chunks/CSz3IaOY.js                           0.59 kB │ gzip:   0.37 kB
+.svelte-kit/output/client/_app/immutable/nodes/9.DMopmrqy.js                          0.60 kB │ gzip:   0.36 kB
+.svelte-kit/output/client/_app/immutable/chunks/0bezph14.js                           0.64 kB │ gzip:   0.39 kB
+.svelte-kit/output/client/_app/immutable/chunks/CYKWnH02.js                           0.68 kB │ gzip:   0.38 kB
+.svelte-kit/output/client/_app/immutable/chunks/X4ybTKTj.js                           0.76 kB │ gzip:   0.33 kB
+.svelte-kit/output/client/_app/immutable/chunks/DyAvRC39.js                           0.87 kB │ gzip:   0.48 kB
+.svelte-kit/output/client/_app/immutable/chunks/D5yFSjE92.js                          0.89 kB │ gzip:   0.47 kB
+.svelte-kit/output/client/_app/immutable/chunks/BynG0Pxp2.js                          0.89 kB │ gzip:   0.52 kB
+.svelte-kit/output/client/_app/immutable/chunks/BsD7sPoI.js                           0.91 kB │ gzip:   0.44 kB
+.svelte-kit/output/client/_app/immutable/chunks/Cuu1mh1_.js                           0.91 kB │ gzip:   0.55 kB
+.svelte-kit/output/client/_app/immutable/chunks/BDJH2Jpk2.js                          1.15 kB │ gzip:   0.62 kB
+.svelte-kit/output/client/_app/immutable/chunks/QxjuN7Hf.js                           1.16 kB │ gzip:   0.56 kB
+.svelte-kit/output/client/_app/immutable/chunks/BFYQcBYR.js                           1.20 kB │ gzip:   0.68 kB
+.svelte-kit/output/client/_app/immutable/chunks/3bS5Qdo8.js                           1.37 kB │ gzip:   0.78 kB
+.svelte-kit/output/client/_app/immutable/chunks/BEjJ0wIn.js                           1.45 kB │ gzip:   0.77 kB
+.svelte-kit/output/client/_app/immutable/chunks/1oUqwrMd.js                           1.59 kB │ gzip:   0.91 kB
+.svelte-kit/output/client/_app/immutable/chunks/2i8nHxaG.js                           1.81 kB │ gzip:   0.87 kB
+.svelte-kit/output/client/_app/immutable/nodes/7.DJ4_r7k2.js                          1.87 kB │ gzip:   1.02 kB
+.svelte-kit/output/client/_app/immutable/chunks/Djyq2RGg.js                           1.90 kB │ gzip:   0.84 kB
+.svelte-kit/output/client/_app/immutable/chunks/NUmomMD7.js                           2.09 kB │ gzip:   0.81 kB
+.svelte-kit/output/client/_app/immutable/chunks/B3VN6t2h.js                           2.15 kB │ gzip:   0.96 kB
+.svelte-kit/output/client/_app/immutable/chunks/DT02CkBX.js                           2.31 kB │ gzip:   0.99 kB
+.svelte-kit/output/client/_app/immutable/chunks/Cg2O0P-0.js                           2.47 kB │ gzip:   1.06 kB
+.svelte-kit/output/client/_app/immutable/chunks/B0C-Xw3t2.js                          2.69 kB │ gzip:   1.28 kB
+.svelte-kit/output/client/_app/immutable/chunks/DrMxrR5C2.js                          2.95 kB │ gzip:   1.31 kB
+.svelte-kit/output/client/_app/immutable/nodes/5.SLWzls2Z.js                          2.96 kB │ gzip:   1.27 kB
+.svelte-kit/output/client/_app/immutable/chunks/DqX7SfWV.js                           3.46 kB │ gzip:   1.46 kB
+.svelte-kit/output/client/_app/immutable/chunks/imzBzfnD2.js                          3.61 kB │ gzip:   1.79 kB
+.svelte-kit/output/client/_app/immutable/chunks/BYEeKO0B.js                           3.93 kB │ gzip:   1.20 kB
+.svelte-kit/output/client/_app/immutable/chunks/B1ROmh-n2.js                          4.15 kB │ gzip:   1.77 kB
+.svelte-kit/output/client/_app/immutable/chunks/COSB8fVN.js                           4.64 kB │ gzip:   2.12 kB
+.svelte-kit/output/client/_app/immutable/chunks/BlvdTFOK2.js                          5.11 kB │ gzip:   2.20 kB
+.svelte-kit/output/client/_app/immutable/entry/app.Y_rKW_bV.js                        5.26 kB │ gzip:   2.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/umGmevus.js                           5.43 kB │ gzip:   2.07 kB
+.svelte-kit/output/client/_app/immutable/chunks/fY0WanTN.js                           5.50 kB │ gzip:   2.24 kB
+.svelte-kit/output/client/_app/immutable/chunks/ibLwkb2W2.js                          5.69 kB │ gzip:   2.33 kB
+.svelte-kit/output/client/_app/immutable/chunks/BVdxQekS2.js                          7.51 kB │ gzip:   2.83 kB
+.svelte-kit/output/client/_app/immutable/chunks/CDqeXBHW2.js                          8.57 kB │ gzip:   3.55 kB
+.svelte-kit/output/client/_app/immutable/chunks/DF-A6XPv.js                           9.31 kB │ gzip:   3.13 kB
+.svelte-kit/output/client/_app/immutable/chunks/CQRqJu6q.js                          10.27 kB │ gzip:   4.00 kB
+.svelte-kit/output/client/_app/immutable/chunks/Cbk0RRDb.js                          10.32 kB │ gzip:   4.20 kB
+.svelte-kit/output/client/_app/immutable/chunks/BKA0B7mv.js                          10.32 kB │ gzip:   3.54 kB
+.svelte-kit/output/client/_app/immutable/chunks/BS6uNIVQ2.js                         10.93 kB │ gzip:   4.02 kB
+.svelte-kit/output/client/_app/immutable/nodes/4.CF5IPWLw.js                         11.59 kB │ gzip:   3.35 kB
+.svelte-kit/output/client/_app/immutable/nodes/6.e9vIRnxz.js                         12.08 kB │ gzip:   4.80 kB
+.svelte-kit/output/client/_app/immutable/chunks/Cek6tuw1.js                          12.69 kB │ gzip:   3.97 kB
+.svelte-kit/output/client/_app/immutable/chunks/tjEmjgjX2.js                         12.74 kB │ gzip:   4.33 kB
+.svelte-kit/output/client/_app/immutable/chunks/-MQCgAu3.js                          13.96 kB │ gzip:   3.64 kB
+.svelte-kit/output/client/_app/immutable/chunks/QasPwOBX2.js                         15.38 kB │ gzip:   5.32 kB
+.svelte-kit/output/client/_app/immutable/chunks/DRSslWSz.js                          17.08 kB │ gzip:   6.00 kB
+.svelte-kit/output/client/_app/immutable/chunks/ysvvq8DF2.js                         17.24 kB │ gzip:   6.47 kB
+.svelte-kit/output/client/_app/immutable/chunks/DbbChBjR2.js                         20.09 kB │ gzip:   7.03 kB
+.svelte-kit/output/client/_app/immutable/chunks/Ch2T6ZuT.js                          21.67 kB │ gzip:   7.79 kB
+.svelte-kit/output/client/_app/immutable/nodes/8.CF7n_9ms.js                         22.17 kB │ gzip:   7.99 kB
+.svelte-kit/output/client/_app/immutable/chunks/UWTepzMM2.js                         23.11 kB │ gzip:   8.11 kB
+.svelte-kit/output/client/_app/immutable/chunks/DfdDLzr22.js                         23.49 kB │ gzip:   7.94 kB
+.svelte-kit/output/client/_app/immutable/chunks/DNyzZnux.js                          23.81 kB │ gzip:   6.24 kB
+.svelte-kit/output/client/_app/immutable/chunks/CI0DCgqk2.js                         24.58 kB │ gzip:   8.62 kB
+.svelte-kit/output/client/_app/immutable/chunks/cT5MZEVV.js                          24.72 kB │ gzip:   7.93 kB
+.svelte-kit/output/client/_app/immutable/chunks/Dov3Ecp92.js                         26.64 kB │ gzip:   9.20 kB
+.svelte-kit/output/client/_app/immutable/chunks/CJqXhI642.js                         27.10 kB │ gzip:   8.85 kB
+.svelte-kit/output/client/_app/immutable/chunks/D8JWS0a3.js                          28.14 kB │ gzip:   8.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/DTfwCq7h2.js                         28.88 kB │ gzip:   8.48 kB
+.svelte-kit/output/client/_app/immutable/chunks/DH8MDbNZ.js                          29.71 kB │ gzip:  10.16 kB
+.svelte-kit/output/client/_app/immutable/nodes/0.BvKsAa73.js                         29.83 kB │ gzip:  10.32 kB
+.svelte-kit/output/client/_app/immutable/chunks/ea6NE8Lh.js                          30.33 kB │ gzip:   9.92 kB
+.svelte-kit/output/client/_app/immutable/chunks/BAqRNokM.js                          30.36 kB │ gzip:  10.93 kB
+.svelte-kit/output/client/_app/immutable/chunks/CLtkeVA4.js                          30.79 kB │ gzip:   9.64 kB
+.svelte-kit/output/client/_app/immutable/nodes/10.CaLmB6z4.js                        31.41 kB │ gzip:  10.65 kB
+.svelte-kit/output/client/_app/immutable/chunks/CzHCH2Uw.js                          33.20 kB │ gzip:  12.77 kB
+.svelte-kit/output/client/_app/immutable/chunks/DHmK-Zo42.js                         33.27 kB │ gzip:   6.98 kB
+.svelte-kit/output/client/_app/immutable/chunks/DKapy2kZ2.js                         33.31 kB │ gzip:   9.68 kB
+.svelte-kit/output/client/_app/immutable/chunks/Bek7g6hH.js                          36.51 kB │ gzip:  11.74 kB
+.svelte-kit/output/client/_app/immutable/chunks/CfY5Zsx3.js                          39.95 kB │ gzip:  11.13 kB
+.svelte-kit/output/client/_app/immutable/chunks/B24-xRPk.js                          40.57 kB │ gzip:  14.85 kB
+.svelte-kit/output/client/_app/immutable/chunks/CToUOubw2.js                         41.85 kB │ gzip:  14.21 kB
+.svelte-kit/output/client/_app/immutable/chunks/D1OkkT3G.js                          45.79 kB │ gzip:  16.04 kB
+.svelte-kit/output/client/_app/immutable/chunks/DNVi3Sgq2.js                         46.77 kB │ gzip:  15.05 kB
+.svelte-kit/output/client/_app/immutable/chunks/ClYDgPKD.js                          52.49 kB │ gzip:  17.12 kB
+.svelte-kit/output/client/_app/immutable/chunks/BdrQfsy7.js                          54.85 kB │ gzip:  20.92 kB
+.svelte-kit/output/client/_app/immutable/chunks/Bpw7ERwv2.js                         60.01 kB │ gzip:  19.37 kB
+.svelte-kit/output/client/_app/immutable/chunks/DTWlUicK2.js                         69.08 kB │ gzip:  22.59 kB
+.svelte-kit/output/client/_app/immutable/chunks/5k_IYXcI.js                          69.11 kB │ gzip:  19.29 kB
+.svelte-kit/output/client/_app/immutable/chunks/DZveUB8J.js                          69.74 kB │ gzip:  19.55 kB
+.svelte-kit/output/client/_app/immutable/chunks/D706AX-62.js                         81.37 kB │ gzip:  21.54 kB
+.svelte-kit/output/client/_app/immutable/chunks/DwPxG-IM2.js                         97.82 kB │ gzip:  23.89 kB
+.svelte-kit/output/client/_app/immutable/chunks/Sizk375F.js                         115.43 kB │ gzip:  30.39 kB
+.svelte-kit/output/client/_app/immutable/chunks/Bcn4Hv9c.js                         146.66 kB │ gzip:  40.15 kB
+.svelte-kit/output/client/_app/immutable/chunks/CdfvNQx3.js                         214.73 kB │ gzip:  33.70 kB
+.svelte-kit/output/client/_app/immutable/chunks/BXAyFsPT.js                         257.18 kB │ gzip:  76.98 kB
+.svelte-kit/output/client/_app/immutable/chunks/oHbKwv-W.js                         434.09 kB │ gzip: 137.49 kB
+.svelte-kit/output/client/_app/immutable/chunks/DiV1eA8g2.js                        518.13 kB │ gzip: 115.12 kB
+
+✓ built in 4.26s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+computing gzip size...
+.svelte-kit/output/server/.vite/manifest.json                                        19.42 kB │ gzip:  2.17 kB
+.svelte-kit/output/server/_app/immutable/assets/CanonicalDetailReader.DPrgmtIZ.css    0.42 kB │ gzip:  0.25 kB
+.svelte-kit/output/server/_app/immutable/assets/NotFound.Bm-6FK7c.css                 0.48 kB │ gzip:  0.28 kB
+.svelte-kit/output/server/_app/immutable/assets/_page.B0GU-oq3.css                    1.14 kB │ gzip:  0.47 kB
+.svelte-kit/output/server/_app/immutable/assets/Popover.CbkP4Jr3.css                  1.17 kB │ gzip:  0.52 kB
+.svelte-kit/output/server/_app/immutable/assets/_page.B62-_ILF.css                    2.02 kB │ gzip:  0.67 kB
+.svelte-kit/output/server/_app/immutable/assets/_page.BHBoAc5j.css                    4.87 kB │ gzip:  1.15 kB
+.svelte-kit/output/server/_app/immutable/assets/DocumentBody.CsrG5M8-.css             4.95 kB │ gzip:  1.29 kB
+.svelte-kit/output/server/_app/immutable/assets/_page.DeSFm_VM.css                    5.47 kB │ gzip:  1.42 kB
+.svelte-kit/output/server/_app/immutable/assets/TaskDetail.Cf-RtEJI.css               5.91 kB │ gzip:  1.27 kB
+.svelte-kit/output/server/_app/immutable/assets/clipboard.DlOKRyUC.css                7.83 kB │ gzip:  1.78 kB
+.svelte-kit/output/server/_app/immutable/assets/SpecDetail.Csz8Vdhg.css               9.44 kB │ gzip:  1.92 kB
+.svelte-kit/output/server/_app/immutable/assets/AnalysisFilters.9696PxCS.css         11.06 kB │ gzip:  1.96 kB
+.svelte-kit/output/server/_app/immutable/assets/_page.CRRViwSI.css                   11.78 kB │ gzip:  2.33 kB
+.svelte-kit/output/server/_app/immutable/assets/_layout.IslrZrfI.css                 16.83 kB │ gzip:  3.73 kB
+.svelte-kit/output/server/chunks/SpecDetail2.js                                       0.08 kB │ gzip:  0.08 kB
+.svelte-kit/output/server/chunks/TaskDetail2.js                                       0.08 kB │ gzip:  0.08 kB
+.svelte-kit/output/server/entries/endpoints/favicon.ico/_server.ts.js                 0.22 kB │ gzip:  0.19 kB
+.svelte-kit/output/server/entries/pages/_page.server.ts.js                            0.32 kB │ gzip:  0.22 kB
+.svelte-kit/output/server/entries/pages/specs/_page.server.ts.js                      0.33 kB │ gzip:  0.22 kB
+.svelte-kit/output/server/entries/pages/tasks/_page.server.ts.js                      0.33 kB │ gzip:  0.22 kB
+.svelte-kit/output/server/entries/pages/timeline/_page.server.ts.js                   0.34 kB │ gzip:  0.22 kB
+.svelte-kit/output/server/chunks/modules.js                                           0.34 kB │ gzip:  0.23 kB
+.svelte-kit/output/server/chunks/detail.js                                            0.38 kB │ gzip:  0.21 kB
+.svelte-kit/output/server/internal.js                                                 0.40 kB │ gzip:  0.20 kB
+.svelte-kit/output/server/entries/fallbacks/error.svelte.js                           0.42 kB │ gzip:  0.26 kB
+.svelte-kit/output/server/entries/pages/_layout.ts.js                                 0.55 kB │ gzip:  0.27 kB
+.svelte-kit/output/server/chunks/resource.svelte.js                                   0.65 kB │ gzip:  0.33 kB
+.svelte-kit/output/server/entries/pages/tasks/_taskId_/_page.server.ts.js             0.70 kB │ gzip:  0.41 kB
+.svelte-kit/output/server/entries/pages/tasks/_taskId_/_error.svelte.js               0.76 kB │ gzip:  0.38 kB
+.svelte-kit/output/server/entries/pages/specs/_specId_/_error.svelte.js               0.76 kB │ gzip:  0.38 kB
+.svelte-kit/output/server/chunks/Popover.js                                           0.79 kB │ gzip:  0.43 kB
+.svelte-kit/output/server/entries/endpoints/workspace-data/_server.ts.js              0.82 kB │ gzip:  0.45 kB
+.svelte-kit/output/server/chunks/context.svelte.js                                    0.85 kB │ gzip:  0.37 kB
+.svelte-kit/output/server/chunks/NotFound.js                                          0.98 kB │ gzip:  0.51 kB
+.svelte-kit/output/server/entries/endpoints/workspace-detail/_server.ts.js            1.00 kB │ gzip:  0.48 kB
+.svelte-kit/output/server/entries/pages/tasks/_taskId_/_page.svelte.js                1.02 kB │ gzip:  0.46 kB
+.svelte-kit/output/server/entries/endpoints/workspace-options/_server.ts.js           1.03 kB │ gzip:  0.49 kB
+.svelte-kit/output/server/entries/endpoints/workspace-relations/_server.ts.js         1.24 kB │ gzip:  0.57 kB
+.svelte-kit/output/server/chunks/question-context.js                                  1.28 kB │ gzip:  0.53 kB
+.svelte-kit/output/server/chunks/environment.js                                       1.37 kB │ gzip:  0.60 kB
+.svelte-kit/output/server/entries/pages/repositories/_page.server.ts.js               1.50 kB │ gzip:  0.75 kB
+.svelte-kit/output/server/entries/pages/_layout.server.ts.js                          1.51 kB │ gzip:  0.64 kB
+.svelte-kit/output/server/chunks/location.svelte.js                                   1.53 kB │ gzip:  0.68 kB
+.svelte-kit/output/server/entries/hooks.server.js                                     2.32 kB │ gzip:  0.99 kB
+.svelte-kit/output/server/entries/pages/specs/_specId_/_page.svelte.js                2.71 kB │ gzip:  1.04 kB
+.svelte-kit/output/server/chunks/history.js                                           2.86 kB │ gzip:  1.05 kB
+.svelte-kit/output/server/entries/pages/repositories/_page.svelte.js                  3.38 kB │ gzip:  1.11 kB
+.svelte-kit/output/server/chunks/circle-check-big.js                                  4.12 kB │ gzip:  1.94 kB
+.svelte-kit/output/server/chunks/blocks.js                                            4.21 kB │ gzip:  1.98 kB
+.svelte-kit/output/server/chunks/git-branch.js                                        4.21 kB │ gzip:  1.96 kB
+.svelte-kit/output/server/chunks/folder-kanban.js                                     4.28 kB │ gzip:  2.00 kB
+.svelte-kit/output/server/chunks/CanonicalDetailReader.js                             4.35 kB │ gzip:  1.60 kB
+.svelte-kit/output/server/chunks/detail-relations.js                                  4.36 kB │ gzip:  1.39 kB
+.svelte-kit/output/server/chunks/notebook-text.js                                     4.39 kB │ gzip:  1.99 kB
+.svelte-kit/output/server/chunks/shared.js                                            4.96 kB │ gzip:  1.86 kB
+.svelte-kit/output/server/chunks/workspace-timeline-contract.js                       6.04 kB │ gzip:  1.97 kB
+.svelte-kit/output/server/chunks/spec-questions.js                                    8.35 kB │ gzip:  2.28 kB
+.svelte-kit/output/server/entries/pages/specs/_specId_/_page.server.ts.js             9.01 kB │ gzip:  3.10 kB
+.svelte-kit/output/server/chunks/workspace-query.js                                   9.96 kB │ gzip:  2.94 kB
+.svelte-kit/output/server/chunks/ui-projects.js                                      10.51 kB │ gzip:  3.34 kB
+.svelte-kit/output/server/chunks/exports.js                                          11.24 kB │ gzip:  3.51 kB
+.svelte-kit/output/server/chunks/workspace-detail.js                                 11.47 kB │ gzip:  3.16 kB
+.svelte-kit/output/server/chunks/domain.js                                           11.83 kB │ gzip:  2.52 kB
+.svelte-kit/output/server/chunks/Icon.js                                             12.44 kB │ gzip:  2.66 kB
+.svelte-kit/output/server/chunks/controller.svelte.js                                12.92 kB │ gzip:  3.78 kB
+.svelte-kit/output/server/entries/pages/specs/_page.svelte.js                        13.26 kB │ gzip:  3.94 kB
+.svelte-kit/output/server/chunks/DocumentBody.js                                     15.65 kB │ gzip:  3.76 kB
+.svelte-kit/output/server/chunks/detail-resource.js                                  20.87 kB │ gzip:  5.35 kB
+.svelte-kit/output/server/chunks/clipboard.js                                        24.52 kB │ gzip:  6.03 kB
+.svelte-kit/output/server/entries/pages/_page.svelte.js                              26.14 kB │ gzip:  4.74 kB
+.svelte-kit/output/server/remote-entry.js                                            28.57 kB │ gzip:  6.06 kB
+.svelte-kit/output/server/chunks/utils.js                                            28.63 kB │ gzip:  8.32 kB
+.svelte-kit/output/server/chunks/AnalysisFilters.js                                  29.54 kB │ gzip:  5.93 kB
+.svelte-kit/output/server/chunks/workspace.js                                        34.77 kB │ gzip:  9.06 kB
+.svelte-kit/output/server/chunks/TaskDetail.js                                       35.08 kB │ gzip:  4.72 kB
+.svelte-kit/output/server/entries/pages/timeline/_page.svelte.js                     35.69 kB │ gzip:  8.36 kB
+.svelte-kit/output/server/entries/pages/tasks/_page.svelte.js                        38.63 kB │ gzip:  8.16 kB
+.svelte-kit/output/server/chunks/repository.js                                       41.44 kB │ gzip: 11.53 kB
+.svelte-kit/output/server/chunks/SpecDetail.js                                       43.56 kB │ gzip:  7.74 kB
+.svelte-kit/output/server/entries/pages/_layout.svelte.js                            47.54 kB │ gzip:  8.28 kB
+.svelte-kit/output/server/chunks/state.js                                            51.21 kB │ gzip: 15.08 kB
+.svelte-kit/output/server/index.js                                                  118.59 kB │ gzip: 30.28 kB
+.svelte-kit/output/server/chunks/internal.js                                        147.03 kB │ gzip: 38.53 kB
+
+[33m[PLUGIN_TIMINGS] Warning:[0m Your build spent significant time in plugins. Here is a breakdown:
+  - vite-plugin-sveltekit-guard (64%)
+  - vite-plugin-sveltekit-virtual-modules (24%)
+  - vite-plugin-svelte:compile (7%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✓ built in 12.12s
+
+Run npm run preview to preview your production build locally.
+
+> Using @sveltejs/adapter-node
+Circular dependency: ../node_modules/smol-toml/dist/struct.js -> ../node_modules/smol-toml/dist/extract.js -> ../node_modules/smol-toml/dist/struct.js
+  ✔ done
+Precompiled UI verified: bb388cc5ad71ba8567c8061441fb0f68fe2c06740a98e4ad485451caa1a3cae5 (627 files). Stop running UI servers before rebuilding.
+
+packed 1.74KB package.json
+packed 36.29KB README.md
+packed 59.17KB bun.lock
+packed 3.40KB scripts/build-ui.ts
+packed 2.18KB src/AGENTS.md
+packed 1.79KB src/backends/AGENTS.md
+packed 0.72KB src/backends/base.ts
+packed 4.89KB src/backends/deterministic.ts
+packed 0.81KB src/backends/index.ts
+packed 9.40KB src/backends/prompt.ts
+packed 10.48KB src/backends/subprocess.ts
+packed 7.25KB src/cli.ts
+packed 1.79KB src/commands/AGENTS.md
+packed 1.92KB src/commands/agent.ts
+packed 0.53KB src/commands/agents.ts
+packed 3.33KB src/commands/current.ts
+packed 0.79KB src/commands/doctor.ts
+packed 4.0KB src/commands/handoff.ts
+packed 1.31KB src/commands/hook-context.ts
+packed 3.74KB src/commands/hooks.ts
+packed 0.79KB src/commands/import.ts
+packed 7.26KB src/commands/init.ts
+packed 13.0KB src/commands/memory.ts
+packed 1.13KB src/commands/nexus.ts
+packed 4.24KB src/commands/portfolio.ts
+packed 1.34KB src/commands/profile.ts
+packed 1.12KB src/commands/release.ts
+packed 0.85KB src/commands/reshape.ts
+packed 10.36KB src/commands/resume.ts
+packed 3.58KB src/commands/spec.ts
+packed 4.33KB src/commands/status.ts
+packed 6.21KB src/commands/task.ts
+packed 0.61KB src/commands/tests.ts
+packed 3.87KB src/commands/ui.ts
+packed 4.48KB src/document-parse-memo.ts
+packed 1.99KB src/document-reader.ts
+packed 20.0KB src/domain.ts
+packed 16.90KB src/engine.ts
+packed 2.34KB src/frontmatter.ts
+packed 5.77KB src/index.ts
+packed 5.77KB src/index.ts
+packed 1.61KB src/paths.ts
+packed 37.88KB src/repository.ts
+packed 1.79KB src/services/AGENTS.md
+packed 47.18KB src/services/adoption.ts
+packed 8.73KB src/services/agent-workflow.ts
+packed 8.1KB src/services/agents.ts
+packed 17.13KB src/services/context-pack.ts
+packed 259B src/services/contracts.ts
+packed 27.33KB src/services/dashboard.ts
+packed 6.1KB src/services/detail-relations.ts
+packed 14.0KB src/services/details.ts
+packed 24.42KB src/services/doctor.ts
+packed 0.54KB src/services/document-provenance.ts
+packed 2.55KB src/services/harness-artifacts.ts
+packed 0.83KB src/services/harness-context.ts
+packed 11.45KB src/services/harness-diagnostics.ts
+packed 10.10KB src/services/harness-guard.ts
+packed 11.73KB src/services/harness-hook-context.ts
+packed 11.1KB src/services/harness-hooks.ts
+packed 6.99KB src/services/harness-native.ts
+packed 4.54KB src/services/harness-paths.ts
+packed 4.46KB src/services/harness-probe.ts
+packed 8.27KB src/services/harness-process.ts
+packed 11.61KB src/services/harness-receipts.ts
+packed 5.82KB src/services/harness-run-evidence.ts
+packed 4.82KB src/services/harness-run-handoff.ts
+packed 3.0KB src/services/hooks.ts
+packed 13.34KB src/services/layout.ts
+packed 5.96KB src/services/legacy-import.ts
+packed 15.22KB src/services/memory-brief.ts
+packed 10.52KB src/services/memory-consolidation.ts
+packed 11.52KB src/services/memory-evals.ts
+packed 7.68KB src/services/memory-index.ts
+packed 11.95KB src/services/memory-links.ts
+packed 9.23KB src/services/memory-note.ts
+packed 12.64KB src/services/memory-query.ts
+packed 2.45KB src/services/memory-scopes.ts
+packed 13.80KB src/services/nexus.ts
+packed 17.68KB src/services/portfolio.ts
+packed 4.35KB src/services/profiles.ts
+packed 4.1KB src/services/release.ts
+packed 4.43KB src/services/resume-render.ts
+packed 3.51KB src/services/resume-snapshot.ts
+packed 3.1KB src/services/resume-window.ts
+packed 3.92KB src/services/spec-answer-evaluation.ts
+packed 8.80KB src/services/spec-import.ts
+packed 10.65KB src/services/spec-questions.ts
+packed 3.49KB src/services/test-diagnostics.ts
+packed 6.70KB src/services/ui-artifacts.ts
+packed 2.58KB src/services/ui-projects.ts
+packed 4.69KB src/services/ui.ts
+packed 1.11KB src/services/version.ts
+packed 3.16KB src/services/workspace-detail.ts
+packed 12.78KB src/services/workspace-query.ts
+packed 7.66KB src/services/workspace-timeline-contract.ts
+packed 5.21KB src/services/workspace-timeline.ts
+packed 16.18KB src/services/workspace.ts
+packed 7.57KB src/spec-answer-write.ts
+packed 5.83KB src/storage.ts
+packed 12.48KB src/templates.ts
+packed 432B tsconfig.json
+packed 17.70KB web/build/client/_app/immutable/assets/0.BobR7juS.css
+packed 3.41KB web/build/client/_app/immutable/assets/0.BobR7juS.css.br
+packed 3.88KB web/build/client/_app/immutable/assets/0.BobR7juS.css.gz
+packed 11.79KB web/build/client/_app/immutable/assets/10.CRRViwSI.css
+packed 2.0KB web/build/client/_app/immutable/assets/10.CRRViwSI.css.br
+packed 2.33KB web/build/client/_app/immutable/assets/10.CRRViwSI.css.gz
+packed 4.88KB web/build/client/_app/immutable/assets/4.BHBoAc5j.css
+packed 0.98KB web/build/client/_app/immutable/assets/4.BHBoAc5j.css.br
+packed 1.15KB web/build/client/_app/immutable/assets/4.BHBoAc5j.css.gz
+packed 1.15KB web/build/client/_app/immutable/assets/5.B0GU-oq3.css
+packed 394B web/build/client/_app/immutable/assets/5.B0GU-oq3.css.br
+packed 480B web/build/client/_app/immutable/assets/5.B0GU-oq3.css.gz
+packed 2.0KB web/build/client/_app/immutable/assets/6.B62-_ILF.css
+packed 0.56KB web/build/client/_app/immutable/assets/6.B62-_ILF.css.br
+packed 0.68KB web/build/client/_app/immutable/assets/6.B62-_ILF.css.gz
+packed 5.48KB web/build/client/_app/immutable/assets/8.DeSFm_VM.css
+packed 1.21KB web/build/client/_app/immutable/assets/8.DeSFm_VM.css.br
+packed 1.42KB web/build/client/_app/immutable/assets/8.DeSFm_VM.css.gz
+packed 11.14KB web/build/client/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css
+packed 1.64KB web/build/client/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css.br
+packed 1.96KB web/build/client/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css.gz
+packed 425B web/build/client/_app/immutable/assets/CanonicalDetailReader.DPrgmtIZ.css
+packed 193B web/build/client/_app/immutable/assets/CanonicalDetailReader.DPrgmtIZ.css.br
+packed 255B web/build/client/_app/immutable/assets/CanonicalDetailReader.DPrgmtIZ.css.gz
+packed 4.96KB web/build/client/_app/immutable/assets/DocumentBody.CsrG5M8-.css
+packed 1.12KB web/build/client/_app/immutable/assets/DocumentBody.CsrG5M8-.css.br
+packed 1.30KB web/build/client/_app/immutable/assets/DocumentBody.CsrG5M8-.css.gz
+packed 487B web/build/client/_app/immutable/assets/NotFound.Bm-6FK7c.css
+packed 242B web/build/client/_app/immutable/assets/NotFound.Bm-6FK7c.css.br
+packed 284B web/build/client/_app/immutable/assets/NotFound.Bm-6FK7c.css.gz
+packed 1.18KB web/build/client/_app/immutable/assets/Popover.CbkP4Jr3.css
+packed 411B web/build/client/_app/immutable/assets/Popover.CbkP4Jr3.css.br
+packed 0.52KB web/build/client/_app/immutable/assets/Popover.CbkP4Jr3.css.gz
+packed 9.44KB web/build/client/_app/immutable/assets/SpecDetail.Csz8Vdhg.css
+packed 1.66KB web/build/client/_app/immutable/assets/SpecDetail.Csz8Vdhg.css.br
+packed 1.93KB web/build/client/_app/immutable/assets/SpecDetail.Csz8Vdhg.css.gz
+packed 5.92KB web/build/client/_app/immutable/assets/TaskDetail.Cf-RtEJI.css
+packed 1.11KB web/build/client/_app/immutable/assets/TaskDetail.Cf-RtEJI.css.br
+packed 1.27KB web/build/client/_app/immutable/assets/TaskDetail.Cf-RtEJI.css.gz
+packed 7.84KB web/build/client/_app/immutable/assets/clipboard.DlOKRyUC.css
+packed 1.51KB web/build/client/_app/immutable/assets/clipboard.DlOKRyUC.css.br
+packed 1.79KB web/build/client/_app/immutable/assets/clipboard.DlOKRyUC.css.gz
+packed 13.97KB web/build/client/_app/immutable/chunks/-MQCgAu3.js
+packed 3.12KB web/build/client/_app/immutable/chunks/-MQCgAu3.js.br
+packed 3.61KB web/build/client/_app/immutable/chunks/-MQCgAu3.js.gz
+packed 0.53KB web/build/client/_app/immutable/chunks/-acyJOWA.js
+packed 372B web/build/client/_app/immutable/chunks/-acyJOWA.js.br
+packed 371B web/build/client/_app/immutable/chunks/-acyJOWA.js.gz
+packed 0.64KB web/build/client/_app/immutable/chunks/0bezph14.js
+packed 331B web/build/client/_app/immutable/chunks/0bezph14.js.br
+packed 397B web/build/client/_app/immutable/chunks/0bezph14.js.gz
+packed 486B web/build/client/_app/immutable/chunks/1BkzNeLj.js
+packed 292B web/build/client/_app/immutable/chunks/1BkzNeLj.js.br
+packed 335B web/build/client/_app/immutable/chunks/1BkzNeLj.js.gz
+packed 1.59KB web/build/client/_app/immutable/chunks/1oUqwrMd.js
+packed 0.77KB web/build/client/_app/immutable/chunks/1oUqwrMd.js.br
+packed 0.91KB web/build/client/_app/immutable/chunks/1oUqwrMd.js.gz
+packed 1.82KB web/build/client/_app/immutable/chunks/2i8nHxaG.js
+packed 0.76KB web/build/client/_app/immutable/chunks/2i8nHxaG.js.br
+packed 0.88KB web/build/client/_app/immutable/chunks/2i8nHxaG.js.gz
+packed 1.37KB web/build/client/_app/immutable/chunks/3bS5Qdo8.js
+packed 0.73KB web/build/client/_app/immutable/chunks/3bS5Qdo8.js.br
+packed 0.78KB web/build/client/_app/immutable/chunks/3bS5Qdo8.js.gz
+packed 69.12KB web/build/client/_app/immutable/chunks/5k_IYXcI.js
+packed 15.44KB web/build/client/_app/immutable/chunks/5k_IYXcI.js.br
+packed 18.94KB web/build/client/_app/immutable/chunks/5k_IYXcI.js.gz
+packed 146B web/build/client/_app/immutable/chunks/9wvpgT5P.js
+packed 83B web/build/client/_app/immutable/chunks/9wvpgT5P.js.br
+packed 127B web/build/client/_app/immutable/chunks/9wvpgT5P.js.gz
+packed 2.69KB web/build/client/_app/immutable/chunks/B0C-Xw3t2.js
+packed 1.18KB web/build/client/_app/immutable/chunks/B0C-Xw3t2.js.br
+packed 1.28KB web/build/client/_app/immutable/chunks/B0C-Xw3t2.js.gz
+packed 4.16KB web/build/client/_app/immutable/chunks/B1ROmh-n2.js
+packed 1.60KB web/build/client/_app/immutable/chunks/B1ROmh-n2.js.br
+packed 1.76KB web/build/client/_app/immutable/chunks/B1ROmh-n2.js.gz
+packed 447B web/build/client/_app/immutable/chunks/B1U2RHOk2.js
+packed 256B web/build/client/_app/immutable/chunks/B1U2RHOk2.js.br
+packed 304B web/build/client/_app/immutable/chunks/B1U2RHOk2.js.gz
+packed 40.57KB web/build/client/_app/immutable/chunks/B24-xRPk.js
+packed 13.24KB web/build/client/_app/immutable/chunks/B24-xRPk.js.br
+packed 14.65KB web/build/client/_app/immutable/chunks/B24-xRPk.js.gz
+packed 2.16KB web/build/client/_app/immutable/chunks/B3VN6t2h.js
+packed 0.85KB web/build/client/_app/immutable/chunks/B3VN6t2h.js.br
+packed 0.96KB web/build/client/_app/immutable/chunks/B3VN6t2h.js.gz
+packed 0.59KB web/build/client/_app/immutable/chunks/B3hblkxS.js
+packed 349B web/build/client/_app/immutable/chunks/B3hblkxS.js.br
+packed 391B web/build/client/_app/immutable/chunks/B3hblkxS.js.gz
+packed 0.59KB web/build/client/_app/immutable/chunks/B6pl8o7U2.js
+packed 315B web/build/client/_app/immutable/chunks/B6pl8o7U2.js.br
+packed 382B web/build/client/_app/immutable/chunks/B6pl8o7U2.js.gz
+packed 30.37KB web/build/client/_app/immutable/chunks/BAqRNokM.js
+packed 9.91KB web/build/client/_app/immutable/chunks/BAqRNokM.js.br
+packed 10.81KB web/build/client/_app/immutable/chunks/BAqRNokM.js.gz
+packed 1.16KB web/build/client/_app/immutable/chunks/BDJH2Jpk2.js
+packed 0.54KB web/build/client/_app/immutable/chunks/BDJH2Jpk2.js.br
+packed 0.61KB web/build/client/_app/immutable/chunks/BDJH2Jpk2.js.gz
+packed 0.56KB web/build/client/_app/immutable/chunks/BE7MGo282.js
+packed 315B web/build/client/_app/immutable/chunks/BE7MGo282.js.br
+packed 367B web/build/client/_app/immutable/chunks/BE7MGo282.js.gz
+packed 176B web/build/client/_app/immutable/chunks/BEfOvqNz2.js
+packed 140B web/build/client/_app/immutable/chunks/BEfOvqNz2.js.br
+packed 150B web/build/client/_app/immutable/chunks/BEfOvqNz2.js.gz
+packed 1.45KB web/build/client/_app/immutable/chunks/BEjJ0wIn.js
+packed 0.66KB web/build/client/_app/immutable/chunks/BEjJ0wIn.js.br
+packed 0.77KB web/build/client/_app/immutable/chunks/BEjJ0wIn.js.gz
+packed 1.21KB web/build/client/_app/immutable/chunks/BFYQcBYR.js
+packed 0.57KB web/build/client/_app/immutable/chunks/BFYQcBYR.js.br
+packed 0.69KB web/build/client/_app/immutable/chunks/BFYQcBYR.js.gz
+packed 10.32KB web/build/client/_app/immutable/chunks/BKA0B7mv.js
+packed 3.26KB web/build/client/_app/immutable/chunks/BKA0B7mv.js.br
+packed 3.54KB web/build/client/_app/immutable/chunks/BKA0B7mv.js.gz
+packed 10.93KB web/build/client/_app/immutable/chunks/BS6uNIVQ2.js
+packed 3.65KB web/build/client/_app/immutable/chunks/BS6uNIVQ2.js.br
+packed 4.0KB web/build/client/_app/immutable/chunks/BS6uNIVQ2.js.gz
+packed 7.52KB web/build/client/_app/immutable/chunks/BVdxQekS2.js
+packed 2.60KB web/build/client/_app/immutable/chunks/BVdxQekS2.js.br
+packed 2.83KB web/build/client/_app/immutable/chunks/BVdxQekS2.js.gz
+packed 257.18KB web/build/client/_app/immutable/chunks/BXAyFsPT.js
+packed 62.58KB web/build/client/_app/immutable/chunks/BXAyFsPT.js.br
+packed 75.38KB web/build/client/_app/immutable/chunks/BXAyFsPT.js.gz
+packed 89B web/build/client/_app/immutable/chunks/BXUFfzzM2.js
+packed 75B web/build/client/_app/immutable/chunks/BXUFfzzM2.js.br
+packed 96B web/build/client/_app/immutable/chunks/BXUFfzzM2.js.gz
+packed 92B web/build/client/_app/immutable/chunks/BXflPZ6O.js
+packed 90B web/build/client/_app/immutable/chunks/BXflPZ6O.js.br
+packed 100B web/build/client/_app/immutable/chunks/BXflPZ6O.js.gz
+packed 447B web/build/client/_app/immutable/chunks/BY55pox_2.js
+packed 253B web/build/client/_app/immutable/chunks/BY55pox_2.js.br
+packed 301B web/build/client/_app/immutable/chunks/BY55pox_2.js.gz
+packed 3.93KB web/build/client/_app/immutable/chunks/BYEeKO0B.js
+packed 1.1KB web/build/client/_app/immutable/chunks/BYEeKO0B.js.br
+packed 1.20KB web/build/client/_app/immutable/chunks/BYEeKO0B.js.gz
+packed 457B web/build/client/_app/immutable/chunks/B_H-k1BJ.js
+packed 325B web/build/client/_app/immutable/chunks/B_H-k1BJ.js.br
+packed 339B web/build/client/_app/immutable/chunks/B_H-k1BJ.js.gz
+packed 146.66KB web/build/client/_app/immutable/chunks/Bcn4Hv9c.js
+packed 33.97KB web/build/client/_app/immutable/chunks/Bcn4Hv9c.js.br
+packed 39.54KB web/build/client/_app/immutable/chunks/Bcn4Hv9c.js.gz
+packed 54.85KB web/build/client/_app/immutable/chunks/BdrQfsy7.js
+packed 18.89KB web/build/client/_app/immutable/chunks/BdrQfsy7.js.br
+packed 20.69KB web/build/client/_app/immutable/chunks/BdrQfsy7.js.gz
+packed 36.52KB web/build/client/_app/immutable/chunks/Bek7g6hH.js
+packed 10.26KB web/build/client/_app/immutable/chunks/Bek7g6hH.js.br
+packed 11.56KB web/build/client/_app/immutable/chunks/Bek7g6hH.js.gz
+packed 5.12KB web/build/client/_app/immutable/chunks/BlvdTFOK2.js
+packed 2.00KB web/build/client/_app/immutable/chunks/BlvdTFOK2.js.br
+packed 2.20KB web/build/client/_app/immutable/chunks/BlvdTFOK2.js.gz
+packed 60.0KB web/build/client/_app/immutable/chunks/Bpw7ERwv2.js
+packed 15.62KB web/build/client/_app/immutable/chunks/Bpw7ERwv2.js.br
+packed 18.76KB web/build/client/_app/immutable/chunks/Bpw7ERwv2.js.gz
+packed 0.92KB web/build/client/_app/immutable/chunks/BsD7sPoI.js
+packed 398B web/build/client/_app/immutable/chunks/BsD7sPoI.js.br
+packed 449B web/build/client/_app/immutable/chunks/BsD7sPoI.js.gz
+packed 92B web/build/client/_app/immutable/chunks/BvsLTm6o.js
+packed 90B web/build/client/_app/immutable/chunks/BvsLTm6o.js.br
+packed 100B web/build/client/_app/immutable/chunks/BvsLTm6o.js.gz
+packed 0.90KB web/build/client/_app/immutable/chunks/BynG0Pxp2.js
+packed 440B web/build/client/_app/immutable/chunks/BynG0Pxp2.js.br
+packed 0.52KB web/build/client/_app/immutable/chunks/BynG0Pxp2.js.gz
+packed 55B web/build/client/_app/immutable/chunks/C-GPuh-R2.js
+packed 59B web/build/client/_app/immutable/chunks/C-GPuh-R2.js.br
+packed 70B web/build/client/_app/immutable/chunks/C-GPuh-R2.js.gz
+packed 94B web/build/client/_app/immutable/chunks/C2QRBU_42.js
+packed 89B web/build/client/_app/immutable/chunks/C2QRBU_42.js.br
+packed 101B web/build/client/_app/immutable/chunks/C2QRBU_42.js.gz
+packed 55B web/build/client/_app/immutable/chunks/CAu0sHqS2.js
+packed 59B web/build/client/_app/immutable/chunks/CAu0sHqS2.js.br
+packed 70B web/build/client/_app/immutable/chunks/CAu0sHqS2.js.gz
+packed 8.58KB web/build/client/_app/immutable/chunks/CDqeXBHW2.js
+packed 3.26KB web/build/client/_app/immutable/chunks/CDqeXBHW2.js.br
+packed 3.53KB web/build/client/_app/immutable/chunks/CDqeXBHW2.js.gz
+packed 24.59KB web/build/client/_app/immutable/chunks/CI0DCgqk2.js
+packed 7.55KB web/build/client/_app/immutable/chunks/CI0DCgqk2.js.br
+packed 8.58KB web/build/client/_app/immutable/chunks/CI0DCgqk2.js.gz
+packed 27.10KB web/build/client/_app/immutable/chunks/CJqXhI642.js
+packed 7.80KB web/build/client/_app/immutable/chunks/CJqXhI642.js.br
+packed 8.77KB web/build/client/_app/immutable/chunks/CJqXhI642.js.gz
+packed 30.79KB web/build/client/_app/immutable/chunks/CLtkeVA4.js
+packed 8.13KB web/build/client/_app/immutable/chunks/CLtkeVA4.js.br
+packed 9.45KB web/build/client/_app/immutable/chunks/CLtkeVA4.js.gz
+packed 0.51KB web/build/client/_app/immutable/chunks/CO1YZcBN.js
+packed 314B web/build/client/_app/immutable/chunks/CO1YZcBN.js.br
+packed 355B web/build/client/_app/immutable/chunks/CO1YZcBN.js.gz
+packed 4.65KB web/build/client/_app/immutable/chunks/COSB8fVN.js
+packed 1.96KB web/build/client/_app/immutable/chunks/COSB8fVN.js.br
+packed 2.11KB web/build/client/_app/immutable/chunks/COSB8fVN.js.gz
+packed 98B web/build/client/_app/immutable/chunks/CQEtJWY72.js
+packed 99B web/build/client/_app/immutable/chunks/CQEtJWY72.js.br
+packed 104B web/build/client/_app/immutable/chunks/CQEtJWY72.js.gz
+packed 10.27KB web/build/client/_app/immutable/chunks/CQRqJu6q.js
+packed 3.50KB web/build/client/_app/immutable/chunks/CQRqJu6q.js.br
+packed 3.99KB web/build/client/_app/immutable/chunks/CQRqJu6q.js.gz
+packed 0.56KB web/build/client/_app/immutable/chunks/CQn0g0cK2.js
+packed 303B web/build/client/_app/immutable/chunks/CQn0g0cK2.js.br
+packed 340B web/build/client/_app/immutable/chunks/CQn0g0cK2.js.gz
+packed 0.60KB web/build/client/_app/immutable/chunks/CSz3IaOY.js
+packed 362B web/build/client/_app/immutable/chunks/CSz3IaOY.js.br
+packed 371B web/build/client/_app/immutable/chunks/CSz3IaOY.js.gz
+packed 41.85KB web/build/client/_app/immutable/chunks/CToUOubw2.js
+packed 12.67KB web/build/client/_app/immutable/chunks/CToUOubw2.js.br
+packed 14.0KB web/build/client/_app/immutable/chunks/CToUOubw2.js.gz
+packed 208B web/build/client/_app/immutable/chunks/CWXbMxSx.js
+packed 153B web/build/client/_app/immutable/chunks/CWXbMxSx.js.br
+packed 159B web/build/client/_app/immutable/chunks/CWXbMxSx.js.gz
+packed 0.68KB web/build/client/_app/immutable/chunks/CYKWnH02.js
+packed 342B web/build/client/_app/immutable/chunks/CYKWnH02.js.br
+packed 384B web/build/client/_app/immutable/chunks/CYKWnH02.js.gz
+packed 439B web/build/client/_app/immutable/chunks/CYvZr2l42.js
+packed 251B web/build/client/_app/immutable/chunks/CYvZr2l42.js.br
+packed 299B web/build/client/_app/immutable/chunks/CYvZr2l42.js.gz
+packed 107B web/build/client/_app/immutable/chunks/CZq7y03d.js
+packed 87B web/build/client/_app/immutable/chunks/CZq7y03d.js.br
+packed 112B web/build/client/_app/immutable/chunks/CZq7y03d.js.gz
+packed 495B web/build/client/_app/immutable/chunks/C_MzhVxT.js
+packed 229B web/build/client/_app/immutable/chunks/C_MzhVxT.js.br
+packed 268B web/build/client/_app/immutable/chunks/C_MzhVxT.js.gz
+packed 10.32KB web/build/client/_app/immutable/chunks/Cbk0RRDb.js
+packed 3.80KB web/build/client/_app/immutable/chunks/Cbk0RRDb.js.br
+packed 4.20KB web/build/client/_app/immutable/chunks/Cbk0RRDb.js.gz
+packed 214.73KB web/build/client/_app/immutable/chunks/CdfvNQx3.js
+packed 24.87KB web/build/client/_app/immutable/chunks/CdfvNQx3.js.br
+packed 30.44KB web/build/client/_app/immutable/chunks/CdfvNQx3.js.gz
+packed 12.69KB web/build/client/_app/immutable/chunks/Cek6tuw1.js
+packed 3.55KB web/build/client/_app/immutable/chunks/Cek6tuw1.js.br
+packed 3.95KB web/build/client/_app/immutable/chunks/Cek6tuw1.js.gz
+packed 39.95KB web/build/client/_app/immutable/chunks/CfY5Zsx3.js
+packed 9.75KB web/build/client/_app/immutable/chunks/CfY5Zsx3.js.br
+packed 10.98KB web/build/client/_app/immutable/chunks/CfY5Zsx3.js.gz
+packed 2.48KB web/build/client/_app/immutable/chunks/Cg2O0P-0.js
+packed 0.96KB web/build/client/_app/immutable/chunks/Cg2O0P-0.js.br
+packed 1.1KB web/build/client/_app/immutable/chunks/Cg2O0P-0.js.gz
+packed 21.67KB web/build/client/_app/immutable/chunks/Ch2T6ZuT.js
+packed 7.10KB web/build/client/_app/immutable/chunks/Ch2T6ZuT.js.br
+packed 7.74KB web/build/client/_app/immutable/chunks/Ch2T6ZuT.js.gz
+packed 52.49KB web/build/client/_app/immutable/chunks/ClYDgPKD.js
+packed 15.46KB web/build/client/_app/immutable/chunks/ClYDgPKD.js.br
+packed 16.89KB web/build/client/_app/immutable/chunks/ClYDgPKD.js.gz
+packed 39B web/build/client/_app/immutable/chunks/CrP-1Ken.js
+packed 43B web/build/client/_app/immutable/chunks/CrP-1Ken.js.br
+packed 59B web/build/client/_app/immutable/chunks/CrP-1Ken.js.gz
+packed 216B web/build/client/_app/immutable/chunks/CtLvoQOY.js
+packed 158B web/build/client/_app/immutable/chunks/CtLvoQOY.js.br
+packed 193B web/build/client/_app/immutable/chunks/CtLvoQOY.js.gz
+packed 0.92KB web/build/client/_app/immutable/chunks/Cuu1mh1_.js
+packed 453B web/build/client/_app/immutable/chunks/Cuu1mh1_.js.br
+packed 0.56KB web/build/client/_app/immutable/chunks/Cuu1mh1_.js.gz
+packed 93B web/build/client/_app/immutable/chunks/Cy_M4HLC.js
+packed 79B web/build/client/_app/immutable/chunks/Cy_M4HLC.js.br
+packed 101B web/build/client/_app/immutable/chunks/Cy_M4HLC.js.gz
+packed 33.21KB web/build/client/_app/immutable/chunks/CzHCH2Uw.js
+packed 11.51KB web/build/client/_app/immutable/chunks/CzHCH2Uw.js.br
+packed 12.64KB web/build/client/_app/immutable/chunks/CzHCH2Uw.js.gz
+packed 22B web/build/client/_app/immutable/chunks/Czq3A1Br.js
+packed 26B web/build/client/_app/immutable/chunks/Czq3A1Br.js.br
+packed 42B web/build/client/_app/immutable/chunks/Czq3A1Br.js.gz
+packed 45.80KB web/build/client/_app/immutable/chunks/D1OkkT3G.js
+packed 14.11KB web/build/client/_app/immutable/chunks/D1OkkT3G.js.br
+packed 15.83KB web/build/client/_app/immutable/chunks/D1OkkT3G.js.gz
+packed 0.53KB web/build/client/_app/immutable/chunks/D4GDxuzX2.js
+packed 265B web/build/client/_app/immutable/chunks/D4GDxuzX2.js.br
+packed 314B web/build/client/_app/immutable/chunks/D4GDxuzX2.js.gz
+packed 0.89KB web/build/client/_app/immutable/chunks/D5yFSjE92.js
+packed 402B web/build/client/_app/immutable/chunks/D5yFSjE92.js.br
+packed 476B web/build/client/_app/immutable/chunks/D5yFSjE92.js.gz
+packed 81.37KB web/build/client/_app/immutable/chunks/D706AX-62.js
+packed 18.57KB web/build/client/_app/immutable/chunks/D706AX-62.js.br
+packed 21.22KB web/build/client/_app/immutable/chunks/D706AX-62.js.gz
+packed 28.14KB web/build/client/_app/immutable/chunks/D8JWS0a3.js
+packed 7.30KB web/build/client/_app/immutable/chunks/D8JWS0a3.js.br
+packed 8.0KB web/build/client/_app/immutable/chunks/D8JWS0a3.js.gz
+packed 99B web/build/client/_app/immutable/chunks/DCpFvSdt.js
+packed 90B web/build/client/_app/immutable/chunks/DCpFvSdt.js.br
+packed 109B web/build/client/_app/immutable/chunks/DCpFvSdt.js.gz
+packed 9.32KB web/build/client/_app/immutable/chunks/DF-A6XPv.js
+packed 2.86KB web/build/client/_app/immutable/chunks/DF-A6XPv.js.br
+packed 3.12KB web/build/client/_app/immutable/chunks/DF-A6XPv.js.gz
+packed 29.72KB web/build/client/_app/immutable/chunks/DH8MDbNZ.js
+packed 8.93KB web/build/client/_app/immutable/chunks/DH8MDbNZ.js.br
+packed 10.1KB web/build/client/_app/immutable/chunks/DH8MDbNZ.js.gz
+packed 161B web/build/client/_app/immutable/chunks/DHQPpBX_.js
+packed 124B web/build/client/_app/immutable/chunks/DHQPpBX_.js.br
+packed 154B web/build/client/_app/immutable/chunks/DHQPpBX_.js.gz
+packed 33.28KB web/build/client/_app/immutable/chunks/DHmK-Zo42.js
+packed 6.19KB web/build/client/_app/immutable/chunks/DHmK-Zo42.js.br
+packed 6.94KB web/build/client/_app/immutable/chunks/DHmK-Zo42.js.gz
+packed 33.32KB web/build/client/_app/immutable/chunks/DKapy2kZ2.js
+packed 8.28KB web/build/client/_app/immutable/chunks/DKapy2kZ2.js.br
+packed 9.52KB web/build/client/_app/immutable/chunks/DKapy2kZ2.js.gz
+packed 46.77KB web/build/client/_app/immutable/chunks/DNVi3Sgq2.js
+packed 12.21KB web/build/client/_app/immutable/chunks/DNVi3Sgq2.js.br
+packed 14.63KB web/build/client/_app/immutable/chunks/DNVi3Sgq2.js.gz
+packed 23.81KB web/build/client/_app/immutable/chunks/DNyzZnux.js
+packed 5.61KB web/build/client/_app/immutable/chunks/DNyzZnux.js.br
+packed 6.18KB web/build/client/_app/immutable/chunks/DNyzZnux.js.gz
+packed 17.1KB web/build/client/_app/immutable/chunks/DRSslWSz.js
+packed 5.18KB web/build/client/_app/immutable/chunks/DRSslWSz.js.br
+packed 5.95KB web/build/client/_app/immutable/chunks/DRSslWSz.js.gz
+packed 2.31KB web/build/client/_app/immutable/chunks/DT02CkBX.js
+packed 0.92KB web/build/client/_app/immutable/chunks/DT02CkBX.js.br
+packed 0.98KB web/build/client/_app/immutable/chunks/DT02CkBX.js.gz
+packed 445B web/build/client/_app/immutable/chunks/DT93R_A32.js
+packed 253B web/build/client/_app/immutable/chunks/DT93R_A32.js.br
+packed 301B web/build/client/_app/immutable/chunks/DT93R_A32.js.gz
+packed 69.1KB web/build/client/_app/immutable/chunks/DTWlUicK2.js
+packed 19.79KB web/build/client/_app/immutable/chunks/DTWlUicK2.js.br
+packed 22.21KB web/build/client/_app/immutable/chunks/DTWlUicK2.js.gz
+packed 28.89KB web/build/client/_app/immutable/chunks/DTfwCq7h2.js
+packed 7.59KB web/build/client/_app/immutable/chunks/DTfwCq7h2.js.br
+packed 8.42KB web/build/client/_app/immutable/chunks/DTfwCq7h2.js.gz
+packed 69.74KB web/build/client/_app/immutable/chunks/DZveUB8J.js
+packed 17.26KB web/build/client/_app/immutable/chunks/DZveUB8J.js.br
+packed 19.28KB web/build/client/_app/immutable/chunks/DZveUB8J.js.gz
+packed 20.1KB web/build/client/_app/immutable/chunks/DbbChBjR2.js
+packed 6.23KB web/build/client/_app/immutable/chunks/DbbChBjR2.js.br
+packed 6.93KB web/build/client/_app/immutable/chunks/DbbChBjR2.js.gz
+packed 23.50KB web/build/client/_app/immutable/chunks/DfdDLzr22.js
+packed 7.11KB web/build/client/_app/immutable/chunks/DfdDLzr22.js.br
+packed 7.82KB web/build/client/_app/immutable/chunks/DfdDLzr22.js.gz
+packed 395B web/build/client/_app/immutable/chunks/DfyjFTk8.js
+packed 223B web/build/client/_app/immutable/chunks/DfyjFTk8.js.br
+packed 260B web/build/client/_app/immutable/chunks/DfyjFTk8.js.gz
+packed 0.52MB web/build/client/_app/immutable/chunks/DiV1eA8g2.js
+packed 95.32KB web/build/client/_app/immutable/chunks/DiV1eA8g2.js.br
+packed 113.48KB web/build/client/_app/immutable/chunks/DiV1eA8g2.js.gz
+packed 1.91KB web/build/client/_app/immutable/chunks/Djyq2RGg.js
+packed 0.76KB web/build/client/_app/immutable/chunks/Djyq2RGg.js.br
+packed 0.84KB web/build/client/_app/immutable/chunks/Djyq2RGg.js.gz
+packed 85B web/build/client/_app/immutable/chunks/DlE_MOIh.js
+packed 86B web/build/client/_app/immutable/chunks/DlE_MOIh.js.br
+packed 100B web/build/client/_app/immutable/chunks/DlE_MOIh.js.gz
+packed 26.64KB web/build/client/_app/immutable/chunks/Dov3Ecp92.js
+packed 7.92KB web/build/client/_app/immutable/chunks/Dov3Ecp92.js.br
+packed 9.1KB web/build/client/_app/immutable/chunks/Dov3Ecp92.js.gz
+packed 491B web/build/client/_app/immutable/chunks/DqLG3M6k.js
+packed 255B web/build/client/_app/immutable/chunks/DqLG3M6k.js.br
+packed 299B web/build/client/_app/immutable/chunks/DqLG3M6k.js.gz
+packed 3.46KB web/build/client/_app/immutable/chunks/DqX7SfWV.js
+packed 1.29KB web/build/client/_app/immutable/chunks/DqX7SfWV.js.br
+packed 1.43KB web/build/client/_app/immutable/chunks/DqX7SfWV.js.gz
+packed 2.96KB web/build/client/_app/immutable/chunks/DrMxrR5C2.js
+packed 1.22KB web/build/client/_app/immutable/chunks/DrMxrR5C2.js.br
+packed 1.31KB web/build/client/_app/immutable/chunks/DrMxrR5C2.js.gz
+packed 90B web/build/client/_app/immutable/chunks/DvtYg6_42.js
+packed 94B web/build/client/_app/immutable/chunks/DvtYg6_42.js.br
+packed 97B web/build/client/_app/immutable/chunks/DvtYg6_42.js.gz
+packed 97.83KB web/build/client/_app/immutable/chunks/DwPxG-IM2.js
+packed 20.18KB web/build/client/_app/immutable/chunks/DwPxG-IM2.js.br
+packed 23.57KB web/build/client/_app/immutable/chunks/DwPxG-IM2.js.gz
+packed 0.87KB web/build/client/_app/immutable/chunks/DyAvRC39.js
+packed 442B web/build/client/_app/immutable/chunks/DyAvRC39.js.br
+packed 489B web/build/client/_app/immutable/chunks/DyAvRC39.js.gz
+packed 91B web/build/client/_app/immutable/chunks/Gwx4Nnv-2.js
+packed 76B web/build/client/_app/immutable/chunks/Gwx4Nnv-2.js.br
+packed 97B web/build/client/_app/immutable/chunks/Gwx4Nnv-2.js.gz
+packed 65B web/build/client/_app/immutable/chunks/I8rQr1kY.js
+packed 69B web/build/client/_app/immutable/chunks/I8rQr1kY.js.br
+packed 79B web/build/client/_app/immutable/chunks/I8rQr1kY.js.gz
+packed 2.1KB web/build/client/_app/immutable/chunks/NUmomMD7.js
+packed 0.73KB web/build/client/_app/immutable/chunks/NUmomMD7.js.br
+packed 0.80KB web/build/client/_app/immutable/chunks/NUmomMD7.js.gz
+packed 260B web/build/client/_app/immutable/chunks/PdXKG_76.js
+packed 176B web/build/client/_app/immutable/chunks/PdXKG_76.js.br
+packed 212B web/build/client/_app/immutable/chunks/PdXKG_76.js.gz
+packed 479B web/build/client/_app/immutable/chunks/PqPpRhrM.js
+packed 335B web/build/client/_app/immutable/chunks/PqPpRhrM.js.br
+packed 340B web/build/client/_app/immutable/chunks/PqPpRhrM.js.gz
+packed 15.38KB web/build/client/_app/immutable/chunks/QasPwOBX2.js
+packed 4.80KB web/build/client/_app/immutable/chunks/QasPwOBX2.js.br
+packed 5.30KB web/build/client/_app/immutable/chunks/QasPwOBX2.js.gz
+packed 1.17KB web/build/client/_app/immutable/chunks/QxjuN7Hf.js
+packed 492B web/build/client/_app/immutable/chunks/QxjuN7Hf.js.br
+packed 0.56KB web/build/client/_app/immutable/chunks/QxjuN7Hf.js.gz
+packed 115.43KB web/build/client/_app/immutable/chunks/Sizk375F.js
+packed 24.94KB web/build/client/_app/immutable/chunks/Sizk375F.js.br
+packed 29.86KB web/build/client/_app/immutable/chunks/Sizk375F.js.gz
+packed 23.11KB web/build/client/_app/immutable/chunks/UWTepzMM2.js
+packed 7.33KB web/build/client/_app/immutable/chunks/UWTepzMM2.js.br
+packed 8.0KB web/build/client/_app/immutable/chunks/UWTepzMM2.js.gz
+packed 0.77KB web/build/client/_app/immutable/chunks/X4ybTKTj.js
+packed 277B web/build/client/_app/immutable/chunks/X4ybTKTj.js.br
+packed 334B web/build/client/_app/immutable/chunks/X4ybTKTj.js.gz
+packed 92B web/build/client/_app/immutable/chunks/bpC3z4hM2.js
+packed 79B web/build/client/_app/immutable/chunks/bpC3z4hM2.js.br
+packed 99B web/build/client/_app/immutable/chunks/bpC3z4hM2.js.gz
+packed 24.73KB web/build/client/_app/immutable/chunks/cT5MZEVV.js
+packed 6.88KB web/build/client/_app/immutable/chunks/cT5MZEVV.js.br
+packed 7.84KB web/build/client/_app/immutable/chunks/cT5MZEVV.js.gz
+packed 30.34KB web/build/client/_app/immutable/chunks/ea6NE8Lh.js
+packed 8.93KB web/build/client/_app/immutable/chunks/ea6NE8Lh.js.br
+packed 9.83KB web/build/client/_app/immutable/chunks/ea6NE8Lh.js.gz
+packed 5.50KB web/build/client/_app/immutable/chunks/fY0WanTN.js
+packed 2.0KB web/build/client/_app/immutable/chunks/fY0WanTN.js.br
+packed 2.25KB web/build/client/_app/immutable/chunks/fY0WanTN.js.gz
+packed 5.69KB web/build/client/_app/immutable/chunks/ibLwkb2W2.js
+packed 2.1KB web/build/client/_app/immutable/chunks/ibLwkb2W2.js.br
+packed 2.32KB web/build/client/_app/immutable/chunks/ibLwkb2W2.js.gz
+packed 3.62KB web/build/client/_app/immutable/chunks/imzBzfnD2.js
+packed 1.56KB web/build/client/_app/immutable/chunks/imzBzfnD2.js.br
+packed 1.79KB web/build/client/_app/immutable/chunks/imzBzfnD2.js.gz
+packed 0.53KB web/build/client/_app/immutable/chunks/nVONgd5P2.js
+packed 265B web/build/client/_app/immutable/chunks/nVONgd5P2.js.br
+packed 314B web/build/client/_app/immutable/chunks/nVONgd5P2.js.gz
+packed 0.43MB web/build/client/_app/immutable/chunks/oHbKwv-W.js
+packed 115.1KB web/build/client/_app/immutable/chunks/oHbKwv-W.js.br
+packed 135.73KB web/build/client/_app/immutable/chunks/oHbKwv-W.js.gz
+packed 347B web/build/client/_app/immutable/chunks/px_3nk3X.js
+packed 204B web/build/client/_app/immutable/chunks/px_3nk3X.js.br
+packed 259B web/build/client/_app/immutable/chunks/px_3nk3X.js.gz
+packed 12.74KB web/build/client/_app/immutable/chunks/tjEmjgjX2.js
+packed 3.90KB web/build/client/_app/immutable/chunks/tjEmjgjX2.js.br
+packed 4.32KB web/build/client/_app/immutable/chunks/tjEmjgjX2.js.gz
+packed 5.44KB web/build/client/_app/immutable/chunks/umGmevus.js
+packed 1.88KB web/build/client/_app/immutable/chunks/umGmevus.js.br
+packed 2.1KB web/build/client/_app/immutable/chunks/umGmevus.js.gz
+packed 17.25KB web/build/client/_app/immutable/chunks/ysvvq8DF2.js
+packed 5.88KB web/build/client/_app/immutable/chunks/ysvvq8DF2.js.br
+packed 6.42KB web/build/client/_app/immutable/chunks/ysvvq8DF2.js.gz
+packed 5.27KB web/build/client/_app/immutable/entry/app.Y_rKW_bV.js
+packed 1.87KB web/build/client/_app/immutable/entry/app.Y_rKW_bV.js.br
+packed 2.1KB web/build/client/_app/immutable/entry/app.Y_rKW_bV.js.gz
+packed 82B web/build/client/_app/immutable/entry/start.D_KPR2z5.js
+packed 86B web/build/client/_app/immutable/entry/start.D_KPR2z5.js.br
+packed 92B web/build/client/_app/immutable/entry/start.D_KPR2z5.js.gz
+packed 29.84KB web/build/client/_app/immutable/nodes/0.BvKsAa73.js
+packed 9.0KB web/build/client/_app/immutable/nodes/0.BvKsAa73.js.br
+packed 10.23KB web/build/client/_app/immutable/nodes/0.BvKsAa73.js.gz
+packed 418B web/build/client/_app/immutable/nodes/1.lPNJKSVc.js
+packed 269B web/build/client/_app/immutable/nodes/1.lPNJKSVc.js.br
+packed 287B web/build/client/_app/immutable/nodes/1.lPNJKSVc.js.gz
+packed 31.42KB web/build/client/_app/immutable/nodes/10.CaLmB6z4.js
+packed 9.35KB web/build/client/_app/immutable/nodes/10.CaLmB6z4.js.br
+packed 10.60KB web/build/client/_app/immutable/nodes/10.CaLmB6z4.js.gz
+packed 0.56KB web/build/client/_app/immutable/nodes/2.CySL6Y8o.js
+packed 309B web/build/client/_app/immutable/nodes/2.CySL6Y8o.js.br
+packed 347B web/build/client/_app/immutable/nodes/2.CySL6Y8o.js.gz
+packed 0.56KB web/build/client/_app/immutable/nodes/3.DC-S8osv.js
+packed 308B web/build/client/_app/immutable/nodes/3.DC-S8osv.js.br
+packed 346B web/build/client/_app/immutable/nodes/3.DC-S8osv.js.gz
+packed 11.59KB web/build/client/_app/immutable/nodes/4.CF5IPWLw.js
+packed 2.88KB web/build/client/_app/immutable/nodes/4.CF5IPWLw.js.br
+packed 3.32KB web/build/client/_app/immutable/nodes/4.CF5IPWLw.js.gz
+packed 2.96KB web/build/client/_app/immutable/nodes/5.SLWzls2Z.js
+packed 1.1KB web/build/client/_app/immutable/nodes/5.SLWzls2Z.js.br
+packed 1.27KB web/build/client/_app/immutable/nodes/5.SLWzls2Z.js.gz
+packed 12.1KB web/build/client/_app/immutable/nodes/6.e9vIRnxz.js
+packed 4.18KB web/build/client/_app/immutable/nodes/6.e9vIRnxz.js.br
+packed 4.78KB web/build/client/_app/immutable/nodes/6.e9vIRnxz.js.gz
+packed 1.88KB web/build/client/_app/immutable/nodes/7.DJ4_r7k2.js
+packed 0.89KB web/build/client/_app/immutable/nodes/7.DJ4_r7k2.js.br
+packed 1.0KB web/build/client/_app/immutable/nodes/7.DJ4_r7k2.js.gz
+packed 22.18KB web/build/client/_app/immutable/nodes/8.CF7n_9ms.js
+packed 6.97KB web/build/client/_app/immutable/nodes/8.CF7n_9ms.js.br
+packed 7.93KB web/build/client/_app/immutable/nodes/8.CF7n_9ms.js.gz
+packed 0.61KB web/build/client/_app/immutable/nodes/9.DMopmrqy.js
+packed 315B web/build/client/_app/immutable/nodes/9.DMopmrqy.js.br
+packed 364B web/build/client/_app/immutable/nodes/9.DMopmrqy.js.gz
+packed 78B web/build/client/_app/version.json
+packed 65B web/build/client/_app/version.json.br
+packed 89B web/build/client/_app/version.json.gz
+packed 2.54KB web/build/env.js
+packed 4.81KB web/build/env.js.map
+packed 0.74KB web/build/handler.js
+packed 110B web/build/handler.js.map
+packed 4.65KB web/build/index.js
+packed 7.52KB web/build/index.js.map
+packed 29.55KB web/build/server/chunks/chunks/AnalysisFilters.js--FTU7bGC.js
+packed 52.18KB web/build/server/chunks/chunks/AnalysisFilters.js--FTU7bGC.js.map
+packed 4.23KB web/build/server/chunks/chunks/CanonicalDetailReader.js-DMOYO-m8.js
+packed 8.91KB web/build/server/chunks/chunks/CanonicalDetailReader.js-DMOYO-m8.js.map
+packed 15.74KB web/build/server/chunks/chunks/DocumentBody.js-CkF32xrp.js
+packed 26.55KB web/build/server/chunks/chunks/DocumentBody.js-CkF32xrp.js.map
+packed 12.49KB web/build/server/chunks/chunks/Icon.js-BfU7XlhT.js
+packed 15.94KB web/build/server/chunks/chunks/Icon.js-BfU7XlhT.js.map
+packed 1.1KB web/build/server/chunks/chunks/NotFound.js-CP9HHxf0.js
+packed 1.90KB web/build/server/chunks/chunks/NotFound.js-CP9HHxf0.js.map
+packed 0.84KB web/build/server/chunks/chunks/Popover.js-DYyzVrid.js
+packed 1.72KB web/build/server/chunks/chunks/Popover.js-DYyzVrid.js.map
+packed 43.60KB web/build/server/chunks/chunks/SpecDetail.js-28f5gy8c.js
+packed 75.47KB web/build/server/chunks/chunks/SpecDetail.js-28f5gy8c.js.map
+packed 0.73KB web/build/server/chunks/chunks/SpecDetail2.js-DXJcDwi2.js
+packed 126B web/build/server/chunks/chunks/SpecDetail2.js-DXJcDwi2.js.map
+packed 35.0KB web/build/server/chunks/chunks/TaskDetail.js-BZCbc46b.js
+packed 55.92KB web/build/server/chunks/chunks/TaskDetail.js-BZCbc46b.js.map
+packed 0.63KB web/build/server/chunks/chunks/TaskDetail2.js-Dk_Ho1kQ.js
+packed 124B web/build/server/chunks/chunks/TaskDetail2.js-Dk_Ho1kQ.js.map
+packed 4.27KB web/build/server/chunks/chunks/blocks.js-lhS3-EXv.js
+packed 5.63KB web/build/server/chunks/chunks/blocks.js-lhS3-EXv.js.map
+packed 4.19KB web/build/server/chunks/chunks/circle-check-big.js-COwALKln.js
+packed 5.41KB web/build/server/chunks/chunks/circle-check-big.js-COwALKln.js.map
+packed 17.26KB web/build/server/chunks/chunks/clipboard.js-CTUY8WP3.js
+packed 47.20KB web/build/server/chunks/chunks/clipboard.js-CTUY8WP3.js.map
+packed 0.91KB web/build/server/chunks/chunks/context.svelte.js-DRRKDj69.js
+packed 1.89KB web/build/server/chunks/chunks/context.svelte.js-DRRKDj69.js.map
+packed 12.19KB web/build/server/chunks/chunks/controller.svelte.js-BCSBb5JD.js
+packed 28.44KB web/build/server/chunks/chunks/controller.svelte.js-BCSBb5JD.js.map
+packed 4.0KB web/build/server/chunks/chunks/detail-relations.js-VfTj7f3z.js
+packed 9.35KB web/build/server/chunks/chunks/detail-relations.js-VfTj7f3z.js.map
+packed 3.33KB web/build/server/chunks/chunks/detail-resource.js-BMADyxsY.js
+packed 26.63KB web/build/server/chunks/chunks/detail-resource.js-BMADyxsY.js.map
+packed 448B web/build/server/chunks/chunks/detail.js-DWHagrlm.js
+packed 0.72KB web/build/server/chunks/chunks/detail.js-DWHagrlm.js.map
+packed 11.87KB web/build/server/chunks/chunks/domain.js-BKHL1dQz.js
+packed 24.89KB web/build/server/chunks/chunks/domain.js-BKHL1dQz.js.map
+packed 0.87KB web/build/server/chunks/chunks/environment.js-qq-3H2U-.js
+packed 2.1KB web/build/server/chunks/chunks/environment.js-qq-3H2U-.js.map
+packed 10.96KB web/build/server/chunks/chunks/exports.js-BI_0Tk-B.js
+packed 22.71KB web/build/server/chunks/chunks/exports.js-BI_0Tk-B.js.map
+packed 4.35KB web/build/server/chunks/chunks/folder-kanban.js-LUw7pS61.js
+packed 5.72KB web/build/server/chunks/chunks/folder-kanban.js-LUw7pS61.js.map
+packed 4.28KB web/build/server/chunks/chunks/git-branch.js-B905Ci1J.js
+packed 5.77KB web/build/server/chunks/chunks/git-branch.js-B905Ci1J.js.map
+packed 2.91KB web/build/server/chunks/chunks/history.js-r2oAWVj5.js
+packed 6.89KB web/build/server/chunks/chunks/history.js-r2oAWVj5.js.map
+packed 175.78KB web/build/server/chunks/chunks/internal.js-0CspeVru.js
+packed 0.36MB web/build/server/chunks/chunks/internal.js-0CspeVru.js.map
+packed 1.46KB web/build/server/chunks/chunks/location.svelte.js-Dk6j1ry0.js
+packed 2.99KB web/build/server/chunks/chunks/location.svelte.js-Dk6j1ry0.js.map
+packed 401B web/build/server/chunks/chunks/modules.js-CtOTaEM3.js
+packed 0.68KB web/build/server/chunks/chunks/modules.js-CtOTaEM3.js.map
+packed 4.46KB web/build/server/chunks/chunks/notebook-text.js-D00okmBw.js
+packed 6.27KB web/build/server/chunks/chunks/notebook-text.js-D00okmBw.js.map
+packed 1.35KB web/build/server/chunks/chunks/question-context.js-CVjEmPIr.js
+packed 2.67KB web/build/server/chunks/chunks/question-context.js-CVjEmPIr.js.map
+packed 74.80KB web/build/server/chunks/chunks/repository.js-8T8KUwL3.js
+packed 155.0KB web/build/server/chunks/chunks/repository.js-8T8KUwL3.js.map
+packed 0.61KB web/build/server/chunks/chunks/resource.svelte.js-GgGh6JlZ.js
+packed 1.33KB web/build/server/chunks/chunks/resource.svelte.js-GgGh6JlZ.js.map
+packed 4.87KB web/build/server/chunks/chunks/shared.js-jePD4fAD.js
+packed 11.41KB web/build/server/chunks/chunks/shared.js-jePD4fAD.js.map
+packed 8.39KB web/build/server/chunks/chunks/spec-questions.js-D55CiMvH.js
+packed 18.74KB web/build/server/chunks/chunks/spec-questions.js-D55CiMvH.js.map
+packed 7.94KB web/build/server/chunks/chunks/state.js-tOj-3LTI.js
+packed 58.0KB web/build/server/chunks/chunks/state.js-tOj-3LTI.js.map
+packed 10.57KB web/build/server/chunks/chunks/ui-projects.js-C5XLn7kk.js
+packed 23.87KB web/build/server/chunks/chunks/ui-projects.js-C5XLn7kk.js.map
+packed 30.0KB web/build/server/chunks/chunks/utils.js-Bed777ay.js
+packed 71.93KB web/build/server/chunks/chunks/utils.js-Bed777ay.js.map
+packed 11.58KB web/build/server/chunks/chunks/workspace-detail.js-BSgRUJud.js
+packed 26.1KB web/build/server/chunks/chunks/workspace-detail.js-BSgRUJud.js.map
+packed 9.98KB web/build/server/chunks/chunks/workspace-query.js-bq2wu9AI.js
+packed 23.1KB web/build/server/chunks/chunks/workspace-query.js-bq2wu9AI.js.map
+packed 6.11KB web/build/server/chunks/chunks/workspace-timeline-contract.js-A3gY36bK.js
+packed 14.43KB web/build/server/chunks/chunks/workspace-timeline-contract.js-A3gY36bK.js.map
+packed 34.86KB web/build/server/chunks/chunks/workspace.js-Dn19175O.js
+packed 80.1KB web/build/server/chunks/chunks/workspace.js-Dn19175O.js.map
+packed 268B web/build/server/chunks/entries/endpoints/favicon.ico/_server.ts.js-BVOfXfLf.js
+packed 0.54KB web/build/server/chunks/entries/endpoints/favicon.ico/_server.ts.js-BVOfXfLf.js.map
+packed 1.43KB web/build/server/chunks/entries/endpoints/workspace-data/_server.ts.js-BQryMYYx.js
+packed 1.77KB web/build/server/chunks/entries/endpoints/workspace-data/_server.ts.js-BQryMYYx.js.map
+packed 1.68KB web/build/server/chunks/entries/endpoints/workspace-detail/_server.ts.js-BfL1u1QC.js
+packed 2.1KB web/build/server/chunks/entries/endpoints/workspace-detail/_server.ts.js-BfL1u1QC.js.map
+packed 1.59KB web/build/server/chunks/entries/endpoints/workspace-options/_server.ts.js-B8W9yUyu.js
+packed 2.18KB web/build/server/chunks/entries/endpoints/workspace-options/_server.ts.js-B8W9yUyu.js.map
+packed 1.87KB web/build/server/chunks/entries/endpoints/workspace-relations/_server.ts.js-DGirIolk.js
+packed 2.55KB web/build/server/chunks/entries/endpoints/workspace-relations/_server.ts.js-DGirIolk.js.map
+packed 0.62KB web/build/server/chunks/entries/fallbacks/error.svelte.js-BecRiOW6.js
+packed 0.90KB web/build/server/chunks/entries/fallbacks/error.svelte.js-BecRiOW6.js.map
+packed 2.76KB web/build/server/chunks/entries/hooks.server.js-DTkahaNX.js
+packed 4.80KB web/build/server/chunks/entries/hooks.server.js-DTkahaNX.js.map
+packed 1.73KB web/build/server/chunks/entries/pages/_layout.server.ts.js-pAaWy1Ja.js
+packed 3.11KB web/build/server/chunks/entries/pages/_layout.server.ts.js-pAaWy1Ja.js.map
+packed 47.1KB web/build/server/chunks/entries/pages/_layout.svelte.js-D3PmRr0g.js
+packed 78.72KB web/build/server/chunks/entries/pages/_layout.svelte.js-D3PmRr0g.js.map
+packed 0.71KB web/build/server/chunks/entries/pages/_layout.ts.js-D36tl-J6.js
+packed 1.30KB web/build/server/chunks/entries/pages/_layout.ts.js-D36tl-J6.js.map
+packed 487B web/build/server/chunks/entries/pages/_page.server.ts.js-CYAgP5Yy.js
+packed 0.70KB web/build/server/chunks/entries/pages/_page.server.ts.js-CYAgP5Yy.js.map
+packed 26.48KB web/build/server/chunks/entries/pages/_page.svelte.js-CaX5_eTC.js
+packed 43.20KB web/build/server/chunks/entries/pages/_page.svelte.js-CaX5_eTC.js.map
+packed 1.70KB web/build/server/chunks/entries/pages/repositories/_page.server.ts.js-B1GUX7sJ.js
+packed 3.57KB web/build/server/chunks/entries/pages/repositories/_page.server.ts.js-B1GUX7sJ.js.map
+packed 4.0KB web/build/server/chunks/entries/pages/repositories/_page.svelte.js-pKmB702S.js
+packed 6.23KB web/build/server/chunks/entries/pages/repositories/_page.svelte.js-pKmB702S.js.map
+packed 493B web/build/server/chunks/entries/pages/specs/_page.server.ts.js-D7gT1U2T.js
+packed 0.71KB web/build/server/chunks/entries/pages/specs/_page.server.ts.js-D7gT1U2T.js.map
+packed 13.76KB web/build/server/chunks/entries/pages/specs/_page.svelte.js-Ch_FdtvV.js
+packed 29.89KB web/build/server/chunks/entries/pages/specs/_page.svelte.js-Ch_FdtvV.js.map
+packed 1.1KB web/build/server/chunks/entries/pages/specs/_specId_/_error.svelte.js-C08ssdxy.js
+packed 1.69KB web/build/server/chunks/entries/pages/specs/_specId_/_error.svelte.js-C08ssdxy.js.map
+packed 9.28KB web/build/server/chunks/entries/pages/specs/_specId_/_page.server.ts.js-CfaOF9Wt.js
+packed 17.90KB web/build/server/chunks/entries/pages/specs/_specId_/_page.server.ts.js-CfaOF9Wt.js.map
+packed 3.50KB web/build/server/chunks/entries/pages/specs/_specId_/_page.svelte.js-Ckw8QwnL.js
+packed 5.80KB web/build/server/chunks/entries/pages/specs/_specId_/_page.svelte.js-Ckw8QwnL.js.map
+packed 493B web/build/server/chunks/entries/pages/tasks/_page.server.ts.js-BYN8H6tz.js
+packed 0.71KB web/build/server/chunks/entries/pages/tasks/_page.server.ts.js-BYN8H6tz.js.map
+packed 39.12KB web/build/server/chunks/entries/pages/tasks/_page.svelte.js-B434beFx.js
+packed 70.69KB web/build/server/chunks/entries/pages/tasks/_page.svelte.js-B434beFx.js.map
+packed 1.1KB web/build/server/chunks/entries/pages/tasks/_taskId_/_error.svelte.js-B3vViALE.js
+packed 1.69KB web/build/server/chunks/entries/pages/tasks/_taskId_/_error.svelte.js-B3vViALE.js.map
+packed 0.91KB web/build/server/chunks/entries/pages/tasks/_taskId_/_page.server.ts.js-BjnaH76Q.js
+packed 1.49KB web/build/server/chunks/entries/pages/tasks/_taskId_/_page.server.ts.js-BjnaH76Q.js.map
+packed 1.84KB web/build/server/chunks/entries/pages/tasks/_taskId_/_page.svelte.js-Da7PSqnD.js
+packed 2.23KB web/build/server/chunks/entries/pages/tasks/_taskId_/_page.svelte.js-Da7PSqnD.js.map
+packed 499B web/build/server/chunks/entries/pages/timeline/_page.server.ts.js-74MsnAPI.js
+packed 0.72KB web/build/server/chunks/entries/pages/timeline/_page.server.ts.js-74MsnAPI.js.map
+packed 34.75KB web/build/server/chunks/entries/pages/timeline/_page.svelte.js-tQffMhzd.js
+packed 75.67KB web/build/server/chunks/entries/pages/timeline/_page.svelte.js-tQffMhzd.js.map
+packed 40.16KB web/build/server/chunks/handler-BFZJeSL-.js
+packed 89.61KB web/build/server/chunks/handler-BFZJeSL-.js.map
+packed 131.22KB web/build/server/chunks/index.js-6glmebe2.js
+packed 0.28MB web/build/server/chunks/index.js-6glmebe2.js.map
+packed 3.77KB web/build/server/chunks/manifest.js-Yj20Y3Xe.js
+packed 8.25KB web/build/server/chunks/manifest.js-Yj20Y3Xe.js.map
+packed 2.11KB web/build/server/chunks/nodes/0.js-XJtdxI39.js
+packed 2.0KB web/build/server/chunks/nodes/0.js-XJtdxI39.js.map
+packed 0.58KB web/build/server/chunks/nodes/1.js-B_CFDBJm.js
+packed 0.92KB web/build/server/chunks/nodes/1.js-B_CFDBJm.js.map
+packed 1.76KB web/build/server/chunks/nodes/10.js-DyVKYLt5.js
+packed 1.91KB web/build/server/chunks/nodes/10.js-DyVKYLt5.js.map
+packed 0.71KB web/build/server/chunks/nodes/2.js-S3K0daUI.js
+packed 1.1KB web/build/server/chunks/nodes/2.js-S3K0daUI.js.map
+packed 0.71KB web/build/server/chunks/nodes/3.js-Brpanxfs.js
+packed 1.1KB web/build/server/chunks/nodes/3.js-Brpanxfs.js.map
+packed 1.38KB web/build/server/chunks/nodes/4.js-xy08JAud.js
+packed 1.40KB web/build/server/chunks/nodes/4.js-xy08JAud.js.map
+packed 1.56KB web/build/server/chunks/nodes/5.js-BfmjXRpN.js
+packed 1.59KB web/build/server/chunks/nodes/5.js-BfmjXRpN.js.map
+packed 1.83KB web/build/server/chunks/nodes/6.js-CbvPOTGK.js
+packed 2.0KB web/build/server/chunks/nodes/6.js-CbvPOTGK.js.map
+packed 2.18KB web/build/server/chunks/nodes/7.js-C20j3s_a.js
+packed 2.0KB web/build/server/chunks/nodes/7.js-C20j3s_a.js.map
+packed 1.94KB web/build/server/chunks/nodes/8.js-B6F7QZ8G.js
+packed 2.16KB web/build/server/chunks/nodes/8.js-B6F7QZ8G.js.map
+packed 2.15KB web/build/server/chunks/nodes/9.js-CqN_Tmzb.js
+packed 2.1KB web/build/server/chunks/nodes/9.js-CqN_Tmzb.js.map
+packed 0.76KB web/build/shims.js
+packed 1.55KB web/build/shims.js.map
+packed 153.37KB web/build/spm-manifest.json
+packed 0.59KB web/package.json
+packed 392B web/runtime/AGENTS.md
+packed 403B web/runtime/server.d.mts
+packed 5.28KB web/runtime/server.mjs
+packed 0.87KB web/src/AGENTS.md
+packed 4.33KB web/src/app.css
+packed 311B web/src/app.d.ts
+packed 1.45KB web/src/app.html
+packed 1.43KB web/src/hooks.server.ts
+packed 1.56KB web/src/lib/AGENTS.md
+packed 6.97KB web/src/lib/components/AnalysisFilters.svelte
+packed 1.59KB web/src/lib/components/ColorModeControl.svelte
+packed 3.42KB web/src/lib/components/DocumentBody.svelte
+packed 1.1KB web/src/lib/components/IconButton.svelte
+packed 3.1KB web/src/lib/components/ListPager.svelte
+packed 6.18KB web/src/lib/components/MermaidBlock.svelte
+packed 8.76KB web/src/lib/components/MultiSelectDropdown.svelte
+packed 2.84KB web/src/lib/components/Popover.svelte
+packed 7.37KB web/src/lib/components/SelectDropdown.svelte
+packed 8.15KB web/src/lib/components/SpecOptionsPicker.svelte
+packed 5.64KB web/src/lib/components/TaskBoard.svelte
+packed 1.0KB web/src/lib/components/ViewToolbar.svelte
+packed 1.69KB web/src/lib/components/WorkspaceLayout.svelte
+packed 0.60KB web/src/lib/components/data-table/AGENTS.md
+packed 3.87KB web/src/lib/components/data-table/ColumnsPanel.svelte
+packed 15.47KB web/src/lib/components/data-table/DataTable.svelte
+packed 1.78KB web/src/lib/components/data-table/SelectionBar.svelte
+packed 2.45KB web/src/lib/components/data-table/SortPanel.svelte
+packed 1.26KB web/src/lib/components/data-table/clipboard.ts
+packed 2.96KB web/src/lib/components/data-table/model.ts
+packed 3.66KB web/src/lib/components/data-table/preferences.ts
+packed 2.37KB web/src/lib/components/data-table/spec-columns.ts
+packed 2.50KB web/src/lib/components/data-table/task-columns.ts
+packed 1.00KB web/src/lib/components/data-table/types.ts
+packed 0.56KB web/src/lib/components/detail/AGENTS.md
+packed 5.90KB web/src/lib/components/detail/CanonicalDetailReader.svelte
+packed 1.1KB web/src/lib/components/detail/NotFound.svelte
+packed 4.16KB web/src/lib/components/detail/RelationWindow.svelte
+packed 16.66KB web/src/lib/components/detail/SpecDetail.svelte
+packed 11.71KB web/src/lib/components/detail/SpecQuestions.svelte
+packed 15.35KB web/src/lib/components/detail/TaskDetail.svelte
+packed 134B web/src/lib/components/detail/action-response.ts
+packed 0.99KB web/src/lib/components/detail/question-context.ts
+packed 4.73KB web/src/lib/components/detail/question-editor.ts
+packed 1.0KB web/src/lib/components/detail/types.ts
+packed 0.52KB web/src/lib/components/timeline/AGENTS.md
+packed 2.51KB web/src/lib/components/timeline/TimelineDiagnostics.svelte
+packed 12.97KB web/src/lib/components/timeline/TimelineGrid.svelte
+packed 2.25KB web/src/lib/components/timeline/TimelineGroupRow.svelte
+packed 0.81KB web/src/lib/components/timeline/TimelineRuler.svelte
+packed 4.1KB web/src/lib/components/timeline/TimelineTable.svelte
+packed 3.55KB web/src/lib/components/timeline/TimelineToolbar.svelte
+packed 4.57KB web/src/lib/components/timeline/TimelineTrace.svelte
+packed 4.17KB web/src/lib/components/timeline/model.ts
+packed 0.54KB web/src/lib/components/workspace/AGENTS.md
+packed 15.31KB web/src/lib/components/workspace/WorkspaceShell.svelte
+packed 0.76KB web/src/lib/inspector/AGENTS.md
+packed 16.41KB web/src/lib/inspector/InspectorHost.svelte
+packed 2.0KB web/src/lib/inspector/InspectorWorkspace.svelte
+packed 2.27KB web/src/lib/inspector/QuestionLeaveDialog.svelte
+packed 18.68KB web/src/lib/inspector/controller.svelte.ts
+packed 12.76KB web/src/lib/inspector/detail-resource.ts
+packed 5.45KB web/src/lib/inspector/detail-validation.ts
+packed 1.1KB web/src/lib/inspector/geometry.ts
+packed 3.33KB web/src/lib/inspector/history.ts
+packed 0.82KB web/src/lib/inspector/list-relations.ts
+packed 412B web/src/lib/inspector/modules.ts
+packed 418B web/src/lib/inspector/relation-reader.ts
+packed 2.61KB web/src/lib/inspector/relation-url.ts
+packed 0.67KB web/src/lib/inspector/spec-outcome-fence.ts
+packed 0.75KB web/src/lib/inspector/spec-seed-adapter.ts
+packed 1.43KB web/src/lib/mermaid-theme.ts
+packed 495B web/src/lib/server/detail.ts
+packed 0.92KB web/src/lib/server/project-root.ts
+packed 4.68KB web/src/lib/server/spec-answers.ts
+packed 1.0KB web/src/lib/server/workspace.ts
+packed 1.41KB web/src/lib/task-board.ts
+packed 0.66KB web/src/lib/theme.ts
+packed 1.17KB web/src/lib/workspace-preferences.ts
+packed 0.70KB web/src/lib/workspace/AGENTS.md
+packed 1.10KB web/src/lib/workspace/context.svelte.ts
+packed 357B web/src/lib/workspace/location.svelte.ts
+packed 1.27KB web/src/lib/workspace/project.ts
+packed 3.99KB web/src/lib/workspace/resource.svelte.ts
+packed 10.65KB web/src/lib/workspace/resource.ts
+packed 1.46KB web/src/routes/+layout.server.ts
+packed 0.70KB web/src/routes/+layout.svelte
+packed 487B web/src/routes/+layout.ts
+packed 364B web/src/routes/+page.server.ts
+packed 9.93KB web/src/routes/+page.svelte
+packed 174B web/src/routes/favicon.ico/+server.ts
+packed 1.40KB web/src/routes/repositories/+page.server.ts
+packed 2.76KB web/src/routes/repositories/+page.svelte
+packed 367B web/src/routes/specs/+page.server.ts
+packed 14.77KB web/src/routes/specs/+page.svelte
+packed 352B web/src/routes/specs/[specId]/+error.svelte
+packed 1.94KB web/src/routes/specs/[specId]/+page.server.ts
+packed 2.1KB web/src/routes/specs/[specId]/+page.svelte
+packed 367B web/src/routes/tasks/+page.server.ts
+packed 20.28KB web/src/routes/tasks/+page.svelte
+packed 352B web/src/routes/tasks/[taskId]/+error.svelte
+packed 0.64KB web/src/routes/tasks/[taskId]/+page.server.ts
+packed 0.92KB web/src/routes/tasks/[taskId]/+page.svelte
+packed 370B web/src/routes/timeline/+page.server.ts
+packed 9.23KB web/src/routes/timeline/+page.svelte
+packed 409B web/src/routes/timeline/AGENTS.md
+packed 0.80KB web/src/routes/workspace-data/+server.ts
+packed 0.91KB web/src/routes/workspace-detail/+server.ts
+packed 1.0KB web/src/routes/workspace-options/+server.ts
+packed 1.12KB web/src/routes/workspace-relations/+server.ts
+packed 1.1KB web/svelte-plugin-options.js
+packed 432B web/svelte.config.js
+packed 192B web/tsconfig.json
+packed 1.23KB web/vite-paths.ts
+packed 458B web/vite.config.ts
+
+Total files: 845
+Unpacked size: 9.71MB
+Tag: latest
+Access: public
+Registry: https://registry.npmjs.org/
+
+ + @leonarto/spec-embryo@0.4.0 (dry-run)

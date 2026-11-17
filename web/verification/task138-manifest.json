@@ -1,0 +1,518 @@
+{
+  "base": "140f9021f15e242c291be9d1caa59f498367c5ff",
+  "sharedHeadAtFreeze": "ab9212ad16ce6b4ae4f697ad58e1c942fa2f3017",
+  "snapshot": "/private/tmp/spm-task138-validation",
+  "status": "Functional commit approved; TASK-138 remains in_progress for latency. No worker/diagnostic instrumentation in product.",
+  "latencyPass": false,
+  "latestValidP95Ms": {
+    "task": 359,
+    "spec": 326.10000014305115
+  },
+  "reviews": [
+    "/private/tmp/spm-task138-producer-review.md",
+    "/private/tmp/spm-task138-client-review.md",
+    "/private/tmp/spm-task138-favicon-review.md",
+    "/private/tmp/spm-task138-collector-review.md"
+  ],
+  "sharedGuideProposal": "/private/tmp/spm-task138-docs-delta.md",
+  "files": [
+    {
+      "path": "src/services/details.ts",
+      "sha256": "163edfe2a317b7967b8485abefb4d0929cc2e24008a181b9bfb9b91d3a6f6ac4",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "src/services/detail-relations.ts",
+      "sha256": "253637e79c253b8b5938e21c7fe2e4e5dfa932e1cfd758c2d8a5910cea2b32dc",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "src/services/workspace-detail.ts",
+      "sha256": "2ca6ef8a076bdfa0c298add7810013b2af622431d99a117f090bfa8524b77743",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/detail-validation.ts",
+      "sha256": "83c64dc6c1178a504ae8013ac1e0684cb5021a86e65968e3b706646035274a48",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/server/detail.ts",
+      "sha256": "2a945578b0ec6c42c30e4a6aeac429c72264e33cac2a4a780f77fda3360d31f4",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/+layout.server.ts",
+      "sha256": "6f162b9a914d6f9c4e2ae914e922a68ed32fcecbef74835a3aa2c6dbfb70911f",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/workspace-detail/+server.ts",
+      "sha256": "862537a542e2b0bcebc78be5ff194fc6fbb33c8d8571a6a55b7845f4630126ee",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/workspace-relations/+server.ts",
+      "sha256": "4bcce7ade5458c0e8b6aa8332cb9c409c2c20594e6f645eff325db6eb4eea57c",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/tasks/[taskId]/+page.server.ts",
+      "sha256": "7a38d10efbe511e80cd0646e42473670c2acc110bdecc26023cf26abc0d3305e",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/specs/[specId]/+page.server.ts",
+      "sha256": "e79a953a0564fdd90bd352bf71e58e88d26da4cca94a8d193a197e2c51b949a7",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/detail-relations.test.ts",
+      "sha256": "42f3b2b6beaf3f949e8c01a89733dc19572a62db10d903f56e402c9321e960e4",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/detail-relation-resource.test.ts",
+      "sha256": "60fd185df24edafa4a5c5322f8e4ec8f06f532d3915f5b5835681c28c351831e",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/detail-presentation.test.ts",
+      "sha256": "bd76c0f1d2eb26ff5808b245766430b1a72732a2a6a7e25899a37e32372c0271",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/detail/CanonicalDetailReader.svelte",
+      "sha256": "64383a5cf8a36145d28e5a1e1aa7bde161227a0a87b25d21c2856e4e8a9e8289",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/detail/TaskDetail.svelte",
+      "sha256": "6bb6893ea1c01bd87b61efcfff2c288c861049bcab42a0c97e2d93f628814195",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/detail/SpecDetail.svelte",
+      "sha256": "1fe266737e8039a8668a6e1bdb321018e5787c24b54c630cfa8789b21a62b9c4",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/detail/RelationWindow.svelte",
+      "sha256": "ea2abded076ce0c1cf63a4a4116ec1312a5895680e86651d9bf92e7a40eaa876",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/controller.svelte.ts",
+      "sha256": "e86c6388d7bf283e2b0fcaf76d3de23c6c680b410fb2667020342d69002b999b",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/history.ts",
+      "sha256": "af65c347b9418f1b1914e3d99a5f4fa2473b8d0b84968bcb789954fc149543df",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/detail-resource.ts",
+      "sha256": "6fa699ba2cabb7416e8172db79a2f34fb3a8e59523d1c0481090345c6d65c379",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/relation-reader.ts",
+      "sha256": "e5e634ed78b6ba4bab6ab0fecf4ff1832b6852a4cdbaa909b78c36896eba146a",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/InspectorHost.svelte",
+      "sha256": "57f5c4aea0128896975fef6f0387438c75738ee9ff00cd291497d0deb8b37c02",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/tasks/[taskId]/+page.svelte",
+      "sha256": "edc016b634b2b810d7a862292510ef309bc5b5947290dee52a5ee4d5923f42d7",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/specs/[specId]/+page.svelte",
+      "sha256": "884617a02f2357458a952ab0e9863677b960113e1c2d4f541d556015cfe661c7",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/relation-url.ts",
+      "sha256": "d09924dc4dc6d3a8b95b131c47dab6f665a5e96bb8fe6b271a8547fa96490c02",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/relation-url.test.ts",
+      "sha256": "56e76820a2d2469873706d054775af9f578b040c6ed44c1e567ea8d4915c2f64",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/detail/AGENTS.md",
+      "sha256": "f46338f802631851b688073e8a284301382fbd2c24f700b030687fb24f69db88",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/AGENTS.md",
+      "sha256": "85b4246e2363be337a08ff0aa2f820b3438a146eeaef24442ed0f4320b0f775a",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/inspector-seed.test.ts",
+      "sha256": "1b1f4b64958b812d25d023da6d76907df2e66a7ed4215e2e0ef75aa6b17d1415",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/tasks/+page.svelte",
+      "sha256": "bd1115b64c9485100827b6d1fff8fa083e31aaa0aa235b3b8fc3f509d5c92451",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/specs/+page.svelte",
+      "sha256": "1f33b9e4c4bd3b3a2f1adfc813722fd12ee313db8728604a976b5fd086fad938",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/ListPager.svelte",
+      "sha256": "fb0c039ebf9467df0ae4d6d4b416a42dbd77a87e0168dfb875c8754c0789091d",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/inspector/list-relations.ts",
+      "sha256": "e6268eabc8001d0f8b22c98d677cd04943fafdd669ffa84cf15b52d1f867a438",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/list-relation-intent.test.ts",
+      "sha256": "9e42faf78d7115a060f129c8c5a6b57daf3604ed7e829790ffa8005eccc0cdac",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/lib/components/AnalysisFilters.svelte",
+      "sha256": "d8430397eeef141ad5a5dac1f07cc6d0eb907a299ce1859912292e837b0890ed",
+      "source": "isolated HEAD-only blob; DO NOT stage dirty Timeline working variant",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/filter-relation-intent.test.ts",
+      "sha256": "27034cd099c2f63c820d4dd5aac9d02afd0c40bc23cc69fb57574b0e8e5a6b41",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/src/routes/favicon.ico/+server.ts",
+      "sha256": "f6b371fad217a72a1195339fc9b1853664f580b3d69c5d0cb2e47d51877cafce",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "tests/favicon-endpoint.test.ts",
+      "sha256": "57e669f6e7ac4bedc9a5371cb52c312d234d934e9873ad05b817a1fe7c682e1f",
+      "source": "shared owned reviewed source",
+      "kind": "reviewed-source"
+    },
+    {
+      "path": "web/scripts/detail-relations-browser-profile.mjs",
+      "sha256": "3f295995b016a4582861f045025849abb030c0467884d6674aa7b90f213b04e6",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-check.mjs",
+      "sha256": "30ebf43f6318a2d0399026e4b6b2614bbe4c79c9f1834d2203c477153674e3c0",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-closure.ts",
+      "sha256": "3ad55cf251a35567edbbafe1e7a61b30aad5e7127737045bc6ee2bcc32ef402d",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-corpus.mjs",
+      "sha256": "902234b9d13d5b656d319bbb8570c54528b74804c671016cc49df0da0ca1a3f1",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-diagnostic-http.mjs",
+      "sha256": "fec2ec86ddb733834ffa38142ed4d5b52e125b6bd24fd25b163270215cacd6f1",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-diagnostic-network.mjs",
+      "sha256": "aaadc5a885ba8ba520ab704b2d92dcce1331b95c8abdbee55fb38740019cee67",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-diagnostic-server.mjs",
+      "sha256": "1b0e5cb72d56a66600658f3e36f66b3dc3a6421b06afb2e2bafdf7e0b8bc698c",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-fixes.mjs",
+      "sha256": "feae4fa611890d18300f4db81a6b2f487c91068d091ea9af36adcae4539eafd8",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-fixture.ts",
+      "sha256": "600e36c0467f2367eae771c404b9c71adf9c8aa78b2771c8b5313b0cb6571862",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-profile.ts",
+      "sha256": "1086c154040a537301020dc5277d468bcc0a1236d0a2d2038e051fcefe782cff",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/scripts/detail-relations-worker-experiment.mjs",
+      "sha256": "f8ae9298b8ca23f96914534cce52cd80a0fc9121c1ec54dd7f5947dab703dd07",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-browser-profile-after-favicon.json",
+      "sha256": "90d228ce25639507e149d99ff8c1f6ef03ff48972db75432aaffd190cd19bd7e",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-browser-profile.json",
+      "sha256": "9380c19375afca9d21c683eb1d3c472add7a5619befdf17eaad3a9454ce1aa4c",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-canonical-report.json",
+      "sha256": "360441d71796f84b8ae4b72893b1f20d19f6cad3e042f129874194869cd78bd4",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-collector.patch",
+      "sha256": "bf68b9d7c4615032cdfc74deadf41bcc025c6eaa0d939f520b8be24a61aaaa7c",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-corpus.json",
+      "sha256": "b5264560d187ed08093488dba99f8ee57485faea46a93b668f2d1eff46446c5b",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-coverage.json",
+      "sha256": "0d3ecc1383839fc9f9051f36b2eed2284e167a14b388c9137f1e0dca76f930ec",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic-counts.jsonl",
+      "sha256": "c39377abe93483907342c27bdc38f19151892f07c5325ca2b73ac781fccc23c4",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic-http.json",
+      "sha256": "18594fc733f72238bef0238040ad252ca4307b63ca935a9d4bf3c515590b2f87",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic-network.json",
+      "sha256": "435b829c3ca243175f304b322660225e2a0709fe97612b959adadf5dc5cb1ae7",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic-provenance.json",
+      "sha256": "8b2fcd6e404c6118b3e09c5c55f725bdef23acc5db29f0831f000530567915db",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic-spans.jsonl",
+      "sha256": "ec52cd87adb7b12371f1da7494c43b67b2200fef4cef9ddb9a36de3a91f04b90",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic-summary.json",
+      "sha256": "37f74d2214ec1e1091f5a5f3bcb20d1f882171336670f49455a613d72973cb96",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-diagnostic.patch",
+      "sha256": "e378ecbec684b1012e812fb82f24bc85008bc23cb17d911f940b0222e6fe018a",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-empty-report.json",
+      "sha256": "ceb5e2cc344e523a19bb035b04d86b3f06405fff9178908d6d7fe0355b539778",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-favicon-counts.jsonl",
+      "sha256": "37f17105c89346ba09a10cbb3299565d0578237688076b710a400cf1427d6817",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-favicon-http.json",
+      "sha256": "20563e47310c52bc777950750f04e043efc864a338258151f5897b57279ca178",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-favicon-network.json",
+      "sha256": "f962ffc2d64f4bb08759f0c77927a422df176a189d327d6db2a08876f4074e6d",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-favicon-summary.json",
+      "sha256": "9b03d642fd928930dfc66a06919e447236dae5e5e97be2b3e9e285129e0d489c",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-filters-report.json",
+      "sha256": "0951fb8dfdb94ddd2917c60402a6bec962068990fb45d78beddea5328e5f57c0",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-first-relations.png",
+      "sha256": "4b342a526638840c274a0e242ba6c2de70df0c4f0ed443a91cdbe10b21b6b5a6",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-guard-report.json",
+      "sha256": "63f0f308c8fb7ddff3d6d1fddb3b23b098f5ba589c510f240717b288b666ef9e",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-integration-initial-report.json",
+      "sha256": "19e512cd9805b8675ebb44aa124b8ccfb2c7f677211d054501dbc18fcade0d76",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-listcarry-report.json",
+      "sha256": "99855ab2e68a647070fad849252ecd27d29982b40b2e8ec9c0fc307cd867ed30",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-native-report.json",
+      "sha256": "05750a3da3d1223b32c31010b882df4ed577c47714e9553a67b54dd3e748e355",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-package-audit.json",
+      "sha256": "08c1a70609b3d1253ed331814cdda35256df0f9f25748d0afc72e7e120215226",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-production-closure.json",
+      "sha256": "7d081ac17af890c9623e0b32378610bc49f4346702fc2d872d28cbe602cf1c5f",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-profile-after-favicon.json",
+      "sha256": "965b876bca80395e9fef434088c4ef82f26151dd717746a80592fed873f833cc",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-profile.json",
+      "sha256": "54ac8fa6ef029a3215accf233f603235c866304c8545aa42960443cc8c88b756",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-reader-report.json",
+      "sha256": "050a4e4c288a09b795c55102985c8c941a462da3bdf13d540b4b0f8ef4eadd70",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-spec-last.png",
+      "sha256": "9155f7ad8f2e4b690b0f599c74d5433a050364793e838bcc9b51fb74c04bd22d",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-timing-buffer-probe.json",
+      "sha256": "986f72b238d103029fa836622a2864537d9f7a258a855afb2ce40869001c1edf",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-verification.md",
+      "sha256": "065209ea09ba891a2596a14be0cb47fd12750270c0d9b29dd0ffedda21d659b3",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-worker-experiment.json",
+      "sha256": "6aec2901af545526e3010c5ec0bd7567f62a9ca1a35af9c28a3e538cb37dbb6a",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    },
+    {
+      "path": "web/verification/task138-worker-experiment.patch",
+      "sha256": "16e08582b1b7663a67e31ea4b36bea49158b5ef18dd2aebd107dddea9d8b6810",
+      "source": "shared owned verification/evidence",
+      "kind": "verification"
+    }
+  ]
+}

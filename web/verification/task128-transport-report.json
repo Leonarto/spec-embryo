@@ -1,0 +1,55 @@
+{
+  "phase": "transport",
+  "capturedAt": "2026-11-15T22:49:46.792Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "500 remains local with canonical link and operable list",
+      "pass": true
+    },
+    {
+      "name": "Retry recovers only detail",
+      "pass": true
+    },
+    {
+      "name": "Same-ID failure retains previous body/scroll with independent error",
+      "pass": true
+    },
+    {
+      "name": "New identity exposes its skeleton, never previous body",
+      "pass": true
+    },
+    {
+      "name": "A→B late response cannot replace current identity/body",
+      "pass": true
+    },
+    {
+      "name": "Delayed successful body does not steal focus moved to list",
+      "pass": true
+    },
+    {
+      "name": "15s timeout exits pending while retaining same-ID content",
+      "pass": true
+    },
+    {
+      "name": "Late timed-out completion cannot replace Retry result",
+      "pass": true
+    },
+    {
+      "name": "Missing inspector renders local not-found and preserves list",
+      "pass": true
+    },
+    {
+      "name": "Missing detail endpoint uses typed404",
+      "pass": true
+    },
+    {
+      "name": "tasks: canonical404 retains workspace shell",
+      "pass": true
+    },
+    {
+      "name": "specs: canonical404 retains workspace shell",
+      "pass": true
+    }
+  ]
+}

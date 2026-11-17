@@ -1,0 +1,29 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/workspace-resource.test.ts:
+(pass) controlled workspace resource > uses only controlled endpoint and commits shell/data atomically without router invalidation [6.58ms]
+(pass) controlled workspace resource > registered refresh sends selected project and rendered workspace key [0.56ms]
+(pass) controlled workspace resource > network/HTTP/JSON/shape/identity failures retain the exact snapshot and prior success time; Retry recovers [2.11ms]
+(pass) controlled workspace resource > superseded late success or error cannot replace or clear a newer request [1.06ms]
+(pass) controlled workspace resource > new SSR generation and disposal invalidate old requests even with the same route/key [0.33ms]
+(pass) controlled workspace resource > deadline exits busy, aborts transport, preserves prior data, and ignores late completion [20.17ms]
+(pass) controlled workspace resource > focus is debounced, visible-only, after five seconds, and coalesces with an existing request [43.49ms]
+(pass) controlled workspace resource > inspector-only retarget preserves pending/error/snapshot and does not abort or fetch [0.58ms]
+(pass) controlled workspace resource > validates schema and required displayed fields before accepting an envelope
+
+tests/portfolio.test.ts:
+(pass) portfolio command > registers projects and renders cross-project status [35.76ms]
+(pass) portfolio command > reports unavailable projects without failing the whole portfolio [7.85ms]
+(pass) portfolio command > searches portfolio summaries and renders explicit relationship issues [92.91ms]
+
+tests/ui-projects.test.ts:
+(pass) registry updates preserve identity and reject collisions; concurrent writers serialize [49.64ms]
+(pass) request selection and stale identity fail closed without exposing paths [24.05ms]
+(pass) stale answer identity retains drafts without calling the writer [3.05ms]
+(pass) remapped selection returns recovery-only action data and never writes either repo [23.54ms]
+(pass) concurrent registration and linking preserve both changes and malformed registries fail closed [47.43ms]
+
+ 17 pass
+ 0 fail
+ 136 expect() calls
+Ran 17 tests across 3 files. [480.00ms]

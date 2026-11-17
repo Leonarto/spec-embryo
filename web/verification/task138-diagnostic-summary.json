@@ -1,0 +1,521 @@
+{
+  "scope": "COPY-only exploratory3warm5serial perkind; summaries median/min/max over5 measured requests. Instrumented spans are diagnostic, not latency acceptance. Async spans/queue and callback totals overlap and must not be added to request wall. Process CPU/ELU and GC are process-wide intervals; do not sum overlapping requests.",
+  "network": {
+    "requests": 185,
+    "details": 24,
+    "contextCallsPerDetail": [
+      1
+    ],
+    "unmatchedDetails": 0,
+    "apiPeak": 1,
+    "sameOriginPeak": 35,
+    "remaining": 0,
+    "aborts": 0,
+    "dynamicURLs": [
+      "http://127.0.0.1:5297/workspace-detail?kind=spec&id=SPEC-00001",
+      "http://127.0.0.1:5297/workspace-detail?kind=task&id=TASK-00001"
+    ],
+    "correction": "API-only concurrency omitted favicon requests. Favicon404 executes rootlayout and loads full project context; this is a competing data load, despite APIpeak1.",
+    "contextBearingRequests": 66,
+    "contextRequestsByPath": {
+      "GET /tasks": 1,
+      "GET /favicon.ico": 41,
+      "GET /workspace-detail": 24
+    },
+    "peakContextBearingRequestIntervals": 2,
+    "detailsOverlappingFaviconRequest": 24,
+    "detailsWithGuaranteedContextOverlap": 24,
+    "faviconOverlapPairs": [
+      {
+        "detailRequest": 3,
+        "faviconRequest": 2,
+        "requestIntervalOverlapMs": 401.8547499999986,
+        "guaranteedContextOverlapLowerBoundMs": 242.0535419999942
+      },
+      {
+        "detailRequest": 3,
+        "faviconRequest": 4,
+        "requestIntervalOverlapMs": 532.8304999999964,
+        "guaranteedContextOverlapLowerBoundMs": 411.5975410000101
+      },
+      {
+        "detailRequest": 6,
+        "faviconRequest": 5,
+        "requestIntervalOverlapMs": 738.018207999994,
+        "guaranteedContextOverlapLowerBoundMs": 644.290875000006
+      },
+      {
+        "detailRequest": 8,
+        "faviconRequest": 7,
+        "requestIntervalOverlapMs": 319.20258399999875,
+        "guaranteedContextOverlapLowerBoundMs": 242.0656250000029
+      },
+      {
+        "detailRequest": 8,
+        "faviconRequest": 9,
+        "requestIntervalOverlapMs": 468.5101250000007,
+        "guaranteedContextOverlapLowerBoundMs": 392.52308299999277
+      },
+      {
+        "detailRequest": 11,
+        "faviconRequest": 10,
+        "requestIntervalOverlapMs": 592.4897080000082,
+        "guaranteedContextOverlapLowerBoundMs": 526.5962080000027
+      },
+      {
+        "detailRequest": 11,
+        "faviconRequest": 12,
+        "requestIntervalOverlapMs": 196.1764589999948,
+        "guaranteedContextOverlapLowerBoundMs": 135.51329200000328
+      },
+      {
+        "detailRequest": 14,
+        "faviconRequest": 13,
+        "requestIntervalOverlapMs": 615.7459580000141,
+        "guaranteedContextOverlapLowerBoundMs": 556.7041259999969
+      },
+      {
+        "detailRequest": 14,
+        "faviconRequest": 15,
+        "requestIntervalOverlapMs": 42.91141700001026,
+        "guaranteedContextOverlapLowerBoundMs": 0
+      },
+      {
+        "detailRequest": 16,
+        "faviconRequest": 15,
+        "requestIntervalOverlapMs": 138.69366699999955,
+        "guaranteedContextOverlapLowerBoundMs": 66.1681239999889
+      },
+      {
+        "detailRequest": 16,
+        "faviconRequest": 17,
+        "requestIntervalOverlapMs": 480.79754200000025,
+        "guaranteedContextOverlapLowerBoundMs": 423.1923749999987
+      },
+      {
+        "detailRequest": 19,
+        "faviconRequest": 18,
+        "requestIntervalOverlapMs": 286.3309159999917,
+        "guaranteedContextOverlapLowerBoundMs": 221.0266249999986
+      },
+      {
+        "detailRequest": 19,
+        "faviconRequest": 20,
+        "requestIntervalOverlapMs": 336.2931669999962,
+        "guaranteedContextOverlapLowerBoundMs": 258.5622919999878
+      },
+      {
+        "detailRequest": 22,
+        "faviconRequest": 21,
+        "requestIntervalOverlapMs": 609.0003749999887,
+        "guaranteedContextOverlapLowerBoundMs": 548.1827500000072
+      },
+      {
+        "detailRequest": 22,
+        "faviconRequest": 23,
+        "requestIntervalOverlapMs": 52.4673749999929,
+        "guaranteedContextOverlapLowerBoundMs": 0
+      },
+      {
+        "detailRequest": 24,
+        "faviconRequest": 23,
+        "requestIntervalOverlapMs": 191.59245799999917,
+        "guaranteedContextOverlapLowerBoundMs": 109.31095800000185
+      },
+      {
+        "detailRequest": 24,
+        "faviconRequest": 25,
+        "requestIntervalOverlapMs": 524.400708000001,
+        "guaranteedContextOverlapLowerBoundMs": 456.54058300000906
+      },
+      {
+        "detailRequest": 27,
+        "faviconRequest": 26,
+        "requestIntervalOverlapMs": 665.4873750000115,
+        "guaranteedContextOverlapLowerBoundMs": 459.94937599998957
+      },
+      {
+        "detailRequest": 29,
+        "faviconRequest": 28,
+        "requestIntervalOverlapMs": 412.07629100000486,
+        "guaranteedContextOverlapLowerBoundMs": 330.2867089999927
+      },
+      {
+        "detailRequest": 29,
+        "faviconRequest": 30,
+        "requestIntervalOverlapMs": 285.15620800000033,
+        "guaranteedContextOverlapLowerBoundMs": 206.72445899999002
+      },
+      {
+        "detailRequest": 31,
+        "faviconRequest": 30,
+        "requestIntervalOverlapMs": 247.15129200000956,
+        "guaranteedContextOverlapLowerBoundMs": 169.7774999999965
+      },
+      {
+        "detailRequest": 31,
+        "faviconRequest": 32,
+        "requestIntervalOverlapMs": 394.3500830000121,
+        "guaranteedContextOverlapLowerBoundMs": 309.88033299997915
+      },
+      {
+        "detailRequest": 34,
+        "faviconRequest": 33,
+        "requestIntervalOverlapMs": 1062.7126250000001,
+        "guaranteedContextOverlapLowerBoundMs": 982.5250839999935
+      },
+      {
+        "detailRequest": 34,
+        "faviconRequest": 35,
+        "requestIntervalOverlapMs": 55.44504200000665,
+        "guaranteedContextOverlapLowerBoundMs": 0
+      },
+      {
+        "detailRequest": 36,
+        "faviconRequest": 35,
+        "requestIntervalOverlapMs": 387.0050409999967,
+        "guaranteedContextOverlapLowerBoundMs": 318.47824899997795
+      },
+      {
+        "detailRequest": 36,
+        "faviconRequest": 37,
+        "requestIntervalOverlapMs": 200.67729200000758,
+        "guaranteedContextOverlapLowerBoundMs": 123.98870899998292
+      },
+      {
+        "detailRequest": 38,
+        "faviconRequest": 39,
+        "requestIntervalOverlapMs": 632.565082999994,
+        "guaranteedContextOverlapLowerBoundMs": 559.5494159999944
+      },
+      {
+        "detailRequest": 41,
+        "faviconRequest": 40,
+        "requestIntervalOverlapMs": 491.42637499999546,
+        "guaranteedContextOverlapLowerBoundMs": 427.01166599999124
+      },
+      {
+        "detailRequest": 41,
+        "faviconRequest": 42,
+        "requestIntervalOverlapMs": 133.35775000001013,
+        "guaranteedContextOverlapLowerBoundMs": 73.65116599999601
+      },
+      {
+        "detailRequest": 43,
+        "faviconRequest": 42,
+        "requestIntervalOverlapMs": 102.49441699999443,
+        "guaranteedContextOverlapLowerBoundMs": 47.29837499999849
+      },
+      {
+        "detailRequest": 43,
+        "faviconRequest": 44,
+        "requestIntervalOverlapMs": 527.0984590000007,
+        "guaranteedContextOverlapLowerBoundMs": 474.7720410000038
+      },
+      {
+        "detailRequest": 46,
+        "faviconRequest": 45,
+        "requestIntervalOverlapMs": 593.7965419999964,
+        "guaranteedContextOverlapLowerBoundMs": 526.3963340000046
+      },
+      {
+        "detailRequest": 46,
+        "faviconRequest": 47,
+        "requestIntervalOverlapMs": 52.00795800000196,
+        "guaranteedContextOverlapLowerBoundMs": 0
+      },
+      {
+        "detailRequest": 48,
+        "faviconRequest": 47,
+        "requestIntervalOverlapMs": 236.52862499999173,
+        "guaranteedContextOverlapLowerBoundMs": 180.44258300001093
+      },
+      {
+        "detailRequest": 48,
+        "faviconRequest": 49,
+        "requestIntervalOverlapMs": 422.7734999999957,
+        "guaranteedContextOverlapLowerBoundMs": 351.9580000000278
+      },
+      {
+        "detailRequest": 50,
+        "faviconRequest": 51,
+        "requestIntervalOverlapMs": 577.0374589999992,
+        "guaranteedContextOverlapLowerBoundMs": 525.6129990000045
+      },
+      {
+        "detailRequest": 53,
+        "faviconRequest": 52,
+        "requestIntervalOverlapMs": 281.39929099999426,
+        "guaranteedContextOverlapLowerBoundMs": 224.6881260000082
+      },
+      {
+        "detailRequest": 53,
+        "faviconRequest": 54,
+        "requestIntervalOverlapMs": 320.3949580000044,
+        "guaranteedContextOverlapLowerBoundMs": 265.395709000004
+      },
+      {
+        "detailRequest": 55,
+        "faviconRequest": 54,
+        "requestIntervalOverlapMs": 94.2987090000097,
+        "guaranteedContextOverlapLowerBoundMs": 36.60874999999942
+      },
+      {
+        "detailRequest": 55,
+        "faviconRequest": 56,
+        "requestIntervalOverlapMs": 568.7022089999955,
+        "guaranteedContextOverlapLowerBoundMs": 494.7861249999987
+      },
+      {
+        "detailRequest": 58,
+        "faviconRequest": 57,
+        "requestIntervalOverlapMs": 932.96875,
+        "guaranteedContextOverlapLowerBoundMs": 861.7145419999724
+      },
+      {
+        "detailRequest": 58,
+        "faviconRequest": 59,
+        "requestIntervalOverlapMs": 342.38866700000654,
+        "guaranteedContextOverlapLowerBoundMs": 272.55191599998216
+      },
+      {
+        "detailRequest": 60,
+        "faviconRequest": 59,
+        "requestIntervalOverlapMs": 179.93591699999524,
+        "guaranteedContextOverlapLowerBoundMs": 90.38112499998533
+      },
+      {
+        "detailRequest": 60,
+        "faviconRequest": 61,
+        "requestIntervalOverlapMs": 557.3747500000027,
+        "guaranteedContextOverlapLowerBoundMs": 474.4952920000069
+      }
+    ]
+  },
+  "results": [
+    {
+      "kind": "task",
+      "measuredRequests": 5,
+      "summary": {
+        "requestWallMs": {
+          "median": 336.913584000009,
+          "min": 313.1215830000001,
+          "max": 376.97704200001317
+        },
+        "contextWallMs": {
+          "median": 320.1737920000014,
+          "min": 297.6560829999944,
+          "max": 355.1403750000027
+        },
+        "configWallMs": {
+          "median": 0.22849999999743886,
+          "min": 0.20824999999604188,
+          "max": 0.26479099999414757
+        },
+        "directoryWallSumMs": {
+          "median": 81.88899999999558,
+          "min": 74.24154299999645,
+          "max": 134.56933300000674
+        },
+        "gitWallMs": {
+          "median": 11.270042000003741,
+          "min": 10.753083000003244,
+          "max": 22.561459000004106
+        },
+        "cpuMs": {
+          "median": 841.516,
+          "min": 829.925,
+          "max": 1037.658
+        },
+        "elu": {
+          "median": 0.9747911462165254,
+          "min": 0.9279843402181037,
+          "max": 0.9979788533799985
+        },
+        "queueWaitSumMs": {
+          "median": 1848614.218944003,
+          "min": 1576779.3374730062,
+          "max": 2039433.8639079996
+        },
+        "callbackWallSumMs": {
+          "median": 19711.594324998907,
+          "min": 18227.934314001148,
+          "max": 21941.506512000502
+        },
+        "gcOverlapMs": {
+          "median": 19.8493332862854,
+          "min": 11.256416082382202,
+          "max": 33.950417280197144
+        },
+        "decodeSyncMs": {
+          "median": 2.923656999555533,
+          "min": 2.906870999126113,
+          "max": 2.9880719988723285
+        },
+        "frontmatterSyncMs": {
+          "median": 60.54000300083135,
+          "min": 59.606491000187816,
+          "max": 61.97663899984036
+        },
+        "domainSyncMs": {
+          "median": 5.037081000744365,
+          "min": 4.861801000137348,
+          "max": 5.585513999307295
+        },
+        "hashSyncMs": {
+          "median": 17.96316499960085,
+          "min": 17.074756999631063,
+          "max": 19.93826000035915
+        },
+        "indexSyncMs": {
+          "median": 12.415082999999868,
+          "min": 10.84299999999348,
+          "max": 14.742333000001963
+        },
+        "projectionSyncMs": {
+          "median": 5.009874999988824,
+          "min": 4.123208999997587,
+          "max": 6.636750000005122
+        },
+        "serializeSyncMs": {
+          "median": 0.2397919999930309,
+          "min": 0.2086249999993015,
+          "max": 0.2565409999951953
+        }
+      },
+      "membership": {
+        "docs": [
+          12202
+        ],
+        "bytes": [
+          3569698
+        ],
+        "frontmatterBytes": [
+          2972419
+        ],
+        "peak": [
+          64
+        ],
+        "activeAtEnd": [
+          0
+        ],
+        "contextCalls": [
+          1
+        ]
+      },
+      "maxFrontmatterSingleDocumentMs": 1.4769999999989523
+    },
+    {
+      "kind": "spec",
+      "measuredRequests": 5,
+      "summary": {
+        "requestWallMs": {
+          "median": 321.1034590000054,
+          "min": 274.1028329999972,
+          "max": 357.7390000000014
+        },
+        "contextWallMs": {
+          "median": 303.3912080000009,
+          "min": 256.05154200000106,
+          "max": 336.01079200000095
+        },
+        "configWallMs": {
+          "median": 0.2564579999889247,
+          "min": 0.19720799999777228,
+          "max": 0.5009580000041751
+        },
+        "directoryWallSumMs": {
+          "median": 102.8655010000075,
+          "min": 82.52233400002297,
+          "max": 119.76945699997304
+        },
+        "gitWallMs": {
+          "median": 15.981666000006953,
+          "min": 12.10158400000364,
+          "max": 19.22933400000329
+        },
+        "cpuMs": {
+          "median": 991.725,
+          "min": 818.113,
+          "max": 1012.732
+        },
+        "elu": {
+          "median": 0.9694302722298727,
+          "min": 0.9520910081282977,
+          "max": 0.9886418999884331
+        },
+        "queueWaitSumMs": {
+          "median": 1598608.5197559954,
+          "min": 1397290.643609,
+          "max": 1900876.2357840068
+        },
+        "callbackWallSumMs": {
+          "median": 18405.866522000506,
+          "min": 15245.159333000542,
+          "max": 20173.194178000223
+        },
+        "gcOverlapMs": {
+          "median": 16.402875185012817,
+          "min": 11.36650013923645,
+          "max": 18.16762375831604
+        },
+        "decodeSyncMs": {
+          "median": 3.1613899993972154,
+          "min": 2.880730001226766,
+          "max": 3.6151409998419695
+        },
+        "frontmatterSyncMs": {
+          "median": 64.5689019994752,
+          "min": 59.62176100167562,
+          "max": 68.21749700047076
+        },
+        "domainSyncMs": {
+          "median": 5.0557319998479215,
+          "min": 4.680661000747932,
+          "max": 5.6284749990009
+        },
+        "hashSyncMs": {
+          "median": 19.518639000481926,
+          "min": 16.724673999895458,
+          "max": 20.137692998876446
+        },
+        "indexSyncMs": {
+          "median": 12.631374999997206,
+          "min": 12.295958000002429,
+          "max": 13.44474999999511
+        },
+        "projectionSyncMs": {
+          "median": 5.732499999998254,
+          "min": 4.96616600001289,
+          "max": 7.911082999999053
+        },
+        "serializeSyncMs": {
+          "median": 0.2010420000005979,
+          "min": 0.1940840000024764,
+          "max": 0.28358299999672454
+        }
+      },
+      "membership": {
+        "docs": [
+          12202
+        ],
+        "bytes": [
+          3569698
+        ],
+        "frontmatterBytes": [
+          2972419
+        ],
+        "peak": [
+          64
+        ],
+        "activeAtEnd": [
+          0
+        ],
+        "contextCalls": [
+          1
+        ]
+      },
+      "maxFrontmatterSingleDocumentMs": 1.4706250000017462
+    }
+  ]
+}

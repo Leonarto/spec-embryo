@@ -1,0 +1,103 @@
+{
+  "capturedAt": "2026-11-16T12:50:30.623Z",
+  "baseCommit": "88cb574",
+  "scope": "Host seam plus approved dirty Timeline overlay. Functional only; no latency or question guard acceptance.",
+  "passed": 19,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Visible expanded task has traversal and no absence banner",
+      "pass": true
+    },
+    {
+      "name": "Collapsed inspected group uses expanded-results label and disables traversal",
+      "pass": true
+    },
+    {
+      "name": "Collapse retains reader node, trace, inspection and relation page",
+      "pass": true
+    },
+    {
+      "name": "Re-expansion restores traversal and virtual scrolling does not change logical Next",
+      "pass": true
+    },
+    {
+      "name": "Inspector Next across virtual window keeps trace and clears old-entity relation intent",
+      "pass": true
+    },
+    {
+      "name": "Simple Timeline uses effective-page label rather than expanded label",
+      "pass": true
+    },
+    {
+      "name": "Timeline builder1 retains same inspect/section/allowlisted relation page",
+      "pass": true
+    },
+    {
+      "name": "Timeline builder2 retains same inspect/section/allowlisted relation page",
+      "pass": true
+    },
+    {
+      "name": "Timeline builder3 retains same inspect/section/allowlisted relation page",
+      "pass": true
+    },
+    {
+      "name": "Timeline builder4 retains same inspect/section/allowlisted relation page",
+      "pass": true
+    },
+    {
+      "name": "Timeline builder5 retains same inspect/section/allowlisted relation page",
+      "pass": true
+    },
+    {
+      "name": "Timeline builder6 retains same inspect/section/allowlisted relation page",
+      "pass": true
+    },
+    {
+      "name": "Real Timeline page activation preserves relation intent",
+      "pass": true
+    },
+    {
+      "name": "Switch to visual recomputes expanded registration reactively",
+      "pass": true
+    },
+    {
+      "name": "tasks: default registration retains page wording",
+      "pass": true
+    },
+    {
+      "name": "specs: unregistered context wording",
+      "pass": true
+    },
+    {
+      "name": "Incomparable Timeline kind retains unavailable-in-view wording",
+      "pass": true
+    },
+    {
+      "name": "No-JS GET pager retains inspect/section/relation/trace",
+      "pass": true
+    },
+    {
+      "name": "Close clears inspection and prior relation intent",
+      "pass": true
+    }
+  ],
+  "supersededHarness": {
+    "failedExpectation": {
+      "name": "specs: default registration retains page wording",
+      "pass": false
+    },
+    "reason": "Specs has no list registration until TASK129 and correctly uses unavailable-in-view. Only the three remaining tail cases were rerun after correcting the expectation."
+  },
+  "limits": [
+    "Simple/Visual mode links caused full-document GET navigation in this run. No DOM continuity claim across that navigation; collapse/reexpand preserved the existing detail node within one document.",
+    "Tasks defaults to page; Specs unregistered baseline is unavailable-in-view.",
+    "No performance, question editor/guard or full TASK130 acceptance."
+  ],
+  "checksCLI": {
+    "targeted": "31 pass, 0 fail, 782 assertions across5files",
+    "webcheck": "0 errors,0 warnings",
+    "agents": "PASS"
+  },
+  "browserClosed": true
+}

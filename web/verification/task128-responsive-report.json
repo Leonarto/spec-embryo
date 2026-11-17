@@ -1,0 +1,105 @@
+{
+  "phase": "responsive",
+  "capturedAt": "2026-11-15T22:44:54.529Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Dock→overlay keeps DOM, focus, scroll, SVG and URL",
+      "pass": true,
+      "detail": {
+        "host": true,
+        "body": true,
+        "svg": true,
+        "focus": true,
+        "scroll": true,
+        "tableScroll": true,
+        "url": true,
+        "role": "dialog",
+        "inert": true,
+        "width": 520
+      }
+    },
+    {
+      "name": "Overlay→dock retains same reader subtree and removes inert",
+      "pass": true,
+      "detail": {
+        "host": true,
+        "body": true,
+        "svg": true,
+        "focus": true,
+        "scroll": true,
+        "tableScroll": true,
+        "url": true,
+        "inert": false
+      }
+    },
+    {
+      "name": "Docked panel does not trap background focus",
+      "pass": true
+    },
+    {
+      "name": "F6 moves toolbar→grid",
+      "pass": true
+    },
+    {
+      "name": "F6 moves grid→inspector",
+      "pass": true
+    },
+    {
+      "name": "F6 moves inspector→toolbar",
+      "pass": true
+    },
+    {
+      "name": "Keyboard End respects real-workspace maximum",
+      "pass": true
+    },
+    {
+      "name": "Keyboard Home uses360 minimum",
+      "pass": true
+    },
+    {
+      "name": "Keyboard resize steps16",
+      "pass": true
+    },
+    {
+      "name": "Disappearing width control returns focus to stable heading",
+      "pass": true
+    },
+    {
+      "name": "Mobile fullscreen is a modal and background inert",
+      "pass": true
+    },
+    {
+      "name": "Modal Shift+Tab cycles within host",
+      "pass": true
+    },
+    {
+      "name": "Modal Tab cycles back to first control",
+      "pass": true
+    },
+    {
+      "name": "Modal descendant-consumed Escape (harness) does not close host",
+      "pass": true
+    },
+    {
+      "name": "Next real modal Escape closes once and cleans inert",
+      "pass": true
+    },
+    {
+      "name": "Modal close restores opener cell",
+      "pass": true
+    },
+    {
+      "name": "First Escape closes nested popup only",
+      "pass": true
+    },
+    {
+      "name": "Second Escape closes Filters only",
+      "pass": true
+    },
+    {
+      "name": "Third Escape closes inspector preserving selection",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/ui-package.test.ts:
+Packed server bare production imports: none (bundled)
+(pass) actual production archive UI > has exact output and explicit production dependency closure, no development imports [468.05ms]
+Starting precompiled Spec Embryo UI with /opt/homebrew/Cellar/node/25.6.0/bin/node (v25.6.0); artifacts verified in 65.5 ms.
+Spec Embryo UI ready at http://127.0.0.1:62082/ (build 698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7)
+Starting precompiled Spec Embryo UI with /opt/homebrew/Cellar/node/25.6.0/bin/node (v25.6.0); artifacts verified in 59.4 ms.
+Spec Embryo UI ready at http://127.0.0.1:62093/ (build 698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7)
+(pass) actual production archive UI > runs the real bin in two external roots with SSR/static/actions/security and shutdown [2088.45ms]
+
+ 2 pass
+ 0 fail
+ 121 expect() calls
+Ran 2 tests across 1 file. [2.69s]

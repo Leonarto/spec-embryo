@@ -1,0 +1,31 @@
+{
+  "phase": "mermaid-fallback",
+  "capturedAt": "2026-11-15T23:23:34.259Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "No-JS page/task: readable diagram source without dead zoom controls",
+      "pass": true
+    },
+    {
+      "name": "No-JS inspector/task: readable diagram source without dead zoom controls",
+      "pass": true
+    },
+    {
+      "name": "No-JS page/spec: readable diagram source without dead zoom controls",
+      "pass": true
+    },
+    {
+      "name": "No-JS inspector/spec: readable diagram source without dead zoom controls",
+      "pass": true
+    },
+    {
+      "name": "Loading diagram has no unusable zoom controls",
+      "pass": true
+    },
+    {
+      "name": "Diagram error keeps readable source and no zoom controls",
+      "pass": true
+    }
+  ]
+}

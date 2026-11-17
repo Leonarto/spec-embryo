@@ -1,0 +1,1470 @@
+{
+  "phase": "themes",
+  "capturedAt": "2026-11-15T23:21:33.417Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "page/task/light/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 6,
+          "minHeight": 19.9921875,
+          "under24": [
+            {
+              "height": 19.9921875,
+              "text": " Back to Tasks"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "page/task/light/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 69,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/task/light: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 14,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "page/task/dark/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 6,
+          "minHeight": 19.9921875,
+          "under24": [
+            {
+              "height": 19.9921875,
+              "text": " Back to Tasks"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "page/task/dark/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 69,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/task/dark: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 14,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "page/spec/light/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 236,
+          "minHeight": 19.9921875,
+          "under24": [
+            {
+              "height": 19.9921875,
+              "text": " Back to Specs"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "page/spec/light/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1493,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/spec/light: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 17,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "page/spec/dark/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 236,
+          "minHeight": 19.9921875,
+          "under24": [
+            {
+              "height": 19.9921875,
+              "text": " Back to Specs"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "page/spec/dark/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1493,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/spec/dark: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 17,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "inspector/task/light/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 988,
+          "y": 56,
+          "width": 440,
+          "height": 832,
+          "top": 56,
+          "right": 1428,
+          "bottom": 888,
+          "left": 988
+        },
+        "controls": {
+          "count": 16,
+          "minHeight": 24,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "inspector/task/light/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 78,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/task/light: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 19,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "inspector/task/dark/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 988,
+          "y": 56,
+          "width": 440,
+          "height": 832,
+          "top": 56,
+          "right": 1428,
+          "bottom": 888,
+          "left": 988
+        },
+        "controls": {
+          "count": 16,
+          "minHeight": 24,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "inspector/task/dark/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 78,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/task/dark: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 19,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "inspector/spec/light/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 988,
+          "y": 56,
+          "width": 440,
+          "height": 832,
+          "top": 56,
+          "right": 1428,
+          "bottom": 888,
+          "left": 988
+        },
+        "controls": {
+          "count": 119,
+          "minHeight": 12.5,
+          "under24": [
+            {
+              "height": 12.5,
+              "text": "TASK-00001"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inspector/spec/light/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 700,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/spec/light: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 19,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "inspector/spec/dark/1440: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 988,
+          "y": 56,
+          "width": 440,
+          "height": 832,
+          "top": 56,
+          "right": 1428,
+          "bottom": 888,
+          "left": 988
+        },
+        "controls": {
+          "count": 119,
+          "minHeight": 12.5,
+          "under24": [
+            {
+              "height": 12.5,
+              "text": "TASK-00001"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inspector/spec/dark/1440: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 700,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/spec/dark: scoped axe",
+      "pass": true,
+      "detail": {
+        "passes": 19,
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "page/task/light/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 6,
+          "minHeight": 44,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "page/task/light/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 69,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/task/dark/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 6,
+          "minHeight": 44,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "page/task/dark/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 69,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/spec/light/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 236,
+          "minHeight": 44,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "page/spec/light/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1493,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "page/spec/dark/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgba(0, 0, 0, 0)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "controls": {
+          "count": 236,
+          "minHeight": 44,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "page/spec/dark/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 1493,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/task/light/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": {
+          "count": 12,
+          "minHeight": 44,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "inspector/task/light/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 76,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/task/dark/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": {
+          "count": 12,
+          "minHeight": 44,
+          "under24": []
+        }
+      }
+    },
+    {
+      "name": "inspector/task/dark/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 76,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/spec/light/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "light",
+        "colorMode": "light",
+        "surface": "#ffffff",
+        "background": "rgb(255, 255, 255)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": {
+          "count": 115,
+          "minHeight": 12.5,
+          "under24": [
+            {
+              "height": 12.5,
+              "text": "TASK-00001"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inspector/spec/light/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 698,
+        "failures": [],
+        "skipped": []
+      }
+    },
+    {
+      "name": "inspector/spec/dark/390: resolved palette and bounded document",
+      "pass": true,
+      "detail": {
+        "theme": "dark",
+        "colorMode": "dark",
+        "surface": "#151b1e",
+        "background": "rgb(21, 27, 30)",
+        "bodyOverflow": false,
+        "host": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "controls": {
+          "count": 115,
+          "minHeight": 12.5,
+          "under24": [
+            {
+              "height": 12.5,
+              "text": "TASK-00001"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inspector/spec/dark/390: solid text contrast",
+      "pass": true,
+      "detail": {
+        "checked": 698,
+        "failures": [],
+        "skipped": []
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "mode": "page",
+      "kind": "task",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 6,
+        "minHeight": 19.9921875,
+        "under24": [
+          {
+            "height": 19.9921875,
+            "text": " Back to Tasks"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 6,
+        "minHeight": 19.9921875,
+        "under24": [
+          {
+            "height": 19.9921875,
+            "text": " Back to Tasks"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 236,
+        "minHeight": 19.9921875,
+        "under24": [
+          {
+            "height": 19.9921875,
+            "text": " Back to Specs"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 236,
+        "minHeight": 19.9921875,
+        "under24": [
+          {
+            "height": 19.9921875,
+            "text": " Back to Specs"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 988,
+        "y": 56,
+        "width": 440,
+        "height": 832,
+        "top": 56,
+        "right": 1428,
+        "bottom": 888,
+        "left": 988
+      },
+      "controls": {
+        "count": 16,
+        "minHeight": 24,
+        "under24": []
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 988,
+        "y": 56,
+        "width": 440,
+        "height": 832,
+        "top": 56,
+        "right": 1428,
+        "bottom": 888,
+        "left": 988
+      },
+      "controls": {
+        "count": 16,
+        "minHeight": 24,
+        "under24": []
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 988,
+        "y": 56,
+        "width": 440,
+        "height": 832,
+        "top": 56,
+        "right": 1428,
+        "bottom": 888,
+        "left": 988
+      },
+      "controls": {
+        "count": 119,
+        "minHeight": 12.5,
+        "under24": [
+          {
+            "height": 12.5,
+            "text": "TASK-00001"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 988,
+        "y": 56,
+        "width": 440,
+        "height": 832,
+        "top": 56,
+        "right": 1428,
+        "bottom": 888,
+        "left": 988
+      },
+      "controls": {
+        "count": 119,
+        "minHeight": 12.5,
+        "under24": [
+          {
+            "height": 12.5,
+            "text": "TASK-00001"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 6,
+        "minHeight": 44,
+        "under24": []
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 6,
+        "minHeight": 44,
+        "under24": []
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 236,
+        "minHeight": 44,
+        "under24": []
+      }
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgba(0, 0, 0, 0)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "controls": {
+        "count": 236,
+        "minHeight": 44,
+        "under24": []
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "controls": {
+        "count": 12,
+        "minHeight": 44,
+        "under24": []
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "controls": {
+        "count": 12,
+        "minHeight": 44,
+        "under24": []
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "colorMode": "light",
+      "surface": "#ffffff",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "controls": {
+        "count": 115,
+        "minHeight": 12.5,
+        "under24": [
+          {
+            "height": 12.5,
+            "text": "TASK-00001"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "colorMode": "dark",
+      "surface": "#151b1e",
+      "background": "rgb(21, 27, 30)",
+      "bodyOverflow": false,
+      "host": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "controls": {
+        "count": 115,
+        "minHeight": 12.5,
+        "under24": [
+          {
+            "height": 12.5,
+            "text": "TASK-00001"
+          }
+        ]
+      }
+    }
+  ],
+  "contrast": [
+    {
+      "mode": "page",
+      "kind": "task",
+      "theme": "light",
+      "width": 1440,
+      "checked": 69,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "theme": "dark",
+      "width": 1440,
+      "checked": 69,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "theme": "light",
+      "width": 1440,
+      "checked": 1493,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "theme": "dark",
+      "width": 1440,
+      "checked": 1493,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "theme": "light",
+      "width": 1440,
+      "checked": 78,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "theme": "dark",
+      "width": 1440,
+      "checked": 78,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "theme": "light",
+      "width": 1440,
+      "checked": 700,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "theme": "dark",
+      "width": 1440,
+      "checked": 700,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "theme": "light",
+      "width": 390,
+      "checked": 69,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "theme": "dark",
+      "width": 390,
+      "checked": 69,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "theme": "light",
+      "width": 390,
+      "checked": 1493,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "theme": "dark",
+      "width": 390,
+      "checked": 1493,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "theme": "light",
+      "width": 390,
+      "checked": 76,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "theme": "dark",
+      "width": 390,
+      "checked": 76,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "theme": "light",
+      "width": 390,
+      "checked": 698,
+      "failures": [],
+      "skipped": []
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "theme": "dark",
+      "width": 390,
+      "checked": 698,
+      "failures": [],
+      "skipped": []
+    }
+  ],
+  "axe": [
+    {
+      "mode": "page",
+      "kind": "task",
+      "theme": "light",
+      "width": 1440,
+      "passes": 14,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "page",
+      "kind": "task",
+      "theme": "dark",
+      "width": 1440,
+      "passes": 14,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "theme": "light",
+      "width": 1440,
+      "passes": 17,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "page",
+      "kind": "spec",
+      "theme": "dark",
+      "width": 1440,
+      "passes": 17,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "theme": "light",
+      "width": 1440,
+      "passes": 19,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "inspector",
+      "kind": "task",
+      "theme": "dark",
+      "width": 1440,
+      "passes": 19,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "theme": "light",
+      "width": 1440,
+      "passes": 19,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "mode": "inspector",
+      "kind": "spec",
+      "theme": "dark",
+      "width": 1440,
+      "passes": 19,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 1
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    }
+  ],
+  "note": "Colors/axe measured before final target-only min-height corrections. Targeted4-check follow-up records24px canonical back links and44px breadcrumb/question links; colors unchanged."
+}

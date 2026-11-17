@@ -1,0 +1,31 @@
+{
+  "capturedAt": "2026-11-15T19:57:07.605Z",
+  "checks": [
+    {
+      "name": "Late option A cannot replace newer B",
+      "pass": true
+    },
+    {
+      "name": "Option response does not overwrite current selection",
+      "pass": true,
+      "detail": [
+        "SPEC-058"
+      ]
+    },
+    {
+      "name": "Option error retains prior options and selection",
+      "pass": true
+    },
+    {
+      "name": "Option Retry preserves off-page selected ID exactly once",
+      "pass": true,
+      "detail": [
+        "SPEC-058"
+      ]
+    },
+    {
+      "name": "Options request never changes list URL or data",
+      "pass": true
+    }
+  ]
+}

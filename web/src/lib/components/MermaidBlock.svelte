@@ -1,14 +1,19 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { buildMermaidThemeVariables } from "../mermaid-theme.ts";
+
   const MIN_ZOOM = 0.3;
   const MAX_ZOOM = 2.2;
   const ZOOM_STEP = 0.2;
 
   let { source } = $props<{ source: string }>();
 
+  let mounted=$state(false);
   let svgMarkup = $state("");
   let error = $state<string | null>(null);
   let isRendering = $state(true);
   let zoom = $state(1);
+  let activeTheme = $state("dark");
 
   function clampZoom(next: number): number {
     return Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Number.parseFloat(next.toFixed(2))));
@@ -39,19 +44,7 @@
       mermaid.initialize({
         startOnLoad: false,
         theme: "base",
-        themeVariables: {
-          primaryColor: "#f5f0e6",
-          primaryBorderColor: "#2e6a52",
-          primaryTextColor: "#1d271f",
-          lineColor: "#2e6a52",
-          tertiaryColor: "#fffdf8",
-          background: "#fffdf8",
-          mainBkg: "#f8f2e8",
-          nodeBorder: "#2e6a52",
-          clusterBkg: "#f7f4ed",
-          clusterBorder: "#c9bcaa",
-          fontFamily: "var(--body-font)",
-        },
+        themeVariables: buildMermaidThemeVariables(getComputedStyle(document.documentElement)),
         flowchart: {
           curve: "basis",
           useMaxWidth: true,
@@ -71,7 +64,24 @@
     }
   }
 
+  onMount(() => {
+    mounted=true;
+    activeTheme = document.documentElement.dataset.theme || "dark";
+
+    const observer = new MutationObserver(() => {
+      activeTheme = document.documentElement.dataset.theme || "dark";
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  });
+
   $effect(() => {
+    activeTheme;
     void renderDiagram(source);
   });
 </script>
@@ -83,7 +93,7 @@
       <span class="diagram-kind">Mermaid</span>
     </div>
 
-    <div class="diagram-controls" aria-label="Diagram zoom controls">
+    {#if mounted&&svgMarkup&&!error}<div class="diagram-controls" role="group" aria-label="Diagram zoom controls">
       <button type="button" class="control-button" onclick={zoomOut} disabled={zoom <= MIN_ZOOM} aria-label="Zoom out">
         -
       </button>
@@ -93,10 +103,11 @@
       <button type="button" class="control-button" onclick={zoomIn} disabled={zoom >= MAX_ZOOM} aria-label="Zoom in">
         +
       </button>
-    </div>
+    </div>{/if}
   </div>
 
-  {#if error}
+  {#if !mounted}<div class="diagram-fallback"><p>Diagram rendering requires JavaScript.</p><pre>{source}</pre></div>
+  {:else if error}
     <div class="diagram-error">
       <p>{error}</p>
       <pre>{source}</pre>
@@ -118,13 +129,9 @@
     gap: 0.85rem;
     padding: 0.9rem;
     border-radius: calc(var(--radius-lg) - 0.15rem);
-    border: 1px solid rgba(46, 106, 82, 0.18);
-    background:
-      linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(247, 242, 233, 0.95)),
-      radial-gradient(circle at top left, rgba(46, 106, 82, 0.07), transparent 48%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.8),
-      0 18px 40px rgba(34, 28, 20, 0.08);
+    border: 1px solid var(--accent-border);
+    background:var(--surface);
+    box-shadow:none;
   }
 
   .diagram-head {
@@ -155,11 +162,11 @@
 
   .diagram-kind {
     padding: 0.28rem 0.55rem;
-    border-radius: 999px;
-    border: 1px solid rgba(46, 106, 82, 0.24);
-    color: #20674c;
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: 0 0 16px rgba(46, 106, 82, 0.12);
+    border-radius:.25rem;
+    border: 1px solid var(--accent-border);
+    color: var(--accent-ink);
+    background: var(--surface-interactive);
+    box-shadow:none;
   }
 
   .diagram-controls {
@@ -168,19 +175,17 @@
 
   .control-button,
   .control-readout {
-    border: 1px solid rgba(46, 106, 82, 0.2);
-    background: rgba(255, 255, 255, 0.74);
-    color: #1d271f;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.72),
-      0 0 18px rgba(46, 106, 82, 0.08);
+    border: 1px solid var(--accent-border);
+    background: var(--surface-interactive);
+    color: var(--ink);
+    box-shadow:none;
   }
 
   .control-button {
     width: 1.95rem;
     height: 1.95rem;
     padding: 0;
-    border-radius: 999px;
+    border-radius:.25rem;
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
@@ -188,7 +193,7 @@
 
   .control-readout {
     padding: 0.34rem 0.62rem;
-    border-radius: 999px;
+    border-radius:.25rem;
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -217,7 +222,7 @@
     max-height: 38rem;
     padding: 0.2rem 0.1rem 0.1rem;
     border-radius: 0.9rem;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(250, 245, 236, 0.62));
+    background:var(--surface-raised);
   }
 
   .diagram-canvas {
@@ -238,19 +243,20 @@
     height: auto;
   }
 
-  .diagram-error {
+  .diagram-error,.diagram-fallback {
     display: grid;
     gap: 0.6rem;
   }
 
-  .diagram-error pre {
+  .diagram-error pre,.diagram-fallback pre {
     margin: 0;
     overflow-x: auto;
     padding: 0.9rem;
     border-radius: 0.9rem;
-    background: rgba(36, 33, 28, 0.96);
-    color: rgba(245, 238, 225, 0.92);
+    background:var(--surface);
+    color: var(--code-ink);
     font-size: 0.85rem;
     line-height: 1.55;
   }
+@media(pointer:coarse){.control-button{width:2.75rem;height:2.75rem}.control-readout{min-height:2.75rem}}
 </style>

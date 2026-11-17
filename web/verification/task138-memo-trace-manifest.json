@@ -1,0 +1,28 @@
+{
+  "baseCommit": "f8a7e1d1edbca416ece8ede8fc5d226d997e04e9",
+  "copyOnly": true,
+  "outcome": "one-complete-diagnostic-no-causal-waiver",
+  "sourceManifestSHA256": "8409e3166e551164d1588aa22aac67c3adb7671ec3388ffd11f37207f6455658",
+  "files": [
+    {
+      "path": "web/verification/task138-memo-trace-browser.json",
+      "sha256": "ff11122c937483a79ab93a9a95819b3173d6a852ceef1046d28a3eee15eb562b"
+    },
+    {
+      "path": "web/verification/task138-memo-trace-server.jsonl",
+      "sha256": "ccc2c3825ca5a0b6df6e9782924aaa9a7306c1ed52d55c8e8eef6ff21b112d3f"
+    },
+    {
+      "path": "web/verification/task138-memo-trace-correlated.json",
+      "sha256": "2429efc558cec6aff77647b79d2c43acd914d37196b3cb649e9cd95028f26e93"
+    },
+    {
+      "path": "web/verification/task138-memo-trace-source.json",
+      "sha256": "e422478dba7c93237dcbf9ee5aed91a5f50b3e2aaf173f6c41432f8e63aff00e"
+    },
+    {
+      "path": "web/verification/task138-memo-trace-report.md",
+      "sha256": "43ba804f0d4016e3bb3c9057d9d00fa21e68a92e57dc30a3c92b9e90824dbb3b"
+    }
+  ]
+}

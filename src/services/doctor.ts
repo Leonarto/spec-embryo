@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { delimiter, join, relative } from "node:path";
 import type {
   CurrentStateDocument,
   HandoffDocument,
@@ -16,9 +16,22 @@ import {
 import { parseTomlFrontmatter } from "../frontmatter.ts";
 import { createDefaultConfig, readProjectConfig } from "../repository.ts";
 import { resolveProjectPaths } from "../paths.ts";
-import { buildAdoptionGuidance } from "./adoption.ts";
+import {
+  agentBriefCommandLines,
+  agentSnippetCommandLines,
+  buildAdoptionArtifactPaths,
+  buildAdoptionGuidance,
+  NEXUS_COEXISTENCE_HEADING,
+  nexusCoexistenceLines,
+  renderAdoptionGuidance,
+  renderDirectAgentBrief,
+  renderMigrationGuideMarkdown,
+} from "./adoption.ts";
 import { inspectAdoptionState, type AdoptionInspection } from "./layout.ts";
 import { listMarkdownFiles, pathExists, readUtf8 } from "../storage.ts";
+import { CLI_VERSION, compareCliVersions } from "./version.ts";
+import { findAgentsFiles } from "./agents.ts";
+import { renderHarnessDiagnostics, type HarnessDiagnosticReport } from "./harness-diagnostics.ts";
 
 export type DoctorSeverity = "blocking" | "warning" | "info";
 export type DoctorOverallStatus = "healthy" | "needs-attention" | "blocked";
@@ -39,8 +52,14 @@ export interface DoctorSummary {
 }
 
 export interface DoctorReport {
+  harness?: HarnessDiagnosticReport;
   summary: DoctorSummary;
   adoption: AdoptionInspection;
+  versions: {
+    cliVersion: string;
+    projectToolVersion?: string;
+    updateAvailable: boolean;
+  };
   config: {
     exists: boolean;
     valid: boolean;
@@ -53,6 +72,13 @@ export interface DoctorReport {
   };
   findings: DoctorFinding[];
   guidance: ReturnType<typeof buildAdoptionGuidance>;
+  migrationGuideFile: string;
+  directAgentBriefFile: string;
+  directAgentBrief: string;
+}
+
+export interface DoctorRenderOptions {
+  verbose?: boolean;
 }
 
 interface SafeParseResult<T> {
@@ -227,6 +253,195 @@ function validateCurrentStateLinks(currentState: CurrentStateDocument | undefine
   return findings;
 }
 
+function detectSeedScaffold(currentState: CurrentStateDocument | undefined, specs: SpecDocument[], tasks: TaskDocument[]): boolean {
+  const hasSeedTag = (tags: string[]) => tags.includes("seed");
+
+  return Boolean(
+    (currentState && hasSeedTag(currentState.tags)) ||
+      specs.some((spec) => hasSeedTag(spec.tags)) ||
+      tasks.some((task) => hasSeedTag(task.tags)),
+  );
+}
+
+async function commandExists(command: string | undefined): Promise<boolean> {
+  if (!command) {
+    return false;
+  }
+
+  if (command.includes("/")) {
+    return pathExists(command);
+  }
+
+  const rawPath = process.env.PATH;
+  if (!rawPath) {
+    return false;
+  }
+
+  const candidates = rawPath
+    .split(delimiter)
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .flatMap((segment) => {
+      return process.platform === "win32"
+        ? [join(segment, command), join(segment, `${command}.exe`), join(segment, `${command}.cmd`)]
+        : [join(segment, command)];
+    });
+
+  for (const candidate of candidates) {
+    if (await pathExists(candidate)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function agentsFileContainsNexusContract(content: string): boolean {
+  return (
+    content.includes(NEXUS_COEXISTENCE_HEADING) &&
+    content.includes("Use `spm` as the source of truth") &&
+    content.includes("Use Nexus for code impact, related-code, and blast-radius analysis only.") &&
+    content.includes("Do not let Nexus replace or overwrite root `AGENTS.md`")
+  );
+}
+
+async function validateRootNexusGuidance(rootDir: string, findings: DoctorFinding[]): Promise<void> {
+  const rootAgentsFile = join(rootDir, "AGENTS.md");
+  if (!(await pathExists(rootAgentsFile))) {
+    pushFinding(
+      findings,
+      "warning",
+      "nexus-missing-root-agents-guidance",
+      "Nexus is enabled but the repo has no root AGENTS.md that defines how Nexus should coexist with `spm`.",
+      rootAgentsFile,
+      `Add a \`${NEXUS_COEXISTENCE_HEADING}\` section that says ${nexusCoexistenceLines()[1]?.toLowerCase() ?? "spm remains the source of truth"}`,
+    );
+    return;
+  }
+
+  const rootAgents = await readUtf8(rootAgentsFile);
+  if (!agentsFileContainsNexusContract(rootAgents)) {
+    pushFinding(
+      findings,
+      "warning",
+      "nexus-missing-coexistence-contract",
+      "Nexus is enabled but root AGENTS guidance does not yet describe the bounded coexistence contract with `spm`.",
+      rootAgentsFile,
+      `Add a \`${NEXUS_COEXISTENCE_HEADING}\` section that keeps \`spm\` as the planning source of truth and limits Nexus to code-impact analysis.`,
+    );
+  }
+}
+
+async function validateScopedNexusGuidance(rootDir: string, findings: DoctorFinding[]): Promise<void> {
+  const scopedAgentsFiles = (await findAgentsFiles(rootDir)).filter((file) => relative(rootDir, file) !== "AGENTS.md");
+
+  for (const agentsFile of scopedAgentsFiles) {
+    const content = await readUtf8(agentsFile);
+    if (agentsFileContainsNexusContract(content)) {
+      return;
+    }
+  }
+
+  pushFinding(
+    findings,
+    "warning",
+    "nexus-missing-scoped-agents-guidance",
+    "Nexus is enabled in scoped AGENTS mode, but no nested AGENTS.md contains the bounded coexistence contract with `spm`.",
+    rootDir,
+    `Add a \`${NEXUS_COEXISTENCE_HEADING}\` section to the nearest scoped AGENTS.md that keeps \`spm\` as the planning source of truth and limits Nexus to code-impact analysis.`,
+  );
+}
+
+async function validateNexusIntegration(rootDir: string, config: ProjectConfig, findings: DoctorFinding[]): Promise<void> {
+  if (!config.nexus.enabled) {
+    return;
+  }
+
+  if (config.nexus.rootAgentsMode === "managed-by-nexus") {
+    pushFinding(
+      findings,
+      "blocking",
+      "nexus-unsafe-root-agents-mode",
+      "Nexus is configured to manage root AGENTS guidance, which would let it displace Spec Embryo's planning authority.",
+      join(rootDir, ".specpm", "config.toml"),
+      "Set `nexus.root_agents_mode` to `reference-only` or `scoped` so root AGENTS ownership stays with `spm`.",
+    );
+  }
+
+  if (!(await commandExists(config.nexus.command))) {
+    pushFinding(
+      findings,
+      "warning",
+      "nexus-command-missing",
+      `Nexus is enabled but the configured command could not be found: ${config.nexus.command ?? "(missing command)"}.`,
+      join(rootDir, ".specpm", "config.toml"),
+      "Install Nexus separately using the upstream instructions, verify the configured command locally, then re-run `spm doctor`.",
+    );
+  }
+
+  if (config.nexus.rootAgentsMode === "scoped") {
+    await validateScopedNexusGuidance(rootDir, findings);
+  } else {
+    await validateRootNexusGuidance(rootDir, findings);
+  }
+}
+
+async function validateAdoptionArtifacts(
+  rootDir: string,
+  options: {
+    artifactPaths: ReturnType<typeof buildAdoptionArtifactPaths>;
+    expectedMigrationGuide: string;
+    expectedAgentBrief: string;
+    shouldValidate: boolean;
+    findings: DoctorFinding[];
+  },
+): Promise<void> {
+  if (!options.shouldValidate) {
+    return;
+  }
+
+  const checks = [
+    {
+      filePath: join(rootDir, options.artifactPaths.migrationGuideFile),
+      codeBase: "adoption-migration-guide",
+      label: "migration guide",
+      expected: options.expectedMigrationGuide,
+    },
+    {
+      filePath: join(rootDir, options.artifactPaths.agentBriefFile),
+      codeBase: "adoption-agent-brief",
+      label: "direct agent brief",
+      expected: options.expectedAgentBrief,
+    },
+  ];
+
+  for (const check of checks) {
+    if (!(await pathExists(check.filePath))) {
+      pushFinding(
+        options.findings,
+        "warning",
+        `missing-${check.codeBase}`,
+        `The generated adoption ${check.label} is missing.`,
+        check.filePath,
+        "Run `spm init` to regenerate the deterministic adoption artifacts before another agent relies on stale or missing repo-local guidance.",
+      );
+      continue;
+    }
+
+    const existing = await readUtf8(check.filePath);
+    if (existing !== check.expected) {
+      pushFinding(
+        options.findings,
+        "warning",
+        `stale-${check.codeBase}`,
+        `The generated adoption ${check.label} no longer matches the current CLI guidance renderer.`,
+        check.filePath,
+        "Run `spm init` to refresh the generated adoption artifacts so repo-local guidance matches the currently installed CLI.",
+      );
+    }
+  }
+}
+
 export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> {
   const configFile = join(rootDir, ".specpm", "config.toml");
   const configExists = await pathExists(configFile);
@@ -256,6 +471,21 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
       configFile,
       "Run `spm init` to adopt this repo into the canonical Spec Embryo layout.",
     );
+  }
+
+  if (config && compareCliVersions(CLI_VERSION, config.toolVersion) > 0) {
+    pushFinding(
+      findings,
+      "info",
+      "tool-upgrade-available",
+      `This repo was last initialized or reshaped with Spec Embryo ${config.toolVersion}, but the running CLI is ${CLI_VERSION}.`,
+      configFile,
+      "Refresh your SpM usage policy from `spm doctor --verbose` or `spm doctor --json`, then re-run `spm init` if you want this repo to adopt the newer guidance, agent brief, and defaults.",
+    );
+  }
+
+  if (config) {
+    await validateNexusIntegration(rootDir, config, findings);
   }
 
   const adoption = await inspectAdoptionState(rootDir, { config });
@@ -352,6 +582,18 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
 
   findings.push(...validateSpecTaskLinks(specsResult.documents, tasksResult.documents));
   findings.push(...validateCurrentStateLinks(currentState, specsResult.documents, tasksResult.documents));
+  const seedScaffoldDetected = detectSeedScaffold(currentState, specsResult.documents, tasksResult.documents);
+
+  if (seedScaffoldDetected) {
+    pushFinding(
+      findings,
+      "warning",
+      "seed-scaffold-present",
+      "The managed memory still contains onboarding scaffold docs meant to orient adoption, not the adopted repo's literal product roadmap.",
+      config ? paths.specsDir : undefined,
+      "Replace or archive the scaffold once the repo's real specs, tasks, and current state are explicit.",
+    );
+  }
 
   if (config && specsResult.documents.length === 0) {
     pushFinding(
@@ -380,11 +622,49 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     memoryDir: config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm",
     doctorFindings: findings,
     commandContext: "doctor",
+    seedScaffoldDetected,
+  });
+  const artifactGuidance = buildAdoptionGuidance({
+    adoption,
+    memoryDir: config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm",
+    commandContext: "init",
+    seedScaffoldDetected,
+  });
+  const memoryDir = config?.memoryDir ?? adoption.layoutChoice.memoryDir ?? "docs/spm";
+  const artifactPaths = buildAdoptionArtifactPaths(memoryDir);
+  const migrationGuide = renderMigrationGuideMarkdown({
+    projectName: effectiveConfig.projectName,
+    memoryDir,
+    adoption,
+    guidance: artifactGuidance,
+  });
+  const directAgentBrief = renderDirectAgentBrief({
+    projectName: effectiveConfig.projectName,
+    memoryDir,
+    adoption,
+    guidance,
+  });
+  await validateAdoptionArtifacts(rootDir, {
+    artifactPaths,
+    expectedMigrationGuide: migrationGuide,
+    expectedAgentBrief: renderDirectAgentBrief({
+      projectName: effectiveConfig.projectName,
+      memoryDir,
+      adoption,
+      guidance: artifactGuidance,
+    }),
+    shouldValidate: Boolean(config),
+    findings,
   });
 
   return {
     summary: buildSummary(findings),
     adoption,
+    versions: {
+      cliVersion: CLI_VERSION,
+      projectToolVersion: config?.toolVersion,
+      updateAvailable: Boolean(config && compareCliVersions(CLI_VERSION, config.toolVersion) > 0),
+    },
     config: {
       exists: configExists,
       valid: Boolean(config),
@@ -397,14 +677,19 @@ export async function buildDoctorReport(rootDir: string): Promise<DoctorReport> 
     },
     findings,
     guidance,
+    migrationGuideFile: artifactPaths.migrationGuideFile,
+    directAgentBriefFile: artifactPaths.agentBriefFile,
+    directAgentBrief,
   };
 }
 
-export function renderDoctorReport(report: DoctorReport): string {
+export function renderDoctorReport(report: DoctorReport, options: DoctorRenderOptions = {}): string {
+  const verbose = options.verbose ?? false;
   const lines = [
     "Spec Embryo doctor",
     `Status: ${report.summary.overall}`,
     `Adoption state: ${report.adoption.state}`,
+    `Versions: cli ${report.versions.cliVersion}${report.versions.projectToolVersion ? ` | project ${report.versions.projectToolVersion}` : ""}${report.versions.updateAvailable ? " | update available" : ""}`,
     `Config: ${report.config.valid ? `valid (${report.config.memoryDir})` : report.config.exists ? "invalid" : "missing"}`,
     `Counts: specs ${report.counts.specs} | tasks ${report.counts.tasks} | handoffs ${report.counts.handoffs}`,
     "",
@@ -427,25 +712,36 @@ export function renderDoctorReport(report: DoctorReport): string {
     }
   }
 
+  if (report.harness) lines.push("", renderHarnessDiagnostics(report.harness));
+
+  if (!verbose) {
+    lines.push(
+      "",
+      "Run `spm doctor --verbose` for the full adoption guide and direct agent brief.",
+      "Use `spm doctor --json` when an agent only needs structured findings and metadata.",
+      ...agentBriefCommandLines(),
+      ...agentSnippetCommandLines(),
+    );
+    if (report.versions.updateAvailable) {
+      lines.push(
+        "The running CLI is newer than this repo's recorded tool version; use those richer doctor modes to refresh capability guidance before continuing work.",
+      );
+    }
+    return lines.join("\n");
+  }
+
   lines.push(
     "",
-    "Adoption summary:",
-    `- ${report.guidance.overview}`,
+    ...renderAdoptionGuidance(report.guidance),
     "",
-    "What was found:",
-    ...report.guidance.whatFound.map((item) => `- ${item}`),
+    "Migration guide file:",
+    `- ${report.migrationGuideFile}`,
     "",
-    "What changed:",
-    ...report.guidance.whatChanged.map((item) => `- ${item}`),
+    "Direct agent brief file:",
+    `- ${report.directAgentBriefFile}`,
     "",
-    "What still needs migration or follow-up:",
-    ...report.guidance.remainingWork.map((item) => `- ${item}`),
-    "",
-    "Recommended next commands:",
-    ...report.guidance.recommendedCommands.map((item) => `- ${item.command} — ${item.reason}`),
-    "",
-    "First-week sequence:",
-    ...report.guidance.firstWeekSequence.map((item, index) => `${index + 1}. ${item}`),
+    "Direct agent brief (copy this to the current coding agent):",
+    ...report.directAgentBrief.trimEnd().split("\n"),
   );
 
   return lines.join("\n");

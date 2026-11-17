@@ -1,0 +1,222 @@
+{
+  "baseCommit": "f8c51db82814d9599b8edca9ab417ec440b7da10",
+  "copyOnly": true,
+  "outcome": "promising-confirmation-await-production-contract",
+  "noSharedProductChanges": true,
+  "pairs": [
+    {
+      "pair": 0,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 255.026292,
+      "candidateMs": 165.61070800000016,
+      "percentReduction": 35.061319873638695
+    },
+    {
+      "pair": 1,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 258.74304200000006,
+      "candidateMs": 227.2610420000001,
+      "percentReduction": 12.167283709990528
+    },
+    {
+      "pair": 2,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 382.1558329999998,
+      "candidateMs": 214.27766599999995,
+      "percentReduction": 43.92924364967104
+    },
+    {
+      "pair": 3,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 251.5956669999996,
+      "candidateMs": 173.24820799999998,
+      "percentReduction": 31.14022587678338
+    },
+    {
+      "pair": 4,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 265.93754199999967,
+      "candidateMs": 169.61954199999946,
+      "percentReduction": 36.21827865130841
+    },
+    {
+      "pair": 5,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 294.25695799999994,
+      "candidateMs": 175.75624999999945,
+      "percentReduction": 40.271165992275535
+    },
+    {
+      "pair": 6,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 342.19154100000014,
+      "candidateMs": 167.2535000000007,
+      "percentReduction": 51.122842045940395
+    },
+    {
+      "pair": 7,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 329.6048330000003,
+      "candidateMs": 226.28312500000084,
+      "percentReduction": 31.347145932171262
+    },
+    {
+      "pair": 8,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 236.1479159999999,
+      "candidateMs": 165.79358300000058,
+      "percentReduction": 29.79248523200999
+    },
+    {
+      "pair": 9,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 231.08016700000007,
+      "candidateMs": 203.2832500000004,
+      "percentReduction": 12.029122776252654
+    },
+    {
+      "pair": 10,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 318.36433300000135,
+      "candidateMs": 175.7041250000002,
+      "percentReduction": 44.81036134157671
+    },
+    {
+      "pair": 11,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 282.8040000000001,
+      "candidateMs": 168.78479200000038,
+      "percentReduction": 40.31739579355301
+    },
+    {
+      "pair": 12,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 248.5803330000017,
+      "candidateMs": 160.14887499999895,
+      "percentReduction": 35.57459954002159
+    },
+    {
+      "pair": 13,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 246.06104199999936,
+      "candidateMs": 167.2581250000003,
+      "percentReduction": 32.02575928293406
+    },
+    {
+      "pair": 14,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 305.5909589999992,
+      "candidateMs": 163.43074999999953,
+      "percentReduction": 46.519769257964214
+    },
+    {
+      "pair": 15,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 249.99675000000025,
+      "candidateMs": 162.12545799999862,
+      "percentReduction": 35.148973736659194
+    },
+    {
+      "pair": 16,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 267.0232909999995,
+      "candidateMs": 160.76945800000067,
+      "percentReduction": 39.791971929519455
+    },
+    {
+      "pair": 17,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 258.7319159999988,
+      "candidateMs": 156.64524999999958,
+      "percentReduction": 39.45654157332476
+    },
+    {
+      "pair": 18,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "baselineMs": 308.1082499999993,
+      "candidateMs": 181.7451660000006,
+      "percentReduction": 41.012561007372895
+    },
+    {
+      "pair": 19,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baselineMs": 248.9254579999997,
+      "candidateMs": 272.9622080000008,
+      "percentReduction": -9.656203986978774
+    }
+  ],
+  "files": [
+    {
+      "path": "web/verification/task138-flat-parse-reuse-confirmation.json",
+      "sha256": "efdc78ab3c22def9c4528c810c893911ea546d1d671dcd939a68c92e37f13f61"
+    },
+    {
+      "path": "web/verification/task138-flat-parse-reuse-confirmation-source.json",
+      "sha256": "204964b7b0d55fdf248efd96b3247fbdf056f8a7b3836d98bd379ec91e22ae5c"
+    },
+    {
+      "path": "web/verification/task138-flat-parse-reuse-confirmation.md",
+      "sha256": "33f0d9d14d582c1ef3db6d36459f3def3c83b22a9274f208a240e8a78ef12c22"
+    }
+  ]
+}

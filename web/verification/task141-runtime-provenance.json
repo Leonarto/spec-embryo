@@ -1,0 +1,66 @@
+{
+  "installedPrefix": "/private/tmp/spm ui verified prefix",
+  "installedPackage": "/private/tmp/spm ui verified prefix/node_modules/@leonarto/spec-embryo",
+  "installCommand": "TMPDIR=/private/tmp/spm-ui-bun-tmp BUN_INSTALL_CACHE_DIR=/private/tmp/spm-ui-bun-cache bun install --cwd '/private/tmp/spm ui verified prefix' --production --ignore-scripts",
+  "installObservedOutput": "188 packages installed [2.36s]; production --ignore-scripts into a fresh owned prefix. Original install output was tool-returned and not separately saved as a log.",
+  "archive": {
+    "path": "/private/tmp/spm-ui-runtime-final-reviewed.tgz",
+    "sha256": "9340f57802a2a09c4cc3458f0ee60587c33cbee6ae64e3e33998cb0a389170f5"
+  },
+  "readonly": {
+    "scope": "entire installed node_modules; symlinks not chmod-followed",
+    "writableEntries": [],
+    "symlinks": [
+      ".bin/json2tsv",
+      ".bin/dsv2json",
+      ".bin/dsv2dsv",
+      ".bin/svelte-kit",
+      ".bin/spm",
+      ".bin/tsserver",
+      ".bin/resolve",
+      ".bin/nanoid",
+      ".bin/acorn",
+      ".bin/rolldown",
+      ".bin/marked",
+      ".bin/tsc",
+      ".bin/tsv2json",
+      ".bin/katex",
+      ".bin/vite",
+      ".bin/json2dsv",
+      ".bin/rollup",
+      ".bin/csv2json",
+      ".bin/spec-embryo",
+      ".bin/tsv2csv",
+      ".bin/csv2tsv",
+      ".bin/uuid",
+      ".bin/json2csv"
+    ],
+    "actualWriteAttempt": "Temporary readonly-sentinel write under installed package raised PermissionError in the recorded tool result; no file was created."
+  },
+  "browserFixture": {
+    "path": "/private/tmp/spm-ui-runtime-browser-fixture.json",
+    "sha256": "f816c6f31d436051a35903fa985a45c815d87d3c030fe155ca37cd7d045897a6",
+    "root": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm141 installed browser wfhoMq",
+    "specId": "SPEC-002",
+    "taskId": "TASK-004",
+    "specPath": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm141 installed browser wfhoMq/docs/spm/specs/SPEC-002-installed-runtime-questions.md",
+    "parentPid": 92084,
+    "bin": "/private/tmp/spm ui verified prefix/node_modules/.bin/spm"
+  },
+  "persistedSpec": {
+    "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm141 installed browser wfhoMq/docs/spm/specs/SPEC-002-installed-runtime-questions.md",
+    "sha256": "6ca72fd21d00187268b8632d36d5be2a800318818fa25bbd61fcb07a9c1c381d",
+    "enhancedAnswerPersisted": true,
+    "nativeAnswerPersisted": true
+  },
+  "closure": {
+    "enhancedAnswerPersisted": true,
+    "nativeAnswerPersisted": true,
+    "recordedOwnedParentPid": 92084,
+    "parentClosed": true,
+    "listenerClosed": true,
+    "readonlyPackageMode": "0o555"
+  },
+  "consoleCapture": "/private/tmp/spm-ui-runtime-final-browser-console.json",
+  "captureLimit": "No explicit pageerror event listener was recorded; console errors/warnings count0 is the observed console-tool result, not a separate pageerror count."
+}

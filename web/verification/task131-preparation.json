@@ -1,0 +1,123 @@
+{
+  "phase": "TASK131 harness preparation only",
+  "acceptanceCredit": false,
+  "preparationCommit": "2862f460d16250b6a907627d6208e6ec74180751",
+  "finalSourcePin": "Source9a components verified; final pin awaits reviewed/committed TASK141 precompiled runtime",
+  "contract": "web/verification/task131-runner-decisions.md",
+  "runtimeOwnerRecord": "/private/tmp/spm-task131-owner.json",
+  "dependencySeed": {
+    "root": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/dependencies",
+    "regularFilesCopied": 17273,
+    "inventory": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/dependencies.json",
+    "inventorySHA256": "52dcfeb35c6e193a10f7dcf5a7af51482361d7d3bce9bc240c371ae653bd588e",
+    "developmentInodesShared": false,
+    "regularFilesReadOnly": true,
+    "runtimeCaches": "Distinct initially empty caches; resolved paths captured in combined runtime record before/after"
+  },
+  "unitSmoke": {
+    "pass": 17,
+    "fail": 0,
+    "assertions": 97,
+    "log": "/private/tmp/spm-task131-unit-group-probe.log",
+    "scope": "Schedules/p95, fixed browser second-frame clock, primary+cleanup error retention and partial-series stop, original dependency inventory comparisons/mutation rejection, own cache/link confinement, synthetic installed bin, stale source/lease rejection and static closure bookkeeping"
+  },
+  "axe": {
+    "name": "axe-core",
+    "version": "4.11.4",
+    "officialMetadata": "https://registry.npmjs.org/axe-core/4.11.4",
+    "officialRelease": "https://github.com/dequelabs/axe-core/releases/tag/v4.11.4",
+    "tarball": "https://registry.npmjs.org/axe-core/-/axe-core-4.11.4.tgz",
+    "integrity": "sha512-KunSNx+TVpkAw/6ULfhnx+HWRecjqZGTOyquAoWHYLRSdK1tB5Ihce1ZW+UY3fj33bYAFWPu7W/GRSmmrCGuxA==",
+    "integrityVerified": true,
+    "archiveSHA256": "97175f79b2bd57adf1d4a55837f574093883bd9eb8096ea66abfafe2f2bdbdb9",
+    "script": "/private/tmp/spm-task131-axe-4.11.4/axe.min.js",
+    "scriptSHA256": "fb83a4378d978ecb7d2dae48a3a3778a84c971ac692f3afd45d714fba89c0f0d",
+    "productDependencyChanged": false,
+    "globalInstall": false,
+    "executedInBrowser": false
+  },
+  "notRun": [
+    "Reviewed precompiled runtime installed-browser boundary (TASK141); current9a package bin/component proof is not future runtime acceptance",
+    "Final exact-source warm5+20/cold20 Task+Spec navigation and detail<=300ms gates",
+    "100-cycle retention on final implementation",
+    "Native200% browser zoom (user-deferred; no substitute)",
+    "VoiceOver/Safari and NVDA/Firefox manual sessions"
+  ],
+  "limits": [
+    "Browser closed and lease returned after tiny smoke; future series need root quiet window",
+    "No product/editor/Timeline or dependency manifest change",
+    "No expensive series before final combined-source freeze and root quiet window",
+    "Screen readers are separate passed/failed/unavailable entries, never inferred from axe",
+    "Task138 detail300ms failure remains an open blocker without waiver"
+  ],
+  "reviewFixes": {
+    "F131-1": "Readiness and two rAF complete in browser; endpoint timestamp is fixed before diagnostics/tool return",
+    "F131-2": "Primary/cleanup errors and partial samples preserved; unverified process closure stops series with remaining NOT RUN",
+    "F131-3": "Original copy-time dependency inventory compared with seed/runtime before start and after cleanup, outside timing; mutation prevents PASS",
+    "runtimeBrowserSmoke": "Completed tiny smoke on9a446a1; see web/verification/task131-smoke.json. Package UI and full series remain NOT RUN."
+  },
+  "sourceBinModeAdaptation": {
+    "scope": "Only in-root copied declared entrypoints, before dependency links; chmod0755, original bytes/shebang preserved",
+    "regression": "Source0644 unchanged; copied bin0755 and directly executable",
+    "approved": "Astra reviewed and real source-layout spm ui smoke confirmed",
+    "firstAttempts": [
+      "/private/tmp/spm-task131-runtime-sandbox-attempt.err",
+      "/private/tmp/spm-task131-runtime-bin-mode-attempt.err"
+    ]
+  },
+  "launcherExecAdaptation": {
+    "scope": "Stable PID/PGID/lstart plus exact argv; only expected env-to-Bun transition may update/persist stamp; shared by readiness and cleanup",
+    "regression": "env\u2192Bun/directBun accepted; reverse/group/start/PID/argv mutations rejected",
+    "priorRuntimeCleanup": "/private/tmp/spm-task131-runtime-mode-stopped.json",
+    "observedGroupProof": "/private/tmp/spm-task131-exec-cleanup.json",
+    "repeatSmoke": "Completed on9a446a1; normalized Bun stamp preserved"
+  },
+  "signalZeroFallback": {
+    "scope": "Only EPERM from kill(-PGID,0): full successful nonempty positive-integer ps PID/PGID inventory; any malformed/query failure remains unknown",
+    "signalPermissions": "TERM/KILL identity rules unchanged",
+    "recording": "Original EPERM, inventory hash/count/matchingmembers persisted in own runtime groupChecks",
+    "repeat": "Existing lease final stop closedtrue and inventory matches; no repeated browser navigation"
+  },
+  "smokeSourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "realSmoke": {
+    "report": "web/verification/task131-smoke.json",
+    "sourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+    "capabilityAndRuntimePass": true,
+    "acceptanceCredit": false,
+    "browserVersion": "157.0.8103.78",
+    "ownedBrowserPID": 71989,
+    "sharedToolPID": 69013,
+    "runtimeClosed": true,
+    "dependencyIntegrity": true,
+    "packageBinCommandsPass": true,
+    "packageUIStarted": false
+  },
+  "currentOwnerRecord": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/owner.json",
+  "sourcePinRecord": "/private/tmp/spm-task131-pin-combined.json",
+  "combinedDeterministicEvidence": {
+    "report": "web/verification/task131-combined-checks.json",
+    "source": "7deb17ff4c242396ca4e2fc196894d498cd3fef9",
+    "tests": 475,
+    "assertions": 10290,
+    "svelte": "0errors/0warnings",
+    "build": "PASS",
+    "agents": "PASS",
+    "coverage": "Bun92.51%functions/93.71%lines; weighted LCOV product scope in report"
+  },
+  "initialClosureEvidence": {
+    "report": "web/verification/task131-closure.json",
+    "deltaBytes": 41209,
+    "budgetBytes": 61440,
+    "mermaidInInitialClosure": false,
+    "audit": "Four serial original-inventory checks PASS; rejected concurrent Bun realpath batch retained as diagnostic"
+  },
+  "componentAccessibilityEvidence": {
+    "report": "web/verification/task131-accessibility.json",
+    "states": 10,
+    "seriousCriticalViolations": 0,
+    "mermaidFix": "e3e6f3c",
+    "rulerFix": "d3a4a4d",
+    "native200Zoom": "PENDING: user explicitly deferred; Mac locked",
+    "screenReaders": "UNAVAILABLE, not certified by axe"
+  }
+}

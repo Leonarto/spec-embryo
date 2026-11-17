@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc"><title id="title">Spec Embryo — mesa de operaciones compacta</title><desc id="desc">Concepto estático propuesto por Astra: rail compacto, tabla de tareas y panel de inspección. Los registros y estados son ilustrativos.</desc>
+<rect x="0" y="0" width="1600" height="1040" fill="#0B1012" rx="0"/>
+<text x="32" y="32" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">SPEC EMBRYO  /  UI DIRECTION 01</text>
+<text x="32" y="72" fill="#E6EBE8" font-family="Iowan Old Style, Georgia, serif" font-size="32" font-weight="400">Más contexto. Menos interfaz.</text>
+<text x="32" y="99" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Concepto de diseño · Astra High · Datos ilustrativos, no estado real del repositorio</text>
+<rect x="1278" y="38" width="126" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="1287" y="55" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">32 px · Compacta</text>
+<rect x="1416" y="38" width="152" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="1425" y="55" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Dark / Light / System</text>
+<rect x="32" y="120" width="1536" height="800" fill="#151B1E" rx="8" stroke="#2D3833"/>
+<rect x="32" y="120" width="56" height="800" fill="#101518" rx="0"/>
+<text x="44" y="150" fill="#75D6A1" font-family="Iowan Old Style, Georgia, serif" font-size="16" font-weight="700">spm</text>
+<text x="51" y="186" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="400">▦</text>
+<rect x="40" y="213" width="40" height="38" fill="#203F32" rx="5"/>
+<rect x="32" y="217" width="3" height="30" fill="#75D6A1" rx="0"/>
+<text x="51" y="236" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="400">☷</text>
+<text x="51" y="286" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="400">▤</text>
+<text x="51" y="336" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="400">≡</text>
+<text x="51" y="833" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="21" font-weight="400">◐</text>
+<text x="49" y="885" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="21" font-weight="400">»</text>
+<path d="M88 120L88 920" stroke="#2D3833"/>
+<text x="108" y="148" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="600">spec-pm</text>
+<text x="183" y="148" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="14" font-weight="400">/</text>
+<text x="202" y="148" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Tasks</text>
+<text x="1220" y="148" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">main</text>
+<text x="1270" y="148" fill="#EBC27C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">• Local changes</text>
+<text x="1430" y="148" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">↻  Refresh</text>
+<path d="M88 164H1568" stroke="#2D3833"/>
+<text x="108" y="199" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="21" font-weight="600">Tasks</text>
+<text x="171" y="199" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">18</text>
+<rect x="215" y="179" width="59" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="224" y="196" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Table</text>
+<text x="287" y="196" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Board</text>
+<rect x="356" y="178" width="273" height="29" fill="#101518" rx="4" stroke="#2D3833"/>
+<text x="368" y="198" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">⌕  Search tasks or IDs…</text>
+<rect x="641" y="179" width="83" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="650" y="196" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">⌁ Filters</text>
+<rect x="735" y="179" width="100" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="744" y="196" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Columns</text>
+<rect x="846" y="179" width="100" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="855" y="196" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Compact</text>
+<text x="1023" y="198" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="16" font-weight="400">•••</text>
+<rect x="108" y="218" width="126" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="117" y="235" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Not archived</text>
+<rect x="244" y="218" width="147" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="253" y="235" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Spec: All specs</text>
+<text x="408" y="235" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">18 results</text>
+<text x="1013" y="235" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Clear</text>
+<path d="M88 255H1108" stroke="#2D3833"/>
+<rect x="89" y="256" width="1018" height="33" fill="#1C2528" rx="0"/>
+<rect x="106" y="266" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="278" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="600">ID</text>
+<text x="241" y="278" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="600">Title</text>
+<text x="648" y="278" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="600">Status</text>
+<text x="772" y="278" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="600">P</text>
+<text x="820" y="278" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="600">Spec</text>
+<text x="957" y="278" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="600">Depends on</text>
+<text x="791" y="278" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">↑</text>
+<rect x="89" y="289" width="1018" height="32" fill="#203F32" rx="0"/>
+<rect x="89" y="289" width="3" height="32" fill="#75D6A1" rx="0"/>
+<rect x="106" y="299" width="13" height="13" fill="#75D6A1" rx="2" stroke="#75867C"/>
+<text x="108" y="310" fill="#101518" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="600">✓</text>
+<text x="134" y="310" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-115</text>
+<text x="241" y="310" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Build first-class resume flows</text>
+<text x="648" y="310" fill="#EBC27C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">◌ Review</text>
+<text x="772" y="310" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P1</text>
+<text x="820" y="310" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-057</text>
+<text x="981" y="310" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">2</text>
+<path d="M89 321H1108" stroke="#2D3833"/>
+<rect x="106" y="331" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="342" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-116</text>
+<text x="241" y="342" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Improve retrieval ranking controls</text>
+<text x="648" y="342" fill="#FF9898" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">⊘ Blocked</text>
+<text x="772" y="342" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P1</text>
+<text x="820" y="342" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-057</text>
+<text x="981" y="342" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">1</text>
+<path d="M89 353H1108" stroke="#2D3833"/>
+<rect x="106" y="363" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="374" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-114</text>
+<text x="241" y="374" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Normalize imported project memory</text>
+<text x="648" y="374" fill="#8AB4FF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">● In progress</text>
+<text x="772" y="374" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P1</text>
+<text x="820" y="374" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-056</text>
+<text x="981" y="374" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">3</text>
+<path d="M89 385H1108" stroke="#2D3833"/>
+<rect x="106" y="395" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="406" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-113</text>
+<text x="241" y="406" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Add project setup profiles</text>
+<text x="648" y="406" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="406" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="406" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-056</text>
+<text x="981" y="406" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 417H1108" stroke="#2D3833"/>
+<rect x="106" y="427" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="438" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-112</text>
+<text x="241" y="438" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Link shared planning milestones</text>
+<text x="648" y="438" fill="#EBC27C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">◌ Review</text>
+<text x="772" y="438" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="438" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-055</text>
+<text x="981" y="438" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">1</text>
+<path d="M89 449H1108" stroke="#2D3833"/>
+<rect x="106" y="459" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="470" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-111</text>
+<text x="241" y="470" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Build portfolio status surfaces</text>
+<text x="648" y="470" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="470" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="470" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-055</text>
+<text x="981" y="470" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 481H1108" stroke="#2D3833"/>
+<rect x="106" y="491" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="502" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-110</text>
+<text x="241" y="502" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Expose Nexus setup review checks</text>
+<text x="648" y="502" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="502" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="502" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-054</text>
+<text x="981" y="502" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 513H1108" stroke="#2D3833"/>
+<rect x="106" y="523" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="534" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-109</text>
+<text x="241" y="534" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Publish typed setup commands</text>
+<text x="648" y="534" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="534" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="534" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-053</text>
+<text x="981" y="534" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 545H1108" stroke="#2D3833"/>
+<rect x="106" y="555" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="566" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-108</text>
+<text x="241" y="566" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Share deterministic setup flow</text>
+<text x="648" y="566" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="566" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="566" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-052</text>
+<text x="981" y="566" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 577H1108" stroke="#2D3833"/>
+<rect x="106" y="587" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="598" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-107</text>
+<text x="241" y="598" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Model Nexus coexistence guidance</text>
+<text x="648" y="598" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="598" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="598" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-051</text>
+<text x="981" y="598" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 609H1108" stroke="#2D3833"/>
+<rect x="106" y="619" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="630" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-106</text>
+<text x="241" y="630" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Preserve tag guidance in adoption</text>
+<text x="648" y="630" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="630" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="630" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-050</text>
+<text x="981" y="630" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 641H1108" stroke="#2D3833"/>
+<rect x="106" y="651" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="662" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-105</text>
+<text x="241" y="662" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Map source-material inspection hints</text>
+<text x="648" y="662" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="662" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="662" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-049</text>
+<text x="981" y="662" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 673H1108" stroke="#2D3833"/>
+<rect x="106" y="683" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="694" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-104</text>
+<text x="241" y="694" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Expose partial-adoption checks</text>
+<text x="648" y="694" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="694" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="694" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-048</text>
+<text x="981" y="694" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 705H1108" stroke="#2D3833"/>
+<rect x="106" y="715" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="726" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-103</text>
+<text x="241" y="726" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Refresh capability-review contract</text>
+<text x="648" y="726" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="726" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="726" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-047</text>
+<text x="981" y="726" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 737H1108" stroke="#2D3833"/>
+<rect x="106" y="747" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="758" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-102</text>
+<text x="241" y="758" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Publish capability refresh commands</text>
+<text x="648" y="758" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="758" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="758" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-046</text>
+<text x="981" y="758" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 769H1108" stroke="#2D3833"/>
+<rect x="106" y="779" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="790" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-101</text>
+<text x="241" y="790" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Type direct agent suggestions</text>
+<text x="648" y="790" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="790" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="790" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-045</text>
+<text x="981" y="790" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 801H1108" stroke="#2D3833"/>
+<rect x="106" y="811" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="822" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-100</text>
+<text x="241" y="822" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Expose deterministic workflow loop</text>
+<text x="648" y="822" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="822" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="822" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-044</text>
+<text x="981" y="822" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 833H1108" stroke="#2D3833"/>
+<rect x="106" y="843" width="13" height="13" fill="#151B1E" rx="2" stroke="#75867C"/>
+<text x="134" y="854" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-099</text>
+<text x="241" y="854" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Normalize doctor guidance modes</text>
+<text x="648" y="854" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">✓ Done</text>
+<text x="772" y="854" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">P2</text>
+<text x="820" y="854" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">SPEC-043</text>
+<text x="981" y="854" fill="#A9B5AF" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">—</text>
+<path d="M89 865H1108" stroke="#2D3833"/>
+<path d="M128 256L128 865" stroke="#2D3833"/>
+<path d="M232 256L232 865" stroke="#2D3833"/>
+<path d="M636 256L636 865" stroke="#2D3833"/>
+<path d="M760 256L760 865" stroke="#2D3833"/>
+<path d="M809 256L809 865" stroke="#2D3833"/>
+<path d="M945 256L945 865" stroke="#2D3833"/>
+<rect x="89" y="866" width="1018" height="54" fill="#101518" rx="0"/>
+<text x="109" y="898" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">1 selected</text>
+<rect x="207" y="880" width="113" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="216" y="897" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Copy rows TSV</text>
+<rect x="332" y="880" width="86" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="341" y="897" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Copy IDs</text>
+<text x="808" y="898" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">1–18 of 18</text>
+<text x="935" y="898" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">100 / page  ‹  ›</text>
+<rect x="1108" y="164" width="460" height="756" fill="#151B1E" rx="0"/>
+<path d="M1108 164L1108 920" stroke="#75867C"/>
+<text x="1132" y="194" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="12" font-weight="400">TASK-115</text>
+<text x="1402" y="194" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="400">‹   ›   ↗   ×</text>
+<text x="1132" y="229" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="23" font-weight="600">Build first-class</text>
+<text x="1132" y="258" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="23" font-weight="600">resume flows</text>
+<rect x="1132" y="276" width="90" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="1141" y="293" fill="#EBC27C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">◌ Review</text>
+<rect x="1233" y="276" width="62" height="25" fill="#1C2528" rx="4" stroke="#2D3833"/>
+<text x="1242" y="293" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">P1</text>
+<text x="1132" y="329" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="14" font-weight="400">Recover the current work slice with</text>
+<text x="1132" y="351" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="14" font-weight="400">deterministic project memory and context.</text>
+<path d="M1132 373H1544" stroke="#2D3833"/>
+<text x="1132" y="400" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Spec</text>
+<text x="1271" y="400" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">SPEC-057</text>
+<text x="1132" y="431" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Dependencies</text>
+<text x="1271" y="431" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">2 linked · 0 unmet</text>
+<text x="1132" y="462" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Owner role</text>
+<text x="1271" y="462" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Implementation</text>
+<text x="1132" y="493" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Updated</text>
+<text x="1271" y="493" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Today, 10:42</text>
+<path d="M1132 515H1544" stroke="#2D3833"/>
+<text x="1132" y="544" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Overview</text>
+<text x="1220" y="544" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="600">Relations</text>
+<text x="1310" y="544" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Document</text>
+<path d="M1219 554H1281" stroke="#75D6A1"/>
+<text x="1132" y="586" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="600">DEPENDS ON</text>
+<text x="1132" y="616" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">TASK-111</text>
+<text x="1132" y="638" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Portfolio status surfaces</text>
+<text x="1511" y="628" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="16" font-weight="400">↗</text>
+<path d="M1132 650H1544" stroke="#2D3833"/>
+<text x="1132" y="671" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">TASK-113</text>
+<text x="1132" y="693" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Project setup profiles</text>
+<text x="1511" y="683" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="16" font-weight="400">↗</text>
+<path d="M1132 705H1544" stroke="#2D3833"/>
+<text x="1132" y="740" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="600">UNBLOCKS</text>
+<text x="1132" y="769" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">TASK-116</text>
+<text x="1132" y="792" fill="#E6EBE8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Retrieval ranking controls</text>
+<text x="1511" y="780" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="16" font-weight="400">↗</text>
+<path d="M1132 809H1544" stroke="#2D3833"/>
+<text x="1132" y="846" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Inspect related work without losing your place.</text>
+<rect x="1109" y="866" width="459" height="54" fill="#101518" rx="0"/>
+<text x="1132" y="898" fill="#75D6A1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Open full page  ↗</text>
+<text x="1442" y="898" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="400">Copy link</text>
+<text x="32" y="966" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">01  NAVEGACIÓN MÍNIMA</text>
+<text x="32" y="992" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Rail de 56 px; los datos ocupan el espacio.</text>
+<text x="552" y="966" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">02  LECTURA EN VOLUMEN</text>
+<text x="552" y="992" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Filas de 32 px, orden, filtros y copia TSV.</text>
+<text x="1072" y="966" fill="#75D6A1" font-family="SFMono-Regular, Consolas, monospace" font-size="11" font-weight="400">03  CONTEXTO PERSISTENTE</text>
+<text x="1072" y="992" fill="#A9B5AF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="13" font-weight="400">Detalle lateral; la lista permanece operable.</text>
+</svg>

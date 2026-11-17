@@ -5,6 +5,9 @@ import type {
   CurrentStateDocument,
   GitSnapshot,
   HandoffDocument,
+  MemoryNoteDocument,
+  MemoryScopeName,
+  MemoryScopeWritePolicy,
   ProjectConfig,
   ProjectContext,
   SpecDocument,
@@ -15,24 +18,35 @@ import type {
 import {
   parseCurrentStateDocument,
   parseHandoffDocument,
+  parseMemoryNoteDocument,
   parseProjectConfig,
   parseSpecDocument,
   parseTaskDocument,
 } from "./domain.ts";
 import { parseTomlFrontmatter, serializeTomlFrontmatter } from "./frontmatter.ts";
 import { resolveProjectPaths } from "./paths.ts";
-import { ensureDir, listMarkdownFiles, pathExists, readUtf8, writeUtf8 } from "./storage.ts";
+import { ensureDir, listMarkdownFiles, pathExists, readUtf8, withLock, writeUtf8 } from "./storage.ts";
 import { applyReshapePlan, buildReshapePlan, initSequenceDescription, resolveLayoutChoice } from "./services/layout.ts";
-import { applySpecAnswers, type SpecAnswerInput } from "./services/spec-questions.ts";
+import { applySpecAnswers, SpecQuestionWriteError, type SpecAnswerInput } from "./services/spec-questions.ts";
+import { buildAdoptionArtifactPaths } from "./services/adoption.ts";
+import { documentSourceHash, registerDocumentSource } from "./services/document-provenance.ts";
+import { commitSpecAnswers, specAnswerRevision } from "./spec-answer-write.ts";
+import { createDocumentReader, readDocumentBytes, type DocumentReader } from "./document-reader.ts";
+import { createDocumentParseMemo } from "./document-parse-memo.ts";
+
+import { getProjectProfile, isProjectProfileName, writeProjectProfileManifest, type ProjectProfileName } from "./services/profiles.ts";
 import {
   createConfigToml,
   createCurrentStateTemplate,
+  createSeedCurrentStateTemplate,
   createSeedSpecTemplate,
   createSeedTaskTemplates,
   createSkillsReadme,
   createTemplateFiles,
   inferProjectName,
 } from "./templates.ts";
+
+const documentParseMemo = createDocumentParseMemo();
 
 function slugify(value: string): string {
   return value
@@ -57,6 +71,25 @@ function nextNumericId(existingIds: string[], prefix: "SPEC" | "TASK"): string {
   }, 0);
 
   return `${prefix}-${String(max + 1).padStart(3, "0")}`;
+}
+
+function nextScopedMemoryNoteId(existingIds: string[], scope: "session" | "org"): string {
+  const prefix = scope === "session" ? "NOTE-SESSION" : "NOTE-ORG";
+  const max = existingIds.reduce((highest, id) => {
+    const match = id.match(new RegExp(`^${prefix}-(\\d+)$`));
+    if (!match) {
+      return highest;
+    }
+
+    return Math.max(highest, Number.parseInt(match[1]!, 10));
+  }, 0);
+
+  return `${prefix}-${String(max + 1).padStart(3, "0")}`;
+}
+
+async function withDocumentCreateLock<T>(rootDir: string, work: () => Promise<T>): Promise<T> {
+  const paths = resolveProjectPaths(rootDir);
+  return withLock(join(paths.specpmDir, "locks", "document-create.lock"), work);
 }
 
 function assertKnownIds(kind: "Spec" | "Task", provided: string[], existing: string[]): void {
@@ -98,24 +131,47 @@ function git(rootDir: string, args: string[]): string {
     return "";
   }
 
-  return result.stdout.trim();
+  return result.stdout.trimEnd();
 }
 
 async function loadMarkdownDocument<T>(
   filePath: string,
   parser: (filePath: string, attributes: unknown, body: string) => T,
+  readDocument: DocumentReader = readDocumentBytes,
 ): Promise<T> {
-  const raw = await readUtf8(filePath);
-  const { attributes, body } = parseTomlFrontmatter(raw);
-  return parser(filePath, attributes, body);
+  const bytes = await readDocument(filePath);
+  return registerDocumentSource(documentParseMemo.parse(filePath, bytes, parser), bytes);
 }
 
 async function loadMarkdownCollection<T>(
   dirPath: string,
   parser: (filePath: string, attributes: unknown, body: string) => T,
+  readDocument: DocumentReader = createDocumentReader(),
 ): Promise<T[]> {
   const files = await listMarkdownFiles(dirPath);
-  return Promise.all(files.map((filePath) => loadMarkdownDocument(filePath, parser)));
+  return Promise.all(files.map((filePath) => loadMarkdownDocument(filePath, parser, readDocument)));
+}
+
+async function loadScopedMemoryNotes(
+  dirPath: string,
+  scope: "session" | "org",
+  writePolicy: MemoryScopeWritePolicy,
+  readDocument: DocumentReader = createDocumentReader(),
+): Promise<MemoryNoteDocument[]> {
+  const notes = await loadMarkdownCollection<MemoryNoteDocument>(
+    dirPath,
+    (filePath, attributes, body) => parseMemoryNoteDocument(filePath, attributes, body, scope, writePolicy),
+    readDocument,
+  );
+  return notes.sort((left, right) => left.id.localeCompare(right.id));
+}
+
+function allMemoryNotes(context: ProjectContext): MemoryNoteDocument[] {
+  return [...context.sessionNotes, ...context.orgNotes];
+}
+
+function memoryScopeDir(paths: ReturnType<typeof resolveProjectPaths>, scope: Exclude<MemoryScopeName, "repo">): string {
+  return scope === "session" ? paths.sessionMemoryDir : paths.orgMemoryDir;
 }
 
 function serializeSpecDocument(spec: SpecDocument, updatedAt: string): string {
@@ -158,6 +214,47 @@ function serializeTaskDocument(task: TaskDocument, updatedAt: string): string {
     },
     task.body,
   );
+}
+
+function serializeMemoryNoteDocument(note: MemoryNoteDocument, updatedAt: string): string {
+  return serializeTomlFrontmatter(
+    {
+      doc_kind: note.docKind,
+      id: note.id,
+      title: note.title,
+      summary: note.summary,
+      created_at: note.createdAt,
+      expires_at: note.expiresAt,
+      consolidated_at: note.consolidatedAt,
+      promoted_to: note.promotedTo,
+      archived_at: note.archivedAt,
+      archive_reason: note.archiveReason,
+      tags: note.tags,
+      updated_at: updatedAt,
+    },
+    note.body,
+  );
+}
+
+function memoryScopeConfigForWrite(
+  config: ProjectConfig,
+  scope: Exclude<MemoryScopeName, "repo">,
+): ProjectConfig["memoryScopes"]["session"] | ProjectConfig["memoryScopes"]["org"] {
+  return scope === "session" ? config.memoryScopes.session : config.memoryScopes.org;
+}
+
+function assertMemoryScopeEnabledAndWritable(
+  config: ProjectConfig,
+  scope: Exclude<MemoryScopeName, "repo">,
+): void {
+  const scopeConfig = memoryScopeConfigForWrite(config, scope);
+  if (!scopeConfig.enabled) {
+    throw new Error(`Memory scope is disabled: ${scope}`);
+  }
+
+  if (scopeConfig.writePolicy !== "read-write") {
+    throw new Error(`Memory scope is read-only under current config: ${scope}`);
+  }
 }
 
 function buildCreatedSpecBody(input: { title: string }): string {
@@ -225,10 +322,21 @@ export interface ArchiveTaskInput {
   reason?: string;
 }
 
+export interface CreateMemoryNoteInput {
+  scope: "session" | "org";
+  title: string;
+  summary?: string;
+  tags?: string[];
+  expiresAt?: string;
+  body?: string;
+}
+
 export interface AnswerSpecQuestionsResult {
   spec: SpecDocument;
   answeredQuestions: string[];
   remainingQuestions: string[];
+  committedRevision: string;
+  cleanupWarning?: string;
 }
 
 export function createDefaultConfig(rootDir: string): ProjectConfig {
@@ -246,7 +354,7 @@ export async function readProjectConfig(rootDir: string): Promise<ProjectConfig>
   return parseProjectConfig(parseToml(raw));
 }
 
-async function readCurrentState(paths: ReturnType<typeof resolveProjectPaths>): Promise<CurrentStateDocument> {
+async function readCurrentState(paths: ReturnType<typeof resolveProjectPaths>, readDocument: DocumentReader = readDocumentBytes): Promise<CurrentStateDocument> {
   if (!(await pathExists(paths.stateFile))) {
     return parseCurrentStateDocument(
       paths.stateFile,
@@ -266,7 +374,7 @@ async function readCurrentState(paths: ReturnType<typeof resolveProjectPaths>): 
     );
   }
 
-  return loadMarkdownDocument(paths.stateFile, parseCurrentStateDocument);
+  return loadMarkdownDocument(paths.stateFile, parseCurrentStateDocument, readDocument);
 }
 
 async function readGitSnapshot(rootDir: string): Promise<GitSnapshot> {
@@ -284,6 +392,7 @@ async function readGitSnapshot(rootDir: string): Promise<GitSnapshot> {
 
   return {
     available: true,
+    head: git(rootDir, ["rev-parse", "--verify", "HEAD"]) || undefined,
     branch: git(rootDir, ["branch", "--show-current"]) || undefined,
     shortStatus,
     lastCommit: git(rootDir, ["log", "-1", "--pretty=format:%h %s"]) || undefined,
@@ -291,15 +400,24 @@ async function readGitSnapshot(rootDir: string): Promise<GitSnapshot> {
   };
 }
 
-export async function loadProjectContext(rootDir: string): Promise<ProjectContext> {
-  const config = await readProjectConfig(rootDir);
+export async function loadProjectContext(rootDir: string, options: {
+  config?: ProjectConfig; includeScopedMemory?: boolean;
+} = {}): Promise<ProjectContext> {
+  const config = options.config ?? await readProjectConfig(rootDir);
   const paths = resolveProjectPaths(rootDir, config);
+  const readDocument = createDocumentReader();
 
-  const [currentState, specs, tasks, handoffs, gitSnapshot] = await Promise.all([
-    readCurrentState(paths),
-    loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument),
-    loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument),
-    loadMarkdownCollection<HandoffDocument>(paths.handoffsDir, parseHandoffDocument),
+  const [currentState, specs, tasks, handoffs, sessionNotes, orgNotes, gitSnapshot] = await Promise.all([
+    readCurrentState(paths, readDocument),
+    loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument, readDocument),
+    loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument, readDocument),
+    loadMarkdownCollection<HandoffDocument>(paths.handoffsDir, parseHandoffDocument, readDocument),
+    options.includeScopedMemory !== false && config.memoryScopes.session.enabled
+      ? loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy, readDocument)
+      : Promise.resolve([]),
+    options.includeScopedMemory !== false && config.memoryScopes.org.enabled
+      ? loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy, readDocument)
+      : Promise.resolve([]),
     readGitSnapshot(rootDir),
   ]);
 
@@ -312,15 +430,28 @@ export async function loadProjectContext(rootDir: string): Promise<ProjectContex
     specs,
     tasks,
     handoffs,
+    sessionNotes,
+    orgNotes,
     git: gitSnapshot,
   };
 }
 
 export interface InitResult {
   memoryDir: string;
+  profile?: ProjectProfileName;
   sequence: string[];
   adoptedHome?: string;
   created: string[];
+  refreshed: string[];
+  skipped: string[];
+}
+
+export interface AdoptionArtifactsWriteResult {
+  adoptionDir: string;
+  migrationGuideFile: string;
+  agentBriefFile: string;
+  created: string[];
+  refreshed: string[];
   skipped: string[];
 }
 
@@ -329,6 +460,7 @@ export async function initializeProject(
   options?: {
     force?: boolean;
     memoryDir?: string;
+    profile?: string;
   },
 ): Promise<InitResult> {
   const projectName = inferProjectName(rootDir);
@@ -337,7 +469,13 @@ export async function initializeProject(
   const paths = resolveProjectPaths(rootDir, config);
   const timestamp = new Date().toISOString();
   const created: string[] = [];
+  const refreshed: string[] = [];
   const skipped: string[] = [];
+  const profile = options?.profile && isProjectProfileName(options.profile) ? getProjectProfile(options.profile) : undefined;
+
+  if (options?.profile && !profile) {
+    throw new Error(`Invalid project profile: ${options.profile}. Expected one of library, service, frontend-app, infra.`);
+  }
 
   await Promise.all([
     ensureDir(paths.specpmDir),
@@ -347,16 +485,22 @@ export async function initializeProject(
     ensureDir(paths.specsDir),
     ensureDir(paths.tasksDir),
     ensureDir(paths.skillsDir),
+    ensureDir(paths.sessionMemoryDir),
+    ensureDir(paths.orgMemoryDir),
   ]);
 
-  const files: Array<{ path: string; content: string }> = [
-    { path: paths.configFile, content: createConfigToml(projectName, memoryDir) },
-    { path: paths.stateFile, content: createCurrentStateTemplate(timestamp) },
-    { path: join(paths.specsDir, "SPEC-001-deterministic-local-first-core.md"), content: createSeedSpecTemplate(timestamp) },
-    ...createSeedTaskTemplates(timestamp).map((item) => ({
-      path: join(paths.tasksDir, item.name),
-      content: item.content,
-    })),
+  const existingSpecFiles = await listMarkdownFiles(paths.specsDir);
+  const existingTaskFiles = await listMarkdownFiles(paths.tasksDir);
+  const shouldSeedAdoptionScaffold = existingSpecFiles.length === 0 && existingTaskFiles.length === 0;
+
+  const files: Array<{ path: string; content: string; refreshOnInit?: boolean }> = [
+    { path: paths.configFile, content: createConfigToml(projectName, memoryDir), refreshOnInit: true },
+    {
+      path: paths.stateFile,
+      content: shouldSeedAdoptionScaffold
+        ? createSeedCurrentStateTemplate(projectName, timestamp)
+        : createCurrentStateTemplate(timestamp),
+    },
     { path: join(paths.skillsDir, "README.md"), content: createSkillsReadme() },
     ...createTemplateFiles().map((item) => ({
       path: join(paths.templatesDir, item.name),
@@ -364,19 +508,99 @@ export async function initializeProject(
     })),
   ];
 
+  if (shouldSeedAdoptionScaffold) {
+    files.splice(
+      2,
+      0,
+      { path: join(paths.specsDir, "SPEC-001-adopt-spec-embryo-memory-for-this-repository.md"), content: createSeedSpecTemplate(projectName, timestamp) },
+      ...createSeedTaskTemplates(projectName, timestamp).map((item) => ({
+        path: join(paths.tasksDir, item.name),
+        content: item.content,
+      })),
+    );
+  }
+
   for (const file of files) {
     if (options?.force || !(await pathExists(file.path))) {
       await writeUtf8(file.path, file.content);
       created.push(file.path);
+    } else if (file.refreshOnInit) {
+      const existing = await readUtf8(file.path);
+      if (existing !== file.content) {
+        await writeUtf8(file.path, file.content);
+        refreshed.push(file.path);
+      } else {
+        skipped.push(file.path);
+      }
     } else {
       skipped.push(file.path);
     }
   }
 
+  if (profile) {
+    const profileFile = join(rootDir, ".specpm", "profile.json");
+    const existed = await pathExists(profileFile);
+    await writeProjectProfileManifest(rootDir, profile);
+    (existed ? refreshed : created).push(profileFile);
+  }
+
   return {
     memoryDir,
+    profile: profile?.name,
     sequence: initSequenceDescription(memoryDir),
     created,
+    refreshed,
+    skipped,
+  };
+}
+
+export async function writeAdoptionArtifacts(
+  rootDir: string,
+  memoryDir: string,
+  content: {
+    migrationGuide: string;
+    agentBrief: string;
+  },
+  options?: {
+    force?: boolean;
+  },
+): Promise<AdoptionArtifactsWriteResult> {
+  const artifactPaths = buildAdoptionArtifactPaths(memoryDir);
+  const adoptionDir = join(rootDir, artifactPaths.adoptionDir);
+  const migrationGuideFile = join(rootDir, artifactPaths.migrationGuideFile);
+  const agentBriefFile = join(rootDir, artifactPaths.agentBriefFile);
+  const created: string[] = [];
+  const refreshed: string[] = [];
+  const skipped: string[] = [];
+
+  await ensureDir(adoptionDir);
+
+  const files = [
+    { path: migrationGuideFile, content: content.migrationGuide },
+    { path: agentBriefFile, content: content.agentBrief },
+  ];
+
+  for (const file of files) {
+    if (options?.force || !(await pathExists(file.path))) {
+      await writeUtf8(file.path, file.content);
+      created.push(file.path);
+    } else {
+      const existing = await readUtf8(file.path);
+      if (existing !== file.content) {
+        await writeUtf8(file.path, file.content);
+        refreshed.push(file.path);
+      } else {
+        skipped.push(file.path);
+      }
+    }
+  }
+
+  return {
+    adoptionDir,
+    migrationGuideFile,
+    agentBriefFile,
+    created,
+    refreshed,
     skipped,
   };
 }
@@ -445,31 +669,37 @@ export async function answerSpecOpenQuestions(
   rootDir: string,
   specId: string,
   answers: SpecAnswerInput[],
+  options: {expectedRevision?: string} = {},
 ): Promise<AnswerSpecQuestionsResult> {
-  const config = await readProjectConfig(rootDir);
-  const paths = resolveProjectPaths(rootDir, config);
-  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
-  const spec = specs.find((entry) => entry.id === specId);
-
-  if (!spec) {
-    throw new Error(`Spec not found: ${specId}`);
+  if (!options || typeof options !== "object" || Array.isArray(options)) {
+    throw new SpecQuestionWriteError("validation", "Expected revision must be a lowercase SHA256 digest.", "expected_revision");
   }
-
-  const applied = applySpecAnswers(spec.body, answers);
-  const updatedAt = new Date().toISOString();
-  const nextSpec: SpecDocument = {
-    ...spec,
-    body: applied.body,
-    updatedAt,
-  };
-
-  await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, updatedAt));
-
-  return {
-    spec: nextSpec,
-    answeredQuestions: applied.answeredQuestions,
-    remainingQuestions: applied.remainingQuestions.map((entry) => entry.question),
-  };
+  const expectedRevision = options.expectedRevision;
+  if (expectedRevision !== undefined && (typeof expectedRevision !== "string" || !/^[a-f0-9]{64}$/.test(expectedRevision))) {
+    throw new SpecQuestionWriteError("validation", "Expected revision must be a lowercase SHA256 digest.", "expected_revision");
+  }
+  const lockPath = join(resolveProjectPaths(rootDir).specpmDir, "locks", "document-create.lock");
+  let committedResult: AnswerSpecQuestionsResult | undefined;
+  try {
+    return await withLock(lockPath, async lease => {
+      const config = await readProjectConfig(rootDir), paths = resolveProjectPaths(rootDir, config);
+      const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+      const spec = specs.find(entry => entry.id === specId);
+      if (!spec) throw new SpecQuestionWriteError("not_found", `Spec not found: ${specId}`);
+      const revision = documentSourceHash(spec);
+      if (!revision) throw new Error("Spec answer source revision is unavailable.");
+      if (expectedRevision !== undefined && expectedRevision !== revision) throw new SpecQuestionWriteError("conflict", "Spec changed since these questions were loaded.", "revision");
+      const applied = applySpecAnswers(spec.body, answers), updatedAt = new Date().toISOString();
+      const nextSpec: SpecDocument = {...spec, body: applied.body, updatedAt};
+      const bytes = Buffer.from(serializeSpecDocument(nextSpec, updatedAt), "utf8");
+      const result: AnswerSpecQuestionsResult = {spec: nextSpec, answeredQuestions: applied.answeredQuestions, remainingQuestions: applied.remainingQuestions.map(entry => entry.question), committedRevision: specAnswerRevision(bytes)};
+      await commitSpecAnswers(spec.filePath, revision, bytes, lockPath, lease, () => { committedResult = result; });
+      return result;
+    });
+  } catch (error) {
+    if (committedResult) return {...committedResult, cleanupWarning: "Spec answers were saved, but lock cleanup failed."};
+    throw error;
+  }
 }
 
 export async function setTaskStatus(rootDir: string, taskId: string, status: TaskStatus): Promise<TaskDocument> {
@@ -543,6 +773,91 @@ export async function restoreTask(rootDir: string, taskId: string): Promise<Task
   }));
 }
 
+export async function findMemoryNote(rootDir: string, noteId: string): Promise<MemoryNoteDocument> {
+  const context = await loadProjectContext(rootDir);
+  const note = allMemoryNotes(context).find((entry) => entry.id === noteId);
+
+  if (!note) {
+    throw new Error(`Memory note not found: ${noteId}`);
+  }
+
+  return note;
+}
+
+export async function updateMemoryNote(
+  rootDir: string,
+  noteId: string,
+  updater: (note: MemoryNoteDocument, now: string) => MemoryNoteDocument,
+): Promise<MemoryNoteDocument> {
+  const config = await readProjectConfig(rootDir);
+  const paths = resolveProjectPaths(rootDir, config);
+  const sessionNotes = config.memoryScopes.session.enabled
+    ? await loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
+    : [];
+  const orgNotes = config.memoryScopes.org.enabled
+    ? await loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
+    : [];
+  const note = [...sessionNotes, ...orgNotes].find((entry) => entry.id === noteId);
+
+  if (!note) {
+    throw new Error(`Memory note not found: ${noteId}`);
+  }
+
+  if (note.writePolicy !== "read-write") {
+    throw new Error(`Memory note ${note.id} is not writable under the configured scope policy.`);
+  }
+
+  const now = new Date().toISOString();
+  const nextNote = updater(note, now);
+  const scopeDir = memoryScopeDir(paths, nextNote.scope);
+  await ensureDir(scopeDir);
+  await writeUtf8(nextNote.filePath, serializeMemoryNoteDocument(nextNote, nextNote.updatedAt ?? now));
+  return nextNote;
+}
+
+export async function createMemoryNote(rootDir: string, input: CreateMemoryNoteInput): Promise<MemoryNoteDocument> {
+  return withDocumentCreateLock(rootDir, async () => {
+    const config = await readProjectConfig(rootDir);
+    assertMemoryScopeEnabledAndWritable(config, input.scope);
+    const paths = resolveProjectPaths(rootDir, config);
+    const sessionNotes = config.memoryScopes.session.enabled
+      ? await loadScopedMemoryNotes(paths.sessionMemoryDir, "session", config.memoryScopes.session.writePolicy)
+      : [];
+    const orgNotes = config.memoryScopes.org.enabled
+      ? await loadScopedMemoryNotes(paths.orgMemoryDir, "org", config.memoryScopes.org.writePolicy)
+      : [];
+    const existingNotes = [...sessionNotes, ...orgNotes];
+    const now = new Date().toISOString();
+    const id = nextScopedMemoryNoteId(existingNotes.map((note) => note.id), input.scope);
+    const fileName = `${id}-${slugify(input.title) || "note"}.md`;
+    const scopeDir = memoryScopeDir(paths, input.scope);
+    const filePath = join(scopeDir, fileName);
+    const note: MemoryNoteDocument = {
+      docKind: "memory-note",
+      id,
+      title: input.title.trim(),
+      summary: input.summary?.trim() || "No summary provided.",
+      tags: uniqueStrings(input.tags ?? []),
+      createdAt: now,
+      expiresAt: input.expiresAt?.trim() || undefined,
+      consolidatedAt: undefined,
+      promotedTo: undefined,
+      archivedAt: undefined,
+      archiveReason: undefined,
+      updatedAt: now,
+      body: input.body?.trim() || "# Notes",
+      filePath,
+      scope: input.scope,
+      writePolicy: "read-write",
+    };
+
+    await ensureDir(scopeDir);
+    await writeUtf8(filePath, serializeMemoryNoteDocument(note, now));
+
+    return note;
+  });
+}
+
 function parseAgeToMilliseconds(value: string): number {
   const trimmed = value.trim().toLowerCase();
   const match = trimmed.match(/^(\d+)([dhw])$/);
@@ -599,102 +914,106 @@ export async function archiveCancelledTasks(rootDir: string, olderThan: string, 
 }
 
 export async function createSpec(rootDir: string, input: CreateSpecInput): Promise<SpecDocument> {
-  const config = await readProjectConfig(rootDir);
-  const paths = resolveProjectPaths(rootDir, config);
-  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
-  const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
-  const taskIds = uniqueStrings(input.taskIds ?? []);
-  assertKnownIds("Task", taskIds, tasks.map((task) => task.id));
+  return withDocumentCreateLock(rootDir, async () => {
+    const config = await readProjectConfig(rootDir);
+    const paths = resolveProjectPaths(rootDir, config);
+    const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+    const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
+    const taskIds = uniqueStrings(input.taskIds ?? []);
+    assertKnownIds("Task", taskIds, tasks.map((task) => task.id));
 
-  const now = new Date().toISOString();
-  const id = nextNumericId(specs.map((spec) => spec.id), "SPEC");
-  const fileName = `${id}-${slugify(input.title) || "spec"}.md`;
-  const filePath = join(paths.specsDir, fileName);
+    const now = new Date().toISOString();
+    const id = nextNumericId(specs.map((spec) => spec.id), "SPEC");
+    const fileName = `${id}-${slugify(input.title) || "spec"}.md`;
+    const filePath = join(paths.specsDir, fileName);
 
-  const spec: SpecDocument = {
-    docKind: "spec",
-    id,
-    title: input.title.trim(),
-    summary: input.summary.trim(),
-    status: input.status ?? "proposed",
-    taskIds,
-    tags: uniqueStrings(input.tags ?? []),
-    owner: input.owner?.trim() || undefined,
-    updatedAt: now,
-    body: buildCreatedSpecBody({ title: input.title.trim() }),
-    filePath,
-  };
-
-  await writeUtf8(filePath, serializeSpecDocument(spec, now));
-
-  const linkedTasks = tasks.filter((task) => taskIds.includes(task.id));
-  for (const task of linkedTasks) {
-    const nextTask: TaskDocument = {
-      ...task,
-      specIds: uniqueStrings([...task.specIds, spec.id]),
+    const spec: SpecDocument = {
+      docKind: "spec",
+      id,
+      title: input.title.trim(),
+      summary: input.summary.trim(),
+      status: input.status ?? "proposed",
+      taskIds,
+      tags: uniqueStrings(input.tags ?? []),
+      owner: input.owner?.trim() || undefined,
       updatedAt: now,
+      body: buildCreatedSpecBody({ title: input.title.trim() }),
+      filePath,
     };
-    await writeUtf8(task.filePath, serializeTaskDocument(nextTask, now));
-  }
 
-  return spec;
+    await writeUtf8(filePath, serializeSpecDocument(spec, now));
+
+    const linkedTasks = tasks.filter((task) => taskIds.includes(task.id));
+    for (const task of linkedTasks) {
+      const nextTask: TaskDocument = {
+        ...task,
+        specIds: uniqueStrings([...task.specIds, spec.id]),
+        updatedAt: now,
+      };
+      await writeUtf8(task.filePath, serializeTaskDocument(nextTask, now));
+    }
+
+    return spec;
+  });
 }
 
 export async function createTask(rootDir: string, input: CreateTaskInput): Promise<TaskDocument> {
-  const config = await readProjectConfig(rootDir);
-  const paths = resolveProjectPaths(rootDir, config);
-  const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
-  const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
-  const specIds = uniqueStrings(input.specIds);
-  const dependsOn = uniqueStrings(input.dependsOn ?? []);
-  const blockedBy = uniqueStrings(input.blockedBy ?? []);
+  return withDocumentCreateLock(rootDir, async () => {
+    const config = await readProjectConfig(rootDir);
+    const paths = resolveProjectPaths(rootDir, config);
+    const specs = await loadMarkdownCollection<SpecDocument>(paths.specsDir, parseSpecDocument);
+    const tasks = await loadMarkdownCollection<TaskDocument>(paths.tasksDir, parseTaskDocument);
+    const specIds = uniqueStrings(input.specIds);
+    const dependsOn = uniqueStrings(input.dependsOn ?? []);
+    const blockedBy = uniqueStrings(input.blockedBy ?? []);
 
-  if (specIds.length === 0) {
-    throw new Error("Task creation requires at least one linked spec.");
-  }
+    if (specIds.length === 0) {
+      throw new Error("Task creation requires at least one linked spec.");
+    }
 
-  assertKnownIds("Spec", specIds, specs.map((spec) => spec.id));
-  assertKnownIds("Task", dependsOn, tasks.map((task) => task.id));
-  assertKnownIds("Task", blockedBy, tasks.map((task) => task.id));
+    assertKnownIds("Spec", specIds, specs.map((spec) => spec.id));
+    assertKnownIds("Task", dependsOn, tasks.map((task) => task.id));
+    assertKnownIds("Task", blockedBy, tasks.map((task) => task.id));
 
-  const now = new Date().toISOString();
-  const id = nextNumericId(tasks.map((task) => task.id), "TASK");
-  const fileName = `${id}-${slugify(input.title) || "task"}.md`;
-  const filePath = join(paths.tasksDir, fileName);
+    const now = new Date().toISOString();
+    const id = nextNumericId(tasks.map((task) => task.id), "TASK");
+    const fileName = `${id}-${slugify(input.title) || "task"}.md`;
+    const filePath = join(paths.tasksDir, fileName);
 
-  const task: TaskDocument = {
-    status: input.status ?? "todo",
-    docKind: "task",
-    id,
-    title: input.title.trim(),
-    summary: input.summary.trim(),
-    specIds,
-    dependsOn,
-    blockedBy,
-    priority: input.priority ?? 3,
-    ownerRole: input.ownerRole?.trim() || undefined,
-    createdAt: now,
-    completedAt: (input.status ?? "todo") === "done" ? now : undefined,
-    cancelledAt: (input.status ?? "todo") === "cancelled" ? now : undefined,
-    tags: uniqueStrings(input.tags ?? []),
-    updatedAt: now,
-    body: buildCreatedTaskBody({ title: input.title.trim() }),
-    filePath,
-  };
-
-  await writeUtf8(filePath, serializeTaskDocument(task, now));
-
-  const linkedSpecs = specs.filter((spec) => specIds.includes(spec.id));
-  for (const spec of linkedSpecs) {
-    const nextSpec: SpecDocument = {
-      ...spec,
-      taskIds: uniqueStrings([...spec.taskIds, task.id]),
+    const task: TaskDocument = {
+      status: input.status ?? "todo",
+      docKind: "task",
+      id,
+      title: input.title.trim(),
+      summary: input.summary.trim(),
+      specIds,
+      dependsOn,
+      blockedBy,
+      priority: input.priority ?? 3,
+      ownerRole: input.ownerRole?.trim() || undefined,
+      createdAt: now,
+      completedAt: (input.status ?? "todo") === "done" ? now : undefined,
+      cancelledAt: (input.status ?? "todo") === "cancelled" ? now : undefined,
+      tags: uniqueStrings(input.tags ?? []),
       updatedAt: now,
+      body: buildCreatedTaskBody({ title: input.title.trim() }),
+      filePath,
     };
-    await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, now));
-  }
 
-  return task;
+    await writeUtf8(filePath, serializeTaskDocument(task, now));
+
+    const linkedSpecs = specs.filter((spec) => specIds.includes(spec.id));
+    for (const spec of linkedSpecs) {
+      const nextSpec: SpecDocument = {
+        ...spec,
+        taskIds: uniqueStrings([...spec.taskIds, task.id]),
+        updatedAt: now,
+      };
+      await writeUtf8(spec.filePath, serializeSpecDocument(nextSpec, now));
+    }
+
+    return task;
+  });
 }
 
 export async function updateCurrentState(rootDir: string, input: UpdateCurrentStateInput): Promise<CurrentStateDocument> {
@@ -763,8 +1082,9 @@ export async function writeHandoff(
     author: string;
     body: string;
   },
+  options: { config?: ProjectConfig } = {},
 ): Promise<string> {
-  const config = await readProjectConfig(rootDir);
+  const config = options.config ?? await readProjectConfig(rootDir);
   const paths = resolveProjectPaths(rootDir, config);
   const slug = handoff.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const fileName = `${handoff.createdAt.replace(/[:]/g, "-")}--${slug || "handoff"}.md`;

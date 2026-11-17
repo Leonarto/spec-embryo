@@ -1,5 +1,14 @@
 import type { ResumeContext } from "../domain.ts";
+import {
+  formatChangedItemSummary,
+  formatOmittedCountNote,
+  humanChangedItemSummarySlice,
+  sliceWithOmittedCount,
+} from "../engine.ts";
 import type { BackendRunOptions, BackendRunResult, ResumeBackend } from "./base.ts";
+import { buildPromptBundle, renderPromptBundleText } from "./prompt.ts";
+import { DEFAULT_MAX_CONTEXT_BYTES } from "../services/resume-render.ts";
+import { renderResumeWindowSummary } from "../services/resume-window.ts";
 
 function section(title: string, lines: string[]): string {
   return [title, ...lines.map((line) => `  ${line}`)].join("\n");
@@ -82,21 +91,35 @@ export class DeterministicBackend implements ResumeBackend {
     }
 
     if (context.git.shortStatus.length > 0) {
-      sections.push(section("Git Changes", context.git.shortStatus.slice(0, 10)));
+      const gitChanges = sliceWithOmittedCount(context.git.shortStatus, 10);
+      const omittedGitNote = formatOmittedCountNote(gitChanges.omittedCount, "git change");
+      sections.push(
+        section("Git Changes", [
+          ...gitChanges.visibleItems,
+          ...(omittedGitNote ? [omittedGitNote] : []),
+        ]),
+      );
     }
 
     if (context.changedItems.length > 0) {
+      const changedItems = humanChangedItemSummarySlice(context.changedItems, 10);
+      const omittedNote = formatOmittedCountNote(changedItems.omittedCount, "changed file");
       sections.push(
         section(
           "Changed Items",
-          context.changedItems.slice(0, 10).map((item) =>
-            item.id ? `[${item.kind}] ${item.id}${item.title ? ` ${item.title}` : ""}` : `[${item.kind}] ${item.path}`,
-          ),
+          [
+            ...changedItems.visibleItems.map((item) => `[${item.kind}] ${formatChangedItemSummary(item)}`),
+            ...(omittedNote ? [omittedNote] : []),
+          ],
         ),
       );
     }
 
-    const text = `${lines.join("\n")}\n\n${sections.join("\n\n")}`;
+    if (context.interruption_window) sections.push(renderResumeWindowSummary(context.interruption_window));
+    if (context.warnings?.length) sections.push(section("Warnings", context.warnings));
+    const fullText = `${lines.join("\n")}\n\n${sections.join("\n\n")}`;
+    const text = Buffer.byteLength(fullText, "utf8") <= (options.maxContextBytes ?? DEFAULT_MAX_CONTEXT_BYTES)
+      ? fullText : renderPromptBundleText(buildPromptBundle(context, options.maxContextBytes));
     return {
       text,
       json: options.json ? context : undefined,

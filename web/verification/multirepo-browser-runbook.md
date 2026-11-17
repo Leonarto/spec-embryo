@@ -1,0 +1,17 @@
+# Bounded multi-repository package smoke
+
+Prepared fixtures: `/private/tmp/spm-multirepo-smoke-YV1P1i/manifest.json`. Three temporary roots have identical SPEC-002 and TASK-004 with different text. Their registry starts absent. Never invoke against a user registry or project.
+
+After integrated build, verify packed version 0.4.0 and invoke the installed package binary. First run `spm portfolio register /private/tmp/spm-multirepo-smoke-YV1P1i/registered --id registered --name 'Registered project' --registry /private/tmp/spm-multirepo-smoke-YV1P1i/registry.json`. Start launch root using `spm ui --host 127.0.0.1 --port 41817 --registry /private/tmp/spm-multirepo-smoke-YV1P1i/registry.json`; capture readiness/build ID and process for shutdown. No start before root's release build.
+
+Call public Playwright `browser_navigate` for `http://127.0.0.1:41817/` and then `browser_run_code_unsafe` with `filename: /private/tmp/spm-multirepo-browser-phase1.js`. It runs two tabs, native registration and no-JS actions, selector guard, per-endpoint 200/400/409 checks, and leaves one dirty registered spec tab. It uses bounded awaits and no sleeps. Inspect tool error/partial progress and terminate smoke on failure; do not rerun mutating steps against the same fixtures.
+
+After phase 1 succeeds, compare files: Registered spec must include `native registered only`, Launch spec must contain `enhanced launch only` and `saved on launch before switch`; none of those values may appear in either other root. `kept launch draft` must appear nowhere. Browser file must remain unchanged. Snapshot all three spec files and registry bytes for the remap test. Record browser file and registry bytes for security tests.
+
+Remap *fixture-only* registry record `registered` from its Registered path to Browser path by editing JSON atomically; first remove or change Browser record (otherwise duplicate path validation rejects it), preserving the registered id and remaining record properties. Then call Playwright `browser_run_code_unsafe` with `/private/tmp/spm-multirepo-browser-phase2.js` without navigating the held page. Require preserved draft, disabled save, and no file changes. A 409 is expected; never automatically re-submit.
+
+With separate non-loopback trusted listener `--host 0.0.0.0` and the same fixture registry, POST registration with same-origin headers and require 403, then compare exact registry bytes. On loopback listener send foreign Origin registration and require 403 and unchanged bytes. Shut down both owned processes and Playwright pages in finally. Confirm no source project/global registry changes.
+
+Limitations: browser automation relies on the integrated UI selectors and requires installed 0.4.0 package/startup; this prepared script has not been run. Observed normal UI network events should also be inspected to prove headers and URLs are emitted by the actual client, beyond the explicit endpoint guard fetches in phase 1. Review after any failure rather than assuming this script is valid.
+
+Prepared byte-level assertions: `bun /private/tmp/spm-multirepo-oracles.ts snapshot`, then `bun /private/tmp/spm-multirepo-oracles.ts remap`, run phase 2, then `bun /private/tmp/spm-multirepo-oracles.ts verify`. With loopback port 41817 and non-loopback port 41818 running, `bun /private/tmp/spm-multirepo-oracles.ts security` checks both 403s and exact registry bytes. These scripts are fixture-path hardcoded and were not executed yet.

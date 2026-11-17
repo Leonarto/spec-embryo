@@ -1,0 +1,228 @@
+{
+  "phase": "TASK131 preparation smoke only",
+  "acceptanceCredit": false,
+  "sourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "ownerRecord": "/private/tmp/spm-task131-owner.json",
+  "runtimeRecord": "/private/tmp/spm-task131-runtime-combined-started.json",
+  "fixture": {
+    "root": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/tiny-fixture",
+    "sourceCommit": "d70c40063fa07fd83c3a7b8881420c0cb3ca069c",
+    "tasks": {
+      "ids": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005"
+      ],
+      "total": 5,
+      "path": "/tasks?view=table&scope=all&sort=id.asc&pageSize=100"
+    },
+    "specs": {
+      "ids": [
+        "SPEC-001",
+        "SPEC-002"
+      ],
+      "total": 2,
+      "path": "/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100"
+    }
+  },
+  "browser": {
+    "preparationOnly": true,
+    "acceptanceCredit": false,
+    "samples": [
+      {
+        "route": "tasks",
+        "ready": true,
+        "url": "http://127.0.0.1:51022/tasks?view=table&scope=all&sort=id.asc&pageSize=100",
+        "pageClosed": true,
+        "elapsedMs": 12067.5,
+        "navigationURL": "http://127.0.0.1:51022/tasks?view=table&scope=all&sort=id.asc&pageSize=100",
+        "ttfbMs": 10983.700000047684,
+        "responseEndMs": 10985.400000095367,
+        "firstContentfulPaintMs": 11552,
+        "firstShellAt": 11075.400000095367,
+        "firstLoadingAt": null,
+        "blankBeyond150ms": true,
+        "loadingVisibleWithin150ms": false
+      },
+      {
+        "route": "specs",
+        "ready": true,
+        "url": "http://127.0.0.1:51022/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100",
+        "pageClosed": true,
+        "elapsedMs": 421.89999985694885,
+        "navigationURL": "http://127.0.0.1:51022/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100",
+        "ttfbMs": 180.69999980926514,
+        "responseEndMs": 181.69999980926514,
+        "firstContentfulPaintMs": 276,
+        "firstShellAt": 249.19999980926514,
+        "firstLoadingAt": null,
+        "blankBeyond150ms": true,
+        "loadingVisibleWithin150ms": false
+      }
+    ],
+    "keyboard": {
+      "before": {
+        "row": "TASK-001",
+        "column": "select"
+      },
+      "after": {
+        "row": "TASK-002",
+        "column": "select"
+      },
+      "pass": true
+    },
+    "pageErrors": [],
+    "sharedPID": 69013,
+    "browser": {
+      "version": "157.0.8103.78",
+      "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/runs/combined-tiny-smoke/profile",
+      "browserPID": 71989,
+      "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "headless": true
+    },
+    "distinctProcess": true,
+    "browserClosed": true,
+    "pass": true
+  },
+  "functionalPass": true,
+  "overallSmokePass": true,
+  "cleanupStatus": "Closed and lease released; original seed/runtime dependency inventory matches",
+  "setupAttempts": [
+    {
+      "kind": "VM module import",
+      "error": "ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING",
+      "resolution": "Inject exact approved pure module text with only export prefixes removed"
+    },
+    {
+      "kind": "Sandbox TCP bind",
+      "record": "/private/tmp/spm-task131-runtime-sandbox-attempt.err",
+      "closed": true
+    },
+    {
+      "kind": "Copied source bin0644",
+      "record": "/private/tmp/spm-task131-runtime-bin-mode-attempt.err",
+      "resolution": "Reviewed copied-bin0755 normalization; original source unchanged"
+    },
+    {
+      "kind": "Missing Playwright default executables",
+      "error": "chromium_headless_shell1254 and chromium1254 paths absent",
+      "resolution": "Public /Applications/Google Chrome.app exact157.0.8103.78 verified before explicit launch"
+    },
+    {
+      "kind": "Public CDP executable discovery",
+      "error": "Browser.getBrowserCommandLine rejected: --enable-automation not set",
+      "resolution": "Finite public app inventory/Info.plist; no private module search"
+    },
+    {
+      "kind": "Transient env-to-Bun exec",
+      "record": "/private/tmp/spm-task131-exec-cleanup.json",
+      "resolution": "Reviewed monotonic exact argv transition; initial failed runtime closed and inventory unchanged"
+    },
+    {
+      "kind": "Pin command typo",
+      "error": "Mistyped full SHA rejected by git archive before source pin/runtime; corrected full SHA from git rev-parse used"
+    }
+  ],
+  "limits": [
+    "No warm/cold20 series, no percentile or latency acceptance",
+    "Smoke first compile12.07s/blank>150ms remains explicit, not a loading PASS",
+    "Package UI styles/hydration/lazy routes, retention100, closurebaseline and accessibility matrices remain NOT RUN",
+    "Source9a446a1 includes reviewed Timeline but TASK138performance may change final pin"
+  ],
+  "runtimeCleanup": {
+    "closed": true,
+    "integrity": {
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+      "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+    }
+  },
+  "priorSignalZeroEvidence": {
+    "initialError": "/private/tmp/spm-task131-runtime-combined-stopped.err",
+    "independentEmptyGroup": "/private/tmp/spm-task131-combined-group-proof.json",
+    "finalStop": "/private/tmp/spm-task131-runtime-combined-stopped-final.json"
+  },
+  "runtimeCacheRecord": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/runs/combined-tiny-smoke/runtime.json",
+  "packageBin": {
+    "preparationOnly": true,
+    "acceptanceCredit": false,
+    "sourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+    "archiveSHA256": "abf74fedc1cd9025d744b05b790e2879509fb84214b008bf3b9b655e8b59852d",
+    "prefix": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/package-prefix",
+    "binRealpaths": {
+      "spm": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/package-prefix/lib/node_modules/@leonarto/spec-embryo/src/index.ts",
+      "spec-embryo": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/package-prefix/lib/node_modules/@leonarto/spec-embryo/src/index.ts"
+    },
+    "declaredBinMode": "0o755",
+    "packageBinBytesSHA256": "5ccac1f1ad1692f88a89ce59c6b92c82a5fadd0c2a9b6cc1f081b665982ba4d5",
+    "notDevelopmentInode": true,
+    "commands": [
+      {
+        "command": [
+          "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/package-prefix/bin/spm",
+          "--help"
+        ],
+        "cwd": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/external-project",
+        "exitCode": 0,
+        "log": "/private/tmp/spm-task131-package-help.log",
+        "stdoutBytes": 5356,
+        "stderrBytes": 0
+      },
+      {
+        "command": [
+          "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/package-prefix/bin/spm",
+          "init",
+          "--standalone"
+        ],
+        "cwd": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/external-project",
+        "exitCode": 0,
+        "log": "/private/tmp/spm-task131-package-init.log",
+        "stdoutBytes": 23544,
+        "stderrBytes": 0
+      },
+      {
+        "command": [
+          "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/package-prefix/bin/spm",
+          "status"
+        ],
+        "cwd": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/external-project",
+        "exitCode": 0,
+        "log": "/private/tmp/spm-task131-package-status.log",
+        "stdoutBytes": 1228,
+        "stderrBytes": 0
+      }
+    ],
+    "uiStarted": false,
+    "pass": true,
+    "limits": [
+      "Prepared global-style runtime, not registry/lifecycle script installation",
+      "Package UI styles/hydration/lazy routes remain NOT RUN; no source symlink or global installation"
+    ]
+  },
+  "packageIntegrity": {
+    "pass": true,
+    "seedMatches": true,
+    "runtimeMatches": true,
+    "baselineSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+    "seedSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a",
+    "runtimeSHA256": "7e9d42b5d3189c97675b08b1d5b7375c54ab6931a0a050b1a5760aea9315899a"
+  },
+  "harnessHashes": {
+    "web/scripts/acceptance-navigation.mjs": "b5a7e674cb58d9799d0180d61d6cb9ce8016d56d722536b1e275ba3d49cb8d2c",
+    "web/scripts/acceptance-runtime.ts": "378b80521a2dc70fea96139942537a9b38268d5bfc28165d590abeb9c580ff6c",
+    "web/scripts/acceptance-files.ts": "79e65d854fd026a2bb489a0e90815e898d42814f457b0291e9ffddf6bdc5528c",
+    "web/scripts/acceptance-package.ts": "f1ee1284036f99134c1f7679d5df8473bf470081acba8f3c05f83a07de8c51c2"
+  },
+  "browserModuleMethod": "Inject exact approved navigation module text with only export prefixes removed; VM import unavailable",
+  "currentOwnerRecord": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/owner.json",
+  "sourcePinRecord": "/private/tmp/spm-task131-pin-combined.json"
+}

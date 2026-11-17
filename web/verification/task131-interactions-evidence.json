@@ -1,0 +1,249 @@
+{
+  "scope": "One root-authorized tiny compiled functional smoke, not final acceptance. No 5+20 or 10-second series.",
+  "sourceCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "helperV1": "c74987bce30b06cfa1078b15afea7b83cd2c0bdd9a8364db9bedcffee477d2e7",
+  "helperV2": "dddbca4b8223850d6c96bc6d5a192e9d7a4ecda67a5abc1c73291f6c5ebaf3b7",
+  "browser": {
+    "version": "157.0.8103.78",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  "acceptanceCredit": false,
+  "originalSmoke": {
+    "path": "/private/tmp/spm-task131-interactions-smoke-v1.json",
+    "pass": false,
+    "reason": "Browser Fetch response.status called as a method in the payload reader. Every other prescribed tiny adapter completed on both routes. Original failure retained."
+  },
+  "correction": "Only payload extraction changed: numeric Fetch status property, factored injectable reader, regression test. v1-to-v2 patch is explicit.",
+  "revalidation": {
+    "scope": "Only two public pageSize100 payload GETs; no key/click/search/scroll/stability replay.",
+    "path": "/private/tmp/spm-task131-interactions-payload-revalidation-v2.json",
+    "pass": true,
+    "routes": [
+      {
+        "route": "tasks",
+        "bytes": 28375,
+        "rows": 100,
+        "sha256": "5d357bc6c01436a9ccc3538380ad39f72271ff3be9d094f0be2b7dc69d2a7c42"
+      },
+      {
+        "route": "specs",
+        "bytes": 31786,
+        "rows": 100,
+        "sha256": "75a30cdc3ec7ad48267a5ac570a9fc49911d22259467d6a996c596c8733a954f"
+      }
+    ]
+  },
+  "hooksObserved": {
+    "tasks": {
+      "keyEvents": [
+        {
+          "type": "keydown",
+          "isTrusted": true,
+          "timeStamp": 359.59999990463257,
+          "capturedAt": 359.89999985694885,
+          "key": "ArrowDown",
+          "inputType": null
+        }
+      ],
+      "clickEvents": [
+        {
+          "type": "click",
+          "isTrusted": true,
+          "timeStamp": 179.90000009536743,
+          "capturedAt": 182,
+          "key": null,
+          "inputType": null
+        }
+      ],
+      "searchEvents": [
+        {
+          "type": "beforeinput",
+          "isTrusted": true,
+          "timeStamp": 155.79999995231628,
+          "capturedAt": 155.79999995231628,
+          "key": null,
+          "inputType": "insertText"
+        },
+        {
+          "type": "input",
+          "isTrusted": true,
+          "timeStamp": 156.39999985694885,
+          "capturedAt": 156.69999980926514,
+          "key": null,
+          "inputType": "insertText"
+        }
+      ],
+      "scrollSupported": true,
+      "actualScroll": true,
+      "mountedMax": 120,
+      "stability": true
+    },
+    "specs": {
+      "keyEvents": [
+        {
+          "type": "keydown",
+          "isTrusted": true,
+          "timeStamp": 147.59999990463257,
+          "capturedAt": 147.79999995231628,
+          "key": "ArrowDown",
+          "inputType": null
+        }
+      ],
+      "clickEvents": [
+        {
+          "type": "click",
+          "isTrusted": true,
+          "timeStamp": 172.79999995231628,
+          "capturedAt": 175.19999980926514,
+          "key": null,
+          "inputType": null
+        }
+      ],
+      "searchEvents": [
+        {
+          "type": "beforeinput",
+          "isTrusted": true,
+          "timeStamp": 182.60000014305115,
+          "capturedAt": 182.60000014305115,
+          "key": null,
+          "inputType": "insertText"
+        },
+        {
+          "type": "input",
+          "isTrusted": true,
+          "timeStamp": 183.20000004768372,
+          "capturedAt": 183.5,
+          "key": null,
+          "inputType": "insertText"
+        }
+      ],
+      "scrollSupported": true,
+      "actualScroll": true,
+      "mountedMax": 120,
+      "stability": true
+    }
+  },
+  "pageErrors": [],
+  "consoleErrors": [],
+  "cleanup": {
+    "browserClosed": true,
+    "runtime": {
+      "closed": true,
+      "integrity": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": true,
+        "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+      }
+    },
+    "managedDocumentsByteIdentical": true,
+    "managedDocumentCount": 242
+  },
+  "infrastructureNotes": [
+    "File-based browser code delivery from /private/tmp was rejected before any helper execution; exact error retained. The approved inline-injection path was used for the sole actual tiny run.",
+    "An initial runtime start while preparation was still running returned ENOENT for runtime.json before any listener. Start succeeded after preparation completed; no application measurement was produced by that failed start."
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/spm-task131-final-interaction-contract.md",
+      "bytes": 9537,
+      "sha256": "07ea5513a46e1910aafd54895daff3f46e6ed58a19a69776a46f336ac674fa3b"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-static-review-v1.md",
+      "bytes": 2624,
+      "sha256": "3f847091cfd1289ec9fa91c81f865d89ee932ba6592e2c5325a9d2aa4a640ba1"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-v1.patch",
+      "bytes": 46765,
+      "sha256": "54fb185316f482aefee88001b5b2bc6ceeb62afc55593e97d136412b2e90ee08"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-manifest-v1.json",
+      "bytes": 1496,
+      "sha256": "7a34bb81f415b01dabccd8e7702bb96f74767a2642494e6aa4419e444600884f"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-manifest-v2.json",
+      "bytes": 1795,
+      "sha256": "f43b04b772a18baca3f2f092d3ceed079cb5f4ada0478984b2b50faa0124bd70"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-v2.patch",
+      "bytes": 47483,
+      "sha256": "a8bc0babd94653f85a94610e634359c490ef172b202e1ea95117cc59189a7a57"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-v1-to-v2.patch",
+      "bytes": 6312,
+      "sha256": "c08747363b8e66d549944fb9c0f50551503543f5383d2c5f90851b691ac1f9e1"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-unit-v2.log",
+      "bytes": 1870,
+      "sha256": "73d55273c55ba39683ac37c008a30def2f8aaabf18af3ebcc0112a0f8b1ba521"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-v1.json",
+      "bytes": 41082,
+      "sha256": "51b02ab329a480768b85e5eb5ddc6f2a008d25ee7540d41c8781340ddf728438"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-payload-revalidation-v2.json",
+      "bytes": 74503,
+      "sha256": "f5cb029f43205be0170fbc88c4be3467dfa4f4f84da133a0490e61a0b9540f5d"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-options.json",
+      "bytes": 12271,
+      "sha256": "ca027fb6768bca92449b93ffe96d0f2ea8d9588baf4649c33d2c272e1db12213"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-browser-v1.mjs",
+      "bytes": 39156,
+      "sha256": "d783b12edd1966b3032f25d47da7b6de0e9f5c2ff6160acce5e6d7017a705694"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-payload-revalidation-v2.mjs",
+      "bytes": 39157,
+      "sha256": "7e6ca12db48b6901d4b497c98d91cdc173c9b4b7466327c1379fcdefa4d2f75a"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-preparation.json",
+      "bytes": 35317,
+      "sha256": "1cc4ae67d5d6805066763b2e8fafa58794cd1f80c0045d83c90b3e00d89e5e7a"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-fixture-guard.json",
+      "bytes": 47110,
+      "sha256": "bdb68d4f7cbb6f3ca0c6a263eefa1a8fe507fd04c33aa2a2a2d06bb48d7c9a1d"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-prepare-runtime.json",
+      "bytes": 2452,
+      "sha256": "7bc9a4b974976ad840a18e6f81a3c4402a5e61f6af69b902ca2b066b8593facd"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-start-runtime.json",
+      "bytes": 4221,
+      "sha256": "63dc26e64e976fc3739f5f1be7ae636afc7394ee4e6a7bfe5d9a078defd3dfd3"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-stop-runtime.json",
+      "bytes": 330,
+      "sha256": "b0eaac3588731ee73019d8adb70edc8c0fd5839ab88f3f69fb0e5f95f8c5ca50"
+    },
+    {
+      "path": "/private/tmp/spm-task131-interactions-smoke-delivery-error.json",
+      "bytes": 359,
+      "sha256": "2b39f5f6f0a92487d7f2beccce5c9598c839095bfccbfdcf2a9e8e3c504d760d"
+    }
+  ]
+}

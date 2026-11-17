@@ -2,14 +2,15 @@
 
 This folder is the thin CLI command layer.
 
-- Each command should orchestrate repository loading, engine calls, backend selection, and output formatting.
-- Avoid burying core rules here; move reusable logic into `src/engine.ts` or `src/repository.ts`.
-- If a command exposes a maintenance or health feature, prefer calling a reusable service in `src/services/`.
-- Status-mutation commands should validate inputs, then delegate the actual document rewrite to repository helpers instead of editing frontmatter inline.
-- Creation commands should also delegate to repository helpers so ID generation, link validation, and back-link updates stay deterministic and centralized.
-- Current-state mutation commands should preserve the current-state body and validate referenced spec/task IDs through repository helpers.
-- Agent-facing migration commands should return structured bundles from deterministic scans rather than embedding ad hoc prompt logic in the handler.
-- `init` should stay a thin guided entrypoint: repo-state classification and adoption inspection belong in reusable services, while the command is responsible for prompting only when multiple homes need a human choice.
-- `doctor` should stay read-only in the command layer; if it starts proposing rewrites, keep that as findings and suggested next commands rather than mutating files from the handler.
+- Commands load state, select services, and format output; reusable rules belong in engine, repository, or services.
+- Status, creation, and current-state commands should validate inputs, then delegate deterministic rewrites to repository helpers.
+- Init delegates classification/scaffolding and renders guidance from the initialized state; prompt only for human choices.
+- Doctor/brief probe harnesses only with explicit `--harness`; snippets never probe. Keep diagnosis optional and separate from project health.
+- Agent brief/snippet share adoption services. `hook-context` returns native read-only envelopes through a bounded private worker; never route it through doctor or launch an agent.
+- `memory` commands should validate typed filters, note-scope inputs, and inclusion/exclusion flags in the handler, then delegate retrieval, note mutation, ranking, and rendering to reusable services.
+- Hooks keep Git events separate from `--harness` presets; native install/remove require `--apply`. Other integration commands stay thin over services and explicit writes.
 - Keep flags and user-facing behavior consistent with `src/cli.ts`.
-- If a command starts needing multiple helpers or subflows, split it instead of growing one large file.
+- `resume` shares window/snapshot before execution. Its result dispatcher owns versioned JSON failures and normalized exit codes; subprocess services own cancellation/artifacts. Unavailable windows block spawn before writes.
+- Native resume evidence stays in harness services; preserve invocation/native results on later evidence errors. `handoff --from-run` previews by default and applies only after an independent byte guard under the repository lock. Legacy handoff stays unchanged.
+
+- UI verifies artifacts before Node spawn; explicit DEV invokes Vite. Own readiness and bounded shutdown.

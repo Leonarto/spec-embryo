@@ -1,0 +1,53 @@
+{
+  "scope": "Post-integration combined working tree only: exact reviewed memo5files plus concurrent owned UI work. Affected compatibility and Svelte type/sync checks; not whole-suite coverage or browser/performance/129completion acceptance. No source product edits by verifier.",
+  "head": "556ed4f64c280c5057f5d55999a84b0dc9e4fd68",
+  "sourceHashesBeforeAndAfterMatch": true,
+  "reviewedFiles": [
+    {
+      "path": "src/document-parse-memo.ts",
+      "sha256": "c4e3adfabcbe3d62aa9a658d9ad34ee3dad7bd63f7d925e73421d04e6a06b717"
+    },
+    {
+      "path": "src/repository.ts",
+      "sha256": "e78ee2761ef4a75e19eff44ff4698abe5011cae339d5eeeeeb41b2339c6d9aef"
+    },
+    {
+      "path": "tests/document-parse-memo.test.ts",
+      "sha256": "7b8126250dedf63114de5b56312c01c82064aa5ecd521364bcda00d0fdd4e18c"
+    },
+    {
+      "path": "src/services/test-diagnostics.ts",
+      "sha256": "d44bca7e3411c01100ffc48ba4c92cbc7502cc1d9c13fe7358ae0e76827ed066"
+    },
+    {
+      "path": "tests/test-diagnostics.test.ts",
+      "sha256": "6476c83faae3bbb74bda63947d6c45cd9b5ff02b42d825ce1423d870d1062d50"
+    }
+  ],
+  "tests": {
+    "command": "bun test tests/document-parse-memo.test.ts tests/document-reader.test.ts tests/repository.test.ts tests/context-pack.test.ts tests/resume-window.test.ts tests/spec-answer-write.test.ts tests/spec-answer-evaluation.test.ts tests/spec-detail-actions.test.ts tests/workspace.test.ts tests/details.test.ts tests/detail-relations.test.ts tests/test-diagnostics.test.ts",
+    "pass": 88,
+    "fail": 0,
+    "assertions": 910,
+    "files": 12,
+    "durationSeconds": 2.97
+  },
+  "webcheck": {
+    "command": "bun run web:check",
+    "errors": 0,
+    "warnings": 0,
+    "pass": true
+  },
+  "logs": [
+    {
+      "path": "/private/tmp/spm-task138-memo-combined-tests.log",
+      "sha256": "d1b0689fec378f0c069e1485ff678e4f7983ab10ba70472bb56db41316d96209"
+    },
+    {
+      "path": "/private/tmp/spm-task138-memo-combined-webcheck.log",
+      "sha256": "b72515012078ed6ea70847624fbd547029d80902f1f884409c4b688ca08cac41"
+    }
+  ],
+  "cpuReleased": true,
+  "browserUsed": false
+}

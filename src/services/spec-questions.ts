@@ -45,8 +45,35 @@ function normalizeHeading(value: string): string {
     .replace(/\s+/g, " ");
 }
 
-function normalizeQuestion(value: string): string {
+export function normalizeQuestion(value: string): string {
   return value.trim().replace(/\s+/g, " ");
+}
+
+export type SpecQuestionWriteCode = "not_found" | "conflict" | "validation";
+export type SpecQuestionWriteReason = "revision" | "question" | "target_changed" | "expected_revision" | "answers";
+export class SpecQuestionWriteError extends Error {
+  constructor(readonly code: SpecQuestionWriteCode, message: string, readonly reason?: SpecQuestionWriteReason) {
+    super(message);
+    this.name = "SpecQuestionWriteError";
+  }
+}
+
+/** Preserve input order; equal duplicate answers resolve all matching question occurrences. */
+export function normalizeSpecAnswers(answers: SpecAnswerInput[]): SpecAnswerInput[] {
+  if (!Array.isArray(answers) || answers.some(answer => !answer || typeof answer.question !== "string" || typeof answer.answer !== "string")) {
+    throw new SpecQuestionWriteError("validation", "Answers must contain question and answer text.", "answers");
+  }
+  const normalized = answers.map(answer => ({question: normalizeQuestion(answer.question), answer: answer.answer.trim()}))
+    .filter(answer => answer.question.length > 0 && answer.answer.length > 0);
+  if (normalized.length === 0) throw new SpecQuestionWriteError("validation", "At least one answered question is required.", "answers");
+  const seen = new Map<string, string>();
+  for (const answer of normalized) {
+    if (seen.has(answer.question) && seen.get(answer.question) !== answer.answer) {
+      throw new SpecQuestionWriteError("validation", "Conflicting answers for the same open question.", "answers");
+    }
+    seen.set(answer.question, answer.answer);
+  }
+  return normalized;
 }
 
 function splitSectionItems(lines: string[]): string[][] {
@@ -269,21 +296,12 @@ export function parseSpecQuestionSections(body: string): ParsedSpecQuestionSecti
 }
 
 export function applySpecAnswers(body: string, answers: SpecAnswerInput[]): AppliedSpecAnswers {
-  const filteredAnswers = answers
-    .map((answer) => ({
-      question: normalizeQuestion(answer.question),
-      answer: answer.answer.trim(),
-    }))
-    .filter((answer) => answer.question.length > 0 && answer.answer.length > 0);
-
-  if (filteredAnswers.length === 0) {
-    throw new Error("At least one answered question is required.");
-  }
+  const filteredAnswers = normalizeSpecAnswers(answers);
 
   const split = splitMarkdownSections(body);
   const openQuestionsIndex = split.sections.findIndex((section) => normalizeHeading(section.heading) === "open questions");
   if (openQuestionsIndex === -1) {
-    throw new Error("This spec does not have an Open Questions section.");
+    throw new SpecQuestionWriteError("conflict", "This spec does not have an Open Questions section.", "question");
   }
 
   const resolvedDecisionsIndex = split.sections.findIndex((section) => normalizeHeading(section.heading) === "resolved decisions");
@@ -293,7 +311,7 @@ export function applySpecAnswers(body: string, answers: SpecAnswerInput[]): Appl
 
   for (const question of answerByQuestion.keys()) {
     if (!openQuestionSet.has(question)) {
-      throw new Error(`Open question not found in spec: ${question}`);
+      throw new SpecQuestionWriteError("conflict", `Open question not found in spec: ${question}`, "question");
     }
   }
 

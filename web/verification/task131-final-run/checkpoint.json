@@ -1,0 +1,122 @@
+{
+  "recordedAt": "2026-11-16T18:46:10.292177+00:00",
+  "head": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+  "productCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "status": "STOPPED by user budget; no global acceptance",
+  "detail": {
+    "status": "FAIL",
+    "valid": true,
+    "summary": [
+      {
+        "kind": "task",
+        "median": 286.2000000476837,
+        "p95": 725,
+        "budgetMs": 300,
+        "pass": false
+      },
+      {
+        "kind": "spec",
+        "median": 395.2000000476837,
+        "p95": 668.5999999046326,
+        "budgetMs": 300,
+        "pass": false
+      }
+    ]
+  },
+  "warm": {
+    "status": "FAIL",
+    "summary": {
+      "tasks": {
+        "count": 20,
+        "expected": 20,
+        "failures": 0,
+        "medianMs": 801.4499999284744,
+        "p95Ms": 2231.5,
+        "budgetMs": 800,
+        "pass": false
+      },
+      "specs": {
+        "count": 20,
+        "expected": 20,
+        "failures": 0,
+        "medianMs": 721.8000000715256,
+        "p95Ms": 1592.0999999046326,
+        "budgetMs": 800,
+        "pass": false
+      }
+    },
+    "initialLoading150": {
+      "status": "FAIL",
+      "observations": 40,
+      "rule": "Fresh direct-document responseStart >150ms; no blank inference from missing FCP"
+    }
+  },
+  "cold": {
+    "status": "INCOMPLETE",
+    "validSamples": 6,
+    "expected": 40,
+    "counts": {
+      "tasks": 3,
+      "specs": 3
+    },
+    "elapsedMs": {
+      "tasks": [
+        1104.1000001430511,
+        880.5999999046326,
+        1207.1999998092651
+      ],
+      "specs": [
+        1650.3000001907349,
+        905.6000001430511,
+        1355.1000001430511
+      ]
+    },
+    "p95Ms": null,
+    "notRun": 34,
+    "notStartedRejection": [
+      {
+        "route": "tasks",
+        "index": 4,
+        "warmup": false,
+        "ready": false,
+        "error": "exec_command failed: CreateProcess { message: \"Rejected(\\\"This action was rejected due to unacceptable risk.\\\\nReason: Starting `final-cold-tasks-04` would begin another measurement after the user requested conserving tokens and the current orchestration explicitly requires stopping after the in-flight sample; it should instead close and audit existing resources.\\\\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.\\\")\" }"
+      }
+    ],
+    "note": "The rejected task4 entry is not a measured sample. No retry."
+  },
+  "supplementals": {
+    "status": "NOT RUN",
+    "scope": "Separate skeleton100, key/click/filter/scroll/payload/stability"
+  },
+  "retention": {
+    "status": "NOT RUN",
+    "expectedCycles": 100
+  },
+  "closure": {
+    "ownBrowsersClosed": true,
+    "activeLeaseAbsent": true,
+    "allRecordedStopsClosedAndIntegrityPass": true,
+    "dependencySHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+    "stops": [
+      "stop-final-detail-owned",
+      "stop-final-cold-tasks-02",
+      "stop-final-warm",
+      "stop-final-cold-tasks-03",
+      "stop-final-cold-specs-01",
+      "stop-final-cold-specs-02",
+      "stop-final-cold-specs-03",
+      "stop-final-cold-tasks-01"
+    ]
+  },
+  "limitations": [
+    "No final fixture-after inventory was run after budget stop; readonly flows contain no writes, initial inventories preserved.",
+    "No final global PASS; existing native200% user-deferred and screen readers unavailable remain unchanged.",
+    "Sandbox bind/ps setup error occurred before samples, cleanup closed:true and triple integrity PASS; subsequent lifecycle elevated."
+  ],
+  "tests": {
+    "runnerSpecific": "28 PASS/154 assertions",
+    "integrated": "43 PASS/236 assertions; provided by root"
+  },
+  "rawRoot": "/private/tmp/spm-task131-final-run"
+}

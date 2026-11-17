@@ -1,0 +1,13 @@
+{
+  "packedFileCount": 141,
+  "generatedSvelteKitEntries": [],
+  "requiredFiles": {
+    "web/src/routes/workspace-data/+server.ts": true,
+    "web/src/routes/workspace-options/+server.ts": true,
+    "web/src/lib/workspace/resource.ts": true,
+    "web/src/lib/workspace/resource.svelte.ts": true,
+    "src/services/workspace-query.ts": true,
+    "src/services/workspace.ts": true
+  },
+  "scope": "Prepared archive content audit only. Fresh installed runtime smoke deferred to P7; P1 installed-runtime evidence remains historical."
+}

@@ -1,0 +1,589 @@
+{
+  "baselineCommit": "896ce55779f8250af89821e7dd8de95ca0cffa8f",
+  "runtime": "v25.6.0",
+  "machine": {
+    "cpu": "Apple M1 Pro",
+    "platform": "darwin",
+    "release": "25.2.0",
+    "arch": "arm64"
+  },
+  "startedAt": "2026-11-15T23:53:13.277Z",
+  "finishedAt": "2026-11-15T23:53:28.719Z",
+  "warmups": 5,
+  "sampleCount": 20,
+  "sourceHashes": {
+    "src/document-reader.ts": "34c05d02b7c3d7196453781e2a4375bf6f26525d231fe7a5a86ad4620b9ade8d",
+    "src/repository.ts": "43acf841fe2b0c7d60cefa05c83eb347b62d74af9ecff00360eccf6ba1c43880",
+    "scripts/project-read-benchmark.ts": "913a18ac621c67e932b85aa7b5010e1d3bec9d3de873fd070708705f37cd09b8"
+  },
+  "baselineRepositorySha256": "0d2ec8b8070a570002323fc8ae445e00708680468c31d2092a3e3c8fa0da5945",
+  "scope": "Final production code, no instrumentation globals. Fresh context each sample; Node baseline then production serially. Median mean of sorted10th/11th, nearest-rank p95. Context equality/revision checks outside timed phases. Context/index/projection/stringification only; no HTTP/render/OS-cold or <=300ms acceptance claim. Timing fixture has zero scoped notes; enabled-scope correctness is a separate test.",
+  "results": [
+    {
+      "implementation": "baseline",
+      "summary": {
+        "contextMs": {
+          "median": 312.5693125,
+          "p95": 373.4894169999998
+        },
+        "indexMs": {
+          "median": 10.257874999999785,
+          "p95": 14.28716600000007
+        },
+        "projectionMs": {
+          "median": 3.5094790000000557,
+          "p95": 4.83233299999938
+        },
+        "stringifyMs": {
+          "median": 7.357312500000035,
+          "p95": 9.790917000000263
+        }
+      },
+      "samples": [
+        {
+          "contextMs": 311.50570800000014,
+          "indexMs": 11.644917000000078,
+          "projectionMs": 3.7051249999999527,
+          "stringifyMs": 7.4801659999998265,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 308.8672080000001,
+          "indexMs": 9.854041999999936,
+          "projectionMs": 3.5933749999999236,
+          "stringifyMs": 6.033457999999882,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 298.24191699999983,
+          "indexMs": 10.004665999999816,
+          "projectionMs": 3.912917000000107,
+          "stringifyMs": 6.365208000000166,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 303.8712499999997,
+          "indexMs": 8.971042000000125,
+          "projectionMs": 2.7639170000002196,
+          "stringifyMs": 7.012040999999954,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 308.3705,
+          "indexMs": 9.201458000000002,
+          "projectionMs": 2.8775839999998425,
+          "stringifyMs": 7.263875000000098,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 303.66566699999976,
+          "indexMs": 9.904750000000604,
+          "projectionMs": 4.140082999999322,
+          "stringifyMs": 6.670375000000604,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 352.57424999999967,
+          "indexMs": 9.216959000000315,
+          "projectionMs": 2.7928329999995185,
+          "stringifyMs": 6.8394170000001395,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 297.6058750000002,
+          "indexMs": 9.2475000000004,
+          "projectionMs": 2.938166999999339,
+          "stringifyMs": 7.450749999999971,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 303.9127920000001,
+          "indexMs": 9.112374999999702,
+          "projectionMs": 2.898124999999709,
+          "stringifyMs": 7.473541000000296,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 316.68433300000015,
+          "indexMs": 9.254874999999629,
+          "projectionMs": 3.0062920000000304,
+          "stringifyMs": 6.2927920000001905,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 311.04679100000067,
+          "indexMs": 11.14049999999952,
+          "projectionMs": 3.7542920000005324,
+          "stringifyMs": 7.8961249999993015,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 357.40670800000044,
+          "indexMs": 10.753374999999323,
+          "projectionMs": 3.6155420000004597,
+          "stringifyMs": 8.469957999999679,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 347.23791600000004,
+          "indexMs": 9.144624999999905,
+          "projectionMs": 3.079334000000017,
+          "stringifyMs": 7.114958000000115,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 341.8335419999994,
+          "indexMs": 10.805292000000009,
+          "projectionMs": 3.6448749999999563,
+          "stringifyMs": 8.435333000000355,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 311.4523330000002,
+          "indexMs": 10.511083999999755,
+          "projectionMs": 3.243083000000297,
+          "stringifyMs": 8.719957999999679,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 347.28079199999956,
+          "indexMs": 12.706167000000278,
+          "projectionMs": 4.83233299999938,
+          "stringifyMs": 9.790917000000263,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 313.6329169999999,
+          "indexMs": 15.15612500000043,
+          "projectionMs": 2.835832999999184,
+          "stringifyMs": 6.093709000000672,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 373.4894169999998,
+          "indexMs": 14.28716600000007,
+          "projectionMs": 6.3619999999991705,
+          "stringifyMs": 10.808209000000716,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 327.24512499999946,
+          "indexMs": 14.046167000000423,
+          "projectionMs": 3.425583000000188,
+          "stringifyMs": 6.008459000000585,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 394.77291700000023,
+          "indexMs": 11.574250000001484,
+          "projectionMs": 4.54412499999853,
+          "stringifyMs": 8.664749999999913,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        }
+      ]
+    },
+    {
+      "implementation": "production",
+      "summary": {
+        "contextMs": {
+          "median": 200.65785400000004,
+          "p95": 236.61158299999988
+        },
+        "indexMs": {
+          "median": 9.4168750000008,
+          "p95": 11.213083999999071
+        },
+        "projectionMs": {
+          "median": 2.89831249999952,
+          "p95": 3.960166000000754
+        },
+        "stringifyMs": {
+          "median": 6.908458500000052,
+          "p95": 7.574625000001106
+        }
+      },
+      "samples": [
+        {
+          "contextMs": 244.1658750000006,
+          "indexMs": 11.213083999999071,
+          "projectionMs": 4.20824999999968,
+          "stringifyMs": 6.7569579999999405,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 201.85883400000057,
+          "indexMs": 9.814249999999447,
+          "projectionMs": 3.960166000000754,
+          "stringifyMs": 7.364041999999245,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 196.56966699999975,
+          "indexMs": 9.151292000000467,
+          "projectionMs": 2.9120829999992566,
+          "stringifyMs": 7.574625000001106,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 200.70983299999898,
+          "indexMs": 9.403083000001061,
+          "projectionMs": 2.884541999999783,
+          "stringifyMs": 6.877207999999882,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 220.33300000000054,
+          "indexMs": 10.676665999999386,
+          "projectionMs": 3.3873340000009193,
+          "stringifyMs": 6.644582999999329,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 194.35212499999943,
+          "indexMs": 9.263459000001603,
+          "projectionMs": 2.7214159999984986,
+          "stringifyMs": 6.850250000001324,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 200.43895899999916,
+          "indexMs": 8.995624999999563,
+          "projectionMs": 2.725458000000799,
+          "stringifyMs": 6.811292000000321,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 196.46037500000057,
+          "indexMs": 8.940291999999317,
+          "projectionMs": 2.702957999999853,
+          "stringifyMs": 7.005333000000974,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 228.26666699999987,
+          "indexMs": 10.492333000000144,
+          "projectionMs": 3.6158329999998386,
+          "stringifyMs": 7.1489999999994325,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 193.84304100000008,
+          "indexMs": 9.13208400000076,
+          "projectionMs": 2.7333749999997963,
+          "stringifyMs": 6.864749999998821,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 195.78683400000045,
+          "indexMs": 9.718790999999328,
+          "projectionMs": 2.782667000001311,
+          "stringifyMs": 6.929749999999331,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 198.1329999999998,
+          "indexMs": 9.69012500000099,
+          "projectionMs": 2.8280419999991864,
+          "stringifyMs": 6.9612080000006245,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 212.1792919999989,
+          "indexMs": 9.43066700000054,
+          "projectionMs": 2.7762910000001284,
+          "stringifyMs": 7.0474169999997684,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 226.8673749999998,
+          "indexMs": 9.868209000000206,
+          "projectionMs": 3.5677080000004935,
+          "stringifyMs": 6.441000000000713,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 236.61158299999988,
+          "indexMs": 12.648957999999766,
+          "projectionMs": 3.676666999999725,
+          "stringifyMs": 6.8871670000007725,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 204.4574590000011,
+          "indexMs": 9.618915999999444,
+          "projectionMs": 3.284916999999041,
+          "stringifyMs": 7.8880000000008295,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 200.6058750000011,
+          "indexMs": 9.02349999999933,
+          "projectionMs": 2.7377080000005662,
+          "stringifyMs": 6.954416999999012,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 222.76583299999947,
+          "indexMs": 9.170874999999796,
+          "projectionMs": 3.091167000000496,
+          "stringifyMs": 6.271957999999358,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 197.79099999999926,
+          "indexMs": 8.938083999999435,
+          "projectionMs": 2.525375000001077,
+          "stringifyMs": 6.380041000000347,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        },
+        {
+          "contextMs": 196.95966699999917,
+          "indexMs": 8.933582999999999,
+          "projectionMs": 3.5023330000003625,
+          "stringifyMs": 7.226124999999229,
+          "bytes": 3629295,
+          "taskCount": 10000,
+          "specCount": 2000,
+          "sessionCount": 0,
+          "orgCount": 0,
+          "contextHash": "9b42c5dbc198721713df653b5e4716248e75e8ecef25d0833369befff13d5ce7",
+          "revision": "bf81a35ce56015ca75dff6a4741bd5e43b938274ec3749a2d8936b4158b53c37"
+        }
+      ]
+    }
+  ]
+}

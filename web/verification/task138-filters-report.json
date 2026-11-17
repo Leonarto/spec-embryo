@@ -1,0 +1,22 @@
+{
+  "phase": "filters",
+  "checks": [
+    {
+      "name": "GET Apply JS=true: same inspector and relation pages retained",
+      "pass": true
+    },
+    {
+      "name": "Clear JS=true: same inspector/relation intent retained",
+      "pass": true
+    },
+    {
+      "name": "GET Apply JS=false: same inspector and relation pages retained",
+      "pass": true
+    },
+    {
+      "name": "Clear JS=false: same inspector/relation intent retained",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

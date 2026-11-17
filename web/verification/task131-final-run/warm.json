@@ -1,0 +1,2243 @@
+{
+  "mode": "warm",
+  "credit": true,
+  "samples": [
+    {
+      "route": "tasks",
+      "index": 1,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1310.6000001430511,
+      "diagnosticCapturedAtMs": 1317.7000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 740
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 740
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 607.1000001430511,
+      "responseEndMs": 609.1000001430511,
+      "firstContentfulPaintMs": 740,
+      "firstShellAt": 685,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 2,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1290.5,
+      "diagnosticCapturedAtMs": 1293.8000001907349,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1152
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1152
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 1003.1000001430511,
+      "responseEndMs": 1006.1000001430511,
+      "firstContentfulPaintMs": 1152,
+      "firstShellAt": 1123.4000000953674,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 3,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 675.2999999523163,
+      "diagnosticCapturedAtMs": 691.3999998569489,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 572
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 572
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 445.89999985694885,
+      "responseEndMs": 447.89999985694885,
+      "firstContentfulPaintMs": 572,
+      "firstShellAt": 534.0999999046326,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 4,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 852.5999999046326,
+      "diagnosticCapturedAtMs": 871.5,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 756
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 756
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 620.1999998092651,
+      "responseEndMs": 621.8999998569489,
+      "firstContentfulPaintMs": 756,
+      "firstShellAt": 667.8999998569489,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 5,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 715.4000000953674,
+      "diagnosticCapturedAtMs": 726.7999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 588
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 588
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 439.2999999523163,
+      "responseEndMs": 441.2999999523163,
+      "firstContentfulPaintMs": 588,
+      "firstShellAt": 555.6000001430511,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 6,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 881.7000000476837,
+      "diagnosticCapturedAtMs": 897.0999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 804
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 804
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 649.7000000476837,
+      "responseEndMs": 651.7000000476837,
+      "firstContentfulPaintMs": 804,
+      "firstShellAt": 712.7000000476837,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 7,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 992.7000000476837,
+      "diagnosticCapturedAtMs": 995.5,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 756
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 756
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 575.5,
+      "responseEndMs": 580.2000000476837,
+      "firstContentfulPaintMs": 756,
+      "firstShellAt": 724.2999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 8,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 750.2999999523163,
+      "diagnosticCapturedAtMs": 755.5,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 600
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 600
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 435.89999985694885,
+      "responseEndMs": 438.19999980926514,
+      "firstContentfulPaintMs": 600,
+      "firstShellAt": 561.5999999046326,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 9,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 2499.5999999046326,
+      "diagnosticCapturedAtMs": 2523.399999856949,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 2272
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 2272
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 2098.0999999046326,
+      "responseEndMs": 2101.0999999046326,
+      "firstContentfulPaintMs": 2272,
+      "firstShellAt": 2243,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 10,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 2231.5,
+      "diagnosticCapturedAtMs": 2289.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 2112
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 2112
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 1929,
+      "responseEndMs": 1932.3999998569489,
+      "firstContentfulPaintMs": 2112,
+      "firstShellAt": 2077,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 11,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 964.2999999523163,
+      "diagnosticCapturedAtMs": 970.1999998092651,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 872
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 872
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 745.0999999046326,
+      "responseEndMs": 747,
+      "firstContentfulPaintMs": 872,
+      "firstShellAt": 822.7999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 12,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1367.7999999523163,
+      "diagnosticCapturedAtMs": 1373.5999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1224
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1224
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 966.1999998092651,
+      "responseEndMs": 974.0999999046326,
+      "firstContentfulPaintMs": 1224,
+      "firstShellAt": 1191.3999998569489,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 13,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 676.5999999046326,
+      "diagnosticCapturedAtMs": 689.0999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 572
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 572
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 434.2000000476837,
+      "responseEndMs": 437,
+      "firstContentfulPaintMs": 572,
+      "firstShellAt": 472.09999990463257,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 14,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 639.1000001430511,
+      "diagnosticCapturedAtMs": 644.4000000953674,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 544
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 544
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 428.5,
+      "responseEndMs": 430.10000014305115,
+      "firstContentfulPaintMs": 544,
+      "firstShellAt": 501.40000009536743,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 15,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1402.5,
+      "diagnosticCapturedAtMs": 1412.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1292
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1292
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 1110.2000000476837,
+      "responseEndMs": 1115.6000001430511,
+      "firstContentfulPaintMs": 1292,
+      "firstShellAt": 1269,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 16,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 482.89999985694885,
+      "diagnosticCapturedAtMs": 487.09999990463257,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 404
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 404
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 288.2000000476837,
+      "responseEndMs": 289.89999985694885,
+      "firstContentfulPaintMs": 404,
+      "firstShellAt": 355.89999985694885,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 17,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 561.2000000476837,
+      "diagnosticCapturedAtMs": 568,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 492
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 492
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 356.80000019073486,
+      "responseEndMs": 359,
+      "firstContentfulPaintMs": 492,
+      "firstShellAt": 437.60000014305115,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 18,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 559.9000000953674,
+      "diagnosticCapturedAtMs": 562.2000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 472
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 472
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 328.7999999523163,
+      "responseEndMs": 330.90000009536743,
+      "firstContentfulPaintMs": 472,
+      "firstShellAt": 382.7000000476837,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 19,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 460.7999999523163,
+      "diagnosticCapturedAtMs": 462.2000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 384
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 384
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 263.7000000476837,
+      "responseEndMs": 265.5,
+      "firstContentfulPaintMs": 384,
+      "firstShellAt": 337.59999990463257,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 20,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 487.40000009536743,
+      "diagnosticCapturedAtMs": 490.80000019073486,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 392
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 392
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 265.10000014305115,
+      "responseEndMs": 268,
+      "firstContentfulPaintMs": 392,
+      "firstShellAt": 358.60000014305115,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 1,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 501.2000000476837,
+      "diagnosticCapturedAtMs": 507.2000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 408
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 408
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 272.2999999523163,
+      "responseEndMs": 274.7999999523163,
+      "firstContentfulPaintMs": 408,
+      "firstShellAt": 353.7999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 2,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 695.3999998569489,
+      "diagnosticCapturedAtMs": 701.3999998569489,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 580
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 580
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 454.2999999523163,
+      "responseEndMs": 456.69999980926514,
+      "firstContentfulPaintMs": 580,
+      "firstShellAt": 554,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 3,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 657.3000001907349,
+      "diagnosticCapturedAtMs": 664.8000001907349,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 528
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 528
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 388.90000009536743,
+      "responseEndMs": 392.7000000476837,
+      "firstContentfulPaintMs": 528,
+      "firstShellAt": 438.80000019073486,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 4,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 755.6999998092651,
+      "diagnosticCapturedAtMs": 802.5999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 644
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 644
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 488.19999980926514,
+      "responseEndMs": 493,
+      "firstContentfulPaintMs": 644,
+      "firstShellAt": 597.7999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 5,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 729.8000001907349,
+      "diagnosticCapturedAtMs": 732.1000001430511,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 636
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 636
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 490.7000000476837,
+      "responseEndMs": 492.90000009536743,
+      "firstContentfulPaintMs": 636,
+      "firstShellAt": 574.5,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 6,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 499.09999990463257,
+      "diagnosticCapturedAtMs": 536.3999998569489,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 392
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 392
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 270.59999990463257,
+      "responseEndMs": 272.39999985694885,
+      "firstContentfulPaintMs": 392,
+      "firstShellAt": 325.09999990463257,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 7,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 713.7999999523163,
+      "diagnosticCapturedAtMs": 752.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 608
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 608
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 468.5,
+      "responseEndMs": 471.09999990463257,
+      "firstContentfulPaintMs": 608,
+      "firstShellAt": 565.1999998092651,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 8,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1077.3999998569489,
+      "diagnosticCapturedAtMs": 1096.5999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1000
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1000
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 875.0999999046326,
+      "responseEndMs": 877.5999999046326,
+      "firstContentfulPaintMs": 1000,
+      "firstShellAt": 959.3999998569489,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 9,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1150.8999998569489,
+      "diagnosticCapturedAtMs": 1166.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1024
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1024
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 845.5999999046326,
+      "responseEndMs": 848.2000000476837,
+      "firstContentfulPaintMs": 1024,
+      "firstShellAt": 990.3999998569489,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 10,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 829.3999998569489,
+      "diagnosticCapturedAtMs": 844.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 748
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 748
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 615,
+      "responseEndMs": 618,
+      "firstContentfulPaintMs": 748,
+      "firstShellAt": 698.5999999046326,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 11,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 508.2999999523163,
+      "diagnosticCapturedAtMs": 518.2000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 424
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 424
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 292.09999990463257,
+      "responseEndMs": 294.2000000476837,
+      "firstContentfulPaintMs": 424,
+      "firstShellAt": 373.09999990463257,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 12,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 533.0999999046326,
+      "diagnosticCapturedAtMs": 534.7999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 460
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 460
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 335.5,
+      "responseEndMs": 337.59999990463257,
+      "firstContentfulPaintMs": 460,
+      "firstShellAt": 409.39999985694885,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 13,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 835.9000000953674,
+      "diagnosticCapturedAtMs": 845,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 708
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 708
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 591.3000001907349,
+      "responseEndMs": 593.4000000953674,
+      "firstContentfulPaintMs": 708,
+      "firstShellAt": 671.3000001907349,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 14,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1046.7999999523163,
+      "diagnosticCapturedAtMs": 1055.5999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 888
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 888
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 721.0999999046326,
+      "responseEndMs": 728.5,
+      "firstContentfulPaintMs": 888,
+      "firstShellAt": 870.9000000953674,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 15,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1779.0999999046326,
+      "diagnosticCapturedAtMs": 1869.0999999046326,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1648
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1648
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 1459,
+      "responseEndMs": 1464.4000000953674,
+      "firstContentfulPaintMs": 1648,
+      "firstShellAt": 1600.0999999046326,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 16,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1467.9000000953674,
+      "diagnosticCapturedAtMs": 1516.7000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1284
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1284
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 1119.7000000476837,
+      "responseEndMs": 1127,
+      "firstContentfulPaintMs": 1284,
+      "firstShellAt": 1248.5999999046326,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 17,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1592.0999999046326,
+      "diagnosticCapturedAtMs": 1599.9000000953674,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1452
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1452
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 1302.5999999046326,
+      "responseEndMs": 1308.7000000476837,
+      "firstContentfulPaintMs": 1452,
+      "firstShellAt": 1428.5,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 18,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 532.4000000953674,
+      "diagnosticCapturedAtMs": 537.9000000953674,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 440
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 440
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 305.80000019073486,
+      "responseEndMs": 307.7000000476837,
+      "firstContentfulPaintMs": 440,
+      "firstShellAt": 387.10000014305115,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 19,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 592.5,
+      "diagnosticCapturedAtMs": 594.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 500
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 500
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 369.89999985694885,
+      "responseEndMs": 372.2999999523163,
+      "firstContentfulPaintMs": 500,
+      "firstShellAt": 457.2999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 20,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 641.8000001907349,
+      "diagnosticCapturedAtMs": 643.6000001430511,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 564
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 564
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 442.2000000476837,
+      "responseEndMs": 444.30000019073486,
+      "firstContentfulPaintMs": 564,
+      "firstShellAt": 514.8000001907349,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    }
+  ],
+  "warmups": [
+    {
+      "route": "tasks",
+      "index": 1,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1381.6000001430511,
+      "diagnosticCapturedAtMs": 1391.1000001430511,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1252
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1252
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 1072.8000001907349,
+      "responseEndMs": 1076,
+      "firstContentfulPaintMs": 1252,
+      "firstShellAt": 1161.4000000953674,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 2,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 787.1000001430511,
+      "diagnosticCapturedAtMs": 798,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 628
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 628
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 499.7000000476837,
+      "responseEndMs": 502,
+      "firstContentfulPaintMs": 628,
+      "firstShellAt": 577.7000000476837,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 3,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 552.3999998569489,
+      "diagnosticCapturedAtMs": 556.2999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 460
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 460
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 323.5,
+      "responseEndMs": 326.69999980926514,
+      "firstContentfulPaintMs": 460,
+      "firstShellAt": 411.89999985694885,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 4,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 2201.7000000476837,
+      "diagnosticCapturedAtMs": 2279.9000000953674,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 2136
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 2136
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 1521.6000001430511,
+      "responseEndMs": 1525.3000001907349,
+      "firstContentfulPaintMs": 2136,
+      "firstShellAt": 1723.3000001907349,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "tasks",
+      "index": 5,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 2400.0999999046326,
+      "diagnosticCapturedAtMs": 2409.4000000953674,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 2264
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 2264
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 2074.0999999046326,
+      "responseEndMs": 2079.7000000476837,
+      "firstContentfulPaintMs": 2264,
+      "firstShellAt": 2183.4000000953674,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 1,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 667.9000000953674,
+      "diagnosticCapturedAtMs": 673.9000000953674,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 588
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 588
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 448.7000000476837,
+      "responseEndMs": 450.09999990463257,
+      "firstContentfulPaintMs": 588,
+      "firstShellAt": 526,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 2,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 520.7999999523163,
+      "diagnosticCapturedAtMs": 522.3999998569489,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 424
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 424
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 310.2000000476837,
+      "responseEndMs": 317.2000000476837,
+      "firstContentfulPaintMs": 424,
+      "firstShellAt": 381.7999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 3,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 438.5,
+      "diagnosticCapturedAtMs": 440.5,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 356
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 356
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 250.5,
+      "responseEndMs": 252.40000009536743,
+      "firstContentfulPaintMs": 356,
+      "firstShellAt": 321,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 4,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 504.7999999523163,
+      "diagnosticCapturedAtMs": 506.59999990463257,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 412
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 412
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 297.39999985694885,
+      "responseEndMs": 300.5,
+      "firstContentfulPaintMs": 412,
+      "firstShellAt": 363.39999985694885,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    },
+    {
+      "route": "specs",
+      "index": 5,
+      "warmup": true,
+      "ready": true,
+      "url": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 412,
+      "diagnosticCapturedAtMs": 414.7000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 324
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 324
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:62386/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 213.70000004768372,
+      "responseEndMs": 215.80000019073486,
+      "firstContentfulPaintMs": 324,
+      "firstShellAt": 280.80000019073486,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true
+    }
+  ],
+  "browser": {
+    "version": "157.0.8103.78",
+    "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-warm/profile",
+    "browserPID": 15915,
+    "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "headless": true
+  },
+  "browserClosed": true,
+  "notRun": [],
+  "validWarmup": true,
+  "summary": {
+    "tasks": {
+      "count": 20,
+      "expected": 20,
+      "failures": 0,
+      "medianMs": 801.4499999284744,
+      "p95Ms": 2231.5,
+      "budgetMs": 800,
+      "pass": false
+    },
+    "specs": {
+      "count": 20,
+      "expected": 20,
+      "failures": 0,
+      "medianMs": 721.8000000715256,
+      "p95Ms": 1592.0999999046326,
+      "budgetMs": 800,
+      "pass": false
+    }
+  },
+  "pass": false
+}

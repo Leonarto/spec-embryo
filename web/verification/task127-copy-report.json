@@ -1,0 +1,35 @@
+{
+  "phase": "copy",
+  "capturedAt": "2026-11-15T21:22:01.549Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Copy rows includes headers, visible order, excludes selection",
+      "pass": true
+    },
+    {
+      "name": "Copy IDs uses visible row order",
+      "pass": true
+    },
+    {
+      "name": "Ctrl+C without selection copies focused value only",
+      "pass": true
+    },
+    {
+      "name": "Selected browser text keeps native copy",
+      "pass": true
+    },
+    {
+      "name": "Toolbar input copy is untouched",
+      "pass": true
+    },
+    {
+      "name": "Denied clipboard shows labeled selectable fallback",
+      "pass": true
+    },
+    {
+      "name": "Denied clipboard does not announce success",
+      "pass": true
+    }
+  ]
+}

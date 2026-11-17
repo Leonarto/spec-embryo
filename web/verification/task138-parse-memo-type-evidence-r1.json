@@ -1,0 +1,45 @@
+{
+  "sourceUnchanged": true,
+  "coreAndCatalogSHA256": [
+    {
+      "path": "src/document-parse-memo.ts",
+      "sha256": "c4e3adfabcbe3d62aa9a658d9ad34ee3dad7bd63f7d925e73421d04e6a06b717"
+    },
+    {
+      "path": "src/repository.ts",
+      "sha256": "e78ee2761ef4a75e19eff44ff4698abe5011cae339d5eeeeeb41b2339c6d9aef"
+    },
+    {
+      "path": "tests/document-parse-memo.test.ts",
+      "sha256": "7b8126250dedf63114de5b56312c01c82064aa5ecd521364bcda00d0fdd4e18c"
+    },
+    {
+      "path": "src/services/test-diagnostics.ts",
+      "sha256": "d44bca7e3411c01100ffc48ba4c92cbc7502cc1d9c13fe7358ae0e76827ed066"
+    },
+    {
+      "path": "tests/test-diagnostics.test.ts",
+      "sha256": "6476c83faae3bbb74bda63947d6c45cd9b5ff02b42d825ce1423d870d1062d50"
+    }
+  ],
+  "focusedFrozen": {
+    "pass": 11,
+    "fail": 0,
+    "assertions": 146,
+    "log": "/private/tmp/spm-task138-parse-memo-production-xwnvkw0_/focused-frozen-r1.log"
+  },
+  "callbackBoundary": {
+    "pass": true,
+    "command": "node candidate/node_modules/typescript/bin/tsc --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler --allowImportingTsExtensions --skipLibCheck --types node --typeRoots candidate/node_modules/@types --ignoreConfig callback-boundary-check.ts",
+    "source": "import { createDocumentReader, type CallbackDocumentReader } from \"./candidate/src/document-reader.ts\";\nconst pending: Array<Parameters<CallbackDocumentReader>[1]> = [];\nconst read = createDocumentReader((_path, complete) => { pending.push(complete); });\nvoid read;\npending[0]?.(null, Buffer.from(\"ok\"));\npending[0]?.(new Error(\"failure\"));\n",
+    "log": "/private/tmp/spm-task138-parse-memo-production-xwnvkw0_/callback-boundary-check.log"
+  },
+  "realTestStrictCheck": {
+    "newTestDiagnostics": [
+      "TS2307 missing bun:test declarations only; same absent tooling affects baseline Bun tests"
+    ],
+    "callbackTS2345": false,
+    "log": "src/frontmatter.ts(74,27): error TS2769: No overload matches this call.\n  Overload 1 of 2, '(toml: string, options?: (ParseOptions & { integersAsBigInt: true | \"asNeeded\"; }) | undefined): TomlTable', gave the following error.\n    Argument of type 'string | undefined' is not assignable to parameter of type 'string'.\n      Type 'undefined' is not assignable to type 'string'.\n  Overload 2 of 2, '(toml: string, options?: ParseOptions | undefined): TomlTableWithoutBigInt', gave the following error.\n    Argument of type 'string | undefined' is not assignable to parameter of type 'string'.\n      Type 'undefined' is not assignable to type 'string'.\ntests/document-parse-memo.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.\n",
+    "note": "Full test-import closure check exits2 on preexisting frontmatter errors and missing bun:test. It contains noTS2345 and no new test type error. Earlier broad typecheck.log is superseded for callback evidence, not a source finding."
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "version": "0.4.0",
+  "sourceCommit": "23dcf56",
+  "sourceState": "Only package version changed after reviewed feature and test fixes",
+  "buildId": "bb388cc5ad71ba8567c8061441fb0f68fe2c06740a98e4ad485451caa1a3cae5",
+  "inputs": 201,
+  "outputs": 627,
+  "tests": {
+    "pass": 523,
+    "skip": "Actual package checks require an explicit root and are covered by separate installed gates",
+    "fail": 0,
+    "assertions": 10609,
+    "files": 87
+  },
+  "coverage": {
+    "aggregate": {
+      "LF": 14782,
+      "LH": 13529,
+      "FNF": 2315,
+      "FNH": 2124,
+      "linePercent": 91.52,
+      "functionPercent": 91.75,
+      "files": 132
+    },
+    "productRecordedByBun": {
+      "LF": 13035,
+      "LH": 12218,
+      "FNF": 1908,
+      "FNH": 1788,
+      "linePercent": 93.73,
+      "functionPercent": 93.71,
+      "files": 116
+    },
+    "limits": "Bun-instrumented code only; compiled Svelte/browser coverage is separate"
+  },
+  "checks": [
+    {
+      "path": "web/verification/multirepo-final-suite.log",
+      "sha256": "184816ba61c02be0c0c8b023b64183f2766d04dddbb9e156ab8ddb3661ac81cb"
+    },
+    {
+      "path": "web/verification/multirepo-final-agents.log",
+      "sha256": "1e7272056ac1ccf8a765467ec8bc8ae4ab185a98aff8a5dfd43f00b95fb73d90"
+    },
+    {
+      "path": "web/verification/multirepo-final-doctor.log",
+      "sha256": "0274549713c921ca3c5b49dd59bd740078d2f5e135201fc69205ece7f6186ecf"
+    },
+    {
+      "path": "web/verification/release-0.4.0-dry-run.log",
+      "sha256": "4ca5e231d6055ef6352def93fcad0efdc340cd19aebfe3b837ffe1a2e082bc07"
+    },
+    {
+      "path": "web/verification/multirepo-final-build.log",
+      "sha256": "c21e0cfdab7639d0999116f43ef9710299a355b24b78b9fc43fe8693688e40ed"
+    }
+  ],
+  "archive": {
+    "path": "/private/tmp/spm-0.4.0-multirepo.tgz",
+    "sha256": "b3962e3805586122c3bc6a589e02ea3fff38086186a0aec07cf9cbbc5f9bdc88"
+  },
+  "firstSuiteFailure": "multirepo-first-suite-failure.log preserves four fixture failures, subsequently fixed and reviewed",
+  "packageBrowser": "Approved installed package smoke; browser findings live-observed in report, no raw browser output retained",
+  "historicalPerformance": "SPEC062 failures and incomplete gates remain; no threshold waiver",
+  "packageTests": {
+    "pass": 2,
+    "assertions": 121
+  },
+  "evidence": [
+    {
+      "path": "web/verification/multirepo-package-smoke.md",
+      "sha256": "944ed6d61f33ae096fd68932c73c9ade42c5fc5d1dd4d24595488c112c25f42d"
+    },
+    {
+      "path": "web/verification/multirepo-package-gate.log",
+      "sha256": "20e2adf83b13b19ca43083a580aff42495912728031d186fc63f7eaf851a669a"
+    },
+    {
+      "path": "web/verification/release-0.4.0-review.md",
+      "sha256": "4c00c2239d87137fb37e4ebcd69162bb0a9fd2a6ca024708f4241d326f09b134"
+    },
+    {
+      "path": "web/verification/multirepo-browser-runbook.md",
+      "sha256": "e7a00b1335de85c3651745224dd52f8cf84701cc78650b3cb9e3fd29d5906a1d"
+    },
+    {
+      "path": "web/verification/multirepo-browser-phase1.js",
+      "sha256": "52e15868c6175ede9f7f35a0cd9027c808da54a36805ec5b8f847fe180e16103"
+    },
+    {
+      "path": "web/verification/multirepo-browser-resume.js",
+      "sha256": "e743d3a9d8a4ce17243cd22a04f5c30adf26e7c054c9827ce1343739ba1b6fcf"
+    },
+    {
+      "path": "web/verification/multirepo-browser-phase2.js",
+      "sha256": "b20fd1373b21071be754c30bd29c374330348dc43555342fdb7910ee9e5f6417"
+    },
+    {
+      "path": "web/verification/multirepo-fixture-oracles.ts",
+      "sha256": "1788ec28472e71b58a6c8706587ba2885b8980d651db0561ddd5f7cbbfb37d1d"
+    },
+    {
+      "path": "web/verification/multirepo-fixture-manifest.json",
+      "sha256": "56fa17d2c5a54fa9eff8fb3ce99583f77358b49ebb5cdfeab893e26da3af4133"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "phase": "refresh",
+  "capturedAt": "2026-11-15T21:23:33.183Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Same-query refresh preserves focused row/key, scroll and URL",
+      "pass": true,
+      "detail": {
+        "before": {
+          "focus": {
+            "row": "TASK-00199",
+            "column": "blockers"
+          },
+          "scroll": 5771.5,
+          "url": "http://localhost:5188/tasks?pageSize=200&sort=id.asc"
+        },
+        "after": {
+          "focus": {
+            "row": "TASK-00199",
+            "column": "blockers"
+          },
+          "scroll": 5771.5,
+          "url": "http://localhost:5188/tasks?pageSize=200&sort=id.asc"
+        }
+      }
+    },
+    {
+      "name": "Same-query refresh preserves visible selection",
+      "pass": true
+    },
+    {
+      "name": "Removed focused row maps to nearest remaining row",
+      "pass": true,
+      "detail": {
+        "expected": "TASK-00200",
+        "actual": {
+          "row": "TASK-00200",
+          "column": "blockers"
+        }
+      }
+    },
+    {
+      "name": "Removed selection is reconciled and announced",
+      "pass": true
+    },
+    {
+      "name": "Failed refresh retains exact data and selection",
+      "pass": true
+    },
+    {
+      "name": "Retry recovers without leaving Table",
+      "pass": true
+    },
+    {
+      "name": "User sort clears page-local selection",
+      "pass": true
+    }
+  ]
+}

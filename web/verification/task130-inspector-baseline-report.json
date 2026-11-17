@@ -1,0 +1,36 @@
+{
+  "phase": "inspector-baseline",
+  "capturedAt": "2026-11-16T00:55:33.783Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Collapsing inspected group retains detail/trace but removes traversal",
+      "pass": true
+    },
+    {
+      "name": "Re-expansion restores logical traversal without remounting detail",
+      "pass": true
+    },
+    {
+      "name": "Virtual opener can unmount while inspector remains open",
+      "pass": true
+    },
+    {
+      "name": "Close materializes/focuses original virtual opener and retains trace",
+      "pass": true
+    },
+    {
+      "name": "Logical Next fixture starts beyond mounted slice",
+      "pass": true
+    },
+    {
+      "name": "Inspector Next traverses expanded logical IDs beyond viewport without changing trace",
+      "pass": true
+    },
+    {
+      "name": "Close after Next restores the original opener rather than the last inspected ID",
+      "pass": true
+    }
+  ],
+  "sourceScope": "Isolated Node production final presenter checkpoint, committed128 inspector plus exactly one frozen pure138 relation-intent module. No138 client/controller or129 guard certification."
+}

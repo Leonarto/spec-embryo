@@ -1,0 +1,522 @@
+{
+  "samples": [
+    {
+      "route": "tasks",
+      "index": 1,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:63909/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1104.1000001430511,
+      "diagnosticCapturedAtMs": 1107.3000001907349,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 984
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 984
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:63909/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 807.8000001907349,
+      "responseEndMs": 809.7000000476837,
+      "firstContentfulPaintMs": 984,
+      "firstShellAt": 893.3000001907349,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true,
+      "browser": {
+        "version": "157.0.8103.78",
+        "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-tasks-01/profile",
+        "browserPID": 17678,
+        "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "headless": true
+      },
+      "browserClosed": true,
+      "startup": {
+        "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+        "startupMs": 1245.7198340000032,
+        "reportedArtifactValidationMs": 181.8,
+        "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+        "nodeVersion": "v25.6.0",
+        "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+        "pid": 17645,
+        "listener": {
+          "pid": 17658,
+          "group": 17645,
+          "started": "Mon Nov 16 15:40:24 2026",
+          "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-tasks-01/app/web/runtime/server.mjs"
+        },
+        "url": "http://127.0.0.1:63909/"
+      },
+      "cleanup": {
+        "closed": true,
+        "integrity": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      }
+    },
+    {
+      "route": "specs",
+      "index": 1,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:64384/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1650.3000001907349,
+      "diagnosticCapturedAtMs": 1655.8000001907349,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1500
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1500
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:64384/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 1294.9000000953674,
+      "responseEndMs": 1304.2000000476837,
+      "firstContentfulPaintMs": 1500,
+      "firstShellAt": 1395.6000001430511,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true,
+      "browser": {
+        "version": "157.0.8103.78",
+        "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-01/profile",
+        "browserPID": 17919,
+        "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "headless": true
+      },
+      "browserClosed": true,
+      "startup": {
+        "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+        "startupMs": 1095.3952499999978,
+        "reportedArtifactValidationMs": 301.7,
+        "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+        "nodeVersion": "v25.6.0",
+        "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+        "pid": 17888,
+        "listener": {
+          "pid": 17899,
+          "group": 17888,
+          "started": "Mon Nov 16 15:41:17 2026",
+          "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-01/app/web/runtime/server.mjs"
+        },
+        "url": "http://127.0.0.1:64384/"
+      },
+      "cleanup": {
+        "closed": true,
+        "integrity": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      }
+    },
+    {
+      "route": "tasks",
+      "index": 2,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:64901/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 880.5999999046326,
+      "diagnosticCapturedAtMs": 884.3999998569489,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 792
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 792
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:64901/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 619,
+      "responseEndMs": 620.7999999523163,
+      "firstContentfulPaintMs": 792,
+      "firstShellAt": 694.2999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true,
+      "browser": {
+        "version": "157.0.8103.78",
+        "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-tasks-02/profile",
+        "browserPID": 18163,
+        "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "headless": true
+      },
+      "browserClosed": true,
+      "startup": {
+        "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+        "startupMs": 1743.7737500000003,
+        "reportedArtifactValidationMs": 890.2,
+        "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+        "nodeVersion": "v25.6.0",
+        "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+        "pid": 18101,
+        "listener": {
+          "pid": 18123,
+          "group": 18101,
+          "started": "Mon Nov 16 15:42:06 2026",
+          "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-tasks-02/app/web/runtime/server.mjs"
+        },
+        "url": "http://127.0.0.1:64901/"
+      },
+      "cleanup": {
+        "closed": true,
+        "integrity": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      }
+    },
+    {
+      "route": "specs",
+      "index": 2,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:65166/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 905.6000001430511,
+      "diagnosticCapturedAtMs": 909.5,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 768
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 768
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:65166/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 596.3000001907349,
+      "responseEndMs": 598.3000001907349,
+      "firstContentfulPaintMs": 768,
+      "firstShellAt": 667.8000001907349,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true,
+      "browser": {
+        "version": "157.0.8103.78",
+        "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/profile",
+        "browserPID": 18367,
+        "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "headless": true
+      },
+      "browserClosed": true,
+      "startup": {
+        "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+        "startupMs": 906.3429159999978,
+        "reportedArtifactValidationMs": 226,
+        "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+        "nodeVersion": "v25.6.0",
+        "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+        "pid": 18342,
+        "listener": {
+          "pid": 18353,
+          "group": 18342,
+          "started": "Mon Nov 16 15:42:44 2026",
+          "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/web/runtime/server.mjs"
+        },
+        "url": "http://127.0.0.1:65166/"
+      },
+      "cleanup": {
+        "closed": true,
+        "integrity": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      }
+    },
+    {
+      "route": "tasks",
+      "index": 3,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:49321/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1207.1999998092651,
+      "diagnosticCapturedAtMs": 1215.7999999523163,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1072
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1072
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:49321/tasks?sort=id.asc&page=1&pageSize=100&scope=all&view=table",
+      "ttfbMs": 911.1999998092651,
+      "responseEndMs": 914.2999999523163,
+      "firstContentfulPaintMs": 1072,
+      "firstShellAt": 983.7999999523163,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true,
+      "browser": {
+        "version": "157.0.8103.78",
+        "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-tasks-03/profile",
+        "browserPID": 18729,
+        "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "headless": true
+      },
+      "browserClosed": true,
+      "startup": {
+        "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+        "startupMs": 1109.5476249999992,
+        "reportedArtifactValidationMs": 244.8,
+        "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+        "nodeVersion": "v25.6.0",
+        "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+        "pid": 18665,
+        "listener": {
+          "pid": 18678,
+          "group": 18665,
+          "started": "Mon Nov 16 15:43:40 2026",
+          "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-tasks-03/app/web/runtime/server.mjs"
+        },
+        "url": "http://127.0.0.1:49321/"
+      },
+      "cleanup": {
+        "closed": true,
+        "integrity": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      }
+    },
+    {
+      "route": "specs",
+      "index": 3,
+      "warmup": false,
+      "ready": true,
+      "url": "http://127.0.0.1:49888/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "pageClosed": true,
+      "startedFromBlank": true,
+      "elapsedMs": 1355.1000001430511,
+      "diagnosticCapturedAtMs": 1361.2000000476837,
+      "visibilityState": "visible",
+      "hasFocus": true,
+      "paintEntries": [
+        {
+          "name": "first-paint",
+          "startTime": 1228
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1228
+        }
+      ],
+      "paintObservation": "observed",
+      "navigationType": "navigate",
+      "activationStart": 0,
+      "prerendering": false,
+      "serviceWorkerController": false,
+      "pageshowPersisted": false,
+      "navigationURL": "http://127.0.0.1:49888/specs?sort=id.asc&page=1&pageSize=100&taskScope=all",
+      "ttfbMs": 1053.8000001907349,
+      "responseEndMs": 1055.5,
+      "firstContentfulPaintMs": 1228,
+      "firstShellAt": 1133.1000001430511,
+      "firstLoadingAt": null,
+      "loadingVisibleWithin150ms": false,
+      "priorRequestCount": 0,
+      "blankBeyond150ms": true,
+      "loading150": {
+        "status": "FAIL",
+        "reason": "Fresh direct document had no response bytes at150ms",
+        "budgetMs": 150
+      },
+      "freshNavigationVerified": true,
+      "browser": {
+        "version": "157.0.8103.78",
+        "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-03/profile",
+        "browserPID": 19440,
+        "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "headless": true
+      },
+      "browserClosed": true,
+      "startup": {
+        "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+        "startupMs": 1103.734792000003,
+        "reportedArtifactValidationMs": 256,
+        "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+        "nodeVersion": "v25.6.0",
+        "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+        "pid": 19211,
+        "listener": {
+          "pid": 19224,
+          "group": 19211,
+          "started": "Mon Nov 16 15:44:30 2026",
+          "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-03/app/web/runtime/server.mjs"
+        },
+        "url": "http://127.0.0.1:49888/"
+      },
+      "cleanup": {
+        "closed": true,
+        "integrity": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      }
+    },
+    {
+      "route": "tasks",
+      "index": 4,
+      "warmup": false,
+      "ready": false,
+      "error": "exec_command failed: CreateProcess { message: \"Rejected(\\\"This action was rejected due to unacceptable risk.\\\\nReason: Starting `final-cold-tasks-04` would begin another measurement after the user requested conserving tokens and the current orchestration explicitly requires stopping after the in-flight sample; it should instead close and audit existing resources.\\\\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.\\\")\" }"
+    }
+  ],
+  "halted": {
+    "at": 6,
+    "id": "final-cold-tasks-04",
+    "reason": "Closure/dependency integrity unverified or setup failure",
+    "sample": {
+      "route": "tasks",
+      "index": 4,
+      "warmup": false,
+      "ready": false,
+      "error": "exec_command failed: CreateProcess { message: \"Rejected(\\\"This action was rejected due to unacceptable risk.\\\\nReason: Starting `final-cold-tasks-04` would begin another measurement after the user requested conserving tokens and the current orchestration explicitly requires stopping after the in-flight sample; it should instead close and audit existing resources.\\\\nDo not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.\\\")\" }"
+    }
+  },
+  "notRun": 33
+}

@@ -1,11 +1,21 @@
-tool_version = "0.1.0"
-project_name = "spec-embryo"
+tool_version = "0.3.1"
+project_name = "spec-pm"
 memory_dir = "docs/spm"
 state_file = "docs/spm/current.md"
 handoffs_dir = "docs/spm/handoffs"
 specs_dir = "docs/spm/specs"
 tasks_dir = "docs/spm/tasks"
 skills_dir = "docs/spm/skills"
+
+[memory_scopes.session]
+enabled = true
+dir = ".specpm/memory/session"
+write_policy = "read-write"
+
+[memory_scopes.org]
+enabled = true
+dir = ".specpm/memory/org"
+write_policy = "read-only"
 
 [agents]
 context_window_tokens = 400000
@@ -18,6 +28,12 @@ absolute_chain_hard_cap = 8000
 
 [defaults]
 resume_backend = "deterministic"
+
+[nexus]
+enabled = false
+command = "gitnexus"
+args = []
+root_agents_mode = "reference-only"
 
 [backends.deterministic]
 enabled = true

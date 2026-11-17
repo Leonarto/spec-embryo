@@ -1,0 +1,166 @@
+{
+  "capturedAt": "2026-11-15T19:48:08.871Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "overview: controlled endpoint contract",
+      "pass": true
+    },
+    {
+      "name": "overview: refresh success without error",
+      "pass": true
+    },
+    {
+      "name": "tasks: controlled endpoint contract",
+      "pass": true
+    },
+    {
+      "name": "tasks: refresh success without error",
+      "pass": true
+    },
+    {
+      "name": "tasks: DOM bounded by page",
+      "pass": true
+    },
+    {
+      "name": "specs: controlled endpoint contract",
+      "pass": true
+    },
+    {
+      "name": "specs: refresh success without error",
+      "pass": true
+    },
+    {
+      "name": "specs: DOM bounded by page",
+      "pass": true
+    },
+    {
+      "name": "timeline: controlled endpoint contract",
+      "pass": true
+    },
+    {
+      "name": "timeline: refresh success without error",
+      "pass": true
+    },
+    {
+      "name": "Refresh control remains focusable while busy",
+      "pass": true
+    },
+    {
+      "name": "Success preserves focused entity, scroll and URL",
+      "pass": true,
+      "detail": {
+        "before": {
+          "scroll": 200,
+          "focus": " TASK-001",
+          "url": "http://127.0.0.1:5184/tasks?pageSize=100"
+        },
+        "success": {
+          "scroll": 200,
+          "focus": " TASK-001",
+          "url": "http://127.0.0.1:5184/tasks?pageSize=100"
+        }
+      }
+    },
+    {
+      "name": "Success commits shell with the accepted data",
+      "pass": true
+    },
+    {
+      "name": "abort: exact data, focus, scroll and URL survive",
+      "pass": true
+    },
+    {
+      "name": "abort: pending exits",
+      "pass": true
+    },
+    {
+      "name": "abort: Retry recovers",
+      "pass": true
+    },
+    {
+      "name": "http: exact data, focus, scroll and URL survive",
+      "pass": true
+    },
+    {
+      "name": "http: pending exits",
+      "pass": true
+    },
+    {
+      "name": "http: Retry recovers",
+      "pass": true
+    },
+    {
+      "name": "json: exact data, focus, scroll and URL survive",
+      "pass": true
+    },
+    {
+      "name": "json: pending exits",
+      "pass": true
+    },
+    {
+      "name": "json: Retry recovers",
+      "pass": true
+    },
+    {
+      "name": "identity: exact data, focus, scroll and URL survive",
+      "pass": true
+    },
+    {
+      "name": "identity: pending exits",
+      "pass": true
+    },
+    {
+      "name": "identity: Retry recovers",
+      "pass": true
+    },
+    {
+      "name": "Controlled refresh never requests SvelteKit navigation data",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "Controlled refresh never navigates the document",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "Late A cannot replace newer B",
+      "pass": true
+    },
+    {
+      "name": "Focus within five seconds does not refetch",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "Debounced focus refresh runs once after five seconds",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "Real fifteen-second deadline preserves previous content",
+      "pass": true
+    },
+    {
+      "name": "Prior visit cannot commit after navigation back to the same query",
+      "pass": true
+    },
+    {
+      "name": "Detail unregisters refresh",
+      "pass": true
+    },
+    {
+      "name": "Spec detail has no background refresh surface",
+      "pass": true
+    },
+    {
+      "name": "Server paging changes the globally sorted page",
+      "pass": true,
+      "detail": {
+        "first": 50,
+        "next": 50
+      }
+    }
+  ]
+}

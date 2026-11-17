@@ -101,6 +101,19 @@ Task lifecycle in this repo:
 
 `review` is the explicit pre-completion stage. Work should generally move through review before being marked `done`.
 
+## Tag guidance
+
+Tags are soft-normalized retrieval handles.
+
+- Use tags to support `spm memory query` and `spm memory brief`, especially for cross-spec topics that are not captured by status alone.
+- Prefer short, stable topical tags such as `adoption`, `ui`, `timeline`, or domain tags like `combat`.
+- Preserve meaningful legacy topical labels as tags during migration when they help another human or agent find related work later.
+- Memory tag filters normalize spaces, underscores, and hyphens to the same canonical tag, so `dark mode`, `dark_mode`, and `dark-mode` match the same docs.
+- Memory tag filters do not treat partial substrings as matches; query `dark` only if `dark` is the actual tag.
+- Avoid unnecessary synonym drift like `frontend` vs `ui` unless the repo intentionally distinguishes them.
+- Do not use tags as a substitute for canonical statuses, explicit `spec_ids`, `task_ids`, `depends_on`, or `blocked_by` links.
+- In v1, tags are not a hard-enforced global taxonomy; they are a soft retrieval aid, so consistency matters more than exhaustiveness.
+
 Completion rule:
 
 - If review finds issues, the task should remain in `review` or move back into active work.

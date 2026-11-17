@@ -1,0 +1,60 @@
++++
+doc_kind = "spec"
+id = "SPEC-063"
+title = "Serve registered repositories from one local UI"
+summary = "Reuse the local portfolio registry for named repository registration and request-scoped UI selection, with isolated drafts and guarded canonical writes."
+status = "done"
+task_ids = ["TASK-142", "TASK-143", "TASK-144"]
+tags = ["ui", "portfolio", "multi-repo"]
+updated_at = "2026-11-17T14:58:20.276Z"
++++
+
+# One local server, registered repositories
+
+The user confirmed registration through both CLI and UI, with name and local directory; switching repositories opens Tasks and respects unsaved spec answers. Delivery order: implement and review this feature, then push GitHub and prepare npm publication. Sol6.1 orchestrates; Terra6.1High implements and independently reviews. Keep local checks serial and small on the reported saturated host.
+
+# Multi-repository local workspace design
+
+## Scope and identity
+
+One `spm ui` server serves its launch repository and projects registered in the existing user-local portfolio registry. The selector shows the launch repository as a distinct option even if the registry is empty and displays registered projects by name and ID. Keep the existing CLI `spm portfolio register <path> --name <name> [--id <id>]` and add a browser registration form. Registration never initializes or modifies a project; it requires an existing directory with a regular `.specpm/config.toml` file.
+
+The URL query parameter `project` identifies a registered record by its exact ID. No `project` parameter means the server's immutable launch root, preserving existing URLs. A single explicit parameter is required for a registered project; empty, repeated, unknown, ambiguous, malformed, or unavailable IDs fail visibly rather than falling back. Registered IDs are opaque data encoded by `URLSearchParams`, never interpreted as paths. A GET request cannot choose an arbitrary path. A registry record pointing to the same real root as launch remains an explicit registered selection; use the real root-derived workspace key for data ownership. Selector changes navigate to the corresponding tasks view and clear entity-specific filters, inspector, and relation state.
+
+## Server request contract
+
+The launch configuration remains immutable process configuration. At the beginning of each project-dependent request, resolve `project` against one bounded, validated registry snapshot; canonicalize the selected existing directory with `realpath`, verify it is a directory and its `.specpm/config.toml` is a regular file, and store an immutable `{ root, selection }` in request locals. The no-parameter launch root continues to work without a registry. Do not use process globals, cookies, or client-provided paths for selection. Registry errors and inaccessible records are handled as actionable errors, including for endpoint requests; never silently select launch root. Registry listing is lightweight and does not load every project context.
+
+`getWorkspaceRequestSource` uses only this request root and retains its existing per-request promise sharing. Layout and page loads, workspace data/options/detail/relations endpoints, and the canonical spec question action all share that selection. In particular the action no longer calls the launch-root resolver. Its post-action outcome/context and cache invalidation remain request-local and tied to the selected root. Preserve existing revision/conflict and recovery semantics. No POST or fetch may infer a different root from a stale client state.
+
+## Registry and registration
+
+Use a shared deterministic portfolio service for CLI and UI; retain the existing default `~/.spec-embryo/portfolio.json` and CLI `--registry` semantics. Introduce bounded registry file size and record count, strict version/shape/type checks, bounded strings and arrays, required nonempty IDs and paths, and explicit duplicate-ID and conflicting path detection. Reject malformed registries without rewriting them or defaulting to empty. Preserve existing valid v1 records and existing CLI updates when a single record unambiguously matches the intended identity/path; reject a conflicting ID and path that refer to different records and reject accidental retargeting of a different project. Registration validates name and ID, resolves an absolute real directory and project config before mutation, and does not initialize it. Explicit collision branches and errors must be covered in tests.
+
+Serialize all service mutations (including link, not only register) using an owned exclusive lock in the registry directory with bounded wait and clear failure, re-read and validate while holding the lock, write a uniquely named same-directory temporary file, then atomically rename it into place. Release only the lock owned by this writer; never delete another writer's lock or silently break stale locks. Clean up owned temporary files on failure. Reads see complete old or new files; concurrent registrations cannot lose updates. Avoid unrelated changes to portfolio matching or presentation. Document registry errors and recovery.
+
+The browser uses a dedicated SvelteKit form action invoking the shared service. Require SvelteKit same-origin POST/CSRF validation and retain production Host authority checks. In addition, permit browser registration only when the actual server is configured to bind a loopback host; a non-loopback `--host` remains able to view/select configured projects but the registration UI is unavailable and registration action returns 403. Derive this policy from trusted launch/runtime configuration, never the Host, Origin, forwarded headers, or submitted fields. Cover production and dev startup, including accepted loopback forms, and reject unrecognized/missing trusted bind configuration by default. Validate the form server-side and return readable field/collision errors. The feature does not expand filesystem paths exposed by read requests.
+
+## Client navigation and isolation
+
+Repository selection lives in the URL, never localStorage or a process-wide selection. Every project-local URL preserves the selected query parameter: shell navigation and brand, task/spec/timeline links, inspector and canonical-detail links, pagination, filters and trace links, clipboard links, and error/recovery paths. Native GET forms include the selection as a hidden input; named spec POST action URLs include both the selected project and SvelteKit's named-action token. Each workspace-data, options, detail and relations request carries the same identity. Centralize helpers and audit existing hardcoded links and query normalization/serialization, which may discard unrelated parameters. Preserve existing route-specific query and action behavior and ensure no-JavaScript links/forms remain usable.
+
+Switching projects uses a full document navigation to a clean tasks URL. Trigger the existing unsaved-answer navigation guard before switching; saving finishes in the original project's action before navigating, cancellation stays put, and discarding is explicit. This also tears down inspector resources, pending requests, in-memory editor drafts, outcome fences and history state before the next project loads. Browser back/forward across projects must re-establish project identity and must not show or save an old project's draft in the new one. Same-project navigation retains current behavior. Real-root project keys continue to scope existing persistent preferences and fences where appropriate.
+
+## Implementation ownership and checks
+
+1. **Backend/service slice:** registry validation, collision handling and serialized atomic mutation; request-local resolver, selection errors, trusted loopback registration policy, registration action and canonical question-action root. Expose a documented selection/registry data contract for layout and UI. Tests: valid legacy registry, invalid/version/size bounds, duplicates, valid updates vs collisions, concurrent writers, failed write/lock behavior, missing/inaccessible roots, malicious query values, request isolation, same-ID spec writes in different roots, same-origin and loopback/remote registration denial.
+2. **UI slice:** selector and registration form; consistent URL helper propagation across all links/forms/fetches; guarded hard navigation and state isolation. Consume backend contract without separate registry parsing. Tests: two simultaneous tabs with overlapping entity IDs; all four fetch endpoints and canonical action preserve selection; native GET and named POST forms; selector save/discard/cancel; stale request and same-ID draft isolation; back/forward, reload, deep links, malformed and unavailable selections; launch-root compatibility, empty registry, accessible selector and errors.
+3. **Integration:** document workflow and security boundary, update managed spec/task/current state and applicable local AGENTS guidance. Run focused service and browser tests, existing relevant suite, type/build/package verification, and `bun run check:agents`. The release follows the publish skill and stops before final `bun publish` for user 2FA.
+
+Independent review should check query propagation and every root-consuming endpoint, mutation authorization and registry races, and confirm the unsaved guard runs before hard navigation. No multi-repo aggregation or automatic project initialization is part of this slice.
+
+## Review-resolved implementation contract
+
+Layout and `/repositories` loader data use shared `UiRepositoriesData {currentId:string|null;workspaceKey:string;projects:Array<{id:string;name:string}>;registrationAllowed:boolean;registryError?:string}`; null means launch. No path is returned in read DTOs. With no explicit selection, registry corruption leaves launch data usable and exposes registryError with an empty registered list; explicit selections fail visibly. `/repositories` POST default action accepts `name` and `path` plus optional `id`, invokes the shared registry service, and returns fail400 `{values:{name,path,id},error:string}` (403 for disabled registration); success303 redirects `/tasks?project=<registeredID>`. No auto-init or writes to target project.
+
+Every registered-selection background workspace request carries `x-spm-workspace-key` from rendered data; compare it with fresh resolved root key before returning data, returning409 on mismatch and400 if missing for registered selection. Launch background requests keep legacy no-header compatibility; any supplied expectation is enforced. Canonical answer forms include hidden `expectedWorkspaceKey`; registered POST requires it, while legacy launch POST may omit it. Any supplied mismatch returns recoverable409 with submitted answers retained and no mutation; do not silently rebase or retry. Initial document GET establishes identity without an expected key. These fields are equality guards, not selectors or authorization tokens.
+
+Repeat registration: omitted path defaults to CLI cwd/root. A unique canonical-path match retains its ID if no explicit ID was supplied, retains omitted name and relationship arrays, updates a supplied nonblank name and merges tags. Explicitly different ID for the same path fails; matching ID with a different canonical path fails; ID/path matching different records fails. New records use existing slug generation when ID omitted. Validate duplicate canonical paths and IDs when reading registry; preserve valid v1 data and custom registry/JSON options. Symlink-equivalent paths resolve to one identity.
+
+Backend owns shared portfolio/ui-projects services, trusted launch bind policy, hooks.server, app.d.ts, layout.server, request-source helper, canonical action server and `/repositories/+page.server`. UI owns browser project URL/header helpers, links/forms/fetch propagation, layout.svelte/WorkspaceLayout keying and selector/form presentation, controller project-change guard. Backend exposes the typed data above. UI sends registered-selection guards without parsing registry or roots. Source changes/builds/tests remain isolated and serialized for the saturated host.

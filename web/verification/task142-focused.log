@@ -1,0 +1,27 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/spec-question-action-guard.test.ts:
+(pass) exact provenance projects once; clone has null and a later disk edit cannot rewrite initial revision [109.75ms]
+(pass) checked revision, legacy success, recovery and exact drafts retain compatibility [133.10ms]
+(pass) malformed/duplicate revisions are400 before writing; stale409 with exact draft and current snapshot [161.89ms]
+(pass) discard recovery redisplays exact remaining drafts without invoking writer [19.58ms]
+(pass) committed outcome is recorded before optional read failure and stays successful [30.10ms]
+(pass) missing and IO failures remain truthful, preserve recovery, and never claim success [50.01ms]
+(pass) root layout and page preserve confirmed outcome and error drafts when their shared context promise rejects [384.74ms]
+
+tests/portfolio.test.ts:
+(pass) portfolio command > registers projects and renders cross-project status [96.66ms]
+(pass) portfolio command > reports unavailable projects without failing the whole portfolio [8.03ms]
+(pass) portfolio command > searches portfolio summaries and renders explicit relationship issues [74.87ms]
+
+tests/ui-projects.test.ts:
+(pass) registry updates preserve identity and reject collisions; concurrent writers serialize [58.81ms]
+(pass) request selection and stale identity fail closed without exposing paths [26.84ms]
+(pass) stale answer identity retains drafts without calling the writer [0.16ms]
+(pass) remapped selection returns recovery-only action data and never writes either repo [19.21ms]
+(pass) concurrent registration and linking preserve both changes and malformed registries fail closed [44.62ms]
+
+ 15 pass
+ 0 fail
+ 103 expect() calls
+Ran 15 tests across 3 files. [1417.00ms]

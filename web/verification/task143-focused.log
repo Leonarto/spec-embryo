@@ -1,0 +1,21 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/ui-project-navigation.test.ts:
+(pass) project-aware navigation > preserves opaque IDs through links, normalized queries, hashes, and named actions [3.43ms]
+(pass) project-aware navigation > keeps launch compatibility and does not silently normalize malformed selections [0.11ms]
+
+tests/workspace-resource.test.ts:
+(pass) controlled workspace resource > uses only controlled endpoint and commits shell/data atomically without router invalidation [3.38ms]
+(pass) controlled workspace resource > registered refresh sends selected project and rendered workspace key [0.41ms]
+(pass) controlled workspace resource > network/HTTP/JSON/shape/identity failures retain the exact snapshot and prior success time; Retry recovers [1.48ms]
+(pass) controlled workspace resource > superseded late success or error cannot replace or clear a newer request [1.21ms]
+(pass) controlled workspace resource > new SSR generation and disposal invalidate old requests even with the same route/key [0.44ms]
+(pass) controlled workspace resource > deadline exits busy, aborts transport, preserves prior data, and ignores late completion [19.03ms]
+(pass) controlled workspace resource > focus is debounced, visible-only, after five seconds, and coalesces with an existing request [44.71ms]
+(pass) controlled workspace resource > inspector-only retarget preserves pending/error/snapshot and does not abort or fetch [0.56ms]
+(pass) controlled workspace resource > validates schema and required displayed fields before accepting an envelope [0.26ms]
+
+ 11 pass
+ 0 fail
+ 95 expect() calls
+Ran 11 tests across 2 files. [266.00ms]

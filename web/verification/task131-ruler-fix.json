@@ -1,0 +1,54 @@
+{
+  "scope": "Focused readonly TimelineRuler group semantics; no full-matrix/runtime/performance credit",
+  "baseProductCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+  "companionMermaidFix": "e3e6f3c",
+  "patch": "/private/tmp/spm-task131-ruler-role.patch",
+  "blob": "/private/tmp/spm-task131-combined-7deb17f/web/src/lib/components/timeline/TimelineRuler.svelte",
+  "previous": {
+    "role": null,
+    "label": "Relative effort units",
+    "ticks": [
+      "0",
+      "2",
+      "4",
+      "6",
+      "8",
+      "10",
+      "12",
+      "14"
+    ]
+  },
+  "result": {
+    "url": "http://127.0.0.1:59815/timeline",
+    "scope": "Named readonly ruler group, unchanged tick text and affected axe rule",
+    "ticks": [
+      "0",
+      "2",
+      "4",
+      "6",
+      "8",
+      "10",
+      "12",
+      "14"
+    ],
+    "tabindex": null,
+    "interactiveChildren": 0,
+    "axe": {
+      "version": "4.11.4",
+      "violations": [],
+      "incomplete": [],
+      "passes": 1
+    },
+    "pass": true
+  },
+  "svelteCheck": {
+    "command": "bun run web:check",
+    "cwd": "/private/tmp/spm-task131-combined-7deb17f",
+    "errors": 0,
+    "warnings": 0,
+    "log": "/private/tmp/spm-task131-ruler-copy-check.log"
+  },
+  "sourceChanges": "Only role=group on existing .ruler div; label/ticks/text/styles unchanged; no tabindex or interaction added",
+  "test": "web/scripts/acceptance-ruler-a11y.mjs",
+  "sharedSourceChanged": false
+}

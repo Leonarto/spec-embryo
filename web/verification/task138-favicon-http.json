@@ -1,0 +1,125 @@
+{
+  "scope": "Real Kit GET/HEAD/repeated/query icon semantics plus list/Task/Spec requests; correlate every header with server context counts.",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/favicon.ico",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "1",
+      "contextCalls": 0
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=1",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "2",
+      "contextCalls": 0
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=2",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "3",
+      "contextCalls": 0
+    },
+    {
+      "method": "HEAD",
+      "url": "http://127.0.0.1:5297/favicon.ico",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "4",
+      "contextCalls": 0
+    },
+    {
+      "method": "HEAD",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=1",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "5",
+      "contextCalls": 0
+    },
+    {
+      "method": "HEAD",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=2",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "6",
+      "contextCalls": 0
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/favicon.ico",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "7",
+      "contextCalls": 0
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=1",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "8",
+      "contextCalls": 0
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=2",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "9",
+      "contextCalls": 0
+    },
+    {
+      "method": "HEAD",
+      "url": "http://127.0.0.1:5297/favicon.ico",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "10",
+      "contextCalls": 0
+    },
+    {
+      "method": "HEAD",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=1",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "11",
+      "contextCalls": 0
+    },
+    {
+      "method": "HEAD",
+      "url": "http://127.0.0.1:5297/favicon.ico?v=2",
+      "status": 204,
+      "bytes": 0,
+      "serverRequest": "12",
+      "contextCalls": 0
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/tasks?sort=id.asc",
+      "status": 200,
+      "kind": "list",
+      "serverRequest": "13",
+      "contextCalls": 1
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/workspace-detail?kind=task&id=TASK-00001",
+      "status": 200,
+      "kind": "task",
+      "serverRequest": "14",
+      "contextCalls": 1
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5297/workspace-detail?kind=spec&id=SPEC-00001",
+      "status": 200,
+      "kind": "spec",
+      "serverRequest": "15",
+      "contextCalls": 1
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "scope": "Frozen one-attribute TimelineRuler group fix and focused proof",
+  "files": [
+    {
+      "path": "/private/tmp/spm-task131-ruler-role.patch",
+      "sha256": "5b7293ddae244af6bde725d363bb0dd2582a42ca6ae3658a2dff79a4e9730300"
+    },
+    {
+      "path": "/private/tmp/spm-task131-combined-7deb17f/web/src/lib/components/timeline/TimelineRuler.svelte",
+      "sha256": "72682121f297b16257e36c369597cfc098df908e3416d49c48afaba2473080a4"
+    },
+    {
+      "path": "web/scripts/acceptance-ruler-a11y.mjs",
+      "sha256": "48132ef22ff5a9c364ec4870e83495fd40cc9807352e91c38b08b4825f8a3d43"
+    },
+    {
+      "path": "web/verification/task131-ruler-fix.json",
+      "sha256": "0a186ff4df6854bb4755e70e14ca4810553d5aaf68c098003391c7f63e067821"
+    },
+    {
+      "path": "/private/tmp/spm-task131-ruler-copy-check.log",
+      "sha256": "1854226743c80601b0c940362578f851ce710762e52d667cc0835fc85d776e22"
+    }
+  ],
+  "patchMetadata": {
+    "path": "web/src/lib/components/timeline/TimelineRuler.svelte",
+    "sourceBeforeSHA256": "5e7957357d6b1a5841f0fee996e0d936f69dd210c9bf4db3b8297b0cf3c9469e",
+    "sourceAfterSHA256": "72682121f297b16257e36c369597cfc098df908e3416d49c48afaba2473080a4",
+    "patchSHA256": "5b7293ddae244af6bde725d363bb0dd2582a42ca6ae3658a2dff79a4e9730300",
+    "sharedProductUnchanged": true
+  }
+}

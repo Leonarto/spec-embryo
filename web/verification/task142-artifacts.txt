@@ -1,0 +1,3 @@
+ead32d4f42ba48a4b76ea28be08ed29c487d0b6faf0a63cd1e5193f65d363918  /private/tmp/spm-task142.patch
+ef31d6eac005ad654cc705721fc063b12da35f4e030789770aa79d310acebdfc  /private/tmp/spm-task142-files.txt
+e840417044c884671bcfc88937c0462f98365b718a8346f4b941290786f456e1  /private/tmp/spm-task142-focused.log

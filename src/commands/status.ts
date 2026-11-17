@@ -1,7 +1,14 @@
 import type { ParsedArgs } from "../cli.ts";
-import { deriveStatusSnapshot, deriveNextActions } from "../engine.ts";
+import {
+  deriveStatusSnapshot,
+  deriveNextActions,
+  formatChangedItemSummary,
+  formatOmittedCountNote,
+  humanChangedItemSummarySlice,
+} from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "../services/agents.ts";
+import { withSchemaVersion } from "../services/contracts.ts";
 
 export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Promise<string> {
   const [context, agentsReport] = await Promise.all([loadProjectContext(rootDir), buildAgentsHealthReport(rootDir)]);
@@ -10,7 +17,7 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
 
   if (parsed.flags.has("json")) {
     return JSON.stringify(
-      {
+      withSchemaVersion({
         project: context.config.projectName,
         focus: context.currentState.focus,
         summary: context.currentState.summary,
@@ -29,7 +36,7 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
         changed_items: snapshot.changedItems,
         git: context.git,
         agents: agentsReport.summary,
-      },
+      }),
       null,
       2,
     );
@@ -77,9 +84,13 @@ export async function runStatusCommand(rootDir: string, parsed: ParsedArgs): Pro
 
   if (snapshot.changedItems.length > 0) {
     lines.push("", "Changed items:");
-    for (const item of snapshot.changedItems.slice(0, 10)) {
-      const label = item.id ? `${item.id}${item.title ? `: ${item.title}` : ""}` : item.path;
-      lines.push(`- [${item.kind}] ${label}`);
+    const changedItems = humanChangedItemSummarySlice(snapshot.changedItems, 10);
+    for (const item of changedItems.visibleItems) {
+      lines.push(`- [${item.kind}] ${formatChangedItemSummary(item)}`);
+    }
+    const omittedNote = formatOmittedCountNote(changedItems.omittedCount, "changed file");
+    if (omittedNote) {
+      lines.push(`- ${omittedNote}`);
     }
   }
 

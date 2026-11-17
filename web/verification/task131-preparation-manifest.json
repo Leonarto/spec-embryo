@@ -1,0 +1,65 @@
+{
+  "scope": "Frozen preparation scripts for independent review; no final acceptance",
+  "files": [
+    {
+      "path": "tests/acceptance-harness.test.ts",
+      "sha256": "7d3fbdcec2e0930e2e4695702e82508f8f491bd279aacc0065f9dd53cdf029aa"
+    },
+    {
+      "path": "web/scripts/AGENTS.md",
+      "sha256": "9b95253f8c558ecad9f299b703b4767a1a4eb5068fbf3a84515781e3404732a4"
+    },
+    {
+      "path": "web/scripts/acceptance-accessibility.mjs",
+      "sha256": "e7656072ffac571351f8b39dc3d79806e022049e2ea150345aa05c7a0d9ba107"
+    },
+    {
+      "path": "web/scripts/acceptance-closure.ts",
+      "sha256": "61f6387ef9180558016b085845bd598ee295f7326f549ef18f39dd2073014e22"
+    },
+    {
+      "path": "web/scripts/acceptance-files.ts",
+      "sha256": "79e65d854fd026a2bb489a0e90815e898d42814f457b0291e9ffddf6bdc5528c"
+    },
+    {
+      "path": "web/scripts/acceptance-navigation.mjs",
+      "sha256": "b5a7e674cb58d9799d0180d61d6cb9ce8016d56d722536b1e275ba3d49cb8d2c"
+    },
+    {
+      "path": "web/scripts/acceptance-package.ts",
+      "sha256": "f1ee1284036f99134c1f7679d5df8473bf470081acba8f3c05f83a07de8c51c2"
+    },
+    {
+      "path": "web/scripts/acceptance-retention.mjs",
+      "sha256": "6ded09051a42353b1eed62beadb32969477d92feaeebc77160ab79deceaa6d6d"
+    },
+    {
+      "path": "web/scripts/acceptance-runtime.ts",
+      "sha256": "378b80521a2dc70fea96139942537a9b38268d5bfc28165d590abeb9c580ff6c"
+    },
+    {
+      "path": "web/verification/task131-preparation.json",
+      "sha256": "e43f2c20ee163bcce7f6cb97cda13f8f6cd1d54151cc0138554085efa0e95655"
+    },
+    {
+      "path": "web/verification/task131-smoke.json",
+      "sha256": "62972d75a6c63820d6139d725abe3186e0cec6f273a262b0f9b12c40734f8b74"
+    }
+  ],
+  "contract": "web/verification/task131-runner-decisions.md",
+  "reviewDelta": {
+    "reason": "Completed tiny runtime/browser and installed package-bin smoke; no implementation delta since EPERM approval",
+    "changedPaths": [
+      "web/scripts/AGENTS.md",
+      "web/verification/task131-preparation.json",
+      "web/verification/task131-smoke.json"
+    ],
+    "previousManifest": "/private/tmp/spm-task131-preparation-manifest.before-real-smoke.json",
+    "sourceCommit": "9a446a1e794b21b60283ad58ff11ce3dc0d853c0",
+    "smoke": "web/verification/task131-smoke.json",
+    "agentsLog": "/private/tmp/spm-task131-agents-smoke.log",
+    "unitLog": "/private/tmp/spm-task131-unit-group-probe.log",
+    "review": "/private/tmp/spm-task131-preparation-review.md",
+    "acceptanceCredit": false
+  }
+}

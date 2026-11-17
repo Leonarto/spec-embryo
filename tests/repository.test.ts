@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { spawnSync } from "node:child_process";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -10,11 +11,26 @@ import {
   createSpec,
   createTask,
   initializeProject,
+  loadProjectContext,
   restoreTask,
   setSpecStatus,
   setTaskStatus,
   updateCurrentState,
 } from "../src/repository.ts";
+import { CLI_VERSION } from "../src/services/version.ts";
+
+function runGit(rootDir: string, args: string[]): string {
+  const result = spawnSync("git", args, {
+    cwd: rootDir,
+    encoding: "utf8",
+  });
+
+  if (result.status !== 0) {
+    throw new Error(result.stderr || `git ${args.join(" ")} failed`);
+  }
+
+  return result.stdout;
+}
 
 describe("repository status updates", () => {
   test("updates a spec status and preserves the body", async () => {
@@ -29,7 +45,7 @@ describe("repository status updates", () => {
       expect(spec.status).toBe("done");
       expect(spec.updatedAt).toBeDefined();
       expect(raw).toContain('status = "done"');
-      expect(raw).toContain("# Problem");
+      expect(raw).toContain("# Purpose");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -108,7 +124,7 @@ describe("repository status updates", () => {
       });
 
       const specRaw = await readFile(spec.filePath, "utf8");
-      const taskRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-002-deterministic-resume.md"), "utf8");
+      const taskRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-002-create-or-import-the-first-real-project-spec.md"), "utf8");
 
       expect(spec.id).toBe("SPEC-002");
       expect(spec.filePath.endsWith("SPEC-002-add-structured-current-state-updates.md")).toBe(true);
@@ -137,7 +153,7 @@ describe("repository status updates", () => {
       });
 
       const taskRaw = await readFile(task.filePath, "utf8");
-      const specRaw = await readFile(join(rootDir, "docs/spm/specs/SPEC-001-deterministic-local-first-core.md"), "utf8");
+      const specRaw = await readFile(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md"), "utf8");
 
       expect(task.id).toBe("TASK-004");
       expect(task.filePath.endsWith("TASK-004-create-spec-docs-from-the-cli.md")).toBe(true);
@@ -146,6 +162,80 @@ describe("repository status updates", () => {
       expect(taskRaw).toContain("created_at = ");
       expect(taskRaw).toContain("# Scope");
       expect(specRaw).toContain('task_ids = ["TASK-001", "TASK-002", "TASK-003", "TASK-004"]');
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("serializes concurrent task creation so ids stay unique", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const created = await Promise.all([
+        createTask(rootDir, {
+          title: "Parallel task one",
+          summary: "First concurrent task.",
+          specIds: ["SPEC-001"],
+        }),
+        createTask(rootDir, {
+          title: "Parallel task two",
+          summary: "Second concurrent task.",
+          specIds: ["SPEC-001"],
+        }),
+        createTask(rootDir, {
+          title: "Parallel task three",
+          summary: "Third concurrent task.",
+          specIds: ["SPEC-001"],
+        }),
+      ]);
+
+      const ids = created.map((task) => task.id).sort();
+      const specRaw = await readFile(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md"), "utf8");
+
+      expect(ids).toEqual(["TASK-004", "TASK-005", "TASK-006"]);
+      expect(new Set(ids).size).toBe(3);
+      expect(specRaw).toContain('"TASK-004"');
+      expect(specRaw).toContain('"TASK-005"');
+      expect(specRaw).toContain('"TASK-006"');
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("serializes concurrent spec creation so ids stay unique", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const created = await Promise.all([
+        createSpec(rootDir, {
+          title: "Parallel spec one",
+          summary: "First concurrent spec.",
+          taskIds: ["TASK-001"],
+        }),
+        createSpec(rootDir, {
+          title: "Parallel spec two",
+          summary: "Second concurrent spec.",
+          taskIds: ["TASK-001"],
+        }),
+        createSpec(rootDir, {
+          title: "Parallel spec three",
+          summary: "Third concurrent spec.",
+          taskIds: ["TASK-001"],
+        }),
+      ]);
+
+      const ids = created.map((spec) => spec.id).sort();
+      const taskRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md"), "utf8");
+
+      expect(ids).toEqual(["SPEC-002", "SPEC-003", "SPEC-004"]);
+      expect(new Set(ids).size).toBe(3);
+      expect(taskRaw).toContain('"SPEC-002"');
+      expect(taskRaw).toContain('"SPEC-003"');
+      expect(taskRaw).toContain('"SPEC-004"');
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }
@@ -187,8 +277,69 @@ describe("repository status updates", () => {
     try {
       await initializeProject(rootDir);
 
-      const seedRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-bootstrap-cli.md"), "utf8");
+      const seedRaw = await readFile(join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md"), "utf8");
       expect(seedRaw).toContain("created_at = ");
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("writes the current CLI version into the project config during init", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+
+      const configRaw = await readFile(join(rootDir, ".specpm/config.toml"), "utf8");
+      expect(configRaw).toContain(`tool_version = "${CLI_VERSION}"`);
+      expect(configRaw).toContain("[memory_scopes.session]");
+      expect(configRaw).toContain('write_policy = "read-only"');
+      expect(configRaw).toContain("[nexus]");
+      expect(configRaw).toContain('enabled = false');
+      expect(configRaw).toContain('root_agents_mode = "reference-only"');
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("does not reseed onboarding specs and tasks into an already adopted repo", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      await createSpec(rootDir, {
+        title: "Real project spec",
+        summary: "A project-specific spec should prevent reseeding scaffold.",
+      });
+
+      await initializeProject(rootDir);
+
+      expect(await Bun.file(join(rootDir, "docs/spm/specs/SPEC-001-adopt-spec-embryo-memory-for-this-repository.md")).exists()).toBe(true);
+      expect(await Bun.file(join(rootDir, "docs/spm/specs/SPEC-003-adopt-spec-embryo-memory-for-this-repository.md")).exists()).toBe(false);
+      expect(await Bun.file(join(rootDir, "docs/spm/tasks/TASK-005-inventory-the-real-project-direction-and-existing-docs.md")).exists()).toBe(false);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
+
+  test("preserves leading spaces in git short status output", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-repository-"));
+
+    try {
+      await initializeProject(rootDir);
+      runGit(rootDir, ["init"]);
+      runGit(rootDir, ["config", "user.name", "Spec Embryo Test"]);
+      runGit(rootDir, ["config", "user.email", "spm@example.test"]);
+      runGit(rootDir, ["add", "."]);
+      runGit(rootDir, ["commit", "-m", "initial"]);
+
+      const currentFile = join(rootDir, "docs/spm/current.md");
+      const raw = await readFile(currentFile, "utf8");
+      await writeFile(currentFile, `${raw}\ntracked change\n`, "utf8");
+
+      const context = await loadProjectContext(rootDir);
+
+      expect(context.git.shortStatus).toContain(" M docs/spm/current.md");
     } finally {
       await rm(rootDir, { recursive: true, force: true });
     }

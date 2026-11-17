@@ -1,0 +1,99 @@
+{
+  "scope": "Directed group opener restoration plus persistent announcement seam only. No full matrix rerun; background filter is real GET applying Spec membership, not statusSpec mode.",
+  "firstThree": [
+    {
+      "name": "Connected group opener restores its exact canonical anchor and trace",
+      "pass": true
+    },
+    {
+      "name": "Virtualized group opener materializes and focuses its own header",
+      "pass": true
+    },
+    {
+      "name": "Collapsed group remains collapsed and restores its anchor",
+      "pass": true
+    }
+  ],
+  "desktopMissing": {
+    "phase": "group-focus",
+    "capturedAt": "2026-11-16T15:10:29.489Z",
+    "checks": [
+      {
+        "name": "Filtered-out group focuses first available task with a truthful announcement",
+        "pass": true
+      },
+      {
+        "name": "Announcement status is unique, connected and accessible after close",
+        "pass": true
+      }
+    ],
+    "lastState": {
+      "active": "<a class=\"task-id svelte-km6ejv\" data-sveltekit-preload-data=\"off\" data-sveltekit-preload-code=\"off\" href=\"/tasks/TASK-00009\">TASK-00009</a>",
+      "status": [
+        {
+          "text": "Actualizado 12:10:31 PM",
+          "blocked": false
+        },
+        {
+          "text": "The inspected group is no longer visible. Focus moved to the first available timeline task.",
+          "blocked": false
+        },
+        {
+          "text": "",
+          "blocked": false
+        }
+      ],
+      "URL": "http://127.0.0.1:5312/timeline?pageSize=100&timeline_mode=all&selected_task=TASK-00001&spec=SPEC-00001&window=&page=1&scope=unarchived"
+    }
+  },
+  "modalMissing": {
+    "phase": "group-focus",
+    "capturedAt": "2026-11-16T15:11:47.510Z",
+    "checks": [
+      {
+        "name": "Filtered-out group focuses first available task with a truthful announcement",
+        "pass": true
+      },
+      {
+        "name": "Announcement status is unique, connected and accessible after close",
+        "pass": true
+      },
+      {
+        "name": "Modal inert cleanup precedes the observed fallback publication",
+        "pass": true
+      }
+    ],
+    "modalStatusBefore": {
+      "blocked": true
+    },
+    "lastState": {
+      "active": "<a class=\"task-id svelte-km6ejv\" data-sveltekit-preload-data=\"off\" data-sveltekit-preload-code=\"off\" href=\"/tasks/TASK-00009\">TASK-00009</a>",
+      "status": [
+        {
+          "text": "Actualizado 12:11:48 PM",
+          "blocked": false
+        },
+        {
+          "text": "The inspected group is no longer visible. Focus moved to the first available timeline task.",
+          "blocked": false
+        },
+        {
+          "text": "",
+          "blocked": false
+        }
+      ],
+      "URL": "http://127.0.0.1:5312/timeline?pageSize=100&timeline_mode=all&selected_task=TASK-00001&spec=SPEC-00001&window=&page=1&scope=unarchived"
+    },
+    "modalPublications": [
+      {
+        "text": "The inspected group is no longer visible. Focus moved to the first available timeline task.",
+        "blocked": false
+      }
+    ]
+  },
+  "supersededHarness": [
+    "Initial Active only assumption was invalid: mode filters task lifecycle, not Spec status.",
+    "Native summary and checkbox-label activation used after initial locator setup failures; no force click or product change to suit selectors."
+  ],
+  "allRequiredCasesPass": true
+}

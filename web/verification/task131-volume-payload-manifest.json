@@ -1,0 +1,36 @@
+{
+  "sourceRoot": "/private/tmp/spm-resumed-payload",
+  "files": [
+    {
+      "path": "run.ts",
+      "bytes": 5975,
+      "sha256": "646eedb1329211cd2cb9f3ef78d711966a45e1c3b099dfad910aa456f4488041",
+      "durablePath": "web/verification/task131-volume-payload-run.ts"
+    },
+    {
+      "path": "report.json",
+      "bytes": 6658,
+      "sha256": "61d29a40c0e566f45c9553ee419c9bad3d8abd8ca6f900d5ef99747e6d6ac334",
+      "durablePath": "web/verification/task131-volume-payload-report.json"
+    },
+    {
+      "path": "server.log",
+      "bytes": 246,
+      "sha256": "5992f60f4e3d3963ac7e112760c7b920035a84c5d2b5e092d3c9b435153ce329",
+      "durablePath": "web/verification/task131-volume-payload-server.log"
+    },
+    {
+      "path": "tasks.json",
+      "bytes": 37116,
+      "sha256": "df85d81221afde2b67c0b0ff881fadbb68c924a178c92824184218f86e3b74a1",
+      "durablePath": "web/verification/task131-volume-payload-tasks.json"
+    },
+    {
+      "path": "specs.json",
+      "bytes": 35629,
+      "sha256": "12767037b3438f5b1bab93693a81e15c7ca39fe0344a3cabf320bf2543459853",
+      "durablePath": "web/verification/task131-volume-payload-specs.json"
+    }
+  ],
+  "scope": "Two decoded public responses on registered volume corpus; no latency acceptance."
+}

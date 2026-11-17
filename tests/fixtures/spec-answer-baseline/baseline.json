@@ -1,0 +1,6 @@
+{
+  "commit": "bf542e101a2b998f0d6a3484f56fed19a86cd3fd",
+  "questionsSourceSha256": "f74bc55e9c5988de80fdb80919444947daad933585b914616f194e93468c3095",
+  "serializerFunctionSourceSha256": "0e592b78628435b0b0ce21ac4b8f71c4fb3f3236739a72a731b22815ad2fddd1",
+  "adaptation": "serializer imports and export visibility only; questions unchanged"
+}

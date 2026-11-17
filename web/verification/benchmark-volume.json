@@ -1,0 +1,12 @@
+{
+  "dataset": "volume",
+  "failed": true,
+  "attemptedSample": 1,
+  "completedSamples": 0,
+  "timeoutMs": 10000,
+  "exitCode": 143,
+  "error": "",
+  "runtime": "1.3.9",
+  "os": "darwin 25.2.0",
+  "cpu": "Apple M1 Pro"
+}

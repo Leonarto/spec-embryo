@@ -1,0 +1,31 @@
+{
+  "phase": "controls",
+  "capturedAt": "2026-11-15T21:34:00.351Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Pointer width shares clamped explicit sizing",
+      "pass": true,
+      "detail": {
+        "before": 800,
+        "after": 717
+      }
+    },
+    {
+      "name": "Hidden focused column maps to nearest visible key",
+      "pass": true
+    },
+    {
+      "name": "Sort panel applies equivalent primary and secondary keys",
+      "pass": true
+    },
+    {
+      "name": "Sort panel removes secondary key",
+      "pass": true
+    },
+    {
+      "name": "Middle click preserves genuine canonical new-tab navigation",
+      "pass": true
+    }
+  ]
+}

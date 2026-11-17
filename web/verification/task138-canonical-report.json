@@ -1,0 +1,36 @@
+{
+  "phase": "canonical",
+  "capturedAt": "2026-11-16T00:25:54.439Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Canonical SSR clamp retains unrelated parameters/hash",
+      "pass": true
+    },
+    {
+      "name": "Canonical relation cardinality bounded",
+      "pass": true
+    },
+    {
+      "name": "Canonical page keeps question draft and document DOM during relation request",
+      "pass": true
+    },
+    {
+      "name": "Revision conflict retains previous range and answer draft",
+      "pass": true
+    },
+    {
+      "name": "Explicit whole refresh accepts all requested windows and preserves draft",
+      "pass": true
+    },
+    {
+      "name": "JS-enabled ordinary POST error renders through v2 loader",
+      "pass": true
+    },
+    {
+      "name": "JS-enabled canonical POST saves and retains continuation evaluation",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

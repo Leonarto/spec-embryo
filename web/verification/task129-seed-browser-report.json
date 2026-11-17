@@ -1,0 +1,45 @@
+{
+  "phase": "real-loader-seed-race-and-remount",
+  "pass": true,
+  "checks": [
+    {
+      "name": "Unfenced SSR baseline is editable",
+      "pass": true
+    },
+    {
+      "name": "The pending real loader captured pre-write revision",
+      "pass": true
+    },
+    {
+      "name": "Confirmed outcome B is visible before releasing loader A",
+      "pass": true
+    },
+    {
+      "name": "Late loader A never flashes old questions or resets the owner",
+      "pass": true
+    },
+    {
+      "name": "Late loader A is not classified as an external version",
+      "pass": true
+    },
+    {
+      "name": "Canonical→inspector remount rejects even a matching fenced SSR seed",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "Fenced canonical initial render publishes no prop fallback",
+      "pass": true
+    },
+    {
+      "name": "Only the controlled remount read supplies current questions",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "Real new document may adopt fresh SSR without duplicate fetch",
+      "pass": true,
+      "detail": 0
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "base": "/private/tmp/spm-multirepo-smoke-YV1P1i",
+  "registry": "/private/tmp/spm-multirepo-smoke-YV1P1i/registry.json",
+  "projects": [
+    {
+      "label": "Launch",
+      "root": "/private/tmp/spm-multirepo-smoke-YV1P1i/launch",
+      "specId": "SPEC-002",
+      "specPath": "/private/tmp/spm-multirepo-smoke-YV1P1i/launch/docs/spm/specs/SPEC-002-launch-shared-identity-specimen.md",
+      "taskId": "TASK-004"
+    },
+    {
+      "label": "Registered",
+      "root": "/private/tmp/spm-multirepo-smoke-YV1P1i/registered",
+      "specId": "SPEC-002",
+      "specPath": "/private/tmp/spm-multirepo-smoke-YV1P1i/registered/docs/spm/specs/SPEC-002-registered-shared-identity-specimen.md",
+      "taskId": "TASK-004"
+    },
+    {
+      "label": "Browser",
+      "root": "/private/tmp/spm-multirepo-smoke-YV1P1i/browser",
+      "specId": "SPEC-002",
+      "specPath": "/private/tmp/spm-multirepo-smoke-YV1P1i/browser/docs/spm/specs/SPEC-002-browser-shared-identity-specimen.md",
+      "taskId": "TASK-004"
+    }
+  ]
+}

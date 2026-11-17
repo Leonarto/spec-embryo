@@ -1,0 +1,191 @@
+{
+  "commit": "task141-isolated-v5",
+  "sourceRoot": "/private/tmp/spm-ui-runtime-sol",
+  "algorithm": "Unique static-import JS file closure; gzip level9, lazy imports excluded",
+  "roots": [
+    "entry/app",
+    "entry/start",
+    "nodes/0",
+    "nodes/1",
+    "nodes/7"
+  ],
+  "files": [
+    {
+      "file": "_app/immutable/chunks/0W6DPVxv.js",
+      "bytes": 489,
+      "gzipBytes": 350,
+      "sha256": "9e949aed45215db40e501dee1b7485414c38cef3077885afd5e1f3ab317d23fa"
+    },
+    {
+      "file": "_app/immutable/chunks/B7CrVkHS.js",
+      "bytes": 39,
+      "gzipBytes": 59,
+      "sha256": "7327d2f7c04ea7967288d38de9c712ae4105200ce191c66dbd2b6a286616c8b5"
+    },
+    {
+      "file": "_app/immutable/chunks/BBZO0ESO.js",
+      "bytes": 11539,
+      "gzipBytes": 4797,
+      "sha256": "23b8fef82fa6506437129a56c965ca916e387332054262a4b79558d4fd7ddc2f"
+    },
+    {
+      "file": "_app/immutable/chunks/Bn6vGo28.js",
+      "bytes": 5439,
+      "gzipBytes": 2061,
+      "sha256": "62c61f843d561b87f96caf94e5fa9ad744071db00865d589084b78b491861da6"
+    },
+    {
+      "file": "_app/immutable/chunks/BVua2Jm8.js",
+      "bytes": 54841,
+      "gzipBytes": 20679,
+      "sha256": "5ccac53cc747508e11872d577568563e133d5046564deb930e4c7695e66f8900"
+    },
+    {
+      "file": "_app/immutable/chunks/CbUDssf9.js",
+      "bytes": 1208,
+      "gzipBytes": 688,
+      "sha256": "2f8a57aecfda9c30a9e1e5b32d55c33dc107941c5a3c87a003017d6eccc0847a"
+    },
+    {
+      "file": "_app/immutable/chunks/CmveZCQR.js",
+      "bytes": 33213,
+      "gzipBytes": 12633,
+      "sha256": "01a76d88c2783a1ba69d8bc8ebae0fd2e5af6df21c6381f527de2db43d84f04d"
+    },
+    {
+      "file": "_app/immutable/chunks/CO0zNEc2.js",
+      "bytes": 2478,
+      "gzipBytes": 1066,
+      "sha256": "b5e97b33ca69b66c2651552ad66e51365361854332338a06d66783e162674119"
+    },
+    {
+      "file": "_app/immutable/chunks/cW9sgAQE2.js",
+      "bytes": 12666,
+      "gzipBytes": 4298,
+      "sha256": "16d1021a5bd797f6cf18e376f8a4796f73bf22b0b8f80f6bfeb5e1a9234f9744"
+    },
+    {
+      "file": "_app/immutable/chunks/CYHg-7JA.js",
+      "bytes": 467,
+      "gzipBytes": 348,
+      "sha256": "3794a1d3898ff622bdca7114e0269524a7b6d5572bdc1b4477af97a546bd6849"
+    },
+    {
+      "file": "_app/immutable/chunks/D2CZe0Zc.js",
+      "bytes": 765,
+      "gzipBytes": 335,
+      "sha256": "e9b6867d238fd54483ff8e3c62605ccc3c2f7cf5853250489cd861ddda4e2172"
+    },
+    {
+      "file": "_app/immutable/chunks/D5yjmpzV.js",
+      "bytes": 596,
+      "gzipBytes": 399,
+      "sha256": "65ffb46c0c8192ca8b86738cdac8b71582abad66a61a8845de8a75af038d3c4c"
+    },
+    {
+      "file": "_app/immutable/chunks/D9FQP20W.js",
+      "bytes": 65,
+      "gzipBytes": 80,
+      "sha256": "0214edcff77242079f540507a53803aa22d857b6ad673e60e39748b6c7aa08c1"
+    },
+    {
+      "file": "_app/immutable/chunks/Dene2yxT.js",
+      "bytes": 874,
+      "gzipBytes": 488,
+      "sha256": "57e78af8bc0e1675c7148a1eec16237769dca26663a2e1a2924fa087f123349f"
+    },
+    {
+      "file": "_app/immutable/chunks/DgwDlVA7.js",
+      "bytes": 16897,
+      "gzipBytes": 5952,
+      "sha256": "ee6f7211652f38c2b09b7ab1eaed7064389240e6fb688622a21975b2abe1604f"
+    },
+    {
+      "file": "_app/immutable/chunks/Dnub1hn5.js",
+      "bytes": 539,
+      "gzipBytes": 381,
+      "sha256": "57a8cf244caebcabb41b8b98ed74d7ffe8379702a62cca8d818e463bc9aeb91e"
+    },
+    {
+      "file": "_app/immutable/chunks/DUqqe1V-.js",
+      "bytes": 607,
+      "gzipBytes": 381,
+      "sha256": "6c4b939ea7d4e00410785347a1986f6ecf24190ed91e108fe02349e6cec4518a"
+    },
+    {
+      "file": "_app/immutable/chunks/DUx54oNv2.js",
+      "bytes": 24556,
+      "gzipBytes": 8585,
+      "sha256": "31a9cd40db17d05dbc6d6199d2338e2dfdebd1cd564b7f09d78fb6ac5a540bb5"
+    },
+    {
+      "file": "_app/immutable/chunks/DxU900nq.js",
+      "bytes": 12411,
+      "gzipBytes": 3898,
+      "sha256": "0bf1d803dfa7b86a7676fa8596d2ba4ed84aa9de345bbcafb248acbb47dc66d3"
+    },
+    {
+      "file": "_app/immutable/chunks/Dzsa7V8-.js",
+      "bytes": 495,
+      "gzipBytes": 270,
+      "sha256": "42ca2dc56eb544117ed5a4d037134174f5b231be52acf04287ef7d1ae7571c18"
+    },
+    {
+      "file": "_app/immutable/chunks/qeQalW4A.js",
+      "bytes": 1369,
+      "gzipBytes": 790,
+      "sha256": "bdd012827599d456f5d00ffe26a41e3db8b9dcb9c1bc0b3dc65cff2982908124"
+    },
+    {
+      "file": "_app/immutable/chunks/vGIAPmg9.js",
+      "bytes": 395,
+      "gzipBytes": 261,
+      "sha256": "c926d14e0f08575dfe5a9e32fa3a7d1e0853f06f150d618eb573141001076bc9"
+    },
+    {
+      "file": "_app/immutable/chunks/X6z7SIMN.js",
+      "bytes": 161,
+      "gzipBytes": 156,
+      "sha256": "ec270e3f7a3717fa9b4b6393ea8da8b1f2e0bb8fe497b44318d26bc815d929e3"
+    },
+    {
+      "file": "_app/immutable/chunks/xo0AzFoc.js",
+      "bytes": 22,
+      "gzipBytes": 42,
+      "sha256": "a8b52bb80779188ab0d3e7b4e8b71925cced8b0e6aefee024fa1b7a6d93f8de3"
+    },
+    {
+      "file": "_app/immutable/entry/app.Bt892apE.js",
+      "bytes": 5023,
+      "gzipBytes": 2011,
+      "sha256": "479170ccd806317efaea9dd5f6e39c551b3b29903e0cc00ca3ccd5c722bb429f"
+    },
+    {
+      "file": "_app/immutable/entry/start.Dchp2rtt.js",
+      "bytes": 82,
+      "gzipBytes": 92,
+      "sha256": "264b03b52a87351ff0637bda6940a02e0afece8224271ed50a58c9bba67be116"
+    },
+    {
+      "file": "_app/immutable/nodes/0.CHWgaP52.js",
+      "bytes": 28451,
+      "gzipBytes": 9787,
+      "sha256": "167bf536476770774a3600ce8100c71262e269006df7af78dcc5875ffa47a0b6"
+    },
+    {
+      "file": "_app/immutable/nodes/1.MXPsSjX6.js",
+      "bytes": 417,
+      "gzipBytes": 288,
+      "sha256": "0681e6aed9953f4f6274f393cb29b22f0a27423e09bd4d8a9fdef404f37c379f"
+    },
+    {
+      "file": "_app/immutable/nodes/7.BsI_0ynO.js",
+      "bytes": 22087,
+      "gzipBytes": 7959,
+      "sha256": "aaf76a726c1fab34e70250998d8220e76dc64914a2aa73c6d6c2cecdaf130c68"
+    }
+  ],
+  "totalGzipBytes": 89134,
+  "mermaid": [],
+  "pass": true
+}

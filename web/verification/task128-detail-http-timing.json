@@ -1,0 +1,360 @@
+{
+  "capturedAt": "2026-11-15T22:57:57.911Z",
+  "runtime": "1.3.9",
+  "origin": "http://127.0.0.1:5188",
+  "warmups": 5,
+  "sampleCount": 20,
+  "scope": "Serial HTTP+download+JSON parse only. First observation is not OS-cold p95; no browser render claim.",
+  "results": [
+    {
+      "id": "TASK-00001",
+      "firstObservation": {
+        "headersMs": 803.826833,
+        "downloadMs": 2.4342920000000277,
+        "jsonParseMs": 10.736749999999915,
+        "totalMs": 816.9978749999999,
+        "bytes": 3496604,
+        "relations": 9999
+      },
+      "medianMs": 409.55620799999997,
+      "p95Ms": 505.87604099999953,
+      "samples": [
+        {
+          "headersMs": 441.6884579999996,
+          "downloadMs": 3.5807920000002014,
+          "jsonParseMs": 8.879667000000154,
+          "totalMs": 454.148917,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 400.37924999999996,
+          "downloadMs": 1.8760830000001079,
+          "jsonParseMs": 9.649499999999989,
+          "totalMs": 411.90483300000005,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 386.39850000000024,
+          "downloadMs": 1.8998329999999441,
+          "jsonParseMs": 8.74633300000005,
+          "totalMs": 397.04466600000023,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 381.0864590000001,
+          "downloadMs": 1.6292499999999563,
+          "jsonParseMs": 8.758165999999619,
+          "totalMs": 391.4738749999997,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 435.1756660000001,
+          "downloadMs": 2.212749999999687,
+          "jsonParseMs": 9.541000000000167,
+          "totalMs": 446.92941599999995,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 388.5004579999995,
+          "downloadMs": 2.553458999999748,
+          "jsonParseMs": 8.881083000000217,
+          "totalMs": 399.9349999999995,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 370.77891700000055,
+          "downloadMs": 1.8113750000002256,
+          "jsonParseMs": 8.705207999999402,
+          "totalMs": 381.2955000000002,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 384.94433300000037,
+          "downloadMs": 1.783499999999549,
+          "jsonParseMs": 10.166207999999642,
+          "totalMs": 396.89404099999956,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 398.4784580000005,
+          "downloadMs": 2.3487499999991996,
+          "jsonParseMs": 8.72900000000027,
+          "totalMs": 409.55620799999997,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 381.47970799999985,
+          "downloadMs": 1.482125000000451,
+          "jsonParseMs": 8.751166999999441,
+          "totalMs": 391.71299999999974,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 424.6876659999998,
+          "downloadMs": 2.4454589999995733,
+          "jsonParseMs": 9.472583000000668,
+          "totalMs": 436.60570800000005,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 386.16945899999973,
+          "downloadMs": 1.7343330000003334,
+          "jsonParseMs": 8.768082999999933,
+          "totalMs": 396.671875,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 404.0803339999993,
+          "downloadMs": 1.7943750000004002,
+          "jsonParseMs": 9.068041000000449,
+          "totalMs": 414.94275000000016,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 373.9440829999994,
+          "downloadMs": 1.5206670000006852,
+          "jsonParseMs": 9.110457999999198,
+          "totalMs": 384.5752079999993,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 380.5544170000012,
+          "downloadMs": 1.8695829999996931,
+          "jsonParseMs": 8.7484170000007,
+          "totalMs": 391.1724170000016,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 433.52800000000025,
+          "downloadMs": 1.7501250000004802,
+          "jsonParseMs": 8.905499999998938,
+          "totalMs": 444.18362499999967,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 494.3995410000007,
+          "downloadMs": 2.0354169999991427,
+          "jsonParseMs": 9.441082999999708,
+          "totalMs": 505.87604099999953,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 559.5289580000008,
+          "downloadMs": 1.6234170000006998,
+          "jsonParseMs": 9.807791999999608,
+          "totalMs": 570.9601670000011,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 468.91470800000025,
+          "downloadMs": 1.8571670000001177,
+          "jsonParseMs": 8.776790999998411,
+          "totalMs": 479.5486659999988,
+          "bytes": 3496604,
+          "relations": 9999
+        },
+        {
+          "headersMs": 381.67270800000006,
+          "downloadMs": 1.7532920000012382,
+          "jsonParseMs": 9.052707999999257,
+          "totalMs": 392.47870800000055,
+          "bytes": 3496604,
+          "relations": 9999
+        }
+      ]
+    },
+    {
+      "id": "TASK-09999",
+      "firstObservation": {
+        "headersMs": 410.43987500000003,
+        "downloadMs": 0.031124999999519787,
+        "jsonParseMs": 0.04254100000071048,
+        "totalMs": 410.51354100000026,
+        "bytes": 1824,
+        "relations": 0
+      },
+      "medianMs": 381.0621250000004,
+      "p95Ms": 494.51358300000174,
+      "samples": [
+        {
+          "headersMs": 390.2257919999993,
+          "downloadMs": 0.010625000000800355,
+          "jsonParseMs": 0.03879099999903701,
+          "totalMs": 390.2752079999991,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 356.9654589999991,
+          "downloadMs": 0.009041000001161592,
+          "jsonParseMs": 0.04208399999879475,
+          "totalMs": 357.01658399999906,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 409.91420800000014,
+          "downloadMs": 0.009833000000071479,
+          "jsonParseMs": 0.037542000000030384,
+          "totalMs": 409.96158300000025,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 381.1510420000013,
+          "downloadMs": 0.011832999998659943,
+          "jsonParseMs": 0.03950000000077125,
+          "totalMs": 381.20237500000076,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 362.44237500000054,
+          "downloadMs": 0.010249999999359716,
+          "jsonParseMs": 0.03858299999956216,
+          "totalMs": 362.49120799999946,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 376.29170799999883,
+          "downloadMs": 0.010292000000845292,
+          "jsonParseMs": 0.038333000000420725,
+          "totalMs": 376.3403330000001,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 371.6400420000009,
+          "downloadMs": 0.008957999998528976,
+          "jsonParseMs": 0.054459000000861124,
+          "totalMs": 371.7034590000003,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 494.4753330000003,
+          "downloadMs": 0.007541999999375548,
+          "jsonParseMs": 0.03070800000205054,
+          "totalMs": 494.51358300000174,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 380.99391599999944,
+          "downloadMs": 0.016250000000582077,
+          "jsonParseMs": 0.05195900000035181,
+          "totalMs": 381.0621250000004,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 420.4657079999997,
+          "downloadMs": 0.009583000002749031,
+          "jsonParseMs": 0.03633399999671383,
+          "totalMs": 420.5116249999992,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 362.93816700000025,
+          "downloadMs": 0.01583299999765586,
+          "jsonParseMs": 0.043207999999140156,
+          "totalMs": 362.99720799999704,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 358.2752500000024,
+          "downloadMs": 0.01058299999931478,
+          "jsonParseMs": 0.03825000000142609,
+          "totalMs": 358.32408300000316,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 422.40758300000016,
+          "downloadMs": 0.01095799999893643,
+          "jsonParseMs": 0.036791999998968095,
+          "totalMs": 422.45533299999806,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 342.51800000000003,
+          "downloadMs": 0.009167000000161352,
+          "jsonParseMs": 0.03583299999809242,
+          "totalMs": 342.5629999999983,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 350.0697910000017,
+          "downloadMs": 0.010708999998314539,
+          "jsonParseMs": 0.03766600000017206,
+          "totalMs": 350.1181660000002,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 359.52287499999875,
+          "downloadMs": 0.012042000002111308,
+          "jsonParseMs": 0.03612499999871943,
+          "totalMs": 359.5710419999996,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 369.7657500000023,
+          "downloadMs": 0.010167000000365078,
+          "jsonParseMs": 0.04054099999848404,
+          "totalMs": 369.81645800000115,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 440.0787500000006,
+          "downloadMs": 0.010833000000275206,
+          "jsonParseMs": 0.03783299999849987,
+          "totalMs": 440.12741599999936,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 446.5244160000002,
+          "downloadMs": 0.022417000000132248,
+          "jsonParseMs": 0.055833000002166955,
+          "totalMs": 446.6026660000025,
+          "bytes": 1824,
+          "relations": 0
+        },
+        {
+          "headersMs": 503.14958300000217,
+          "downloadMs": 0.010708999998314539,
+          "jsonParseMs": 0.03862500000104774,
+          "totalMs": 503.19891700000153,
+          "bytes": 1824,
+          "relations": 0
+        }
+      ]
+    }
+  ]
+}

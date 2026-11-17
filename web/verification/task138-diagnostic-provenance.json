@@ -1,0 +1,69 @@
+{
+  "scope": "COPY-only instrumentation; never apply this patch to shared product source. Requestcount mode then spans mode; sourcecopiedfrom138140f902+approvedmanifest.",
+  "sourceRoot": "/private/tmp/spm-task138-validation",
+  "instrumentedRoot": "/private/tmp/spm-task138-diagnostic",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 5297,
+    "strictPort": true
+  },
+  "identityEvidence": [
+    "Synthetic project title spm-detail-relations-WCXVAv",
+    "x-spm-diagnostic-request response IDs match ALS records",
+    "CountsPID20661 / spansPID21901 Nodev25.6.0",
+    "12202 parsed documents and owned fixture paths in spans"
+  ],
+  "files": [
+    {
+      "path": "src/diagnostic.ts",
+      "beforeSha256": null,
+      "instrumentedSha256": "ef3d587a6b0336cab84dcaff483f64b5df18d55cb2b2cfafe0167f45957cf875"
+    },
+    {
+      "path": "src/repository.ts",
+      "beforeSha256": "43acf841fe2b0c7d60cefa05c83eb347b62d74af9ecff00360eccf6ba1c43880",
+      "instrumentedSha256": "09bfc4b37c928eb100a2b13cefd38331afea87d3402618b8755d9807f7c0640a"
+    },
+    {
+      "path": "src/storage.ts",
+      "beforeSha256": "eab6460a20779e8c5f6165e5b573054ae7454317d943bc19fa55cd6f6d7a1a3e",
+      "instrumentedSha256": "66665c620a18c40f3efbb46083b1cf2115e3301ff4e399478a12133aec057bd9"
+    },
+    {
+      "path": "src/document-reader.ts",
+      "beforeSha256": "34c05d02b7c3d7196453781e2a4375bf6f26525d231fe7a5a86ad4620b9ade8d",
+      "instrumentedSha256": "baae72e48108a67e3f2978fdc60e0f5306aaefe125ad2588a5210eacb21b3b8e"
+    },
+    {
+      "path": "src/services/workspace.ts",
+      "beforeSha256": "3f07da04a8843dccd8b489a7c2dec329d7150712a22b7e8ce015ef1156374f10",
+      "instrumentedSha256": "f1295c08b1c244df5ff91cd7893d9c5e3ef7793633448e23ae93962fc18e1cb8"
+    },
+    {
+      "path": "src/services/workspace-detail.ts",
+      "beforeSha256": "2ca6ef8a076bdfa0c298add7810013b2af622431d99a117f090bfa8524b77743",
+      "instrumentedSha256": "8c574507ba39e193e3b0f231544e5049f818902ce4189905348246680faa7e46"
+    },
+    {
+      "path": "web/src/hooks.server.ts",
+      "beforeSha256": null,
+      "instrumentedSha256": "a124482cbd6f023aacc5b58acf1591cb456fc263580c0f3e5eb1d8e8ca3e0e8a"
+    },
+    {
+      "path": "web/src/routes/workspace-detail/+server.ts",
+      "beforeSha256": "862537a542e2b0bcebc78be5ff194fc6fbb33c8d8571a6a55b7845f4630126ee",
+      "instrumentedSha256": "396a9894d41c4724a2c8eb2360e0c6357191740394358b6d4e9bd16e71aa378f"
+    },
+    {
+      "path": "web/src/routes/workspace-relations/+server.ts",
+      "beforeSha256": "4bcce7ade5458c0e8b6aa8332cb9c409c2c20594e6f645eff325db6eb4eea57c",
+      "instrumentedSha256": "b47fd912761eef5cbfdad59c934d9a703dd1bb4c3ad9bcd6ddcaf155142cd336"
+    }
+  ],
+  "sourceUnchanged": true,
+  "scriptHashes": {
+    "web/scripts/detail-relations-diagnostic-network.mjs": "aaadc5a885ba8ba520ab704b2d92dcce1331b95c8abdbee55fb38740019cee67",
+    "web/scripts/detail-relations-diagnostic-http.mjs": "fec2ec86ddb733834ffa38142ed4d5b52e125b6bd24fd25b163270215cacd6f1",
+    "web/scripts/detail-relations-corpus.mjs": "902234b9d13d5b656d319bbb8570c54528b74804c671016cc49df0da0ca1a3f1"
+  }
+}

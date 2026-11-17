@@ -1,0 +1,25 @@
+{
+  "copyOnly": true,
+  "outcome": "not-promising-stop",
+  "noSharedProductChanges": true,
+  "baseCommit": "f8c51db82814d9599b8edca9ab417ec440b7da10",
+  "isolatedRoot": "/private/tmp/spm-task138-parse-reuse-zhfk0a5p",
+  "files": [
+    {
+      "path": "web/verification/task138-parse-reuse-correctness.json",
+      "sha256": "cc99d061917456e69fabdf1f13e80084f0721e0f40e898286f00dfc6d53a7e67"
+    },
+    {
+      "path": "web/verification/task138-parse-reuse-experiment.json",
+      "sha256": "a3f90e7f62013ea96c966e454aba1c3b688a9cc0128cc1066cc5f2cdaebcf34d"
+    },
+    {
+      "path": "web/verification/task138-parse-reuse-source.json",
+      "sha256": "8b7d0c16e2f77bd9b1865dea58274812df27a2bcdab84f42b437425bf0fdfebb"
+    },
+    {
+      "path": "web/verification/task138-parse-reuse-report.md",
+      "sha256": "60a2113c9f0b031cbeaf241f51ed3d3d92d045e1e92c31e60b2618fc782a3ec1"
+    }
+  ]
+}

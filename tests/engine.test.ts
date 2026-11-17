@@ -1,6 +1,12 @@
 import { describe, expect, test } from "bun:test";
 import type { ProjectContext } from "../src/domain.ts";
-import { buildResumeContext, deriveChangedItems, deriveStatusSnapshot } from "../src/engine.ts";
+import {
+  buildResumeContext,
+  deriveChangedItems,
+  deriveStatusSnapshot,
+  formatOmittedCountNote,
+  sliceWithOmittedCount,
+} from "../src/engine.ts";
 
 const context: ProjectContext = {
   rootDir: "/tmp/spec-embryo",
@@ -164,9 +170,79 @@ describe("engine", () => {
 
     const changedItems = deriveChangedItems(changedContext);
     expect(changedItems.map((item) => item.kind)).toEqual(["spec", "task", "current-state", "other"]);
+    expect(changedItems.map((item) => item.changeHint)).toEqual(["M", "M", "M", "??"]);
+    expect(changedItems.map((item) => item.statusCode)).toEqual(["M", "M", "M", "??"]);
     expect(changedItems[0]?.id).toBe("SPEC-001");
     expect(changedItems[1]?.id).toBe("TASK-002");
     expect(changedItems[2]?.kind).toBe("current-state");
+    expect(changedItems[3]?.path).toBe("README.md");
+  });
+
+  test("accepts tracked lines that already lost the leading status column and decodes quoted rename targets", () => {
+    const renamedContext: ProjectContext = {
+      ...context,
+      currentState: {
+        ...context.currentState,
+        filePath: "/tmp/spec-embryo/docs/spm/current state.md",
+      },
+      specs: [
+        {
+          ...context.specs[0]!,
+          title: "Foundation Renamed",
+          filePath: "/tmp/spec-embryo/docs/spm/specs/New Spec.md",
+        },
+      ],
+      git: {
+        ...context.git,
+        dirty: true,
+        shortStatus: [
+          "M docs/spm/current state.md",
+          'R  "docs/spm/specs/Old Spec.md" -> "docs/spm/specs/New Spec.md"',
+          '?? "notes with spaces.md"',
+        ],
+      },
+    };
+
+    const changedItems = deriveChangedItems(renamedContext);
+
+    expect(changedItems.map((item) => item.path)).toEqual([
+      "docs/spm/current state.md",
+      "docs/spm/specs/New Spec.md",
+      "notes with spaces.md",
+    ]);
+    expect(changedItems.map((item) => item.changeHint)).toEqual(["M", "R", "??"]);
+    expect(changedItems.map((item) => item.statusCode)).toEqual(["M", "R", "??"]);
+    expect(changedItems[0]?.kind).toBe("current-state");
+    expect(changedItems[1]?.id).toBe("SPEC-001");
+    expect(changedItems[2]?.kind).toBe("other");
+  });
+
+  test("preserves left-to-right precedence for mixed tracked status columns", () => {
+    const mixedStatusContext: ProjectContext = {
+      ...context,
+      git: {
+        ...context.git,
+        dirty: true,
+        shortStatus: ["MD docs/spm/current.md"],
+      },
+    };
+
+    const changedItems = deriveChangedItems(mixedStatusContext);
+
+    expect(changedItems).toHaveLength(1);
+    expect(changedItems[0]?.kind).toBe("current-state");
+    expect(changedItems[0]?.changeHint).toBe("M");
+    expect(changedItems[0]?.statusCode).toBe("MD");
+  });
+
+  test("shares omitted-count note formatting across truncated summary surfaces", () => {
+    const truncated = sliceWithOmittedCount(["a", "b", "c"], 2);
+
+    expect(truncated.visibleItems).toEqual(["a", "b"]);
+    expect(truncated.omittedCount).toBe(1);
+    expect(formatOmittedCountNote(truncated.omittedCount, "git change")).toBe("... and 1 more git change.");
+    expect(formatOmittedCountNote(2, "changed file")).toBe("... and 2 more changed files.");
+    expect(formatOmittedCountNote(0, "changed file")).toBeUndefined();
   });
 
   test("includes changed managed docs in next actions when available", () => {

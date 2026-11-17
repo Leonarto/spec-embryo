@@ -1,0 +1,24 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/spec-detail-actions.test.ts:
+(pass) spec detail actions > answers open questions from the spec detail action [145.00ms]
+
+tests/inspector.test.ts:
+(pass) inspector service and URL contracts > validates identities and separates inspector from list/trace request intention [4.33ms]
+(pass) inspector service and URL contracts > projects shared detail envelopes and preserves local found:false [0.71ms]
+(pass) inspector service and URL contracts > endpoint validates before IO and returns no-store 200/404/500 without list facade [4.57ms]
+(pass) inspector service and URL contracts > canonical missing GET throws404 while direct list inspector remains a local DTO [1.39ms]
+(pass) inspector service and URL contracts > preserves every unrelated parameter and modified identity activation [0.19ms]
+(pass) verified session entry ledger > Back closes only a proven immediate same-query predecessor [0.30ms]
+(pass) verified session entry ledger > unverified or forged markers/URLs never authorize Back [0.05ms]
+(pass) responsive inspector geometry > docks only with both viewport and real table minimum, keeping explicit width [0.28ms]
+(pass) owned detail transport > matching SSR seed avoids duplicate fetch and section work [6.54ms]
+(pass) owned detail transport > identity switch removes previous body immediately, aborts and rejects late success/error [12.45ms]
+(pass) owned detail transport > refresh failure retains same-identity detail and Retry accepts404 locally [0.45ms]
+(pass) owned detail transport > malformed/identity/status failures cannot commit, and timeout releases pending [14.88ms]
+(pass) owned detail transport > disposal/close invalidates late completion and focus uses visibility/staleness [17.55ms]
+
+ 14 pass
+ 0 fail
+ 97 expect() calls
+Ran 14 tests across 2 files. [606.00ms]

@@ -1,0 +1,8 @@
+{
+  "scope": "Local dry-run archive inventory only; isolated140f902+138+favicon source, ignore lifecycle scripts, no publish/network/install. Final combined integration remains separate.",
+  "faviconIncluded": true,
+  "path": "web/src/routes/favicon.ico/+server.ts",
+  "fileCount": 182,
+  "package": "@leonarto/spec-embryo",
+  "version": "0.3.1"
+}

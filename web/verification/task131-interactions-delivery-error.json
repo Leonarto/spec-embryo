@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "### Error\nError: File access denied: /private/tmp/spm-task131-interactions-smoke-browser-v1.mjs is outside allowed roots. Allowed roots: /Users/leonardodiazvidal/Documents/dev-projects/spec-pm/.playwright-mcp, /Users/leonardodiazvidal/Documents/dev-projects/spec-pm"
+    }
+  ],
+  "isError": true
+}

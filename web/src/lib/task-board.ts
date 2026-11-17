@@ -18,3 +18,15 @@ export function filterKanbanBySpecs(columns: DashboardKanbanColumn[], selectedSp
 export function countKanbanTasks(columns: DashboardKanbanColumn[]): number {
   return columns.reduce((total, column) => total + column.tasks.length, 0);
 }
+
+/** Presentation grouping happens after the shared service has sorted and paged. */
+export function groupTaskPage(tasks: DashboardTaskCard[]): DashboardKanbanColumn[] {
+  const columns: DashboardKanbanColumn[] = [
+    {id:"blocked",title:"Blocked",tasks:[]},{id:"todo",title:"Todo",tasks:[]},
+    {id:"in_progress",title:"In progress",tasks:[]},{id:"review",title:"Review",tasks:[]},
+    {id:"done",title:"Done / Cancelled",tasks:[]},
+  ];
+  const byId=new Map(columns.map(column=>[column.id,column]));
+  for(const task of tasks)byId.get(task.effectiveStatus==='cancelled'?'done':task.effectiveStatus)?.tasks.push(task);
+  return columns;
+}

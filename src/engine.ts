@@ -18,27 +18,227 @@ function unique<T>(items: T[]): T[] {
   return [...new Set(items)];
 }
 
-function parseGitStatusPath(line: string): string | undefined {
-  if (line.length < 4) {
+function decodeGitQuotedPath(value: string): string {
+  if (!(value.startsWith('"') && value.endsWith('"')) || value.length < 2) {
+    return value;
+  }
+
+  const inner = value.slice(1, -1);
+  return inner.replace(/\\([0-7]{3}|["\\abfnrtv])/g, (_match, token: string) => {
+    if (/^[0-7]{3}$/u.test(token)) {
+      return String.fromCharCode(Number.parseInt(token, 8));
+    }
+
+    switch (token) {
+      case '"':
+        return '"';
+      case "\\":
+        return "\\";
+      case "a":
+        return "\u0007";
+      case "b":
+        return "\b";
+      case "f":
+        return "\f";
+      case "n":
+        return "\n";
+      case "r":
+        return "\r";
+      case "t":
+        return "\t";
+      case "v":
+        return "\u000b";
+      default:
+        return token;
+    }
+  });
+}
+
+function splitRenamePath(rawPath: string): string[] {
+  let inQuotes = false;
+  let escaped = false;
+
+  for (let index = 0; index <= rawPath.length - 4; index += 1) {
+    const char = rawPath[index]!;
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+
+    if (inQuotes && char === "\\") {
+      escaped = true;
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (!inQuotes && rawPath.slice(index, index + 4) === " -> ") {
+      return [rawPath.slice(0, index), rawPath.slice(index + 4)];
+    }
+  }
+
+  return [rawPath];
+}
+
+function normalizeGitChangeHint(rawStatus: string): string {
+  const compact = rawStatus.trim();
+  if (compact === "??") {
+    return "??";
+  }
+
+  for (const char of rawStatus) {
+    if (char === " " || char === "?") {
+      continue;
+    }
+
+    return char;
+  }
+
+  return compact[0] || "M";
+}
+
+function compactGitStatusCode(rawStatus: string): string {
+  const compact = rawStatus.replace(/\s+/g, "");
+  return compact.length > 0 ? compact : rawStatus.trim() || "M";
+}
+
+function parseGitStatusRecord(line: string): { path: string; changeHint: string; statusCode: string } | undefined {
+  if (line.length < 2) {
     return undefined;
   }
 
-  const rawPath = line.slice(3).trim();
-  if (rawPath.length === 0) {
+  const rawStatus =
+    line.length >= 3 && line[2] === " "
+      ? line.slice(0, 2)
+      : line[1] === " "
+        ? line[0]!
+        : undefined;
+  const rawPath =
+    line.length >= 3 && line[2] === " "
+      ? line.slice(3).trim()
+      : line[1] === " "
+        ? line.slice(2).trim()
+        : undefined;
+
+  if (!rawPath || rawPath.length === 0) {
     return undefined;
   }
 
-  const renameParts = rawPath.split(" -> ");
-  return renameParts[renameParts.length - 1]?.trim() || undefined;
+  const renameParts = splitRenamePath(rawPath).map((part) => decodeGitQuotedPath(part.trim()));
+  const path = renameParts[renameParts.length - 1];
+  if (!path || !rawStatus) {
+    return undefined;
+  }
+
+  return {
+    path,
+    changeHint: normalizeGitChangeHint(rawStatus),
+    statusCode: compactGitStatusCode(rawStatus),
+  };
+}
+
+export function formatChangedItemSummary(item: ChangedItemSummary): string {
+  if (item.kind === "other") {
+    return `${item.changeHint} ${item.path}`;
+  }
+
+  const identity = item.id ? `${item.id}${item.title ? `: ${item.title}` : ""}` : item.path;
+  return `${item.changeHint} ${identity} (${item.path})`;
+}
+
+export function orderChangedItemsForHumanSummary(items: ChangedItemSummary[]): ChangedItemSummary[] {
+  const managed: ChangedItemSummary[] = [];
+  const unmanaged: ChangedItemSummary[] = [];
+
+  for (const item of items) {
+    if (item.kind === "other") {
+      unmanaged.push(item);
+    } else {
+      managed.push(item);
+    }
+  }
+
+  return [...managed, ...unmanaged];
+}
+
+export function sliceWithOmittedCount<T>(
+  items: T[],
+  limit = 10,
+): {
+  visibleItems: T[];
+  omittedCount: number;
+} {
+  const visibleItems = items.slice(0, limit);
+  return {
+    visibleItems,
+    omittedCount: Math.max(items.length - visibleItems.length, 0),
+  };
+}
+
+export function formatOmittedCountNote(
+  omittedCount: number,
+  singularNoun: string,
+  pluralNoun = `${singularNoun}s`,
+): string | undefined {
+  if (omittedCount <= 0) {
+    return undefined;
+  }
+
+  return `... and ${omittedCount} more ${omittedCount === 1 ? singularNoun : pluralNoun}.`;
+}
+
+export function humanChangedItemSummarySlice(
+  items: ChangedItemSummary[],
+  limit = 10,
+): {
+  visibleItems: ChangedItemSummary[];
+  omittedCount: number;
+} {
+  const orderedItems = orderChangedItemsForHumanSummary(items);
+  return sliceWithOmittedCount(orderedItems, limit);
 }
 
 export function buildTaskIndex(tasks: TaskDocument[]): Map<string, TaskDocument> {
   return new Map(tasks.map((task) => [task.id, task]));
 }
 
-export function summarizeTaskNode(task: TaskDocument, index: Map<string, TaskDocument>): TaskNodeSummary {
-  const unmetDependencies = task.dependsOn.filter((dependencyId) => index.get(dependencyId)?.status !== "done");
-  const downstreamCount = [...index.values()].filter((candidate) => candidate.dependsOn.includes(task.id)).length;
+export interface TaskAnalysisIndex {
+  byId: Map<string, TaskDocument>;
+  directDependents: Map<string, TaskDocument[]>;
+  directDependentCounts: Map<string, number>;
+  unmetDependencies: Map<string, string[]>;
+}
+
+/** Per-snapshot adjacency analysis; repeated dependency IDs count one dependent. */
+export function buildTaskAnalysisIndex(tasks: TaskDocument[]): TaskAnalysisIndex {
+  const byId = buildTaskIndex(tasks);
+  const directDependents = new Map<string, TaskDocument[]>();
+  const directDependentCounts = new Map<string, number>();
+  const unmetDependencies = new Map<string, string[]>();
+  for (const task of byId.values()) {
+    unmetDependencies.set(task.id, task.dependsOn.filter((id) => byId.get(id)?.status !== "done"));
+    for (const id of new Set(task.dependsOn)) {
+      const dependents = directDependents.get(id) ?? [];
+      dependents.push(task);
+      directDependents.set(id, dependents);
+      directDependentCounts.set(id, dependents.length);
+    }
+  }
+  return { byId, directDependents, directDependentCounts, unmetDependencies };
+}
+
+export function summarizeTaskNode(task: TaskDocument, index: Map<string, TaskDocument>, analysis?: TaskAnalysisIndex): TaskNodeSummary {
+  const compatible = analysis?.byId === index;
+  const unmetDependencies = compatible && index.get(task.id) === task
+    ? [...(analysis.unmetDependencies.get(task.id) ?? [])]
+    : task.dependsOn.filter((dependencyId) => index.get(dependencyId)?.status !== "done");
+  const downstreamCount = compatible
+    ? analysis.directDependentCounts.get(task.id) ?? 0
+    : [...index.values()].filter((candidate) => candidate.dependsOn.includes(task.id)).length;
 
   return {
     task,
@@ -65,37 +265,44 @@ export function deriveChangedItems(context: ProjectContext): ChangedItemSummary[
   const items: ChangedItemSummary[] = [];
 
   for (const line of context.git.shortStatus) {
-    const path = parseGitStatusPath(line);
-    if (!path || seen.has(path)) {
+    const record = parseGitStatusRecord(line);
+    if (!record || seen.has(record.path)) {
       continue;
     }
 
-    seen.add(path);
+    seen.add(record.path);
 
-    const spec = specByPath.get(path);
+    const spec = specByPath.get(record.path);
     if (spec) {
-      items.push({ kind: "spec", path, id: spec.id, title: spec.title });
+      items.push({ kind: "spec", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path, id: spec.id, title: spec.title });
       continue;
     }
 
-    const task = taskByPath.get(path);
+    const task = taskByPath.get(record.path);
     if (task) {
-      items.push({ kind: "task", path, id: task.id, title: task.title });
+      items.push({ kind: "task", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path, id: task.id, title: task.title });
       continue;
     }
 
-    if (path === currentStatePath) {
-      items.push({ kind: "current-state", path, id: context.currentState.id, title: context.currentState.title });
+    if (record.path === currentStatePath) {
+      items.push({
+        kind: "current-state",
+        changeHint: record.changeHint,
+        statusCode: record.statusCode,
+        path: record.path,
+        id: context.currentState.id,
+        title: context.currentState.title,
+      });
       continue;
     }
 
-    const handoff = handoffByPath.get(path);
+    const handoff = handoffByPath.get(record.path);
     if (handoff) {
-      items.push({ kind: "handoff", path, id: handoff.id, title: handoff.title });
+      items.push({ kind: "handoff", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path, id: handoff.id, title: handoff.title });
       continue;
     }
 
-    items.push({ kind: "other", path });
+    items.push({ kind: "other", changeHint: record.changeHint, statusCode: record.statusCode, path: record.path });
   }
 
   return items;
@@ -120,50 +327,58 @@ function deriveActiveSpecIds(specs: SpecDocument[], currentState: CurrentStateDo
 
 function computeCriticalPath(tasks: TaskDocument[], index: Map<string, TaskDocument>): TaskDocument[] {
   const unfinished = tasks.filter((task) => task.status !== "done" && task.status !== "cancelled");
-  const cache = new Map<string, TaskDocument[]>();
+  // Append-only path records avoid copying every prefix of a long chain.
+  interface Path { task: TaskDocument; previous?: Path; length: number }
+  interface Frame { task: TaskDocument; next: number; best: Path }
+  const cache = new Map<string, Path>();
+  const active = new Set<string>();
 
-  function dfs(task: TaskDocument, trail: Set<string>): TaskDocument[] {
-    if (cache.has(task.id)) {
-      return cache.get(task.id)!;
-    }
-
-    if (trail.has(task.id)) {
-      return [task];
-    }
-
-    const nextTrail = new Set(trail);
-    nextTrail.add(task.id);
-
-    let best: TaskDocument[] = [task];
-    for (const dependencyId of task.dependsOn) {
-      const dependency = index.get(dependencyId);
-      if (!dependency || dependency.status === "done" || dependency.status === "cancelled") {
-        continue;
+  function pathFor(task: TaskDocument): Path {
+    const cached = cache.get(task.id);
+    if (cached) return cached;
+    const frames: Frame[] = [{ task, next: 0, best: { task, length: 1 } }];
+    active.add(task.id);
+    while (frames.length > 0) {
+      const frame = frames[frames.length - 1]!;
+      const dependencyId = frame.task.dependsOn[frame.next];
+      if (frame.next < frame.task.dependsOn.length) {
+        const dependency = index.get(dependencyId!);
+        if (!dependency || dependency.status === "done" || dependency.status === "cancelled") {
+          frame.next += 1;
+          continue;
+        }
+        // Cache precedes cycle detection, including duplicate IDs, as in the oracle.
+        const dependencyPath = cache.get(dependency.id) ?? (active.has(dependency.id) ? { task: dependency, length: 1 } : undefined);
+        if (dependencyPath) {
+          const length = dependencyPath.length + 1;
+          if (length > frame.best.length) frame.best = { task: frame.task, previous: dependencyPath, length };
+          frame.next += 1;
+        } else {
+          active.add(dependency.id);
+          frames.push({ task: dependency, next: 0, best: { task: dependency, length: 1 } });
+        }
+      } else {
+        cache.set(frame.task.id, frame.best);
+        active.delete(frame.task.id);
+        frames.pop();
       }
-
-      const candidate = [...dfs(dependency, nextTrail), task];
-      if (candidate.length > best.length) {
-        best = candidate;
-      }
     }
-
-    cache.set(task.id, best);
-    return best;
+    return cache.get(task.id)!;
   }
 
-  let overallBest: TaskDocument[] = [];
+  let overallBest: Path | undefined;
   for (const task of unfinished) {
-    const candidate = dfs(task, new Set());
-    if (candidate.length > overallBest.length) {
-      overallBest = candidate;
-    }
+    const candidate = pathFor(task);
+    if (!overallBest || candidate.length > overallBest.length) overallBest = candidate;
   }
-
-  return overallBest;
+  const result: TaskDocument[] = [];
+  for (let path = overallBest; path; path = path.previous) result.push(path.task);
+  return result.reverse();
 }
 
 export function deriveStatusSnapshot(context: ProjectContext): StatusSnapshot {
-  const taskIndex = buildTaskIndex(context.tasks);
+  const analysis = buildTaskAnalysisIndex(context.tasks);
+  const taskIndex = analysis.byId;
   const activeTaskIds = deriveActiveTaskIds(context.tasks, context.currentState);
   const activeSpecIds = deriveActiveSpecIds(context.specs, context.currentState, activeTaskIds, taskIndex);
   const activeTasks = activeTaskIds.map((taskId) => taskIndex.get(taskId)).filter((task): task is TaskDocument => Boolean(task));
@@ -171,12 +386,12 @@ export function deriveStatusSnapshot(context: ProjectContext): StatusSnapshot {
 
   const blockedTasks = context.tasks
     .filter((task) => task.status === "blocked" || (task.status === "todo" && task.dependsOn.some((dependencyId) => taskIndex.get(dependencyId)?.status !== "done")))
-    .map((task) => summarizeTaskNode(task, taskIndex))
+    .map((task) => summarizeTaskNode(task, taskIndex, analysis))
     .sort((left, right) => byPriority(left.task, right.task));
 
   const reviewTasks = context.tasks
     .filter((task) => task.status === "review")
-    .map((task) => summarizeTaskNode(task, taskIndex))
+    .map((task) => summarizeTaskNode(task, taskIndex, analysis))
     .sort((left, right) => byPriority(left.task, right.task));
 
   const readyTasks = context.tasks
@@ -185,10 +400,10 @@ export function deriveStatusSnapshot(context: ProjectContext): StatusSnapshot {
         return false;
       }
 
-      return summarizeTaskNode(task, taskIndex).unmetDependencies.length === 0;
+      return summarizeTaskNode(task, taskIndex, analysis).unmetDependencies.length === 0;
     })
     .filter((task) => !activeTaskSet.has(task.id))
-    .map((task) => summarizeTaskNode(task, taskIndex))
+    .map((task) => summarizeTaskNode(task, taskIndex, analysis))
     .sort((left, right) => byPriority(left.task, right.task));
 
   return {

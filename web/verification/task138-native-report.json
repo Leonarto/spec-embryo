@@ -1,0 +1,60 @@
+{
+  "phase": "native",
+  "capturedAt": "2026-11-16T00:26:09.578Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "NoJS /tasks/TASK-00001: SSR readable and bounded",
+      "pass": true
+    },
+    {
+      "name": "NoJS /tasks/TASK-00001: real Last link reaches final occurrence",
+      "pass": true
+    },
+    {
+      "name": "NoJS /tasks?inspect=task:TASK-00001&keep=x: SSR readable and bounded",
+      "pass": true
+    },
+    {
+      "name": "NoJS /tasks: real Last link reaches final occurrence",
+      "pass": true
+    },
+    {
+      "name": "NoJS /tasks: unrelated URL preserved",
+      "pass": true
+    },
+    {
+      "name": "NoJS /specs/SPEC-00001: SSR readable and bounded",
+      "pass": true
+    },
+    {
+      "name": "NoJS /specs/SPEC-00001: real Last link reaches final occurrence",
+      "pass": true
+    },
+    {
+      "name": "NoJS /specs?inspect=spec:SPEC-00001&keep=x: SSR readable and bounded",
+      "pass": true
+    },
+    {
+      "name": "NoJS /specs: real Last link reaches final occurrence",
+      "pass": true
+    },
+    {
+      "name": "NoJS /specs: unrelated URL preserved",
+      "pass": true
+    },
+    {
+      "name": "NoJS tasks canonical404 retains shell",
+      "pass": true
+    },
+    {
+      "name": "NoJS specs canonical404 retains shell",
+      "pass": true
+    },
+    {
+      "name": "NoJS canonical POST saves through bounded loader",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

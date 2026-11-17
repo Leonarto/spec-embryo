@@ -1,0 +1,35 @@
+# TASK138 production parse memo — isolated implementation freeze
+
+Implementation awaits independent code review and root's serial integration; no shared product source was edited. Exact baseline0b12d574ea366c24573df5bac3216ffc498527f7 excludes concurrent129dirty work. Candidate and retained baseline are at `/private/tmp/spm-task138-parse-memo-production-xwnvkw0_/{candidate,baseline}`.
+
+The five proposed files are `src/document-parse-memo.ts`, the import/private-instance/common-read-helper hunks in `src/repository.ts`, `tests/document-parse-memo.test.ts`, and the two-line catalog plus focused assertions in `src/services/test-diagnostics.ts`/`tests/test-diagnostics.test.ts`. There are no reader-pool, parser/domain, lock/answer, provenance algorithm, DTO/editor/UI, CLI flag, dependency or public index/API changes.
+
+One internal factory owns successful values, proof-byte copies, parser identity and LRU. Every lookup follows an ordinary fresh Buffer read and requires full byte equality plus resolved path/exact argument/function identity. Eligibility is limited to plain enumerable standard data fields holding finite scalars or dense ordinary string arrays; unsupported and oversized values take normal parse semantics without retention. Retained values are private, initial publication/hits are separate scalar+array copies, new source Buffer provenance stays outside the memo. Fixed16384entry/32MiB raw+UTF8serialized-value accounting is not a runtime heap cap. Smaller positive internal test bounds obey the same oversize/eviction rules. There are no stats/reset/pending-work controls.
+
+## Verification and limits
+
+- Final focused11tests/146assertions PASS. Behavioral assertions include touchedA→insertC→Bvictim, byte pressure, repeated replacement without accounting leak, impossible-entry bypass retaining a useful item, independent arrays/inputBuffer, malformed/error recovery, parser/path/root aliases, strict unsupported descriptors, true reads despite parser hits, actual warm-repository IO rejection/recovery, missing-current no-provenance fallback, policy/config/notes, and reverse-controlled read completions with distinct hashes/one concurrent failure.
+- Existing compatibility selection86tests/887assertions PASS across11files (3.03s): reader, repository, context-pack, resume-window, guarded-answer write/evaluation/actions, workspace/details/relations, plus the then10focused memo cases. A final targeted rerun covers the added counted-read case and final descriptor/type assertions; the entire selection was not repeated. The only later production-code refinement rejects a readonly array length descriptor, covered by the final focused test.
+- Selected coverage records memo100%functions/100%lines. The compatibility import graph aggregate is57.84%functions/64.15%lines because this selection does not exercise the whole imported application. This is not an overall project coverage measurement or a claim that the repository's80%overall requirement is met by this selection. Full combined coverage remains a later gate.
+- Immutable official12202document/3569698byte fixture: candidate first+warm contexts equal the ordinary baseline fully, including actual source hashes for every candidate document, fixed-clock revision and bounded Task/SpecDTO hashes. Mutation of the first return cannot poison the second. Equality script is diagnostic correctness only, executed with identical Node25.6 transform-types setup for baseline imports; supported product launch flags were not changed.
+- Webcheck PASS0errors/0warnings on the isolated candidate before the final readonly-length guard; latest memo module strict standalone TypeScript check PASS (Node types explicitly selected). Final guard changes no interface and is covered by the focused test; no extra webcheck is claimed after it.
+- Root-wide `tsc --noEmit` FAIL is separate: exact baseline also fails with297log lines of existing missing Bun types, CLI/frontmatter and other diagnostics. Candidate attempt additionally found a callback test type mismatch, fixed by using the existing CallbackDocumentReader type. That broad failing check was not repeated after the fix. New test still follows the repository's Bun-test pattern whose type declarations are absent from that root-wide setup. Standalone memo source type check is clean; do not claim root-wide tsc PASS.
+- Catalog focused1test/9assertions PASS. Root owns semantic AGENTS/README/architecture merge; compact proposals are in source bundle docs-delta.md. No AGENTS workflow/checker change is proposed. Root must run its guidance check after merging those edits.
+
+## Cold first-use impact (honest diagnostic)
+
+Root authorized3paired fresh supported Bun1.3.9 CLIstatus processes plus3paired fresh first-context processes, alternating AB/BA. All12samples exit0, JSON output/context hashes match, source hashes match before/after. The disposable fixture copies actual archived project memory:204canonical documents/738975bytes, no Git repo or scoped-note corpus, corpusSHA2efc96f3bdad6e61757ea47064974795522d2a102b2c6b456994defdda6e469e. OS filesystem caches were ordinary; this is empty-memo/one-shot impact, not OS-cold or an acceptance percentile.
+
+|Span|Baseline median, ms|Candidate median, ms|Delta|
+|---|---:|---:|---:|
+|Actual `bun …/src/index.ts status --json` process wall|73.9355|79.2695|+5.3340 /+7.2%|
+|Fresh first-context process wall|56.0035|59.0065|+3.0029 /+5.4%|
+|First context load span after imports|23.1476|27.1399|+3.9923 /+17.2%|
+
+All3first-context pairs regress. CLIstatus has one improving pair and two regressing pairs; raw values retain startup variability. This small diagnostic does not invent a numerical CLI gate or waive regression: Astra must evaluate these costs before integration together with the separate warm benefit. Every sample starts a new Bun process, so the memo is empty. No prefill, candidate-only warmup or forced GC.
+
+An initial run was invalid because the harness inventory counted2AGENTS.md files that repository enumeration correctly skips (206versus204). It stopped on that assertion and supplies no usable timing. Its error log and correction are preserved in source bundle cold-invalid.json; the fixture/product source did not change. Root separately authorized the corrected single12process rerun2026-11-16 13:37:30–13:37:31UTC,0.85s. No sample from the invalid run is mixed into valid results.
+
+The confirmed COPY warm result (262.34→169.20ms median,19/20pairs) remains separate evidence from a different earlier source/experimental instrumentation setup, not a measurement of this production helper. No production warm HTTP/browser confirmation was run here. TASK138's real warm-browser Task359/Spec326.1ms remains FAIL300ms until exact reviewed combined spm/Vite product passes. No task completion or release is implied.
+
+Source patch/hash, runtime/fixture identities, cold/equality raw data and log paths are frozen in adjacent production-{source,cold,equivalence,manifest}.json. Code/test3file source freeze and catalog2file supplement were preserved throughout cold execution. CPU/browser are free;129browser lease was never taken.

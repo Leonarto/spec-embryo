@@ -1,13 +1,10 @@
 # AGENTS
 
-This folder contains the local SvelteKit workspace for Spec Embryo.
+SvelteKit workspace.
 
-- Keep the web app read-only until the product explicitly supports UI-side mutations.
-- Treat the root `src/` deterministic services as the single data source; do not re-parse repo docs in the web app.
-- Prefer server-side loading for repo state so the dashboard always reflects the local files.
-- Preserve the intentional editorial-operations visual direction; avoid generic dashboard styling.
-- The shell should stay a compact but readable left rail plus focused views rather than drifting back into one overloaded page.
-- Keep the overview dashboard as the home for general signals, stats, AGENTS health, and cross-cutting context that does not belong inside Tasks, Specs, or Timeline.
-- The timeline view now aims for a dense split-pane planning surface rather than large card rows; preserve grouping and scanability when iterating on it.
-- Use iconography deliberately and consistently. The current icon layer is `@lucide/svelte`, chosen to align with shadcn-svelte's recommended icon path without forcing a Tailwind rewrite.
-- If the web app gains multiple pages or richer local state, add nested `AGENTS.md` files before the folder sprawls.
+- Shared deterministic root services supply data; keep route loads thin and do not re-parse documents here.
+- Canonical questions mutate project memory; `/repositories` registration mutates only the shared portfolio registry.
+- Preserve the compact editorial operations direction: solid semantic tokens in `src/app.css`, focused routes, and consistent Lucide icons.
+- Normal `spm ui`: verified `build/` via `runtime/` under Node; `--dev`: Vite. Preserve external roots and read-only installations.
+- `scripts/workspace-benchmark.ts` creates disposable volume fixtures; `verification/` records measurements and browser evidence.
+- Generated `.svelte-kit/` and `build/` stay untracked. Ship only certified `build/`, never caches.

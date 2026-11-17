@@ -1,0 +1,14 @@
+#!/usr/bin/env bun
+import {readFile,readdir,writeFile} from 'node:fs/promises';import {join,resolve} from 'node:path';import {gzipSync} from 'node:zlib';import {createHash} from 'node:crypto';
+/** Same file-set/algorithm for baseline fa025f2 and final combined Tasks. Lazy chunks are not initial. */
+export async function initialTasksClosure(source:string,commit:string){
+ const root=resolve(source),client=join(root,'web/.svelte-kit/output/client'),manifest=JSON.parse(await readFile(join(client,'.vite/manifest.json'),'utf8'));let taskNode:string|undefined;
+ const nodes=join(root,'web/.svelte-kit/generated/client/nodes');for(const file of await readdir(nodes))if((await readFile(join(nodes,file),'utf8')).includes('/routes/tasks/+page.svelte'))taskNode='nodes/'+file.replace(/\.js$/,'');
+ if(!taskNode)throw Error('Tasks route node missing');const names=['entry/app','entry/start','nodes/0','nodes/1',taskNode],keys=Object.keys(manifest),roots=names.map(name=>keys.find(key=>manifest[key].name===name));if(roots.some(root=>!root))throw Error('Initial app/start/layout/error/Tasks roots incomplete');
+ const seen=new Set<string>();function visit(key:string){if(seen.has(key))return;seen.add(key);for(const dependency of manifest[key].imports??[])visit(dependency);}for(const key of roots)visit(key!);
+ const files=[],seenFiles=new Set<string>(),mermaid=[];
+ for(const key of seen){const entry=manifest[key];if(/mermaid/i.test(key+' '+entry.name))mermaid.push(key);if(seenFiles.has(entry.file))continue;seenFiles.add(entry.file);const bytes=await readFile(join(client,entry.file));files.push({file:entry.file,bytes:bytes.length,gzipBytes:gzipSync(bytes,{level:9}).length,sha256:createHash('sha256').update(bytes).digest('hex')});}
+ return {commit,sourceRoot:root,algorithm:'Unique static-import JS file closure; gzip level9, lazy imports excluded',roots:names,files:files.sort((a,b)=>a.file.localeCompare(b.file)),totalGzipBytes:files.reduce((sum,file)=>sum+file.gzipBytes,0),mermaid,pass:!mermaid.length};
+}
+export function compareClosures(baseline:{commit:string;totalGzipBytes:number;pass:boolean},current:{totalGzipBytes:number;pass:boolean}){if(!baseline.commit.startsWith('fa025f2'))throw Error('Expected pinned fa025f2 baseline');const deltaBytes=current.totalGzipBytes-baseline.totalGzipBytes;return {baselineGzipBytes:baseline.totalGzipBytes,currentGzipBytes:current.totalGzipBytes,deltaBytes,budgetBytes:60*1024,pass:baseline.pass&&current.pass&&deltaBytes<=60*1024};}
+if(import.meta.main){const [root,commit,output,baseline]=process.argv.slice(2);const result=await initialTasksClosure(root!,commit!);const report=baseline?{...result,comparison:compareClosures(JSON.parse(await readFile(baseline,'utf8')),result)}:result;await writeFile(output!,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));}

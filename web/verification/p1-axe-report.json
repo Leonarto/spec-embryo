@@ -1,0 +1,137 @@
+{
+  "axeVersion": "4.10.3",
+  "routes": [
+    {
+      "mode": "dark",
+      "route": "/",
+      "violations": [],
+      "incomplete": [],
+      "passes": 28
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": null,
+          "nodes": 0
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "mode": "dark",
+      "route": "/specs",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ],
+      "passes": 23
+    },
+    {
+      "mode": "dark",
+      "route": "/timeline",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": null,
+          "nodes": 0
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "mode": "dark",
+      "route": "/tasks/TASK-115",
+      "violations": [],
+      "incomplete": [],
+      "passes": 24
+    },
+    {
+      "mode": "dark",
+      "route": "/specs/SPEC-057",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "passes": 26
+    },
+    {
+      "mode": "light",
+      "route": "/",
+      "violations": [],
+      "incomplete": [],
+      "passes": 28
+    },
+    {
+      "mode": "light",
+      "route": "/tasks",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": null,
+          "nodes": 0
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "mode": "light",
+      "route": "/specs",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7
+        }
+      ],
+      "passes": 23
+    },
+    {
+      "mode": "light",
+      "route": "/timeline",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": null,
+          "nodes": 0
+        }
+      ],
+      "passes": 22
+    },
+    {
+      "mode": "light",
+      "route": "/tasks/TASK-115",
+      "violations": [],
+      "incomplete": [],
+      "passes": 24
+    },
+    {
+      "mode": "light",
+      "route": "/specs/SPEC-057",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "passes": 26
+    }
+  ]
+}

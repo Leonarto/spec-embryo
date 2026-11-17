@@ -1,0 +1,32 @@
+{
+  "baseCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "scope": "Only interaction collector/helper and deterministic unit tests; no browser or runtime run.",
+  "files": [
+    {
+      "path": "web/scripts/acceptance-interactions.mjs",
+      "bytes": 31576,
+      "sha256": "dddbca4b8223850d6c96bc6d5a192e9d7a4ecda67a5abc1c73291f6c5ebaf3b7"
+    },
+    {
+      "path": "tests/acceptance-interactions.test.ts",
+      "bytes": 15494,
+      "sha256": "96082278d2c50590b5f123284905194c6ffd5c545978a85d06bd1e174175dfab"
+    }
+  ],
+  "patch": {
+    "path": "/private/tmp/spm-task131-interactions-v2.patch",
+    "sha256": "a8bc0babd94653f85a94610e634359c490ef172b202e1ea95117cc59189a7a57"
+  },
+  "contract": {
+    "path": "/private/tmp/spm-task131-final-interaction-contract.md",
+    "sha256": "07ea5513a46e1910aafd54895daff3f46e6ed58a19a69776a46f336ac674fa3b"
+  },
+  "unitLog": {
+    "path": "/private/tmp/spm-task131-interactions-unit-v2.log",
+    "sha256": "73d55273c55ba39683ac37c008a30def2f8aaabf18af3ebcc0112a0f8b1ba521"
+  },
+  "api": "runAcceptanceInteractions(page,{identity:{fixture,source,runtime},routes:[{route,page100:{url,ids,total,pageSize:100},page200:{url,ids,total,pageSize:200},search:[{q,url,ids,total,pageSize:100},{...}],openerId}],smoke})",
+  "ownership": "Caller owns all page/context/runtime lifecycle. Helper removes only its installed observers/listeners.",
+  "smoke": "One v1 full tiny run, credit:false, retained overall FAIL due payload adapter; only the two public payload GETs revalidated after this correction, both PASS. No interaction series repeated.",
+  "changeFromV1": "Only browser Fetch payload extraction changed from response.status() to numeric response.status, factored into an injectable helper with a regression test. Other probe logic unchanged."
+}

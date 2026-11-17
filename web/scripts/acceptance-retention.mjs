@@ -1,0 +1,30 @@
+// Separate from every latency series. Caller owns and closes this browser context.
+export function retentionComparison(before,after){
+ const counters=['documents','nodes','jsEventListeners'];if(![before,after].every(value=>value?.heap&&Number.isFinite(value.heap.usedSize)&&value.listeners&&counters.every(key=>Number.isSafeInteger(value.dom?.[key])&&value.dom[key]>=0)))return {pass:false,error:'Complete DOM/heap/listener snapshots required'};
+ const retainedBytes=after.heap.usedSize-before.heap.usedSize,listenerGrowth=[];
+ for(const [target,counts]of Object.entries(after.listeners))for(const [type,count]of Object.entries(counts))if(count>(before.listeners[target]?.[type]??0))listenerGrowth.push({target,type,before:before.listeners[target]?.[type]??0,after:count});
+ const domDelta=Object.fromEntries(counters.map(key=>[key,after.dom[key]-before.dom[key]]));
+ return {retainedBytes,limitBytes:10*1024*1024,listenerGrowth,domDelta,listenerScope:'Page renderer global jsEventListeners plus window/document/grid target/type metadata; documents/nodes retained as diagnostics',pass:after.closed&&after.pending===0&&retainedBytes<=10*1024*1024&&domDelta.jsEventListeners<=0&&!listenerGrowth.length};
+}
+export async function retentionSmoke(context,{url,taskIDs,smoke=false}){
+ const requests=new Set(),cycles=smoke?2:100,warmups=smoke?1:5;let page,session,warmed=0,completed=0;
+ const result={phase:smoke?'retention-harness-smoke':'100-cycle retention',credit:!smoke,warmups,cycles,warmed,completed,pass:false};
+ const start=request=>requests.add(request),finish=request=>requests.delete(request);
+ const waitClosed=()=>page.waitForFunction(()=>!new URL(location.href).searchParams.has('inspect')&&!document.querySelector('dialog[open]'));
+ const loaded=(kind,id)=>page.waitForFunction(({kind,id})=>{const host=document.querySelector('.inspector-host'),identity=host?.querySelector('.identity')?.textContent??'';return host&&!host.hidden&&identity.includes(kind)&&identity.includes(id)&&host.querySelector('.inspector-reader')?.getAttribute('aria-busy')==='false'&&!!host.querySelector('.detail-shell');},{kind,id});
+ const cycle=async index=>{const id=taskIDs[index%taskIDs.length];await page.getByRole('link',{name:id,exact:true}).click();await loaded('task',id);const related=page.locator('.inspector-reader a[href^="/specs/"]').first();const specId=decodeURIComponent(new URL(await related.getAttribute('href'),url).pathname.split('/').at(-1));await related.click();await loaded('spec',specId);await page.getByRole('button',{name:'Close inspector',exact:true}).click();await waitClosed();};
+ async function quiescent(){const deadline=Date.now()+15000;while(requests.size&&Date.now()<deadline)await page.waitForTimeout(50);if(requests.size)throw Error('Requests still pending at equivalent closed state');await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
+ async function listeners(){const counts={};try{for(const expression of ['window','document','document.querySelector("[data-table-grid]")']){const {result}=await session.send('Runtime.evaluate',{expression,objectGroup:'acceptance-listeners'});if(!result.objectId)throw Error('Listener target unavailable: '+expression);const {listeners}=await session.send('DOMDebugger.getEventListeners',{objectId:result.objectId,depth:0});counts[expression]=Object.fromEntries([...new Set(listeners.map(l=>l.type))].sort().map(type=>[type,listeners.filter(l=>l.type===type).length]));}return counts;}finally{await session.send('Runtime.releaseObjectGroup',{objectGroup:'acceptance-listeners'});}}
+ async function snapshot(){await quiescent();await session.send('HeapProfiler.collectGarbage');await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await session.send('HeapProfiler.collectGarbage');return {dom:await session.send('Memory.getDOMCounters'),heap:await session.send('Runtime.getHeapUsage'),listeners:await listeners(),mountedRows:await page.locator('[data-table-grid] tbody tr[data-entity-id]').count(),closed:!new URL(page.url()).searchParams.has('inspect'),pending:requests.size};}
+ try{
+  page=await context.newPage();session=await context.newCDPSession(page);page.on('request',start);page.on('requestfinished',finish);page.on('requestfailed',finish);
+  page.setDefaultTimeout(15000);await page.goto(url,{timeout:30000});await page.locator('[data-table-grid] table[role=grid]').waitFor();
+  for(let i=0;i<warmups;i++){await cycle(i);warmed++;}result.before=await snapshot();
+  for(let i=0;i<cycles;i++){await cycle(i);completed++;}result.after=await snapshot();Object.assign(result,retentionComparison(result.before,result.after));
+ }catch(error){Object.assign(result,{credit:false,error:String(error),pass:false});}
+ Object.assign(result,{warmed,completed,pending:requests.size});
+ if(page){page.off('request',start);page.off('requestfinished',finish);page.off('requestfailed',finish);}
+ if(session)try{await session.detach();}catch(error){(result.cleanupErrors??=[]).push({stage:'CDP detach',error:String(error)});}
+ if(page)try{await page.close();result.pageClosed=true;}catch(error){(result.cleanupErrors??=[]).push({stage:'page.close',error:String(error)});result.pageClosed=page.isClosed?.()===true;}
+ if(result.cleanupErrors?.length||result.pageClosed!==true){result.pass=false;result.credit=false;}return result;
+}

@@ -1,0 +1,70 @@
+{
+  "phase": "listcarry",
+  "checks": [
+    {
+      "name": "tasks JS=true: list page keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "tasks JS=true: sort keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "tasks JS=true: page-size form keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "Task Board tab retains relation vector",
+      "pass": true
+    },
+    {
+      "name": "Task preset retains relation vector",
+      "pass": true
+    },
+    {
+      "name": "specs JS=true: list page keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "specs JS=true: sort keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "specs JS=true: page-size form keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "Spec simple tab JS=true retains relation vector",
+      "pass": true
+    },
+    {
+      "name": "tasks JS=false: list page keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "tasks JS=false: sort keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "tasks JS=false: page-size form keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "specs JS=false: list page keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "specs JS=false: sort keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "specs JS=false: page-size form keeps relation vector",
+      "pass": true
+    },
+    {
+      "name": "Spec simple tab JS=false retains relation vector",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

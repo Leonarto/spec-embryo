@@ -159,8 +159,8 @@ describe("dashboard service", () => {
       await setTaskStatus(rootDir, "TASK-002", "done");
       await archiveTask(rootDir, "TASK-002", { reason: "Aged out." });
 
-      const freshTaskPath = join(rootDir, "docs/spm/tasks/TASK-002-deterministic-resume.md");
-      const agedTaskPath = join(rootDir, "docs/spm/tasks/TASK-001-bootstrap-cli.md");
+      const freshTaskPath = join(rootDir, "docs/spm/tasks/TASK-002-create-or-import-the-first-real-project-spec.md");
+      const agedTaskPath = join(rootDir, "docs/spm/tasks/TASK-001-inventory-the-real-project-direction-and-existing-docs.md");
 
       await Bun.write(
         freshTaskPath,

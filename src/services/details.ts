@@ -1,4 +1,4 @@
-import { buildTaskIndex, summarizeTaskNode } from "../engine.ts";
+import { buildTaskIndex, summarizeTaskNode, type TaskAnalysisIndex } from "../engine.ts";
 import type {
   CurrentStateDocument,
   HandoffDocument,
@@ -8,6 +8,7 @@ import type {
 } from "../domain.ts";
 import { loadProjectContext } from "../repository.ts";
 import { deriveEffectiveStatus, type DashboardTaskCard } from "./dashboard.ts";
+import { documentSourceHash } from "./document-provenance.ts";
 import { parseSpecQuestionSections } from "./spec-questions.ts";
 
 export interface DocumentBodyBlock {
@@ -58,6 +59,7 @@ export interface ResolvedDecisionDetail {
 }
 
 export interface SpecDetailData {
+  specRevision: string | null;
   kind: "spec";
   found: true;
   spec: {
@@ -133,8 +135,8 @@ function deriveEffort(priority: number, downstreamCount: number): number {
   return Math.min(8, base + Math.min(2, downstreamCount));
 }
 
-function toDetailTaskCard(task: TaskDocument, index: ReturnType<typeof buildTaskIndex>): DetailLinkedTask {
-  const summary = summarizeTaskNode(task, index);
+function toDetailTaskCard(task: TaskDocument, index: ReturnType<typeof buildTaskIndex>, analysis?: TaskAnalysisIndex): DetailLinkedTask {
+  const summary = summarizeTaskNode(task, index, analysis);
   const effectiveStatus = deriveEffectiveStatus(task.status, summary.unmetDependencies);
 
   return {
@@ -349,11 +351,11 @@ function buildCurrentStateRelevance(currentState: CurrentStateDocument, input: {
   };
 }
 
-function sortHandoffsDescending(handoffs: HandoffDocument[]): DetailRelatedHandoff[] {
+function sortHandoffsDescending(handoffs: HandoffDocument[], limit = 3): DetailRelatedHandoff[] {
   return handoffs
     .slice()
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt))
-    .slice(0, 3)
+    .slice(0, limit)
     .map((handoff) => ({
       id: handoff.id,
       title: handoff.title,
@@ -362,21 +364,21 @@ function sortHandoffsDescending(handoffs: HandoffDocument[]): DetailRelatedHando
     }));
 }
 
-function buildRelatedHandoffsForSpec(context: ProjectContext, spec: SpecDocument): DetailRelatedHandoff[] {
+export function buildRelatedHandoffsForSpec(context: ProjectContext, spec: SpecDocument, limit = 3): DetailRelatedHandoff[] {
   return sortHandoffsDescending(
     context.handoffs.filter(
       (handoff) =>
         handoff.relatedSpecIds.includes(spec.id) ||
         handoff.activeTaskIds.some((taskId) => spec.taskIds.includes(taskId)),
-    ),
+    ), limit,
   );
 }
 
-function buildRelatedHandoffsForTask(context: ProjectContext, task: TaskDocument): DetailRelatedHandoff[] {
+export function buildRelatedHandoffsForTask(context: ProjectContext, task: TaskDocument, limit = 3): DetailRelatedHandoff[] {
   return sortHandoffsDescending(
     context.handoffs.filter(
       (handoff) => handoff.activeTaskIds.includes(task.id) || handoff.relatedSpecIds.some((specId) => task.specIds.includes(specId)),
-    ),
+    ), limit,
   );
 }
 
@@ -393,6 +395,10 @@ function buildLinkedSpecs(context: ProjectContext, task: TaskDocument): DetailLi
 
 export async function buildSpecDetailData(rootDir: string, specId: string): Promise<SpecDetailResult> {
   const context = await loadProjectContext(rootDir);
+  return buildSpecDetailFromContext(context, specId);
+}
+
+export function buildSpecDetailFromContext(context: ProjectContext, specId: string, analysis?: TaskAnalysisIndex): SpecDetailResult {
   const spec = context.specs.find((entry) => entry.id === specId);
 
   if (!spec) {
@@ -404,11 +410,11 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
     };
   }
 
-  const taskIndex = buildTaskIndex(context.tasks);
+  const taskIndex = analysis?.byId ?? buildTaskIndex(context.tasks);
   const linkedTasks = spec.taskIds
     .map((taskId) => taskIndex.get(taskId))
     .filter((task): task is TaskDocument => Boolean(task))
-    .map((task) => toDetailTaskCard(task, taskIndex))
+    .map((task) => toDetailTaskCard(task, taskIndex, analysis))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
   const parsedQuestionSections = parseSpecQuestionSections(spec.body);
   const bodySections = parseDocumentBody(spec.body).filter((section) => {
@@ -419,6 +425,7 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
   return {
     found: true,
     kind: "spec",
+    specRevision: documentSourceHash(spec),
     spec: {
       id: spec.id,
       title: spec.title,
@@ -441,6 +448,10 @@ export async function buildSpecDetailData(rootDir: string, specId: string): Prom
 
 export async function buildTaskDetailData(rootDir: string, taskId: string): Promise<TaskDetailResult> {
   const context = await loadProjectContext(rootDir);
+  return buildTaskDetailFromContext(context, taskId);
+}
+
+export function buildTaskDetailFromContext(context: ProjectContext, taskId: string, analysis?: TaskAnalysisIndex): TaskDetailResult {
   const task = context.tasks.find((entry) => entry.id === taskId);
 
   if (!task) {
@@ -452,16 +463,16 @@ export async function buildTaskDetailData(rootDir: string, taskId: string): Prom
     };
   }
 
-  const taskIndex = buildTaskIndex(context.tasks);
+  const taskIndex = analysis?.byId ?? buildTaskIndex(context.tasks);
   const dependencyTasks = task.dependsOn
     .map((dependencyId) => taskIndex.get(dependencyId))
     .filter((dependency): dependency is TaskDocument => Boolean(dependency))
-    .map((dependency) => toDetailTaskCard(dependency, taskIndex))
+    .map((dependency) => toDetailTaskCard(dependency, taskIndex, analysis))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
-  const summary = summarizeTaskNode(task, taskIndex);
+  const summary = summarizeTaskNode(task, taskIndex, analysis);
   const blockingTasks = context.tasks
     .filter((entry) => entry.dependsOn.includes(task.id))
-    .map((entry) => toDetailTaskCard(entry, taskIndex))
+    .map((entry) => toDetailTaskCard(entry, taskIndex, analysis))
     .sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id));
 
   return {

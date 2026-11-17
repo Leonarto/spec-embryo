@@ -1,0 +1,57 @@
+{
+  "scope": "Frozen isolated runner+map+tiny functional proof; no final performance authorization",
+  "copy": "/private/tmp/spm-task131-precompiled-runner",
+  "baseline": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "files": [
+    {
+      "path": "web/scripts/AGENTS.md",
+      "sha256": "64267374bbfc1a118008b6df97ffc92ef1cbbba991177bda21bc9a8d09928b82"
+    },
+    {
+      "path": "web/scripts/acceptance-artifacts.ts",
+      "sha256": "4252e1f6219a8ad289d87c15582c291833eafd2064907c595fc73754676f037d"
+    },
+    {
+      "path": "web/scripts/acceptance-runtime.ts",
+      "sha256": "fb82344982b2a7a12ad456286be3fa3ee4cb950b5cfc4b2f0efe525037db3152"
+    },
+    {
+      "path": "web/scripts/acceptance-package.ts",
+      "sha256": "e0e8f9445973b00f0b472d732c8fc4b87c9f83757545077323c1f45ca511d63e"
+    },
+    {
+      "path": "web/scripts/acceptance-navigation.mjs",
+      "sha256": "13e3882d1f5c5aface2d91125e6fb424e4e77cf8e01cf509bad1ecb7916147ff"
+    },
+    {
+      "path": "web/scripts/acceptance-retention.mjs",
+      "sha256": "6c616bce02d95205f6d0f3a8af115b199730e07600c9c766e3c9721bdd511c33"
+    },
+    {
+      "path": "web/scripts/acceptance-detail-loading.mjs",
+      "sha256": "b8d156948c2226f66226db56aaeded6fb3a2f62481d363fc1347b277aaa129ca"
+    },
+    {
+      "path": "tests/acceptance-harness.test.ts",
+      "sha256": "228bfbdaa6defbc6ef0c92aa0285e0c13a03ddc6b9a60ed55e75e03d14519472"
+    },
+    {
+      "path": "web/verification/task131-compiled-tiny-smoke.json",
+      "sha256": "e879dbf19fb9d5b3cbc8dfa5653e287e6f71a55659954b384fc0a2a0fe9522af"
+    },
+    {
+      "path": "web/verification/task131-final-gate-map.json",
+      "sha256": "b38b052f26aca3fc9aa21a936619c030be89f016296a513fd0e7e5a0df5b42b1"
+    },
+    {
+      "path": "web/verification/task131-precompiled-runner-preparation.json",
+      "sha256": "7157cb69d908646e7034048d1b3ddf142963dc9fb79dd9a8a0423dd28b98da7f"
+    }
+  ],
+  "patch": "/private/tmp/spm-task131-precompiled-runner.patch",
+  "patchSHA256": "8238ce607ff0b019732d8c1eac00ed0f415b26d0d214f04ece229f6dca66e527",
+  "unitLog": "/private/tmp/spm-task131-precompiled-runner-unit-clockfix.log",
+  "agentsLog": "/private/tmp/spm-task131-precompiled-runner-agents.log",
+  "tinyPass": true,
+  "frozenDetailCollectorUnchanged": "web/scripts/detail-relations-browser-profile.mjs"
+}

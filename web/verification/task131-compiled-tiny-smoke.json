@@ -1,0 +1,630 @@
+{
+  "scope": "Single functional compiled runtime/browser smoke; not latency acceptance",
+  "sourceCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "rawBrowser": {
+    "preparationOnly": true,
+    "acceptanceCredit": false,
+    "samples": [
+      {
+        "route": "tasks",
+        "ready": true,
+        "url": "http://127.0.0.1:56728/tasks?view=table&scope=all&sort=id.asc&pageSize=100",
+        "pageClosed": true,
+        "elapsedMs": 492.5,
+        "navigationURL": "http://127.0.0.1:56728/tasks?view=table&scope=all&sort=id.asc&pageSize=100",
+        "ttfbMs": 124.59999990463257,
+        "responseEndMs": 125.90000009536743,
+        "firstContentfulPaintMs": null,
+        "firstShellAt": 293.7000000476837,
+        "firstLoadingAt": null,
+        "blankBeyond150ms": true,
+        "loadingVisibleWithin150ms": false
+      },
+      {
+        "route": "specs",
+        "ready": true,
+        "url": "http://127.0.0.1:56728/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100",
+        "pageClosed": true,
+        "elapsedMs": 159.10000014305115,
+        "navigationURL": "http://127.0.0.1:56728/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100",
+        "ttfbMs": 28.100000143051147,
+        "responseEndMs": 29.100000143051147,
+        "firstContentfulPaintMs": null,
+        "firstShellAt": 87.10000014305115,
+        "firstLoadingAt": null,
+        "blankBeyond150ms": true,
+        "loadingVisibleWithin150ms": false
+      }
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/tasks?view=table&scope=all&sort=id.asc&pageSize=100"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/Popover.CbkP4Jr3.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/0.BIIvgS2h.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/clipboard.DlOKRyUC.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/7.DeSFm_VM.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/entry/start.Dchp2rtt.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CmveZCQR.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/BVua2Jm8.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dene2yxT.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/entry/app.Bt892apE.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CbUDssf9.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D9FQP20W.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/0.CHWgaP52.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Bn6vGo28.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CO0zNEc2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/qeQalW4A.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D5yjmpzV.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/0W6DPVxv.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DUqqe1V-.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D2CZe0Zc.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/BBZO0ESO.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/xo0AzFoc.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dzsa7V8-.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DxU900nq.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/vGIAPmg9.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/X6z7SIMN.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/7.BsI_0ynO.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/cW9sgAQE2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dnub1hn5.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DgwDlVA7.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CYHg-7JA.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DUx54oNv2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/1.MXPsSjX6.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/B7CrVkHS.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/specs?scope=all&taskScope=all&sort=id.asc&pageSize=100"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/Popover.CbkP4Jr3.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/0.BIIvgS2h.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/clipboard.DlOKRyUC.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/5.B62-_ILF.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/entry/start.Dchp2rtt.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CmveZCQR.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/BVua2Jm8.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dene2yxT.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/entry/app.Bt892apE.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CbUDssf9.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D9FQP20W.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/0.CHWgaP52.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Bn6vGo28.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CO0zNEc2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/qeQalW4A.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D5yjmpzV.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/0W6DPVxv.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DUqqe1V-.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D2CZe0Zc.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/BBZO0ESO.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/xo0AzFoc.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dzsa7V8-.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DxU900nq.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/vGIAPmg9.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/X6z7SIMN.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/5.D8iZu8J2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/cW9sgAQE2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DgwDlVA7.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DUx54oNv2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/1.MXPsSjX6.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/B7CrVkHS.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/tasks?view=table&scope=all&sort=id.asc&pageSize=100"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/Popover.CbkP4Jr3.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/0.BIIvgS2h.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/AnalysisFilters.BSLnnEsn.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/clipboard.DlOKRyUC.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/assets/7.DeSFm_VM.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/entry/start.Dchp2rtt.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CmveZCQR.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/BVua2Jm8.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dene2yxT.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/entry/app.Bt892apE.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CbUDssf9.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D9FQP20W.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/0.CHWgaP52.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Bn6vGo28.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CO0zNEc2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/qeQalW4A.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D5yjmpzV.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/0W6DPVxv.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DUqqe1V-.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/D2CZe0Zc.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/BBZO0ESO.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/xo0AzFoc.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dzsa7V8-.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DxU900nq.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/vGIAPmg9.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/X6z7SIMN.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/7.BsI_0ynO.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/cW9sgAQE2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/Dnub1hn5.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DgwDlVA7.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/CYHg-7JA.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/DUx54oNv2.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/nodes/1.MXPsSjX6.js"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:56728/_app/immutable/chunks/B7CrVkHS.js"
+      }
+    ],
+    "pageErrors": [],
+    "sharedPID": 1072,
+    "browser": {
+      "version": "157.0.8103.78",
+      "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/profile",
+      "browserPID": 1100,
+      "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "headless": true
+    },
+    "distinctProcess": true,
+    "keyboard": {
+      "before": {
+        "row": "TASK-001",
+        "column": "select"
+      },
+      "after": {
+        "row": "TASK-002",
+        "column": "select"
+      },
+      "pass": true
+    },
+    "browserClosed": true,
+    "devResources": [],
+    "pass": true
+  },
+  "paintLimitation": "Raw original blankBeyond150ms booleans are conservative legacy diagnostics, not proved blank facts. FCP was absent and both responseStart values <=150ms; initial loading is NOT PROVEN. Approved diagnostic-only correction is unit-tested without repeating this smoke.",
+  "postExecutionChanges": "Only diagnostic loading metadata, separate skeleton probe and retention DOM counters were added after this functional smoke; accepted row/two-frame interval unchanged.",
+  "setupErrorsPreserved": [
+    "Fixture handle was missing in orchestrator memory; retained fixture JSON was read before browser execution",
+    "Outer result formatter lacks URL global; raw browser result was already stored and no browser sample was repeated"
+  ],
+  "acceptanceCredit": false,
+  "stage": {
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "sourceDigest": "7b1f540de1b5c96e5442f48b91c0d8dde509a93bfff4f7ae3cc9ce169747df8d",
+    "lockDigest": "a99d175ce307fe9fd043e2f8e75645dbb1e13c2740136899fe6cfa733d63d425",
+    "packageVersion": "0.3.1",
+    "nodeBuildVersion": "v25.6.0",
+    "manifestSHA256": "c5a9305fa7d9798ef6180ebea58e99937c4b01d91112eb87bfec527c618c18ac",
+    "sourceBuild": "/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/web/build",
+    "stagedBuild": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/source/web/build",
+    "buildOccurred": false
+  },
+  "startup": {
+    "id": "compiled-tiny-smoke",
+    "nonce": "24eaf2dd-0ead-496b-b54a-513fd907f283",
+    "sourceCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+    "mode": "precompiled",
+    "artifact": {
+      "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+      "sourceDigest": "7b1f540de1b5c96e5442f48b91c0d8dde509a93bfff4f7ae3cc9ce169747df8d",
+      "lockDigest": "a99d175ce307fe9fd043e2f8e75645dbb1e13c2740136899fe6cfa733d63d425",
+      "packageVersion": "0.3.1",
+      "nodeBuildVersion": "v25.6.0",
+      "manifestSHA256": "c5a9305fa7d9798ef6180ebea58e99937c4b01d91112eb87bfec527c618c18ac"
+    },
+    "app": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app",
+    "fixture": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-YeGzse/tiny-fixture",
+    "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/profile",
+    "log": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/server.log",
+    "binPreparation": {
+      "spm": {
+        "entry": "src/index.ts",
+        "originalMode": 420,
+        "preparedMode": 493,
+        "sha256": "5ccac1f1ad1692f88a89ce59c6b92c82a5fadd0c2a9b6cc1f081b665982ba4d5",
+        "bytesPreserved": true
+      },
+      "spec-embryo": {
+        "entry": "src/index.ts",
+        "originalMode": 420,
+        "preparedMode": 493,
+        "sha256": "5ccac1f1ad1692f88a89ce59c6b92c82a5fadd0c2a9b6cc1f081b665982ba4d5",
+        "bytesPreserved": true
+      }
+    },
+    "cache": {
+      "nodeModules": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/node_modules",
+      "viteCache": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/node_modules/.vite",
+      "generatedCache": "web/.svelte-kit",
+      "integrity": {
+        "before": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": null,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        },
+        "after": {
+          "pass": true,
+          "seedMatches": true,
+          "runtimeMatches": true,
+          "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+          "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+        }
+      },
+      "initialCaches": [
+        {
+          "path": "node_modules/.vite",
+          "exists": false
+        },
+        {
+          "path": "node_modules/.vite-temp",
+          "exists": false
+        },
+        {
+          "path": "web/node_modules/.vite",
+          "exists": false
+        },
+        {
+          "path": "web/node_modules/.vite-temp",
+          "exists": false
+        },
+        {
+          "path": "web/.svelte-kit",
+          "exists": false
+        }
+      ],
+      "beforeStart": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": true,
+        "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+      }
+    },
+    "nodeWrapper": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/web/runtime/server.mjs",
+    "requestedPort": 56728,
+    "launcherCommands": {
+      "env": "/usr/bin/env bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/bin/spm ui --host 127.0.0.1 --port 56728",
+      "bun": [
+        "bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/bin/spm ui --host 127.0.0.1 --port 56728",
+        "/Users/leonardodiazvidal/.bun/bin/bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/bin/spm ui --host 127.0.0.1 --port 56728"
+      ]
+    },
+    "pid": 188,
+    "stamp": {
+      "pid": 188,
+      "group": 188,
+      "started": "Mon Nov 16 14:47:33 2026",
+      "command": "bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/bin/spm ui --host 127.0.0.1 --port 56728"
+    },
+    "listener": {
+      "pid": 197,
+      "group": 188,
+      "started": "Mon Nov 16 14:47:33 2026",
+      "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/compiled-tiny-smoke/app/web/runtime/server.mjs"
+    },
+    "url": "http://127.0.0.1:56728/",
+    "port": 56728,
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+    "nodeVersion": "v25.6.0",
+    "reportedArtifactValidationMs": 175.2,
+    "startupMs": 924.2522079999999
+  },
+  "cleanup": {
+    "closed": true,
+    "integrity": {
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+      "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+      "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+    }
+  },
+  "pass": true,
+  "ownerRecord": "/private/tmp/spm-task131-compiled-owner.json",
+  "activeLeaseAtOwnCompletion": false
+}

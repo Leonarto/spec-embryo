@@ -1,0 +1,38 @@
+{
+  "phase": "empty",
+  "checks": [
+    {
+      "name": "/tasks/TASK-00001 item: empty full snapshot retains range shell/focus",
+      "pass": true
+    },
+    {
+      "name": "/tasks/TASK-00001: empty full snapshot retains document root",
+      "pass": true
+    },
+    {
+      "name": "/tasks pager: empty full snapshot retains range shell/focus",
+      "pass": true
+    },
+    {
+      "name": "/tasks: empty full snapshot retains document root",
+      "pass": true
+    },
+    {
+      "name": "/specs/SPEC-00001 item: empty full snapshot retains range shell/focus",
+      "pass": true
+    },
+    {
+      "name": "/specs/SPEC-00001: empty full snapshot retains document root",
+      "pass": true
+    },
+    {
+      "name": "/specs pager: empty full snapshot retains range shell/focus",
+      "pass": true
+    },
+    {
+      "name": "/specs: empty full snapshot retains document root",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

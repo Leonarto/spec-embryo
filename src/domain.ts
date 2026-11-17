@@ -2,11 +2,30 @@ export const SPEC_STATUSES = ["proposed", "active", "paused", "done", "archived"
 export const TASK_STATUSES = ["todo", "in_progress", "blocked", "review", "done", "cancelled"] as const;
 export const HANDOFF_KINDS = ["checkpoint", "resume", "decision", "release"] as const;
 export const BACKEND_NAMES = ["deterministic", "prompt", "codex", "claude"] as const;
+export const NEXUS_ROOT_AGENTS_MODES = ["reference-only", "scoped", "managed-by-nexus"] as const;
+export const MEMORY_SCOPE_NAMES = ["session", "repo", "org"] as const;
+export const MEMORY_SCOPE_WRITE_POLICIES = ["read-only", "read-write"] as const;
 
 export type SpecStatus = (typeof SPEC_STATUSES)[number];
 export type TaskStatus = (typeof TASK_STATUSES)[number];
 export type HandoffKind = (typeof HANDOFF_KINDS)[number];
 export type BackendName = (typeof BACKEND_NAMES)[number];
+export type HarnessProvider = "codex" | "claude";
+export type HarnessProtocol = "codex-jsonl" | "claude-json" | "claude-stream-json";
+
+export interface NativeHarnessResult {
+  provider: HarnessProvider;
+  protocol: HarnessProtocol;
+  session_id: string | null;
+  terminal: "completed" | "failed" | "unknown";
+  final_text: string | null;
+  final_text_truncated: boolean;
+  warnings: string[];
+  warnings_omitted: number;
+}
+export type NexusRootAgentsMode = (typeof NEXUS_ROOT_AGENTS_MODES)[number];
+export type MemoryScopeName = (typeof MEMORY_SCOPE_NAMES)[number];
+export type MemoryScopeWritePolicy = (typeof MEMORY_SCOPE_WRITE_POLICIES)[number];
 
 export function isSpecStatus(value: string): value is SpecStatus {
   return SPEC_STATUSES.includes(value as SpecStatus);
@@ -68,10 +87,29 @@ export interface CurrentStateDocument extends BaseDocument {
   lastHandoffId?: string;
 }
 
+export interface MemoryNoteDocument extends BaseDocument {
+  docKind: "memory-note";
+  scope: Exclude<MemoryScopeName, "repo">;
+  writePolicy: MemoryScopeWritePolicy;
+  createdAt?: string;
+  expiresAt?: string;
+  consolidatedAt?: string;
+  promotedTo?: string;
+  archivedAt?: string;
+  archiveReason?: string;
+}
+
 export interface ExecutionBackendConfig {
   enabled: boolean;
   command?: string;
   args?: string[];
+}
+
+export interface NexusConfig {
+  enabled: boolean;
+  command?: string;
+  args: string[];
+  rootAgentsMode: NexusRootAgentsMode;
 }
 
 export interface AgentsConfig {
@@ -84,6 +122,21 @@ export interface AgentsConfig {
   absoluteChainHardCap: number;
 }
 
+export interface MemoryScopeConfig {
+  enabled: boolean;
+  dir: string;
+  writePolicy: MemoryScopeWritePolicy;
+}
+
+export interface MemoryScopesConfig {
+  session: MemoryScopeConfig;
+  repo: {
+    enabled: true;
+    writePolicy: "read-write";
+  };
+  org: MemoryScopeConfig;
+}
+
 export interface ProjectConfig {
   toolVersion: string;
   projectName: string;
@@ -93,10 +146,12 @@ export interface ProjectConfig {
   specsDir: string;
   tasksDir: string;
   skillsDir: string;
+  memoryScopes: MemoryScopesConfig;
   agents: AgentsConfig;
   defaults: {
     resumeBackend: BackendName;
   };
+  nexus: NexusConfig;
   backends: {
     deterministic: { enabled: boolean };
     prompt: { enabled: boolean };
@@ -107,6 +162,7 @@ export interface ProjectConfig {
 
 export interface GitSnapshot {
   available: boolean;
+  head?: string;
   branch?: string;
   shortStatus: string[];
   lastCommit?: string;
@@ -115,6 +171,8 @@ export interface GitSnapshot {
 
 export interface ChangedItemSummary {
   kind: "spec" | "task" | "current-state" | "handoff" | "other";
+  changeHint: string;
+  statusCode: string;
   path: string;
   id?: string;
   title?: string;
@@ -133,6 +191,8 @@ export interface ProjectContext {
   specs: SpecDocument[];
   tasks: TaskDocument[];
   handoffs: HandoffDocument[];
+  sessionNotes: MemoryNoteDocument[];
+  orgNotes: MemoryNoteDocument[];
   git: GitSnapshot;
 }
 
@@ -165,6 +225,38 @@ export interface ResumeContext {
   nextActions: string[];
   git: GitSnapshot;
   changedItems: ChangedItemSummary[];
+  interruption_window?: ResumeWindowSummary;
+  context_snapshot?: ResumeContextSnapshot;
+  warnings?: string[];
+}
+
+export interface ResumeWindowSummary {
+  since: string;
+  resolvedSince: string | null;
+  available: boolean;
+  changedFiles: string[];
+  commits: string[];
+  error?: string;
+}
+
+export interface ResumeContextSnapshot {
+  head: string | null;
+  branch: string | null;
+  dirty: boolean;
+  fingerprint: string;
+  sources: Array<{ id: string; path: string; content_hash: string | null }>;
+}
+
+export interface HarnessInvocation {
+  state: "completed" | "failed" | "cancelled" | "timed_out" | "unknown";
+  exit_code: number | null;
+  signal: NodeJS.Signals | null;
+  cancellation_signal?: "SIGINT" | "SIGTERM";
+  output: string;
+  stdout_bytes: number;
+  stdout_truncated: boolean;
+  error?: { type: "usage" | "precondition" | "context" | "artifact" | "spawn" | "process" | "cancelled" | "timeout" | "unknown"; message: string };
+  warnings: string[];
 }
 
 function fail(message: string): never {
@@ -238,6 +330,20 @@ function asEnum<T extends readonly string[]>(
   fail(`Expected "${field}" in ${filePath} to be one of: ${allowed.join(", ")}`);
 }
 
+function asEnumWithUndefinedFallback<T extends readonly string[]>(
+  value: unknown,
+  allowed: T,
+  field: string,
+  filePath: string,
+  fallback: T[number],
+): T[number] {
+  if (value === undefined) {
+    return fallback;
+  }
+
+  return asEnum(value, allowed, field, filePath);
+}
+
 export function parseProjectConfig(data: unknown): ProjectConfig {
   if (!isRecord(data)) {
     fail("Project config must be a TOML object.");
@@ -245,6 +351,10 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
 
   const defaults = isRecord(data.defaults) ? data.defaults : {};
   const agents = isRecord(data.agents) ? data.agents : {};
+  const nexus = isRecord(data.nexus) ? data.nexus : {};
+  const memoryScopes = isRecord(data.memory_scopes) ? data.memory_scopes : {};
+  const sessionScope = isRecord(memoryScopes.session) ? memoryScopes.session : {};
+  const orgScope = isRecord(memoryScopes.org) ? memoryScopes.org : {};
   const backends = isRecord(data.backends) ? data.backends : {};
   const deterministicBackend = isRecord(backends.deterministic) ? backends.deterministic : {};
   const promptBackend = isRecord(backends.prompt) ? backends.prompt : {};
@@ -260,6 +370,34 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
     specsDir: asString(data.specs_dir, "specs_dir", ".specpm/config.toml", "docs/spm/specs"),
     tasksDir: asString(data.tasks_dir, "tasks_dir", ".specpm/config.toml", "docs/spm/tasks"),
     skillsDir: asString(data.skills_dir, "skills_dir", ".specpm/config.toml", "docs/spm/skills"),
+    memoryScopes: {
+      session: {
+        enabled: sessionScope.enabled !== false,
+        dir: asString(sessionScope.dir, "memory_scopes.session.dir", ".specpm/config.toml", ".specpm/memory/session"),
+        writePolicy: asEnumWithUndefinedFallback(
+          sessionScope.write_policy,
+          MEMORY_SCOPE_WRITE_POLICIES,
+          "memory_scopes.session.write_policy",
+          ".specpm/config.toml",
+          "read-write",
+        ),
+      },
+      repo: {
+        enabled: true,
+        writePolicy: "read-write",
+      },
+      org: {
+        enabled: orgScope.enabled !== false,
+        dir: asString(orgScope.dir, "memory_scopes.org.dir", ".specpm/config.toml", ".specpm/memory/org"),
+        writePolicy: asEnumWithUndefinedFallback(
+          orgScope.write_policy,
+          MEMORY_SCOPE_WRITE_POLICIES,
+          "memory_scopes.org.write_policy",
+          ".specpm/config.toml",
+          "read-only",
+        ),
+      },
+    },
     agents: {
       contextWindowTokens: asPositiveNumber(
         agents.context_window_tokens,
@@ -307,6 +445,18 @@ export function parseProjectConfig(data: unknown): ProjectConfig {
     defaults: {
       resumeBackend: asEnum(defaults.resume_backend, BACKEND_NAMES, "defaults.resume_backend", ".specpm/config.toml", "deterministic"),
     },
+    nexus: {
+      enabled: nexus.enabled === true,
+      command: asOptionalString(nexus.command),
+      args: asStringArray(nexus.args, "nexus.args", ".specpm/config.toml"),
+      rootAgentsMode: asEnumWithUndefinedFallback(
+        nexus.root_agents_mode,
+        NEXUS_ROOT_AGENTS_MODES,
+        "nexus.root_agents_mode",
+        ".specpm/config.toml",
+        "reference-only",
+      ),
+    },
     backends: {
       deterministic: {
         enabled: deterministicBackend.enabled !== false,
@@ -338,7 +488,7 @@ export function parseSpecDocument(filePath: string, attributes: unknown, body: s
     id: asString(attributes.id, "id", filePath),
     title: asString(attributes.title, "title", filePath),
     summary: asString(attributes.summary, "summary", filePath, "No summary provided."),
-    status: asEnum(attributes.status, SPEC_STATUSES, "status", filePath, "proposed"),
+    status: asEnumWithUndefinedFallback(attributes.status, SPEC_STATUSES, "status", filePath, "proposed"),
     taskIds: asStringArray(attributes.task_ids, "task_ids", filePath),
     tags: asStringArray(attributes.tags, "tags", filePath),
     owner: asOptionalString(attributes.owner),
@@ -358,7 +508,7 @@ export function parseTaskDocument(filePath: string, attributes: unknown, body: s
     id: asString(attributes.id, "id", filePath),
     title: asString(attributes.title, "title", filePath),
     summary: asString(attributes.summary, "summary", filePath, "No summary provided."),
-    status: asEnum(attributes.status, TASK_STATUSES, "status", filePath, "todo"),
+    status: asEnumWithUndefinedFallback(attributes.status, TASK_STATUSES, "status", filePath, "todo"),
     specIds: asStringArray(attributes.spec_ids, "spec_ids", filePath),
     dependsOn: asStringArray(attributes.depends_on, "depends_on", filePath),
     blockedBy: asStringArray(attributes.blocked_by, "blocked_by", filePath),
@@ -418,5 +568,36 @@ export function parseCurrentStateDocument(filePath: string, attributes: unknown,
     updatedAt: asOptionalString(attributes.updated_at),
     body: body.trim(),
     filePath,
+  };
+}
+
+export function parseMemoryNoteDocument(
+  filePath: string,
+  attributes: unknown,
+  body: string,
+  scope: Exclude<MemoryScopeName, "repo">,
+  writePolicy: MemoryScopeWritePolicy,
+): MemoryNoteDocument {
+  if (!isRecord(attributes)) {
+    fail(`Invalid frontmatter in ${filePath}`);
+  }
+
+  return {
+    docKind: asEnum(attributes.doc_kind, ["memory-note"] as const, "doc_kind", filePath),
+    id: asString(attributes.id, "id", filePath),
+    title: asString(attributes.title, "title", filePath),
+    summary: asString(attributes.summary, "summary", filePath, "No summary provided."),
+    tags: asStringArray(attributes.tags, "tags", filePath),
+    createdAt: asOptionalString(attributes.created_at),
+    expiresAt: asOptionalString(attributes.expires_at),
+    consolidatedAt: asOptionalString(attributes.consolidated_at),
+    promotedTo: asOptionalString(attributes.promoted_to),
+    archivedAt: asOptionalString(attributes.archived_at),
+    archiveReason: asOptionalString(attributes.archive_reason),
+    updatedAt: asOptionalString(attributes.updated_at),
+    body: body.trim(),
+    filePath,
+    scope,
+    writePolicy,
   };
 }

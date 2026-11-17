@@ -1,0 +1,115 @@
+{
+  "id": "final-cold-specs-02",
+  "nonce": "a87946c4-1ffb-4eea-baef-a0c5acf67868",
+  "sourceCommit": "3108b5c4a573e7a5bbbbc8f4f16a6ffb29b32021",
+  "mode": "precompiled",
+  "artifact": {
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "sourceDigest": "7b1f540de1b5c96e5442f48b91c0d8dde509a93bfff4f7ae3cc9ce169747df8d",
+    "lockDigest": "a99d175ce307fe9fd043e2f8e75645dbb1e13c2740136899fe6cfa733d63d425",
+    "packageVersion": "0.3.1",
+    "nodeBuildVersion": "v25.6.0",
+    "manifestSHA256": "c5a9305fa7d9798ef6180ebea58e99937c4b01d91112eb87bfec527c618c18ac"
+  },
+  "app": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app",
+  "fixture": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-ui-benchmark-ZgqpBe",
+  "profile": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/profile",
+  "log": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/server.log",
+  "binPreparation": {
+    "spm": {
+      "entry": "src/index.ts",
+      "originalMode": 420,
+      "preparedMode": 493,
+      "sha256": "5ccac1f1ad1692f88a89ce59c6b92c82a5fadd0c2a9b6cc1f081b665982ba4d5",
+      "bytesPreserved": true
+    },
+    "spec-embryo": {
+      "entry": "src/index.ts",
+      "originalMode": 420,
+      "preparedMode": 493,
+      "sha256": "5ccac1f1ad1692f88a89ce59c6b92c82a5fadd0c2a9b6cc1f081b665982ba4d5",
+      "bytesPreserved": true
+    }
+  },
+  "cache": {
+    "nodeModules": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/node_modules",
+    "viteCache": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/node_modules/.vite",
+    "generatedCache": "web/.svelte-kit",
+    "integrity": {
+      "before": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": null,
+        "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+      },
+      "after": {
+        "pass": true,
+        "seedMatches": true,
+        "runtimeMatches": true,
+        "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+        "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+      }
+    },
+    "initialCaches": [
+      {
+        "path": "node_modules/.vite",
+        "exists": false
+      },
+      {
+        "path": "node_modules/.vite-temp",
+        "exists": false
+      },
+      {
+        "path": "web/node_modules/.vite",
+        "exists": false
+      },
+      {
+        "path": "web/node_modules/.vite-temp",
+        "exists": false
+      },
+      {
+        "path": "web/.svelte-kit",
+        "exists": false
+      }
+    ],
+    "beforeStart": {
+      "pass": true,
+      "seedMatches": true,
+      "runtimeMatches": true,
+      "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+      "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+      "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+    }
+  },
+  "nodeWrapper": "/private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/web/runtime/server.mjs",
+  "requestedPort": 65166,
+  "launcherCommands": {
+    "env": "/usr/bin/env bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/bin/spm ui --host 127.0.0.1 --port 65166",
+    "bun": [
+      "bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/bin/spm ui --host 127.0.0.1 --port 65166",
+      "/Users/leonardodiazvidal/.bun/bin/bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/bin/spm ui --host 127.0.0.1 --port 65166"
+    ]
+  },
+  "pid": 18342,
+  "stamp": {
+    "pid": 18342,
+    "group": 18342,
+    "started": "Mon Nov 16 15:42:44 2026",
+    "command": "bun /var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/bin/spm ui --host 127.0.0.1 --port 65166"
+  },
+  "listener": {
+    "pid": 18353,
+    "group": 18342,
+    "started": "Mon Nov 16 15:42:44 2026",
+    "command": "/opt/homebrew/Cellar/node/25.6.0/bin/node /private/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-acceptance-CTFV0u/runs/final-cold-specs-02/app/web/runtime/server.mjs"
+  },
+  "url": "http://127.0.0.1:65166/",
+  "port": 65166,
+  "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+  "nodeExecutable": "/opt/homebrew/Cellar/node/25.6.0/bin/node",
+  "nodeVersion": "v25.6.0",
+  "reportedArtifactValidationMs": 226,
+  "startupMs": 906.3429159999978
+}

@@ -1,0 +1,213 @@
+{
+  "phase": "Finite acceptance plan for Astra review, not window authorization",
+  "identity": {
+    "productCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "node": "v25.6.0",
+    "browser": "Chrome157.0.8103.78 explicit /Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "clock": "Original navigationStart->exact hydrated rows->two rAF; detail original trusted-click->100accepted rows->two rAF. Startup kept separately; never subtracted."
+  },
+  "fixtures": {
+    "listsInteractionsAndRetention": {
+      "path": "/var/folders/kd/klgrnvx90t76gmtb4mw9slqc0000gn/T/spm-ui-benchmark-ZgqpBe",
+      "tasks": 10000,
+      "specs": 2000,
+      "edges": 30000,
+      "handoffs": 0,
+      "documents": 12001,
+      "bytes": 3113582,
+      "corpusSHA256": "0a7917cf23b94ec99d748dc79855148887ca85e48b06573397b3059f2d0225a8"
+    },
+    "detail": {
+      "path": "/private/tmp/spm-detail-relations-WCXVAv",
+      "tasks": 10000,
+      "specs": 2000,
+      "handoffs": 201,
+      "documents": 12202,
+      "bytes": 3569698,
+      "corpusSHA256": "eb4e290a40f94d7d8f1950c41db0c221908cfa9280db884b4c108b29ef296b30",
+      "purpose": "High-fanout detail: Task9999downstream/Spec10k linked; never relabelled as30k-edge volume corpus"
+    }
+  },
+  "oracles": "Derive route/url/pageSize/orderedIDs/total and two distinct q/results before measurements using committed deterministic workspace projection. Bind actualready origin afterwards without selecting new queries. Hash fixture documents before/after readonly flows. Actions use separate disposable fixtures.",
+  "orderedPhases": [
+    {
+      "phase": 1,
+      "gate": "Task+Spec detail",
+      "fixture": "detail",
+      "method": "Unchanged web/scripts/detail-relations-browser-profile.mjs.5warmups+20serial each, nearest-rank19/20 p95<=300ms. All current raw/invalid/partial behavior retained; no automatic retry. Actual compiled attribution outside historical Node/Vite scope string; baseURL is ready origin without trailing slash. Global request trace remains enabled."
+    },
+    {
+      "phase": 2,
+      "gate": "Task+Spec warm lists",
+      "fixture": "listsInteractionsAndRetention",
+      "method": "Same Node server/browser/profile, fresh about:blank page per navigation, close previous.5warmups+20serial perroute; p95<=800ms, exact original hydrated IDs/count/total +two rAF."
+    },
+    {
+      "phase": 3,
+      "gate": "Application/browser-cold lists",
+      "fixture": "listsInteractionsAndRetention",
+      "method": "Alternate Tasks/Specs20 each; every sample NEW Node server +browser process/profile, staged compiled artifacts outside interval, empty own tool/generated caches and no appHTTP before direct navigation. p95<=2500ms route clock unchanged; manifest/startup costs explicit separately. OS cache uncontrolled, no purge."
+    },
+    {
+      "phase": 4,
+      "gate": "Supplemental loading and interactions",
+      "fixture": "listsInteractionsAndRetention plus2detail visibility checks",
+      "method": "Independent intervals, never insert interactions/GC into route/detail samples. Loading150 metadata comes from navigationStart; skeleton uses separate versioned bounded Task/Spec click visibility checks after detail series, not edits to frozen collector. Interaction helper contract details below."
+    },
+    {
+      "phase": 5,
+      "gate": "100-cycle retention",
+      "fixture": "listsInteractionsAndRetention",
+      "method": "5warmup cycles then100Task->relatedSpec->Close cycles. Before/after same closed/quiescent state: doubleGC, Memory.getDOMCounters documents/nodes/jsEventListeners, heap and window/document/grid target/type metadata.<=10MiB retained heap, no global jsEventListeners growth or sampled-target growth. Raw both snapshots; no GC elsewhere."
+    }
+  ],
+  "loading": {
+    "initial150": "Record FCP/paint entries, visibility/focus and monotonic diagnostic time after fixed endpoint. Missing FCP alone is NOT PROVEN, never inferred blank or PASS. Verified fresh about:blank/direct navigate/no priorappHTTP/noSW/BFCache/prerender plus responseStart>150 is a FAIL lower bound. Positive visible product indicator or contentful paint<=150 can establish feedback; neither browser spinner nor later shell waives origin. Raw tiny legacy flags retained with explicit limitation.",
+    "skeleton100": "acceptance-detail-loading.mjs separate bounded checks: real trusted Task/Spec link, monotonic event timestamp origin with capture time diagnostic, visible clipped skeleton or accepted content frame<=100; record raw events/frames. Never rewrite original detail collector or its100-row endpoint."
+  },
+  "interactions": {
+    "owner": "Sol UI; acceptance-interactions.mjs and tests only",
+    "contract": "web/verification/task131-final-interaction-contract.md",
+    "helperCommit": "45deba5",
+    "helperSHA256": "dddbca4b8223850d6c96bc6d5a192e9d7a4ecda67a5abc1c73291f6c5ebaf3b7",
+    "localKeyAndClick": "Perroute5warm+20 measured per family; trusted key/click->first frame with exact active cell or selected checkbox+aria state, p95<=50ms. Distinct from navigation/detail2rAF.",
+    "search": "Perroute5warm+20 alternated distinct fixed query/results. beforeinput->visible intended value+frame<=100ms. Lastinput->URL/query/exact accepted IDs/count/total+hydrated grid+2rAF p95<=1150ms (original1000result+configured150debounce); actual request delay/HTTP separate, no subtraction.",
+    "scroll": "One settled pageSize200 traversal, then fixed10s actual wheel interval/route reversing at bounds; raw events/positions and all overlapping longtasks. No task>100ms; max mounted data rows<=200. Unsupported/zero scroll notPASS.",
+    "payload": "One decoded public /workspace-data page100 response/route outside intervals: UTF8 bytes/hash/rawText/shape/IDs <=250KiB, no document bodies/raw blocks/offroute datasets. Bounded filter options legitimate.",
+    "stability": "One fixed known-row open/accepted inspector/close/refresh sequence perroute; geometry/focus beforeafter. Toolbar visible/vertical delta<=1CSSpx; retained opener inside usable viewport; restored correct focus and identity."
+  },
+  "reuseByAC": [
+    {
+      "ac": "AC01",
+      "reuse": [
+        "task127-core-report.json",
+        "task137/core.json",
+        "task131-combined-checks.json"
+      ],
+      "now": "Interaction payload/stability and final compiled package boundary; no full old matrix replay."
+    },
+    {
+      "ac": "AC02",
+      "reuse": [
+        "SPEC-062-P2.md",
+        "task128-core-manifest.json"
+      ],
+      "now": "Final affected shell/toolbar geometry in fixed stability sequence; source/layout hash reconciliation."
+    },
+    {
+      "ac": "AC03",
+      "reuse": [
+        "task127-layouts-report.json",
+        "task130-layouts-final-report.json"
+      ],
+      "now": "task131-accessibility.json:390px reflow/forcedcolors; no density matrix repeat."
+    },
+    {
+      "ac": "AC04",
+      "reuse": [
+        "task129-contrast-browser-report.json",
+        "task131-accessibility.json"
+      ],
+      "now": "Unchanged app.css/SpecQuestions/dialog styles +two role-only deltas, resolved light/dark recorded. Decorative aria-hidden glyph incompletes reviewed."
+    },
+    {
+      "ac": "AC05",
+      "reuse": [
+        "task131-combined-checks.json",
+        "task141-integration-checks.json"
+      ],
+      "now": "Fixed projection-derived query oracles and distinct query identity in search."
+    },
+    {
+      "ac": "AC06",
+      "reuse": [
+        "task127-copy-report.json",
+        "task127-columns-report.json",
+        "task131-combined-checks.json"
+      ],
+      "now": "New key/click responsiveness/selection; preserve existing visible-column/formula-safe TSV semantics by unchanged source."
+    },
+    {
+      "ac": "AC07",
+      "reuse": [
+        "task129-history-browser-report.json",
+        "task130-final-manifest.json",
+        "task131-accessibility.json"
+      ],
+      "now": "Fixed stability opener restoration; no rapid-history matrix rerun."
+    },
+    {
+      "ac": "AC08",
+      "reuse": [
+        "task128-responsive-report.json",
+        "task129-final-review.md",
+        "task131-accessibility.json"
+      ],
+      "now": "Dialog/keyboard and affected390px checks completed; native200% user-deferred."
+    },
+    {
+      "ac": "AC09",
+      "reuse": [
+        "task138-reader-report.json",
+        "task129-final-review.md",
+        "task130-final-manifest.json"
+      ],
+      "now": "Package production native/enhanced boundary accepted by task141-runtime-final-review; no unchanged race matrix replay."
+    },
+    {
+      "ac": "AC10",
+      "reuse": [
+        "task138-manifest.json",
+        "task131-mermaid-fix.json",
+        "task131-ruler-fix.json"
+      ],
+      "now": "Actual final installed runtime has hydrated lazy reader/Mermaid/editor per task141-runtime-final-review, not merely HTMLsvg."
+    },
+    {
+      "ac": "AC11",
+      "reuse": [
+        "task129-final-review.md",
+        "task141-runtime-final-review.md"
+      ],
+      "now": "Production Origin/CSRF/native+enhanced guarded actions2externalprojects/121asserts and realbrowser save reviewed; no benchmark fixture writes."
+    },
+    {
+      "ac": "AC12",
+      "reuse": [
+        "task130-final-render-report.json",
+        "task130-final-source.json"
+      ],
+      "now": "Reuse only final maxRows34 DOM proof on Grid4083bc29/model13e087dc, not the earlier browser-timing/production-closure sources or any DEV latency. Reuse volume80-task reference proof: source TimelineGrid/model/geometry unchanged, ruler onlyrole group leaves tick/layout intact. Small108-task110-item evidence is not that cap. Retain10k/2k/30k ledger."
+    },
+    {
+      "ac": "AC13",
+      "reuse": [
+        "task131-closure.json",
+        "task141-runtime-final-review.md"
+      ],
+      "now": "All explicit metric phases above; final compiled initialTasks89134gzipB/Mermaidabsent can reuse exact build698 output vs pinned47871baseline (delta41263<=61440). Historic validDEVdetailFAIL remains, never relabelled."
+    },
+    {
+      "ac": "AC14",
+      "reuse": [
+        "task141-integration-checks.json",
+        "task131-accessibility.json"
+      ],
+      "now": "489pass/2explicitpackage skips already2/121passed,10414assertions, Svelte/build/AGENTS and product coverage reviewed. New runner targeted units27/149; component10axe states0seriouscritical, role fixes focused. Native200%PENDING peruser; VoiceOver/Safari,NVDA/FirefoxUNAVAILABLE."
+    },
+    {
+      "ac": "AC15",
+      "reuse": [
+        "task141-runtime-final-review.md",
+        "task141-integration-review.md"
+      ],
+      "now": "Integratedarchive7b65... differs approvedpackage only3docs, all executable/artifact bytes same. Workspace actualcompiled tiny validated; ready/build/Node/cleanup before final timing."
+    }
+  ],
+  "failurePolicy": "A valid FAIL never triggers retry/tuning. Root may finish remaining predetermined independent checks for a complete ledger. Invalid/partial observations retained and not credited; unverified closure halts queue. No threshold changes, GC during latency, preload, controller or new dependency."
+}

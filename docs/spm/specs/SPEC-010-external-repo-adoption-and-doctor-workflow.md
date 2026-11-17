@@ -4,9 +4,9 @@ id = "SPEC-010"
 title = "External repo adoption and doctor workflow"
 summary = "Define how Spec Embryo should help existing repositories adopt the managed memory model, detect drift, and surface the next deterministic cleanup actions."
 status = "done"
-task_ids = ["TASK-030", "TASK-031", "TASK-032"]
+task_ids = ["TASK-030", "TASK-031", "TASK-032", "TASK-038", "TASK-039", "TASK-040", "TASK-041", "TASK-042", "TASK-043", "TASK-044", "TASK-045"]
 tags = ["adoption", "doctor", "workflow"]
-updated_at = "2026-04-03T19:10:35.259Z"
+updated_at = "2026-04-08T12:35:28.963Z"
 +++
 
 # Problem
@@ -136,6 +136,9 @@ This matters because external adoption is the actual product growth path. If ano
   - files preserved
   - files or directories that still need migration work
   - recommended next commands
+- If `init` seeds onboarding scaffold docs, those docs should explicitly describe themselves as temporary adoption guidance for the adopted repo, not as the repo's literal product roadmap.
+- If a repo already has managed spec/task docs, rerunning `init` should preserve them rather than reseeding additional onboarding scaffold.
+- If a repo already has managed spec/task docs but is missing `current.md`, `init` should create a neutral current-state template instead of adoption-flavored scaffold that points at fake tasks.
 - `doctor` should classify findings by severity or actionability, such as:
   - blocking
   - warning
@@ -153,6 +156,27 @@ This matters because external adoption is the actual product growth path. If ano
   - import prompts
   - current-state updates
 - The structured doctor output should also make it easy for an active agent to ask the human whether to proceed with migration instead of assuming permission.
+- Human-readable and JSON adoption/doctor output should include explicit agent orientation that says Spec Embryo is workflow support for the adopted repo, not the adopted repo's product direction.
+- Adoption guidance should explicitly explain what `spm` is, when another LLM should use it, and which deterministic responsibilities it can offload to `spm` instead of improvising them in chat.
+- Adoption should provide a repo-local migration guide plus a direct agent brief that the human can review and then paste to the active coding agent.
+- The direct agent brief should be designed for a user-mediated loop:
+  - the user runs an `spm` command
+  - `spm` emits a migration guide and intelligent agent brief
+  - the user reviews that brief
+  - the user pastes it to the active coding agent
+- The migration guide and brief should explain:
+  - what the scaffold tasks are for
+  - where the real source specs/docs live
+  - why `spm` is present in the repo
+  - which deterministic chores `spm` handles
+  - how AGENTS files and skills should be updated as adoption progresses
+- The migration guide and brief should explicitly cover partially adopted repos, including how to identify missing adoption work in:
+  - managed spec/task conversion
+  - statuses and dependencies
+  - AGENTS sizing and `spm` usage guidance
+  - repo-local skills
+  - `spm ui` visibility/readiness
+- `doctor` should warn when the managed memory still contains onboarding scaffold so another agent does not treat those docs as literal implementation backlog.
 - Adoption output should include a deterministic “first week” sequence tailored to repo state, such as:
   - import legacy specs
   - create initial current state
@@ -183,6 +207,8 @@ This matters because external adoption is the actual product growth path. If ano
 - `doctor` can emit output useful to both a human maintainer and an already-running agent.
 - `doctor` remains read-only in v1 while still making the next migration decision obvious.
 - The adoption path produces a clear next-step sequence instead of leaving the repo half-initialized without guidance.
+- A freshly adopted repo gets seed docs that guide the first migration steps without steering another agent toward building Spec Embryo inside the adopted project.
+- Rerunning `init` on an already adopted repo does not create extra onboarding specs/tasks on top of real managed memory.
 - The adoption path defaults toward the canonical Spec Embryo layout, while leaving room for future config-driven structure flexibility.
 - The external adoption workflow composes cleanly with `reshape`, `spec import-prompt`, and existing spec/task/current-state flows.
 

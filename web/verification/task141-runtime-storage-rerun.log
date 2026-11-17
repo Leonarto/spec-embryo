@@ -1,0 +1,11 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/storage.test.ts:
+(pass) storage > ignores AGENTS.md when listing markdown collections [2.20ms]
+(pass) storage > keeps an active lock alive past staleMs with heartbeat updates [127.36ms]
+(pass) storage > serializes cross-process task creation through the shared repository lock [173.16ms]
+
+ 3 pass
+ 0 fail
+ 8 expect() calls
+Ran 3 tests across 1 file. [336.00ms]

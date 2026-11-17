@@ -1,0 +1,54 @@
+{
+  "phase": "filters",
+  "capturedAt": "2026-11-15T22:32:22.069Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "all: exactly one successful taskScope value",
+      "pass": true
+    },
+    {
+      "name": "all: JS GET-equivalent apply preserves spec status/sort/page size",
+      "pass": true
+    },
+    {
+      "name": "all: progress label identifies subset",
+      "pass": true
+    },
+    {
+      "name": "unarchived: exactly one successful taskScope value",
+      "pass": true
+    },
+    {
+      "name": "unarchived: JS GET-equivalent apply preserves spec status/sort/page size",
+      "pass": true
+    },
+    {
+      "name": "unarchived: progress label identifies subset",
+      "pass": true
+    },
+    {
+      "name": "archived: exactly one successful taskScope value",
+      "pass": true
+    },
+    {
+      "name": "archived: JS GET-equivalent apply preserves spec status/sort/page size",
+      "pass": true
+    },
+    {
+      "name": "archived: progress label identifies subset",
+      "pass": true
+    },
+    {
+      "name": "Lifecycle window labels progress subset even at all scope",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "baseCommit": "c32be17",
+  "snapshot": "/private/tmp/spm-task137-final",
+  "sourceHashes": {
+    "web/src/routes/specs/+page.svelte": "ddf6db3d336b80522b1f0c6b47277dcd73bc963279820c9b46d90124bb2bd858",
+    "web/src/lib/components/data-table/spec-columns.ts": "6b38574d57af26a2f18890fc4870f17ef2f328c811bf52c9843a89e9d2e2d658"
+  }
+}

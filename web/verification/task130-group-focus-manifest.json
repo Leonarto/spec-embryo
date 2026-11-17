@@ -1,0 +1,36 @@
+{
+  "files": [
+    {
+      "path": "web/src/routes/timeline/+page.svelte",
+      "beforeSHA256": "09c3ec192858abb64bb8577bc67f644a8d30e4f483c9df679e4cd6a9610428d8",
+      "sha256": "64de4aa3637a41d1f2fbc56ce3ad80fe9318eec0f9991bcdef5d560e63dd006b"
+    },
+    {
+      "path": "web/src/lib/components/timeline/TimelineGrid.svelte",
+      "beforeSHA256": "d3b76bb9ef74e653275ce757581c3271a82d71dd8b31623795ae0034a946e205",
+      "sha256": "4083bc29a7d3631af9d4612bd4951092f8477b5b849923a65758aa13885110ee"
+    },
+    {
+      "path": "web/src/lib/components/timeline/AGENTS.md",
+      "beforeSHA256": "a957697e27827c1389dffa5e679661d5445cac3b8559c6ca2f778ddf8a99f6c0",
+      "sha256": "e95af62d80297bea10a5811b844780c77457240a5683fba3935e0f35d7da7d5a"
+    },
+    {
+      "path": "web/src/lib/inspector/InspectorHost.svelte",
+      "beforeSHA256": "f8b4b84dcb1d8de47b5582436191ac51d2703ed2ae37e232e8e4dd08c5e7a633",
+      "sha256": "216fe1437953f847d763884efac194d21b344a47a65ac6c78578a1e664c0ac2f"
+    }
+  ],
+  "patch": "/private/tmp/spm-task130-final-113ewabs/group-focus.patch",
+  "patchSHA256": "dc8e7a428920272e4d08842af6763bf200f1d11da9ab6da9f601064879bf34a1",
+  "evidence": [
+    {
+      "path": "web/scripts/timeline-integration-check.mjs",
+      "sha256": "b9c0a2dfa287a0d1d24eddf9d33bf4b1830b8760ac4a69dcf03d25b3f1445359"
+    },
+    {
+      "path": "web/verification/task130-group-focus-report.json",
+      "sha256": "6b3f63c2ffd29056ac0af7febaac72843c44d41015f73f3a716116e6b61ec88f"
+    }
+  ]
+}

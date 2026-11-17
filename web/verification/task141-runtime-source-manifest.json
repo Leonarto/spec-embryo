@@ -1,0 +1,141 @@
+{
+  "baseCommit": "a42cccb7d4c55fdef689d9a61d500a0e4d0d4dab",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 505,
+      "sha256": "574f94becc9352bb64b53099b919167267b0db69b8af63dba78e78955878ed44",
+      "baseSha256": "17acb759401a72432ab56f5af2be3a88c6b9a71fa62b7751de81f59681da3d49"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1738,
+      "sha256": "aeebdca2a911fb1876ad80c9d10f99082c6c6622ce729ffb5e962108c7a3f557",
+      "baseSha256": "d2906d38b39bd11e3fc722b069a65bb1e7383f0692bc53dc0944558b3d162dff"
+    },
+    {
+      "path": "bun.lock",
+      "bytes": 59168,
+      "sha256": "a99d175ce307fe9fd043e2f8e75645dbb1e13c2740136899fe6cfa733d63d425",
+      "baseSha256": "e935ab8378a53f9f329e8254a27f21b9978ff148cc6f09625aa2113e4f4432ec"
+    },
+    {
+      "path": "web/package.json",
+      "bytes": 588,
+      "sha256": "20e3416b02380c06cab1ede25539e875b8080683e9f3a63b51899fa22414e230",
+      "baseSha256": "529256a017f89a051526e01213fd60a09c3d37e28f3e2f3f8664dc9e51b7bb18"
+    },
+    {
+      "path": "web/bun.lock",
+      "bytes": 33569,
+      "sha256": "2bb9b3ff3abca4997a0a1f412262812c3590c1abe66215c1b54a15a2a67fa22f",
+      "baseSha256": "142c5e0cf64f5b6d35b5c0bb387f33bdc910313ce2b23980fbc2f5892c7552ff"
+    },
+    {
+      "path": "src/cli.ts",
+      "bytes": 7231,
+      "sha256": "0276f87cb56e70512814da5f0592842397327dccaa228c43777f35ad08b758bf",
+      "baseSha256": "d6ad3aa0f10a7728edb11f77a16d4e77a661fb02883b22ff939353f2f511fd4a"
+    },
+    {
+      "path": "src/commands/ui.ts",
+      "bytes": 3709,
+      "sha256": "7ce8b56d3af7445a7dac419d68bdfac1b1e1d739a0db564107efce0f8170aa7b",
+      "baseSha256": "6dbe2fa740abd8c4f6996dc9356f5344e6d6170583d95821c4f0104dd4c2a543"
+    },
+    {
+      "path": "src/services/ui.ts",
+      "bytes": 4403,
+      "sha256": "1bb9b9f129b5b3c6807f349cc3bb17f0294d04be08e1399326a64f9e27656e9d",
+      "baseSha256": "cead679299e7ebf7e6d4de74e7ed9d318e382f11e4d076acbcaab00d6aaf45d1"
+    },
+    {
+      "path": "src/services/ui-artifacts.ts",
+      "bytes": 6701,
+      "sha256": "54355b27cbbbb140bbcaea94bf5be8b531d347fd72f4c34984d5899bb5e7d933",
+      "baseSha256": null
+    },
+    {
+      "path": "scripts/build-ui.ts",
+      "bytes": 3397,
+      "sha256": "78345712fce59f1cbe73ae77a3a35bcef2bfd34215bde76bf03e62db3b129932",
+      "baseSha256": null
+    },
+    {
+      "path": "web/svelte.config.js",
+      "bytes": 432,
+      "sha256": "a5c83ccba2314277aab1952f1679ac1115fda04a1d2afc9a4992f87658138d01",
+      "baseSha256": "08afd60b799d42c488b6643ebdeaa3baf3416c46b0f2e277cb596736ef55e41b"
+    },
+    {
+      "path": "web/runtime/server.mjs",
+      "bytes": 5275,
+      "sha256": "13579a6e12d8efeb139658b34bc83af6dd3c6141a801fb1dd4e514be79287a3c",
+      "baseSha256": null
+    },
+    {
+      "path": "web/runtime/server.d.mts",
+      "bytes": 403,
+      "sha256": "8cd02d5eb9b5bdaa7ffdb7966b20a7fa4aa5dd1c53fc175bdba55db8d4cb577c",
+      "baseSha256": null
+    },
+    {
+      "path": "web/runtime/AGENTS.md",
+      "bytes": 392,
+      "sha256": "546ac4bf14e434583162477a8c40293b954311f99da788c5f56b43603e10b751",
+      "baseSha256": null
+    },
+    {
+      "path": "tests/ui.test.ts",
+      "bytes": 4546,
+      "sha256": "7a07025622b4242a7dfb2aaf3677a4375a618df8cceb696a9779f5c0be51e2d1",
+      "baseSha256": "e330cbe5ad5c3b8e2be3109ac2fa894505d738939819b0812258865a99a684a1"
+    },
+    {
+      "path": "tests/ui-artifacts.test.ts",
+      "bytes": 4195,
+      "sha256": "41c3702f58c07152cbcd2bf30f776b92f5c32531b119556140498684d3a35788",
+      "baseSha256": null
+    },
+    {
+      "path": "tests/ui-runtime.test.ts",
+      "bytes": 7339,
+      "sha256": "2bd4642b783e66ff919919cd5c79b85f2ed2ab1c069d866743e25b5a1d9320f7",
+      "baseSha256": null
+    },
+    {
+      "path": "tests/ui-build.test.ts",
+      "bytes": 3330,
+      "sha256": "710b2aed33544637e27e776151647b01ddc2bb1cbcc0cc4695f8df15b1c39c4c",
+      "baseSha256": null
+    },
+    {
+      "path": "tests/ui-package.test.ts",
+      "bytes": 9452,
+      "sha256": "a38c6fa272d6577f0f7c1bb59aa13b4f0c56ffccd759d964c953060126811124",
+      "baseSha256": null
+    },
+    {
+      "path": "tests/ui-launch.test.ts",
+      "bytes": 2557,
+      "sha256": "d3148e123e91425880f241b08cdd1c3a00bda17381d97588e8f739186aa402ee",
+      "baseSha256": null
+    },
+    {
+      "path": "src/services/test-diagnostics.ts",
+      "bytes": 3492,
+      "sha256": "f2d99e1ef9a378b6c07cc89a682af5d6be418bc60975127ba6f8173f68dbbf66",
+      "baseSha256": "d44bca7e3411c01100ffc48ba4c92cbc7502cc1d9c13fe7358ae0e76827ed066"
+    },
+    {
+      "path": "tests/test-diagnostics.test.ts",
+      "bytes": 1921,
+      "sha256": "bdadcb874d45bf1f16c408a99c725400ab879764e884bf39259568b3e265875b",
+      "baseSha256": "6476c83faae3bbb74bda63947d6c45cd9b5ff02b42d825ce1423d870d1062d50"
+    }
+  ],
+  "acceptedExternalSource": {
+    "path": "web/src/lib/components/MermaidBlock.svelte",
+    "sha256": "d32d4400d705a9d2e84080a0b869ab1215c1515e6361dcb11e0553aa3b80aac4"
+  }
+}

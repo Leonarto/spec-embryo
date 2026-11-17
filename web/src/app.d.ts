@@ -1,6 +1,8 @@
-// See https://svelte.dev/docs/kit/types#app.d.ts
+import type { WorkspaceRequestState } from "./lib/server/workspace.ts";
 declare global {
-  namespace App {}
+  namespace App {
+    interface Locals extends WorkspaceRequestState {specAnswerOutcome?: import("./lib/server/spec-answers.ts").SpecAnswerOutcome}
+    interface PageState {spmInspector?:{entryId:string}}
+  }
 }
-
 export {};

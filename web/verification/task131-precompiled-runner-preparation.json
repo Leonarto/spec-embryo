@@ -1,0 +1,38 @@
+{
+  "phase": "Isolated compiled-runner adaptation, not acceptance",
+  "base": "86609ccdc954fa4956a06ebefb32ea962774b5c0",
+  "finalProduct": {
+    "productCommit": "abf426c1bcc399cdefa5a51d56ef49e7b15d3864",
+    "buildId": "698bfe3987a9717865de1a2745f59d3df0394e48064faf7a2b1c26177c5ab2d7",
+    "node": "v25.6.0",
+    "browser": "Chrome157.0.8103.78 explicit /Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "clock": "Original navigationStart->exact hydrated rows->two rAF; detail original trusted-click->100accepted rows->two rAF. Startup kept separately; never subtracted."
+  },
+  "owner": "/private/tmp/spm-task131-compiled-owner.json",
+  "tiny": "web/verification/task131-compiled-tiny-smoke.json",
+  "gates": "web/verification/task131-final-gate-map.json",
+  "units": {
+    "pass": 28,
+    "assertions": 154,
+    "log": "/private/tmp/spm-task131-precompiled-runner-unit-clockfix.log"
+  },
+  "agentsLog": "/private/tmp/spm-task131-precompiled-runner-agents.log",
+  "changes": [
+    "Explicit reviewed build staging outside samples; no compiler/preload",
+    "Exact ready/build/Node/listener identity and startup/validation evidence",
+    "Loading diagnostics corrected conservatively without changing row/two-frame endpoint",
+    "Retention globalDOM counters and preserved cleanup/partial errors",
+    "Separate versioned skeleton visibility observation, never edits detail collector"
+  ],
+  "notRun": [
+    "Acceptance timing series",
+    "100-cycle retention",
+    "Separate2 skeleton checks pending authorizedwindow",
+    "Interactions helper independentreview/tiny handled bySol"
+  ],
+  "sourceApplicationUntouched": true
+}

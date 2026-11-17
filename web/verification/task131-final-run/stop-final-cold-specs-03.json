@@ -1,0 +1,11 @@
+{
+  "closed": true,
+  "integrity": {
+    "pass": true,
+    "seedMatches": true,
+    "runtimeMatches": true,
+    "baselineSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+    "seedSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636",
+    "runtimeSHA256": "830aa1aa8f32467950250fffefca15a390f3210ad37fea669b51fffe0ecc2636"
+  }
+}

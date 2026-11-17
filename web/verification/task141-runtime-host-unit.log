@@ -1,0 +1,12 @@
+bun test v1.3.9 (cf6cdbbb)
+
+tests/ui.test.ts:
+(pass) UI launch contract > production defers binding to child, DEV probes only the bounded legal range [3.78ms]
+(pass) UI launch contract > rejects incomplete flags, partial ports and boolean values [1.04ms]
+(pass) UI launch contract > normalizes exactly one advertised authority, including IPv6 [1.27ms]
+(pass) UI launch contract > requires actual supported Node and scrubs binding/proxy inputs [5.42ms]
+
+ 4 pass
+ 0 fail
+ 68 expect() calls
+Ran 4 tests across 1 file. [170.00ms]

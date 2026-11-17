@@ -1,0 +1,120 @@
+{
+  "capturedAt": "2026-11-15T20:39:22.559Z",
+  "scope": "Focused integration regressions only; controlled envelopes/options, no project-memory writes. Same-URL handler isolation suppresses default navigation once and is not a native-flow no-navigation guarantee.",
+  "checks": [
+    {
+      "name": "F126-1 matching query accepts fresh option title",
+      "pass": true
+    },
+    {
+      "name": "F126-1 matching query accepts fresh option total",
+      "pass": true
+    },
+    {
+      "name": "F126-1 refresh preserves unsent option-search text",
+      "pass": true
+    },
+    {
+      "name": "F126-1 unsent text is never requested",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "F126-1 refresh preserves status/window/spec/main-search drafts",
+      "pass": true,
+      "detail": {
+        "status": [
+          "active"
+        ],
+        "window": [
+          "7d"
+        ],
+        "spec": [
+          "SPEC-002"
+        ],
+        "q": "UNAPPLIED MAIN"
+      }
+    },
+    {
+      "name": "F126-1 refetches last submitted query and page",
+      "pass": true,
+      "detail": [
+        "q=SPEC-&page=2&pageSize=50&spec=SPEC-051"
+      ]
+    },
+    {
+      "name": "F126-1 local-query refresh preserves unsent text and selection",
+      "pass": true
+    },
+    {
+      "name": "F126-1 local query receives current total and title",
+      "pass": true
+    },
+    {
+      "name": "F126-1 old response after refresh cannot replace current options",
+      "pass": true,
+      "detail": 2
+    },
+    {
+      "name": "F126-1 refetch generation retains pending selection and typed text",
+      "pass": true
+    },
+    {
+      "name": "F126-2 Clear after URL change resets all drafts",
+      "pass": true,
+      "detail": {
+        "status": [],
+        "window": [],
+        "spec": [],
+        "q": ""
+      }
+    },
+    {
+      "name": "F126-2 native same-URL Clear resets all drafts",
+      "pass": true,
+      "detail": {
+        "url": "http://127.0.0.1:5184/specs?sort=status.asc&page=1&pageSize=100&taskScope=all",
+        "canonical": "http://127.0.0.1:5184/specs?sort=status.asc&page=1&pageSize=100&taskScope=all",
+        "fullNavigations": 1,
+        "form": {
+          "status": [],
+          "window": [],
+          "spec": [],
+          "q": ""
+        }
+      }
+    },
+    {
+      "name": "F126-2 old option error after Clear cannot restore stale state",
+      "pass": true
+    },
+    {
+      "name": "F126-2 isolated same-URL Clear handler resets drafts without relying on navigation",
+      "pass": true,
+      "detail": {
+        "handlerNavigations": 0,
+        "form": {
+          "status": [],
+          "window": [],
+          "spec": [],
+          "q": ""
+        },
+        "defaultNavigationPreventedOnce": true
+      }
+    },
+    {
+      "name": "F126-2 old request after isolated Clear cannot restore error or options",
+      "pass": true
+    },
+    {
+      "name": "F126-2 native no-JS GET Clear remains functional",
+      "pass": true,
+      "detail": {
+        "status": [],
+        "window": [],
+        "spec": [],
+        "q": ""
+      }
+    }
+  ]
+}

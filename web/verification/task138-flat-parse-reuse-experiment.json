@@ -1,0 +1,910 @@
+{
+  "scope": "COPY-ONLY final flat-clone candidate (strict insertion eligibility, input-path correctness partition) exploratory matched3warm+5measured serial paired AB/BA blocks pervariant; candidate memo empty at process start, first warmup populates naturally. Full fresh enumeration/read pool/config/Git unchanged; context wall includes exact-byte comparison, clones, accounting, eviction and provenance. Full context/revision/Task+SpecDTO equality validated outside timed span every load against pre-run correctness. Fixed accounting is NOT JS heap. No p95, no300ms claim, no product authorization.",
+  "baseCommit": "f8c51db82814d9599b8edca9ab417ec440b7da10",
+  "startedAt": "2026-11-16T13:05:44.084Z",
+  "finishedAt": "2026-11-16T13:05:48.832Z",
+  "runtime": "v25.6.0",
+  "execArgv": [
+    "--experimental-transform-types"
+  ],
+  "command": "node --experimental-transform-types experiment-flat.mjs",
+  "setupNote": "Identical Astra-approved TS transformation flag for both variants because committed140 parameter-property syntax is unsupported by strip-only Node. Historical138 plain-Node timings at olderbase140f902 are not directly comparable.",
+  "fixture": "/private/tmp/spm-detail-relations-WCXVAv",
+  "expected": {
+    "documents": 12202,
+    "bytes": 3569698,
+    "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+    "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+    "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+    "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7"
+  },
+  "codeHashes": {
+    "baseline/src/repository.ts": "50fc0d4c1af7c04c2409033c6e7f82121eed75b1ec8e0e7228811b3dda9dc905",
+    "baseline/src/experimental-parse-reuse.ts": "0fa07c60e220083a0d1608a41cf1e098932eeec333796f4dcf3234c3c3ab90a1",
+    "candidate-flat/src/repository.ts": "50fc0d4c1af7c04c2409033c6e7f82121eed75b1ec8e0e7228811b3dda9dc905",
+    "candidate-flat/src/experimental-parse-reuse.ts": "0567e766b597c6c7d90cafbc1e17511964b57d20d2451598a138d4fc432edea3",
+    "correctness-flat.mjs": "070afa5e8f70e3fd974d76f965aa7176f1701826e599a776c9aeecc35fb68fd5",
+    "alias-flat.mjs": "c61ace2aacc118ee456c19cbed34d5b68a3e30e5d50306470cb46af4f51a4fd9",
+    "experiment-flat.mjs": "fc81db6bdae1209012eaa5462ba708069b8f3819bf7cf50330c2d34152b16604"
+  },
+  "summary": {
+    "baseline": {
+      "wallMs": {
+        "min": 252.9450829999996,
+        "median": 263.9296250000002,
+        "max": 276.2757080000001,
+        "raw": [
+          255.19891600000028,
+          276.2757080000001,
+          263.9296250000002,
+          252.9450829999996,
+          275.70308300000033
+        ]
+      },
+      "cpuMs": {
+        "min": 766.776,
+        "median": 785.567,
+        "max": 819.709,
+        "raw": [
+          766.776,
+          819.709,
+          785.567,
+          771.454,
+          808.938
+        ]
+      },
+      "parseMs": {
+        "min": 66.29843899999105,
+        "median": 67.03119099999003,
+        "max": 71.87594999991052,
+        "raw": [
+          67.03119099999003,
+          66.29843899999105,
+          67.05352799997445,
+          66.75527300001977,
+          71.87594999991052
+        ]
+      },
+      "cloneMs": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "raw": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "lookupMs": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "raw": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "accountMs": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "raw": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      }
+    },
+    "candidate": {
+      "wallMs": {
+        "min": 152.38274999999976,
+        "median": 159.47408300000006,
+        "max": 197.74270800000068,
+        "raw": [
+          161.11400000000003,
+          153.24495800000022,
+          152.38274999999976,
+          159.47408300000006,
+          197.74270800000068
+        ]
+      },
+      "cpuMs": {
+        "min": 614.105,
+        "median": 616.539,
+        "max": 675.562,
+        "raw": [
+          616.066,
+          614.105,
+          616.539,
+          631.451,
+          675.562
+        ]
+      },
+      "parseMs": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "raw": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "cloneMs": {
+        "min": 3.412576000042918,
+        "median": 3.4925020000237055,
+        "max": 4.091595000034431,
+        "raw": [
+          3.476821000010659,
+          3.5141630000130135,
+          3.412576000042918,
+          3.4925020000237055,
+          4.091595000034431
+        ]
+      },
+      "lookupMs": {
+        "min": 18.880756000004567,
+        "median": 19.64254599999913,
+        "max": 22.163044999990234,
+        "raw": [
+          19.53194399996346,
+          19.803890999962732,
+          18.880756000004567,
+          19.64254599999913,
+          22.163044999990234
+        ]
+      },
+      "accountMs": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "raw": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      }
+    }
+  },
+  "samples": [
+    {
+      "n": -3,
+      "warmup": true,
+      "variant": "baseline",
+      "start": 254.159625,
+      "end": 678.753292,
+      "wallMs": 424.593667,
+      "cpu": {
+        "user": 392414,
+        "system": 760841
+      },
+      "elu": {
+        "idle": 70.608459,
+        "active": 354.06804084359743,
+        "utilization": 0.8337358930244454
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 93.15162000000055,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 214892544,
+        "heapTotal": 105644032,
+        "heapUsed": 76692856,
+        "external": 12821884,
+        "arrayBuffers": 3362722
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 21.701333045959473
+    },
+    {
+      "n": -3,
+      "warmup": true,
+      "variant": "candidate",
+      "start": 732.092083,
+      "end": 1236.92425,
+      "wallMs": 504.832167,
+      "cpu": {
+        "user": 544499,
+        "system": 629935
+      },
+      "elu": {
+        "idle": 8.932377000000002,
+        "active": 495.92466483578494,
+        "utilization": 0.9823071161540707
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 12202,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 25.8849900000007,
+        "parseMs": 92.11501000000828,
+        "cloneMs": 7.815880999986007,
+        "accountMs": 61.738683000000265
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 280363008,
+        "heapTotal": 179142656,
+        "heapUsed": 109472328,
+        "external": 15583064,
+        "arrayBuffers": 6123862
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 23.497042417526245
+    },
+    {
+      "n": -2,
+      "warmup": true,
+      "variant": "candidate",
+      "start": 1288.927875,
+      "end": 1491.538958,
+      "wallMs": 202.611083,
+      "cpu": {
+        "user": 216378,
+        "system": 515295
+      },
+      "elu": {
+        "idle": 3.4926240000000064,
+        "active": 199.1430840936432,
+        "utilization": 0.9827640249941241
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 24.757136999981412,
+        "parseMs": 0,
+        "cloneMs": 4.771970999988298,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 321994752,
+        "heapTotal": 213221376,
+        "heapUsed": 92027840,
+        "external": 18901351,
+        "arrayBuffers": 6124137
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 7.463249921798706
+    },
+    {
+      "n": -2,
+      "warmup": true,
+      "variant": "baseline",
+      "start": 1555.584875,
+      "end": 1830.936,
+      "wallMs": 275.3511249999999,
+      "cpu": {
+        "user": 289712,
+        "system": 519250
+      },
+      "elu": {
+        "idle": 0.4791239999999988,
+        "active": 274.8937509752043,
+        "utilization": 0.9982600900686273
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 76.1954279999934,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 356483072,
+        "heapTotal": 249266176,
+        "heapUsed": 162014456,
+        "external": 19100470,
+        "arrayBuffers": 9641268
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 14.7899169921875
+    },
+    {
+      "n": -1,
+      "warmup": true,
+      "variant": "baseline",
+      "start": 1877.966542,
+      "end": 2146.927708,
+      "wallMs": 268.9611660000003,
+      "cpu": {
+        "user": 287809,
+        "system": 515015
+      },
+      "elu": {
+        "idle": 0.7888329999999968,
+        "active": 268.216416977112,
+        "utilization": 0.997067592546736
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 68.13257699996416,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 390316032,
+        "heapTotal": 278511616,
+        "heapUsed": 169549264,
+        "external": 22009432,
+        "arrayBuffers": 12550230
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 20.038376092910767
+    },
+    {
+      "n": -1,
+      "warmup": true,
+      "variant": "candidate",
+      "start": 2186.056333,
+      "end": 2343.58775,
+      "wallMs": 157.53141700000015,
+      "cpu": {
+        "user": 180849,
+        "system": 457905
+      },
+      "elu": {
+        "idle": 3.435621999999995,
+        "active": 154.12146208355716,
+        "utilization": 0.9781944301648919
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 20.51118800000495,
+        "parseMs": 0,
+        "cloneMs": 3.910313000001679,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 402849792,
+        "heapTotal": 284803072,
+        "heapUsed": 209298592,
+        "external": 25284919,
+        "arrayBuffers": 15825717
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 4.669291973114014
+    },
+    {
+      "n": 0,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 2393.186875,
+      "end": 2554.300875,
+      "wallMs": 161.11400000000003,
+      "cpu": {
+        "user": 165156,
+        "system": 450910
+      },
+      "elu": {
+        "idle": 3.1609180000000094,
+        "active": 157.97883200381466,
+        "utilization": 0.9803839958798175
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 19.53194399996346,
+        "parseMs": 0,
+        "cloneMs": 3.476821000010659,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 414777344,
+        "heapTotal": 296239104,
+        "heapUsed": 198602880,
+        "external": 23298084,
+        "arrayBuffers": 13838882
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 5.908416986465454
+    },
+    {
+      "n": 0,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 2590.730917,
+      "end": 2845.929833,
+      "wallMs": 255.19891600000028,
+      "cpu": {
+        "user": 263909,
+        "system": 502867
+      },
+      "elu": {
+        "idle": 0.7747509999999949,
+        "active": 254.4464570955506,
+        "utilization": 0.9969643941199827
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 67.03119099999003,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 432226304,
+        "heapTotal": 323928064,
+        "heapUsed": 239636048,
+        "external": 25579130,
+        "arrayBuffers": 16119928
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 13.314249992370605
+    },
+    {
+      "n": 1,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 2889.333542,
+      "end": 3165.60925,
+      "wallMs": 276.2757080000001,
+      "cpu": {
+        "user": 330278,
+        "system": 489431
+      },
+      "elu": {
+        "idle": 0.031374999999997044,
+        "active": 276.26337497520444,
+        "utilization": 0.9998864437344436
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 66.29843899999105,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 420986880,
+        "heapTotal": 242974720,
+        "heapUsed": 91916536,
+        "external": 16733017,
+        "arrayBuffers": 7273815
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 35.28754186630249
+    },
+    {
+      "n": 1,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 3223.311792,
+      "end": 3376.55675,
+      "wallMs": 153.24495800000022,
+      "cpu": {
+        "user": 164396,
+        "system": 449709
+      },
+      "elu": {
+        "idle": 2.13263400000001,
+        "active": 151.1279079158935,
+        "utilization": 0.9860849115281718
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 19.803890999962732,
+        "parseMs": 0,
+        "cloneMs": 3.5141630000130135,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 428032000,
+        "heapTotal": 250953728,
+        "heapUsed": 142113696,
+        "external": 18702294,
+        "arrayBuffers": 9243092
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 3.8218750953674316
+    },
+    {
+      "n": 2,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 3425.742458,
+      "end": 3578.125208,
+      "wallMs": 152.38274999999976,
+      "cpu": {
+        "user": 167038,
+        "system": 449501
+      },
+      "elu": {
+        "idle": 2.4750419999999878,
+        "active": 149.92270813923642,
+        "utilization": 0.9837593271702588
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 18.880756000004567,
+        "parseMs": 0,
+        "cloneMs": 3.412576000042918,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 422658048,
+        "heapTotal": 255672320,
+        "heapUsed": 164210104,
+        "external": 20088160,
+        "arrayBuffers": 10628958
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 4.917083978652954
+    },
+    {
+      "n": 2,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 3636.519833,
+      "end": 3900.449458,
+      "wallMs": 263.9296250000002,
+      "cpu": {
+        "user": 256795,
+        "system": 528772
+      },
+      "elu": {
+        "idle": 1.046586000000005,
+        "active": 262.90362218710334,
+        "utilization": 0.9960349112539509
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 67.05352799997445,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 423985152,
+        "heapTotal": 264994816,
+        "heapUsed": 160039816,
+        "external": 20302715,
+        "arrayBuffers": 10843513
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 10.893542766571045
+    },
+    {
+      "n": 3,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 3943.779542,
+      "end": 4196.724625,
+      "wallMs": 252.9450829999996,
+      "cpu": {
+        "user": 263867,
+        "system": 507587
+      },
+      "elu": {
+        "idle": 0.6493739999999946,
+        "active": 252.310376175476,
+        "utilization": 0.997432895946689
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 66.75527300001977,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 430768128,
+        "heapTotal": 290570240,
+        "heapUsed": 204071408,
+        "external": 23872413,
+        "arrayBuffers": 14413211
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 10.378249883651733
+    },
+    {
+      "n": 3,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 4236.352292,
+      "end": 4395.826375,
+      "wallMs": 159.47408300000006,
+      "cpu": {
+        "user": 179374,
+        "system": 452077
+      },
+      "elu": {
+        "idle": 2.7747520000000065,
+        "active": 156.7148310154421,
+        "utilization": 0.9826022994885418
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 19.64254599999913,
+        "parseMs": 0,
+        "cloneMs": 3.4925020000237055,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 438681600,
+        "heapTotal": 301727744,
+        "heapUsed": 196184384,
+        "external": 24272540,
+        "arrayBuffers": 14813338
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 6.825375080108643
+    },
+    {
+      "n": 4,
+      "warmup": false,
+      "variant": "candidate",
+      "start": 4432.8195,
+      "end": 4630.562208,
+      "wallMs": 197.74270800000068,
+      "cpu": {
+        "user": 180161,
+        "system": 495401
+      },
+      "elu": {
+        "idle": 2.4522019999999998,
+        "active": 195.30617316784674,
+        "utilization": 0.9876000093653747
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 12202,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 22.163044999990234,
+        "parseMs": 0,
+        "cloneMs": 4.091595000034431,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 12202,
+        "accountedBytes": 8135433
+      },
+      "memory": {
+        "rss": 441679872,
+        "heapTotal": 308543488,
+        "heapUsed": 233371888,
+        "external": 27227356,
+        "arrayBuffers": 17768154
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 6.343415975570679
+    },
+    {
+      "n": 4,
+      "warmup": false,
+      "variant": "baseline",
+      "start": 4685.790625,
+      "end": 4961.493708,
+      "wallMs": 275.70308300000033,
+      "cpu": {
+        "user": 271695,
+        "system": 537243
+      },
+      "elu": {
+        "idle": 0.7118770000000012,
+        "active": 275.0047482136233,
+        "utilization": 0.9974180846024484
+      },
+      "delta": {
+        "reads": 12202,
+        "readBytes": 3569698,
+        "hits": 0,
+        "misses": 0,
+        "bypass": 0,
+        "evictions": 0,
+        "lookupMs": 0,
+        "parseMs": 71.87594999991052,
+        "cloneMs": 0,
+        "accountMs": 0
+      },
+      "retained": {
+        "entries": 0,
+        "accountedBytes": 0
+      },
+      "memory": {
+        "rss": 460259328,
+        "heapTotal": 336216064,
+        "heapUsed": 229342120,
+        "external": 27442111,
+        "arrayBuffers": 17982909
+      },
+      "contextHash": "79023b2d0b1b67a8898e7365163b7c982fc8b0d28a1ebe643f0849cf068da47d",
+      "revision": "9a00e4603c274cd2b6130081e91175eb6176c2fbf4b621c8dcc93c68983b4078",
+      "task": "55617efc77435258c9471fa4fcb35ea931fa04a0b5379376ffe8d44b6442bcdc",
+      "spec": "0085a71034273e0e62f3e8b4aaf5979707c4d78b68945a6bb0f03ad83da3f5d7",
+      "mainThreadGCOverlapMs": 13.582041025161743
+    }
+  ]
+}

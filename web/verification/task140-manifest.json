@@ -1,0 +1,116 @@
+{
+  "task": "TASK-140",
+  "status": "final-frozen-awaiting-independent-hash-verdict",
+  "source": {
+    "base": "bf542e101a2b998f0d6a3484f56fed19a86cd3fd",
+    "root": "/private/tmp/spm-task140-1zy1dr67",
+    "archiveSha256": "ecb33a2f35a4bdb977d10d5a9bb29e049d92c89e9921ec0698e5878a13693397",
+    "baselineTrackedFiles": 675,
+    "dependencies": "linked existing node_modules only; no install"
+  },
+  "scope": "Isolated answer-write/validation, approved2-line diagnostics maintenance, focused tests/oracle and compact guides/evidence. No shared source edits. Reviewed write-only patch may integrate serially before138; no readpool/worker/context/detail/UI change.",
+  "checks": {
+    "passed": [
+      "38tests/231assertions/5files after final tempguard/name delta",
+      "Question service and atomic helper100%functions/lines in scoped selection",
+      "Svelte check0errors0warnings",
+      "AGENTS budgets pass without increases",
+      "CLI startup help smoke passes",
+      "Pinned bf542e1 oracle and actual postrename lock rm fault",
+      "Final temp identity/digest/stamp and long-name regressions pass"
+    ],
+    "failed": [],
+    "notRun": [
+      "Whole-repository suite/coverage not rerun for isolated checkpoint",
+      "No browser/editor/HTTPmapping/readpool/performance or138129combined certification"
+    ]
+  },
+  "historicalPreliminaryManifest": "web/verification/task140-preliminary-manifest.json; superseded by current final results",
+  "files": [
+    {
+      "path": "src/AGENTS.md",
+      "sha256": "0a5c4c8391e74f621b285949ce7921a0b65488eb11ef8fb5986559a31f40f61e",
+      "change": "modified"
+    },
+    {
+      "path": "src/repository.ts",
+      "sha256": "fb6263c5b8e856dae839532a40e4b4880d6dce03f32f60ad7fbab6edb7ea51ba",
+      "change": "modified"
+    },
+    {
+      "path": "src/services/AGENTS.md",
+      "sha256": "9352c6b520ec7e6047c0d646b7deacb9e106b8dca7cbc4ab7e0f53ee3d70dd7f",
+      "change": "modified"
+    },
+    {
+      "path": "src/services/spec-questions.ts",
+      "sha256": "21cc2a432b07c8295b3445e72422c836ecd839a3ca275f21ba58f4854c37a355",
+      "change": "modified"
+    },
+    {
+      "path": "src/services/test-diagnostics.ts",
+      "sha256": "8164a64962da261d3b742bdf9060992dbac446a4822dbbdd5374994f11ccc298",
+      "change": "modified"
+    },
+    {
+      "path": "src/spec-answer-write.ts",
+      "sha256": "f486017b6df969bf496ec400c92b5ee43b069462ecaa321ea8f510c6a4822fc4",
+      "change": "new"
+    },
+    {
+      "path": "tests/AGENTS.md",
+      "sha256": "ad4dc4d352dd3efd548b7c0fa61cddca009f24d90944a00a37a0c574c6bb301a",
+      "change": "modified"
+    },
+    {
+      "path": "tests/fixtures/spec-answer-baseline/AGENTS.md",
+      "sha256": "bcfb966f3173c9431e5b960edd244da2eb94007fae7049f2d4b16ea647543491",
+      "change": "new"
+    },
+    {
+      "path": "tests/fixtures/spec-answer-baseline/baseline.json",
+      "sha256": "8e2b813857034cc19d5b815c8650b8437a94f4603f0c83211cd1bc9aae9a82da",
+      "change": "new"
+    },
+    {
+      "path": "tests/fixtures/spec-answer-baseline/questions.ts",
+      "sha256": "f74bc55e9c5988de80fdb80919444947daad933585b914616f194e93468c3095",
+      "change": "new"
+    },
+    {
+      "path": "tests/fixtures/spec-answer-baseline/serializer.ts",
+      "sha256": "c2b404261e69fe3829b0c3a9368c8f46ba5def602906d69539253d56c0ae7f37",
+      "change": "new"
+    },
+    {
+      "path": "tests/spec-answer-write.test.ts",
+      "sha256": "57b7c89b204fd187883c06f9bb01c49ed6e40c73b31b4652a70039fef28df883",
+      "change": "new"
+    },
+    {
+      "path": "tests/test-diagnostics.test.ts",
+      "sha256": "606498ef361bc2683d269ca422086bf108f8af2c99292fe49d73c03a417dad4a",
+      "change": "modified"
+    },
+    {
+      "path": "web/verification/SPEC-062-TASK140.md",
+      "sha256": "b1825da06acdd512d4acb49ed6faa1608e6db837be2208fb16abfca7f234a717",
+      "change": "new"
+    },
+    {
+      "path": "web/verification/task140-backend-report.json",
+      "sha256": "5d406032b90539e3a87e1806cd3a6db8079e3147948d865d148253a75a986541",
+      "change": "new"
+    },
+    {
+      "path": "web/verification/task140-docs-delta.md",
+      "sha256": "64413a5843250af361ad49d61b9701f5464e61b55e8d0d57a83456f0a4ce3224",
+      "change": "new"
+    },
+    {
+      "path": "web/verification/task140-preliminary-manifest.json",
+      "sha256": "a789ed78cc0cbe0f5c068efc8b93a1d6d9357b6cf441f5e66e1f77a3b5f951d8",
+      "change": "new"
+    }
+  ]
+}

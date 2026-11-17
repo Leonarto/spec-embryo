@@ -1,5 +1,6 @@
 import { readdir, readFile } from "node:fs/promises";
 import { extname, join, relative } from "node:path";
+import { SPEC_STATUSES, TASK_STATUSES } from "../domain.ts";
 import { buildManagedPaths } from "./layout.ts";
 
 const SUPPORTED_EXTENSIONS = new Set([".md", ".mdx", ".txt", ".rst", ".yaml", ".yml", ".toml", ".json"]);
@@ -129,6 +130,9 @@ export async function buildSpecImportBundle(
     migrationRules: [
       "Create Markdown files with TOML frontmatter so Spec Embryo can parse them deterministically.",
       "Use `doc_kind = \"spec\"` for specs and `doc_kind = \"task\"` for tasks.",
+      `Use only canonical spec statuses: ${SPEC_STATUSES.join(", ")}.`,
+      `Use only canonical task statuses: ${TASK_STATUSES.join(", ")}.`,
+      "Do not invent synonym statuses like `planned` or `completed`; map them to the canonical enums before writing managed docs.",
       "Keep facts faithful to the source docs. Do not invent requirements, dependencies, or statuses unless the user explicitly asked for interpretation.",
       "When dependencies are unclear, prefer leaving `depends_on = []` and note ambiguity in the body instead of guessing.",
       "Prefer one coherent spec per product slice and create linked tasks for executable work.",
@@ -141,6 +145,7 @@ export async function buildSpecImportBundle(
       "Use the scanned source file inventory and excerpts as the source of truth.",
       `Produce repo-native Markdown files under \`${managed.specsDir}/\` and \`${managed.tasksDir}/\` using TOML frontmatter.`,
       "The result must be deterministic-friendly: explicit IDs, linked tasks, and no missing required frontmatter fields.",
+      `Use exact canonical spec statuses (${SPEC_STATUSES.join(", ")}) and task statuses (${TASK_STATUSES.join(", ")}).`,
       "Do not invent facts. When something is ambiguous, preserve the ambiguity in the Markdown body or add a concise note instead of fabricating structure.",
       "Prefer stable spec intent in spec files and actionable execution slices in task files.",
       "",

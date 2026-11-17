@@ -1,0 +1,10 @@
+{
+  "phase": "layouts",
+  "capturedAt": "2026-11-16T00:37:08.403Z",
+  "browser": "157.0.8103.78",
+  "checks": [],
+  "layouts": [],
+  "contrast": [],
+  "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'Workspace preferences', exact: true })\n    - locator resolved to <button type=\"button\" aria-expanded=\"false\" title=\"Workspace preferences\" aria-label=\"Workspace preferences\" aria-controls=\"workspace-preferences\" class=\"settings-trigger svelte-jb9drd\">…</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <vite-error-overlay></vite-error-overlay> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <vite-error-overlay></vite-error-overlay> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    57 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <vite-error-overlay></vite-error-overlay> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+  "scope": "Invalid run: shared Vite error overlay intercepted preferences; zero assertions, no product failure/pass claim."
+}

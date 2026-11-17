@@ -74,4 +74,25 @@ describe("agents service", () => {
       await rm(rootDir, { recursive: true, force: true });
     }
   });
+
+  test("ignores local Nexus and Claude artifact AGENTS files", async () => {
+    const rootDir = await mkdtemp(join(tmpdir(), "spec-embryo-agents-"));
+
+    try {
+      await mkdir(join(rootDir, ".specpm"), { recursive: true });
+      await writeFile(join(rootDir, ".specpm", "config.toml"), 'tool_version = "0.1.0"\nproject_name = "tmp"\n', "utf8");
+      await writeFile(join(rootDir, "AGENTS.md"), "# AGENTS\n\nShort root guidance.\n", "utf8");
+      await mkdir(join(rootDir, ".gitnexus", "generated"), { recursive: true });
+      await mkdir(join(rootDir, ".claude", "skills"), { recursive: true });
+      await writeFile(join(rootDir, ".gitnexus", "generated", "AGENTS.md"), `# AGENTS\n\n${"word ".repeat(5000)}`, "utf8");
+      await writeFile(join(rootDir, ".claude", "skills", "AGENTS.md"), `# AGENTS\n\n${"word ".repeat(5000)}`, "utf8");
+
+      const report = await buildAgentsHealthReport(rootDir);
+
+      expect(report.summary.ok).toBe(true);
+      expect(report.summary.fileCount).toBe(1);
+    } finally {
+      await rm(rootDir, { recursive: true, force: true });
+    }
+  });
 });

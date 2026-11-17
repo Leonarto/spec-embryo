@@ -1,4 +1,4 @@
-import { buildTaskIndex, deriveNextActions, deriveStatusSnapshot, summarizeTaskNode } from "../engine.ts";
+import { buildTaskAnalysisIndex, buildTaskIndex, deriveNextActions, deriveStatusSnapshot, summarizeTaskNode, type TaskAnalysisIndex } from "../engine.ts";
 import { loadProjectContext } from "../repository.ts";
 import { buildAgentsHealthReport } from "./agents.ts";
 
@@ -202,8 +202,8 @@ function deriveEffort(priority: number, downstreamCount: number): number {
   return Math.min(8, base + Math.min(2, downstreamCount));
 }
 
-function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: ReturnType<typeof buildTaskIndex>): DashboardTaskCard {
-  const summary = summarizeTaskNode(task, index);
+export function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: ReturnType<typeof buildTaskIndex>, analysis?: TaskAnalysisIndex): DashboardTaskCard {
+  const summary = summarizeTaskNode(task, index, analysis);
   const effectiveStatus = deriveEffectiveStatus(task.status, summary.unmetDependencies);
   const effort = deriveEffort(task.priority, summary.downstreamCount);
 
@@ -226,7 +226,7 @@ function toTaskCard(task: Parameters<typeof summarizeTaskNode>[0], index: Return
   };
 }
 
-function buildSpecProgress(taskCards: DashboardTaskCard[]) {
+export function buildSpecProgress(taskCards: DashboardTaskCard[]) {
   const counts = {
     todo: 0,
     inProgress: 0,
@@ -295,43 +295,42 @@ function buildTimeline(taskCards: DashboardTaskCard[]): { totalUnits: number; it
   const taskMap = new Map(taskCards.map((task) => [task.id, task]));
   const cache = new Map<string, { start: number; end: number }>();
 
-  function place(task: DashboardTaskCard, trail: Set<string>): { start: number; end: number } {
-    if (cache.has(task.id)) {
-      return cache.get(task.id)!;
-    }
-
-    if (trail.has(task.id)) {
-      const cyclePlacement = { start: 0, end: task.effort };
-      cache.set(task.id, cyclePlacement);
-      return cyclePlacement;
-    }
-
-    const nextTrail = new Set(trail);
-    nextTrail.add(task.id);
-
-    let start = 0;
-    for (const dependencyId of task.dependsOn) {
-      const dependency = taskMap.get(dependencyId);
-      if (!dependency) {
-        continue;
+  function place(task: DashboardTaskCard): { start: number; end: number } {
+    const cached = cache.get(task.id);
+    if (cached) return cached;
+    const active = new Set<string>([task.id]);
+    const frames = [{ task, next: 0, start: 0 }];
+    while (frames.length > 0) {
+      const frame = frames[frames.length - 1]!;
+      if (frame.next < frame.task.dependsOn.length) {
+        const dependency = taskMap.get(frame.task.dependsOn[frame.next]!);
+        if (!dependency) { frame.next += 1; continue; }
+        let placement = cache.get(dependency.id);
+        if (!placement && active.has(dependency.id)) {
+          placement = { start: 0, end: dependency.effort };
+          cache.set(dependency.id, placement);
+        }
+        if (placement) {
+          frame.start = Math.max(frame.start, placement.end);
+          frame.next += 1;
+        } else {
+          active.add(dependency.id);
+          frames.push({ task: dependency, next: 0, start: 0 });
+        }
+      } else {
+        // Completing an ancestor deliberately overwrites its cached cycle fallback.
+        cache.set(frame.task.id, { start: frame.start, end: frame.start + frame.task.effort });
+        active.delete(frame.task.id);
+        frames.pop();
       }
-
-      const placement = place(dependency, nextTrail);
-      start = Math.max(start, placement.end);
     }
-
-    const result = {
-      start,
-      end: start + task.effort,
-    };
-    cache.set(task.id, result);
-    return result;
+    return cache.get(task.id)!;
   }
 
   const items = taskCards
     .filter((task) => task.effectiveStatus !== "cancelled")
     .map((task) => {
-      const placement = place(task, new Set());
+      const placement = place(task);
       return {
         taskId: task.id,
         title: task.title,
@@ -357,8 +356,8 @@ function isTimelineActiveRow(task: DashboardTaskCard): boolean {
   return !isClosedStatus(task.effectiveStatus);
 }
 
-function primarySpecForTimeline(task: DashboardTaskCard, selectedSpecIds: string[]): string {
-  const selectedMatch = task.specIds.find((specId) => selectedSpecIds.includes(specId));
+function primarySpecForTimeline(task: DashboardTaskCard, selectedSpecIds: ReadonlySet<string>): string {
+  const selectedMatch = task.specIds.find((specId) => selectedSpecIds.has(specId));
   return selectedMatch ?? task.specIds[0] ?? "UNSCOPED";
 }
 
@@ -366,8 +365,8 @@ function collectReachableIds(startIds: string[], nextIds: (taskId: string) => st
   const visited = new Set<string>();
   const queue = [...startIds];
 
-  while (queue.length > 0) {
-    const taskId = queue.shift()!;
+  for (let cursor = 0; cursor < queue.length; cursor += 1) {
+    const taskId = queue[cursor]!;
     if (visited.has(taskId)) {
       continue;
     }
@@ -408,6 +407,7 @@ function buildTimelineSelection(
   }
 
   const directDependencyIds = selectedTask.dependsOn.filter((dependencyId) => taskMap.has(dependencyId));
+  const directDependencySet = new Set(directDependencyIds);
   const transitiveDependencyIds = collectReachableIds(directDependencyIds, (taskId) => {
     const task = taskMap.get(taskId);
     if (!task) {
@@ -415,12 +415,13 @@ function buildTimelineSelection(
     }
 
     return task.dependsOn.filter((dependencyId) => taskMap.has(dependencyId));
-  }).filter((taskId) => !directDependencyIds.includes(taskId));
+  }).filter((taskId) => !directDependencySet.has(taskId));
 
   const directDependentIds = (dependentsMap.get(selectedTask.id) ?? []).filter((taskId) => taskMap.has(taskId));
+  const directDependentSet = new Set(directDependentIds);
   const transitiveDependentIds = collectReachableIds(directDependentIds, (taskId) =>
     (dependentsMap.get(taskId) ?? []).filter((dependentId) => taskMap.has(dependentId)),
-  ).filter((taskId) => !directDependentIds.includes(taskId));
+  ).filter((taskId) => !directDependentSet.has(taskId));
   const directBlockedDependentIds = directDependentIds.filter((taskId) => {
     const task = taskMap.get(taskId);
     return Boolean(task && task.effectiveStatus === "blocked");
@@ -430,7 +431,7 @@ function buildTimelineSelection(
     return Boolean(task && task.effectiveStatus === "blocked");
   });
 
-  const primarySpecId = primarySpecForTimeline(selectedTask, selectedSpecIds);
+  const primarySpecId = primarySpecForTimeline(selectedTask, new Set(selectedSpecIds));
   const directRelatedSpecIds = Array.from(
     new Set(
       [
@@ -441,11 +442,12 @@ function buildTimelineSelection(
       ].filter((specId) => specId !== primarySpecId),
     ),
   );
+  const directRelatedSpecSet = new Set(directRelatedSpecIds);
   const transitiveRelatedSpecIds = Array.from(
     new Set(
       [...transitiveDependencyIds, ...transitiveDependentIds, ...transitiveBlockedDependentIds]
         .flatMap((taskId) => taskMap.get(taskId)?.specIds ?? [])
-        .filter((specId) => specId !== primarySpecId && !directRelatedSpecIds.includes(specId)),
+        .filter((specId) => specId !== primarySpecId && !directRelatedSpecSet.has(specId)),
     ),
   );
 
@@ -465,9 +467,27 @@ function buildTimelineSelection(
   };
 }
 
+type SelectionMembership = { [Key in keyof Pick<DashboardTimelineSelection,
+  "directDependencyIds" | "transitiveDependencyIds" | "directBlockedDependentIds" | "transitiveBlockedDependentIds" |
+  "directDependentIds" | "transitiveDependentIds" | "directRelatedSpecIds" | "transitiveRelatedSpecIds">]: Set<string> };
+
+function selectionMembership(selection: DashboardTimelineSelection | undefined): SelectionMembership {
+  return {
+    directDependencyIds: new Set(selection?.directDependencyIds),
+    transitiveDependencyIds: new Set(selection?.transitiveDependencyIds),
+    directBlockedDependentIds: new Set(selection?.directBlockedDependentIds),
+    transitiveBlockedDependentIds: new Set(selection?.transitiveBlockedDependentIds),
+    directDependentIds: new Set(selection?.directDependentIds),
+    transitiveDependentIds: new Set(selection?.transitiveDependentIds),
+    directRelatedSpecIds: new Set(selection?.directRelatedSpecIds),
+    transitiveRelatedSpecIds: new Set(selection?.transitiveRelatedSpecIds),
+  };
+}
+
 function selectionStateForRow(
   row: DashboardTimelineItem,
   selection: DashboardTimelineSelection | undefined,
+  membership: SelectionMembership,
 ): DashboardTimelineRowSelectionState {
   if (!selection) {
     return "none";
@@ -477,27 +497,27 @@ function selectionStateForRow(
     return "selected";
   }
 
-  if (selection.directDependencyIds.includes(row.taskId)) {
+  if (membership.directDependencyIds.has(row.taskId)) {
     return "dependency";
   }
 
-  if (selection.transitiveDependencyIds.includes(row.taskId)) {
+  if (membership.transitiveDependencyIds.has(row.taskId)) {
     return "dependency_transitive";
   }
 
-  if (selection.directBlockedDependentIds.includes(row.taskId)) {
+  if (membership.directBlockedDependentIds.has(row.taskId)) {
     return "blocked_dependent";
   }
 
-  if (selection.transitiveBlockedDependentIds.includes(row.taskId)) {
+  if (membership.transitiveBlockedDependentIds.has(row.taskId)) {
     return "blocked_dependent_transitive";
   }
 
-  if (selection.directDependentIds.includes(row.taskId)) {
+  if (membership.directDependentIds.has(row.taskId)) {
     return "dependent";
   }
 
-  if (selection.transitiveDependentIds.includes(row.taskId)) {
+  if (membership.transitiveDependentIds.has(row.taskId)) {
     return "dependent_transitive";
   }
 
@@ -507,6 +527,7 @@ function selectionStateForRow(
 function groupSelectionState(
   specId: string,
   selection: DashboardTimelineSelection | undefined,
+  membership: SelectionMembership,
 ): DashboardTimelineGroupSelectionState {
   if (!selection) {
     return "none";
@@ -516,11 +537,11 @@ function groupSelectionState(
     return "selected";
   }
 
-  if (selection.directRelatedSpecIds.includes(specId)) {
+  if (membership.directRelatedSpecIds.has(specId)) {
     return "related_direct";
   }
 
-  if (selection.transitiveRelatedSpecIds.includes(specId)) {
+  if (membership.transitiveRelatedSpecIds.has(specId)) {
     return "related_transitive";
   }
 
@@ -536,6 +557,10 @@ function buildTimelineGroups(
 ): DashboardTimelineGroup[] {
   const itemMap = new Map(timelineItems.map((item) => [item.taskId, item]));
   const groupMap = new Map<string, DashboardTimelineGroup>();
+  const selectedSpecSet = new Set(selectedSpecIds);
+  const membership = selectionMembership(selection);
+  const specMap = new Map<string, typeof specs[number]>();
+  for (const spec of specs) if (!specMap.has(spec.id)) specMap.set(spec.id, spec);
   const order: string[] = [];
 
   for (const task of taskCards) {
@@ -544,14 +569,14 @@ function buildTimelineGroups(
       continue;
     }
 
-    const specId = primarySpecForTimeline(task, selectedSpecIds);
+    const specId = primarySpecForTimeline(task, selectedSpecSet);
     if (!groupMap.has(specId)) {
-      const spec = specs.find((entry) => entry.id === specId);
+      const spec = specMap.get(specId);
       groupMap.set(specId, {
         specId,
         specTitle: spec?.title ?? specId,
         specStatus: spec?.status ?? "unknown",
-        selectionState: groupSelectionState(specId, selection),
+        selectionState: groupSelectionState(specId, selection, membership),
         rows: [],
       });
       order.push(specId);
@@ -563,7 +588,7 @@ function buildTimelineGroups(
       primarySpecId: specId,
       dependencyCount: task.dependsOn.length,
       archivedAt: task.archivedAt,
-      selectionState: selectionStateForRow(item, selection),
+      selectionState: selectionStateForRow(item, selection, membership),
       isCrossSpecRelated: Boolean(selection && item.specIds.some((rowSpecId) => rowSpecId !== selection.primarySpecId)),
     });
   }
@@ -574,12 +599,12 @@ function buildTimelineGroups(
         continue;
       }
 
-      const spec = specs.find((entry) => entry.id === specId);
+      const spec = specMap.get(specId);
       groupMap.set(specId, {
         specId,
         specTitle: spec?.title ?? specId,
         specStatus: spec?.status ?? "unknown",
-        selectionState: groupSelectionState(specId, selection),
+        selectionState: groupSelectionState(specId, selection, membership),
         rows: [],
       });
       order.push(specId);
@@ -590,7 +615,7 @@ function buildTimelineGroups(
     .map((specId) => groupMap.get(specId)!)
     .map((group) => ({
       ...group,
-      selectionState: groupSelectionState(group.specId, selection),
+      selectionState: groupSelectionState(group.specId, selection, membership),
       rows: group.rows.sort(
         (left, right) => left.start - right.start || left.priority - right.priority || left.taskId.localeCompare(right.taskId),
       ),
@@ -606,12 +631,12 @@ function normalizeSelectedSpecIds(specIds: string[] | undefined, availableSpecId
   return Array.from(new Set(specIds.map((specId) => specId.trim()).filter((specId) => known.has(specId))));
 }
 
-function matchesSelectedSpecs(task: DashboardTaskCard, selectedSpecIds: string[]): boolean {
-  if (selectedSpecIds.length === 0) {
+function matchesSelectedSpecs(task: DashboardTaskCard, selectedSpecIds: ReadonlySet<string>): boolean {
+  if (selectedSpecIds.size === 0) {
     return true;
   }
 
-  return task.specIds.some((specId) => selectedSpecIds.includes(specId));
+  return task.specIds.some((specId) => selectedSpecIds.has(specId));
 }
 
 function parseTimeWindowMilliseconds(timeWindow: DashboardTimeWindow): number {
@@ -651,15 +676,38 @@ function matchesTimeWindow(
   return value >= now - parseTimeWindowMilliseconds(timeWindow);
 }
 
+/** Timeline-only projection over already loaded/filter-selected canonical task cards. */
+export function buildTimelineProjection(
+  taskCards: DashboardTaskCard[],
+  specs: DashboardAnalysisState["availableSpecs"],
+  filters: { selectedSpecIds: string[]; mode: DashboardTimelineMode; selectedTaskId?: string },
+): Omit<DashboardData["timeline"], "items"> & { taskCount: number } {
+  const cards = filters.mode === "all" ? taskCards : taskCards.filter(isTimelineActiveRow);
+  const timeline = buildTimeline(cards);
+  const selection = buildTimelineSelection(cards, filters.selectedTaskId, filters.selectedSpecIds);
+  return {
+    totalUnits: timeline.totalUnits,
+    taskCount: timeline.items.length,
+    groups: buildTimelineGroups(cards, timeline.items, specs, filters.selectedSpecIds, selection),
+    mode: filters.mode,
+    ...(selection ? { selection } : {}),
+  };
+}
+
 export async function buildDashboardData(rootDir: string, filters: DashboardFilterOptions = {}): Promise<DashboardData> {
   const [context, agentsReport] = await Promise.all([loadProjectContext(rootDir), buildAgentsHealthReport(rootDir)]);
   const snapshot = deriveStatusSnapshot(context);
   const nextActions = deriveNextActions(context, snapshot);
-  const taskIndex = buildTaskIndex(context.tasks);
-  const taskCards = context.tasks.map((task) => toTaskCard(task, taskIndex));
+  const analysis = buildTaskAnalysisIndex(context.tasks);
+  const taskIndex = analysis.byId;
+  const taskCards = context.tasks.map((task) => toTaskCard(task, taskIndex, analysis));
+  // The facade's historical find() chooses the first source card, unlike taskMap.
+  const firstTaskCard = new Map<string, DashboardTaskCard>();
+  for (const task of taskCards) if (!firstTaskCard.has(task.id)) firstTaskCard.set(task.id, task);
   const activeFlowTaskCards = taskCards.filter((task) => !task.archivedAt);
   const availableSpecIds = context.specs.map((spec) => spec.id);
   const selectedSpecIds = normalizeSelectedSpecIds(filters.selectedSpecIds, availableSpecIds);
+  const selectedSpecSet = new Set(selectedSpecIds);
   const timeWindow = filters.timeWindow;
   const timelineMode = filters.timelineMode ?? "active";
   const selectedTimelineTaskId = filters.selectedTimelineTaskId?.trim() || undefined;
@@ -667,7 +715,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
   const hasActiveFilters = selectedSpecIds.length > 0 || Boolean(timeWindow);
   const analyticalSourceCards = hasActiveFilters ? taskCards : activeFlowTaskCards;
   const analyticalTaskCards = analyticalSourceCards.filter((task) => {
-    if (!matchesSelectedSpecs(task, selectedSpecIds)) {
+    if (!matchesSelectedSpecs(task, selectedSpecSet)) {
       return false;
     }
 
@@ -724,7 +772,7 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
     specs: context.specs
       .map((spec) => {
         const linkedTaskCards = spec.taskIds
-          .map((taskId) => taskCards.find((task) => task.id === taskId))
+          .map((taskId) => firstTaskCard.get(taskId))
           .filter((task): task is DashboardTaskCard => Boolean(task));
 
         return {
@@ -740,11 +788,11 @@ export async function buildDashboardData(rootDir: string, filters: DashboardFilt
       .sort((left, right) => left.id.localeCompare(right.id)),
     tasks: taskCards.sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id)),
     analysisTasks: analyticalTaskCards.sort((left, right) => left.priority - right.priority || left.id.localeCompare(right.id)),
-    inProgressTasks: snapshot.inProgressTasks.map((task) => toTaskCard(task, taskIndex)).filter((task) => !task.archivedAt),
-    readyTasks: snapshot.readyTasks.map((item) => toTaskCard(item.task, taskIndex)).filter((task) => !task.archivedAt),
-    blockedTasks: snapshot.blockedTasks.map((item) => toTaskCard(item.task, taskIndex)).filter((task) => !task.archivedAt),
-    reviewTasks: snapshot.reviewTasks.map((item) => toTaskCard(item.task, taskIndex)).filter((task) => !task.archivedAt),
-    criticalPath: snapshot.criticalPath.map((task) => toTaskCard(task, taskIndex)).filter((task) => !task.archivedAt),
+    inProgressTasks: snapshot.inProgressTasks.map((task) => toTaskCard(task, taskIndex, analysis)).filter((task) => !task.archivedAt),
+    readyTasks: snapshot.readyTasks.map((item) => toTaskCard(item.task, taskIndex, analysis)).filter((task) => !task.archivedAt),
+    blockedTasks: snapshot.blockedTasks.map((item) => toTaskCard(item.task, taskIndex, analysis)).filter((task) => !task.archivedAt),
+    reviewTasks: snapshot.reviewTasks.map((item) => toTaskCard(item.task, taskIndex, analysis)).filter((task) => !task.archivedAt),
+    criticalPath: snapshot.criticalPath.map((task) => toTaskCard(task, taskIndex, analysis)).filter((task) => !task.archivedAt),
     kanban: buildKanban(activeFlowTaskCards),
     timeline: {
       totalUnits: timeline.totalUnits,

@@ -1,0 +1,47 @@
+{
+  "phase": "fallback",
+  "capturedAt": "2026-11-15T21:27:05.251Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "name": "Board explicitly remains unarchived",
+      "pass": true
+    },
+    {
+      "name": "Archived preset from Board explicitly changes Table",
+      "pass": true
+    },
+    {
+      "name": "Presets preserve independent facets and sort",
+      "pass": true
+    },
+    {
+      "name": "Mixed scope/status has Custom preset",
+      "pass": true
+    },
+    {
+      "name": "Debounced search replaces history and clears selection",
+      "pass": true
+    },
+    {
+      "name": "Simple mode keeps native semantics and native tab controls",
+      "pass": true
+    },
+    {
+      "name": "No-JS SSR is semantic table with no dead grid controls",
+      "pass": true
+    },
+    {
+      "name": "No-JS sort follows genuine GET link",
+      "pass": true
+    },
+    {
+      "name": "No-JS GET form includes external toolbar search",
+      "pass": true
+    },
+    {
+      "name": "No-JS Clear restores unfiltered table",
+      "pass": true
+    }
+  ]
+}

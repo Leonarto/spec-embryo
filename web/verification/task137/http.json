@@ -1,0 +1,99 @@
+{
+  "baseCommit": "c32be17",
+  "snapshot": "/private/tmp/spm-task137-final",
+  "fixture": "Disposable200specs/600tasks;0/1 are filtered result states, not separate physical datasets.",
+  "method": "HTTP SSR/JSON/bytes and transitive production static imports, excluding dynamic route references. No browser, runtime JavaScript or latency claim.",
+  "sourceHashes": {
+    "web/src/routes/specs/+page.svelte": "ddf6db3d336b80522b1f0c6b47277dcd73bc963279820c9b46d90124bb2bd858",
+    "web/src/lib/components/data-table/spec-columns.ts": "6b38574d57af26a2f18890fc4870f17ef2f328c811bf52c9843a89e9d2e2d658",
+    "web/src/lib/components/data-table/DataTable.svelte": "945aa28afa5922c56db0bfe96607e593ab1fc2602333f2e820631dd5846f3296",
+    "web/src/lib/components/SelectDropdown.svelte": "30bd2e0d665f6bf067b8eebb744475ec60fe297926313ee126a28335ab604fdb",
+    "web/src/lib/components/MultiSelectDropdown.svelte": "27546e69dab85da3cd2f913d3a0f02d28229ab4aef5e2ed271a3902b9c3c7593",
+    "web/src/lib/components/Popover.svelte": "cd0bbf06661a6b2e83e867a22118bb4c46ecb27eeddc510ac372ba0fcba149fd"
+  },
+  "checks": [
+    {
+      "name": "0-row JSON result and no-store",
+      "pass": true
+    },
+    {
+      "name": "0-row JSON omits bodies/foreign views",
+      "pass": true
+    },
+    {
+      "name": "0-row SSR native table matches JSON",
+      "pass": true
+    },
+    {
+      "name": "1-row JSON result and no-store",
+      "pass": true
+    },
+    {
+      "name": "1-row JSON omits bodies/foreign views",
+      "pass": true
+    },
+    {
+      "name": "1-row SSR native table matches JSON",
+      "pass": true
+    },
+    {
+      "name": "200-row JSON result and no-store",
+      "pass": true
+    },
+    {
+      "name": "200-row JSON omits bodies/foreign views",
+      "pass": true
+    },
+    {
+      "name": "200-row SSR native table matches JSON",
+      "pass": true
+    },
+    {
+      "name": "100-row JSON <=250KiB",
+      "pass": true,
+      "detail": {
+        "bytes": 41669,
+        "budgetBytes": 256000
+      }
+    },
+    {
+      "name": "Initial Specs static imports exclude details/Mermaid",
+      "pass": true,
+      "detail": {
+        "modules": 19,
+        "forbidden": []
+      }
+    },
+    {
+      "name": "HTTP list reads leave all fixture documents byte-identical",
+      "pass": true,
+      "detail": {
+        "documents": 800
+      }
+    }
+  ],
+  "requests": [
+    {
+      "path": "/workspace-data?route=specs&taskScope=all&q=NO-MATCH-137",
+      "status": 200,
+      "jsonRows": 0,
+      "jsonBytes": 4726,
+      "htmlBytes": 71404
+    },
+    {
+      "path": "/workspace-data?route=specs&taskScope=all&q=SPEC-00001",
+      "status": 200,
+      "jsonRows": 1,
+      "jsonBytes": 5182,
+      "htmlBytes": 74494
+    },
+    {
+      "path": "/workspace-data?route=specs&taskScope=all&pageSize=200&sort=id.asc",
+      "status": 200,
+      "jsonRows": 200,
+      "jsonBytes": 78649,
+      "htmlBytes": 663408
+    }
+  ],
+  "pass": true
+}
