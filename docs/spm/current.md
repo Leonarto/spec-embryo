@@ -3,13 +3,13 @@ doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
 summary = "Harness interoperability, the functional UI revamp and the precompiled UI runtime are reviewed and integrated. Final volume performance and acceptance remain open."
-focus = "Complete remaining SPEC-062 acceptance efficiently: Sol 6.1 orchestration, Terra 6.1 High subagents, accounting for the saturated host."
-active_spec_ids = ["SPEC-062"]
-active_task_ids = ["TASK-138"]
+focus = "Implement SPEC-063 multi-repository local UI, then deliver GitHub and prepare npm release; Sol6.1 orchestration and Terra6.1High agents."
+active_spec_ids = ["SPEC-063"]
+active_task_ids = ["TASK-142", "TASK-143"]
 blocked_task_ids = []
-next_action_hints = ["User resumed with Sol6.1 orchestration and Terra6.1High subagents; prefer existing evidence and bounded serial work.", "Review existing final results and source before selecting any material optimization; preserve failures and original thresholds.", "Avoid repeating heavy timing series on the saturated host; keep cold6/40, supplemental and retention status explicit."]
+next_action_hints = ["Implement approved SPEC063 backend and client slices with Terra6.1High agents in isolated copies.", "Independently review and commit each slice; integrate targeted multi-repo isolation and package checks serially.", "After feature completion push GitHub and prepare npm release; stop before final publish for user 2FA per publish skill."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-16T17:36:29.833Z"
+updated_at = "2026-11-17T14:23:58.672Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -58,3 +58,7 @@ All owned browsers/servers are closed, the active lease is absent and recorded s
 The user resumed work, replacing earlier Astra/Sol routing with Sol6.1 orchestration and Terra6.1High subagents, and reported a saturated/slow computer. The prior budget stop is historical, no longer an instruction to stop all work. Begin with bounded read-only source/evidence review; avoid concurrent local workloads and repeated benchmark series. Host contention can affect timings but has not been quantified for the historical run, so it neither proves the cause nor converts failed results into passes. Native200% zoom remains deferred; no new permission to disturb unrelated processes.
 
 The resumed read-only triage and independent evidence review are complete. No speculative performance code change was justified. Standalone volume payload acceptance now passes with two actual HTTP responses: Tasks37116bytes/Specs35629bytes for100rows, exact fixture/oracles/build, unchanged documents and clean process closure. Independent review and durable raw responses live under `web/verification/task131-volume-payload-*`. No timing series was repeated on the saturated host; remaining performance, cold, interaction and retention acceptance is open.
+
+## Multi-repository delivery
+
+The user requests one local server serving named registered repositories, with registration through UI and CLI and a selector that preserves unsaved-answer guards. Reuse the portfolio registry with per-request project query identity and expected-workspace guards. SPEC063 is independently approved after collision/identity/API fixes; TASK142 and143 implement disjoint slices. Once complete, the user wants GitHub push and npm distribution. Publishing preparation follows the local skill and leaves final2FA publish to the user. Prior SPEC062 latency failures and incomplete acceptance remain recorded and are not waived.
