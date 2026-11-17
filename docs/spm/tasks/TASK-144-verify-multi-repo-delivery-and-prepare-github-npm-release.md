@@ -3,15 +3,16 @@ doc_kind = "task"
 id = "TASK-144"
 title = "Verify multi-repo delivery and prepare GitHub npm release"
 summary = "Review combined multi-repo isolation, run bounded package checks, push the reviewed branch and prepare npm release with final publish handoff."
-status = "review"
+status = "done"
 spec_ids = ["SPEC-063"]
 depends_on = ["TASK-142", "TASK-143"]
 blocked_by = []
 priority = 1
 owner_role = "implementation"
 created_at = "2026-11-17T14:23:58.589Z"
+completed_at = "2026-11-17T14:58:20.194Z"
 tags = []
-updated_at = "2026-11-17T14:55:03.524Z"
+updated_at = "2026-11-17T14:58:20.194Z"
 +++
 
 # Scope
@@ -21,3 +22,5 @@ After both slices are reviewed/committed, verify combined registered-project rea
 ## Reviewed 0.4.0 delivery evidence
 
 Independent final review approves installed multi-repo behavior and package scope in `web/verification/release-0.4.0-review.md`. Full suite523pass/2explicitpackage skips/0fail; separate package gate2pass121asserts; Svelte0/0, doctor, AGENTS, build and publish dry run pass. Actual installed package verifies CLI/UI registration, identical-ID tab isolation, guarded native/enhanced saves and switching, terminal remap recovery with exact byte preservation, and remote/origin registration denial. Browser results are live-observed findings summarized with scripts, not retained raw tool output; relation pagination has direct endpoint coverage. Historical SPEC062 latency/retention/AT limitations remain. Version commit and GitHub push precede final npm2FA handoff.
+
+GitHub delivery completed: version/release checkpoint045b88c pushed to `origin/codex/harness-ui-revamp`; draft PR https://github.com/Leonarto/spec-embryo/pull/1. The GitHub connector returned403, so authenticated `gh` created the PR. No merge. Release preparation is complete; final npm publication remains the user's2FA handoff per root/publish skill, and has not been executed.

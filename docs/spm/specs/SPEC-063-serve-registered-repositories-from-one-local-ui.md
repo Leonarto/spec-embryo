@@ -3,10 +3,10 @@ doc_kind = "spec"
 id = "SPEC-063"
 title = "Serve registered repositories from one local UI"
 summary = "Reuse the local portfolio registry for named repository registration and request-scoped UI selection, with isolated drafts and guarded canonical writes."
-status = "active"
+status = "done"
 task_ids = ["TASK-142", "TASK-143", "TASK-144"]
 tags = ["ui", "portfolio", "multi-repo"]
-updated_at = "2026-11-17T14:23:58.589Z"
+updated_at = "2026-11-17T14:58:20.276Z"
 +++
 
 # One local server, registered repositories

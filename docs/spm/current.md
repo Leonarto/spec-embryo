@@ -2,14 +2,14 @@
 doc_kind = "current-state"
 id = "CURRENT"
 title = "Current Project State"
-summary = "Harness interoperability, the functional UI revamp and the precompiled UI runtime are reviewed and integrated. Final volume performance and acceptance remain open."
-focus = "Implement SPEC-063 multi-repository local UI, then deliver GitHub and prepare npm release; Sol6.1 orchestration and Terra6.1High agents."
-active_spec_ids = ["SPEC-063"]
-active_task_ids = ["TASK-142", "TASK-143"]
+summary = "One local UI server now selects and registers multiple repos with isolated reads and drafts. GitHub PR1 is open; npm0.4.0 dry run passed and awaits final user publication."
+focus = "Multi-repository UI completed and pushed; npm0.4.0 prepared for user2FA publication. Preserve remaining SPEC062 performance acceptance."
+active_spec_ids = ["SPEC-062"]
+active_task_ids = ["TASK-138"]
 blocked_task_ids = []
-next_action_hints = ["Implement approved SPEC063 backend and client slices with Terra6.1High agents in isolated copies.", "Independently review and commit each slice; integrate targeted multi-repo isolation and package checks serially.", "After feature completion push GitHub and prepare npm release; stop before final publish for user 2FA per publish skill."]
+next_action_hints = ["User publishes prepared0.4.0 with bun publish --access public and required2FA; release version commit045b88c and dryrun are recorded.", "GitHub draft PR https://github.com/Leonarto/spec-embryo/pull/1 contains the reviewed branch; no merge performed.", "SPEC062 latency/cold/interaction/retention acceptance remains open with original evidence; avoid benchmarks on the saturated host."]
 last_handoff_id = "HANDOFF-20260402T163915"
-updated_at = "2026-11-17T14:23:58.672Z"
+updated_at = "2026-11-17T14:58:20.415Z"
 tags = ["v1", "self-hosting", "spec-workflow", "context"]
 +++
 
@@ -62,3 +62,7 @@ The resumed read-only triage and independent evidence review are complete. No sp
 ## Multi-repository delivery
 
 The user requests one local server serving named registered repositories, with registration through UI and CLI and a selector that preserves unsaved-answer guards. Reuse the portfolio registry with per-request project query identity and expected-workspace guards. SPEC063 is independently approved after collision/identity/API fixes; TASK142 and143 implement disjoint slices. Once complete, the user wants GitHub push and npm distribution. Publishing preparation follows the local skill and leaves final2FA publish to the user. Prior SPEC062 latency failures and incomplete acceptance remain recorded and are not waived.
+
+## Multi-repository delivery complete
+
+SPEC063/TASK142–144 are done after independent code and functional-package review. Version0.4.0 is committed;523 general tests/10609 assertions and separate package2/121 pass, Svelte0/0, doctor, AGENTS and publish dryrun pass. The reviewed branch is pushed to origin/codex/harness-ui-revamp and draft PR1 is https://github.com/Leonarto/spec-embryo/pull/1. The connector lacked PR creation permission; authenticated local gh created it successfully. No merge or actual npm publication occurred. The publish skill/root policy reserves final `bun publish --access public` for user2FA; this is the remaining external handoff, not a claim of publication. Browser evidence limitations and all historical performance failures remain recorded.
