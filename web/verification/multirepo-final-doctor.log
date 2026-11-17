@@ -1,0 +1,25 @@
+$ bun run src/index.ts doctor
+Spec Embryo doctor
+Status: healthy
+Adoption state: adopted
+Versions: cli 0.4.0 | project 0.3.1 | update available
+Config: valid (docs/spm)
+Counts: specs 63 | tasks 144 | handoffs 1
+
+Findings: blocking 0 | warnings 0 | info 5
+
+Info findings:
+- (tool-upgrade-available) This repo was last initialized or reshaped with Spec Embryo 0.3.1, but the running CLI is 0.4.0. [/Users/leonardodiazvidal/Documents/dev-projects/spec-pm/.specpm/config.toml]
+  hint: Refresh your SpM usage policy from `spm doctor --verbose` or `spm doctor --json`, then re-run `spm init` if you want this repo to adopt the newer guidance, agent brief, and defaults.
+- (adoption-inspection) Existing config points to `docs/spm`.
+- (adoption-inspection) Detected documentation/spec surfaces: `docs` (docs).
+- (adoption-inspection) Detected managed-memory signals at: `docs/spm (current, handoffs, specs, tasks, skills)`.
+- (adoption-inspection) This repo already has the canonical managed layout configured; init should preserve it and only seed missing optional artifacts.
+
+Run `spm doctor --verbose` for the full adoption guide and direct agent brief.
+Use `spm doctor --json` when an agent only needs structured findings and metadata.
+If you need the current repo workflow without the full adoption guide, run `spm agent brief` for a shorter steady-state surface.
+Use `spm agent brief --json` when wrapper tooling needs that workflow surface without scraping human-readable output.
+If you only need the bounded external `AGENTS.md` guidance, run `spm agent snippet` for a narrow read-only surface.
+Use `spm agent snippet --json` when wrapper tooling needs the snippet without scraping larger adoption outputs.
+The running CLI is newer than this repo's recorded tool version; use those richer doctor modes to refresh capability guidance before continuing work.
